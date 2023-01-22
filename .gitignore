@@ -1,0 +1,17 @@
+# artifacts
+/node_modules
+/.next/
+/out/
+/build
+*.tsbuildinfo
+next-env.d.ts
+.vercel
+npm-debug.log*
+.vscode
+
+# misc
+.DS_Store
+*.pem
+
+
+
