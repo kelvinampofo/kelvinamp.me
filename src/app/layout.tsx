@@ -1,5 +1,6 @@
 import '@/styles/globals.css';
 
+import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
 import { Inter } from '@next/font/google';
 
@@ -7,6 +8,7 @@ const fontSans = Inter({
   subsets: ['latin'],
   variable: '--font-inter'
 });
+
 interface RootLayoutProps {
   children: React.ReactNode;
 }
@@ -23,10 +25,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head />
       <body
         className={cn(
-          'mx-auto flex min-h-screen max-w-3xl flex-col text-sm md:text-base'
+          'mx-auto flex min-h-screen max-w-3xl flex-auto flex-col text-sm md:text-base'
         )}
       >
         {children}
+        <Footer />
       </body>
     </html>
   );
