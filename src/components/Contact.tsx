@@ -8,15 +8,15 @@ export default function Contact() {
     },
     {
       label: 'GitHub',
-      href: 'https://twitter.com/kelvinamp_'
+      href: 'https://github.com/kelvinampofo'
     },
     {
       label: 'Instagram',
-      href: 'https://twitter.com/kelvinamp_'
+      href: 'https://instagram.com/kelvinamp_'
     },
     {
       label: 'Email',
-      href: 'https://twitter.com/kelvinamp_'
+      href: 'mailto:hi@kelvinampofo.com'
     }
   ];
 
@@ -32,6 +32,8 @@ export default function Contact() {
                 className={cn(
                   'underline decoration-[#A0A0A0] decoration-1 underline-offset-4 duration-500 ease-in-out hover:text-gray-500 dark:text-[#E5E5E5]'
                 )}
+                target="_blank"
+                rel="noreferrer"
               >
                 {link.label}
               </a>
