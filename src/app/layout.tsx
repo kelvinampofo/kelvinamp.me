@@ -23,12 +23,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
       )}
     >
       <head />
-      <body
-        className={cn(
-          'mx-auto flex min-h-screen max-w-3xl flex-auto flex-col text-sm md:text-base'
-        )}
-      >
-        {children}
+      <body className="mx-auto flex max-w-3xl flex-auto flex-col text-sm md:text-base">
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
