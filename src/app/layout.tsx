@@ -18,7 +18,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="en"
       className={cn(
-        'bg-white dark:bg-[#161616] dark:text-[#E5E5E5]',
+        'selection:bg-gray-500 dark:bg-neutral-900 dark:text-neutral-200',
         fontSans.variable
       )}
     >
