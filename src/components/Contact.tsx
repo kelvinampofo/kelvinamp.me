@@ -7,22 +7,18 @@ export default function Contact() {
       href: 'https://twitter.com/kelvinamp_'
     },
     {
-      label: 'GitHub',
-      href: 'https://github.com/kelvinampofo'
-    },
-    {
       label: 'Instagram',
       href: 'https://instagram.com/kelvinamp_'
     },
     {
-      label: 'Email',
-      href: 'mailto:hi@kelvinampofo.com'
+      label: 'GitHub',
+      href: 'https://github.com/kelvinampofo'
     }
   ];
 
   return (
     <section>
-      <h2 className="mb-6 dark:text-[#EDEDED]">Connect</h2>
+      <h2 className="mb-6 font-medium">Connect</h2>
       <ul className="flex gap-1">
         <>
           {links.map((link, index) => (
