@@ -18,13 +18,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="en"
       className={cn(
-        'selection:bg-gray-500 dark:bg-neutral-900 dark:text-neutral-200',
+        'selection:bg-gray-700 dark:bg-neutral-900 dark:text-neutral-200',
         fontSans.variable
       )}
     >
       <head />
       <body className="mx-auto flex max-w-3xl flex-auto flex-col text-sm md:text-base">
-        <main>{children}</main>
+        <main className="min-h-full">{children}</main>
         <Footer />
       </body>
     </html>
