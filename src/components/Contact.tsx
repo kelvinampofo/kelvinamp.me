@@ -18,7 +18,7 @@ export default function Contact() {
 
   return (
     <section>
-      <h2 className="mb-6 font-medium">Connect</h2>
+      <h2 className="mb-6">Connect</h2>
       <ul className="flex gap-1">
         <>
           {links.map((link, index) => (

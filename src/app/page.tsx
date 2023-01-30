@@ -2,7 +2,7 @@ import Contact from '@/components/Contact';
 
 export default function About() {
   return (
-    <section className="flex flex-col justify-center px-8 pb-32 pt-20 md:px-8 md:pt-32 md:pb-36 lg:px-10 lg:pt-32 lg:pb-36">
+    <section className="flex flex-col justify-center px-8 pb-32 pt-20 md:pt-32 md:pb-36 lg:px-10 lg:py-36">
       <h1 className="text-xl font-medium md:text-[22px]">Kelvin Ampofo</h1>
       <h2 className="mb-6 dark:text-[#A0A0A0]">Software engineer</h2>
       <article>
