@@ -18,16 +18,14 @@ export default function Contact() {
 
   return (
     <section>
-      <h2 className="mb-6">Connect</h2>
+      <h2 className="mb-6 font-medium">Connect</h2>
       <ul className="flex gap-1">
         <>
           {links.map((link, index) => (
             <li key={link.label} className="flex gap-1">
               <a
                 href={link.href}
-                className={cn(
-                  'underline decoration-[#A0A0A0] decoration-1 underline-offset-4 duration-500 ease-in-out hover:text-gray-500 dark:text-[#E5E5E5]'
-                )}
+                className="underline decoration-neutral-500 decoration-1 underline-offset-4 duration-500 ease-in-out hover:text-gray-500"
                 target="_blank"
                 rel="noreferrer"
               >

@@ -23,7 +23,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       )}
     >
       <head />
-      <body className="mx-auto flex max-w-3xl flex-auto flex-col text-sm md:text-base lg:text-base">
+      <body className="mx-auto flex max-w-3xl flex-auto flex-col text-sm antialiased md:text-base lg:text-base">
         <main className="min-h-full">{children}</main>
         <Footer />
       </body>
