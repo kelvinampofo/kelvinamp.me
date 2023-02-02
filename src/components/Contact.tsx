@@ -1,5 +1,3 @@
-import { cn } from '@/lib/utils';
-
 export default function Contact() {
   const links = [
     {
