@@ -13,6 +13,10 @@ export default function Contact() {
     {
       label: 'GitHub',
       href: 'https://github.com/kelvinampofo'
+    },
+    {
+      label: 'k@kelvinamp.me',
+      href: 'mailto:k@kelvinamp.me'
     }
   ];
 
