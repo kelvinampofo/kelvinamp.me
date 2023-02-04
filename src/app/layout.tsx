@@ -2,16 +2,13 @@ import '@/styles/globals.css';
 
 import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
+import { RootLayoutProps } from '@/types';
 import { Inter } from '@next/font/google';
 
 const fontSans = Inter({
   subsets: ['latin'],
   variable: '--font-inter'
 });
-
-interface RootLayoutProps {
-  children: React.ReactNode;
-}
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (

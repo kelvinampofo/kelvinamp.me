@@ -1,5 +1,7 @@
+import { Links } from '@/types';
+
 export default function Contact() {
-  const links = [
+  const links: Links[] = [
     {
       label: 'Twitter',
       href: 'https://twitter.com/kelvinamp_'
@@ -23,7 +25,7 @@ export default function Contact() {
       <h2 className="mb-6 font-medium">Connect</h2>
       <ul className="flex gap-1">
         <>
-          {links.map((link, index) => (
+          {links.map((link: Links, index: number) => (
             <li key={link.label} className="flex gap-1">
               <a
                 href={link.href}
