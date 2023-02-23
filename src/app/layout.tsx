@@ -3,12 +3,38 @@ import '@/styles/globals.css';
 import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
 import { RootLayoutProps } from '@/types';
-import { Inter } from '@next/font/google';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 
 const fontSans = Inter({
   subsets: ['latin'],
   variable: '--font-inter'
 });
+
+export const metadata: Metadata = {
+  title: {
+    default: 'Kelvin Ampofo',
+    template: '%s | Kelvin Ampofo'
+  },
+  description: 'Crafting interfaces.',
+  openGraph: {
+    title: 'Kelvin Ampofo',
+    description: 'Crafting interfaces.',
+    url: 'https://kelvinamp.me',
+    siteName: 'Kelvin Ampofo',
+    locale: 'en-US',
+    type: 'website'
+    // TODO: add logo for images
+  },
+  twitter: {
+    title: 'Kelvin Ampofo',
+    card: 'summary_large_image',
+    description: 'Crafting interfaces.'
+  },
+  icons: {
+    shortcut: '/favicon.ico'
+  }
+};
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
