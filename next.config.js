@@ -4,7 +4,8 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp']
   },
   experimental: {
-    appDir: true
+    appDir: true,
+    typedRoutes: true
   }
 };
 
