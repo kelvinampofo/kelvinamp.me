@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description: 'Crafting interfaces.'
   },
   icons: {
-    shortcut: '/'
+    shortcut: '/favicon.ico'
   }
 };
 
