@@ -23,8 +23,14 @@ export const metadata: Metadata = {
     url: 'https://kelvinamp.me',
     siteName: 'Kelvin Ampofo',
     locale: 'en-US',
-    type: 'website'
-    // TODO: add logo for images
+    type: 'website',
+    images: [
+      {
+        url: 'https://kelvinamp.me/og.jpeg',
+        width: 1500,
+        height: 1500
+      }
+    ]
   },
   twitter: {
     title: 'Kelvin Ampofo',
@@ -32,7 +38,7 @@ export const metadata: Metadata = {
     description: 'Crafting interfaces.'
   },
   icons: {
-    shortcut: '/favicon.ico'
+    shortcut: '/'
   }
 };
 
