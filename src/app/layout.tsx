@@ -27,10 +27,21 @@ export const metadata: Metadata = {
     images: [
       {
         url: 'https://kelvinamp.me/og.jpeg',
-        width: 1500,
-        height: 1500
+        width: 1920,
+        height: 1080
       }
     ]
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1
+    }
   },
   twitter: {
     title: 'Kelvin Ampofo',
