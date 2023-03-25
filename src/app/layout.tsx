@@ -1,8 +1,8 @@
 import '@/styles/globals.css';
 
 import Footer from '@/components/Footer';
-import { cn } from '@/lib/utils';
 import { RootLayoutProps } from '@/types';
+import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
@@ -57,8 +57,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="en"
-      className={cn(
-        'selection:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-200 dark:selection:bg-neutral-700',
+      className={clsx(
+        'selection:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-200 dark:selection:bg-neutral-700 dark:selection:text-white',
         fontSans.variable
       )}
     >
