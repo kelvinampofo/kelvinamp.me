@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: 'Kelvin Ampofo',
-    card: 'summary_large_image',
+    card: 'summary',
     description: 'Crafting interfaces.'
   },
   icons: {
@@ -62,7 +62,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         fontSans.variable
       )}
     >
-      <head />
       <body className="mx-auto flex max-w-3xl flex-auto flex-col text-sm antialiased md:text-base lg:text-base">
         <main className="min-h-full">{children}</main>
         <Footer />
