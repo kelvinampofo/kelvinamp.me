@@ -27,8 +27,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: 'https://kelvinamp.me/og.jpeg',
-        width: 1200,
-        height: 630
+        width: 1920,
+        height: 1080
       }
     ]
   },
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: 'Kelvin Ampofo',
-    card: 'summary',
+    card: 'summary_large_image',
     description: 'Crafting interfaces.'
   },
   icons: {
