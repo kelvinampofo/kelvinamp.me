@@ -6,7 +6,8 @@ import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
-const fontSans = Inter({
+const interFont = Inter({
+  display: 'swap',
   subsets: ['latin'],
   variable: '--font-inter'
 });
@@ -59,7 +60,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       lang="en"
       className={clsx(
         'selection:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-200 dark:selection:bg-neutral-700 dark:selection:text-white',
-        fontSans.variable
+        interFont.variable
       )}
     >
       <body className="mx-auto flex max-w-3xl flex-auto flex-col text-sm antialiased md:text-base lg:text-base">
