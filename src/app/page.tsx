@@ -1,8 +1,8 @@
 import Contact from '@/components/Contact';
 
-export default function About() {
+export default function Home() {
   return (
-    <section className="flex flex-col justify-center px-8 py-16  md:py-32 lg:py-32 lg:px-10">
+    <section className="flex flex-col justify-center px-8 py-16 md:py-32 lg:px-10 lg:py-32">
       <h1 className="text-xl font-medium dark:text-white">Kelvin Ampofo</h1>
       <span className="dark:text-neutral-400">Software Engineer</span>
       <section className="mt-6">
@@ -12,7 +12,7 @@ export default function About() {
         </p>
         <br />
         <p>
-          Committed to developing craftmanship—guiltlessly exploring art and
+          Developing craft through immersive, hands-on exploration in art and
           technology.
         </p>
       </section>
