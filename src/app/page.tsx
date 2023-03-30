@@ -12,7 +12,7 @@ export default function Home() {
         </p>
         <br />
         <p>
-          Developing craft through immersive, hands-on exploration in art and
+          Developing skill through immersive, hands-on exploration in art and
           technology.
         </p>
       </section>
