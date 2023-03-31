@@ -1,9 +1,8 @@
-import '@/styles/globals.css';
-
 import Footer from '@/components/Footer';
 import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import './globals.css';
 
 const interFont = Inter({
   display: 'swap',
