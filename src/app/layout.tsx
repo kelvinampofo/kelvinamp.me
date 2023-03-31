@@ -1,7 +1,6 @@
 import '@/styles/globals.css';
 
 import Footer from '@/components/Footer';
-import { RootLayoutProps } from '@/types';
 import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -53,6 +52,10 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico'
   }
 };
+
+export interface RootLayoutProps {
+  children: React.ReactNode;
+}
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
