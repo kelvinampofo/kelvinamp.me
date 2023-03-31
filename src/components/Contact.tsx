@@ -1,3 +1,5 @@
+import ExternalLink from './ExternalLink';
+
 export default function Contact() {
   const links = [
     {
@@ -20,14 +22,7 @@ export default function Contact() {
       <ul className="flex">
         {links.map((link, index) => (
           <li key={index} className="flex items-center">
-            <a
-              href={link.href}
-              className="underline decoration-neutral-500 decoration-1 underline-offset-4 duration-500 ease-in-out hover:text-gray-500"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {link.label}
-            </a>
+            <ExternalLink href={link.href}>{link.label}</ExternalLink>
             {index !== links.length - 1 && (
               <span className="mx-1">&middot;</span>
             )}
