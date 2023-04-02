@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <section className="flex flex-col justify-center px-8 py-16 md:py-32 lg:px-10 lg:py-32">
+    <section className="flex flex-col justify-center px-8 py-12 md:py-32 lg:px-10 lg:py-32">
       <h1 className="text-xl font-medium dark:text-white">Kelvin Ampofo</h1>
       <span className="mb-6 dark:text-neutral-400">Software Engineer</span>
       <section>

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function Now() {
   return (
-    <aside className="flex flex-col justify-center px-8 py-16 md:py-32 lg:px-10 lg:py-32">
+    <aside className="flex flex-col justify-center px-8 py-12 md:py-32 lg:px-10 lg:py-32">
       <h1 className="mb-6 text-xl font-medium dark:text-white">Now</h1>
       <section>
         <p className="mb-6">
