@@ -20,10 +20,10 @@ export default function Now() {
           </em>
         </p>
         <p className="mb-6">
-          For now, all I want to do is build software (interfaces) of which
-          I&apos;ve barely even scratched the surface. Interactivity,
-          typography, motion, touch, optimisations, accessibility, design—there
-          is an infinite space for creativity and opportunity.
+          For now, all I want to do is build software of which I&apos;ve barely
+          even scratched the surface. Interactivity, typography, motion, touch,
+          optimisations, accessibility, design—there is an infinite space for
+          creativity and opportunity.
         </p>
         <p className="mb-6">
           Taking the time to be still, embracing a minimalist lifestyle centered
