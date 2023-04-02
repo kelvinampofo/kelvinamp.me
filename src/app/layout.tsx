@@ -12,7 +12,7 @@ const interFont = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Kelvin Ampofo',
+    default: 'Kelvin Ampofo.',
     template: '%s'
   },
   description: 'Crafting interfaces.',
