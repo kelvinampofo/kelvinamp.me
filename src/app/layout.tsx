@@ -5,7 +5,6 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 
 const interFont = Inter({
-  display: 'swap',
   subsets: ['latin'],
   variable: '--font-inter'
 });
