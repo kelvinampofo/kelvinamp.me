@@ -13,7 +13,7 @@ const interFont = Inter({
 export const metadata: Metadata = {
   title: {
     default: 'Kelvin Ampofo',
-    template: '%s | Kelvin Ampofo'
+    template: '%s'
   },
   description: 'Crafting interfaces.',
   openGraph: {
