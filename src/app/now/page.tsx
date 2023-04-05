@@ -1,16 +1,15 @@
-import ExternalLink from '@/components/ExternalLink';
 import { ArrowTopLeftIcon } from '@radix-ui/react-icons';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Now',
-  description: 'Current interests, goals and state of life.'
+  description: 'Current state of life.'
 };
 
 export default function Now() {
   return (
-    <aside className="flex flex-col justify-center px-8 py-12 md:py-32 lg:px-10 lg:py-32">
+    <aside className="flex flex-col justify-center px-8 py-16 md:py-32 lg:px-10 lg:py-32">
       <h1 className="mb-6 text-xl font-medium dark:text-white">Now</h1>
       <section>
         <p className="mb-6">
@@ -21,33 +20,27 @@ export default function Now() {
         </p>
         <p className="mb-6">
           For now, all I want to do is build software of which I&apos;ve barely
-          even scratched the surface. Interactivity, typography, motion, touch,
-          optimisations, accessibility, design—there is an infinite space for
+          even scratched the surface. Interactivity, typography, design, motion,
+          touch, optimisations, accessibility—there is an infinite space for
           creativity and opportunity.
         </p>
         <p className="mb-6">
           Taking the time to be still, embracing a minimalist lifestyle centered
-          around purpose and intention together with my beatiful wife.
+          around purpose and intention with my beatiful wife.
         </p>
         <p className="mb-6">
           Enjoying music that evokes strong emotions. Watching videos of cars I
           aspire to own. Staying up-to-date with the latest advancements in
-          technological innovation.
-        </p>
-        <p className="mb-6">
-          Inspired by{' '}
-          <ExternalLink href="https://nownownow.com/about">
-            nownownow.com
-          </ExternalLink>
+          technology.
         </p>
       </section>
       <section>
         <Link
           href="/"
-          className="inline-flex items-center underline decoration-neutral-500 decoration-1 underline-offset-4 duration-500 ease-in-out hover:text-gray-500"
+          className="inline-flex items-center underline decoration-neutral-500 decoration-1 underline-offset-4 duration-500 ease-in-out hover:text-neutral-500 dark:hover:text-neutral-400"
           aria-label="Go to home page"
         >
-          <ArrowTopLeftIcon aria-label="Arrow icon" />
+          <ArrowTopLeftIcon className="dark:text-neutral-400" />
           Index
         </Link>
       </section>
