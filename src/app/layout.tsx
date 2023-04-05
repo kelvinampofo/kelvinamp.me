@@ -1,4 +1,3 @@
-import Footer from '@/components/Footer';
 import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -66,7 +65,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
     >
       <body className="mx-auto flex max-w-3xl flex-auto flex-col text-sm antialiased md:text-base lg:text-base">
         <main className="min-h-full">{children}</main>
-        <Footer />
       </body>
     </html>
   );
