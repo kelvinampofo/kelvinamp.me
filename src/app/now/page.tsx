@@ -19,10 +19,10 @@ export default function Now() {
           </em>
         </p>
         <p className="mb-6">
-          For now, all I want to do is build software of which I&apos;ve barely
-          even scratched the surface. Interactivity, typography, design, motion,
-          touch, optimisations, accessibility—there is an infinite space for
-          creativity and opportunity.
+          For now, I&apos;m focused on building software of which I&apos;ve
+          barely even scratched the surface. Interactivity, typography, design,
+          motion, touch, optimisations, accessibility—there is an infinite space
+          for creativity and opportunity.
         </p>
         <p className="mb-6">
           Taking the time to be still, embracing a minimalist lifestyle centered
@@ -30,7 +30,7 @@ export default function Now() {
         </p>
         <p className="mb-6">
           Enjoying music that evokes strong emotions. Watching videos of cars I
-          aspire to own. Staying up-to-date with the latest advancements in
+          aspire to own. Staying up-to-date with latest advancements in
           technology.
         </p>
       </section>
