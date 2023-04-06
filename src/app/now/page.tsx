@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Now() {
   return (
-    <aside className="flex flex-col justify-center px-8 py-16 md:py-32 lg:px-10 lg:py-32">
+    <aside className="flex flex-col justify-center px-8 py-12 md:py-32 lg:px-10 lg:py-32">
       <h1 className="mb-6 text-xl font-medium dark:text-white">Now</h1>
       <section>
         <p className="mb-6">
@@ -19,10 +19,10 @@ export default function Now() {
           </em>
         </p>
         <p className="mb-6">
-          For now, I&apos;m focused on building software of which I&apos;ve
-          barely even scratched the surface. Interactivity, typography, design,
-          motion, touch, optimisations, accessibility—there is an infinite space
-          for creativity and opportunity.
+          For now, I&apos;m focused on building software of which I&apos;ve only
+          just scratched the surface. Interactivity, typography, design, motion,
+          touch, optimisations, accessibility—there is an infinite space for
+          creativity and opportunity.
         </p>
         <p className="mb-6">
           Taking the time to be still, embracing a minimalist lifestyle centered
@@ -37,10 +37,10 @@ export default function Now() {
       <section>
         <Link
           href="/"
-          className="inline-flex items-center underline decoration-neutral-500 decoration-1 underline-offset-4 duration-500 ease-in-out hover:text-neutral-500 dark:hover:text-neutral-400"
+          className="inline-flex items-center underline decoration-neutral-300 decoration-1 underline-offset-4 duration-500 ease-in-out hover:text-neutral-500 dark:decoration-neutral-500 dark:hover:text-neutral-400"
           aria-label="Go to home page"
         >
-          <ArrowTopLeftIcon className="dark:text-neutral-400" />
+          <ArrowTopLeftIcon className="text-neutral-500 dark:text-neutral-400" />
           Index
         </Link>
       </section>
