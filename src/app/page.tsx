@@ -1,11 +1,12 @@
 import Contact from '@/components/Contact';
+import Container from '@/components/Container';
 import { ArrowTopRightIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
 
 export default function Home() {
   return (
-    <section className="flex flex-col justify-center px-8 py-12 md:py-32 lg:px-10 lg:py-32">
-      <h1 className="text-xl font-medium dark:text-white">Kelvin Ampofo</h1>
+    <Container>
+      <h1 className="text-xl font-medium">Kelvin Ampofo</h1>
       <span className="mb-6 text-neutral-500 dark:text-neutral-400">
         Software Engineer
       </span>
@@ -31,6 +32,6 @@ export default function Home() {
       </section>
       <hr className="my-12 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
       <Contact />
-    </section>
+    </Container>
   );
 }
