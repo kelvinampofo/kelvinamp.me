@@ -14,6 +14,11 @@ export const metadata: Metadata = {
     template: '%s'
   },
   description: 'Crafting interfaces.',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png'
+  },
   openGraph: {
     title: 'Kelvin Ampofo',
     description: 'Crafting interfaces.',
@@ -44,9 +49,6 @@ export const metadata: Metadata = {
     title: 'Kelvin Ampofo',
     card: 'summary_large_image',
     description: 'Crafting interfaces.'
-  },
-  icons: {
-    shortcut: '/favicon.ico'
   }
 };
 
