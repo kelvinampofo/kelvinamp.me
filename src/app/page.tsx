@@ -6,7 +6,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <Container>
-      <h1 className="text-xl font-medium">Kelvin Ampofo</h1>
+      <h1 className="text-xl font-medium dark:text-white">Kelvin Ampofo</h1>
       <span className="mb-6 text-neutral-500 dark:text-neutral-400">
         Software Engineer
       </span>
@@ -27,7 +27,10 @@ export default function Home() {
           aria-label="Go to now page"
         >
           Now
-          <ArrowTopRightIcon className="text-neutral-500 dark:text-neutral-400" />
+          <ArrowTopRightIcon
+            className="ml-1 text-neutral-500 dark:text-neutral-400"
+            aria-label="Top right arrow icon"
+          />
         </Link>
       </section>
       <hr className="my-12 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
