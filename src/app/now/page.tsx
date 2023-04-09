@@ -35,7 +35,7 @@ export default function Now() {
           technology.
         </p>
       </section>
-      <section>
+      <span>
         <Link
           href="/"
           className="inline-flex items-center underline decoration-neutral-300 decoration-1 underline-offset-4 duration-500 ease-in-out hover:text-neutral-500 dark:decoration-neutral-500 dark:hover:text-neutral-400"
@@ -47,7 +47,7 @@ export default function Now() {
           />
           Index
         </Link>
-      </section>
+      </span>
     </Container>
   );
 }

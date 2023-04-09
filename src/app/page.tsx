@@ -20,7 +20,7 @@ export default function Home() {
           technology.
         </p>
       </section>
-      <section>
+      <span>
         <Link
           href="/now"
           className="mt-6 inline-flex items-center underline decoration-neutral-300 decoration-1 underline-offset-4 duration-500 ease-in-out hover:text-neutral-500 dark:decoration-neutral-500 dark:hover:text-neutral-400"
@@ -32,7 +32,7 @@ export default function Home() {
             aria-label="Top right arrow icon"
           />
         </Link>
-      </section>
+      </span>
       <hr className="my-12 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
       <Contact />
     </Container>
