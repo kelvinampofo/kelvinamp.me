@@ -1,4 +1,5 @@
 import Container from '@/components/Container';
+import ExternalLink from '@/components/ExternalLink';
 import { ArrowTopLeftIcon } from '@radix-ui/react-icons';
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -20,19 +21,22 @@ export default function Now() {
           </em>
         </p>
         <p className="mb-6">
-          For now, I&apos;m focused on building software of which I&apos;ve only
-          just scratched the surface. Interactivity, typography, design, motion,
-          touch, optimisations, accessibility&mdash;there is an infinite space
-          for creativity and opportunity.
+          For now, my main focus is to{' '}
+          <ExternalLink href="https://www.audible.co.uk/pd/Build-Audiobook/B09MSBVCYL">
+            build
+          </ExternalLink>{' '}
+          software of which I&apos;ve only just scratched the surface.
+          Interactivity, typography, design, motion, touch, optimisations,
+          accessibility&mdash;there is an infinite space for creativity and
+          opportunity.
         </p>
         <p className="mb-6">
-          Taking the time to be still, embracing a minimalist lifestyle centered
-          around purpose and intention with my beatiful wife.
+          Taking the time to be still, embracing a <s>minimal</s> simple
+          lifestyle centered around purpose and intention.
         </p>
         <p className="mb-6">
-          Enjoying music that evokes strong emotions. Watching videos of cars I
-          aspire to own. Staying up-to-date with latest advancements in
-          technology.
+          Enjoying music that evokes strong emotions. Watching videos of super
+          cars. Keeping up with the latest advancements in technology.
         </p>
       </section>
       <span>
