@@ -61,7 +61,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="en"
       className={clsx(
-        'selection:bg-neutral-300 dark:bg-neutral-900 dark:text-neutral-200 dark:selection:bg-neutral-700 dark:selection:text-white',
+        'selection:bg-orange-300 selection:text-black dark:bg-neutral-900 dark:text-neutral-200',
         interFont.variable
       )}
     >
