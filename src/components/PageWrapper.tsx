@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-export default function AnimateWrapper({
+export default function PageWrapper({
   children,
   className
 }: {
