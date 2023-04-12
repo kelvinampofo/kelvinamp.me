@@ -9,11 +9,11 @@ export default function Home() {
     <PageWrapper>
       <Container>
         <h1 className="text-xl font-medium dark:text-white">Kelvin Ampofo</h1>
-        <span className="mb-6 text-neutral-500 dark:text-neutral-400">
+        <span className="text-neutral-500 dark:text-neutral-400">
           Software Engineer
         </span>
-        <section>
-          <p className="mb-6">
+        <section className="my-6 flex flex-col gap-6">
+          <p>
             <em>Crafting interfaces</em> with a focus on design, human-computer
             interaction and architecture. Currently working in Fintech.
           </p>
@@ -25,7 +25,7 @@ export default function Home() {
         <span>
           <Link
             href="/now"
-            className="mt-6 inline-flex items-center underline decoration-neutral-300 decoration-1 underline-offset-4 duration-500 ease-in-out hover:text-neutral-500 dark:decoration-neutral-500 dark:hover:text-neutral-400"
+            className="inline-flex items-center underline decoration-neutral-300 decoration-1 underline-offset-4 duration-500 ease-in-out hover:text-neutral-500 dark:decoration-neutral-500 dark:hover:text-neutral-400"
             aria-label="Go to now page"
           >
             Now
