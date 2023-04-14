@@ -29,7 +29,7 @@ export default function Now() {
           </p>
           <p>
             Taking the time to be still, embracing a <s>minimal</s> simple
-            lifestyle centered around purpose and intention.
+            lifestyle centred around purpose and intention.
           </p>
           <p>
             Enjoying music that evokes strong emotions. Watching videos of super
