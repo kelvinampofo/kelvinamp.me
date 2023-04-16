@@ -13,7 +13,7 @@ export default function Now() {
   return (
     <PageWrapper>
       <Container>
-        <h1 className="text-xl font-medium dark:text-white">Now</h1>
+        <h1 className="text-xl font-medium">Now</h1>
         <section className="my-6 flex flex-col gap-6">
           <p>
             Diving deep into passions and interests&mdash;keeping in mind that{' '}
@@ -43,8 +43,10 @@ export default function Now() {
             aria-label="Go to home page"
           >
             <ArrowTopLeftIcon
-              className="mr-1 text-neutral-500 dark:text-neutral-400"
-              aria-label="Top left arrow icon"
+              className="mr-[3px] text-neutral-400"
+              aria-label="ArrowTopLeft icon"
+              width={18}
+              height={18}
             />
             Index
           </Link>

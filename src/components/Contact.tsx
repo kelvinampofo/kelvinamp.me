@@ -18,13 +18,13 @@ export default function Contact() {
 
   return (
     <section>
-      <h2 className="mb-6 font-medium dark:text-white">Connect</h2>
+      <h2 className="mb-6 font-medium">Connect</h2>
       <ul className="flex">
         {links.map((link, index) => (
           <li key={index} className="flex items-center">
             <ExternalLink href={link.href}>{link.label}</ExternalLink>
             {index !== links.length - 1 && (
-              <span className="mx-1">&middot;</span>
+              <span className="mx-1 dark:text-neutral-400">&middot;</span>
             )}
           </li>
         ))}
