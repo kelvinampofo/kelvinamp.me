@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 
 interface PageWrapperProps {
   children: React.ReactNode;
@@ -14,14 +14,16 @@ export default function PageWrapper({
   delay = 0
 }: PageWrapperProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
-      transition={{ ease: 'linear', duration: 0.4, delay }}
-      className={className}
-    >
-      {children}
-    </motion.div>
+    <LazyMotion features={domAnimation}>
+      <m.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ ease: 'linear', duration: 0.4, delay }}
+        className={className}
+      >
+        {children}
+      </m.section>
+    </LazyMotion>
   );
 }
