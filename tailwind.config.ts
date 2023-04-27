@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 export default {
-  content: ['./src/**/*.{ts,tsx}', './posts/**/*.{md,mdx}'],
+  content: ['./src/**/*.{ts,tsx}', './content/**/*.{md,mdx}'],
   theme: {
     extend: {
       fontFamily: {
@@ -9,6 +9,7 @@ export default {
       }
     }
   },
+  darkMode: 'class',
   future: {
     hoverOnlyWhenSupported: true
   },
