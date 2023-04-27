@@ -1,7 +1,6 @@
 import Container from '@/components/Container';
-import { ArrowTopLeftIcon } from '@radix-ui/react-icons';
+import CustomLink from '@/components/CustomLink';
 import { Metadata } from 'next';
-import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Now',
@@ -20,33 +19,24 @@ export default function Now() {
           </em>
         </p>
         <p>
-          For now, my main focus is to build software of which I&apos;ve only just scratched the
-          surface. Interactivity, typography, design, motion, touch, optimisations,
-          accessibility&mdash;there is an infinite space for creativity and opportunity.
+          For now, my main focus is to build software of which I&apos;ve only
+          just scratched the surface. Interactivity, typography, design, motion,
+          touch, optimisations, accessibility&mdash;there is an infinite space
+          for creativity and opportunity.
         </p>
         <p>
-          Taking the time to be still, embracing a <s>minimal</s> simple lifestyle centred around
-          purpose and intention.
+          Taking the time to be still, embracing a <s>minimal</s> simple
+          lifestyle centred around purpose and intention.
         </p>
         <p>
-          Enjoying music that evokes strong emotions. Watching videos of super cars. Keeping up with
-          the latest advancements in technology.
+          Enjoying music that evokes strong emotions. Watching videos of super
+          cars. Keeping up with the latest advancements in technology.
         </p>
       </section>
       <span>
-        <Link
-          href="/"
-          className="inline-flex items-center underline decoration-neutral-300 decoration-1 underline-offset-4 duration-500 ease-in-out hover:text-neutral-500 dark:decoration-neutral-500 dark:hover:text-neutral-400"
-          aria-label="Go to home page"
-        >
-          <ArrowTopLeftIcon
-            className="mr-[3px]"
-            aria-label="ArrowTopLeft icon"
-            width={18}
-            height={18}
-          />
+        <CustomLink href="/" ariaLabel="go to home page" arrowIcon>
           Index
-        </Link>
+        </CustomLink>
       </span>
     </Container>
   );
