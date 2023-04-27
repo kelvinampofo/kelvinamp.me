@@ -1,4 +1,4 @@
-import ExternalLink from './ExternalLink';
+import CustomLink from './CustomLink';
 
 export default function Contact() {
   const links = [
@@ -22,7 +22,7 @@ export default function Contact() {
       <ul className="flex">
         {links.map((link, index) => (
           <li key={index} className="flex items-center">
-            <ExternalLink href={link.href}>{link.label}</ExternalLink>
+            <CustomLink href={link.href}>{link.label}</CustomLink>
             {index !== links.length - 1 && (
               <span className="mx-1 dark:text-neutral-400">&middot;</span>
             )}

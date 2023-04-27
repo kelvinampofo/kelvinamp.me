@@ -8,6 +8,7 @@ next-env.d.ts
 .vercel
 npm-debug.log*
 .vscode
+.contentlayer
 
 # misc
 .DS_Store
