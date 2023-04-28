@@ -39,12 +39,8 @@ export async function generateMetadata({
     twitter: {
       site: '@kelvinamp_',
       card: 'summary',
-      description: summary,
-      images: [
-        {
-          url: 'https://kelvinamp.me/og.jpeg'
-        }
-      ]
+      title,
+      description: summary
     }
   };
 }

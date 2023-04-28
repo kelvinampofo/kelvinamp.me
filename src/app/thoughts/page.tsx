@@ -11,17 +11,18 @@ export const metadata: Metadata = {
   title: 'Thoughts',
   description: description,
   openGraph: {
-    description: description
-  },
-  twitter: {
-    site: '@kelvinamp_',
-    card: 'summary',
+    title: 'Thoughts',
     description: description,
     images: [
       {
         url: 'https://kelvinamp.me/og.jpeg'
       }
     ]
+  },
+  twitter: {
+    site: '@kelvinamp_',
+    card: 'summary',
+    description: description
   }
 };
 

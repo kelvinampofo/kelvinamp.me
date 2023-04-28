@@ -29,7 +29,9 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://kelvinamp.me/og.jpeg'
+        url: 'https://kelvinamp.me/og.jpeg',
+        height: 1200,
+        width: 630
       }
     ]
   },
