@@ -40,7 +40,14 @@ export async function generateMetadata({
       site: '@kelvinamp_',
       card: 'summary',
       title,
-      description: summary
+      description: summary,
+      images: [
+        {
+          url: 'https://kelvinamp.me/og.jpeg',
+          height: 1200,
+          width: 1200
+        }
+      ]
     }
   };
 }
