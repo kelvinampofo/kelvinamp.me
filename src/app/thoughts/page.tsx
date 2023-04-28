@@ -4,21 +4,18 @@ import { allPosts } from 'contentlayer/generated';
 import { compareDesc, format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
 
-const description =
-  'Infrequent thoughts on code, design and things in between.';
-
 export const metadata: Metadata = {
   title: 'Thoughts',
-  description: description,
+  description: 'Infrequent written thoughts.',
   openGraph: {
     title: 'Thoughts',
-    description: description
+    description: 'Infrequent written thoughts.'
   },
   twitter: {
     title: 'Thoughts',
     site: '@kelvinamp_',
     card: 'summary',
-    description: description,
+    description: 'Infrequent written thoughts.',
     images: [
       {
         url: 'https://kelvinamp.me/og.jpeg',
@@ -34,7 +31,7 @@ export default function Thoughts() {
     <Container>
       <h1 className="mb-6 text-xl font-medium">Thoughts</h1>
       <p className="mb-12">
-        Infrequent thoughts on code, design and things in between.
+        Infrequent thoughts on design, engineering and things in between.
       </p>
       {allPosts
         .sort((a, b) => {
