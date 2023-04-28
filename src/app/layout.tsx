@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: 'Kelvin Ampofo',
-    card: 'summary_large_image',
+    card: 'summary',
     description: 'Crafting interfaces.'
   }
 };

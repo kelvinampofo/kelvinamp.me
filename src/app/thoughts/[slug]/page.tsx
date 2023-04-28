@@ -24,22 +24,21 @@ export async function generateMetadata({
 
   if (!post) return;
 
-  const {
-    title,
-    publishedAt: publishedTime,
-    summary: description,
-    slug
-  } = post;
+  const { title, publishedAt, summary, slug } = post;
 
   return {
     title,
-    description,
+    description: summary,
     openGraph: {
       title,
-      description,
+      description: summary,
       type: 'article',
-      publishedTime,
+      publishedTime: publishedAt,
       url: `https://kelvinamp.me/thoughts/${slug}`
+    },
+    twitter: {
+      card: 'summary',
+      description: summary
     }
   };
 }
