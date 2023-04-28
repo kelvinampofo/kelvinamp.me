@@ -31,7 +31,7 @@ export const metadata: Metadata = {
       {
         url: 'https://kelvinamp.me/og.jpeg',
         height: 1200,
-        width: 630
+        width: 1200
       }
     ]
   },

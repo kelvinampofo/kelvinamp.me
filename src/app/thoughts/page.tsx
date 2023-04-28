@@ -15,14 +15,24 @@ export const metadata: Metadata = {
     description: description,
     images: [
       {
-        url: 'https://kelvinamp.me/og.jpeg'
+        url: 'https://kelvinamp.me/og.jpeg',
+        height: 1200,
+        width: 1200
       }
     ]
   },
   twitter: {
+    title: 'Thoughts',
     site: '@kelvinamp_',
     card: 'summary',
-    description: description
+    description: description,
+    images: [
+      {
+        url: 'https://kelvinamp.me/og.jpeg',
+        height: 1200,
+        width: 1200
+      }
+    ]
   }
 };
 
