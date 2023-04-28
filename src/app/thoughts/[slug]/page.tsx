@@ -37,8 +37,14 @@ export async function generateMetadata({
       url: `https://kelvinamp.me/thoughts/${slug}`
     },
     twitter: {
+      site: '@kelvinamp_',
       card: 'summary',
-      description: summary
+      description: summary,
+      images: [
+        {
+          url: 'https://kelvinamp.me/og.jpeg'
+        }
+      ]
     }
   };
 }

@@ -4,9 +4,25 @@ import { allPosts } from 'contentlayer/generated';
 import { compareDesc, format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
 
+const description =
+  'Infrequent thoughts on code, design and things in between.';
+
 export const metadata: Metadata = {
   title: 'Thoughts',
-  description: 'Infrequent thoughts on code, design and things in between.'
+  description: description,
+  openGraph: {
+    description: description
+  },
+  twitter: {
+    site: '@kelvinamp_',
+    card: 'summary',
+    description: description,
+    images: [
+      {
+        url: 'https://kelvinamp.me/og.jpeg'
+      }
+    ]
+  }
 };
 
 export default function Thoughts() {
