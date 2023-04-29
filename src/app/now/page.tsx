@@ -8,6 +8,19 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Now',
     description: 'Current rhythm of life.'
+  },
+  twitter: {
+    title: 'Now',
+    site: '@kelvinamp_',
+    card: 'summary',
+    description: 'Current rhythm of life.',
+    images: [
+      {
+        url: 'https://kelvinamp.me/og.jpeg',
+        height: 1200,
+        width: 1200
+      }
+    ]
   }
 };
 
