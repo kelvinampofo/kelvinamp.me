@@ -67,7 +67,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         interFont.variable
       )}
     >
-      <body className="mx-auto flex max-w-3xl flex-auto flex-col text-sm antialiased dark:bg-neutral-900 dark:text-neutral-100 md:text-base lg:text-base">
+      <body className="mx-auto flex max-w-3xl flex-auto flex-col text-sm antialiased dark:bg-[#161616] dark:text-[#EDEDED] md:text-base lg:text-base">
         <ThemeProvider>
           <main className="min-h-full">{children}</main>
         </ThemeProvider>

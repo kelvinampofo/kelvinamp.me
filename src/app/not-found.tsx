@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <Container>
-      <h1 className="mb-6 text-xl font-medium">Not Found</h1>
+      <h1 className="mb-6 text-lg font-medium">Not Found</h1>
       <section>
         <p className="mb-6">
           Been looking high and low, far and wide but couldn&apos;t find the

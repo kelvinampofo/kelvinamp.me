@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 
 export interface CustomLinkProps {
-  href: any; // have to use 'any' due to typing on <Link>
+  href: any;
   children: React.ReactNode | React.ReactNode[];
   ariaLabel?: string;
   arrowIcon?: boolean;
@@ -26,9 +26,9 @@ export default function CustomLink({
         className={clsx(
           arrowIcon ? 'inline-flex items-center' : '',
           underline
-            ? 'underline decoration-neutral-300 decoration-1 underline-offset-4'
+            ? 'underline decoration-[#6F6F6F] decoration-1 underline-offset-4 dark:decoration-neutral-400'
             : '',
-          'duration-500 ease-in-out hover:text-neutral-500 dark:decoration-neutral-500 dark:hover:text-neutral-400'
+          'duration-500 ease-linear hover:text-[#6F6F6F]  dark:hover:text-neutral-400'
         )}
         aria-label={ariaLabel}
       >
