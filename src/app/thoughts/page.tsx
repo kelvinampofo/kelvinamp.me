@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 export default function Thoughts() {
   return (
     <Container>
-      <h1 className="mb-6 text-xl font-medium">Thoughts</h1>
+      <h1 className="mb-6 text-lg font-medium">Thoughts</h1>
       <p className="mb-12">
         Infrequent thoughts on design, engineering and things in between.
       </p>
@@ -46,7 +46,7 @@ export default function Thoughts() {
             >
               <div className="flex justify-between">
                 {post.title}
-                <time className="dark:text-neutral-400">
+                <time className="text-[#6F6F6F] dark:text-neutral-400">
                   {format(parseISO(post.publishedAt), 'dd MMMM, yyyy')}
                 </time>
               </div>

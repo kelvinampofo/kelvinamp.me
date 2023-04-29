@@ -1,6 +1,6 @@
 import Container from '@/components/Container';
 import CustomLink from '@/components/CustomLink';
-import Mdx from '@/components/Mdx';
+import MDXContent from '@/components/MDXComponents';
 import { allPosts } from 'contentlayer/generated';
 import { format, parseISO } from 'date-fns';
 import type { Metadata } from 'next';
@@ -55,12 +55,12 @@ export async function generateMetadata({
 export default async function Post({ params }: Props) {
   const post = allPosts.find((post) => post.slug === params.slug);
 
-  if (!post) return notFound();
+  if (!post) notFound();
 
   return (
     <Container>
       <header className="inline-flex justify-between">
-        <h1 className="text-xl font-medium">
+        <h1 className="text-lg font-medium">
           <Balancer>{post.title}</Balancer>
         </h1>
         <span>
@@ -73,10 +73,10 @@ export default async function Post({ params }: Props) {
           </CustomLink>
         </span>
       </header>
-      <time className="mb-6 dark:text-neutral-400" dateTime={post.publishedAt}>
+      <time className="mb-12 dark:text-neutral-400" dateTime={post.publishedAt}>
         {format(parseISO(post.publishedAt), 'MMMM dd, yyyy')}
       </time>
-      <Mdx code={post.body.code} />
+      <MDXContent code={post.body.code} />
     </Container>
   );
 }

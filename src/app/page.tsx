@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <Container>
       <PageWrapper delay={0.6}>
-        <h1 className="text-xl font-medium">Kelvin Ampofo</h1>
-        <span className="text-neutral-500 dark:text-neutral-400">
+        <h1 className="text-lg font-medium">Kelvin Ampofo</h1>
+        <span className="text-[#6F6F6F] dark:text-neutral-400">
           Software Engineer
         </span>
       </PageWrapper>

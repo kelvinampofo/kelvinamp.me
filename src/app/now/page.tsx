@@ -4,13 +4,17 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Now',
-  description: 'Current state of life.'
+  description: 'Current rhythm of life.',
+  openGraph: {
+    title: 'Now',
+    description: 'Current rhythm of life.'
+  }
 };
 
 export default function Now() {
   return (
     <Container>
-      <h1 className="text-xl font-medium">Now</h1>
+      <h1 className="text-lg font-medium">Now</h1>
       <section className="my-6 flex flex-col gap-6">
         <p>
           Diving deep into passions and interests&mdash;keeping in mind that{' '}
