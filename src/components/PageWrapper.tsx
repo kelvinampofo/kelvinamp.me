@@ -19,7 +19,7 @@ export default function PageWrapper({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 20 }}
-        transition={{ ease: 'linear', duration: 0.4, delay }}
+        transition={{ ease: 'linear', duration: 0.35, delay }}
         className={className}
       >
         {children}
