@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export interface CustomLinkProps {
   href: any;
-  children: React.ReactNode | React.ReactNode[];
+  children?: React.ReactNode | React.ReactNode[];
   ariaLabel?: string;
   arrowIcon?: boolean;
   underline?: boolean;
@@ -19,19 +19,17 @@ export default function CustomLink({
 }: CustomLinkProps) {
   const isInternalLink = href.startsWith('/');
 
+  const classes = clsx(
+    arrowIcon ? 'inline-flex items-center' : null,
+    underline
+      ? 'underline decoration-[#6F6F6F] decoration-1 underline-offset-4 dark:decoration-neutral-500'
+      : null,
+    'duration-500 ease-linear hover:text-[#6F6F6F] dark:hover:text-neutral-400'
+  );
+
   if (isInternalLink) {
     return (
-      <Link
-        href={href}
-        className={clsx(
-          arrowIcon ? 'inline-flex items-center' : '',
-          underline
-            ? 'underline decoration-[#6F6F6F] decoration-1 underline-offset-4 dark:decoration-neutral-500'
-            : '',
-          'duration-500 ease-linear hover:text-[#6F6F6F] dark:hover:text-neutral-400'
-        )}
-        aria-label={ariaLabel}
-      >
+      <Link href={href} className={classes} aria-label={ariaLabel}>
         {arrowIcon && (
           <ArrowTopLeftIcon
             className="mr-[3px] text-[#6F6F6F] dark:text-neutral-400"
@@ -48,7 +46,7 @@ export default function CustomLink({
   return (
     <a
       href={href}
-      className="underline decoration-[#6F6F6F] decoration-1 underline-offset-4 duration-500 ease-linear hover:text-[#6F6F6F] dark:decoration-neutral-500 dark:hover:text-neutral-400"
+      className={classes}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={ariaLabel}
