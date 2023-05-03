@@ -19,7 +19,12 @@ export default function NotFound() {
         <p>Either way, apologies for the inconvenience.</p>
       </section>
       <span className="mt-6">
-        <CustomLink href="/" ariaLabel="go to home page" arrowIcon>
+        <CustomLink
+          href="/"
+          ariaLabel="go to home page"
+          arrowIcon
+          underline={false}
+        >
           Index
         </CustomLink>
       </span>
