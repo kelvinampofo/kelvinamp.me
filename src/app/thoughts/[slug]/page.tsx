@@ -6,6 +6,7 @@ import { format, parseISO } from 'date-fns';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Balancer from 'react-wrap-balancer';
+import '../../../styles/prose.css';
 
 interface Props {
   params: { slug: string };
@@ -59,23 +60,28 @@ export default async function Post({ params }: Props) {
 
   return (
     <Container>
-      <header className="inline-flex justify-between">
-        <h1 className="text-lg font-medium">
-          <Balancer>{post.title}</Balancer>
-        </h1>
-        <span>
+      <header className="flex flex-col-reverse justify-between gap-4 md:flex-row lg:flex-row">
+        <span className="order-2">
           <CustomLink
             href="/thoughts"
             ariaLabel="go back to thoughts page"
             arrowIcon
+            underline={false}
           >
             Back
           </CustomLink>
         </span>
+        <h1 className="order-1 text-lg font-medium">
+          <Balancer>{post.title}</Balancer>
+        </h1>
       </header>
-      <time className="mb-12 dark:text-neutral-400" dateTime={post.publishedAt}>
-        {format(parseISO(post.publishedAt), 'MMMM dd, yyyy')}
-      </time>
+      <div className="mb-4 flex gap-2 text-sm dark:text-neutral-400">
+        <time dateTime={post.publishedAt}>
+          {format(parseISO(post.publishedAt), 'MMMM dd, yyyy')}
+        </time>
+        <span>&middot;</span>
+        <span>{post.readingTime.text}</span>
+      </div>
       <MDXContent code={post.body.code} />
     </Container>
   );
