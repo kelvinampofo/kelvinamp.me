@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 
 export interface CustomLinkProps {
-  href: any;
+  href?: any;
   children?: React.ReactNode | React.ReactNode[];
   ariaLabel?: string;
   arrowIcon?: boolean;
@@ -24,7 +24,7 @@ export default function CustomLink({
     underline
       ? 'underline decoration-[#6F6F6F] decoration-1 underline-offset-4 dark:decoration-neutral-500'
       : null,
-    'duration-500 ease-linear hover:text-[#6F6F6F] dark:hover:text-neutral-400'
+    'duration-200 ease-linear hover:text-[#6F6F6F] dark:hover:text-neutral-400'
   );
 
   if (isInternalLink) {

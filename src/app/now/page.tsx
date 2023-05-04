@@ -51,7 +51,12 @@ export default function Now() {
         </p>
       </section>
       <span>
-        <CustomLink href="/" ariaLabel="go to home page" arrowIcon>
+        <CustomLink
+          href="/"
+          ariaLabel="go to home page"
+          arrowIcon
+          underline={false}
+        >
           Index
         </CustomLink>
       </span>

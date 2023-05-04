@@ -2,7 +2,7 @@ import { useMDXComponent } from 'next-contentlayer/hooks';
 import CustomLink from './CustomLink';
 
 const MDXComponents = {
-  Link: CustomLink
+  a: CustomLink
 };
 
 interface MdxProps {
@@ -13,7 +13,7 @@ export default function MDX({ code }: MdxProps) {
   const MDXContent = useMDXComponent(code);
 
   return (
-    <article>
+    <article className="prose prose-sm md:prose-base lg:prose-base">
       <MDXContent components={{ ...MDXComponents }} />
     </article>
   );
