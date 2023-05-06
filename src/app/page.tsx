@@ -23,18 +23,18 @@ export default function Home() {
             technology.
           </p>
         </section>
-        <span className="flex gap-3">
+        <section className="flex flex-col gap-3">
           <span>
             <CustomLink href="/now" ariaLabel="go to now page">
-              Now
+              / Now
             </CustomLink>
           </span>
           <span>
             <CustomLink href="/thoughts" ariaLabel="go to thoughts page">
-              Thoughts
+              / Thoughts
             </CustomLink>
           </span>
-        </span>
+        </section>
         <hr className="my-12 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
       </PageWrapper>
       <PageWrapper delay={0.8}>
