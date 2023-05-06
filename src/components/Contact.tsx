@@ -22,7 +22,9 @@ export default function Contact() {
       <ul className="flex">
         {links.map((link, index) => (
           <li key={index} className="flex items-center">
-            <CustomLink href={link.href}>{link.label}</CustomLink>
+            <CustomLink href={link.href} underline>
+              {link.label}
+            </CustomLink>
             {index !== links.length - 1 && (
               <span className="mx-1 dark:text-neutral-400">&middot;</span>
             )}
