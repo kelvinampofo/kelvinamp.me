@@ -31,36 +31,29 @@ export default function Thoughts() {
     <Container>
       <h1 className="mb-6 text-lg font-medium">Thoughts</h1>
       <p className="mb-12">
-        Infrequent thoughts on design, engineering and things in between.
+        Infrequent thoughts on design, technology and things in between.
       </p>
       {allPosts
         .sort((a, b) => {
           return compareDesc(new Date(a.publishedAt), new Date(b.publishedAt));
         })
-        .map((post, index) => (
-          <>
-            <CustomLink
-              href={`/thoughts/${post.slug}`}
-              key={index}
-              underline={false}
-            >
-              <div className="flex justify-between">
-                {post.title}
-                <time className="text-[#6F6F6F] dark:text-neutral-400">
-                  {format(parseISO(post.publishedAt), 'dd MMMM, yyyy')}
-                </time>
-              </div>
-            </CustomLink>
-            <hr className="my-6 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
-          </>
-        ))}
+        .map((post) => {
+          return (
+            <>
+              <CustomLink href={`/thoughts/${post.slug}`} key={post._id}>
+                <div className="flex justify-between">
+                  {post.title}
+                  <time className="text-[#6F6F6F] dark:text-neutral-400">
+                    {format(parseISO(post.publishedAt), 'dd MMMM, yyyy')}
+                  </time>
+                </div>
+              </CustomLink>
+              <hr className="my-6 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
+            </>
+          );
+        })}
       <span className="mt-6">
-        <CustomLink
-          href="/"
-          ariaLabel="go back to home page"
-          arrowIcon
-          underline={false}
-        >
+        <CustomLink href="/" ariaLabel="go back to home page" arrowIcon>
           Index
         </CustomLink>
       </span>
