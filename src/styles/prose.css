@@ -1,13 +1,13 @@
 .prose {
-  @apply max-w-3xl text-black antialiased dark:text-[#EDEDED];
+  @apply max-w-3xl text-black antialiased marker:text-[#6F6F6F] dark:text-[#EDEDED] marker:dark:text-neutral-400;
 }
 
 .prose a {
-  @apply font-normal text-black dark:text-[#EDEDED];
+  @apply font-normal text-black underline decoration-[#6F6F6F] decoration-1 underline-offset-[2.5px] dark:text-[#EDEDED] dark:decoration-[#505050];
 }
 
 .prose code {
-  @apply rounded-md border border-neutral-100 bg-neutral-100 px-1 py-0.5 text-neutral-800 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-200;
+  @apply rounded-md border border-neutral-100 bg-neutral-100 px-1 py-0.5 font-normal text-neutral-800 dark:border-neutral-800 dark:bg-neutral-900 dark:text-[#EDEDED];
 }
 
 .prose > :first-child {
