@@ -19,22 +19,18 @@ export default function Home() {
             interaction and architecture. Currently working in digital banking.
           </p>
           <p>
-            Developing skill through immersive, hands-on exploration in art and
-            technology.
+            Read further on{' '}
+            <CustomLink href="/now" underline ariaLabel="go to thoughts page">
+              now
+            </CustomLink>{' '}
+            page
           </p>
         </section>
-        <section className="flex flex-col gap-3">
-          <span>
-            <CustomLink href="/now" ariaLabel="go to now page">
-              / Now
-            </CustomLink>
-          </span>
-          <span>
-            <CustomLink href="/thoughts" ariaLabel="go to thoughts page">
-              / Thoughts
-            </CustomLink>
-          </span>
-        </section>
+        <span>
+          <CustomLink href="/thoughts" ariaLabel="go to thoughts page">
+            / Thoughts
+          </CustomLink>
+        </span>
         <hr className="my-12 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
       </PageWrapper>
       <PageWrapper delay={0.8}>
