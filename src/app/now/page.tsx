@@ -30,7 +30,8 @@ export default function Now() {
       <h1 className="text-lg font-medium">Now</h1>
       <section className="my-6 flex flex-col gap-6">
         <p>
-          Diving deep into passions and interests&mdash;keeping in mind that{' '}
+          Developing skill through immersive, hands-on exploration in art and
+          technology&mdash;keeping in mind that{' '}
           <em>
             <q>everything around me is someone&apos;s life work</q>.
           </em>
@@ -43,11 +44,18 @@ export default function Now() {
         </p>
         <p>
           Taking the time to be still, embracing a <s>minimal</s> simple
-          lifestyle centred around purpose and intention.
+          lifestyle centred around intention. Making space for the
+          essentials&mdash;health, family, people, creation and iced tea.
         </p>
         <p>
           Enjoying music that evokes strong emotions. Watching videos of super
           cars. Keeping up with the latest advancements in technology.
+        </p>
+        <p>
+          See library of current reading on{' '}
+          <CustomLink href="https://literal.club/kelvinamp" underline>
+            Literal
+          </CustomLink>
         </p>
       </section>
       <span>
