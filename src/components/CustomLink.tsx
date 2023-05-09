@@ -22,7 +22,7 @@ export default function CustomLink({
   const classes = clsx(
     arrowIcon ? 'inline-flex items-center' : null,
     underline
-      ? 'underline decoration-[#6F6F6F] decoration-1 underline-offset-[2.5px] dark:decoration-[neutral-400]'
+      ? 'underline decoration-neutral-300 decoration-1 underline-offset-[2.5px] dark:decoration-[#505050]'
       : null,
     'duration-200 ease-linear hover:text-[#6F6F6F] dark:hover:text-neutral-400'
   );
