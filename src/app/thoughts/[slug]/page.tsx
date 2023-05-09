@@ -75,7 +75,7 @@ export default async function Post({ params }: Props) {
           <Balancer>{post.title}</Balancer>
         </h1>
       </header>
-      <div className="mb-4 flex gap-2 text-sm dark:text-neutral-400">
+      <div className="mb-4 flex gap-2 text-sm text-[#6F6F6F] dark:text-neutral-400">
         <time dateTime={post.publishedAt}>
           {format(parseISO(post.publishedAt), 'MMMM dd, yyyy')}
         </time>
