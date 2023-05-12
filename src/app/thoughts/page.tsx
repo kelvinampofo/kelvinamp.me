@@ -54,7 +54,7 @@ export default function Thoughts() {
         })}
       <span className="mt-6">
         <CustomLink href="/" ariaLabel="go back to home page" arrowIcon>
-          Index
+          Back
         </CustomLink>
       </span>
     </Container>

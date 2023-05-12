@@ -25,7 +25,7 @@ export default function NotFound() {
           arrowIcon
           underline={false}
         >
-          Index
+          Back
         </CustomLink>
       </span>
     </Container>
