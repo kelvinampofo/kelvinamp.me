@@ -3,7 +3,7 @@
 }
 
 .prose a {
-  @apply font-normal text-black underline decoration-[#6F6F6F] decoration-1 underline-offset-[2.5px] dark:text-[#EDEDED] dark:decoration-[#505050];
+  @apply font-normal text-black underline decoration-neutral-300 decoration-1 underline-offset-[2.5px] dark:text-[#EDEDED] dark:decoration-[#505050];
 }
 
 .prose code {
