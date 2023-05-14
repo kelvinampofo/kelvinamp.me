@@ -40,7 +40,7 @@ export default function Thoughts() {
         .map((post) => {
           return (
             <>
-              <CustomLink href={`/thoughts/${post.slug}`} key={post._id}>
+              <CustomLink href={`/writing/${post.slug}`} key={post._id}>
                 <div className="flex justify-between">
                   <span className="font-medium">{post.title}</span>
                   <time className="text-[#6F6F6F] dark:text-neutral-400">

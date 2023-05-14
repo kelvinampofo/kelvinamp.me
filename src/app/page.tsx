@@ -20,17 +20,17 @@ export default function Home() {
           </p>
           <p>
             Read further on{' '}
-            <CustomLink href="/now" underline ariaLabel="go to thoughts page">
+            <CustomLink href="/now" underline ariaLabel="go to writing page">
               now
             </CustomLink>{' '}
             page
           </p>
         </section>
-        <span>
-          <CustomLink href="/thoughts" ariaLabel="go to thoughts page">
+        <>
+          <CustomLink href="/writing" ariaLabel="go to thoughts page">
             / Writing
           </CustomLink>
-        </span>
+        </>
         <hr className="my-12 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
       </PageWrapper>
       <PageWrapper delay={0.8}>

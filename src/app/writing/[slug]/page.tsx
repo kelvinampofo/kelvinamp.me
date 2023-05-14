@@ -63,8 +63,8 @@ export default async function Post({ params }: Props) {
       <header className="flex flex-col-reverse justify-between gap-4 md:flex-row lg:flex-row">
         <span className="order-2">
           <CustomLink
-            href="/thoughts"
-            ariaLabel="go back to thoughts page"
+            href="/writing"
+            ariaLabel="go back to writing page"
             arrowIcon
             underline={false}
           >
