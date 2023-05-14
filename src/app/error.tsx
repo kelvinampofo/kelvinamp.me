@@ -1,18 +1,19 @@
 'use client';
 
-import { useEffect } from 'react';
+import Container from '@/components/Container';
 
-export default function Error({ error }: { error: Error; reset: () => void }) {
-  useEffect(() => {
-    // TODO: Log the error to an error reporting service.
-    console.error(error);
-  }, [error]);
+interface ErrorBoundaryProps {
+  error: Error;
+  reset: () => void;
+}
+
+export default function ErrorBoundary({ error }: ErrorBoundaryProps) {
+  console.error(error);
 
   return (
-    <div>
-      <p className="mt-44">
-        Oops, something went wrong... very much sad. Maybe refresh?
-      </p>
-    </div>
+    <Container>
+      <h1 className="mb-6 text-lg font-medium">Oops something went wrong...</h1>
+      <p>Very much sad, very high priority. Maybe refresh?</p>
+    </Container>
   );
 }
