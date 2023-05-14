@@ -1,11 +1,15 @@
-export default function Container({
-  children
-}: {
+import clsx from 'clsx';
+
+interface ContainerProps {
   children: React.ReactNode | React.ReactNode[];
-}) {
-  return (
-    <article className="flex flex-col justify-center px-8 py-12 md:py-32 lg:px-10 lg:py-32">
-      {children}
-    </article>
+  className?: string;
+}
+
+export default function Container({ children, className }: ContainerProps) {
+  const classes = clsx(
+    'flex flex-col justify-center px-8 py-12 md:py-32 lg:px-10 lg:py-32',
+    className
   );
+
+  return <div className={classes}>{children}</div>;
 }
