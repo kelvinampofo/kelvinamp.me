@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 export default function Thoughts() {
   return (
     <Container>
-      <h1 className="mb-6 text-lg font-medium">Thoughts</h1>
+      <h1 className="mb-6 text-lg font-medium">Writing</h1>
       <p className="mb-12">
         Infrequent thoughts on design, technology and things in between.
       </p>
@@ -42,7 +42,7 @@ export default function Thoughts() {
             <>
               <CustomLink href={`/thoughts/${post.slug}`} key={post._id}>
                 <div className="flex justify-between">
-                  {post.title}
+                  <span className="font-medium">{post.title}</span>
                   <time className="text-[#6F6F6F] dark:text-neutral-400">
                     {format(parseISO(post.publishedAt), 'dd MMMM, yyyy')}
                   </time>

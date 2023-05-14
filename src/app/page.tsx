@@ -28,7 +28,7 @@ export default function Home() {
         </section>
         <span>
           <CustomLink href="/thoughts" ariaLabel="go to thoughts page">
-            / Thoughts
+            / Writing
           </CustomLink>
         </span>
         <hr className="my-12 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
