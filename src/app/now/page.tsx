@@ -37,22 +37,20 @@ export default function Now() {
           </em>
         </p>
         <p>
-          For now, my main focus is to build software of which I&apos;ve only
-          just scratched the surface. Interactivity, typography, design, motion,
-          touch, optimisations, accessibility&mdash;there is an infinite space
-          for creativity and opportunity.
+          Dedicated to building software. Interactivity, typography, motion,
+          touch, optimisations, accessibility and design&mdash;there&apos;s an
+          infinite canvas for creativity and opportunity.
         </p>
         <p>
-          Taking the time to be still, embracing a <s>minimal</s> simple
-          lifestyle centred around intention. Making space for the
-          essentials&mdash;health, family, people, creation and iced tea.
+          Seperating identify from trivialities. Reading excessively, thinking
+          critically. Finding joy in challenges. Meticulous about the details.
         </p>
         <p>
-          Enjoying music that evokes strong emotions. Watching videos of super
-          cars. Keeping up with the latest advancements in technology.
+          Enjoying music that evokes strong emotions. Watching Porsche videos.
+          Drinking iced tea.
         </p>
         <p>
-          See library of current reading on{' '}
+          View current selection of reading on{' '}
           <CustomLink href="https://literal.club/kelvinamp" underline>
             Literal
           </CustomLink>
