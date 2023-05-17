@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export interface CustomLinkProps {
   href?: any;
-  children?: React.ReactNode | React.ReactNode[];
+  children?: React.ReactNode;
   ariaLabel?: string;
   arrowIcon?: boolean;
   underline?: boolean;
@@ -20,10 +20,9 @@ export default function CustomLink({
   const isInternalLink = href.startsWith('/');
 
   const classes = clsx(
-    arrowIcon ? 'inline-flex items-center' : null,
-    underline
-      ? 'underline decoration-neutral-300 decoration-1 underline-offset-[2.5px] dark:decoration-[#505050]'
-      : null,
+    arrowIcon && 'inline-flex items-center',
+    underline &&
+      'underline decoration-neutral-300 decoration-1 underline-offset-[2.5px] dark:decoration-[#505050]',
     'duration-200 ease-linear hover:text-[#6F6F6F] dark:hover:text-neutral-400'
   );
 
