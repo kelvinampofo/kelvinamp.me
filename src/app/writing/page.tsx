@@ -5,7 +5,9 @@ import { compareDesc, format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Thoughts',
+  title: 'Writing',
+  publisher: 'Kelvin Ampofo',
+  authors: [{ name: 'Kelvin Ampofo' }],
   description: 'Infrequent written thoughts.',
   openGraph: {
     title: 'Thoughts',
@@ -14,6 +16,7 @@ export const metadata: Metadata = {
   twitter: {
     title: 'Thoughts',
     site: '@kelvinamp_',
+    creator: '@kelvinamp',
     card: 'summary',
     description: 'Infrequent written thoughts.',
     images: [
@@ -26,7 +29,7 @@ export const metadata: Metadata = {
   }
 };
 
-export default function Thoughts() {
+export default function Writing() {
   return (
     <Container>
       <h1 className="mb-6 text-lg font-medium">Writing</h1>

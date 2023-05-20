@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     default: 'Kelvin Ampofo',
     template: '%s'
   },
+  creator: 'Kelvin Ampofo',
   description: 'Crafting interfaces.',
   icons: {
     icon: '/favicon.ico',
@@ -49,6 +50,7 @@ export const metadata: Metadata = {
   twitter: {
     title: 'Kelvin Ampofo',
     site: '@kelvinamp_',
+    creator: '@kelvinamp',
     card: 'summary',
     description: 'Crafting interfaces.'
   }

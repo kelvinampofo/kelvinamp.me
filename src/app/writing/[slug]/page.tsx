@@ -23,23 +23,28 @@ export async function generateMetadata({
 }: Props): Promise<Metadata | undefined> {
   const post = allPosts.find((post) => post.slug === params.slug);
 
-  if (!post) return;
+  if (!post) {
+    return;
+  }
 
   const { title, publishedAt, summary, slug } = post;
 
   return {
     title,
+    publisher: 'Kelvin Ampofo',
+    authors: [{ name: 'Kelvin Ampofo' }],
     description: summary,
     openGraph: {
       title,
       description: summary,
       type: 'article',
       publishedTime: publishedAt,
-      url: `https://kelvinamp.me/thoughts/${slug}`
+      url: `https://kelvinamp.me/writing/${slug}`
     },
     twitter: {
       site: '@kelvinamp_',
       card: 'summary',
+      creator: '@kelvinamp',
       title,
       description: summary,
       images: [
@@ -56,7 +61,9 @@ export async function generateMetadata({
 export default async function Post({ params }: Props) {
   const post = allPosts.find((post) => post.slug === params.slug);
 
-  if (!post) notFound();
+  if (!post) {
+    notFound();
+  }
 
   return (
     <Container>
