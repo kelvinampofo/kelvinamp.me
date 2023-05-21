@@ -57,7 +57,7 @@ export default function Writing() {
         })}
       <span className="mt-6">
         <CustomLink href="/" ariaLabel="go back to home page" arrowIcon>
-          Back
+          Index
         </CustomLink>
       </span>
     </Container>
