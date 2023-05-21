@@ -1,4 +1,5 @@
 import Container from '@/components/Container';
+import CopyLinkButton from '@/components/CopyLinkButton';
 import CustomLink from '@/components/CustomLink';
 import MDXContent from '@/components/MDXComponents';
 import { allPosts } from 'contentlayer/generated';
@@ -87,6 +88,7 @@ export default async function Post({ params }: Props) {
         </time>
         <span>&middot;</span>
         <span>{post.readingTime.text}</span>
+        <CopyLinkButton />
       </div>
       <MDXContent code={post.body.code} />
     </Container>
