@@ -67,18 +67,17 @@ export default async function Post({ params }: Props) {
 
   return (
     <Container>
-      <header className="flex flex-col-reverse justify-between gap-4 md:flex-row lg:flex-row">
-        <span className="order-2">
+      <header className="flex flex-col justify-between gap-8">
+        <span>
           <CustomLink
             href="/writing"
             ariaLabel="go back to writing page"
-            arrowIcon
-            underline={false}
+            resetIcon
           >
-            Back
+            Writing
           </CustomLink>
         </span>
-        <h1 className="order-1 text-lg font-medium">
+        <h1 className="text-lg font-medium">
           <Balancer>{post.title}</Balancer>
         </h1>
       </header>
