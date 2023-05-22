@@ -15,7 +15,8 @@ export const metadata: Metadata = {
     template: '%s'
   },
   creator: 'Kelvin Ampofo',
-  description: 'Crafting interfaces.',
+  description:
+    'Crafting interfaces with a focus on design, human-computer interaction and architecture.',
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon-16x16.png',
@@ -23,7 +24,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Kelvin Ampofo',
-    description: 'Crafting interfaces.',
+    description:
+      'Crafting interfaces with a focus on design, human-computer interaction and architecture.',
     url: 'https://kelvinamp.me',
     siteName: 'Kelvin Ampofo',
     locale: 'en-US',
@@ -32,7 +34,8 @@ export const metadata: Metadata = {
       {
         url: 'https://kelvinamp.me/og.jpeg',
         height: 1200,
-        width: 1200
+        width: 1200,
+        alt: 'Black background image'
       }
     ]
   },
@@ -52,7 +55,8 @@ export const metadata: Metadata = {
     site: '@kelvinamp_',
     creator: '@kelvinamp',
     card: 'summary',
-    description: 'Crafting interfaces.'
+    description:
+      'Crafting interfaces with a focus on design, human-computer interaction and architecture.'
   }
 };
 
