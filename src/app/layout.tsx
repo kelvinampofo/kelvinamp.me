@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     default: 'Kelvin Ampofo',
     template: '%s'
   },
+  metadataBase: new URL('https://kelvinamp.me'),
   creator: 'Kelvin Ampofo',
   description:
     'Crafting interfaces with a focus on design, human-computer interaction and architecture.',
