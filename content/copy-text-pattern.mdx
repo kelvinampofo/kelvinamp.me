@@ -1,0 +1,76 @@
+---
+title: Copy Text Pattern
+summary: An overview of the copy text pattern.
+publishedAt: '2023-05-28'
+image: '/images/copy-text-pattern.png'
+---
+
+Recently, I realised that there wasn't a convenient way for visitors to easily copy the URL of my posts. This led me to confront a common problem—the need for a seamless method to allow visitors to copy a specific post's URL.
+
+To solve this, I decided to implement a "Copy Link" button that enables users to effortlessly copy the current page's URL to their clipboard. Now, let's delve into the key elements of the code that accomplished this goal.
+
+First, I needed to access the current page's URL and copy it to the clipboard. Since my website is built using Next.js, which pre-renders pages on the server, I had to consider the availability of the window object. To address this, I used the useEffect hook to store the URL in the currentUrl state variable. By checking if the window object exists, I ensured that the code only executes on the client-side, avoiding any server-side rendering issues.
+
+```tsx
+const [currentUrl, setCurrentUrl] = useState('');
+
+useEffect(() => {
+  if (typeof window !== 'undefined') {
+    setCurrentUrl(window.location.href);
+  }
+}, []);
+```
+
+To handle the copying process, I leveraged the [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API), which offers a simple way to interact with the user's clipboard. I encapsulated the copy logic within the 'handleCopy' function, utilising the `navigator.clipboard.writeText` method to write the current URL to the clipboard. In case of any errors, an error message is logged to the console.
+
+```tsx
+const handleCopy = async () => {
+  try {
+    await navigator.clipboard.writeText(currentUrl);
+    setCopied(true);
+  } catch (error) {
+    console.error(error);
+  }
+};
+```
+
+To support older browsers that do not have access to the Clipboard API, I implemented a fallback mechanism. Inside the `handleFallbackCopy` function, I created a temporary textarea element, populated it with the `window.location.href`, selected its contents, and used the `document.execCommand` to perform the copy operation. Finally, I removed the temporary element from the DOM.
+
+```tsx
+const handleFallbackCopy = () => {
+  const tmpElement = document.createElement('textarea');
+  tmpElement.value = window.location.href;
+  tmpElement.setAttribute('readonly', '');
+  tmpElement.style.opacity = '0';
+  document.body.appendChild(tmpElement);
+  tmpElement.focus();
+  tmpElement.select();
+
+  try {
+    document.execCommand('copy');
+    setCopied(true);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    document.body.removeChild(tmpElement);
+  }
+};
+```
+
+Lastly, to enhance the user experience, I included a visual indicator of the copy action success. The 'copied' state variable tracks the copy status, and appropriate feedback is displayed to the user. After 2.5 seconds, the 'copied' state is reset to its initial value.
+
+```tsx
+const [copied, setCopied] = useState(false);
+
+useEffect(() => {
+  const resetCopied = () => {
+    setCopied(false);
+  };
+  const timeout = setTimeout(resetCopied, 2500);
+  return () => {
+    clearTimeout(timeout);
+  };
+}, [copied]);
+```
+
+That's pretty much it. Open for extension, closed for modification. You can find the full source code [here](https://github.com/kelvinampofo/kelvinamp.me/blob/main/src/components/CopyLinkButton.tsx).
