@@ -28,7 +28,11 @@ export async function generateMetadata({
     return;
   }
 
-  const { title, publishedAt, summary, slug } = post;
+  const { title, publishedAt, summary, slug, image } = post;
+
+  const ogImage = image
+    ? `https://kelvinamp.me${image}`
+    : 'https://kelvinamp.me/og.jpeg';
 
   return {
     title,
@@ -40,7 +44,13 @@ export async function generateMetadata({
       description: summary,
       type: 'article',
       publishedTime: publishedAt,
-      url: `https://kelvinamp.me/writing/${slug}`
+      url: `https://kelvinamp.me/writing/${slug}`,
+      images: [
+        {
+          url: ogImage,
+          alt: summary
+        }
+      ]
     },
     twitter: {
       site: '@kelvinamp_',
@@ -50,9 +60,8 @@ export async function generateMetadata({
       description: summary,
       images: [
         {
-          url: 'https://kelvinamp.me/og.jpeg',
-          height: 1200,
-          width: 1200
+          url: ogImage,
+          alt: summary
         }
       ]
     }
