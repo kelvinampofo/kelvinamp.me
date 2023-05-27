@@ -54,7 +54,7 @@ export async function generateMetadata({
     },
     twitter: {
       site: '@kelvinamp_',
-      card: 'summary',
+      card: 'summary_large_image',
       creator: '@kelvinamp',
       title,
       description: summary,
