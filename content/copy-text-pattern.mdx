@@ -1,15 +1,13 @@
 ---
 title: Copy Text Pattern
 summary: An overview of the copy text pattern.
-publishedAt: '2023-05-28'
+publishedAt: '2023-05-27'
 image: '/images/copy-text-pattern.png'
 ---
 
-Recently, I realised that there wasn't a convenient way for visitors to easily copy the URL of my posts. This led me to confront a common problem—the need for a seamless method to allow visitors to copy a specific post's URL.
+I recently realised that visitors didn't have an easy way to copy the URL of my posts. To address this, I implemented a "Copy Link" button that allows users to effortlessly copy the current page's URL to their clipboard. Here's a break down of how I achieved this:
 
-To solve this, I decided to implement a "Copy Link" button that enables users to effortlessly copy the current page's URL to their clipboard. Now, let's delve into the key elements of the code that accomplished this goal.
-
-First, I needed to access the current page's URL and copy it to the clipboard. Since my website is built using Next.js, which pre-renders pages on the server, I had to consider the availability of the window object. To address this, I used the useEffect hook to store the URL in the currentUrl state variable. By checking if the window object exists, I ensured that the code only executes on the client-side, avoiding any server-side rendering issues.
+Since my website is built with [Next.js](https://nextjs.org/), which pre-renders pages on the server, I needed to consider the availability of the window object. To handle this, I used the `useEffect` hook to store the URL in the currentUrl state variable. By checking if the window object exists, I ensured that the code only runs on the client-side, avoiding any server-side rendering issues.
 
 ```tsx
 const [currentUrl, setCurrentUrl] = useState('');
@@ -21,7 +19,7 @@ useEffect(() => {
 }, []);
 ```
 
-To handle the copying process, I leveraged the [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API), which offers a simple way to interact with the user's clipboard. I encapsulated the copy logic within the 'handleCopy' function, utilising the `navigator.clipboard.writeText` method to write the current URL to the clipboard. In case of any errors, an error message is logged to the console.
+To handle the copying process, I leveraged the [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API), which offers a simple way to interact with the user's clipboard. I encapsulated the copy logic within the `handleCopy` function, utilising the `navigator.clipboard.writeText` method to write the current URL to the clipboard. In case of any errors, an error message is logged to the console.
 
 ```tsx
 const handleCopy = async () => {
@@ -73,4 +71,4 @@ useEffect(() => {
 }, [copied]);
 ```
 
-That's pretty much it. Open for extension, closed for modification. You can find the full source code [here](https://github.com/kelvinampofo/kelvinamp.me/blob/main/src/components/CopyLinkButton.tsx).
+That's it. Open for extension, closed for modification. You can find the source code [here](https://github.com/kelvinampofo/kelvinamp.me/blob/main/src/components/CopyLinkButton.tsx).
