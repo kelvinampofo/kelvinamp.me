@@ -10,11 +10,11 @@ export const metadata: Metadata = {
   authors: [{ name: 'Kelvin Ampofo' }],
   description: 'Infrequent written thoughts.',
   openGraph: {
-    title: 'Thoughts',
+    title: 'Writing',
     description: 'Infrequent written thoughts.'
   },
   twitter: {
-    title: 'Thoughts',
+    title: 'Writing',
     site: '@kelvinamp_',
     creator: '@kelvinamp',
     card: 'summary',
