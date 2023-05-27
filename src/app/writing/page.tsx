@@ -47,7 +47,7 @@ export default function Writing() {
                 <div className="flex justify-between">
                   <span className="font-medium">{post.title}</span>
                   <time className="text-[#6F6F6F] dark:text-neutral-400">
-                    {format(parseISO(post.publishedAt), 'dd MMMM, yyyy')}
+                    {format(parseISO(post.publishedAt), 'dd/MM/yy')}
                   </time>
                 </div>
               </CustomLink>
