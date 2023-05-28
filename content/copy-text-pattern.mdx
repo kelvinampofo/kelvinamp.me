@@ -1,13 +1,17 @@
 ---
 title: Copy Text Pattern
 summary: An overview of the copy text pattern.
-publishedAt: '2023-05-27'
+publishedAt: '2023-05-28'
 image: '/images/copy-text-pattern.png'
 ---
 
-I recently realised that visitors didn't have an easy way to copy the URL of my posts. To address this, I implemented a "Copy Link" button that allows users to effortlessly copy the current page's URL to their clipboard. Here's a break down of how I achieved this:
+Recently, I realised that visitors had no easy way to copy the URL of my posts. To address this, I implemented a "Copy Link" button that allows users to effortlessly copy the current page's URL to their clipboard. Here's a break down of how this was achieved this:
 
-Since my website is built with [Next.js](https://nextjs.org/), which pre-renders pages on the server, I needed to consider the availability of the window object. To handle this, I used the `useEffect` hook to store the URL in the currentUrl state variable. By checking if the window object exists, I ensured that the code only runs on the client-side, avoiding any server-side rendering issues.
+**Retrieving the Current URL**
+
+Since my site is built with [Next.js](https://nextjs.org/), which pre-renders pages on the server, I had to consider the availability of the `window` object. To handle this, we can use a `useEffect` to store the URL in a `currentUrl` state variable.
+
+By checking if the window object exists, it ensures that the code only runs on the client-side, avoiding any server-side rendering issues.
 
 ```tsx
 const [currentUrl, setCurrentUrl] = useState('');
@@ -19,7 +23,9 @@ useEffect(() => {
 }, []);
 ```
 
-To handle the copying process, I leveraged the [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API), which offers a simple way to interact with the user's clipboard. I encapsulated the copy logic within the `handleCopy` function, utilising the `navigator.clipboard.writeText` method to write the current URL to the clipboard. In case of any errors, an error message is logged to the console.
+**Copying the URL to the Clipboard**
+
+To handle the copying process, we can leveraged the [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API), which offers a simple way to interact with the user's clipboard. The copy logic is encapsulated within the `handleCopy` function, utilising the `navigator.clipboard.writeText` method to write the current URL to the clipboard and setting the `copied` variable state to true. In case of any errors, an error message is logged to the console.
 
 ```tsx
 const handleCopy = async () => {
@@ -32,7 +38,9 @@ const handleCopy = async () => {
 };
 ```
 
-To support older browsers that do not have access to the Clipboard API, I implemented a fallback mechanism. Inside the `handleFallbackCopy` function, I created a temporary textarea element, populated it with the `window.location.href`, selected its contents, and used the `document.execCommand` to perform the copy operation. Finally, I removed the temporary element from the DOM.
+**Fallback Mechanism**
+
+To support browsers that do not have access to the Clipboard API, we can implement a fallback mechanism. We can create a temporary textarea element, populate it with the `window.location.href`, select its contents, and use the `document.execCommand` to perform the copy operation. Finally, we remove the temporary element from the DOM.
 
 ```tsx
 const handleFallbackCopy = () => {
@@ -55,7 +63,9 @@ const handleFallbackCopy = () => {
 };
 ```
 
-Lastly, to enhance the user experience, I included a visual indicator of the copy action success. The 'copied' state variable tracks the copy status, and appropriate feedback is displayed to the user. After 2.5 seconds, the 'copied' state is reset to its initial value.
+**User Feedback**
+
+To enhance the user experience, we can include a visual indicator of the copy action success. The 'copied' state variable tracks the copy status, and appropriate feedback is displayed to the user. After 2.5 seconds, the 'copied' state is reset to its initial value.
 
 ```tsx
 const [copied, setCopied] = useState(false);
@@ -71,4 +81,27 @@ useEffect(() => {
 }, [copied]);
 ```
 
-That's it. Open for extension, closed for modification. You can find the source code [here](https://github.com/kelvinampofo/kelvinamp.me/blob/main/src/components/CopyLinkButton.tsx).
+A quick check if the API is available. If so, return the relevant function. We can then trigger this function when the button is clicked.
+
+```tsx
+const handleCopyUrl = () => {
+  if (navigator.clipboard) {
+    handleCopy();
+  } else {
+    handleFallbackCopy();
+  }
+};
+
+return (
+  <Tooltip content="Copy URL">
+    <button
+      onClick={handleCopyUrl}
+      aria-label={copied ? 'Copied URL' : 'Copy URL'}
+    >
+      {copied ? 'Copied!' : <LinkIcon />}
+    </button>
+  </Tooltip>
+);
+```
+
+That's about it. Open for extension, closed for modification. You can find the full code [here](https://github.com/kelvinampofo/kelvinamp.me/blob/main/src/components/CopyLinkButton.tsx).
