@@ -72,7 +72,7 @@ export default function CopyLinkButton() {
         aria-label={copied ? 'Copied URL' : 'Copy URL'}
       >
         {copied ? (
-          'Copied URL!'
+          'Copied!'
         ) : (
           <Link2Icon
             className="mx-2 text-[#6F6F6F] duration-200 ease-linear hover:text-[#6F6F6F] dark:text-neutral-400 dark:hover:text-[#EDEDED]"
