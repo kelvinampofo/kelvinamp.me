@@ -16,6 +16,10 @@
   margin-bottom: 1.25em !important;
 }
 
+pre > code {
+  display: grid;
+}
+
 .prose pre code {
   @apply p-0 text-neutral-800 dark:text-neutral-200;
   border: initial;
@@ -31,7 +35,7 @@ pre[class*='language-'] {
 }
 
 [data-rehype-pretty-code-fragment] code {
-  @apply grid min-w-full break-words rounded-none border-0 bg-transparent p-0 text-sm text-black;
+  @apply grid min-w-full break-words rounded-none border-0 bg-transparent p-0 text-xs text-black md:text-sm lg:text-sm;
   counter-reset: line;
   box-decoration-break: clone;
 }
