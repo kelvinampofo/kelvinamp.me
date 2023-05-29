@@ -1,8 +1,8 @@
-import ThemeProvider from '@/components/ThemeProvider';
+import ThemeProvider from '@/app/_components/ThemeProvider';
+import '@/app/_styles/globals.css';
 import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import '../styles/globals.css';
 
 const interFont = Inter({
   subsets: ['latin'],

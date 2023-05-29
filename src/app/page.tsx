@@ -1,7 +1,7 @@
-import Contact from '@/components/Contact';
-import Container from '@/components/Container';
-import CustomLink from '@/components/CustomLink';
-import PageWrapper from '@/components/PageWrapper';
+import Contact from '@/app/_components/Contact';
+import Container from '@/app/_components/Container';
+import CustomLink from '@/app/_components/CustomLink';
+import PageWrapper from '@/app/_components/PageWrapper';
 
 export default function Home() {
   return (

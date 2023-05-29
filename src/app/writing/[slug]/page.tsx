@@ -1,13 +1,13 @@
-import Container from '@/components/Container';
-import CopyLinkButton from '@/components/CopyLinkButton';
-import CustomLink from '@/components/CustomLink';
-import MDXContent from '@/components/MDXComponents';
+import Container from '@/app/_components/Container';
+import CopyLinkButton from '@/app/_components/CopyLinkButton';
+import CustomLink from '@/app/_components/CustomLink';
+import MDXContent from '@/app/_components/MDXComponents';
+import '@/app/_styles/prose.css';
 import { allPosts } from 'contentlayer/generated';
 import { format, parseISO } from 'date-fns';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Balancer from 'react-wrap-balancer';
-import '../../../styles/prose.css';
 
 interface Props {
   params: { slug: string };

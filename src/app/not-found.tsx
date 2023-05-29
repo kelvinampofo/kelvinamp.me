@@ -1,5 +1,5 @@
-import Container from '@/components/Container';
-import CustomLink from '@/components/CustomLink';
+import Container from '@/app/_components/Container';
+import CustomLink from '@/app/_components/CustomLink';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

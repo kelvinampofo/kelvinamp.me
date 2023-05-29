@@ -1,6 +1,6 @@
 'use client';
 
-import Container from '@/components/Container';
+import Container from '@/app/_components/Container';
 
 interface ErrorBoundaryProps {
   error: Error;
