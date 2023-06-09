@@ -1,7 +1,8 @@
+import clsx from 'clsx';
 import CustomLink from './CustomLink';
 
 export default function Contact() {
-  const links = [
+  const contactLinks = [
     {
       label: 'Twitter',
       href: 'https://twitter.com/kelvinamp_'
@@ -20,14 +21,18 @@ export default function Contact() {
     <section>
       <h2 className="mb-6 font-medium">Connect</h2>
       <ul className="flex">
-        {links.map((link, index) => (
-          <li key={index} className="flex items-center">
+        {contactLinks.map((link, index) => (
+          <li key={link.label} className="flex items-center">
             <CustomLink href={link.href} underline>
               {link.label}
             </CustomLink>
-            {index !== links.length - 1 && (
-              <span className="mx-1 dark:text-neutral-400">&middot;</span>
-            )}
+            <span
+              className={clsx('mx-1 dark:text-neutral-400', {
+                hidden: index === contactLinks.length - 1
+              })}
+            >
+              &middot;
+            </span>
           </li>
         ))}
       </ul>
