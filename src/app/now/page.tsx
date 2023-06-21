@@ -58,7 +58,7 @@ export default function Now() {
       </section>
       <span>
         <CustomLink href="/" ariaLabel="go to home page" arrowIcon>
-          Index
+          Back
         </CustomLink>
       </span>
     </Container>

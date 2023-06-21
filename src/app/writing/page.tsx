@@ -33,7 +33,7 @@ export default function Writing() {
   return (
     <Container>
       <h1 className="mb-6 text-lg font-medium">Writing</h1>
-      <p className="mb-12">
+      <p className="mb-12 text-[#6F6F6F] dark:text-neutral-400">
         Infrequent thoughts on design, technology and things in between.
       </p>
       {allPosts
@@ -57,7 +57,7 @@ export default function Writing() {
         })}
       <span className="mt-6">
         <CustomLink href="/" ariaLabel="go back to home page" arrowIcon>
-          Index
+          Back
         </CustomLink>
       </span>
     </Container>

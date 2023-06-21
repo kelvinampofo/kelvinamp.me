@@ -26,11 +26,9 @@ export default function Home() {
             page
           </p>
         </section>
-        <>
-          <CustomLink href="/writing" ariaLabel="go to thoughts page">
-            / Writing
-          </CustomLink>
-        </>
+        <CustomLink href="/writing" ariaLabel="go to thoughts page">
+          / Writing
+        </CustomLink>
         <hr className="my-12 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
       </PageWrapper>
       <PageWrapper delay={0.8}>
