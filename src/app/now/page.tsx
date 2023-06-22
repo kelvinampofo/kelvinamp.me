@@ -42,8 +42,9 @@ export default function Now() {
           infinite canvas for creativity and opportunity.
         </p>
         <p>
-          Seperating identify from trivialities. Reading excessively, thinking
-          critically. Finding joy in challenges. Meticulous about the details.
+          Seperating identify from trivialities. Practicing inward focus.
+          Reading excessively, thinking critically. Finding joy in challenges.
+          Meticulous about the details.
         </p>
         <p>
           Enjoying music that evokes strong emotions. Watching Porsche videos.
