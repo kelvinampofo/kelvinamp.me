@@ -23,7 +23,7 @@ export default function Home() {
             <CustomLink href="/now" underline ariaLabel="go to writing page">
               now
             </CustomLink>{' '}
-            page
+            page.
           </p>
         </section>
         <CustomLink href="/writing" ariaLabel="go to thoughts page">

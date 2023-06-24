@@ -82,7 +82,7 @@ export default async function Post({ params }: Props) {
           <CustomLink
             href="/writing"
             ariaLabel="go back to writing page"
-            resetIcon
+            arrowIcon
           >
             Writing
           </CustomLink>
