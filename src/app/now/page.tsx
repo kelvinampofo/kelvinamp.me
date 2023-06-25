@@ -44,7 +44,7 @@ export default function Now() {
         <p>
           Seperating identify from trivialities. Practicing inward focus.
           Reading excessively, thinking critically. Finding joy in challenges.
-          Meticulous about the details.
+          Meticulous about the details. Insatiably curious.
         </p>
         <p>
           Enjoying music that evokes strong emotions. Watching Porsche videos.

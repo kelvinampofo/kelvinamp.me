@@ -91,14 +91,14 @@ export default async function Post({ params }: Props) {
           <Balancer>{post.title}</Balancer>
         </h1>
       </header>
-      <div className="mb-4 flex gap-2 text-sm text-[#6F6F6F] dark:text-neutral-400">
+      <div className="mb-3 flex justify-between gap-2 text-sm text-[#6F6F6F] dark:text-neutral-400">
         <time dateTime={post.publishedAt}>
           {format(parseISO(post.publishedAt), 'MMMM dd, yyyy')}
         </time>
-        <span>&middot;</span>
-        <span>{post.readingTime.text}</span>
+        <span className="flex-auto">&middot; {post.readingTime.text}</span>
         <CopyLinkButton />
       </div>
+      <hr className="mt-3 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
       <MDXContent code={post.body.code} />
     </Container>
   );

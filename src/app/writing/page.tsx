@@ -51,11 +51,11 @@ export default function Writing() {
                   </time>
                 </div>
               </CustomLink>
-              <hr className="my-6 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
+              <hr className="my-3 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
             </>
           );
         })}
-      <span className="mt-6">
+      <span className="mt-12">
         <CustomLink href="/" ariaLabel="go back to home page" arrowIcon>
           Back
         </CustomLink>

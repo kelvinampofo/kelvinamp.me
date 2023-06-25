@@ -78,6 +78,7 @@ export default function CopyLinkButton() {
             className="mx-2 text-[#6F6F6F] duration-200 ease-linear hover:text-[#6F6F6F] dark:text-neutral-400 dark:hover:text-[#EDEDED]"
             width={18}
             height={18}
+            aria-label="Link icon"
           />
         )}
       </button>
