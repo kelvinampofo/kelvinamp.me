@@ -36,6 +36,7 @@ export default function Writing() {
       <p className="mb-12 text-[#6F6F6F] dark:text-neutral-400">
         Infrequent thoughts on design, technology and things in between.
       </p>
+      <hr className="mb-3 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
       {allPosts
         .sort((a, b) => {
           return compareDesc(new Date(a.publishedAt), new Date(b.publishedAt));
