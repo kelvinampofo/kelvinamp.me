@@ -26,10 +26,13 @@ export const Post = defineDocumentType(() => ({
     }
   },
   computedFields: {
-    readingTime: { resolve: (doc) => readingTime(doc.body.raw), type: 'json' },
+    readingTime: {
+      resolve: (doc) => readingTime(doc.body.raw),
+      type: 'json'
+    },
     url: {
       type: 'string',
-      resolve: (post) => `/thoughts/${post._raw.flattenedPath}`
+      resolve: (post) => `/writing/${post._raw.flattenedPath}`
     },
     slug: {
       type: 'string',
