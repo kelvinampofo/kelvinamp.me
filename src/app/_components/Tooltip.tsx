@@ -8,7 +8,7 @@ interface Props {
 export default function Tooltip({ children, content }: Props) {
   return (
     <TooltipPrimitive.Provider>
-      <TooltipPrimitive.Root delayDuration={500}>
+      <TooltipPrimitive.Root delayDuration={350}>
         <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
         <TooltipPrimitive.Content
           className="animate-tooltip rounded-md border p-1 text-xs shadow-md duration-200 dark:border-neutral-800 dark:shadow-neutral-950"
