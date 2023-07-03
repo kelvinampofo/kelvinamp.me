@@ -34,7 +34,7 @@ pre > code {
 }
 
 .prose pre {
-  @apply border border-neutral-800 bg-neutral-900;
+  @apply border border-neutral-800 bg-neutral-900 !important;
 }
 
 code[class*='language-'],
@@ -43,7 +43,7 @@ pre[class*='language-'] {
 }
 
 [data-rehype-pretty-code-fragment] code {
-  @apply grid min-w-full break-words rounded-none border-0 bg-transparent p-0 text-xs text-black md:text-sm lg:text-sm;
+  @apply grid min-w-full break-words rounded-none border-0  p-0 text-xs text-black md:text-sm lg:text-sm;
   counter-reset: line;
   box-decoration-break: clone;
 }
