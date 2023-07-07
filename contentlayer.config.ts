@@ -50,7 +50,7 @@ export default makeSource({
       [
         rehypePrettCode,
         {
-          theme: 'github-dark-dimmed',
+          theme: 'github-dark',
           onVisitHighlightedLine(node: any) {
             node.properties.className.push('line--highlighted');
           },
