@@ -33,7 +33,7 @@ export default function CustomLink({
       <Link href={href} className={classes} aria-label={ariaLabel}>
         {arrowIcon && (
           <ArrowTopLeftIcon
-            className="mr-1 text-[#6F6F6F] dark:text-neutral-400"
+            className="mr-1"
             aria-label="Arrow Top Left icon"
             width={18}
             height={18}

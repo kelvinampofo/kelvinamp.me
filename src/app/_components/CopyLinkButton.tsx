@@ -69,13 +69,13 @@ export default function CopyLinkButton() {
     <Tooltip content="Copy URL">
       <button
         onClick={handleCopyUrl}
-        aria-label={copied ? 'Copied URL' : 'Copy URL'}
+        aria-label={copied ? 'Link copied' : 'Copy URL'}
       >
         {copied ? (
-          'Link Copied!'
+          'Link copied'
         ) : (
           <Link2Icon
-            className="mx-2 text-[#6F6F6F] duration-200 ease-linear hover:text-[#6F6F6F] dark:text-neutral-400 dark:hover:text-[#EDEDED]"
+            className="text-[#6F6F6F] duration-200 ease-linear hover:text-[#6F6F6F] dark:text-neutral-400 dark:hover:text-[#EDEDED]"
             width={18}
             height={18}
             aria-label="Link icon"
