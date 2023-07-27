@@ -3,6 +3,7 @@ import CopyLinkButton from '@/app/_components/CopyLinkButton';
 import CustomLink from '@/app/_components/CustomLink';
 import MDXContent from '@/app/_components/MDXComponents';
 import '@/app/_styles/prose.css';
+import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
 import { allPosts } from 'contentlayer/generated';
 import { format, parseISO } from 'date-fns';
 import type { Metadata } from 'next';
@@ -19,9 +20,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({
-  params
-}: Props): Promise<Metadata | undefined> {
+export async function generateMetadata({ params }: Props): Promise<Metadata | undefined> {
   const post = allPosts.find((post) => post.slug === params.slug);
 
   if (!post) {
@@ -30,9 +29,7 @@ export async function generateMetadata({
 
   const { title, publishedAt, summary, slug, image } = post;
 
-  const ogImage = image
-    ? `https://kelvinamp.me${image}`
-    : 'https://kelvinamp.me/og.jpeg';
+  const ogImage = image ? `https://kelvinamp.me${image}` : 'https://kelvinamp.me/og.jpeg';
 
   return {
     title,
@@ -75,15 +72,15 @@ export default async function Post({ params }: Props) {
     notFound();
   }
 
+  const currentIndex = allPosts.findIndex((post) => post.slug === params.slug);
+  const previousPost = allPosts[currentIndex - 1];
+  const nextPost = allPosts[currentIndex + 1];
+
   return (
     <Container>
       <header className="flex flex-col justify-between gap-8">
         <span>
-          <CustomLink
-            href="/writing"
-            ariaLabel="go back to writing page"
-            arrowIcon
-          >
+          <CustomLink href="/writing" ariaLabel="go back to writing page" arrowIcon>
             Writing
           </CustomLink>
         </span>
@@ -98,8 +95,30 @@ export default async function Post({ params }: Props) {
         <span className="flex-auto">&middot; {post.readingTime.text}</span>
         <CopyLinkButton />
       </div>
-      <hr className="mt-3 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
       <MDXContent code={post.body.code} />
+      <hr className="my-3 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
+      <section className="mt-2 flex justify-between text-sm">
+        {previousPost && (
+          <CustomLink href={`/writing/${previousPost.slug}`}>
+            <div className="flex flex-col gap-1">
+              <span>
+                <ArrowLeftIcon className="mr-1 inline-flex" />
+                {previousPost.title}
+              </span>
+            </div>
+          </CustomLink>
+        )}
+        <div className="flex grow" /> {/* fill remaining space */}
+        {nextPost && (
+          <CustomLink href={`/writing/${nextPost.slug}`}>
+            <div className="flex flex-col gap-1">
+              <span>
+                {nextPost.title} <ArrowRightIcon className="ml-1 inline-flex" />
+              </span>
+            </div>
+          </CustomLink>
+        )}
+      </section>
     </Container>
   );
 }
