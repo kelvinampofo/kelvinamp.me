@@ -1,5 +1,5 @@
-import ThemeProvider from '@/app/_components/ThemeProvider';
-import '@/app/_styles/globals.css';
+import ThemeProvider from '@/app/components/ThemeProvider';
+import '@/app/styles/globals.css';
 import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -69,10 +69,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="en"
-      className={clsx(
-        'selection:bg-[#FFF9A8] selection:text-black',
-        interFont.variable
-      )}
+      className={clsx('selection:bg-[#FFF9A8] selection:text-black', interFont.variable)}
     >
       <body className="mx-auto flex max-w-3xl flex-col text-sm antialiased dark:bg-[#161616] dark:text-[#EDEDED] md:text-base lg:text-base">
         <ThemeProvider>

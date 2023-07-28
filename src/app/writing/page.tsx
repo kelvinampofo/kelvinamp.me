@@ -1,5 +1,5 @@
-import Container from '@/app/_components/Container';
-import CustomLink from '@/app/_components/CustomLink';
+import Container from '@/app/components/Container';
+import CustomLink from '@/app/components/CustomLink';
 import { allPosts } from 'contentlayer/generated';
 import { compareDesc, format, parseISO } from 'date-fns';
 import { Metadata } from 'next';

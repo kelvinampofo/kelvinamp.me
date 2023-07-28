@@ -1,22 +1,20 @@
-import Contact from '@/app/_components/Contact';
-import Container from '@/app/_components/Container';
-import CustomLink from '@/app/_components/CustomLink';
-import PageWrapper from '@/app/_components/PageWrapper';
+import Contact from '@/app/components/Contact';
+import Container from '@/app/components/Container';
+import CustomLink from '@/app/components/CustomLink';
+import PageWrapper from '@/app/components/PageWrapper';
 
 export default function Home() {
   return (
     <Container>
       <PageWrapper delay={0.4}>
         <h1 className="text-lg font-medium">Kelvin Ampofo</h1>
-        <span className="text-[#6F6F6F] dark:text-neutral-400">
-          Software Engineer
-        </span>
+        <span className="text-[#6F6F6F] dark:text-neutral-400">Software Engineer</span>
       </PageWrapper>
       <PageWrapper delay={0.6}>
         <section className="my-6 flex flex-col gap-6">
           <p>
-            <em>Crafting interfaces</em> with a focus on design, human-computer
-            interaction and architecture. Currently working in digital banking.
+            <em>Crafting interfaces</em> with a focus on design, human-computer interaction and
+            architecture. Currently working in digital banking.
           </p>
           <p>
             Read further on{' '}

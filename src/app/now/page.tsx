@@ -1,5 +1,5 @@
-import Container from '@/app/_components/Container';
-import CustomLink from '@/app/_components/CustomLink';
+import Container from '@/app/components/Container';
+import CustomLink from '@/app/components/CustomLink';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -37,18 +37,17 @@ export default function Now() {
           </em>
         </p>
         <p>
-          Dedicated to building software. Interactivity, typography, motion,
-          touch, optimisations, accessibility and design&mdash;there&apos;s an
-          infinite canvas for creativity and opportunity.
+          Dedicated to building software. Interactivity, typography, motion, touch, optimisations,
+          accessibility and design&mdash;there&apos;s an infinite canvas for creativity and
+          opportunity.
         </p>
         <p>
-          Seperating identify from trivialities. Practicing inward focus.
-          Reading excessively, thinking critically. Finding joy in challenges.
-          Meticulous about the details. Insatiably curious.
+          Seperating identify from trivialities. Practicing inward focus. Reading excessively,
+          thinking critically. Finding joy in challenges. Meticulous about the details. Insatiably
+          curious.
         </p>
         <p>
-          Enjoying music that evokes strong emotions. Watching Porsche videos.
-          Drinking iced tea.
+          Enjoying music that evokes strong emotions. Watching Porsche videos. Drinking iced tea.
         </p>
         <p>
           View current selection of reading on{' '}
