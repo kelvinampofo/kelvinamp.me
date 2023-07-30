@@ -92,7 +92,6 @@ export default async function Post({ params }: Props) {
         <time dateTime={post.publishedAt}>
           {format(parseISO(post.publishedAt), 'MMMM dd, yyyy')}
         </time>
-        <span className="flex-auto">&middot; {post.readingTime.text}</span>
         <CopyLinkButton />
       </div>
       <MDXContent code={post.body.code} />

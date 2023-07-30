@@ -1,5 +1,4 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
-import readingTime from 'reading-time';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypePrettCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
@@ -26,10 +25,6 @@ export const Post = defineDocumentType(() => ({
     }
   },
   computedFields: {
-    readingTime: {
-      resolve: (doc) => readingTime(doc.body.raw),
-      type: 'json'
-    },
     url: {
       type: 'string',
       resolve: (post) => `/writing/${post._raw.flattenedPath}`
