@@ -5,7 +5,7 @@ export default function Contact() {
   const contactLinks = [
     {
       label: 'Twitter',
-      href: 'https://twitter.com/kelvinamp_'
+      href: 'https://x.com/kelvinamp_'
     },
     {
       label: 'GitHub',
