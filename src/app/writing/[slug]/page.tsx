@@ -95,25 +95,22 @@ export default async function Post({ params }: Props) {
         <CopyLinkButton />
       </div>
       <MDXContent code={post.body.code} />
-      <hr className="my-3 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
-      <section className="mt-2 flex justify-between text-sm">
+      <hr className="my-8 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
+      <section className="flex justify-between text-sm">
         {previousPost && (
-          <CustomLink href={`/writing/${previousPost.slug}`}>
+          <CustomLink href={`/writing/${previousPost.slug}`} ariaLabel="Previous post">
             <div className="flex flex-col gap-1">
-              <span>
-                <ArrowLeftIcon className="mr-1 inline-flex" />
-                {previousPost.title}
-              </span>
+              <ArrowLeftIcon className="text-[#6F6F6F] dark:text-neutral-400" />
+              {previousPost.title}
             </div>
           </CustomLink>
         )}
         <div className="flex grow" /> {/* fill remaining space */}
         {nextPost && (
-          <CustomLink href={`/writing/${nextPost.slug}`}>
-            <div className="flex flex-col gap-1">
-              <span>
-                {nextPost.title} <ArrowRightIcon className="ml-1 inline-flex" />
-              </span>
+          <CustomLink href={`/writing/${nextPost.slug}`} ariaLabel="Next post">
+            <div className="flex flex-col items-end gap-1">
+              <ArrowRightIcon className="flex-1 text-[#6F6F6F] dark:text-neutral-400" />
+              {nextPost.title}
             </div>
           </CustomLink>
         )}
