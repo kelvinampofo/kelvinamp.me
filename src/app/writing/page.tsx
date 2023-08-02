@@ -53,10 +53,10 @@ export default function Writing() {
             <>
               <CustomLink href={`/writing/${post.slug}`} key={post._id}>
                 <div className="flex justify-between">
-                  <span className="font-medium">
+                  <span className="flex font-medium">
                     {post.title}{' '}
                     {isWithin2Months && (
-                      <span className="ml-2 bg-gradient-to-r from-teal-500 to-blue-600 bg-clip-text align-top text-xs text-transparent hover:animate-[pulse_1.40s_ease-in-out_infinite] dark:from-teal-200 dark:to-blue-600">
+                      <span className="ml-2 items-baseline bg-gradient-to-r from-teal-500 via-blue-600 to-teal-500 bg-200 bg-clip-text bg-left text-xs text-transparent hover:animate-shine dark:from-teal-200 dark:via-blue-600 dark:to-teal-200">
                         new
                       </span>
                     )}
