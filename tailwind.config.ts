@@ -9,7 +9,7 @@ export default {
       },
       animation: {
         tooltip: 'tooltipAnimation 0.25s ease-in-out',
-        shine: 'shineAnimation 2s infinite alternate linear'
+        shine: 'shineAnimation 1.5s infinite alternate linear'
       },
       keyframes: {
         tooltipAnimation: {
