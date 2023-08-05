@@ -93,14 +93,11 @@ const handleCopyUrl = () => {
 
 return (
   <Tooltip content="Copy URL">
-    <button
-      onClick={handleCopyUrl}
-      aria-label={copied ? 'Copied URL' : 'Copy URL'}
-    >
+    <button onClick={handleCopyUrl} aria-label={copied ? 'Copied URL' : 'Copy URL'}>
       {copied ? 'Copied!' : <LinkIcon />}
     </button>
   </Tooltip>
 );
 ```
 
-That's about it. Open for extension, closed for modification. You can find the full code [here](https://github.com/kelvinampofo/kelvinamp.me/blob/main/src/app/_components/CopyLinkButton.tsx).
+That's about it. Open for extension, closed for modification. You can find the full code [here](https://github.com/kelvinampofo/kelvinamp.me/blob/main/src/app/components/CopyLinkButton.tsx).
