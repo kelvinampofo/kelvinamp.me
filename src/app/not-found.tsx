@@ -1,6 +1,6 @@
-import Container from '@/app/components/Container';
-import CustomLink from '@/app/components/CustomLink';
+import Container from '@/app/components/generic/Container';
 import { Metadata } from 'next';
+import CustomLink from './components/ui/CustomLink';
 
 export const metadata: Metadata = {
   title: '404',

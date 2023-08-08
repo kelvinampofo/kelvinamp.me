@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import CustomLink from './CustomLink';
+import CustomLink from '../ui/CustomLink';
 
 export default function Contact() {
   const contactLinks = [

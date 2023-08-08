@@ -1,7 +1,7 @@
-import Container from '@/app/components/Container';
-import CopyLinkButton from '@/app/components/CopyLinkButton';
-import CustomLink from '@/app/components/CustomLink';
-import MDXContent from '@/app/components/MDXComponents';
+import Container from '@/app/components/generic/Container';
+import MDXContent from '@/app/components/generic/MDXComponents';
+import CopyLinkButton from '@/app/components/ui/CopyLinkButton';
+import CustomLink from '@/app/components/ui/CustomLink';
 import '@/app/styles/prose.css';
 import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
 import { allPosts } from 'contentlayer/generated';

@@ -1,5 +1,5 @@
 import { useMDXComponent } from 'next-contentlayer/hooks';
-import CustomLink from './CustomLink';
+import CustomLink from '../ui/CustomLink';
 
 const MDXComponents = {
   a: CustomLink

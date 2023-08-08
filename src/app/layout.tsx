@@ -1,4 +1,4 @@
-import ThemeProvider from '@/app/components/ThemeProvider';
+import ThemeProvider from '@/app/components/generic/ThemeProvider';
 import '@/app/styles/globals.css';
 import clsx from 'clsx';
 import type { Metadata } from 'next';
