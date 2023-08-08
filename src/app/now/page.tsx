@@ -30,16 +30,16 @@ export default function Now() {
       <h1 className="text-lg font-medium">Now</h1>
       <section className="my-6 flex flex-col gap-6">
         <p>
-          Developing skill through immersive, hands-on exploration in art and
+          Dedicated to creative excellence through immersive, hands-on exploration in art and
           technology&mdash;keeping in mind that{' '}
           <em>
             <q>everything around me is someone&apos;s life work</q>.
           </em>
         </p>
         <p>
-          Dedicated to building software. Interactivity, typography, motion, touch, optimisations,
-          accessibility and design&mdash;there&apos;s an infinite canvas for creativity and
-          opportunity.
+          For now, I <s>just</s> want to design and build software. Interactivity, typography,
+          motion, touch, optimisations, accessibility, design&mdash;an infinite canvas for
+          creativity and opportunity.
         </p>
         <p>
           Seperating identify from trivialities. Practicing inward focus. Reading excessively,
@@ -54,6 +54,7 @@ export default function Now() {
           <CustomLink href="https://literal.club/kelvinamp" underline>
             Literal
           </CustomLink>
+          .
         </p>
       </section>
       <span>
