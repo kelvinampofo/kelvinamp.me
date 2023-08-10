@@ -9,7 +9,7 @@ export default {
       },
       animation: {
         tooltip: 'tooltipAnimation 0.25s ease-in-out',
-        shine: 'shineAnimation 1.5s infinite alternate linear'
+        shine: 'shineAnimation 3s linear 0s infinite normal forwards'
       },
       keyframes: {
         tooltipAnimation: {
@@ -18,7 +18,7 @@ export default {
         },
         shineAnimation: {
           '0%': { 'background-position': 'left' },
-          '100%': { 'background-position': 'right' }
+          '50%': { 'background-position': 'right' }
         }
       },
       backgroundSize: {

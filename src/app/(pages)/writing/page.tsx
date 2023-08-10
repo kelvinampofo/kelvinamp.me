@@ -56,7 +56,7 @@ export default function Writing() {
                   <span className="flex font-medium">
                     {post.title}{' '}
                     {isWithin2Months && (
-                      <span className="ml-2 items-baseline bg-gradient-to-r from-teal-500 via-blue-600 to-teal-500 bg-200 bg-clip-text bg-left text-xs text-transparent hover:animate-shine dark:from-teal-200 dark:via-blue-600 dark:to-teal-200">
+                      <span className="ml-2 animate-shine items-baseline bg-gradient-to-r from-teal-500 via-blue-600 to-teal-500 bg-200 bg-clip-text bg-left text-xs text-transparent dark:from-teal-200 dark:via-blue-600 dark:to-teal-200">
                         new
                       </span>
                     )}
