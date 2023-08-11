@@ -1,7 +1,8 @@
 import Container from '@/app/components/generic/Container';
 import CustomLink from '@/app/components/ui/CustomLink';
+import { isWithin2Months } from '@/app/lib/utils';
 import { allPosts } from 'contentlayer/generated';
-import { compareDesc, format, isWithinInterval, parseISO, subMonths } from 'date-fns';
+import { compareDesc, format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -30,8 +31,6 @@ export const metadata: Metadata = {
 };
 
 export default function Writing() {
-  const currentDate = new Date();
-
   return (
     <Container>
       <h1 className="mb-6 text-lg font-medium">Writing</h1>
@@ -43,19 +42,13 @@ export default function Writing() {
         .sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)))
         .map((post) => {
           const postDate = parseISO(post.publishedAt);
-
-          const isWithin2Months = isWithinInterval(postDate, {
-            start: subMonths(currentDate, 2),
-            end: currentDate
-          });
-
           return (
             <>
               <CustomLink href={`/writing/${post.slug}`} key={post._id}>
                 <div className="flex justify-between">
                   <span className="flex font-medium">
                     {post.title}{' '}
-                    {isWithin2Months && (
+                    {isWithin2Months(postDate) && (
                       <span className="ml-2 animate-shine items-baseline bg-gradient-to-r from-teal-500 via-blue-600 to-teal-500 bg-200 bg-clip-text bg-left text-xs text-transparent dark:from-teal-200 dark:via-blue-600 dark:to-teal-200">
                         new
                       </span>
