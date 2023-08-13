@@ -1,5 +1,5 @@
 import Container from '@/app/components/generic/Container';
-import Seperator from '@/app/components/generic/Seperator';
+import Separator from '@/app/components/generic/Separator';
 import CustomLink from '@/app/components/ui/CustomLink';
 import PostList from '@/app/components/ui/List';
 import { allPosts } from 'contentlayer/generated';
@@ -37,7 +37,7 @@ export default function Writing() {
       <p className="mb-12 text-[#6F6F6F] dark:text-neutral-400">
         Infrequent thoughts on design, technology and things in between.
       </p>
-      <Seperator className="mb-3" />
+      <Separator className="mb-3" />
       <PostList items={allPosts} />
       <span className="mt-12">
         <CustomLink href="/" ariaLabel="go back to home page" arrowIcon>

@@ -3,7 +3,7 @@ import { isWithin2Months } from '@/app/lib/utils';
 import type { Post } from 'contentlayer/generated';
 import { compareDesc, format, parseISO } from 'date-fns';
 import { Fragment } from 'react';
-import Seperator from '../generic/Seperator';
+import Separator from '../generic/Separator';
 import CustomLink from './CustomLink';
 
 interface ContentListProps {
@@ -36,7 +36,7 @@ export default function List({ items }: ContentListProps) {
                   </time>
                 </div>
               </CustomLink>
-              <Seperator className="my-3" />
+              <Separator className="my-3" />
             </Fragment>
           );
         })}
