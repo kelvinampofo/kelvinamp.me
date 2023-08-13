@@ -38,7 +38,7 @@ export default function Writing() {
         Infrequent thoughts on design, technology and things in between.
       </p>
       <Separator className="mb-3" />
-      <PostList items={allPosts} />
+      <PostList items={allPosts} route="writing" />
       <span className="mt-12">
         <CustomLink href="/" ariaLabel="go back to home page" arrowIcon>
           Back
