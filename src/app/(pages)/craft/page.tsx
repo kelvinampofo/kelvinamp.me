@@ -31,7 +31,9 @@ export default function Craft() {
   return (
     <Container>
       <h1 className="mb-3 text-lg font-medium">Craft</h1>
-      <p className="mb-12 text-[#6F6F6F] dark:text-neutral-400">Crafting interfaces.</p>
+      <p className="mb-12 text-[#6F6F6F] dark:text-neutral-400">
+        Crafting interfaces / prototypes.
+      </p>
       <hr className="mb-3 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
       <PrototypeList items={allPrototypes} route="craft" />
       <span className="mt-12">
