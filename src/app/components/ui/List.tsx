@@ -1,4 +1,4 @@
-import type { Project } from '@/app/data/data';
+import type { Project } from '@/app/data/prototypes';
 import { isWithin2Months } from '@/app/lib/utils';
 import type { Post } from 'contentlayer/generated';
 import { compareDesc, format, parseISO } from 'date-fns';
@@ -6,11 +6,11 @@ import { Fragment } from 'react';
 import Separator from '../generic/Separator';
 import CustomLink from './CustomLink';
 
-interface ContentListProps {
+interface ListProps {
   items: Project[] | Post[];
 }
 
-export default function List({ items }: ContentListProps) {
+export default function List({ items }: ListProps) {
   return (
     <>
       {items
