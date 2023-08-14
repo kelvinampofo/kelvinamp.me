@@ -1,4 +1,5 @@
 import Container from '@/app/components/generic/Container';
+import Separator from '@/app/components/generic/Separator';
 import CustomLink from '@/app/components/ui/CustomLink';
 import PrototypeList from '@/app/components/ui/List';
 import { allPrototypes } from '@/app/data/prototypes';
@@ -34,7 +35,7 @@ export default function Craft() {
       <p className="mb-12 text-[#6F6F6F] dark:text-neutral-400">
         Crafting interfaces / prototypes.
       </p>
-      <hr className="mb-3 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
+      <Separator className="mb-3" />
       <PrototypeList items={allPrototypes} route="craft" />
       <span className="mt-12">
         <CustomLink href="/" ariaLabel="go back to home page" arrowIcon>
