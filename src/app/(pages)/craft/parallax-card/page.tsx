@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: 'Interactive credit card interface, inspired by Monzo.',
     images: [
       {
-        url: 'https://kelvinamp.me/assets/parallax-card.png',
+        url: 'https://kelvinamp.me/parallax-card.png',
         height: 1200,
         width: 1200,
         alt: 'Credit card image'
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description: 'Interactive credit card interface, inspired by Monzo.',
     images: [
       {
-        url: 'https://kelvinamp.me/assets/parallax-card.png',
+        url: 'https://kelvinamp.me/parallax-card.png',
         height: 1200,
         width: 1200,
         alt: 'Credit card image'
