@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Interactive credit card interface, inspired by Monzo.',
   authors: [{ name: 'Kelvin Ampofo' }],
   openGraph: {
-    title: 'Parallax credit cardft',
+    title: 'Parallax credit card',
     description: 'Interactive credit card interface, inspired by Monzo.',
     images: [
       {
