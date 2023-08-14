@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   twitter: {
     title: 'Parallax credit card',
     site: '@kelvinamp_',
-    card: 'summary',
+    card: 'summary_large_image',
     description: 'Interactive credit card interface, inspired by Monzo.',
     images: [
       {
