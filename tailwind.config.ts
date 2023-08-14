@@ -8,11 +8,11 @@ export default {
         sans: ['var(--font-inter)']
       },
       animation: {
-        tooltip: 'tooltipAnimation 0.25s ease-in-out',
+        slideUp: 'slideUpAnimation 0.25s ease-in-out',
         shine: 'shineAnimation 3s linear 0s infinite normal forwards'
       },
       keyframes: {
-        tooltipAnimation: {
+        slideUpAnimation: {
           '0%': { transform: 'translateY(10px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' }
         },

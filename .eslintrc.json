@@ -2,6 +2,7 @@
   "extends": ["next", "plugin:tailwindcss/recommended", "prettier"],
   "plugins": ["tailwindcss"],
   "rules": {
-    "no-unused-vars": 1
+    "no-unused-vars": 1,
+    "no-console": 1
   }
 }

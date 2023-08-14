@@ -2,6 +2,7 @@ import Contact from '@/app/components/generic/Contact';
 import Container from '@/app/components/generic/Container';
 import PageWrapper from '@/app/components/generic/PageWrapper';
 import CustomLink from '@/app/components/ui/CustomLink';
+import Separator from './components/generic/Separator';
 
 export default function Home() {
   return (
@@ -24,10 +25,19 @@ export default function Home() {
             page.
           </p>
         </section>
-        <CustomLink href="/writing" ariaLabel="go to thoughts page">
-          / Writing
-        </CustomLink>
-        <hr className="my-12 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
+        <section className="flex flex-col gap-1">
+          <span>
+            <CustomLink href="/writing" ariaLabel="go to writing page">
+              / Writing
+            </CustomLink>
+          </span>
+          <span>
+            <CustomLink href="/craft" ariaLabel="go to craft page">
+              / Craft
+            </CustomLink>
+          </span>
+        </section>
+        <Separator className="my-12" />
       </PageWrapper>
       <PageWrapper delay={0.8}>
         <Contact />
