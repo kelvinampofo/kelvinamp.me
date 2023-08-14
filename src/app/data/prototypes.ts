@@ -16,8 +16,8 @@ export const allPrototypes: Prototype[] = [
     _id: 1,
     title: 'Parallax credit card',
     href: '/parallax-card',
-    publishedAt: '2023-08-13',
-    summary: 'Interactive credit card interface for fidgeting purposes, inspired by Monzo.'
+    publishedAt: '2023-08-14',
+    summary: 'Interactive credit card interface, inspired by Monzo.'
   }
 ].sort((a, b) => {
   return compareAsc(parseISO(a.publishedAt), parseISO(b.publishedAt));
