@@ -9,6 +9,7 @@ import React from 'react';
 export const metadata: Metadata = {
   title: 'Craft',
   description: 'Crafting interfaces, immersed in art+technology.',
+  authors: [{ name: 'Kelvin Ampofo' }],
   openGraph: {
     title: 'Craft',
     description: 'Crafting interfaces, immersed in art+technology.'
