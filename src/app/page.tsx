@@ -27,13 +27,13 @@ export default function Home() {
         </section>
         <section className="flex flex-col gap-1">
           <span>
-            <CustomLink href="/writing" ariaLabel="go to writing page">
-              / Writing
+            <CustomLink href="/craft" ariaLabel="go to craft page">
+              / Craft
             </CustomLink>
           </span>
           <span>
-            <CustomLink href="/craft" ariaLabel="go to craft page">
-              / Craft
+            <CustomLink href="/writing" ariaLabel="go to writing page">
+              / Writing
             </CustomLink>
           </span>
         </section>
