@@ -42,7 +42,7 @@ export default function Now() {
           creativity and opportunity.
         </p>
         <p>
-          Seperating identify from trivialities. Practicing inward focus. Reading excessively,
+          Separating identify from trivialities. Practising inward focus. Reading excessively,
           thinking critically. Finding joy in challenges. Meticulous about the details. Insatiably
           curious.
         </p>
