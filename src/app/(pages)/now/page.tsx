@@ -57,6 +57,7 @@ export default function Now() {
           .
         </p>
       </section>
+      <p className="mb-12 text-[#6F6F6F] dark:text-neutral-400">Last modified on 15 August 2023</p>
       <span>
         <CustomLink href="/" ariaLabel="go to home page" arrowIcon>
           Back
