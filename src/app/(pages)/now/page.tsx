@@ -4,16 +4,16 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Now',
-  description: 'Current rhythm of life.',
+  description: 'Personal + pro updates.',
   openGraph: {
     title: 'Now',
-    description: 'Current rhythm of life.'
+    description: 'Personal + pro updates.'
   },
   twitter: {
     title: 'Now',
     site: '@kelvinamp_',
     card: 'summary',
-    description: 'Current rhythm of life.',
+    description: 'Personal + pro updates.',
     images: [
       {
         url: 'https://kelvinamp.me/og.jpeg',
