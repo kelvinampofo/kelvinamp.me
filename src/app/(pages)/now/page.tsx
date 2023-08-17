@@ -28,7 +28,7 @@ export default function Now() {
   return (
     <Container>
       <h1 className="text-lg font-medium">Now</h1>
-      <section className="my-6 flex flex-col gap-6">
+      <section className="mb-12 mt-6 flex flex-col gap-6">
         <p>
           Dedicated to creative excellence through immersive, hands-on exploration in art and
           technology&mdash;keeping in mind that{' '}
@@ -57,7 +57,6 @@ export default function Now() {
           .
         </p>
       </section>
-      <p className="mb-12 text-[#6F6F6F] dark:text-neutral-400">Last modified on 15 August 2023</p>
       <span>
         <CustomLink href="/" ariaLabel="go to home page" arrowIcon>
           Back
