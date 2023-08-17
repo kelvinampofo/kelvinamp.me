@@ -1,10 +1,10 @@
-import clsx from 'clsx';
+import c from 'clsx';
 import CustomLink from '../ui/CustomLink';
 
 export default function Contact() {
   const contactLinks = [
     {
-      label: 'Twitter',
+      label: '@kelvinamp_',
       href: 'https://x.com/kelvinamp_'
     },
     {
@@ -27,7 +27,7 @@ export default function Contact() {
               {link.label}
             </CustomLink>
             <span
-              className={clsx('mx-1 dark:text-neutral-400', {
+              className={c('mx-1 dark:text-neutral-400', {
                 hidden: index === contactLinks.length - 1
               })}
             >
