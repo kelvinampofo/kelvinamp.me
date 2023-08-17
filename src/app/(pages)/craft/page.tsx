@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   twitter: {
     title: 'Craft',
     site: '@kelvinamp_',
-    card: 'summary',
+    card: 'summary_large_image',
     description: 'Crafting interfaces, immersed in art+technology.',
     images: [
       {
@@ -34,7 +34,7 @@ export default function Craft() {
     <Container>
       <h1 className="mb-3 text-lg font-medium">Craft</h1>
       <p className="mb-12 text-[#6F6F6F] dark:text-neutral-400">
-        Crafting interfaces / prototypes.
+        Crafting interfaces + prototypes.
       </p>
       <Separator className="mb-3" />
       <PrototypeList items={allPrototypes} route="craft" />
