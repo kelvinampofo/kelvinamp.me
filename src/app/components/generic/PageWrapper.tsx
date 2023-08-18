@@ -8,14 +8,10 @@ interface PageWrapperProps {
   delay?: number;
 }
 
-export default function PageWrapper({
-  children,
-  className,
-  delay = 0
-}: PageWrapperProps) {
+export default function PageWrapper({ children, className, delay = 0 }: PageWrapperProps) {
   return (
     <LazyMotion features={domAnimation}>
-      <m.section
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 20 }}
@@ -23,7 +19,7 @@ export default function PageWrapper({
         className={className}
       >
         {children}
-      </m.section>
+      </m.div>
     </LazyMotion>
   );
 }

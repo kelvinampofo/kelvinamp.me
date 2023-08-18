@@ -5,15 +5,18 @@ export default function Contact() {
   const contactLinks = [
     {
       label: '@kelvinamp_',
-      href: 'https://x.com/kelvinamp_'
+      href: 'https://x.com/kelvinamp_',
+      ariaLabel: 'Go to @kelvinamp_ twitter profile'
     },
     {
       label: 'GitHub',
-      href: 'https://github.com/kelvinampofo'
+      href: 'https://github.com/kelvinampofo',
+      ariaLabel: 'Go to GitHub profile'
     },
     {
-      label: 'k@kelvinamp.me',
-      href: 'mailto:k@kelvinamp.me'
+      label: 'Email',
+      href: 'mailto:k@kelvinamp.me',
+      ariaLabel: 'Email Kelvin Ampofo'
     }
   ];
 
@@ -23,7 +26,7 @@ export default function Contact() {
       <ul className="flex">
         {contactLinks.map((link, index) => (
           <li key={link.label} className="flex items-center">
-            <CustomLink href={link.href} underline>
+            <CustomLink href={link.href} underline ariaLabel={link.ariaLabel}>
               {link.label}
             </CustomLink>
             <span

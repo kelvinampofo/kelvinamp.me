@@ -8,8 +8,10 @@ export default function Home() {
   return (
     <Container>
       <PageWrapper delay={0.4}>
-        <h1 className="text-lg font-medium">Kelvin Ampofo</h1>
-        <span className="text-[#6F6F6F] dark:text-neutral-400">Software Engineer</span>
+        <header>
+          <h1 className="text-lg font-medium">Kelvin Ampofo</h1>
+          <span className="text-[#6F6F6F] dark:text-neutral-400">Software Engineer</span>
+        </header>
       </PageWrapper>
       <PageWrapper delay={0.6}>
         <section className="my-6 flex flex-col gap-6">
@@ -19,13 +21,13 @@ export default function Home() {
           </p>
           <p>
             Read further on{' '}
-            <CustomLink href="/now" underline ariaLabel="go to writing page">
+            <CustomLink href="/now" ariaLabel="go to now page" underline>
               now
             </CustomLink>{' '}
             page.
           </p>
         </section>
-        <section className="flex flex-col gap-1">
+        <nav className="flex flex-col gap-1">
           <span>
             <CustomLink href="/craft" ariaLabel="go to craft page" underline>
               Craft
@@ -36,7 +38,7 @@ export default function Home() {
               Writing
             </CustomLink>
           </span>
-        </section>
+        </nav>
         <Separator className="my-12" />
       </PageWrapper>
       <PageWrapper delay={0.8}>

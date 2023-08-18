@@ -96,7 +96,7 @@ export default async function Post({ params }: Props) {
       </div>
       <MDXContent code={post.body.code} />
       <hr className="my-8 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
-      <section className="flex justify-between text-sm">
+      <nav className="flex list-none justify-between text-sm">
         {previousPost && (
           <CustomLink href={`/writing/${previousPost.slug}`} ariaLabel="Previous post">
             <div className="flex flex-col gap-1">
@@ -114,7 +114,7 @@ export default async function Post({ params }: Props) {
             </div>
           </CustomLink>
         )}
-      </section>
+      </nav>
     </Container>
   );
 }
