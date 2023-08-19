@@ -30,9 +30,10 @@ export default function Contact() {
               {link.label}
             </CustomLink>
             <span
-              className={c('mx-1 dark:text-neutral-400', {
-                hidden: index === contactLinks.length - 1
-              })}
+              className={c(
+                'mx-1 dark:text-neutral-400',
+                index === contactLinks.length - 1 && 'hidden'
+              )}
             >
               &middot;
             </span>
