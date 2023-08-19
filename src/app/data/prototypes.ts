@@ -16,7 +16,7 @@ export const allPrototypes: Prototype[] = [
     _id: 1,
     title: 'Carousel',
     href: '/carousel',
-    publishedAt: '2023-08-18',
+    publishedAt: '2023-08-20',
     summary: 'A minimal CSS based carousel interface.'
   }
 ].sort((a, b) => {
