@@ -16,16 +16,16 @@ export default function List({ items, route }: ListProps) {
     <>
       {items
         .sort((a, b) => compareDesc(parseISO(a.publishedAt), parseISO(b.publishedAt)))
-        .map((item) => {
-          const publishedDate = parseISO(item.publishedAt);
+        .map(({ _id, publishedAt, slug, title }) => {
+          const publishedDate = parseISO(publishedAt);
 
           const isNewContent = isWithin2Months(publishedDate);
           return (
-            <Fragment key={item._id}>
-              <CustomLink href={`/${route}/${item.slug}`}>
+            <Fragment key={_id}>
+              <CustomLink href={`/${route}/${slug}`}>
                 <div className="flex justify-between">
                   <span className="flex font-medium">
-                    {item.title}
+                    {title}
                     {isNewContent && (
                       <span className="ml-2 animate-shine items-baseline bg-gradient-to-r from-teal-500 via-blue-600 to-teal-500 bg-200 bg-clip-text bg-left text-xs text-transparent dark:from-teal-200 dark:via-blue-600 dark:to-teal-200">
                         new

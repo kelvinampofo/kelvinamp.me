@@ -24,10 +24,10 @@ export default function Contact() {
     <section>
       <h2 className="mb-6 font-medium">Connect</h2>
       <ul className="flex">
-        {contactLinks.map((link, index) => (
-          <li key={link.label} className="flex items-center">
-            <CustomLink href={link.href} underline ariaLabel={link.ariaLabel}>
-              {link.label}
+        {contactLinks.map(({ label, href, ariaLabel }, index) => (
+          <li key={label} className="flex items-center">
+            <CustomLink href={href} underline ariaLabel={ariaLabel}>
+              {label}
             </CustomLink>
             <span
               className={c(

@@ -15,8 +15,8 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  return allPosts.map((post) => ({
-    slug: post.slug
+  return allPosts.map(({ slug }) => ({
+    slug: slug
   }));
 }
 
@@ -102,6 +102,7 @@ export default async function Post({ params }: Props) {
             <div className="flex flex-col gap-1">
               <ArrowLeftIcon className="text-[#6F6F6F] dark:text-neutral-400" />
               {previousPost.title}
+              <span className="sr-only">Previous</span>
             </div>
           </CustomLink>
         )}
@@ -111,6 +112,7 @@ export default async function Post({ params }: Props) {
             <div className="flex flex-col items-end gap-1">
               <ArrowRightIcon className="flex-1 text-[#6F6F6F] dark:text-neutral-400" />
               {nextPost.title}
+              <span className="sr-only">Next</span>
             </div>
           </CustomLink>
         )}
