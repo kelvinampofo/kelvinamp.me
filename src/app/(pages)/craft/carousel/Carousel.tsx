@@ -82,7 +82,7 @@ export default function Carousel() {
         {slides.map(({ title, imageUrl, imageAlt, author, isPriority }) => (
           <li
             key={title}
-            className="relative mr-5 w-[250px] shrink-0 touch-pinch-zoom overscroll-x-contain rounded-lg bg-white text-center transition-all duration-300 last:mr-0 md:w-[450px] md:snap-start md:snap-always lg:w-[450px] lg:snap-start lg:snap-always"
+            className="relative mr-5 w-[250px] shrink-0 overscroll-x-contain rounded-lg bg-white text-center transition-all duration-300 last:mr-0 md:w-[450px] md:snap-start md:snap-always lg:w-[450px] lg:snap-start lg:snap-always"
           >
             <figure>
               <Image
