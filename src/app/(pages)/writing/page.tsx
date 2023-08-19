@@ -1,7 +1,7 @@
 import Container from '@/app/components/generic/Container';
 import Separator from '@/app/components/generic/Separator';
 import CustomLink from '@/app/components/ui/CustomLink';
-import PostList from '@/app/components/ui/List';
+import List from '@/app/components/ui/List';
 import { allPosts } from 'contentlayer/generated';
 import { Metadata } from 'next';
 
@@ -38,7 +38,7 @@ export default function Writing() {
         Infrequent thoughts on design, technology and things in between.
       </p>
       <Separator className="mb-3" />
-      <PostList items={allPosts} route="writing" />
+      <List items={allPosts} route="writing" />
       <span className="mt-12">
         <CustomLink href="/" ariaLabel="go back to home page" arrowIcon>
           Back
