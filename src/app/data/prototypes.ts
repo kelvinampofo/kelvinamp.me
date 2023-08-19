@@ -12,12 +12,12 @@ export type Prototype = {
 
 export const allPrototypes: Prototype[] = [
   {
-    slug: '/parallax-card',
+    slug: '/carousel',
     _id: 1,
-    title: 'Parallax credit card',
-    href: '/parallax-card',
-    publishedAt: '2023-08-14',
-    summary: 'Interactive credit card interface, inspired by Monzo.'
+    title: 'Carousel',
+    href: '/carousel',
+    publishedAt: '2023-08-18',
+    summary: 'A minimal CSS based carousel interface.'
   }
 ].sort((a, b) => {
   return compareAsc(parseISO(a.publishedAt), parseISO(b.publishedAt));
