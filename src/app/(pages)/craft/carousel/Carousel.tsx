@@ -103,7 +103,7 @@ export default function Carousel() {
           <button
             onClick={handlePreviousSlide}
             disabled={currentSlide === 0}
-            className="rounded-full disabled:cursor-not-allowed disabled:text-neutral-600"
+            className="rounded-full disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600"
           >
             <ChevronLeftIcon width={25} height={25} aria-label="Left chevron icon" />
             <span className="sr-only">Previous</span>
@@ -112,7 +112,7 @@ export default function Carousel() {
           <button
             onClick={handleNextSlide}
             disabled={scrolledToEndOfSlide()}
-            className="rounded-full disabled:cursor-not-allowed disabled:text-neutral-600"
+            className="rounded-full disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600"
           >
             <ChevronRightIcon width={25} height={25} aria-label="Right chevron icon" />
             <span className="sr-only">Next</span>
