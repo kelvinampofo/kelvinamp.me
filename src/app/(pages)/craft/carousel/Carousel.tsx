@@ -37,7 +37,7 @@ const SLIDE_WIDTH = 450;
 const SLIDE_MARGIN = 20;
 
 export default function Carousel() {
-  const slideRef = useRef<HTMLUListElement | null>(null); // reference to the slide container element
+  const slideRef = useRef<HTMLUListElement | null>(null);
   const [slidePosition, setSlidePosition] = useState(0);
   const { isPointerDevice } = usePointerDeviceDetector();
 
@@ -98,13 +98,12 @@ export default function Carousel() {
           </li>
         ))}
       </ul>
-
       {isPointerDevice && (
-        <div className="mt-2 flex justify-between disabled:text-gray-400">
+        <div className="mt-2 flex justify-between">
           <button
             onClick={handlePreviousSlide}
             disabled={currentSlide === 0}
-            className="rounded-full disabled:cursor-not-allowed disabled:text-gray-400"
+            className="rounded-full disabled:cursor-not-allowed disabled:text-neutral-600"
           >
             <ChevronLeftIcon width={25} height={25} aria-label="Left chevron icon" />
             <span className="sr-only">Previous</span>
@@ -113,7 +112,7 @@ export default function Carousel() {
           <button
             onClick={handleNextSlide}
             disabled={scrolledToEndOfSlide()}
-            className="rounded-full disabled:cursor-not-allowed disabled:text-gray-400"
+            className="rounded-full disabled:cursor-not-allowed disabled:text-neutral-600"
           >
             <ChevronRightIcon width={25} height={25} aria-label="Right chevron icon" />
             <span className="sr-only">Next</span>
