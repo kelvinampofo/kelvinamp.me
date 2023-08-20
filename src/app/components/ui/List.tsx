@@ -7,7 +7,7 @@ import Separator from '../generic/Separator';
 import CustomLink from './CustomLink';
 
 interface ListProps {
-  items: Prototype[] | Post[];
+  items: Array<Prototype | Post>;
   route: string;
 }
 

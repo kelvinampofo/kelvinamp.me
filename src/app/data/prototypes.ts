@@ -10,7 +10,7 @@ export type Prototype = {
   image?: string | undefined;
 };
 
-export const allPrototypes: Prototype[] = [
+export const allPrototypes: Array<Prototype> = [
   {
     slug: '/carousel',
     _id: 1,
