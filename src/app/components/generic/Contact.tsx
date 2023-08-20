@@ -4,17 +4,17 @@ import CustomLink from '../ui/CustomLink';
 export default function Contact() {
   const contactLinks = [
     {
-      label: '@kelvinamp_',
-      href: 'https://x.com/kelvinamp_',
-      ariaLabel: 'Go to @kelvinamp_ twitter profile'
-    },
-    {
       label: 'GitHub',
       href: 'https://github.com/kelvinampofo',
       ariaLabel: 'Go to GitHub profile'
     },
     {
-      label: 'Email',
+      label: '@kelvinamp_',
+      href: 'https://x.com/kelvinamp_',
+      ariaLabel: 'Go to @kelvinamp_ twitter profile'
+    },
+    {
+      label: 'k@kelvinamp.me',
       href: 'mailto:k@kelvinamp.me',
       ariaLabel: 'Email Kelvin Ampofo'
     }
@@ -26,7 +26,7 @@ export default function Contact() {
       <ul className="flex">
         {contactLinks.map(({ label, href, ariaLabel }, index) => (
           <li key={label} className="flex items-center">
-            <CustomLink href={href} underline ariaLabel={ariaLabel}>
+            <CustomLink href={href} ariaLabel={ariaLabel} underline>
               {label}
             </CustomLink>
             <span
