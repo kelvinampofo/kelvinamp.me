@@ -23,5 +23,5 @@ export default function usePointerDeviceDetector() {
     };
   }, []);
 
-  return isPointerDevice;
+  return { isPointerDevice };
 }

@@ -39,7 +39,7 @@ const SLIDE_MARGIN = 20;
 export default function Carousel() {
   const slideRef = useRef<HTMLUListElement | null>(null); // reference to the slide container element
   const [slidePosition, setSlidePosition] = useState(0);
-  const isPointerDevice = usePointerDeviceDetector();
+  const { isPointerDevice } = usePointerDeviceDetector();
 
   // check if the user has scrolled to the end of the slide container
   const scrolledToEndOfSlide = () => {
