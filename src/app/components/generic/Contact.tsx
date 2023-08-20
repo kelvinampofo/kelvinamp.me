@@ -4,17 +4,17 @@ import CustomLink from '../ui/CustomLink';
 export default function Contact() {
   const contactLinks = [
     {
-      label: 'GitHub',
-      href: 'https://github.com/kelvinampofo',
-      ariaLabel: 'Go to GitHub profile'
-    },
-    {
       label: '@kelvinamp_',
       href: 'https://x.com/kelvinamp_',
       ariaLabel: 'Go to @kelvinamp_ twitter profile'
     },
     {
-      label: 'k@kelvinamp.me',
+      label: 'GitHub',
+      href: 'https://github.com/kelvinampofo',
+      ariaLabel: 'Go to GitHub profile'
+    },
+    {
+      label: 'Email',
       href: 'mailto:k@kelvinamp.me',
       ariaLabel: 'Email Kelvin Ampofo'
     }
