@@ -4,6 +4,7 @@
 
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -14,7 +15,7 @@
 
 @media (prefers-color-scheme: dark) {
   ::-webkit-scrollbar-track {
-    background: #1c1c1c;
+    background: #161616;
     border-radius: 10px;
   }
 
