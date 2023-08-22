@@ -10,7 +10,7 @@ export default function Card({ children, className }: CardProps) {
   return (
     <section
       className={c(
-        'rounded-sm border dark:bg-[#1C1C1C] bg-gray-50 dark:border-neutral-800 p-2 md:p-6 lg:p-6',
+        'rounded-sm border dark:bg-transparent bg-gray-50 dark:border-neutral-800 p-2 md:p-6 lg:p-6',
         className
       )}
     >
