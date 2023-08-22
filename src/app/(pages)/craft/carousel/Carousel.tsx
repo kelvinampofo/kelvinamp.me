@@ -33,6 +33,7 @@ const slides = [
     author: 'Angela Bailey'
   }
 ];
+
 const SLIDE_WIDTH = 450;
 const SLIDE_MARGIN = 20;
 
@@ -108,7 +109,6 @@ export default function Carousel() {
             <ChevronLeftIcon width={25} height={25} aria-label="Left chevron icon" />
             <span className="sr-only">Previous</span>
           </button>
-
           <button
             onClick={handleNextSlide}
             disabled={scrolledToEndOfSlide()}
