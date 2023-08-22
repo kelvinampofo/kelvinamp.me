@@ -17,7 +17,7 @@ export const allPrototypes: Array<Prototype> = [
     title: 'Carousel',
     href: '/carousel',
     publishedAt: '2023-08-19',
-    summary: 'A minimal CSS based carousel interface.'
+    summary: 'A minimal CSS based carousel.'
   }
 ].sort((a, b) => {
   return compareAsc(parseISO(a.publishedAt), parseISO(b.publishedAt));
