@@ -82,7 +82,7 @@ export default function Carousel() {
         {slides.map(({ title, imageUrl, imageAlt, author, isPriority }) => (
           <li
             key={title}
-            className="relative mr-5 w-[250px] shrink-0 overscroll-x-contain rounded-lg bg-white text-center transition-all duration-300 last:mr-0 md:w-[450px] md:snap-start md:snap-always lg:w-[450px] lg:snap-start lg:snap-always"
+            className="relative mr-5 w-[250px] shrink-0 overscroll-x-contain rounded-sm bg-white text-center transition-all duration-300 last:mr-0 md:w-[450px] md:snap-start md:snap-always lg:w-[450px] lg:snap-start lg:snap-always"
           >
             <figure>
               <Image
@@ -91,7 +91,7 @@ export default function Carousel() {
                 fill
                 priority={isPriority}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="rounded-md object-fill"
+                className="rounded-sm object-fill"
               />
               <figcaption className="absolute bottom-[-25px] left-0 w-full text-start text-xs text-[#6F6F6F] dark:text-neutral-400">{`${title} by, ${author}`}</figcaption>
             </figure>
