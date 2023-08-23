@@ -1,5 +1,5 @@
 import type { Prototype } from '@/app/data/prototypes';
-import { isWithin2Months } from '@/app/lib/utils';
+import { isWithin1Month } from '@/app/lib/utils';
 import type { Post } from 'contentlayer/generated';
 import { compareDesc, format, parseISO } from 'date-fns';
 import { Fragment } from 'react';
@@ -19,7 +19,7 @@ export default function List({ items, route }: ListProps) {
         .map(({ _id, publishedAt, slug, title }) => {
           const publishedDate = parseISO(publishedAt);
 
-          const isNewContent = isWithin2Months(publishedDate);
+          const isNewContent = isWithin1Month(publishedDate);
           return (
             <Fragment key={_id}>
               <CustomLink href={`/${route}/${slug}`}>
