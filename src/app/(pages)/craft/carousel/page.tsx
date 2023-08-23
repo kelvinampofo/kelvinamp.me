@@ -10,17 +10,17 @@ import Carousel from './Carousel';
 
 export const metadata: Metadata = {
   title: 'Carousel',
-  description: 'A minimal CSS based carousel interface.',
+  description: 'A minimal CSS based carousel.',
   authors: [{ name: 'Kelvin Ampofo' }],
   openGraph: {
     title: 'Carousel',
-    description: 'A minimal CSS based carousel interface.',
+    description: 'A minimal CSS based carousel.',
     images: [
       {
         url: 'https://kelvinamp.me/assets/carousel/carousel.png',
         height: 1200,
         width: 1200,
-        alt: 'A minimal CSS based carousel interface.'
+        alt: 'A minimal CSS based carousel.'
       }
     ]
   },
@@ -28,13 +28,13 @@ export const metadata: Metadata = {
     title: 'Carousel',
     site: '@kelvinamp_',
     card: 'summary_large_image',
-    description: 'A minimal CSS based carousel interface.',
+    description: 'A minimal CSS based carousel.',
     images: [
       {
         url: 'https://kelvinamp.me/assets/carousel/carousel-og.png',
         height: 1200,
         width: 1200,
-        alt: 'A minimal CSS based carousel interface.'
+        alt: 'A minimal CSS based carousel.'
       }
     ]
   }
