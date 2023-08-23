@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-export default function usePointerDeviceDetector() {
+export default function usePointerDevice() {
   const [isPointerDevice, setIsPointerDevice] = useState(true);
 
   useEffect(() => {

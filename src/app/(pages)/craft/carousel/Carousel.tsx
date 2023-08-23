@@ -1,6 +1,6 @@
 'use client';
 
-import usePointerDeviceDetector from '@/app/hooks/usePointerDeviceDetector';
+import usePointerDevice from '@/app/hooks/usePointerDevice';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import Image from 'next/image';
 import { useCallback, useMemo, useRef, useState } from 'react';
@@ -40,7 +40,7 @@ const SLIDE_MARGIN = 20;
 export default function Carousel() {
   const slideRef = useRef<HTMLUListElement | null>(null);
   const [slidePosition, setSlidePosition] = useState(0);
-  const { isPointerDevice } = usePointerDeviceDetector();
+  const { isPointerDevice } = usePointerDevice();
 
   // check if the user has scrolled to the end of the slide container
   const scrolledToEndOfSlide = () => {
