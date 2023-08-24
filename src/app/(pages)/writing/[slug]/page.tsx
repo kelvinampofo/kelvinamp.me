@@ -78,7 +78,7 @@ export default async function Post({ params }: Props) {
 
   return (
     <Container>
-      <header className="flex flex-col justify-between gap-8">
+      <header className="flex flex-col justify-between gap-6">
         <span>
           <CustomLink href="/writing" ariaLabel="go back to writing page" arrowIcon>
             Writing
@@ -88,7 +88,7 @@ export default async function Post({ params }: Props) {
           <Balancer>{post.title}</Balancer>
         </h1>
       </header>
-      <div className="mb-3 flex justify-between gap-2 text-sm text-[#6F6F6F] dark:text-neutral-400">
+      <div className="mb-3 flex justify-between text-sm text-[#6F6F6F] dark:text-neutral-400">
         <time dateTime={post.publishedAt}>
           {format(parseISO(post.publishedAt), 'MMMM dd, yyyy')}
         </time>

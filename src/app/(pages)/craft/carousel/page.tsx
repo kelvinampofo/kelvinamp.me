@@ -47,7 +47,7 @@ export default function Page() {
 
   return (
     <Container>
-      <header className="flex flex-col justify-between gap-8">
+      <header className="flex flex-col justify-between gap-6">
         <span>
           <CustomLink href="/craft" ariaLabel="go back to craft page" arrowIcon>
             Craft
@@ -57,12 +57,12 @@ export default function Page() {
           <Balancer>{title}</Balancer>
         </h1>
       </header>
-      <div className="mb-6 flex justify-between gap-2 text-sm text-[#6F6F6F] dark:text-neutral-400">
+      <div className="flex justify-between text-sm text-[#6F6F6F] dark:text-neutral-400">
         <time dateTime={publishedAt}>{format(parseISO(publishedAt), 'MMMM yyyy')}</time>
         <CopyLinkButton />
       </div>
-      <p>{summary}</p>
-      <Card className="my-6">
+      <p className="my-8">{summary}</p>
+      <Card className="flex lg:px-2">
         <Carousel />
       </Card>
     </Container>
