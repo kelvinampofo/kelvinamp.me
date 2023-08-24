@@ -1,5 +1,6 @@
 import Card from '@/app/components/generic/Card';
 import Container from '@/app/components/generic/Container';
+import Separator from '@/app/components/generic/Separator';
 import CopyLinkButton from '@/app/components/ui/CopyLinkButton';
 import CustomLink from '@/app/components/ui/CustomLink';
 import { allPrototypes } from '@/app/data/prototypes';
@@ -65,6 +66,22 @@ export default function Page() {
       <Card className="flex lg:px-2">
         <Carousel />
       </Card>
+      <Separator className="my-10" />
+      <section>
+        <h2 className="mb-2 font-medium">Resources</h2>
+        <ul className="flex list-inside flex-col gap-1">
+          <li>
+            <CustomLink href="https://web.dev/css-scroll-snap/" underline>
+              Well-controlled scrolling with CSS Scroll Snap
+            </CustomLink>
+          </li>
+          <li>
+            <CustomLink href="https://tailwindcss.com/docs/scroll-snap-type" underline>
+              Scroll Snap Type Tailwind CSS
+            </CustomLink>
+          </li>
+        </ul>
+      </section>
     </Container>
   );
 }

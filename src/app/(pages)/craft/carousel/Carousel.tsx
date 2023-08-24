@@ -4,33 +4,44 @@ import usePointerDevice from '@/app/hooks/usePointerDevice';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import Image from 'next/image';
 import { useCallback, useMemo, useRef, useState } from 'react';
+import CentralLibraryImage from '../../../../../public/assets/carousel/central-library.webp';
+import AliyevCenterImage from '../../../../../public/assets/carousel/heydar-aliyev-center.webp';
+import KyotoStationImage from '../../../../../public/assets/carousel/kyoto-station.webp';
+import SydneyHarbourImage from '../../../../../public/assets/carousel/sydney-harbour.jpg';
+import ConcertHallImage from '../../../../../public/assets/carousel/walt-disney-concert-hall.webp';
 
 const slides = [
   {
     title: 'Walt Disney Concert Hall',
-    imageUrl: '/assets/carousel/walt-disney-concert-hall.webp',
-    imageAlt: 'Walt Disney Concert Hall',
+    src: ConcertHallImage,
+    alt: 'Walt Disney Concert Hall',
     author: 'Ranjith Alingal',
     isPriority: true
   },
   {
     title: 'Kyoto Station',
-    imageUrl: '/assets/carousel/kyoto-station.webp',
-    imageAlt: 'Kyoto Station by Hiroshi Hara (1997)',
+    src: KyotoStationImage,
+    alt: 'Kyoto Station by Hiroshi Hara (1997)',
     author: 'Hiroshi Hara',
     isPriority: true
   },
   {
     title: 'Heydar Aliyev Center',
-    imageUrl: '/assets/carousel/heydar-aliyev-center.webp',
-    imageAlt: 'Heydar Aliyev Center, Baku Azerbaijan',
+    src: AliyevCenterImage,
+    alt: 'The Heydar Aliyev Center, Baku Azerbaijan',
     author: 'İltun Huseynli'
   },
   {
     title: 'Calgary Central Library',
-    imageUrl: '/assets/carousel/central-library.webp',
-    imageAlt: 'Interior of Calgary Central Library, Canada',
+    src: CentralLibraryImage,
+    alt: 'The interior of Calgary Central Library, Canada',
     author: 'Angela Bailey'
+  },
+  {
+    title: 'Sydney Harbour Bridge',
+    src: SydneyHarbourImage,
+    alt: 'Sydney Harbour Bridge, Milsons Point, Australia',
+    author: 'Connor Meakins'
   }
 ];
 
@@ -63,33 +74,40 @@ export default function Carousel() {
     return Math.floor(slidePosition / (SLIDE_WIDTH + SLIDE_MARGIN));
   }, [slidePosition]);
 
-  const handleNextSlide = useCallback(() => {
-    scrollToSlide(slideRef.current, currentSlide + 1);
-  }, [currentSlide]);
-
-  const handlePreviousSlide = useCallback(() => {
-    scrollToSlide(slideRef.current, currentSlide - 1);
-  }, [currentSlide]);
+  const handleSlideChange = useCallback((newSlideIndex: number) => {
+    scrollToSlide(slideRef.current, newSlideIndex);
+  }, []);
 
   return (
     <>
+      {isPointerDevice && (
+        <button
+          onClick={() => handleSlideChange(currentSlide - 1)}
+          disabled={currentSlide === 0}
+          className="mr-2 rounded-sm disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600"
+        >
+          <ChevronLeftIcon width={25} height={25} aria-label="Left chevron icon" />
+          <span className="sr-only">Previous</span>
+        </button>
+      )}
       <ul
-        className="flex h-[350px] max-w-4xl overflow-x-auto pb-10 md:h-[600px] md:snap-x md:snap-mandatory lg:h-[600px]"
+        className="flex h-[350px] overflow-x-auto pb-10 md:h-[600px] md:snap-x md:snap-mandatory md:pb-16 lg:h-[600px] lg:pb-16"
         onScroll={(e) => {
           setSlidePosition(e.currentTarget.scrollLeft);
         }}
         ref={slideRef}
       >
-        {slides.map(({ title, imageUrl, imageAlt, author, isPriority }) => (
+        {slides.map(({ title, src, alt, author, isPriority }) => (
           <li
             key={title}
             className="relative mr-5 w-[250px] shrink-0 overscroll-x-contain rounded-sm bg-white text-center transition-all duration-300 last:mr-0 md:w-[450px] md:snap-start md:snap-always lg:w-[450px] lg:snap-start lg:snap-always"
           >
             <figure>
               <Image
-                src={imageUrl}
-                alt={imageAlt}
+                src={src}
+                alt={alt}
                 fill
+                placeholder="blur"
                 priority={isPriority}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="rounded-sm object-fill"
@@ -100,24 +118,14 @@ export default function Carousel() {
         ))}
       </ul>
       {isPointerDevice && (
-        <div className="mt-2 flex justify-between">
-          <button
-            onClick={handlePreviousSlide}
-            disabled={currentSlide === 0}
-            className="rounded-full disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600"
-          >
-            <ChevronLeftIcon width={25} height={25} aria-label="Left chevron icon" />
-            <span className="sr-only">Previous</span>
-          </button>
-          <button
-            onClick={handleNextSlide}
-            disabled={scrolledToEndOfSlide()}
-            className="rounded-full disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600"
-          >
-            <ChevronRightIcon width={25} height={25} aria-label="Right chevron icon" />
-            <span className="sr-only">Next</span>
-          </button>
-        </div>
+        <button
+          onClick={() => handleSlideChange(currentSlide + 1)}
+          disabled={scrolledToEndOfSlide()}
+          className="ml-2 rounded-sm disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600"
+        >
+          <ChevronRightIcon width={25} height={25} aria-label="Right chevron icon" />
+          <span className="sr-only">Next</span>
+        </button>
       )}
     </>
   );
