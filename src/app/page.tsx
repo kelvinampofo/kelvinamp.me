@@ -28,16 +28,18 @@ export default function Home() {
           </p>
         </section>
         <nav className="flex flex-col gap-1">
-          <span>
-            <CustomLink href="/craft" ariaLabel="go to craft page" underline>
-              Craft
-            </CustomLink>
-          </span>
-          <span>
-            <CustomLink href="/writing" ariaLabel="go to writing page" underline>
-              Writing
-            </CustomLink>
-          </span>
+          <ul>
+            <li>
+              <CustomLink href="/craft" ariaLabel="go to craft page" underline>
+                Craft
+              </CustomLink>
+            </li>
+            <li>
+              <CustomLink href="/writing" ariaLabel="go to writing page" underline>
+                Writing
+              </CustomLink>
+            </li>
+          </ul>
         </nav>
         <Separator className="my-12" />
       </PageWrapper>
