@@ -20,6 +20,9 @@ export default function List({ items, route }: ListProps) {
           const publishedDate = parseISO(publishedAt);
 
           const isNewContent = isWithin1Month(publishedDate);
+
+          const formattedDate = format(publishedDate, 'dd/MM/yy');
+
           return (
             <Fragment key={_id}>
               <CustomLink href={`/${route}/${slug}`}>
@@ -32,9 +35,7 @@ export default function List({ items, route }: ListProps) {
                       </span>
                     )}
                   </span>
-                  <time className="text-[#6F6F6F] dark:text-neutral-400">
-                    {format(publishedDate, 'dd/MM/yy')}
-                  </time>
+                  <time className="text-[#6F6F6F] dark:text-neutral-400">{formattedDate}</time>
                 </div>
               </CustomLink>
               <Separator className="my-3" />
