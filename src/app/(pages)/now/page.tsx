@@ -30,7 +30,7 @@ export default function Now() {
       <h1 className="text-lg font-medium">Now</h1>
       <section className="mb-12 mt-6 flex flex-col gap-6">
         <p>
-          Dedicated to enhancing skill through immersive, hands-on exploration in art+technology.
+          Dedicated to enhancing skill through hands-on, immersive exploration in art+technology.
         </p>
         <p>
           For now, I <s>just</s> want to design and build software. Interactivity, typography,
@@ -38,16 +38,17 @@ export default function Now() {
           creativity and opportunity.
         </p>
         <p>
-          Separating identity from trivialities. Practising inward focus. Thinking critically.
-          Finding joy in challenges. Meticulous about the details. Insatiably curious.
+          Separating identity from trivialities. Focused on creation. Thinking critically. Finding
+          joy in challenges. Meticulous about the details. Insatiably curious.
         </p>
         <p>
-          Enjoying music that evokes strong emotions. Watching Porsche videos. Drinking iced tea.
-        </p>
-        <p>
-          View current selection of reading on{' '}
+          Enjoying music that evokes strong emotions, reading{' '}
           <CustomLink href="https://literal.club/kelvinamp" underline>
-            Literal
+            books
+          </CustomLink>
+          , sipping iced tea, watching Porsche videos&mdash;dream{' '}
+          <CustomLink href="https://configurator.porsche.com/porsche-code/PRW3ZU86" underline>
+            spec
           </CustomLink>
           .
         </p>
