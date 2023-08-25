@@ -28,7 +28,7 @@ export default function Home() {
           </p>
         </section>
         <nav>
-          <ul className="flex flex-col gap-2">
+          <ul className="flex flex-col gap-1">
             <li>
               <CustomLink href="/craft" ariaLabel="go to craft page" underline>
                 Craft
