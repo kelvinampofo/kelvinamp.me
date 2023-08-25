@@ -69,18 +69,9 @@ export default function Page() {
       <Separator className="my-10" />
       <section>
         <h2 className="mb-2 font-medium">Resources</h2>
-        <ul className="flex list-inside flex-col gap-1">
-          <li>
-            <CustomLink href="https://web.dev/css-scroll-snap/" underline>
-              Well-controlled scrolling with CSS Scroll Snap
-            </CustomLink>
-          </li>
-          <li>
-            <CustomLink href="https://tailwindcss.com/docs/scroll-snap-type" underline>
-              Scroll Snap Type Tailwind CSS
-            </CustomLink>
-          </li>
-        </ul>
+        <CustomLink href="https://web.dev/css-scroll-snap/" underline>
+          Well-controlled scrolling with CSS Scroll Snap
+        </CustomLink>
       </section>
     </Container>
   );
