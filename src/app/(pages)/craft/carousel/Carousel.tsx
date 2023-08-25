@@ -81,17 +81,19 @@ export default function Carousel() {
   return (
     <>
       {isPointerDevice && (
-        <button
-          onClick={() => handleSlideChange(currentSlide - 1)}
-          disabled={currentSlide === 0}
-          className="mr-2 rounded-sm disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600"
-        >
-          <ChevronLeftIcon width={25} height={25} aria-label="Left chevron icon" />
-          <span className="sr-only">Previous</span>
-        </button>
+        <div className="flex items-center">
+          <button
+            onClick={() => handleSlideChange(currentSlide - 1)}
+            disabled={currentSlide === 0}
+            className="mr-2 rounded-sm border text-neutral-600 shadow-sm shadow-neutral-200 disabled:cursor-not-allowed disabled:text-neutral-300 dark:border-neutral-800 dark:text-neutral-300 dark:shadow-neutral-950 dark:disabled:text-neutral-600"
+          >
+            <ChevronLeftIcon width={25} height={25} aria-label="Left chevron icon" />
+            <span className="sr-only">Previous</span>
+          </button>
+        </div>
       )}
       <ul
-        className="flex h-[350px] overflow-x-auto pb-10 md:h-[600px] md:snap-x md:snap-mandatory md:pb-16 lg:h-[600px] lg:pb-16"
+        className="flex h-[350px] overflow-x-auto pb-10 md:h-[600px] md:snap-x md:snap-mandatory md:pb-12 lg:h-[600px] lg:pb-12"
         onScroll={(e) => {
           setSlidePosition(e.currentTarget.scrollLeft);
         }}
@@ -118,14 +120,16 @@ export default function Carousel() {
         ))}
       </ul>
       {isPointerDevice && (
-        <button
-          onClick={() => handleSlideChange(currentSlide + 1)}
-          disabled={scrolledToEndOfSlide()}
-          className="ml-2 rounded-sm disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600"
-        >
-          <ChevronRightIcon width={25} height={25} aria-label="Right chevron icon" />
-          <span className="sr-only">Next</span>
-        </button>
+        <div className="flex items-center">
+          <button
+            onClick={() => handleSlideChange(currentSlide + 1)}
+            disabled={scrolledToEndOfSlide()}
+            className="ml-2 rounded-sm border text-neutral-600 shadow-sm shadow-neutral-200 disabled:cursor-not-allowed disabled:text-neutral-300 dark:border-neutral-800 dark:text-neutral-300 dark:shadow-neutral-950 dark:disabled:text-neutral-600"
+          >
+            <ChevronRightIcon width={25} height={25} aria-label="Right chevron icon" />
+            <span className="sr-only">Next</span>
+          </button>
+        </div>
       )}
     </>
   );
