@@ -38,7 +38,6 @@
     "postcss": "^8.4.27",
     "prettier": "^3.0.1",
     "prettier-plugin-tailwindcss": "^0.5.2",
-    "react-tilt": "^1.0.2",
     "rehype-autolink-headings": "^6.1.1",
     "rehype-pretty-code": "^0.10.0",
     "remark-gfm": "^3.0.1",
