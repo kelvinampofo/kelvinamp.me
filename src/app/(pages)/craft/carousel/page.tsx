@@ -63,7 +63,7 @@ export default function Page() {
         <CopyLinkButton />
       </div>
       <p className="my-8">{summary}</p>
-      <Card className="flex lg:px-2">
+      <Card className="flex md:px-2 md:pt-8 lg:px-2 lg:pt-8">
         <Carousel />
       </Card>
       <Separator className="my-10" />
