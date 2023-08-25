@@ -47,7 +47,7 @@ export default function Now() {
             books
           </CustomLink>
           , sipping iced tea, watching Porsche videos&mdash;dream{' '}
-          <CustomLink href="https://configurator.porsche.com/porsche-code/PRW3ZU86" underline>
+          <CustomLink href="https://configurator.porsche.com/porsche-code/PRFXXVN8" underline>
             spec
           </CustomLink>
           .
