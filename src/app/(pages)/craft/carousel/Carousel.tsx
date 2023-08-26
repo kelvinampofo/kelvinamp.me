@@ -2,6 +2,7 @@
 
 import usePointerDevice from '@/app/hooks/usePointerDevice';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import c from 'clsx';
 import Image from 'next/image';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import CentralLibraryImage from '../../../../../public/assets/carousel/central-library.webp';
@@ -85,7 +86,9 @@ export default function Carousel() {
           <button
             onClick={() => handleSlideChange(currentSlide - 1)}
             disabled={currentSlide === 0}
-            className="mr-2 rounded-sm text-neutral-600 duration-100 hover:bg-neutral-200 disabled:cursor-not-allowed disabled:bg-inherit disabled:text-neutral-300 hover:disabled:bg-gray-50 dark:border-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:disabled:text-neutral-600 dark:hover:disabled:bg-[#161616]"
+            className={c(
+              'mr-2 rounded-sm text-neutral-600 disabled:cursor-not-allowed dark:disabled:text-neutral-600 disabled:text-neutral-300 dark:border-neutral-800 dark:text-neutral-300 duration-150 hover:text-neutral-400 dark:hover:text-neutral-400'
+            )}
           >
             <ChevronLeftIcon width={25} height={25} aria-label="Left chevron icon" />
             <span className="sr-only">Previous slide</span>
@@ -124,7 +127,7 @@ export default function Carousel() {
           <button
             onClick={() => handleSlideChange(currentSlide + 1)}
             disabled={scrolledToEndOfSlide()}
-            className="ml-2 rounded-sm text-neutral-600 duration-100 hover:bg-neutral-200 disabled:cursor-not-allowed disabled:bg-inherit disabled:text-neutral-300 hover:disabled:bg-gray-50 dark:border-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:disabled:text-neutral-600 dark:hover:disabled:bg-[#161616]"
+            className="ml-2 rounded-sm text-neutral-600 duration-150 hover:text-neutral-400 disabled:cursor-not-allowed disabled:text-neutral-300 dark:border-neutral-800 dark:text-neutral-300 dark:hover:text-neutral-400 dark:disabled:text-neutral-600"
           >
             <ChevronRightIcon width={25} height={25} aria-label="Right chevron icon" />
             <span className="sr-only">Next slide</span>
