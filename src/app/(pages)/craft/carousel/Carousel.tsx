@@ -85,15 +85,15 @@ export default function Carousel() {
           <button
             onClick={() => handleSlideChange(currentSlide - 1)}
             disabled={currentSlide === 0}
-            className="mr-2 rounded-sm border text-neutral-600 shadow-sm shadow-neutral-200 disabled:cursor-not-allowed disabled:text-neutral-300 dark:border-neutral-800 dark:text-neutral-300 dark:shadow-neutral-950 dark:disabled:text-neutral-600"
+            className="mr-2 rounded-sm text-neutral-600 duration-100 hover:bg-neutral-200 disabled:cursor-not-allowed disabled:bg-inherit disabled:text-neutral-300 hover:disabled:bg-gray-50 dark:border-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:disabled:text-neutral-600 dark:hover:disabled:bg-[#161616]"
           >
             <ChevronLeftIcon width={25} height={25} aria-label="Left chevron icon" />
-            <span className="sr-only">Previous</span>
+            <span className="sr-only">Previous slide</span>
           </button>
         </div>
       )}
       <ul
-        className="flex h-[350px] overflow-x-auto pb-10 md:h-[600px] md:snap-x md:snap-mandatory md:pb-12 lg:h-[600px] lg:pb-12"
+        className="flex h-[350px] overflow-x-auto bg-scroll pb-10 md:h-[600px] md:snap-x md:snap-mandatory md:pb-12 lg:h-[600px] lg:pb-12"
         onScroll={(e) => {
           setSlidePosition(e.currentTarget.scrollLeft);
         }}
@@ -102,7 +102,7 @@ export default function Carousel() {
         {slides.map(({ title, src, alt, author, isPriority }) => (
           <li
             key={title}
-            className="relative mr-5 w-[250px] shrink-0 overscroll-x-contain rounded-sm bg-white text-center transition-all duration-300 last:mr-0 md:w-[450px] md:snap-start md:snap-always lg:w-[450px] lg:snap-start lg:snap-always"
+            className="relative mr-5 w-[250px] shrink-0 overscroll-x-contain rounded-sm bg-white text-center transition-all last:mr-0 md:w-[450px] md:snap-start md:snap-always lg:w-[450px] lg:snap-start lg:snap-always"
           >
             <figure>
               <Image
@@ -124,10 +124,10 @@ export default function Carousel() {
           <button
             onClick={() => handleSlideChange(currentSlide + 1)}
             disabled={scrolledToEndOfSlide()}
-            className="ml-2 rounded-sm border text-neutral-600 shadow-sm shadow-neutral-200 disabled:cursor-not-allowed disabled:text-neutral-300 dark:border-neutral-800 dark:text-neutral-300 dark:shadow-neutral-950 dark:disabled:text-neutral-600"
+            className="ml-2 rounded-sm text-neutral-600 duration-100 hover:bg-neutral-200 disabled:cursor-not-allowed disabled:bg-inherit disabled:text-neutral-300 hover:disabled:bg-gray-50 dark:border-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:disabled:text-neutral-600 dark:hover:disabled:bg-[#161616]"
           >
             <ChevronRightIcon width={25} height={25} aria-label="Right chevron icon" />
-            <span className="sr-only">Next</span>
+            <span className="sr-only">Next slide</span>
           </button>
         </div>
       )}
