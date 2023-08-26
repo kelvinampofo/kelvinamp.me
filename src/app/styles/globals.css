@@ -15,7 +15,7 @@
 
 @media (prefers-color-scheme: dark) {
   ::-webkit-scrollbar-track {
-    background: #161616;
+    background: transparent;
     border-radius: 10px;
   }
 
@@ -30,8 +30,8 @@
 
 @media (prefers-color-scheme: light) {
   ::-webkit-scrollbar-track {
-    background: #f9fafb;
-    border-radius: 15px;
+    background: transparent;
+    border-radius: 10px;
   }
 
   ::-webkit-scrollbar-thumb {
