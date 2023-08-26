@@ -105,7 +105,7 @@ export default function Carousel() {
         {slides.map(({ title, src, alt, author, isPriority }) => (
           <li
             key={title}
-            className="relative mr-5 w-[250px] shrink-0 overscroll-x-contain rounded-sm bg-white text-center transition-all last:mr-0 md:w-[450px] md:snap-start md:snap-always lg:w-[450px] lg:snap-start lg:snap-always"
+            className="relative mr-5 w-[250px] shrink-0 overscroll-x-contain bg-white text-center transition-all last:mr-0 md:w-[450px] md:snap-start md:snap-always lg:w-[450px] lg:snap-start lg:snap-always"
           >
             <figure>
               <Image
@@ -115,7 +115,7 @@ export default function Carousel() {
                 placeholder="blur"
                 priority={isPriority}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="rounded-sm object-fill"
+                className="object-fill"
               />
               <figcaption className="absolute bottom-[-25px] left-0 w-full text-start text-xs text-[#6F6F6F] dark:text-neutral-400">{`${title} by, ${author}`}</figcaption>
             </figure>
@@ -127,7 +127,9 @@ export default function Carousel() {
           <button
             onClick={() => handleSlideChange(currentSlide + 1)}
             disabled={scrolledToEndOfSlide()}
-            className="ml-2 rounded-sm text-neutral-600 duration-150 hover:text-neutral-400 disabled:cursor-not-allowed disabled:text-neutral-300 dark:border-neutral-800 dark:text-neutral-300 dark:hover:text-neutral-400 dark:disabled:text-neutral-600"
+            className={c(
+              'ml-2 rounded-sm text-neutral-600 disabled:cursor-not-allowed dark:disabled:text-neutral-600 disabled:text-neutral-300 dark:border-neutral-800 dark:text-neutral-300 duration-150 hover:text-neutral-400 dark:hover:text-neutral-400'
+            )}
           >
             <ChevronRightIcon width={25} height={25} aria-label="Right chevron icon" />
             <span className="sr-only">Next slide</span>
