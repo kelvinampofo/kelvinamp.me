@@ -89,9 +89,7 @@ export default async function Post({ params }: Props) {
         </h1>
       </header>
       <div className="mb-3 flex justify-between text-sm text-[#6F6F6F] dark:text-neutral-400">
-        <time dateTime={post.publishedAt}>
-          {format(parseISO(post.publishedAt), 'MMMM dd, yyyy')}
-        </time>
+        <time dateTime={post.publishedAt}>{format(parseISO(post.publishedAt), 'dd MMM yyyy')}</time>
         <CopyLinkButton />
       </div>
       <MDXContent code={post.body.code} />
