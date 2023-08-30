@@ -35,7 +35,7 @@ export default function Writing() {
     <Container>
       <h1 className="mb-3 text-lg font-medium">Writing</h1>
       <p className="mb-12 text-[#6F6F6F] dark:text-neutral-400">
-        Infrequent thoughts on design, technology and things in between.
+        Infrequent written thoughts on technology, design and things in between.
       </p>
       <Separator className="mb-3" />
       <List items={allPosts} route="writing" />
