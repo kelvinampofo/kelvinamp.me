@@ -3,13 +3,13 @@
 import usePointerDevice from '@/app/hooks/usePointerDevice';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import c from 'clsx';
-import Image from 'next/image';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import CentralLibraryImage from '../../../../../public/assets/carousel/central-library.webp';
 import AliyevCenterImage from '../../../../../public/assets/carousel/heydar-aliyev-center.webp';
 import KyotoStationImage from '../../../../../public/assets/carousel/kyoto-station.webp';
 import SydneyHarbourImage from '../../../../../public/assets/carousel/sydney-harbour.jpg';
 import ConcertHallImage from '../../../../../public/assets/carousel/walt-disney-concert-hall.webp';
+import Slide from './Slide';
 
 const slides = [
   {
@@ -30,19 +30,22 @@ const slides = [
     title: 'Heydar Aliyev Center',
     src: AliyevCenterImage,
     alt: 'The Heydar Aliyev Center, Baku Azerbaijan',
-    author: 'İltun Huseynli'
+    author: 'İltun Huseynli',
+    isPriority: false
   },
   {
     title: 'Calgary Central Library',
     src: CentralLibraryImage,
     alt: 'The interior of Calgary Central Library, Canada',
-    author: 'Angela Bailey'
+    author: 'Angela Bailey',
+    isPriority: false
   },
   {
     title: 'Sydney Harbour Bridge',
     src: SydneyHarbourImage,
     alt: 'Sydney Harbour Bridge, Milsons Point, Australia',
-    author: 'Connor Meakins'
+    author: 'Connor Meakins',
+    isPriority: false
   }
 ];
 
@@ -51,12 +54,36 @@ const SLIDE_MARGIN = 20;
 
 export default function Carousel() {
   const slideRef = useRef<HTMLUListElement | null>(null);
+
   const [slidePosition, setSlidePosition] = useState(0);
+  const [isCursorLeft, setIsCursorLeft] = useState(false);
+  const [isCursorRight, setIsCursorRight] = useState(false);
+
   const { isPointerDevice } = usePointerDevice();
 
-  // check if the user has scrolled to the end of the slide container
-  const scrolledToEndOfSlide = () => {
-    if (!slideRef.current) return false;
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!slideRef.current) return false;
+
+      const containerRect = slideRef.current.getBoundingClientRect();
+
+      const mouseX = e.clientX;
+
+      const cursorDirection =
+        mouseX < containerRect.left + containerRect.width / 2 ? 'left' : 'right';
+
+      setIsCursorLeft(cursorDirection === 'left');
+      setIsCursorRight(cursorDirection === 'right');
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  const hasReachedEndOfSlide = () => {
+    if (!slideRef.current) return;
     return (
       slideRef.current.scrollLeft + slideRef.current.clientWidth === slideRef.current.scrollWidth
     );
@@ -70,7 +97,6 @@ export default function Carousel() {
     });
   };
 
-  // calculate the current slide index based on the slide position
   const currentSlide = useMemo(() => {
     return Math.floor(slidePosition / (SLIDE_WIDTH + SLIDE_MARGIN));
   }, [slidePosition]);
@@ -78,6 +104,25 @@ export default function Carousel() {
   const handleSlideChange = useCallback((newSlideIndex: number) => {
     scrollToSlide(slideRef.current, newSlideIndex);
   }, []);
+
+  const handleCarouselClick = (e: React.MouseEvent<HTMLUListElement>) => {
+    if (!slideRef.current) return;
+    const containerRect = slideRef.current.getBoundingClientRect();
+    const mouseX = e.clientX;
+
+    const slideThreshold = containerRect.left + containerRect.width / 2;
+
+    if (mouseX < slideThreshold && currentSlide > 0) {
+      handleSlideChange(currentSlide - 1);
+    } else if (mouseX >= slideThreshold && currentSlide < slides.length - 1) {
+      handleSlideChange(currentSlide + 1);
+    }
+  };
+
+  const cursorClasses = c(
+    currentSlide !== 0 && isCursorLeft && 'cursor-w-resize',
+    !hasReachedEndOfSlide() && isCursorRight && 'cursor-e-resize'
+  );
 
   return (
     <>
@@ -87,7 +132,7 @@ export default function Carousel() {
             onClick={() => handleSlideChange(currentSlide - 1)}
             disabled={currentSlide === 0}
             className={c(
-              'mr-2 rounded-sm text-neutral-600 disabled:cursor-not-allowed dark:disabled:text-neutral-600 disabled:text-neutral-300 dark:border-neutral-800 dark:text-neutral-300 duration-150 hover:text-neutral-400 dark:hover:text-neutral-400'
+              'mr-2 rounded-sm text-neutral-600 hover:text-neutral-400 duration-150 dark:border-neutral-800 dark:text-neutral-300 dark:hover:text-neutral-400 disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600'
             )}
           >
             <ChevronLeftIcon width={25} height={25} aria-label="Left chevron icon" />
@@ -96,39 +141,34 @@ export default function Carousel() {
         </div>
       )}
       <ul
-        className="flex h-[350px] overflow-x-auto bg-scroll pb-10 md:h-[600px] md:snap-x md:snap-mandatory md:pb-12 lg:h-[600px] lg:pb-12"
+        ref={slideRef}
+        onClick={handleCarouselClick}
         onScroll={(e) => {
           setSlidePosition(e.currentTarget.scrollLeft);
         }}
-        ref={slideRef}
+        className={c(
+          'flex h-[350px] overflow-x-auto bg-scroll pb-10 md:h-[600px] md:snap-x md:snap-mandatory md:pb-12 lg:h-[600px] lg:pb-12',
+          cursorClasses
+        )}
       >
         {slides.map(({ title, src, alt, author, isPriority }) => (
-          <li
+          <Slide
             key={title}
-            className="relative mr-5 w-[250px] shrink-0 overscroll-x-contain bg-white text-center transition-all last:mr-0 md:w-[450px] md:snap-start md:snap-always lg:w-[450px] lg:snap-start lg:snap-always"
-          >
-            <figure>
-              <Image
-                src={src}
-                alt={alt}
-                fill
-                placeholder="blur"
-                priority={isPriority}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-fill"
-              />
-              <figcaption className="absolute bottom-[-25px] left-0 w-full text-start text-xs text-[#6F6F6F] dark:text-neutral-400">{`${title} by, ${author}`}</figcaption>
-            </figure>
-          </li>
+            title={title}
+            image={src}
+            alt={alt}
+            author={author}
+            isPriority={isPriority}
+          />
         ))}
       </ul>
       {isPointerDevice && (
         <div className="flex items-center">
           <button
             onClick={() => handleSlideChange(currentSlide + 1)}
-            disabled={scrolledToEndOfSlide()}
+            disabled={hasReachedEndOfSlide()}
             className={c(
-              'ml-2 rounded-sm text-neutral-600 disabled:cursor-not-allowed dark:disabled:text-neutral-600 disabled:text-neutral-300 dark:border-neutral-800 dark:text-neutral-300 duration-150 hover:text-neutral-400 dark:hover:text-neutral-400'
+              'ml-2 rounded-sm text-neutral-600 hover:text-neutral-400 duration-150 dark:border-neutral-800 dark:text-neutral-300 dark:hover:text-neutral-400 disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600'
             )}
           >
             <ChevronRightIcon width={25} height={25} aria-label="Right chevron icon" />
