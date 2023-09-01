@@ -3,12 +3,12 @@
 import usePointerDevice from '@/app/hooks/usePointerDevice';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import c from 'clsx';
+import CentralLibraryImage from 'public/assets/carousel/central-library.webp';
+import AliyevCenterImage from 'public/assets/carousel/heydar-aliyev-center.webp';
+import KyotoStationImage from 'public/assets/carousel/kyoto-station.webp';
+import SydneyHarbourImage from 'public/assets/carousel/sydney-harbour.jpg';
+import ConcertHallImage from 'public/assets/carousel/walt-disney-concert-hall.webp';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import CentralLibraryImage from '../../../../../public/assets/carousel/central-library.webp';
-import AliyevCenterImage from '../../../../../public/assets/carousel/heydar-aliyev-center.webp';
-import KyotoStationImage from '../../../../../public/assets/carousel/kyoto-station.webp';
-import SydneyHarbourImage from '../../../../../public/assets/carousel/sydney-harbour.jpg';
-import ConcertHallImage from '../../../../../public/assets/carousel/walt-disney-concert-hall.webp';
 import Slide from './Slide';
 
 const slides = [
