@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     title: 'Kelvin Ampofo',
     site: '@kelvinamp_',
     creator: '@kelvinamp',
-    card: 'summary',
+    card: 'summary_large_image',
     description:
       'Crafting interfaces with a focus on design, human-computer interaction and architecture.'
   }
