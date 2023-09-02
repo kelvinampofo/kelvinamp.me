@@ -13,12 +13,12 @@
   height: 20px;
 }
 
-@media (prefers-color-scheme: dark) {
-  ::-webkit-scrollbar-track {
-    background: transparent;
-    border-radius: 10px;
-  }
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
 
+@media (prefers-color-scheme: dark) {
   ::-webkit-scrollbar-thumb {
     background: #404040;
   }
@@ -29,11 +29,6 @@
 }
 
 @media (prefers-color-scheme: light) {
-  ::-webkit-scrollbar-track {
-    background: transparent;
-    border-radius: 10px;
-  }
-
   ::-webkit-scrollbar-thumb {
     background: #a3a3a3;
   }
