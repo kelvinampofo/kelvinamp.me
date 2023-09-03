@@ -45,22 +45,21 @@ const SLIDE_WIDTH = 450;
 const SLIDE_MARGIN = 20;
 
 export default function Carousel() {
-  const slideRef = useRef<HTMLUListElement | null>(null);
-
   const [slidePosition, setSlidePosition] = useState(0);
   const [isCursorLeft, setIsCursorLeft] = useState(false);
   const [isCursorRight, setIsCursorRight] = useState(false);
 
   const { isPointerDevice } = usePointerDevice();
 
+  const slideRef = useRef<HTMLUListElement | null>(null);
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!slideRef.current) return false;
+      if (!slideRef.current) return;
 
+      // get container dimensions and mouse position
       const containerRect = slideRef.current.getBoundingClientRect();
-
       const mouseX = e.clientX;
-
       const cursorDirection =
         mouseX < containerRect.left + containerRect.width / 2 ? 'left' : 'right';
 
@@ -69,6 +68,8 @@ export default function Carousel() {
     };
 
     document.addEventListener('mousemove', handleMouseMove);
+
+    // cleanup, remove event listener when component unmounts
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
     };
@@ -76,6 +77,7 @@ export default function Carousel() {
 
   const hasReachedEndOfSlide = () => {
     if (!slideRef.current) return;
+
     return (
       slideRef.current.scrollLeft + slideRef.current.clientWidth === slideRef.current.scrollWidth
     );
@@ -83,12 +85,14 @@ export default function Carousel() {
 
   const scrollToSlide = (slider: HTMLUListElement | null, currentSlideIndex: number) => {
     if (!slider) return;
+
     slider.scrollTo({
       left: currentSlideIndex * (SLIDE_WIDTH + SLIDE_MARGIN),
       behavior: 'smooth'
     });
   };
 
+  // calculate the current slide index based on slide position
   const currentSlide = useMemo(() => {
     return Math.floor(slidePosition / (SLIDE_WIDTH + SLIDE_MARGIN));
   }, [slidePosition]);
@@ -99,15 +103,16 @@ export default function Carousel() {
 
   const handleCarouselClick = (e: React.MouseEvent<HTMLUListElement>) => {
     if (!slideRef.current) return;
+
     const containerRect = slideRef.current.getBoundingClientRect();
     const mouseX = e.clientX;
-
     const slideThreshold = containerRect.left + containerRect.width / 2;
 
-    if (mouseX < slideThreshold && currentSlide > 0) {
-      handleSlideChange(currentSlide - 1);
-    } else if (mouseX >= slideThreshold && currentSlide < slides.length - 1) {
-      handleSlideChange(currentSlide + 1);
+    // determine the new slide index based on mouse position
+    const newSlideIndex = mouseX < slideThreshold ? currentSlide - 1 : currentSlide + 1;
+
+    if (newSlideIndex >= 0 && newSlideIndex < slides.length) {
+      handleSlideChange(newSlideIndex);
     }
   };
 
