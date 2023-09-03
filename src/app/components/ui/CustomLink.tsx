@@ -1,4 +1,4 @@
-import { ArrowTopLeftIcon, ResetIcon } from '@radix-ui/react-icons';
+import { ArrowTopLeftIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
 import Link from 'next/link';
 
@@ -37,12 +37,6 @@ export default function CustomLink({
             aria-label="Arrow Top Left icon"
             width={18}
             height={18}
-          />
-        )}
-        {resetIcon && (
-          <ResetIcon
-            className="mr-1 text-[#6F6F6F] dark:text-neutral-400"
-            aria-label="Reset icon"
           />
         )}
         {children}
