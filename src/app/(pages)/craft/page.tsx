@@ -1,4 +1,5 @@
 import Container from '@/app/components/generic/Container';
+import Heading from '@/app/components/generic/Heading';
 import Separator from '@/app/components/generic/Separator';
 import CustomLink from '@/app/components/ui/CustomLink';
 import List from '@/app/components/ui/List';
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
 export default function Craft() {
   return (
     <Container>
-      <h1 className="mb-3 text-lg font-medium">Craft</h1>
+      <Heading className="mb-3">Craft</Heading>
       <p className="mb-12 text-[#6F6F6F] dark:text-neutral-400">
         Crafting interfaces, art+technology.
       </p>

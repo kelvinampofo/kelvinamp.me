@@ -2,6 +2,7 @@ import Contact from '@/app/components/generic/Contact';
 import Container from '@/app/components/generic/Container';
 import PageWrapper from '@/app/components/generic/PageWrapper';
 import CustomLink from '@/app/components/ui/CustomLink';
+import Heading from './components/generic/Heading';
 import Separator from './components/generic/Separator';
 
 export default function Home() {
@@ -9,8 +10,8 @@ export default function Home() {
     <Container>
       <PageWrapper delay={0.4}>
         <header>
-          <h1 className="text-lg font-medium">Kelvin Ampofo</h1>
-          <span className="text-[#6F6F6F] dark:text-neutral-400">Software Engineer</span>
+          <Heading>Kelvin Ampofo</Heading>
+          <p className="text-[#6F6F6F] dark:text-neutral-400">Software Engineer</p>
         </header>
       </PageWrapper>
       <PageWrapper delay={0.6}>

@@ -1,4 +1,5 @@
 import Container from '@/app/components/generic/Container';
+import Heading from '@/app/components/generic/Heading';
 import Separator from '@/app/components/generic/Separator';
 import CustomLink from '@/app/components/ui/CustomLink';
 import List from '@/app/components/ui/List';
@@ -33,8 +34,8 @@ export const metadata: Metadata = {
 export default function Writing() {
   return (
     <Container>
-      <h1 className="mb-3 text-lg font-medium">Writing</h1>
-      <p className="mb-12 text-[#6F6F6F] dark:text-neutral-400">
+      <Heading className="mb-3">Writing</Heading>
+      <p className="mb-10 text-[#6F6F6F] dark:text-neutral-400">
         Infrequent written thoughts on technology, design and things in between.
       </p>
       <Separator className="mb-3" />

@@ -1,4 +1,5 @@
 import Container from '@/app/components/generic/Container';
+import Heading from '@/app/components/generic/Heading';
 import CustomLink from '@/app/components/ui/CustomLink';
 import { Metadata } from 'next';
 
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
 export default function Now() {
   return (
     <Container>
-      <h1 className="text-lg font-medium">Now</h1>
+      <Heading>Now</Heading>
       <section className="mb-12 mt-6 flex flex-col gap-6">
         <p>
           Dedicated to enhancing skill through hands-on, immersive exploration in art+technology.

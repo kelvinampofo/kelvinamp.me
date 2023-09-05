@@ -1,5 +1,6 @@
 import c from 'clsx';
 import CustomLink from '../ui/CustomLink';
+import Heading from './Heading';
 
 export default function Contact() {
   const contactLinks = [
@@ -22,7 +23,9 @@ export default function Contact() {
 
   return (
     <section>
-      <h2 className="mb-6 font-medium">Connect</h2>
+      <Heading level="h2" className="mb-6">
+        Connect
+      </Heading>
       <ul className="flex">
         {contactLinks.map(({ label, href, ariaLabel }, index) => (
           <li key={label} className="flex items-center">
