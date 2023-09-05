@@ -132,7 +132,7 @@ export default function Carousel() {
               'mr-2 rounded-sm text-neutral-600 hover:text-neutral-400 duration-150 dark:border-neutral-800 dark:text-neutral-300 dark:hover:text-neutral-400 disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600'
             )}
           >
-            <ChevronLeftIcon width={25} height={25} aria-label="Left chevron icon" />
+            <ChevronLeftIcon width={25} height={25} />
             <span className="sr-only">Previous slide</span>
           </button>
         </div>
@@ -168,7 +168,7 @@ export default function Carousel() {
               'ml-2 rounded-sm text-neutral-600 hover:text-neutral-400 duration-150 dark:border-neutral-800 dark:text-neutral-300 dark:hover:text-neutral-400 disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600'
             )}
           >
-            <ChevronRightIcon width={25} height={25} aria-label="Right chevron icon" />
+            <ChevronRightIcon width={25} height={25} />
             <span className="sr-only">Next slide</span>
           </button>
         </div>
