@@ -1,5 +1,6 @@
 'use client';
 
+import { getErrorMessage } from '@/app/lib/utils';
 import { Link2Icon } from '@radix-ui/react-icons';
 import { useEffect, useState } from 'react';
 import Tooltip from './Tooltip';
@@ -7,6 +8,7 @@ import Tooltip from './Tooltip';
 export default function CopyLinkButton() {
   const [copied, setCopied] = useState(false);
   const [currentUrl, setCurrentUrl] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -20,25 +22,27 @@ export default function CopyLinkButton() {
     };
 
     const timeout = setTimeout(resetCopied, 2500);
-
     return () => {
       clearTimeout(timeout);
     };
   }, [copied]);
 
-  // below code follows similar pattern from https://web.dev/patterns/clipboard/copy-text/
+  const handleErrorMessage = (error: unknown) => {
+    const errorMessage = getErrorMessage(error);
+    setErrorMessage(errorMessage);
+  };
+
+  // clipboard pattern adapted from https://web.dev/patterns/clipboard/copy-text/
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(currentUrl);
       setCopied(true);
     } catch (error) {
-      console.error('Failed to copy URL to clipboard: ', error);
-      // todo: show error feedback to the user
+      handleErrorMessage(error);
     }
   };
 
-  // fallback function if clipboard api is not supported
-  const handleFallbackCopy = () => {
+  const createTmpElement = () => {
     const tmpElement = document.createElement('textarea');
     tmpElement.value = window.location.href;
     tmpElement.setAttribute('readonly', '');
@@ -46,15 +50,24 @@ export default function CopyLinkButton() {
     document.body.appendChild(tmpElement);
     tmpElement.focus();
     tmpElement.select();
+    return tmpElement;
+  };
 
+  const copyTextToClipboard = (tmpElement: HTMLTextAreaElement) => {
     try {
+      tmpElement.select();
       document.execCommand('copy');
       setCopied(true);
     } catch (error) {
-      console.error('Failed to copy URL to clipboard: ', error);
-    } finally {
-      document.body.removeChild(tmpElement);
+      handleErrorMessage(error);
     }
+  };
+
+  // fallback if clipboard api is not supported
+  const handleFallbackCopy = () => {
+    const tmpElement = createTmpElement();
+    copyTextToClipboard(tmpElement);
+    document.body.removeChild(tmpElement);
   };
 
   const handleCopyUrl = () => {
@@ -69,9 +82,11 @@ export default function CopyLinkButton() {
     <Tooltip content="Copy URL">
       <button
         onClick={handleCopyUrl}
-        aria-label={copied ? 'Link copied' : 'Copy URL'}
+        aria-label={errorMessage ? errorMessage : copied ? 'Link copied' : 'Copy URL'}
       >
-        {copied ? (
+        {errorMessage ? (
+          errorMessage
+        ) : copied ? (
           'Link copied'
         ) : (
           <Link2Icon
