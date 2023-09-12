@@ -22,14 +22,14 @@ export default function Contact() {
   ];
 
   return (
-    <section>
+    <>
       <Heading level="h2" className="mb-6">
         Connect
       </Heading>
       <ul className="flex">
         {contactLinks.map(({ label, href, ariaLabel }, index) => (
           <li key={label} className="flex items-center">
-            <CustomLink href={href} ariaLabel={ariaLabel} underline>
+            <CustomLink href={href} ariaLabel={ariaLabel}>
               {label}
             </CustomLink>
             <span
@@ -43,6 +43,6 @@ export default function Contact() {
           </li>
         ))}
       </ul>
-    </section>
+    </>
   );
 }
