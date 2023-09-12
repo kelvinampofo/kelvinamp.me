@@ -80,7 +80,7 @@ export default async function Post({ params }: Props) {
     <Container className="lg:pt-20">
       <header className="flex flex-col justify-between gap-6">
         <span>
-          <CustomLink href="/writing" ariaLabel="go back to writing page" arrowIcon>
+          <CustomLink href="/writing" ariaLabel="go back to writing page" hideUnderline arrowIcon>
             Writing
           </CustomLink>
         </span>
@@ -96,7 +96,11 @@ export default async function Post({ params }: Props) {
       <hr className="my-8 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
       <nav className="flex list-none justify-between text-sm">
         {previousPost && (
-          <CustomLink href={`/writing/${previousPost.slug}`} ariaLabel="Previous post">
+          <CustomLink
+            href={`/writing/${previousPost.slug}`}
+            ariaLabel="Previous post"
+            hideUnderline
+          >
             <div className="flex flex-col gap-1">
               <ArrowLeftIcon className="text-[#6F6F6F] dark:text-neutral-400" />
               {previousPost.title}
@@ -106,7 +110,7 @@ export default async function Post({ params }: Props) {
         )}
         <div className="flex grow" /> {/* fill remaining space */}
         {nextPost && (
-          <CustomLink href={`/writing/${nextPost.slug}`} ariaLabel="Next post">
+          <CustomLink href={`/writing/${nextPost.slug}`} ariaLabel="Next post" hideUnderline>
             <div className="flex flex-col items-end gap-1">
               <ArrowRightIcon className="flex-1 text-[#6F6F6F] dark:text-neutral-400" />
               {nextPost.title}

@@ -49,7 +49,7 @@ export default function Page() {
     <Container className="lg:pt-20">
       <header className="flex flex-col justify-between gap-6">
         <span>
-          <CustomLink href="/craft" ariaLabel="go back to craft page" arrowIcon>
+          <CustomLink href="/craft" ariaLabel="go back to craft page" arrowIcon hideUnderline>
             Craft
           </CustomLink>
         </span>
