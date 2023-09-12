@@ -2,12 +2,11 @@ import type { Prototype } from '@/app/data/prototypes';
 import { isWithin1Month } from '@/app/lib/utils';
 import type { Post } from 'contentlayer/generated';
 import { compareDesc, format, parseISO } from 'date-fns';
-import { Fragment } from 'react';
 import Separator from '../generic/Separator';
 import CustomLink from './CustomLink';
 
 interface ListProps {
-  items: Array<Prototype | Post>;
+  items: (Post | Prototype)[];
   route: string;
 }
 
@@ -16,7 +15,7 @@ export default function List({ items, route }: ListProps) {
     <>
       {items
         .sort((a, b) => compareDesc(parseISO(a.publishedAt), parseISO(b.publishedAt)))
-        .map(({ _id, publishedAt, slug, title }) => {
+        .map(({ publishedAt, slug, title }) => {
           const publishedDate = parseISO(publishedAt);
 
           const isNewContent = isWithin1Month(publishedDate);
@@ -24,9 +23,13 @@ export default function List({ items, route }: ListProps) {
           const formattedDate = format(publishedDate, 'dd/MM/yy');
 
           return (
-            <Fragment key={_id}>
-              <CustomLink href={`/${route}/${slug}`}>
-                <div className="flex justify-between">
+            <ol key={title}>
+              <li>
+                <CustomLink
+                  href={`/${route}/${slug}`}
+                  hideUnderline
+                  className="flex justify-between"
+                >
                   <span className="flex font-medium">
                     {title}
                     {isNewContent && (
@@ -36,10 +39,10 @@ export default function List({ items, route }: ListProps) {
                     )}
                   </span>
                   <time className="text-[#6F6F6F] dark:text-neutral-400">{formattedDate}</time>
-                </div>
-              </CustomLink>
+                </CustomLink>
+              </li>
               <Separator className="my-3" />
-            </Fragment>
+            </ol>
           );
         })}
     </>
