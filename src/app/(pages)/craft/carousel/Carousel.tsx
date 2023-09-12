@@ -21,7 +21,7 @@ const slides = [
   {
     title: 'Kyoto Station',
     src: KyotoStationImage,
-    alt: 'Kyoto Station by Hiroshi Hara (1997)',
+    alt: 'Kyoto Station (1997)',
     author: 'Hiroshi Hara',
     isPriority: true
   },
@@ -68,8 +68,6 @@ export default function Carousel() {
     };
 
     document.addEventListener('mousemove', handleMouseMove);
-
-    // cleanup, remove event listener when component unmounts
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
     };
