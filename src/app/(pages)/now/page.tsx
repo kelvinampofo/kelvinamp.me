@@ -44,14 +44,8 @@ export default function Now() {
         </p>
         <p>
           Enjoying music that evokes strong emotions, reading{' '}
-          <CustomLink href="https://literal.club/kelvinamp" underline>
-            books
-          </CustomLink>
-          , sipping iced tea, watching Porsche videos&mdash;dream{' '}
-          <CustomLink href="https://configurator.porsche.com/porsche-code/PRFXXVN8" underline>
-            spec
-          </CustomLink>
-          .
+          <CustomLink href="https://literal.club/kelvinamp">books</CustomLink>, sipping iced tea,
+          watching Porsche videos.
         </p>
       </section>
       <span>
