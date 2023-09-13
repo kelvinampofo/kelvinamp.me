@@ -22,7 +22,7 @@ export default function Home() {
           </p>
           <p>
             Read further on{' '}
-            <CustomLink href="/now" ariaLabel="go to now page" underline>
+            <CustomLink href="/now" ariaLabel="go to now page">
               now
             </CustomLink>{' '}
             page.
@@ -31,12 +31,12 @@ export default function Home() {
         <nav>
           <ul className="flex flex-col gap-1">
             <li>
-              <CustomLink href="/craft" ariaLabel="go to craft page" underline>
+              <CustomLink href="/craft" ariaLabel="go to craft page">
                 Craft
               </CustomLink>
             </li>
             <li>
-              <CustomLink href="/writing" ariaLabel="go to writing page" underline>
+              <CustomLink href="/writing" ariaLabel="go to writing page">
                 Writing
               </CustomLink>
             </li>
