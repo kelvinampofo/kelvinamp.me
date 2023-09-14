@@ -34,19 +34,16 @@ export default function Now() {
           Dedicated to enhancing skill through hands-on, immersive exploration in art+technology.
         </p>
         <p>
-          For now, I <s>just</s> want to design and build software. Interactivity, typography,
-          motion, touch, optimisations, accessibility, design&mdash;an infinite canvas for
-          creativity and opportunity.
-        </p>
-        <p>
-          Separating identity from trivialities. Focused on creation. Thinking critically. Finding
-          joy in challenges. Meticulous about the details. Insatiably curious.
+          For now, I want to design and build software. Interactivity, typography, motion, touch,
+          optimisations, accessibility, design&mdash;an infinite canvas for creativity and
+          opportunity.
         </p>
         <p>
           Enjoying music that evokes strong emotions, reading{' '}
           <CustomLink href="https://literal.club/kelvinamp">books</CustomLink>, sipping iced tea,
           watching Porsche videos.
         </p>
+        <p>Separating identity from trivialities. Finding joy in challenges. Insatiably curious.</p>
       </section>
       <span>
         <CustomLink href="/" ariaLabel="go to home page" arrowIcon>
