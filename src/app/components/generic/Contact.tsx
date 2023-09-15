@@ -23,7 +23,7 @@ export default function Contact() {
 
   return (
     <>
-      <Heading level="h2" className="mb-6">
+      <Heading as="h2" className="mb-6">
         Connect
       </Heading>
       <ul className="flex">
