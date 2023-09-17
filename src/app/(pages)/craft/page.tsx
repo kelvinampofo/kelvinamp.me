@@ -38,7 +38,7 @@ export default function Craft() {
         Crafting interfaces, imbued with quality + play
       </p>
       <Separator className="mb-3" />
-      <List items={allPrototypes} route="craft" />
+      <List items={allPrototypes} route="craft" dateFormat="MM/yy" />
       <span className="mt-12">
         <CustomLink href="/" ariaLabel="go back to home page" arrowIcon>
           Back

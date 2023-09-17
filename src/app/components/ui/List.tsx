@@ -5,12 +5,15 @@ import { compareDesc, format, parseISO } from 'date-fns';
 import Separator from '../generic/Separator';
 import CustomLink from './CustomLink';
 
+type DateFormat = 'dd/MM/yy' | 'MM/yy' | 'yyyy';
+
 interface ListProps {
   items: (Post | Prototype)[];
   route: string;
+  dateFormat?: DateFormat;
 }
 
-export default function List({ items, route }: ListProps) {
+export default function List({ items, route, dateFormat = 'dd/MM/yy' }: ListProps) {
   return (
     <>
       {items
@@ -20,7 +23,7 @@ export default function List({ items, route }: ListProps) {
 
           const isNewContent = isWithin1Month(publishedDate);
 
-          const formattedDate = format(publishedDate, 'dd/MM/yy');
+          const formattedDate = format(publishedDate, dateFormat);
 
           return (
             <ol key={title}>
