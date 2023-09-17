@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import c from 'clsx';
 
 interface ContainerProps {
   children: React.ReactNode | React.ReactNode[];
@@ -6,10 +6,11 @@ interface ContainerProps {
 }
 
 export default function Container({ children, className }: ContainerProps) {
-  const classes = clsx(
-    'flex flex-col justify-center px-8 py-12 md:py-32 lg:px-10 lg:py-32',
-    className
+  return (
+    <div
+      className={c('flex flex-col justify-center px-8 py-12 md:py-32 lg:px-10 lg:py-32', className)}
+    >
+      {children}
+    </div>
   );
-
-  return <div className={classes}>{children}</div>;
 }

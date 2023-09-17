@@ -6,9 +6,9 @@ interface HeadingProps extends HTMLProps<HTMLHeadingElement> {
 }
 
 export default function Heading({ children, className, as = 'h1', ...rest }: HeadingProps) {
-  const fontSizeClass = as === 'h1' ? 'text-lg' : 'text-base';
-
   const HeadingTag = as;
+
+  const fontSizeClass = as === 'h1' ? 'text-lg' : 'text-base';
 
   return (
     <HeadingTag className={c('font-medium', fontSizeClass, className)} {...rest}>
