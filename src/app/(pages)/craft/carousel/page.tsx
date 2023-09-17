@@ -2,7 +2,7 @@ import Card from '@/app/components/generic/Card';
 import Container from '@/app/components/generic/Container';
 import CopyLinkButton from '@/app/components/ui/CopyLinkButton';
 import CustomLink from '@/app/components/ui/CustomLink';
-import { allPrototypes } from '@/app/data/prototypes';
+import { allPrototypes } from '@/app/lib/constants';
 import { format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
 import Balancer from 'react-wrap-balancer';

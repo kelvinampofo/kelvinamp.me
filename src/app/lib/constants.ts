@@ -2,7 +2,7 @@ import { compareAsc, parseISO } from 'date-fns';
 
 export type Prototype = {
   slug: string;
-  _id: number;
+  id: number;
   title: string;
   href: string;
   publishedAt: string;
@@ -10,10 +10,10 @@ export type Prototype = {
   image?: string | undefined;
 };
 
-export const allPrototypes: Array<Prototype> = [
+export const allPrototypes: Prototype[] = [
   {
     slug: '/carousel',
-    _id: 1,
+    id: 1,
     title: 'Carousel',
     href: '/carousel',
     publishedAt: '2023-08-19',
