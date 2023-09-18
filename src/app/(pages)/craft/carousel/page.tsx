@@ -57,7 +57,7 @@ export default function Page() {
           <Balancer>{title}</Balancer>
         </h1>
       </header>
-      <div className="flex justify-between text-sm text-[#6F6F6F] dark:text-neutral-400">
+      <div className="flex justify-between text-sm text-[#6F6F6F] dark:text-[#A0A0A0]">
         <time dateTime={publishedAt}>{format(parseISO(publishedAt), 'MMMM yyyy')}</time>
         <CopyLinkButton />
       </div>

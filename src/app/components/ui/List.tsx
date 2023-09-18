@@ -41,7 +41,7 @@ export default function List({ items, route, dateFormat = 'dd/MM/yy' }: ListProp
                       </span>
                     )}
                   </span>
-                  <time className="text-[#6F6F6F] dark:text-neutral-400">{formattedDate}</time>
+                  <time className="text-[#6F6F6F] dark:text-[#A0A0A0]">{formattedDate}</time>
                 </CustomLink>
               </li>
               <Separator className="my-3" />

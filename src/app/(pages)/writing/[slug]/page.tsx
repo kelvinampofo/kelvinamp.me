@@ -88,7 +88,7 @@ export default async function Post({ params }: Props) {
           <Balancer>{post.title}</Balancer>
         </h1>
       </header>
-      <div className="mb-3 flex justify-between text-sm text-[#6F6F6F] dark:text-neutral-400">
+      <div className="mb-3 flex justify-between text-sm text-[#6F6F6F] dark:text-[#A0A0A0]">
         <time dateTime={post.publishedAt}>{format(parseISO(post.publishedAt), 'dd MMM yyyy')}</time>
         <CopyLinkButton />
       </div>
@@ -102,7 +102,7 @@ export default async function Post({ params }: Props) {
             hideUnderline
           >
             <div className="flex flex-col gap-1">
-              <ArrowLeftIcon className="text-[#6F6F6F] dark:text-neutral-400" />
+              <ArrowLeftIcon className="text-[#6F6F6F] dark:text-[#A0A0A0]" />
               {previousPost.title}
               <span className="sr-only">Previous</span>
             </div>
@@ -112,7 +112,7 @@ export default async function Post({ params }: Props) {
         {nextPost && (
           <CustomLink href={`/writing/${nextPost.slug}`} ariaLabel="Next post" hideUnderline>
             <div className="flex flex-col items-end gap-1">
-              <ArrowRightIcon className="flex-1 text-[#6F6F6F] dark:text-neutral-400" />
+              <ArrowRightIcon className="flex-1 text-[#6F6F6F] dark:text-[#A0A0A0]" />
               {nextPost.title}
               <span className="sr-only">Next</span>
             </div>

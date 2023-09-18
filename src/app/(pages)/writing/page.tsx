@@ -35,7 +35,7 @@ export default function Writing() {
   return (
     <Container>
       <Heading className="mb-3">Writing</Heading>
-      <p className="mb-10 text-[#6F6F6F] dark:text-neutral-400">
+      <p className="mb-10 text-[#6F6F6F] dark:text-[#A0A0A0]">
         Infrequent written thoughts on technology, design and things in between.
       </p>
       <Separator className="mb-3" />
