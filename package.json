@@ -26,8 +26,8 @@
     "react-wrap-balancer": "^1.1.0"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.9",
-    "@types/node": "20.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/node": "20.6.2",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "^10.4.15",
@@ -35,12 +35,12 @@
     "eslint-config-next": "^13.4.19",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-tailwindcss": "^3.13.0",
-    "postcss": "^8.4.27",
+    "postcss": "^8.4.29",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.4",
     "rehype-autolink-headings": "^7.0.0",
     "rehype-pretty-code": "^0.10.1",
-    "remark-gfm": "^3.0.1",
+    "remark-gfm": "^4.0.0",
     "shiki": "^0.14.4",
     "tailwindcss": "^3.3.3",
     "typescript": "5.1.6"
