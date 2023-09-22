@@ -1,4 +1,4 @@
-import type { Prototype } from '@/app/lib/constants';
+import type { Prototype } from '@/app/lib/data';
 import { isWithin1Month } from '@/app/lib/utils';
 import type { Post } from 'contentlayer/generated';
 import { compareDesc, format, parseISO } from 'date-fns';

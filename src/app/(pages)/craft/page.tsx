@@ -3,7 +3,7 @@ import Heading from '@/app/components/generic/Heading';
 import Separator from '@/app/components/generic/Separator';
 import CustomLink from '@/app/components/ui/CustomLink';
 import List from '@/app/components/ui/List';
-import { allPrototypes } from '@/app/lib/constants';
+import { allPrototypes } from '@/app/lib/data';
 
 import { Metadata } from 'next';
 import React from 'react';
