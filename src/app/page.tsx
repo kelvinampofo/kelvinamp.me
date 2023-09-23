@@ -1,6 +1,6 @@
+import PageWrapper from '@/app/components/generic/AnimateEnter';
 import Contact from '@/app/components/generic/Contact';
 import Container from '@/app/components/generic/Container';
-import PageWrapper from '@/app/components/generic/PageWrapper';
 import CustomLink from '@/app/components/ui/CustomLink';
 import Heading from './components/generic/Heading';
 import Separator from './components/generic/Separator';
