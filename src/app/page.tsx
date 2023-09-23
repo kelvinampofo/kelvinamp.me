@@ -1,4 +1,4 @@
-import PageWrapper from '@/app/components/generic/AnimateEnter';
+import AnimateEnter from '@/app/components/generic/AnimateEnter';
 import Contact from '@/app/components/generic/Contact';
 import Container from '@/app/components/generic/Container';
 import CustomLink from '@/app/components/ui/CustomLink';
@@ -8,13 +8,13 @@ import Separator from './components/generic/Separator';
 export default function Home() {
   return (
     <Container>
-      <PageWrapper delay={0.4}>
+      <AnimateEnter delay={0.4}>
         <header>
           <Heading>Kelvin Ampofo</Heading>
           <p className="text-[#6F6F6F] dark:text-neutral-400">Software Engineer</p>
         </header>
-      </PageWrapper>
-      <PageWrapper delay={0.6}>
+      </AnimateEnter>
+      <AnimateEnter delay={0.6}>
         <section className="my-6 flex flex-col gap-6">
           <p>
             <em>Crafting interfaces</em> with a focus on design, human-computer interaction and
@@ -43,10 +43,10 @@ export default function Home() {
           </ul>
         </nav>
         <Separator className="my-12" />
-      </PageWrapper>
-      <PageWrapper delay={0.8}>
+      </AnimateEnter>
+      <AnimateEnter delay={0.8}>
         <Contact />
-      </PageWrapper>
+      </AnimateEnter>
     </Container>
   );
 }
