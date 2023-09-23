@@ -1,8 +1,8 @@
-import ThemeProvider from '@/app/components/generic/ThemeProvider';
 import '@/app/styles/globals.css';
 import c from 'clsx';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Providers from './providers';
 
 const interFont = Inter({
   subsets: ['latin'],
@@ -72,9 +72,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       className={c('scroll-smooth selection:bg-[#FFF9A8] selection:text-black', interFont.variable)}
     >
       <body className="mx-auto flex max-w-3xl flex-col text-sm text-[#161616] antialiased dark:bg-[#161616] dark:text-[#EDEDED] md:text-base lg:text-base">
-        <ThemeProvider>
+        <Providers>
           <main className="min-h-full">{children}</main>
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
