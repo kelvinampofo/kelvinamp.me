@@ -1,5 +1,7 @@
 import Container from '@/app/components/generic/Container';
+import Heading from '@/app/components/generic/Heading';
 import MDXContent from '@/app/components/generic/MDXComponents';
+import Separator from '@/app/components/generic/Separator';
 import CopyLinkButton from '@/app/components/ui/CopyLinkButton';
 import CustomLink from '@/app/components/ui/CustomLink';
 import '@/app/styles/prose.css';
@@ -84,16 +86,16 @@ export default async function Post({ params }: Props) {
             Writing
           </CustomLink>
         </span>
-        <h1 className="text-lg font-medium">
+        <Heading>
           <Balancer>{post.title}</Balancer>
-        </h1>
+        </Heading>
       </header>
       <div className="mb-3 flex justify-between text-sm text-[#6F6F6F] dark:text-[#A0A0A0]">
         <time dateTime={post.publishedAt}>{format(parseISO(post.publishedAt), 'dd MMM yyyy')}</time>
         <CopyLinkButton />
       </div>
       <MDXContent code={post.body.code} />
-      <hr className="my-8 h-px border-0 bg-neutral-200 dark:bg-neutral-800" />
+      <Separator className="my-8" />
       <nav className="flex list-none justify-between text-sm">
         {previousPost && (
           <CustomLink
