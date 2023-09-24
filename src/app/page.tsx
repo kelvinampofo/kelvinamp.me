@@ -4,6 +4,7 @@ import Container from '@/app/components/generic/Container';
 import CustomLink from '@/app/components/ui/CustomLink';
 import Heading from './components/generic/Heading';
 import Separator from './components/generic/Separator';
+import Text from './components/generic/Text';
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
       <AnimateEnter delay={0.4}>
         <header>
           <Heading>Kelvin Ampofo</Heading>
-          <p className="text-[#6F6F6F] dark:text-neutral-400">Software Engineer</p>
+          <Text colour="secondary">Software Engineer</Text>
         </header>
       </AnimateEnter>
       <AnimateEnter delay={0.6}>
