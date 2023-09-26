@@ -1,6 +1,7 @@
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
 import Separator from '@/app/components/generic/Separator';
+import Text from '@/app/components/generic/Text';
 import CustomLink from '@/app/components/ui/CustomLink';
 import List from '@/app/components/ui/List';
 import { allPosts } from 'contentlayer/generated';
@@ -35,9 +36,9 @@ export default function Writing() {
   return (
     <Container>
       <Heading className="mb-3">Writing</Heading>
-      <p className="mb-10 text-[#6F6F6F] dark:text-[#A0A0A0]">
+      <Text className="mb-10" colour="secondary">
         Infrequent written thoughts on technology, design and things in between.
-      </p>
+      </Text>
       <Separator className="mb-3" />
       <List items={allPosts} route="writing" />
       <span className="mt-12">

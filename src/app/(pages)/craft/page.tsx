@@ -1,6 +1,7 @@
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
 import Separator from '@/app/components/generic/Separator';
+import Text from '@/app/components/generic/Text';
 import CustomLink from '@/app/components/ui/CustomLink';
 import List from '@/app/components/ui/List';
 import { allPrototypes } from '@/app/lib/data';
@@ -35,9 +36,9 @@ export default function Craft() {
   return (
     <Container>
       <Heading className="mb-3">Craft</Heading>
-      <p className="mb-12 text-[#6F6F6F] dark:text-[#A0A0A0]">
+      <Text className="mb-12" colour="secondary">
         Crafting interfaces, imbued with quality + play
-      </p>
+      </Text>
       <Separator className="mb-3" />
       <List items={allPrototypes} route="craft" dateFormat="MM/yy" />
       <span className="mt-12">
