@@ -1,3 +1,5 @@
+'use client';
+
 import AnimateEnter from '@/app/components/generic/AnimateEnter';
 import Contact from '@/app/components/generic/Contact';
 import Container from '@/app/components/generic/Container';
@@ -5,8 +7,11 @@ import CustomLink from '@/app/components/ui/CustomLink';
 import Heading from './components/generic/Heading';
 import Separator from './components/generic/Separator';
 import Text from './components/generic/Text';
+import useTime from './hooks/useTime';
 
 export default function Home() {
+  const currentTime = useTime();
+
   return (
     <Container>
       <AnimateEnter delay={0.4}>
@@ -47,6 +52,11 @@ export default function Home() {
       </AnimateEnter>
       <AnimateEnter delay={0.8}>
         <Contact />
+      </AnimateEnter>
+      <AnimateEnter delay={1}>
+        <Text as="div" colour="secondary" className="mt-20" size="small">
+          {currentTime}
+        </Text>
       </AnimateEnter>
     </Container>
   );
