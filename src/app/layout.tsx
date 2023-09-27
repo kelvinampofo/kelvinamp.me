@@ -71,9 +71,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
       lang="en"
       className={c('scroll-smooth selection:bg-[#FFF9A8] selection:text-black', interFont.variable)}
     >
-      <body className="mx-auto flex max-w-3xl flex-col text-sm text-[#161616] antialiased dark:bg-[#161616] dark:text-[#EDEDED] md:text-base lg:text-base">
+      <body className="text-sm text-primary antialiased dark:bg-primary dark:text-primary-dark md:text-base lg:text-base">
         <Providers>
-          <main className="min-h-full">{children}</main>
+          <main className="mx-auto min-h-full max-w-3xl pb-page-bottom-mobile pt-page-top-mobile md:pb-page-bottom md:pt-page-top">
+            {children}
+          </main>
         </Providers>
       </body>
     </html>
