@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --page-top-mobile: 4rem;
+    --page-top: 8rem;
+    --page-bottom-mobile: 4rem;
+    --page-bottom: 8rem;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
