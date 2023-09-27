@@ -6,11 +6,5 @@ interface ContainerProps {
 }
 
 export default function Container({ children, className }: ContainerProps) {
-  return (
-    <div
-      className={c('flex flex-col justify-center px-8 py-12 md:py-32 lg:px-10 lg:py-32', className)}
-    >
-      {children}
-    </div>
-  );
+  return <div className={c('flex flex-col justify-center px-8', className)}>{children}</div>;
 }
