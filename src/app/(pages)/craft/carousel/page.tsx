@@ -46,7 +46,7 @@ export default function Page() {
   const { title, publishedAt, summary } = carouselPrototype;
 
   return (
-    <Container className="lg:pt-20">
+    <Container>
       <header className="flex flex-col justify-between gap-6">
         <span>
           <CustomLink href="/craft" ariaLabel="go back to craft page" arrowIcon hideUnderline>

@@ -79,7 +79,7 @@ export default async function Post({ params }: Props) {
   const nextPost = allPosts[currentIndex + 1];
 
   return (
-    <Container className="lg:pt-20">
+    <Container>
       <header className="flex flex-col justify-between gap-6">
         <span>
           <CustomLink href="/writing" ariaLabel="go back to writing page" hideUnderline arrowIcon>

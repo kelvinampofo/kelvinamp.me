@@ -1,5 +1,5 @@
 import { ArrowTopLeftIcon } from '@radix-ui/react-icons';
-import clsx from 'clsx';
+import c from 'clsx';
 import Link from 'next/link';
 
 export interface CustomLinkProps {
@@ -25,11 +25,11 @@ export default function CustomLink({
     hideUnderline = true;
   }
 
-  const classes = clsx(
+  const classes = c(
     className,
     !hideUnderline &&
       'underline decoration-neutral-300 decoration-1 underline-offset-[2.5px] dark:decoration-[#505050]',
-    'duration-150 ease-linear hover:text-[#6F6F6F] dark:hover:text-[#A0A0A0]'
+    'transition-colors hover:text-secondary dark:hover:text-secondary-dark'
   );
 
   if (isInternalLink) {
