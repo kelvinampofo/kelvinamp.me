@@ -4,6 +4,18 @@ export default {
   content: ['./src/**/*.{ts,tsx}', './content/**/*.{md,mdx}'],
   theme: {
     extend: {
+      colors: {
+        primary: '#161616',
+        'primary-dark': '#EDEDED',
+        secondary: '#6F6F6F',
+        'secondary-dark': '#A0A0A0'
+      },
+      spacing: {
+        'page-top': 'var(--page-top)',
+        'page-top-mobile': 'var(--page-top-mobile)',
+        'page-bottom': 'var(--page-bottom)',
+        'page-bottom-mobile': 'var(--page-bottom-mobile)'
+      },
       fontFamily: {
         sans: ['var(--font-inter)']
       },
