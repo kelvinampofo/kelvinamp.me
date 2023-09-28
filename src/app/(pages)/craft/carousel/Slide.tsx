@@ -11,7 +11,7 @@ interface SlideProps {
 export default function Slide({ title, image, alt, author, isPriority }: SlideProps) {
   return (
     <li className="relative mr-5 w-[250px] shrink-0 overscroll-x-contain bg-white text-center transition-all last:mr-0 md:w-[450px] md:snap-start md:snap-always lg:w-[450px] lg:snap-start lg:snap-always">
-      <figure>
+      <figure role="group">
         <Image
           src={image}
           alt={alt}
