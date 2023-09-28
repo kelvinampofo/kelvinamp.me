@@ -3,11 +3,11 @@
 import AnimateEnter from '@/app/components/generic/AnimateEnter';
 import Contact from '@/app/components/generic/Contact';
 import Container from '@/app/components/generic/Container';
+import Heading from '@/app/components/generic/Heading';
+import Separator from '@/app/components/generic/Separator';
+import Text from '@/app/components/generic/Text';
 import CustomLink from '@/app/components/ui/CustomLink';
-import Heading from './components/generic/Heading';
-import Separator from './components/generic/Separator';
-import Text from './components/generic/Text';
-import useTime from './hooks/useTime';
+import useTime from '@/app/hooks/useTime';
 
 export default function Home() {
   const currentTime = useTime();
@@ -17,11 +17,13 @@ export default function Home() {
       <AnimateEnter delay={0.4}>
         <header>
           <Heading>Kelvin Ampofo</Heading>
-          <Text colour="secondary">Software Engineer</Text>
+          <Text as="span" colour="secondary">
+            Software Engineer
+          </Text>
         </header>
       </AnimateEnter>
       <AnimateEnter delay={0.6}>
-        <section className="my-6 flex flex-col gap-6">
+        <section className="my-6 flex flex-col gap-6" aria-label="introduction">
           <p>
             <em>Crafting interfaces</em> with a focus on design, human-computer interaction and
             architecture. Currently working in digital banking.
@@ -54,7 +56,7 @@ export default function Home() {
         <Contact />
       </AnimateEnter>
       <AnimateEnter delay={1}>
-        <Text as="div" colour="secondary" className="mt-16" size="small">
+        <Text as="div" colour="secondary" size="small" className="mt-16">
           {currentTime}
         </Text>
       </AnimateEnter>
