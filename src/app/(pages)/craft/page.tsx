@@ -40,7 +40,7 @@ export default function Craft() {
         Crafting interfaces, imbued with quality + play
       </Text>
       <Separator className="mb-3" />
-      <List items={allPrototypes} route="craft" dateFormat="MM/yy" />
+      <List items={allPrototypes} route="craft" showSummary />
       <span className="mt-12">
         <CustomLink href="/" ariaLabel="go back to home page" arrowIcon>
           Back

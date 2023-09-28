@@ -40,7 +40,7 @@ export default function Writing() {
         Infrequent written thoughts on technology, design and things in between.
       </Text>
       <Separator className="mb-3" />
-      <List items={allPosts} route="writing" />
+      <List items={allPosts} route="writing" showDate />
       <span className="mt-12">
         <CustomLink href="/" ariaLabel="go back to home page" arrowIcon>
           Back
