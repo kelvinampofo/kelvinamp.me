@@ -23,7 +23,7 @@ export default function Home() {
         </header>
       </AnimateEnter>
       <AnimateEnter delay={0.6}>
-        <section className="my-6 flex flex-col gap-6" aria-label="introduction">
+        <section className="my-6 flex flex-col gap-6">
           <p>
             <em>Crafting interfaces</em> with a focus on design, human-computer interaction and
             architecture. Currently working in digital banking.

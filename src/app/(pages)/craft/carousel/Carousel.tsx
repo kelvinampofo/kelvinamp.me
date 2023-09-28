@@ -122,7 +122,7 @@ export default function Carousel() {
   return (
     <>
       {isPointerDevice && (
-        <div className="flex items-center">
+        <div className="flex items-center" aria-hidden>
           <button
             onClick={() => handleSlideChange(currentSlide - 1)}
             disabled={currentSlide === 0}
@@ -158,7 +158,7 @@ export default function Carousel() {
         ))}
       </ul>
       {isPointerDevice && (
-        <div className="flex items-center">
+        <div className="flex items-center" aria-hidden>
           <button
             onClick={() => handleSlideChange(currentSlide + 1)}
             disabled={hasReachedEndOfSlide()}
