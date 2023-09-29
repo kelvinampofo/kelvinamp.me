@@ -12,7 +12,9 @@ export default {
       },
       spacing: {
         'page-top': 'var(--page-top)',
-        'page-top-mobile': 'var(--page-top-mobile)'
+        'page-top-mobile': 'var(--page-top-mobile)',
+        'page-bottom': 'var(--page-bottom)',
+        'page-bottom-mobile': 'var(--page-bottom-mobile)'
       },
       fontFamily: {
         sans: ['var(--font-inter)']
