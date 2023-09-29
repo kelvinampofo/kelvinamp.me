@@ -25,7 +25,7 @@ export default function useTime() {
   if (isClient) {
     return (
       <div className="flex">
-        <span className="w-[3.2rem] md:w-[3.8rem]">{formattedTime}</span>
+        <span className="w-[3.5rem] md:w-[4rem]">{formattedTime}</span>
         <span>{period}</span>
       </div>
     );
