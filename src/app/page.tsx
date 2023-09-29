@@ -56,7 +56,7 @@ export default function Home() {
         <Contact />
       </AnimateEnter>
       <AnimateEnter delay={1}>
-        <Text as="div" colour="secondary" size="small" className="mt-16">
+        <Text as="div" colour="secondary" size="small" className="mt-12">
           {currentTime}
         </Text>
       </AnimateEnter>
