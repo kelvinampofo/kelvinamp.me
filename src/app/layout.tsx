@@ -73,7 +73,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     >
       <body className="text-sm text-primary antialiased dark:bg-primary dark:text-primary-dark md:text-base lg:text-base">
         <Providers>
-          <main className="mx-auto min-h-full max-w-3xl pb-page-bottom-mobile pt-page-top-mobile md:pb-page-bottom md:pt-page-top">
+          <main className="mx-auto min-h-full max-w-3xl pt-page-top-mobile md:pt-page-top">
             {children}
           </main>
         </Providers>
