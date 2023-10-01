@@ -90,7 +90,7 @@ export default function CopyLinkButton() {
           'Link copied'
         ) : (
           <Link2Icon
-            className="text-[#6F6F6F] duration-200 ease-linear hover:text-[#6F6F6F] dark:text-[#A0A0A0] dark:hover:text-[#EDEDED]"
+            className="text-[#6F6F6F] transition-colors hover:text-[#6F6F6F] dark:text-[#A0A0A0] dark:hover:text-[#EDEDED]"
             width={18}
             height={18}
             aria-label="Link icon"
