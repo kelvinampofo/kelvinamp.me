@@ -1,5 +1,6 @@
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
+import Text from '@/app/components/generic/Text';
 import CustomLink from '@/app/components/ui/CustomLink';
 import { Metadata } from 'next';
 
@@ -29,22 +30,25 @@ export default function Now() {
   return (
     <Container>
       <Heading>Now</Heading>
-      <section className="mb-12 mt-6 flex flex-col gap-6">
-        <p>
+      <section className="mb-8 mt-6 flex flex-col gap-6">
+        <Text>
           Dedicated to enhancing skill through hands-on, immersive exploration in art+technology.
-        </p>
-        <p>
+        </Text>
+        <Text>
           For now, I want to design and build software. Interactivity, typography, motion, touch,
           optimisations, accessibility, design&mdash;an infinite canvas for creativity and
           opportunity.
-        </p>
-        <p>
-          Enjoying music that evokes strong emotions, reading{' '}
-          <CustomLink href="https://literal.club/kelvinamp">books</CustomLink>, sipping iced tea,
-          watching Porsche videos.
-        </p>
-        <p>Separating identity from trivialities. Finding joy in challenges. Insatiably curious.</p>
+        </Text>
+        <Text>
+          Code+design pursuits aside, enjoying music that evokes strong emotions, reading{' '}
+          <CustomLink href="https://literal.club/kelvinamp">books</CustomLink>, watching Porsche
+          videos.
+        </Text>
+        <Text>Speaking less, unless I can improve the silence.</Text>
       </section>
+      <Text colour="secondary" size="small" className="mb-12">
+        Updated <time dateTime="2023-10-02">October 02, 2023</time>
+      </Text>
       <span>
         <CustomLink href="/" ariaLabel="go to home page" arrowIcon>
           Back
