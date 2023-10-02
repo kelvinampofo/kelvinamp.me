@@ -1,11 +1,9 @@
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
 import MDXContent from '@/app/components/generic/MDXComponents';
-import Separator from '@/app/components/generic/Separator';
 import CopyLinkButton from '@/app/components/ui/CopyLinkButton';
 import CustomLink from '@/app/components/ui/CustomLink';
 import '@/app/styles/prose.css';
-import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
 import { allPosts } from 'contentlayer/generated';
 import { format, parseISO } from 'date-fns';
 import type { Metadata } from 'next';
@@ -82,12 +80,6 @@ export default async function Post({ params }: Props) {
     body: { code }
   } = post;
 
-  const filteredPosts = allPosts.filter((p) => p.publishedAt <= post.publishedAt);
-
-  const currentIndex = filteredPosts.findIndex((post) => post.slug === slug);
-  const previousPost = currentIndex > 0 ? filteredPosts[currentIndex - 1] : null;
-  const nextPost = currentIndex < filteredPosts.length - 1 ? filteredPosts[currentIndex + 1] : null;
-
   return (
     <Container>
       <header className="flex flex-col justify-between gap-6">
@@ -105,32 +97,6 @@ export default async function Post({ params }: Props) {
         <CopyLinkButton />
       </div>
       <MDXContent code={code} />
-      <Separator className="my-8" />
-      <nav className="flex list-none justify-between text-sm">
-        {previousPost && (
-          <CustomLink
-            href={`/writing/${previousPost.slug}`}
-            ariaLabel="Previous post"
-            hideUnderline
-          >
-            <div className="flex flex-col gap-1">
-              <ArrowLeftIcon className="text-[#6F6F6F] dark:text-[#A0A0A0]" />
-              {previousPost.title}
-              <span className="sr-only">Previous</span>
-            </div>
-          </CustomLink>
-        )}
-        <div className="flex grow" /> {/* fill remaining space */}
-        {nextPost && (
-          <CustomLink href={`/writing/${nextPost.slug}`} ariaLabel="Next post" hideUnderline>
-            <div className="flex flex-col items-end gap-1">
-              <ArrowRightIcon className="flex-1 text-[#6F6F6F] dark:text-[#A0A0A0]" />
-              {nextPost.title}
-              <span className="sr-only">Next</span>
-            </div>
-          </CustomLink>
-        )}
-      </nav>
     </Container>
   );
 }
