@@ -82,9 +82,11 @@ export default async function Post({ params }: Props) {
     body: { code }
   } = post;
 
-  const currentIndex = allPosts.findIndex((post) => post.slug === slug);
-  const previousPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
-  const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+  const filteredPosts = allPosts.filter((p) => p.publishedAt <= post.publishedAt);
+
+  const currentIndex = filteredPosts.findIndex((post) => post.slug === slug);
+  const previousPost = currentIndex > 0 ? filteredPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex < filteredPosts.length - 1 ? filteredPosts[currentIndex + 1] : null;
 
   return (
     <Container>
