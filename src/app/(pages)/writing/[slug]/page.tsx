@@ -68,15 +68,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata | un
 }
 
 export default async function Post({ params }: Props) {
-  const post = allPosts.find((post) => post.slug === params.slug);
+  const { slug } = params;
+
+  const post = allPosts.find((post) => post.slug === slug);
 
   if (!post) {
     notFound();
   }
 
-  const currentIndex = allPosts.findIndex((post) => post.slug === params.slug);
-  const previousPost = allPosts[currentIndex - 1];
-  const nextPost = allPosts[currentIndex + 1];
+  const {
+    title,
+    publishedAt,
+    body: { code }
+  } = post;
+
+  const currentIndex = allPosts.findIndex((post) => post.slug === slug);
+  const previousPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
 
   return (
     <Container>
@@ -87,14 +95,14 @@ export default async function Post({ params }: Props) {
           </CustomLink>
         </span>
         <Heading>
-          <Balancer>{post.title}</Balancer>
+          <Balancer>{title}</Balancer>
         </Heading>
       </header>
       <div className="mb-3 flex justify-between text-sm text-[#6F6F6F] dark:text-[#A0A0A0]">
-        <time dateTime={post.publishedAt}>{format(parseISO(post.publishedAt), 'dd MMM yyyy')}</time>
+        <time dateTime={publishedAt}>{format(parseISO(publishedAt), 'dd MMM yyyy')}</time>
         <CopyLinkButton />
       </div>
-      <MDXContent code={post.body.code} />
+      <MDXContent code={code} />
       <Separator className="my-8" />
       <nav className="flex list-none justify-between text-sm">
         {previousPost && (
