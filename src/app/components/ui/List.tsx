@@ -44,7 +44,7 @@ export default function List({ items, route, showDate, showSummary }: ListProps)
                   </span>
                   {showDate && (
                     <Text as="span" colour="secondary">
-                      {formattedDate}
+                      <time dateTime={publishedAt}>{formattedDate}</time>
                     </Text>
                   )}
                   {showSummary && (
