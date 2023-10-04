@@ -67,10 +67,7 @@ export interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html
-      lang="en"
-      className={c('scroll-smooth selection:bg-[#FFF9A8] selection:text-black', interFont.variable)}
-    >
+    <html lang="en" className={c('scroll-smooth', interFont.variable)}>
       <body className="text-sm text-primary antialiased dark:bg-primary dark:text-primary-dark md:text-base lg:text-base">
         <Providers>
           <main className="mx-auto min-h-full max-w-3xl pb-page-bottom-mobile pt-page-top-mobile md:pb-page-bottom md:pt-page-top">

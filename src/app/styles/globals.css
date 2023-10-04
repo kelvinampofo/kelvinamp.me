@@ -3,46 +3,57 @@
 @tailwind utilities;
 
 @layer base {
+  ::selection {
+    background-color: #fff9a8;
+    color: #000000;
+  }
+
   :root {
     --page-top-mobile: 4rem;
     --page-top: 8rem;
     --page-bottom-mobile: 1.5rem;
     --page-bottom: 3rem;
+    --selection-color: #fff9a8;
   }
-}
 
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
+  :focus,
+  :focus-visible {
+    outline-color: #f59e0b;
+  }
 
-::-webkit-scrollbar-thumb {
-  border-radius: 15px;
-  width: auto;
-  height: 20px;
-}
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 10px;
-}
-
-@media (prefers-color-scheme: dark) {
   ::-webkit-scrollbar-thumb {
-    background: #404040;
+    border-radius: 15px;
+    width: auto;
+    height: 20px;
   }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: #525252;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  ::-webkit-scrollbar-thumb {
-    background: #a3a3a3;
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
   }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: #d4d4d4;
+  @media (prefers-color-scheme: dark) {
+    ::-webkit-scrollbar-thumb {
+      background: #404040;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #525252;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    ::-webkit-scrollbar-thumb {
+      background: #a3a3a3;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #d4d4d4;
+    }
   }
 }
