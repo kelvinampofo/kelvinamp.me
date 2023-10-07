@@ -1,8 +1,10 @@
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import CustomLink from '../ui/CustomLink';
+import Heading from './Heading';
 
 const MDXComponents = {
-  a: CustomLink
+  a: CustomLink,
+  Heading
 };
 
 interface MdxProps {
