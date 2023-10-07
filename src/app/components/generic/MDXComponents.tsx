@@ -1,10 +1,9 @@
+import c from 'clsx';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import CustomLink from '../ui/CustomLink';
-import Heading from './Heading';
 
 const MDXComponents = {
-  a: CustomLink,
-  Heading
+  a: CustomLink
 };
 
 interface MdxProps {
@@ -15,7 +14,11 @@ export default function MDX({ code }: MdxProps) {
   const MDXContent = useMDXComponent(code);
 
   return (
-    <article className="prose prose-sm md:prose-base lg:prose-base">
+    <article
+      className={c(
+        'prose prose-sm md:prose-base prose-headings:font-medium prose-headings:text-primary prose-h2:text-base dark:prose-headings:text-primary-dark'
+      )}
+    >
       <MDXContent components={{ ...MDXComponents }} />
     </article>
   );
