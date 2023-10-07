@@ -48,11 +48,11 @@ export default function Page() {
   return (
     <Container>
       <header className="flex flex-col justify-between gap-6">
-        <span>
+        <div>
           <CustomLink href="/craft" ariaLabel="go back to craft page" arrowIcon hideUnderline>
             Craft
           </CustomLink>
-        </span>
+        </div>
         <h1 className="text-lg font-medium">
           <Balancer>{title}</Balancer>
         </h1>

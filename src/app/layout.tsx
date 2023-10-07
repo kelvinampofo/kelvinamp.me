@@ -2,6 +2,7 @@ import '@/app/styles/globals.css';
 import c from 'clsx';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import type { ReactNode } from 'react';
 import Providers from './providers';
 
 const interFont = Inter({
@@ -62,7 +63,7 @@ export const metadata: Metadata = {
 };
 
 export interface RootLayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {

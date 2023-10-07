@@ -39,8 +39,8 @@ export default function CustomLink({
           <ArrowTopLeftIcon
             className="mr-1 inline-flex items-center"
             aria-label="Arrow Top Left icon"
-            width={18}
-            height={18}
+            width={15}
+            height={15}
           />
         )}
         {children}
