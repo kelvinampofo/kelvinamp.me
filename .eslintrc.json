@@ -1,7 +1,14 @@
 {
-  "extends": ["next", "plugin:tailwindcss/recommended", "prettier"],
-  "plugins": ["tailwindcss"],
+  "extends": [
+    "next",
+    "plugin:tailwindcss/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["tailwindcss", "@typescript-eslint"],
   "rules": {
+    "@typescript-eslint/no-explicit-any": 0,
     "no-unused-vars": 1,
     "no-console": 1
   }
