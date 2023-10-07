@@ -3,10 +3,10 @@
 import usePointerDevice from '@/app/hooks/usePointerDevice';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import c from 'clsx';
-import CentralLibraryImage from 'public/assets/carousel/central-library.webp';
-import AliyevCenterImage from 'public/assets/carousel/heydar-aliyev-center.webp';
-import KyotoStationImage from 'public/assets/carousel/kyoto-station.webp';
-import ConcertHallImage from 'public/assets/carousel/walt-disney-concert-hall.webp';
+import CentralLibraryImage from 'public/assets/images/carousel/central-library.webp';
+import AliyevCenterImage from 'public/assets/images/carousel/heydar-aliyev-center.webp';
+import KyotoStationImage from 'public/assets/images/carousel/kyoto-station.webp';
+import ConcertHallImage from 'public/assets/images/carousel/walt-disney-concert-hall.webp';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Slide from './Slide';
 
