@@ -14,9 +14,15 @@ export default function AnimateEnter({ children, delay = 0 }: AnimateEnterProps)
     setIsClient(true);
   }, []);
 
-  return isClient && prefersReducedMotion ? (
-    children
-  ) : (
+  if (isClient) {
+    if (prefersReducedMotion) {
+      return children;
+    }
+  } else {
+    return null;
+  }
+
+  return (
     <LazyMotion features={domAnimation}>
       <m.div
         initial={{ opacity: 0, y: 20 }}
