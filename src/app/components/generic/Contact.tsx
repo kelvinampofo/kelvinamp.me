@@ -7,17 +7,17 @@ export default function Contact() {
     {
       label: '@kelvinamp_',
       href: 'https://x.com/kelvinamp_',
-      ariaLabel: 'Go to @kelvinamp_ twitter profile'
+      ariaLabel: 'go to @kelvinamp_ twitter profile'
     },
     {
       label: 'GitHub',
       href: 'https://github.com/kelvinampofo',
-      ariaLabel: 'Go to GitHub profile'
+      ariaLabel: 'go to github profile'
     },
     {
       label: 'Email',
       href: 'mailto:k@kelvinamp.me',
-      ariaLabel: 'Email Kelvin Ampofo'
+      ariaLabel: 'email kelvin ampofo'
     }
   ];
 
@@ -28,13 +28,13 @@ export default function Contact() {
       </Heading>
       <ul className="flex">
         {contactLinks.map(({ label, href, ariaLabel }, index) => (
-          <li key={label} className="flex items-center">
+          <li key={label}>
             <CustomLink href={href} ariaLabel={ariaLabel}>
               {label}
             </CustomLink>
             <span
               className={c(
-                'mx-1 dark:text-neutral-400',
+                'mx-1 dark:text-secondary-dark',
                 index === contactLinks.length - 1 && 'hidden'
               )}
             >
