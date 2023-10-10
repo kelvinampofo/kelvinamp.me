@@ -17,7 +17,8 @@ export default {
         'page-bottom-mobile': 'var(--page-bottom-mobile)'
       },
       fontFamily: {
-        sans: ['var(--font-inter)']
+        sans: ['var(--font-inter)'],
+        mono: ['var(--font-ibm-plex-mono)']
       },
       animation: {
         slideUp: 'slideUpAnimation 0.25s ease-in-out',

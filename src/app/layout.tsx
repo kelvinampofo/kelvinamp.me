@@ -1,13 +1,19 @@
 import '@/app/styles/globals.css';
 import c from 'clsx';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { IBM_Plex_Mono, Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 import Providers from './providers';
 
 const interFont = Inter({
   subsets: ['latin'],
   variable: '--font-inter'
+});
+
+const jetBrainsFont = IBM_Plex_Mono({
+  subsets: ['latin'],
+  variable: '--font-ibm-plex-mono',
+  weight: '400'
 });
 
 export const metadata: Metadata = {
@@ -68,7 +74,7 @@ export interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className={c('scroll-smooth', interFont.variable)}>
+    <html lang="en" className={c('scroll-smooth', interFont.variable, jetBrainsFont.variable)}>
       <body className="text-sm text-primary antialiased dark:bg-primary dark:text-primary-dark md:text-base lg:text-base">
         <Providers>
           <main className="mx-auto min-h-full max-w-3xl pb-page-bottom-mobile pt-page-top-mobile md:pb-page-bottom md:pt-page-top">
