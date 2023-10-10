@@ -10,7 +10,7 @@ import CustomLink from '@/app/components/ui/CustomLink';
 import useTime from '@/app/hooks/useTime';
 
 export default function Home() {
-  const currentTime = useTime();
+  const { formattedTime } = useTime();
 
   return (
     <Container>
@@ -56,8 +56,8 @@ export default function Home() {
         <Contact />
       </AnimateEnter>
       <AnimateEnter delay={1}>
-        <Text as="div" colour="secondary" size="small" className="mt-12 flex">
-          {currentTime}
+        <Text as="div" colour="secondary" size="small" className="mt-20 font-mono">
+          {formattedTime}
         </Text>
       </AnimateEnter>
     </Container>

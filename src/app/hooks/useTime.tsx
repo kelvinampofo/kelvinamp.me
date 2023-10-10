@@ -5,25 +5,22 @@ export default function useTime() {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      const newTime = new Date();
-      if (newTime.getSeconds() !== currentTime.getSeconds()) {
-        setCurrentTime(newTime);
-      }
-    }, 1000);
+    /*
+     * Using requestAnimationFrame for better performance and synchronisation with the browser's rendering cycle.
+     */
+    const updateCurrentTime = () => {
+      setCurrentTime(new Date());
+      window.requestAnimationFrame(updateCurrentTime);
+    };
+
+    const timer = setTimeout(updateCurrentTime, 1000);
 
     return () => {
-      clearInterval(timer);
+      clearTimeout(timer);
     };
-  }, [currentTime]);
+  }, []);
 
-  const formattedTime = format(currentTime, 'HH:mm:ss');
-  const timePeriod = currentTime.getHours() >= 12 ? 'PM' : 'AM';
+  const formattedTime = format(currentTime, 'HH:mm:ss a');
 
-  return (
-    <>
-      <span className="w-[3.2rem] md:w-[3.8rem]">{formattedTime}</span>
-      <span>{timePeriod}</span>
-    </>
-  );
+  return { formattedTime };
 }
