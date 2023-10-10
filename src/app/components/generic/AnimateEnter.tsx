@@ -14,6 +14,9 @@ export default function AnimateEnter({ children, delay = 0 }: AnimateEnterProps)
     setIsClient(true);
   }, []);
 
+  /*
+   * This is to ensure the component is rendered consistently on both the server and the client, resolving hydration errors.
+   */
   if (isClient) {
     if (prefersReducedMotion) {
       return children;
