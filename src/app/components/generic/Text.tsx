@@ -6,7 +6,7 @@ interface TextProps
   as?: 'p' | 'div' | 'span';
   weight?: 'regular' | 'medium' | 'bold';
   colour?: 'primary' | 'secondary';
-  size?: 'small' | 'normal' | 'large';
+  size?: 'xsmall' | 'small' | 'normal' | 'large';
 }
 
 export default function Text({
@@ -31,9 +31,10 @@ export default function Text({
   );
 
   const sizeClasses = c(
-    size === 'small' && 'text-xs md:text-sm',
-    size === 'normal' && 'md:text-base',
-    size === 'large' && 'md:text-lg'
+    size === 'xsmall' && 'text-xs',
+    size === 'small' && 'text-sm',
+    size === 'normal' && 'text-base',
+    size === 'large' && 'text-lg'
   );
 
   return <Tag className={c(weightClasses, colourClasses, sizeClasses, className)}>{children}</Tag>;
