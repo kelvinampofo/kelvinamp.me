@@ -18,7 +18,7 @@ export default {
       },
       fontFamily: {
         sans: ['var(--font-inter)'],
-        mono: ['var(--font-ibm-plex-mono)']
+        mono: ['var(--font-roboto)']
       },
       animation: {
         slideUp: 'slideUpAnimation 0.25s ease-in-out',
