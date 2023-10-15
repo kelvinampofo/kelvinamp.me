@@ -7,10 +7,11 @@ import Heading from '@/app/components/generic/Heading';
 import Separator from '@/app/components/generic/Separator';
 import Text from '@/app/components/generic/Text';
 import CustomLink from '@/app/components/ui/CustomLink';
+import Tooltip from '@/app/components/ui/Tooltip';
 import useTime from '@/app/hooks/useTime';
 
 export default function Home() {
-  const { formattedTime } = useTime();
+  const { currentTime, timezoneOffset } = useTime();
 
   return (
     <Container>
@@ -56,9 +57,11 @@ export default function Home() {
         <Contact />
       </AnimateEnter>
       <AnimateEnter delay={1}>
-        <Text as="div" colour="secondary" size="xsmall" className="mt-16 font-mono">
-          {formattedTime}
-        </Text>
+        <Tooltip content={timezoneOffset} className="mt-16">
+          <button className="cursor-auto font-mono text-xs text-secondary dark:text-secondary-dark">
+            {currentTime}
+          </button>
+        </Tooltip>
       </AnimateEnter>
     </Container>
   );
