@@ -92,8 +92,10 @@ export default async function Post({ params }: Props) {
           <Balancer>{title}</Balancer>
         </Heading>
       </header>
-      <div className="mb-3 flex justify-between text-sm text-[#6F6F6F] dark:text-[#A0A0A0]">
-        <time dateTime={publishedAt}>{format(parseISO(publishedAt), 'dd MMM yyyy')}</time>
+      <div className="mb-3 flex justify-between text-sm">
+        <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
+          {format(parseISO(publishedAt), 'dd MMM yyyy')}
+        </time>
         <CopyLinkButton />
       </div>
       <MDXContent code={code} />
