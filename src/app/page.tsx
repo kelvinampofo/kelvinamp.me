@@ -1,11 +1,11 @@
 'use client';
 
 import AnimateEnter from '@/app/components/generic/AnimateEnter';
-import Contact from '@/app/components/generic/Contact';
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
 import Separator from '@/app/components/generic/Separator';
 import Text from '@/app/components/generic/Text';
+import Contact from '@/app/components/ui/Contact';
 import CustomLink from '@/app/components/ui/CustomLink';
 import Tooltip from '@/app/components/ui/Tooltip';
 import useTime from '@/app/hooks/useTime';
@@ -30,22 +30,18 @@ export default function Home() {
             architecture. Currently working in digital banking.
           </p>
           <p>
-            Read further on{' '}
-            <CustomLink href="/now" ariaLabel="go to now page">
-              now
-            </CustomLink>{' '}
-            page.
+            Read further on <CustomLink href="/now">now</CustomLink> page.
           </p>
         </section>
         <nav>
           <ul className="flex flex-col gap-1">
             <li>
-              <CustomLink href="/craft" ariaLabel="go to craft page">
+              <CustomLink href="/craft" ariaLabel="Craft page">
                 Craft
               </CustomLink>
             </li>
             <li>
-              <CustomLink href="/writing" ariaLabel="go to writing page">
+              <CustomLink href="/writing" ariaLabel="Writing page">
                 Writing
               </CustomLink>
             </li>
