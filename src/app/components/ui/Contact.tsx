@@ -1,23 +1,23 @@
+import Heading from '@/app/components/generic/Heading';
+import CustomLink from '@/app/components/ui/CustomLink';
 import c from 'clsx';
-import CustomLink from '../ui/CustomLink';
-import Heading from './Heading';
 
 export default function Contact() {
   const contactLinks = [
     {
       label: '@kelvinamp_',
       href: 'https://x.com/kelvinamp_',
-      ariaLabel: 'go to @kelvinamp_ twitter profile'
+      ariaLabel: 'Twitter profile'
     },
     {
       label: 'GitHub',
       href: 'https://github.com/kelvinampofo',
-      ariaLabel: 'go to github profile'
+      ariaLabel: 'GitHub profile'
     },
     {
       label: 'Email',
       href: 'mailto:k@kelvinamp.me',
-      ariaLabel: 'email kelvin ampofo'
+      ariaLabel: 'Email address'
     }
   ];
 
