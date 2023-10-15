@@ -2,14 +2,14 @@ import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 
 export default function useTime() {
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [time, setTime] = useState(new Date());
 
   useEffect(() => {
     /*
      * Using requestAnimationFrame for better performance and synchronisation with the browser's rendering cycle.
      */
     const updateCurrentTime = () => {
-      setCurrentTime(new Date());
+      setTime(new Date());
       window.requestAnimationFrame(updateCurrentTime);
     };
 
@@ -20,7 +20,9 @@ export default function useTime() {
     };
   }, []);
 
-  const formattedTime = format(currentTime, 'HH:mm:ss a');
+  const timezoneOffset = `UTC ${format(new Date(), 'xxx')}`;
 
-  return { formattedTime };
+  const currentTime = format(time, 'HH:mm:ss a');
+
+  return { currentTime, timezoneOffset };
 }
