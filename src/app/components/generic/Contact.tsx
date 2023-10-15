@@ -37,6 +37,7 @@ export default function Contact() {
                 'mx-1 dark:text-secondary-dark',
                 index === contactLinks.length - 1 && 'hidden'
               )}
+              aria-hidden="true"
             >
               &middot;
             </span>
