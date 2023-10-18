@@ -5,23 +5,22 @@ import Text from '@/app/components/generic/Text';
 import CustomLink from '@/app/components/ui/CustomLink';
 import List from '@/app/components/ui/List';
 import { allPrototypes } from '@/app/lib/data';
-
 import { Metadata } from 'next';
 import React from 'react';
 
 export const metadata: Metadata = {
   title: 'Craft',
-  description: 'Crafting interfaces, imbued with meticulousness + play.',
+  description: 'Crafting interfaces.',
   authors: [{ name: 'Kelvin Ampofo' }],
   openGraph: {
     title: 'Craft',
-    description: 'Crafting interfaces, imbued with meticulousness + play.'
+    description: 'Crafting interfaces.'
   },
   twitter: {
     title: 'Craft',
     site: '@kelvinamp_',
     card: 'summary_large_image',
-    description: 'Crafting interfaces, imbued with meticulousness + play.',
+    description: 'Crafting interfaces.',
     images: [
       {
         url: 'https://kelvinamp.me/og.jpeg',
@@ -36,8 +35,8 @@ export default function Craft() {
   return (
     <Container>
       <Heading className="mb-3">Craft</Heading>
-      <Text className="mb-12" colour="secondary">
-        Crafting interfaces, imbued with quality + play
+      <Text className="mb-10" colour="secondary">
+        Crafting user interfaces.
       </Text>
       <Separator className="mb-3" />
       <List items={allPrototypes} route="craft" showSummary />
