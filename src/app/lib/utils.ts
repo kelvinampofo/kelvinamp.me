@@ -1,4 +1,5 @@
 import { isWithinInterval, subMonths } from 'date-fns';
+import type { Prototype } from './data';
 
 export const isWithin1Month = (postDate: Date) => {
   const currentDate = new Date();
@@ -25,4 +26,8 @@ export const getErrorMessage = (error: unknown) => {
   }
 
   return 'Something went wrong.';
+};
+
+export const findPrototype = (prototype: Prototype[], titleToMatch: string) => {
+  return prototype.find(({ title }) => title === titleToMatch) as Prototype;
 };
