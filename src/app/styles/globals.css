@@ -13,12 +13,11 @@
     --page-top: 8rem;
     --page-bottom-mobile: 1.5rem;
     --page-bottom: 3rem;
-    --selection-color: #fff9a8;
   }
 
   :focus,
   :focus-visible {
-    outline-color: #f59e0b;
+    outline-color: #ff9500;
   }
 
   ::-webkit-scrollbar {
