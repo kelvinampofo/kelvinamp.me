@@ -33,19 +33,17 @@ export default function Home() {
             Read further on <CustomLink href="/now">now</CustomLink> page.
           </p>
         </section>
-        <nav>
-          <ul className="flex flex-col gap-1">
-            <li>
-              <CustomLink href="/craft" ariaLabel="Craft page">
-                Craft
-              </CustomLink>
-            </li>
-            <li>
-              <CustomLink href="/writing" ariaLabel="Writing page">
-                Writing
-              </CustomLink>
-            </li>
-          </ul>
+        <nav className="flex flex-col gap-1">
+          <span>
+            <CustomLink href="/craft" ariaLabel="Craft page">
+              Craft
+            </CustomLink>
+          </span>
+          <span>
+            <CustomLink href="/writing" ariaLabel="Writing page">
+              Writing
+            </CustomLink>
+          </span>
         </nav>
         <Separator className="my-12" />
       </AnimateEnter>
@@ -54,7 +52,11 @@ export default function Home() {
       </AnimateEnter>
       <AnimateEnter delay={1}>
         <Tooltip content={timezoneOffset} className="mt-16">
-          <button className="cursor-auto px-1 font-mono text-xs text-secondary dark:text-secondary-dark">
+          <button
+            className="cursor-pointer px-1 font-mono text-xs text-secondary dark:text-secondary-dark"
+            aria-live="off"
+            role="status"
+          >
             {currentTime}
           </button>
         </Tooltip>
