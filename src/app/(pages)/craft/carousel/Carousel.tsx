@@ -1,5 +1,6 @@
 'use client';
 
+import Card from '@/app/components/generic/Card';
 import usePointerDevice from '@/app/hooks/usePointerDevice';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import c from 'clsx';
@@ -120,7 +121,7 @@ export default function Carousel() {
   );
 
   return (
-    <>
+    <Card className="flex lg:px-2">
       {isPointerDevice && (
         <div className="flex items-center">
           <button
@@ -171,6 +172,6 @@ export default function Carousel() {
           </button>
         </div>
       )}
-    </>
+    </Card>
   );
 }

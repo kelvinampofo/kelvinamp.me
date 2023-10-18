@@ -1,8 +1,10 @@
-import Card from '@/app/components/generic/Card';
 import Container from '@/app/components/generic/Container';
+import Heading from '@/app/components/generic/Heading';
+import Text from '@/app/components/generic/Text';
 import CopyLinkButton from '@/app/components/ui/CopyLinkButton';
 import CustomLink from '@/app/components/ui/CustomLink';
 import { allPrototypes } from '@/app/lib/data';
+import { findPrototype } from '@/app/lib/utils';
 import { format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
 import Balancer from 'react-wrap-balancer';
@@ -41,21 +43,19 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  const carouselPrototype = allPrototypes[0];
+  const carouselPrototype = findPrototype(allPrototypes, 'Carousel');
 
   const { title, publishedAt, summary } = carouselPrototype;
 
   return (
     <Container>
       <header className="flex flex-col justify-between gap-6">
-        <div>
-          <CustomLink href="/craft" ariaLabel="go back to craft page" arrowIcon hideUnderline>
-            Craft
-          </CustomLink>
-        </div>
-        <h1 className="text-lg font-medium">
+        <CustomLink href="/craft" ariaLabel="go back to craft page" arrowIcon hideUnderline>
+          Craft
+        </CustomLink>
+        <Heading className="text-lg font-medium">
           <Balancer>{title}</Balancer>
-        </h1>
+        </Heading>
       </header>
       <div className="flex justify-between text-sm">
         <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
@@ -63,10 +63,8 @@ export default function Page() {
         </time>
         <CopyLinkButton />
       </div>
-      <p className="my-8">{summary}</p>
-      <Card className="flex md:px-2 md:pt-8 lg:px-2 lg:pt-8">
-        <Carousel />
-      </Card>
+      <Text className="my-8">{summary}</Text>
+      <Carousel />
     </Container>
   );
 }
