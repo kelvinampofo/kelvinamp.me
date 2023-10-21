@@ -6,6 +6,7 @@ import { isWithin1Month } from '@/app/lib/utils';
 import c from 'clsx';
 import type { Post } from 'contentlayer/generated';
 import { compareDesc, format, parseISO } from 'date-fns';
+import Badge from './Badge';
 
 interface ListProps {
   items: (Post | Prototype)[];
@@ -33,14 +34,7 @@ export default function List({ items, route, showDate, showSummary }: ListProps)
               >
                 <span className="flex items-center font-medium">
                   {title}
-                  {isNewContent && (
-                    <span
-                      aria-hidden="true"
-                      className="animate-shine bg-gradient-to-r from-teal-500 via-blue-600 to-teal-500 bg-200 bg-clip-text bg-left pl-2 text-xs text-transparent dark:from-teal-200 dark:via-blue-600 dark:to-teal-200"
-                    >
-                      new
-                    </span>
-                  )}
+                  {isNewContent && <Badge ariaHidden>New</Badge>}
                 </span>
                 {showDate && (
                   <Text as="span" colour="secondary">
