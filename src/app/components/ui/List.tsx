@@ -34,7 +34,7 @@ export default function List({ items, route, showDate, showSummary }: ListProps)
               >
                 <span className="flex items-center font-medium">
                   {title}
-                  {isNewContent && <Badge ariaHidden>New</Badge>}
+                  {isNewContent && <Badge ariaHidden>new</Badge>}
                 </span>
                 {showDate && (
                   <Text as="span" colour="secondary">
