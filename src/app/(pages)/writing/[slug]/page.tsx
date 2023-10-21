@@ -1,7 +1,7 @@
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
 import MDXContent from '@/app/components/generic/MDXComponents';
-import CopyLinkButton from '@/app/components/ui/CopyLinkButton';
+import CopyButton from '@/app/components/ui/CopyButton';
 import CustomLink from '@/app/components/ui/CustomLink';
 import '@/app/styles/prose.css';
 import { allPosts } from 'contentlayer/generated';
@@ -96,7 +96,7 @@ export default async function Post({ params }: Props) {
         <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
           {format(parseISO(publishedAt), 'dd MMM yyyy')}
         </time>
-        <CopyLinkButton />
+        <CopyButton />
       </div>
       <MDXContent code={code} />
     </Container>

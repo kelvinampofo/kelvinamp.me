@@ -1,7 +1,7 @@
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
 import Text from '@/app/components/generic/Text';
-import CopyLinkButton from '@/app/components/ui/CopyLinkButton';
+import CopyButton from '@/app/components/ui/CopyButton';
 import CustomLink from '@/app/components/ui/CustomLink';
 import { allPrototypes } from '@/app/lib/data';
 import { findPrototype } from '@/app/lib/utils';
@@ -50,9 +50,11 @@ export default function Page() {
   return (
     <Container>
       <header className="flex flex-col justify-between gap-6">
-        <CustomLink href="/craft" ariaLabel="go back to craft page" arrowIcon hideUnderline>
-          Craft
-        </CustomLink>
+        <span>
+          <CustomLink href="/craft" ariaLabel="go back to craft page" arrowIcon hideUnderline>
+            Craft
+          </CustomLink>
+        </span>
         <Heading className="text-lg font-medium">
           <Balancer>{title}</Balancer>
         </Heading>
@@ -61,7 +63,7 @@ export default function Page() {
         <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
           {format(parseISO(publishedAt), 'MMMM yyyy')}
         </time>
-        <CopyLinkButton />
+        <CopyButton />
       </div>
       <Text className="my-8">{summary}</Text>
       <Carousel />
