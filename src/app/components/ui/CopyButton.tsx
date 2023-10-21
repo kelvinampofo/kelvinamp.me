@@ -21,7 +21,7 @@ export default function CopyLinkButton() {
         ) : (
           <CopyIcon
             className="text-secondary transition-colors hover:text-secondary dark:text-secondary-dark dark:hover:text-secondary-dark"
-            aria-label="Link icon"
+            aria-label="Copy icon"
           />
         )}
       </button>
