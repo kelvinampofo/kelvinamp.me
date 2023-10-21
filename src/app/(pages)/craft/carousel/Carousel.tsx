@@ -20,11 +20,11 @@ const slides = [
     isPriority: true
   },
   {
-    title: 'Kyoto Station',
-    src: KyotoStationImage,
-    alt: 'Kyoto Station (1997)',
-    author: 'Hiroshi Hara',
-    isPriority: true
+    title: 'Calgary Central Library',
+    src: CentralLibraryImage,
+    alt: 'The interior of Calgary Central Library, Canada',
+    author: 'Angela Bailey',
+    isPriority: false
   },
   {
     title: 'Heydar Aliyev Center',
@@ -34,11 +34,11 @@ const slides = [
     isPriority: false
   },
   {
-    title: 'Calgary Central Library',
-    src: CentralLibraryImage,
-    alt: 'The interior of Calgary Central Library, Canada',
-    author: 'Angela Bailey',
-    isPriority: false
+    title: 'Kyoto Station',
+    src: KyotoStationImage,
+    alt: 'Kyoto Station (1997)',
+    author: 'Hiroshi Hara',
+    isPriority: true
   }
 ];
 
