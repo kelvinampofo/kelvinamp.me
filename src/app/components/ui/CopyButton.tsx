@@ -22,6 +22,8 @@ export default function CopyLinkButton() {
           <Link2Icon
             className="text-secondary transition-colors hover:text-secondary dark:text-secondary-dark dark:hover:text-secondary-dark"
             aria-label="Copy icon"
+            width={18}
+            height={18}
           />
         )}
       </button>
