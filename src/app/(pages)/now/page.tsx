@@ -6,16 +6,16 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Now',
-  description: 'Personal + pro updates.',
+  description: 'Personal and professional updates.',
   openGraph: {
     title: 'Now',
-    description: 'Personal + pro updates.'
+    description: 'Personal and professional updates.'
   },
   twitter: {
     title: 'Now',
     site: '@kelvinamp_',
     card: 'summary',
-    description: 'Personal + pro updates.',
+    description: 'Personal and professional updates.',
     images: [
       {
         url: 'https://kelvinamp.me/og.jpeg',
@@ -40,17 +40,17 @@ export default function Now() {
           opportunity.
         </Text>
         <Text>
-          Code+design pursuits aside, enjoying music that evokes strong emotions, reading{' '}
-          <CustomLink href="https://literal.club/kelvinamp">books</CustomLink>, watching Porsche
-          videos.
+          Code and design pursuits aside, reading / listening to{' '}
+          <CustomLink href="https://literal.club/kelvinamp">books</CustomLink>, enjoying emotionally
+          evocative music, engaging with Porsche-related content.
         </Text>
         <Text>Speaking less, unless I can improve the silence.</Text>
       </section>
       <Text colour="secondary" size="small" className="mb-12">
-        Updated <time dateTime="2023-10-02">October 02, 2023</time>
+        Updated <time dateTime="2023-10-25">October 26, 2023</time>
       </Text>
       <span>
-        <CustomLink href="/" ariaLabel="go to home page" arrowIcon>
+        <CustomLink href="/" ariaLabel="Back to home page" arrowIcon>
           Back
         </CustomLink>
       </span>
