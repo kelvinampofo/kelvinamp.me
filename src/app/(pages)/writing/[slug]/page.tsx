@@ -1,8 +1,10 @@
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
 import MDXContent from '@/app/components/generic/MDXComponents';
+import Separator from '@/app/components/generic/Separator';
 import CopyButton from '@/app/components/ui/CopyButton';
 import CustomLink from '@/app/components/ui/CustomLink';
+import { Navigation } from '@/app/components/ui/Navigation';
 import '@/app/styles/prose.css';
 import { allPosts } from 'contentlayer/generated';
 import { format, parseISO } from 'date-fns';
@@ -99,6 +101,8 @@ export default async function Post({ params }: Props) {
         <CopyButton />
       </div>
       <MDXContent code={code} />
+      <Separator className="my-8" />
+      <Navigation allItems={allPosts} currentItem={post} pathPrefix="writing" />
     </Container>
   );
 }
