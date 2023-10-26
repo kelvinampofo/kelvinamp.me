@@ -1,8 +1,8 @@
 'use client';
 
 import Card from '@/app/components/generic/Card';
+import { ChevronLeftIcon, ChevronRightIcon } from '@/app/components/ui/Icons';
 import usePointerDevice from '@/app/hooks/usePointerDevice';
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import c from 'clsx';
 import CentralLibraryImage from 'public/assets/images/carousel/central-library.webp';
 import AliyevCenterImage from 'public/assets/images/carousel/heydar-aliyev-center.webp';
