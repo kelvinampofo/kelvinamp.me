@@ -47,7 +47,7 @@ export default function Now() {
         <Text>Speaking less, unless I can improve the silence.</Text>
       </section>
       <Text colour="secondary" size="small" className="mb-12">
-        Updated <time dateTime="2023-10-25">October 26, 2023</time>
+        Updated <time dateTime="2023-10-26">October 26, 2023</time>
       </Text>
       <span>
         <CustomLink href="/" ariaLabel="Back to home page" arrowIcon>
