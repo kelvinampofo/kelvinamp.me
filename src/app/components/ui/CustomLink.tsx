@@ -1,6 +1,6 @@
-import { ArrowTopLeftIcon } from '@radix-ui/react-icons';
 import c from 'clsx';
 import Link from 'next/link';
+import { ArrowTopLeftIcon } from './Icons';
 
 export interface CustomLinkProps {
   href?: any;

@@ -1,7 +1,7 @@
 'use client';
 
 import { useClipboard } from '@/app/hooks/useClipboard';
-import { Link2Icon } from '@radix-ui/react-icons';
+import { LinkIcon } from './Icons';
 import Tooltip from './Tooltip';
 
 export default function CopyLinkButton() {
@@ -19,7 +19,7 @@ export default function CopyLinkButton() {
         ) : isCopied ? (
           <span>Link copied!</span>
         ) : (
-          <Link2Icon
+          <LinkIcon
             className="text-secondary transition-colors hover:text-secondary dark:text-secondary-dark dark:hover:text-secondary-dark"
             aria-label="Copy icon"
             width={18}
