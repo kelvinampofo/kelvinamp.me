@@ -53,11 +53,11 @@ export default function Home() {
       <AnimateEnter delay={1}>
         <Tooltip content={timezoneOffset} className="mt-16">
           <button
-            className="cursor-auto px-1 font-mono text-xs text-secondary dark:text-secondary-dark"
+            className="cursor-auto px-1 font-mono text-secondary dark:text-secondary-dark"
             aria-live="off"
             role="status"
           >
-            {currentTime}
+            <small>{currentTime}</small>
           </button>
         </Tooltip>
       </AnimateEnter>
