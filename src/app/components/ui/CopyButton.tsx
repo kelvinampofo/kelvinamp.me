@@ -4,7 +4,7 @@ import { useClipboard } from '@/app/hooks/useClipboard';
 import { LinkIcon } from './Icons';
 import Tooltip from './Tooltip';
 
-export default function CopyLinkButton() {
+export default function CopyButton() {
   const { isCopied, errorMessage, handleCopyUrl } = useClipboard();
 
   return (
