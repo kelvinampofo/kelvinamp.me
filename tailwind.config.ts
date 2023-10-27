@@ -17,8 +17,8 @@ export default {
         'page-bottom-mobile': 'var(--page-bottom-mobile)'
       },
       fontFamily: {
-        sans: ['var(--font-inter)'],
-        mono: ['var(--font-roboto)']
+        sans: ['var(--font-geist-sans)'],
+        mono: ['var(--font-geist-mono)']
       },
       animation: {
         shine: 'shineAnimation 3s linear 0s infinite normal forwards'
