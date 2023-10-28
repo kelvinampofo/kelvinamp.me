@@ -41,8 +41,8 @@ export default function Now() {
         </Text>
         <Text>
           Code and design pursuits aside, reading / listening to{' '}
-          <CustomLink href="https://literal.club/kelvinamp">books</CustomLink>, enjoying emotionally
-          evocative music, engaging with Porsche-related content.
+          <CustomLink href="https://literal.club/kelvinamp/goals">books</CustomLink>, enjoying
+          emotionally evocative music, engaging with Porsche-related content.
         </Text>
         <Text>Speaking less, unless I can improve the silence.</Text>
       </section>
