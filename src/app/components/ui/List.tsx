@@ -23,8 +23,7 @@ export default function List({ items, route, showDate, showSummary }: ListProps)
         .map(({ publishedAt, slug, title, summary }) => {
           const publishedDate = parseISO(publishedAt);
           const formattedDate = format(publishedDate, 'dd/MM/yy');
-
-          const isNewContent = isWithin1Month(publishedDate);
+          const isNewItem = isWithin1Month(publishedDate);
           return (
             <li key={title}>
               <CustomLink
@@ -32,10 +31,12 @@ export default function List({ items, route, showDate, showSummary }: ListProps)
                 hideUnderline
                 className={c('flex justify-between gap-2', showSummary && 'flex-col md:flex-row')}
               >
-                <span className="flex items-center font-medium">
-                  {title}
-                  {isNewContent && <Badge ariaHidden>new</Badge>}
-                </span>
+                <div className="flex items-center font-medium">
+                  <Text as="span" weight="medium">
+                    {title}
+                  </Text>
+                  {isNewItem && <Badge ariaHidden>new</Badge>}
+                </div>
                 {showDate && (
                   <Text as="span" colour="secondary">
                     <time dateTime={publishedAt}>{formattedDate}</time>
