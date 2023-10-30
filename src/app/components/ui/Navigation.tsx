@@ -11,7 +11,7 @@ type Item = {
 interface NavigationProps {
   currentItem: Item;
   allItems: Item[];
-  pathPrefix: string;
+  route: string;
 }
 
 function findNextItem(currentItem: Item, allItems: Item[]) {
@@ -34,18 +34,14 @@ function findPreviousItem(currentItem: Item, allItems: Item[]) {
   return previousItems[0];
 }
 
-export function Navigation({ currentItem, allItems, pathPrefix }: NavigationProps) {
+export function Navigation({ currentItem, allItems, route }: NavigationProps) {
   const nextItem = findNextItem(currentItem, allItems);
   const previousItem = findPreviousItem(currentItem, allItems);
 
   return (
     <nav className="flex list-none justify-between text-sm">
       {previousItem && (
-        <CustomLink
-          href={`/${pathPrefix}/${previousItem.slug}`}
-          ariaLabel="Previous post"
-          hideUnderline
-        >
+        <CustomLink href={`/${route}/${previousItem.slug}`} ariaLabel="Previous post" hideUnderline>
           <div className="flex flex-col gap-1">
             <ArrowLeftIcon className="text-[#6F6F6F] dark:text-[#A0A0A0]" />
             {previousItem.title}
@@ -55,7 +51,7 @@ export function Navigation({ currentItem, allItems, pathPrefix }: NavigationProp
       )}
       <div className="flex grow" /> {/* fill remaining space */}
       {nextItem && (
-        <CustomLink href={`/${pathPrefix}/${nextItem.slug}`} ariaLabel="Next post" hideUnderline>
+        <CustomLink href={`/${route}/${nextItem.slug}`} ariaLabel="Next post" hideUnderline>
           <div className="flex flex-col items-end gap-1">
             <ArrowRightIcon className="flex-1 text-[#6F6F6F] dark:text-[#A0A0A0]" />
             {nextItem.title}

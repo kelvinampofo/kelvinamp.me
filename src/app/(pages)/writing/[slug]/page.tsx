@@ -86,7 +86,7 @@ export default async function Post({ params }: Props) {
     <Container>
       <header className="flex flex-col justify-between gap-6">
         <span>
-          <CustomLink href="/writing" ariaLabel="go back to writing page" hideUnderline arrowIcon>
+          <CustomLink href="/writing" ariaLabel="Back to writing page" hideUnderline arrowIcon>
             Writing
           </CustomLink>
         </span>
@@ -102,7 +102,7 @@ export default async function Post({ params }: Props) {
       </div>
       <MDXContent code={code} />
       <Separator className="my-8" />
-      <Navigation allItems={allPosts} currentItem={post} pathPrefix="writing" />
+      <Navigation allItems={allPosts} currentItem={post} route="writing" />
     </Container>
   );
 }
