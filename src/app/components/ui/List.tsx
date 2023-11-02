@@ -22,7 +22,7 @@ export default function List({ items, route, showDate, showSummary }: ListProps)
         .sort((a, b) => compareDesc(parseISO(a.publishedAt), parseISO(b.publishedAt)))
         .map(({ publishedAt, slug, title, summary }) => {
           const publishedDate = parseISO(publishedAt);
-          const formattedDate = format(publishedDate, 'MM/yy');
+          const formattedDate = format(publishedDate, 'dd/MM/yy');
           const isNewItem = isWithin1Month(publishedDate);
           return (
             <li key={title}>
