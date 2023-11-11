@@ -1,9 +1,11 @@
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
+import Separator from '@/app/components/generic/Separator';
 import Text from '@/app/components/generic/Text';
 import CopyButton from '@/app/components/ui/CopyButton';
 import CustomLink from '@/app/components/ui/CustomLink';
-import { allPrototypes } from '@/app/lib/data';
+import { Navigation } from '@/app/components/ui/Navigation';
+import { allPrototypes } from '@/app/lib/prototypes';
 import { findPrototype } from '@/app/lib/utils';
 import { format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
@@ -67,6 +69,8 @@ export default function Page() {
       </div>
       <Text className="my-8">{summary}</Text>
       <Carousel />
+      <Separator className="my-8" />
+      <Navigation allItems={allPrototypes} currentItem={carouselPrototype} route="craft" />
     </Container>
   );
 }
