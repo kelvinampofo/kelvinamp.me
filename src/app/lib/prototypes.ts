@@ -18,6 +18,14 @@ export const allPrototypes: Prototype[] = [
     href: '/carousel',
     publishedAt: '2023-08-19',
     summary: 'A minimal CSS based carousel.'
+  },
+  {
+    slug: '/loading-states',
+    id: 2,
+    title: 'Loading states',
+    href: '/loading-states',
+    publishedAt: '2023-11-11',
+    summary: 'Loading state interfaces.'
   }
 ].sort((a, b) => {
   return compareAsc(parseISO(a.publishedAt), parseISO(b.publishedAt));
