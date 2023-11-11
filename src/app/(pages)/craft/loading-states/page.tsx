@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     description: 'Loading state interfaces.',
     images: [
       {
-        url: 'https://kelvinamp.me/assets/images/og-images/og-loading-states',
+        url: 'https://kelvinamp.me/assets/images/og-images/og-loading-states.png',
         height: 1200,
         width: 1200,
         alt: 'Loading state interfaces.'
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description: 'Loading state interfaces.',
     images: [
       {
-        url: 'https://kelvinamp.me/assets/images/og-images/og-loading-states',
+        url: 'https://kelvinamp.me/assets/images/og-images/og-loading-states.png',
         height: 1200,
         width: 1200,
         alt: 'Loading state interfaces.'
