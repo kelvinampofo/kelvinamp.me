@@ -90,4 +90,66 @@
       transform: translateY(0);
     }
   }
+
+  @keyframes donut-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .spinner {
+    animation: donut-spin 1.3s linear infinite;
+  }
+
+  @keyframes loading-animation {
+    0% {
+      content: '';
+    }
+    25% {
+      content: '.';
+    }
+    50% {
+      content: '..';
+    }
+    75% {
+      content: '...';
+    }
+  }
+
+  .loading-text .loading-dots::after {
+    animation: loading-animation 1.8s infinite;
+    content: '';
+  }
+
+  @keyframes flashing {
+    0% {
+      opacity: 0.2;
+    }
+    20% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.2;
+    }
+  }
+
+  .loading-dots span {
+    width: 0.25rem;
+    height: 0.25rem;
+    border-radius: 15%;
+    margin: 0 2px;
+    display: inline-block;
+    animation: flashing 1.6s infinite linear;
+  }
+
+  .loading-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .loading-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
 }
