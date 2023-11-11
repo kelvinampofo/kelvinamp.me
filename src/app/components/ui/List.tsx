@@ -1,5 +1,4 @@
 import Separator from '@/app/components/generic/Separator';
-import Text from '@/app/components/generic/Text';
 import CustomLink from '@/app/components/ui/CustomLink';
 import type { Prototype } from '@/app/lib/prototypes';
 import { isWithin1Month } from '@/app/lib/utils';
@@ -40,7 +39,9 @@ export default function List({ items, route, showDate, showSummary }: ListProps)
                     {formattedDate}
                   </time>
                 )}
-                {showSummary && <Text colour="secondary">{summary}</Text>}
+                {showSummary && (
+                  <span className="text-secondary dark:text-secondary-dark">{summary}</span>
+                )}
               </CustomLink>
               <Separator className="my-3" />
             </li>
