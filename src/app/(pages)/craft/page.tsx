@@ -4,7 +4,7 @@ import Separator from '@/app/components/generic/Separator';
 import Text from '@/app/components/generic/Text';
 import CustomLink from '@/app/components/ui/CustomLink';
 import List from '@/app/components/ui/List';
-import { allPrototypes } from '@/app/lib/data';
+import { allPrototypes } from '@/app/lib/prototypes';
 import { Metadata } from 'next';
 import React from 'react';
 

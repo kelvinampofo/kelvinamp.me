@@ -1,6 +1,6 @@
 import { allPosts } from 'contentlayer/generated';
 import { MetadataRoute } from 'next';
-import { allPrototypes } from './lib/data';
+import { allPrototypes } from './lib/prototypes';
 
 function formatDate(date: Date) {
   return date.toISOString().split('T')[0];

@@ -1,5 +1,5 @@
 import { isWithinInterval, subMonths } from 'date-fns';
-import type { Prototype } from './data';
+import type { Prototype } from './prototypes';
 
 export const isWithin1Month = (postDate: Date) => {
   const currentDate = new Date();

@@ -1,7 +1,7 @@
 import Separator from '@/app/components/generic/Separator';
 import Text from '@/app/components/generic/Text';
 import CustomLink from '@/app/components/ui/CustomLink';
-import type { Prototype } from '@/app/lib/data';
+import type { Prototype } from '@/app/lib/prototypes';
 import { isWithin1Month } from '@/app/lib/utils';
 import c from 'clsx';
 import type { Post } from 'contentlayer/generated';
