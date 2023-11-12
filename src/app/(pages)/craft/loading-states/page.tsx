@@ -15,17 +15,17 @@ import Loading from './Loading';
 
 export const metadata: Metadata = {
   title: 'Loading states',
-  description: 'Loading state interfaces.',
+  description: 'Simple loading state indicators.',
   authors: [{ name: 'Kelvin Ampofo' }],
   openGraph: {
     title: 'Loading states',
-    description: 'Loading state interfaces.',
+    description: 'Simple loading state indicators.',
     images: [
       {
         url: 'https://kelvinamp.me/assets/images/og-images/og-loading-states.png',
         height: 1200,
         width: 1200,
-        alt: 'Loading state interfaces.'
+        alt: 'Simple loading state indicators.'
       }
     ]
   },
@@ -33,13 +33,13 @@ export const metadata: Metadata = {
     title: 'Loading states',
     site: '@kelvinamp_',
     card: 'summary_large_image',
-    description: 'Loading state interfaces.',
+    description: 'Simple loading state indicators.',
     images: [
       {
         url: 'https://kelvinamp.me/assets/images/og-images/og-loading-states.png',
         height: 1200,
         width: 1200,
-        alt: 'Loading state interfaces.'
+        alt: 'Simple loading state indicators.'
       }
     ]
   }
@@ -70,6 +70,7 @@ export default function Page() {
       </div>
       <Text className="my-8">{summary}</Text>
       <Card className="flex h-40 items-center justify-center gap-16">
+        <Loading variant="ios-spinner" />
         <Loading variant="spinner" />
         <Loading variant="dots" />
         <Loading variant="loading-text" />
