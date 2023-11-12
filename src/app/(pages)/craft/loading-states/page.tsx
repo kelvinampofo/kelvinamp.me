@@ -69,10 +69,11 @@ export default function Page() {
         <CopyButton />
       </div>
       <Text className="my-8">{summary}</Text>
-      <Card className="flex h-40 items-center justify-center gap-16">
+      <Card className="flex h-40 items-center justify-center gap-12 md:gap-16">
         <Loading variant="ios-spinner" />
-        <Loading variant="spinner" />
-        <Loading variant="dots" />
+        <Loading variant="primary-spinner" />
+        <Loading variant="secondary-spinner" />
+        <Loading variant="loading-dots" />
         <Loading variant="loading-text" />
       </Card>
       <Separator className="my-8" />
