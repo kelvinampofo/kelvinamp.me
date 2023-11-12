@@ -20,9 +20,9 @@ export default function Loading({ variant }: LoadingProps) {
     case 'dots':
       return (
         <div className="loading-dots cursor-not-allowed">
-          <span className="bg-neutral-800 dark:bg-neutral-500"></span>
-          <span className="bg-neutral-800 dark:bg-neutral-500"></span>
-          <span className="bg-neutral-800 dark:bg-neutral-500"></span>
+          {[...Array(3)].map((_, index) => (
+            <span key={index} className="bg-neutral-800 dark:bg-neutral-500"></span>
+          ))}
         </div>
       );
     case 'spinner':
