@@ -25,7 +25,7 @@ export const allPrototypes: Prototype[] = [
     title: 'Loading states',
     href: '/loading-states',
     publishedAt: '2023-11-11',
-    summary: 'Loading state interfaces.'
+    summary: 'Simple loading state indicators.'
   }
 ].sort((a, b) => {
   return compareAsc(parseISO(a.publishedAt), parseISO(b.publishedAt));
