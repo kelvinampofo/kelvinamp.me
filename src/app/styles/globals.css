@@ -56,6 +56,16 @@
     }
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    /* disable animations and transitions for users who prefer reduced motion. */
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+
   .tooltip-content {
     animation-duration: 0.6s;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
