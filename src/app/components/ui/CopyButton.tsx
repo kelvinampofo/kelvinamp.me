@@ -1,7 +1,7 @@
 'use client';
 
 import { useClipboard } from '@/app/hooks/useClipboard';
-import { LinkIcon } from './Icons';
+import { Icon } from './Icon';
 import Tooltip from './Tooltip';
 
 export default function CopyButton() {
@@ -19,7 +19,8 @@ export default function CopyButton() {
         ) : isCopied ? (
           <span>Link copied!</span>
         ) : (
-          <LinkIcon
+          <Icon
+            name="link"
             className="text-secondary transition-colors hover:text-secondary dark:text-secondary-dark dark:hover:text-secondary-dark"
             aria-label="Copy icon"
             width={18}

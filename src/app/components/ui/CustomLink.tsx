@@ -1,6 +1,6 @@
 import c from 'clsx';
 import Link from 'next/link';
-import { ArrowTopLeftIcon } from './Icons';
+import { Icon } from './Icon';
 
 export interface CustomLinkProps {
   href?: any;
@@ -36,7 +36,8 @@ export default function CustomLink({
     return (
       <Link href={href} className={classes} aria-label={ariaLabel}>
         {arrowIcon && (
-          <ArrowTopLeftIcon
+          <Icon
+            name="arrowTopLeft"
             className="mr-1 inline-flex items-center"
             aria-label="Arrow Top Left icon"
             width={15}

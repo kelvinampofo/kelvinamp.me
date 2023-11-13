@@ -1,6 +1,6 @@
 import CustomLink from '@/app/components/ui/CustomLink';
 import React from 'react';
-import { ArrowLeftIcon, ArrowRightIcon } from './Icons';
+import { Icon } from './Icon';
 
 type Item = {
   title: string;
@@ -43,7 +43,7 @@ export function Navigation({ currentItem, allItems, route }: NavigationProps) {
       {previousItem && (
         <CustomLink href={`/${route}/${previousItem.slug}`} ariaLabel="Previous post" hideUnderline>
           <div className="flex flex-col gap-1">
-            <ArrowLeftIcon className="text-[#6F6F6F] dark:text-[#A0A0A0]" />
+            <Icon name="arrowLeft" className="text-[#6F6F6F] dark:text-[#A0A0A0]" />
             {previousItem.title}
             <span className="sr-only">Previous</span>
           </div>
@@ -53,7 +53,7 @@ export function Navigation({ currentItem, allItems, route }: NavigationProps) {
       {nextItem && (
         <CustomLink href={`/${route}/${nextItem.slug}`} ariaLabel="Next post" hideUnderline>
           <div className="flex flex-col items-end gap-1">
-            <ArrowRightIcon className="flex-1 text-[#6F6F6F] dark:text-[#A0A0A0]" />
+            <Icon name="arrowRight" className="flex-1 text-[#6F6F6F] dark:text-[#A0A0A0]" />
             {nextItem.title}
             <span className="sr-only">Next</span>
           </div>
