@@ -1,8 +1,16 @@
+type IconName =
+  | 'arrowLeft'
+  | 'arrowRight'
+  | 'arrowTopLeft'
+  | 'link'
+  | 'chevronLeft'
+  | 'chevronRight';
+
 interface IconProps {
   className?: string;
   width?: number;
   height?: number;
-  name: string;
+  name: IconName;
 }
 
 export function Icon({ className, width = 15, height = 15, name }: IconProps) {
@@ -102,7 +110,7 @@ export function Icon({ className, width = 15, height = 15, name }: IconProps) {
           className={className}
           height={height}
           width={width}
-          aria-label="ChevronRightIcon"
+          aria-label="Chevron Right icon"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 15 15"
