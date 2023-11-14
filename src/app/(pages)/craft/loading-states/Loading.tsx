@@ -1,12 +1,14 @@
 import Text from '@/app/components/generic/Text';
 
+type LoadingVariant =
+  | 'loading-text'
+  | 'loading-dots'
+  | 'primary-spinner'
+  | 'secondary-spinner'
+  | 'ios-spinner';
+
 interface LoadingProps {
-  variant:
-    | 'loading-text'
-    | 'loading-dots'
-    | 'primary-spinner'
-    | 'secondary-spinner'
-    | 'ios-spinner';
+  variant: LoadingVariant;
 }
 
 export default function Loading({ variant }: LoadingProps) {

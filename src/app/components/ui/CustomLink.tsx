@@ -37,7 +37,7 @@ export default function CustomLink({
       <Link href={href} className={classes} aria-label={ariaLabel}>
         {arrowIcon && (
           <Icon
-            name="arrowTopLeft"
+            name="arrow-top-left"
             className="mr-1 inline-flex items-center"
             aria-label="Arrow Top Left icon"
             width={15}

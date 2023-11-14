@@ -1,10 +1,10 @@
 type IconName =
-  | 'arrowLeft'
-  | 'arrowRight'
-  | 'arrowTopLeft'
+  | 'arrow-left'
+  | 'arrow-right'
+  | 'arrow-top-left'
   | 'link'
-  | 'chevronLeft'
-  | 'chevronRight';
+  | 'chevron-left'
+  | 'chevron-right';
 
 interface IconProps {
   className?: string;
@@ -15,7 +15,7 @@ interface IconProps {
 
 export function Icon({ className, width = 15, height = 15, name }: IconProps) {
   switch (name) {
-    case 'arrowLeft':
+    case 'arrow-left':
       return (
         <svg
           className={className}
@@ -34,7 +34,7 @@ export function Icon({ className, width = 15, height = 15, name }: IconProps) {
           />
         </svg>
       );
-    case 'arrowRight':
+    case 'arrow-right':
       return (
         <svg
           className={className}
@@ -53,7 +53,7 @@ export function Icon({ className, width = 15, height = 15, name }: IconProps) {
           />
         </svg>
       );
-    case 'arrowTopLeft':
+    case 'arrow-top-left':
       return (
         <svg
           className={className}
@@ -87,7 +87,7 @@ export function Icon({ className, width = 15, height = 15, name }: IconProps) {
           />
         </svg>
       );
-    case 'chevronLeft':
+    case 'chevron-left':
       return (
         <svg
           className={className}
@@ -104,7 +104,7 @@ export function Icon({ className, width = 15, height = 15, name }: IconProps) {
           />
         </svg>
       );
-    case 'chevronRight':
+    case 'chevron-right':
       return (
         <svg
           className={className}
