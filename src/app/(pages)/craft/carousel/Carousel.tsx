@@ -128,7 +128,7 @@ export default function Carousel() {
             onClick={() => handleSlideChange(currentSlide - 1)}
             disabled={currentSlide === 0}
             className={c(
-              'mr-2 rounded-md text-primary duration-150 dark:border-neutral-800 dark:text-primary-dark disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600 dark:hover:bg-neutral-800 dark:bg-opacity-25 dark:disabled:bg-transparent hover:bg-neutral-200 disabled:bg-transparent'
+              'mr-2 rounded-sm text-primary duration-150 dark:border-neutral-800 dark:text-primary-dark disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600 dark:hover:bg-neutral-800 dark:bg-opacity-25 dark:disabled:bg-transparent hover:bg-neutral-200 disabled:bg-transparent'
             )}
           >
             <Icon name="chevron-left" width={25} height={25} />
@@ -164,7 +164,7 @@ export default function Carousel() {
             onClick={() => handleSlideChange(currentSlide + 1)}
             disabled={hasReachedEndOfSlide()}
             className={c(
-              'ml-2 rounded-md text-primary duration-150 dark:border-neutral-800 dark:text-primary-dark disabled:cursor-not-allowed dark:disabled:text-neutral-600 dark:hover:bg-neutral-800 dark:disabled:bg-transparent hover:bg-neutral-200 disabled:bg-transparent'
+              'ml-2 rounded-sm text-primary duration-150 dark:border-neutral-800 dark:text-primary-dark disabled:cursor-not-allowed dark:disabled:text-neutral-600 dark:hover:bg-neutral-800 dark:disabled:bg-transparent hover:bg-neutral-200 disabled:bg-transparent'
             )}
           >
             <Icon name="chevron-right" width={25} height={25} />
