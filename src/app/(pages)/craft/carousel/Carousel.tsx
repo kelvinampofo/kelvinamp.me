@@ -121,14 +121,14 @@ export default function Carousel() {
   );
 
   return (
-    <Card className="flex lg:px-2">
+    <Card className="flex sm:pt-6 md:px-2 md:pt-8 lg:px-2 lg:pt-8">
       {isPointerDevice && (
         <div className="flex items-center">
           <button
             onClick={() => handleSlideChange(currentSlide - 1)}
             disabled={currentSlide === 0}
             className={c(
-              'mr-2 rounded-sm text-neutral-600 hover:text-neutral-400 duration-150 dark:border-neutral-800 dark:text-neutral-300 dark:hover:text-neutral-400 disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600'
+              'mr-2 rounded-sm text-primary duration-150 dark:border-neutral-800 dark:text-primary-dark disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600 dark:hover:bg-neutral-700 dark:bg-opacity-25 dark:disabled:bg-transparent hover:bg-neutral-200 disabled:bg-transparent'
             )}
           >
             <Icon name="chevron-left" width={25} height={25} />
@@ -164,7 +164,7 @@ export default function Carousel() {
             onClick={() => handleSlideChange(currentSlide + 1)}
             disabled={hasReachedEndOfSlide()}
             className={c(
-              'ml-2 rounded-sm text-neutral-600 hover:text-neutral-400 duration-150 dark:border-neutral-800 dark:text-neutral-300 dark:hover:text-neutral-400 disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600'
+              'ml-2 rounded-sm text-primary duration-150 dark:border-neutral-800 dark:text-primary-dark disabled:cursor-not-allowed dark:disabled:text-neutral-600 dark:hover:bg-neutral-700 dark:disabled:bg-transparent hover:bg-neutral-200 disabled:bg-transparent'
             )}
           >
             <Icon name="chevron-right" width={25} height={25} />
