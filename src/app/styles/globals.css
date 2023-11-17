@@ -115,7 +115,7 @@
   }
 
   span.secondary-spinner {
-    animation: donut-spin 1.2s ease-in-out infinite;
+    animation: donut-spin 0.7s ease-in-out infinite;
   }
 
   @keyframes loading-animation {
