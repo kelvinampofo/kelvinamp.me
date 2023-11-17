@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 @layer base {
-  ::selection {
-    background-color: #fff9a8;
-    color: #000000;
-  }
-
   :root {
     --page-top-mobile: 4rem;
     --page-top: 8rem;
     --page-bottom-mobile: 1.5rem;
     --page-bottom: 3rem;
+  }
+
+  ::selection {
+    background-color: #fff9a8;
+    color: #000;
   }
 
   :focus,
@@ -21,14 +21,14 @@
   }
 
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 0.375rem;
+    height: 0.375rem;
   }
 
   ::-webkit-scrollbar-thumb {
     border-radius: 15px;
     width: auto;
-    height: 20px;
+    height: 1.25rem;
   }
 
   ::-webkit-scrollbar-track {
@@ -110,8 +110,12 @@
     }
   }
 
-  .spinner {
-    animation: donut-spin 1.3s linear infinite;
+  span.primary-spinner {
+    animation: donut-spin 1.2s linear infinite;
+  }
+
+  span.secondary-spinner {
+    animation: donut-spin 1.2s ease-in-out infinite;
   }
 
   @keyframes loading-animation {
@@ -130,7 +134,7 @@
   }
 
   .loading-text .loading-dots::after {
-    animation: loading-animation 1.8s infinite;
+    animation: loading-animation 2s infinite;
     content: '';
   }
 
@@ -150,7 +154,7 @@
     width: 0.25rem;
     height: 0.25rem;
     border-radius: 15%;
-    margin: 0 2px;
+    margin: 0 0.125rem;
     display: inline-block;
     animation: flashing 1.6s infinite linear;
   }
@@ -174,13 +178,13 @@
   div.ios-spinner div {
     width: 5%;
     height: 15%;
-    background: #ffffff;
+    background: #fff;
     position: absolute;
     left: 50%;
     top: 45%;
     opacity: 0;
     border-radius: 20%;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0.1875rem rgba(0, 0, 0, 0.2);
     animation: fade 1s linear infinite;
   }
 
@@ -201,7 +205,7 @@
       opacity: 1;
     }
     to {
-      opacity: 0.25;
+      opacity: 0.3;
     }
   }
 
@@ -229,7 +233,7 @@
   }
   div.ios-spinner div:nth-child(6) {
     transform: rotate(150deg) translate(0, -130%);
-    animation-delay: -0.5s;
+    animation-delay: -0.55s;
   }
   div.ios-spinner div:nth-child(7) {
     transform: rotate(180deg) translate(0, -130%);

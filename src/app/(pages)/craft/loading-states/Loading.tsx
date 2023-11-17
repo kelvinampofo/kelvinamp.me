@@ -35,14 +35,14 @@ export default function Loading({ variant }: LoadingProps) {
     case 'primary-spinner':
       return (
         <span
-          className="spinner h-6 w-6 cursor-not-allowed rounded-full border-2 border-transparent border-l-neutral-800 dark:border-l-white"
+          className="primary-spinner h-6 w-6 cursor-not-allowed rounded-full border-2 border-transparent border-t-neutral-800 dark:border-t-white"
           aria-label="Primary spinner"
         ></span>
       );
     case 'secondary-spinner':
       return (
         <span
-          className="spinner h-6 w-6 cursor-not-allowed rounded-full border-2 border-neutral-300 border-l-neutral-800 dark:border-neutral-700 dark:border-l-white"
+          className="secondary-spinner h-6 w-6 cursor-not-allowed rounded-full border-2 border-neutral-300 border-t-neutral-800 dark:border-neutral-700 dark:border-t-white"
           aria-label="Secondary spinner"
         ></span>
       );
