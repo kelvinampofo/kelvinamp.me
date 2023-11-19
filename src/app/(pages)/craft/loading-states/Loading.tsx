@@ -28,7 +28,7 @@ export default function Loading({ variant }: LoadingProps) {
       return (
         <div className="loading-dots cursor-not-allowed" aria-label="Loading dots">
           {[...Array(3)].map((_, index) => (
-            <span key={index} className="bg-neutral-800 dark:bg-neutral-500"></span>
+            <span key={index} className="bg-neutral-800 dark:bg-neutral-300"></span>
           ))}
         </div>
       );
