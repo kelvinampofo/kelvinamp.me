@@ -35,19 +35,19 @@ export default function Now() {
           Dedicated to enhancing skill through hands-on, immersive exploration in art+technology.
         </Text>
         <Text>
-          For now, I just want to design and build software. Interactivity, typography, motion,
+          For now, all I want to do is design and build software. Interactivity, typography, motion,
           touch, optimisations, accessibility, design&mdash;an infinite canvas for creativity and
           opportunity.
         </Text>
         <Text>
-          Code and design pursuits aside, reading and/or listening to{' '}
+          Design and code pursuits aside, reading and/or listening to{' '}
           <CustomLink href="https://literal.club/kelvinamp/goals">books</CustomLink>, enjoying
           emotionally evocative music, engaging with Porsche-related content.
         </Text>
         <Text>Speaking less, unless I can improve the silence.</Text>
       </section>
       <Text colour="secondary" size="small" className="mb-12">
-        Updated <time dateTime="2023-11-08">Novemeber 08, 2023</time>
+        Last updated <time dateTime="2023-11-19">Novemeber 19 , 2023</time>
       </Text>
       <span>
         <CustomLink href="/" ariaLabel="Back to home page" arrowIcon>
