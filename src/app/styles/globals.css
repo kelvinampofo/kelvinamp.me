@@ -156,7 +156,7 @@
     border-radius: 15%;
     margin: 0 0.125rem;
     display: inline-block;
-    animation: flashing 1.2s infinite ease-out;
+    animation: flashing 1.15s infinite ease-out;
   }
 
   .loading-dots span:nth-child(2) {
