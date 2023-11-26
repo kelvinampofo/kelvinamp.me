@@ -21,7 +21,7 @@ export default {
         mono: ['var(--font-geist-mono)']
       },
       animation: {
-        shine: 'shineAnimation 3s linear 0s infinite normal forwards'
+        shine: 'shineAnimation 2.5s linear 0s infinite normal forwards'
       },
       keyframes: {
         shineAnimation: {
