@@ -10,7 +10,6 @@ import { allPrototypes } from '@/app/lib/prototypes';
 import { findPrototype } from '@/app/lib/utils';
 import { format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
-import Balancer from 'react-wrap-balancer';
 import Loading from './Loading';
 
 export const metadata: Metadata = {
@@ -58,9 +57,7 @@ export default function Page() {
             Craft
           </CustomLink>
         </span>
-        <Heading className="text-lg font-medium">
-          <Balancer>{title}</Balancer>
-        </Heading>
+        <Heading className="text-lg font-medium">{title}</Heading>
       </header>
       <div className="flex justify-between text-sm">
         <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
