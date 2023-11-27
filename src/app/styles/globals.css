@@ -15,11 +15,6 @@
     color: #000;
   }
 
-  :focus,
-  :focus-visible {
-    outline-color: #ff9500;
-  }
-
   ::-webkit-scrollbar {
     width: 0.375rem;
     height: 0.375rem;
