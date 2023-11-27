@@ -16,7 +16,7 @@ export default function Loading({ variant }: LoadingProps) {
     case 'loading-text':
       return (
         <Text
-          as="span"
+          as="div"
           size="small"
           className="loading-text hidden w-20 cursor-not-allowed sm:block"
         >
@@ -26,7 +26,7 @@ export default function Loading({ variant }: LoadingProps) {
       );
     case 'loading-dots':
       return (
-        <div className="loading-dots cursor-not-allowed" aria-label="Loading dots">
+        <div className="loading-dots cursor-not-allowed" aria-label="Loading..." role="progressbar">
           {[...Array(3)].map((_, index) => (
             <span key={index} className="bg-neutral-800 dark:bg-neutral-300"></span>
           ))}
@@ -34,21 +34,23 @@ export default function Loading({ variant }: LoadingProps) {
       );
     case 'primary-spinner':
       return (
-        <span
+        <div
           className="primary-spinner h-6 w-6 cursor-not-allowed rounded-full border-2 border-transparent border-t-neutral-800 dark:border-t-white"
-          aria-label="Primary spinner"
-        ></span>
+          aria-label="Loading..."
+          role="progressbar"
+        ></div>
       );
     case 'secondary-spinner':
       return (
-        <span
+        <div
           className="secondary-spinner h-6 w-6 cursor-not-allowed rounded-full border-2 border-neutral-300 border-t-neutral-800 dark:border-neutral-700 dark:border-t-white"
           aria-label="Secondary spinner"
-        ></span>
+          role="progressbar"
+        ></div>
       );
     case 'ios-spinner':
       return (
-        <div className="ios-spinner cursor-not-allowed">
+        <div className="ios-spinner cursor-not-allowed" aria-label="Loading..." role="progressbar">
           {[...Array(12)].map((_, index) => (
             <div key={index}></div>
           ))}

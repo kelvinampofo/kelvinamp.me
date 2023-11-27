@@ -110,11 +110,11 @@
     }
   }
 
-  span.primary-spinner {
-    animation: donut-spin 1.2s linear infinite;
+  div.primary-spinner {
+    animation: donut-spin 1.4s linear infinite;
   }
 
-  span.secondary-spinner {
+  div.secondary-spinner {
     animation: donut-spin 0.8s ease-in-out infinite;
   }
 
