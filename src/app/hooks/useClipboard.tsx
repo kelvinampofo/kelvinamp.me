@@ -7,12 +7,6 @@ export function useClipboard() {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setCurrentUrl(window.location.href);
-    }
-  }, []);
-
-  useEffect(() => {
     const resetCopied = () => {
       setIsCopied(false);
     };
@@ -23,17 +17,28 @@ export function useClipboard() {
     };
   }, [isCopied]);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentUrl(location.href);
+    }
+  }, []);
+
   const handleErrorMessage = (error: unknown) => {
     const errorMessage = getErrorMessage(error);
     setErrorMessage(errorMessage);
   };
 
+  /**
+   * clipboard copy text pattern
+   * @see https://web.dev/patterns/clipboard/copy-text
+   */
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(currentUrl);
       setIsCopied(true);
     } catch (error) {
       handleErrorMessage(error);
+      setIsCopied(false);
     }
   };
 
@@ -58,7 +63,10 @@ export function useClipboard() {
     }
   };
 
-  // Fallback function if clipboard api is not supported
+  /**
+   * fallback to clipboard api because safari (webkit) treats user activation differently:
+   * @see https://bugs.webkit.org/show_bug.cgi?id=222262.
+   */
   const handleFallbackCopy = () => {
     const tmpElement = createTmpElement();
     copyTextToClipboard(tmpElement);
