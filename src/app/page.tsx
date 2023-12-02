@@ -33,7 +33,7 @@ export default function Home() {
             Read further on <CustomLink href="/now">now</CustomLink> page.
           </p>
         </section>
-        <nav className="flex flex-col gap-1">
+        <nav className="flex flex-col">
           <span>
             <CustomLink href="/craft" ariaLabel="Craft page">
               Craft
