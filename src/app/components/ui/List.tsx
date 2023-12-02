@@ -28,7 +28,10 @@ export default function List({ items, route, showDate, showSummary }: ListProps)
               <CustomLink
                 href={`/${route}/${slug}`}
                 hideUnderline
-                className={c('flex justify-between gap-2', showSummary && 'flex-col md:flex-row')}
+                className={c(
+                  'flex justify-between gap-2 p-1',
+                  showSummary && 'flex-col md:flex-row'
+                )}
               >
                 <div className="flex items-center font-medium">
                   <span>{title}</span>

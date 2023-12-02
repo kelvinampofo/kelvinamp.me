@@ -21,10 +21,6 @@ export default function CustomLink({
 }: CustomLinkProps) {
   const isInternalLink = href.startsWith('/');
 
-  if (children === 'Back') {
-    hideUnderline = true;
-  }
-
   const classes = c(
     className,
     !hideUnderline &&
@@ -55,7 +51,7 @@ export default function CustomLink({
       className={classes}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={ariaLabel}
+      aria-label={`${ariaLabel} (opens in a new tab)`}
     >
       {children}
     </a>

@@ -17,7 +17,7 @@
 
   :focus,
   :focus-visible {
-    outline-color: #737373;
+    outline-color: #6f6f6f;
   }
 
   ::-webkit-scrollbar {
@@ -25,15 +25,20 @@
     height: 0.375rem;
   }
 
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+  }
+
   ::-webkit-scrollbar-thumb {
     border-radius: 15px;
     width: auto;
     height: 1.25rem;
+    background: #a3a3a3;
   }
 
-  ::-webkit-scrollbar-track {
-    background: transparent;
-    border-radius: 10px;
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d4d4d4;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -44,15 +49,10 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #525252;
     }
-  }
 
-  @media (prefers-color-scheme: light) {
-    ::-webkit-scrollbar-thumb {
-      background: #a3a3a3;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #d4d4d4;
+    :focus,
+    :focus-visible {
+      outline-color: #a0a0a0;
     }
   }
 
@@ -167,6 +167,15 @@
     animation-delay: 0.25s;
   }
 
+  @keyframes fade {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0.3;
+    }
+  }
+
   div.ios-spinner {
     position: relative;
     width: 2.5rem;
@@ -200,25 +209,14 @@
     }
   }
 
-  @keyframes fade {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0.3;
-    }
-  }
-
   div.ios-spinner div:nth-child(1) {
     transform: rotate(0deg) translate(0, -130%);
     animation-delay: 0s;
   }
-
   div.ios-spinner div:nth-child(2) {
     transform: rotate(30deg) translate(0, -130%);
     animation-delay: -0.9s;
   }
-
   div.ios-spinner div:nth-child(3) {
     transform: rotate(60deg) translate(0, -130%);
     animation-delay: -0.8s;

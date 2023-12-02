@@ -42,7 +42,7 @@ export default function Writing() {
       <Separator className="mb-3" />
       <List items={allPosts} route="writing" showDate />
       <span className="mt-12">
-        <CustomLink href="/" ariaLabel="Back to home page" arrowIcon>
+        <CustomLink href="/" ariaLabel="back to home page" arrowIcon className="p-1" hideUnderline>
           Back
         </CustomLink>
       </span>

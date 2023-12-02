@@ -52,7 +52,13 @@ export default function Page() {
     <Container>
       <header className="flex flex-col justify-between gap-6">
         <span>
-          <CustomLink href="/craft" ariaLabel="go back to craft page" arrowIcon hideUnderline>
+          <CustomLink
+            href="/craft"
+            ariaLabel="back to craft page"
+            arrowIcon
+            hideUnderline
+            className="p-1"
+          >
             Craft
           </CustomLink>
         </span>

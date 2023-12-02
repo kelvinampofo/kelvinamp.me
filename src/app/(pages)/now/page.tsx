@@ -54,7 +54,7 @@ export default function Now() {
         Last updated <time dateTime="2023-12-01">December 1 , 2023</time>
       </Text>
       <span>
-        <CustomLink href="/" ariaLabel="Back to home page" arrowIcon>
+        <CustomLink href="/" ariaLabel="Back to home page" arrowIcon hideUnderline className="p-1">
           Back
         </CustomLink>
       </span>

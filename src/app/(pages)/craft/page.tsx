@@ -41,7 +41,7 @@ export default function Craft() {
       <Separator className="mb-3" />
       <List items={allPrototypes} route="craft" showSummary />
       <span className="mt-12">
-        <CustomLink href="/" ariaLabel="go back to home page" arrowIcon>
+        <CustomLink href="/" ariaLabel="back to home page" arrowIcon className="p-1" hideUnderline>
           Back
         </CustomLink>
       </span>

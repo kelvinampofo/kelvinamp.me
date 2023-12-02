@@ -12,7 +12,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Balancer from 'react-wrap-balancer';
 
-interface Props {
+interface Params {
   params: { slug: string };
 }
 
@@ -22,11 +22,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata | undefined> {
+export async function generateMetadata({ params }: Params): Promise<Metadata | undefined> {
   const post = allPosts.find((post) => post.slug === params.slug);
 
   if (!post) {
-    return;
+    notFound();
   }
 
   const { title, publishedAt, summary, slug, image } = post;
@@ -67,10 +67,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata | un
   };
 }
 
-export default async function Post({ params }: Props) {
-  const { slug } = params;
-
-  const post = allPosts.find((post) => post.slug === slug);
+export default async function Post({ params }: Params) {
+  const post = allPosts.find((post) => post.slug === params.slug);
 
   if (!post) {
     notFound();
@@ -86,7 +84,13 @@ export default async function Post({ params }: Props) {
     <Container>
       <header className="flex flex-col justify-between gap-6">
         <span>
-          <CustomLink href="/writing" ariaLabel="Back to writing page" hideUnderline arrowIcon>
+          <CustomLink
+            href="/writing"
+            ariaLabel="Back to writing page"
+            arrowIcon
+            hideUnderline
+            className="p-1"
+          >
             Writing
           </CustomLink>
         </span>
