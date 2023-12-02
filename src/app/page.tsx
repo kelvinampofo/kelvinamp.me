@@ -51,14 +51,14 @@ export default function Home() {
         <Contact />
       </AnimateEnter>
       <AnimateEnter delay={1}>
-        <Tooltip content={timezoneOffset} className="mt-16">
-          <button
-            className="cursor-crosshair px-1 font-mono text-secondary dark:text-secondary-dark"
+        <Tooltip content={timezoneOffset} className="mt-24">
+          <span
+            className="inline-block cursor-crosshair font-mono text-xs text-secondary dark:text-secondary-dark"
             aria-live="off"
             role="status"
           >
-            <small>{currentTime}</small>
-          </button>
+            {currentTime}
+          </span>
         </Tooltip>
       </AnimateEnter>
     </Container>
