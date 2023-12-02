@@ -51,7 +51,7 @@ export default function CustomLink({
       className={classes}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`${ariaLabel} (opens in a new tab)`}
+      aria-label={ariaLabel}
     >
       {children}
     </a>
