@@ -5,19 +5,15 @@ import { Icon } from './Icon';
 import Tooltip from './Tooltip';
 
 export default function CopyButton() {
-  const { isCopied, errorMessage, handleCopyUrl } = useClipboard();
+  const { copyUrl, isCopied, isError, error } = useClipboard();
 
   return (
     <Tooltip content="Copy URL">
-      <button
-        onClick={handleCopyUrl}
-        aria-label={errorMessage ? errorMessage : isCopied ? 'Link copied' : 'Copy URL'}
-        className="px-1 text-secondary dark:text-secondary-dark"
-      >
-        {errorMessage ? (
-          errorMessage
+      <button onClick={copyUrl} className="px-1 text-secondary dark:text-secondary-dark">
+        {isError ? (
+          error.message
         ) : isCopied ? (
-          <span>Link copied!</span>
+          <span>Link copied</span>
         ) : (
           <Icon
             name="link"

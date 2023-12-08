@@ -3,17 +3,14 @@ import { useEffect, useState } from 'react';
 
 export function useClipboard() {
   const [isCopied, setIsCopied] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState({ message: '' });
   const [currentUrl, setCurrentUrl] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    const resetCopied = () => {
-      setIsCopied(false);
-    };
-
-    const timeout = setTimeout(resetCopied, 3000);
+    const timeoutId = setTimeout(() => setIsCopied(false), 3000);
     return () => {
-      clearTimeout(timeout);
+      clearTimeout(timeoutId);
     };
   }, [isCopied]);
 
@@ -24,8 +21,8 @@ export function useClipboard() {
   }, []);
 
   const handleErrorMessage = (error: unknown) => {
-    const errorMessage = getErrorMessage(error);
-    setErrorMessage(errorMessage);
+    const message = getErrorMessage(error);
+    setError({ message });
   };
 
   /**
@@ -38,6 +35,7 @@ export function useClipboard() {
       setIsCopied(true);
     } catch (error) {
       handleErrorMessage(error);
+      setIsError(true);
       setIsCopied(false);
     }
   };
@@ -60,6 +58,8 @@ export function useClipboard() {
       setIsCopied(true);
     } catch (error) {
       handleErrorMessage(error);
+      setIsError(true);
+      setIsCopied(false);
     }
   };
 
@@ -74,16 +74,13 @@ export function useClipboard() {
   };
 
   const handleCopyUrl = () => {
-    if (navigator.clipboard) {
-      handleCopy();
-    } else {
-      handleFallbackCopy();
-    }
+    navigator.clipboard ? handleCopy() : handleFallbackCopy();
   };
 
   return {
     isCopied,
-    errorMessage,
-    handleCopyUrl
+    isError,
+    error,
+    copyUrl: handleCopyUrl
   };
 }
