@@ -41,7 +41,7 @@ export function Navigation({ currentItem, allItems, route }: NavigationProps) {
   return (
     <nav className="flex list-none justify-between text-sm">
       {previousItem && (
-        <CustomLink href={`/${route}/${previousItem.slug}`} ariaLabel="Previous post" hideUnderline>
+        <CustomLink href={`/${route}/${previousItem.slug}`} hideUnderline>
           <div className="flex flex-col gap-1">
             <Icon name="arrow-left" className="text-[#6F6F6F] dark:text-[#A0A0A0]" />
             {previousItem.title}
@@ -51,7 +51,7 @@ export function Navigation({ currentItem, allItems, route }: NavigationProps) {
       )}
       <div className="flex grow" /> {/* fill remaining space */}
       {nextItem && (
-        <CustomLink href={`/${route}/${nextItem.slug}`} ariaLabel="Next post" hideUnderline>
+        <CustomLink href={`/${route}/${nextItem.slug}`} hideUnderline>
           <div className="flex flex-col items-end gap-1">
             <Icon name="arrow-right" className="flex-1 text-[#6F6F6F] dark:text-[#A0A0A0]" />
             {nextItem.title}
