@@ -20,10 +20,10 @@ export const allPrototypes: Prototype[] = [
     summary: 'A minimal CSS based carousel.'
   },
   {
-    slug: '/loading-states',
+    slug: '/loading-indicators',
     id: 2,
-    title: 'Loading states',
-    href: '/loading-states',
+    title: 'Loading indicators',
+    href: '/loading-indicators',
     publishedAt: '2023-11-11',
     summary: 'Simple loading state indicators.'
   }

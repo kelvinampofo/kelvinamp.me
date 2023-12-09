@@ -36,12 +36,12 @@ export default function Craft() {
     <Container>
       <Heading className="mb-3">Craft</Heading>
       <Text className="mb-10" colour="secondary">
-        Crafting web interfaces just for play.
+        Crafting web interfaces.
       </Text>
       <Separator className="mb-3" />
       <List items={allPrototypes} route="craft" showSummary />
       <span className="mt-12">
-        <CustomLink href="/" ariaLabel="back to home page" arrowIcon className="p-1" hideUnderline>
+        <CustomLink href="/" arrowIcon className="p-1" hideUnderline>
           Back
         </CustomLink>
       </span>

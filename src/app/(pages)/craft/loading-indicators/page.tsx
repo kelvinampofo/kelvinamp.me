@@ -13,11 +13,11 @@ import { Metadata } from 'next';
 import Loading from './Loading';
 
 export const metadata: Metadata = {
-  title: 'Loading states',
+  title: 'Loading indicators',
   description: 'Simple loading state indicators.',
   authors: [{ name: 'Kelvin Ampofo' }],
   openGraph: {
-    title: 'Loading states',
+    title: 'Loading indicators',
     description: 'Simple loading state indicators.',
     images: [
       {
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     ]
   },
   twitter: {
-    title: 'Loading states',
+    title: 'Loading indicators',
     site: '@kelvinamp_',
     card: 'summary_large_image',
     description: 'Simple loading state indicators.',
@@ -45,15 +45,15 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  const loadingStatePrototypes = findPrototype(allPrototypes, 'Loading states');
+  const loadingIndicators = findPrototype(allPrototypes, 'Loading indicators');
 
-  const { title, publishedAt, summary } = loadingStatePrototypes;
+  const { title, publishedAt, summary } = loadingIndicators;
 
   return (
     <Container>
       <header className="flex flex-col justify-between gap-6">
         <span>
-          <CustomLink href="/craft" ariaLabel="go back to craft page" arrowIcon hideUnderline>
+          <CustomLink href="/craft" arrowIcon hideUnderline>
             Craft
           </CustomLink>
         </span>
@@ -74,7 +74,7 @@ export default function Page() {
         <Loading variant="loading-text" />
       </Card>
       <Separator className="my-8" />
-      <Navigation allItems={allPrototypes} currentItem={loadingStatePrototypes} route="craft" />
+      <Navigation allItems={allPrototypes} currentItem={loadingIndicators} route="craft" />
     </Container>
   );
 }

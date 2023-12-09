@@ -16,7 +16,7 @@ export default function Loading({ variant }: LoadingProps) {
     case 'loading-text':
       return (
         <Text
-          as="div"
+          as="span"
           size="small"
           className="loading-text hidden w-20 cursor-not-allowed sm:block"
         >
