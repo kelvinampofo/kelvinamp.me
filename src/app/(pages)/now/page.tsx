@@ -42,16 +42,16 @@ export default function Now() {
         <Text>
           Design and code pursuits aside, probably reading and/or listening to{' '}
           <CustomLink href="https://literal.club/kelvinamp/goals">books</CustomLink>, enjoying
-          emotionally evocative music or playing with the{' '}
-          <CustomLink href="https://configurator.porsche.com/en-GB/model/992810?options=1LQ.1NX.2W6.3FF.6FP.9VL.C2Q.DDD.DDN.G1C.Q4Q.UD1.VW7.72.N0&loadedFrom=PRFXXVN8">
-            Porsche
-          </CustomLink>{' '}
-          configurator.
+          emotionally evocative music or playing with the Porsche{' '}
+          <CustomLink href="https://configurator.porsche.com/porsche-code/PRWFJS71">
+            configurator
+          </CustomLink>
+          .
         </Text>
         <Text>Speaking less, unless I can improve the silence.</Text>
       </section>
       <Text colour="secondary" size="small" className="mb-12">
-        Last updated <time dateTime="2023-12-01">December 1 , 2023</time>
+        Updated <time dateTime="2023-12-10">December 10, 2023</time>
       </Text>
       <span>
         <CustomLink href="/" ariaLabel="Back to home page" arrowIcon hideUnderline className="p-1">
