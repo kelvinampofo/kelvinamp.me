@@ -1,6 +1,5 @@
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
-import Separator from '@/app/components/generic/Separator';
 import Text from '@/app/components/generic/Text';
 import CustomLink from '@/app/components/ui/CustomLink';
 import List from '@/app/components/ui/List';
@@ -39,8 +38,7 @@ export default function Writing() {
       <Text className="mb-10" colour="secondary">
         Infrequent thoughts on technology, design and things in between.
       </Text>
-      <Separator className="mb-3" />
-      <List items={allPosts} route="writing" showDate />
+      <List items={allPosts} route="writing" />
       <span className="mt-12">
         <CustomLink href="/" ariaLabel="back to home page" arrowIcon className="p-1" hideUnderline>
           Back

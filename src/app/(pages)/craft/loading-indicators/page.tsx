@@ -61,7 +61,7 @@ export default function Page() {
       </header>
       <div className="flex justify-between text-sm">
         <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
-          {format(parseISO(publishedAt), 'MMMM yyyy')}
+          {format(parseISO(publishedAt), 'MMM yyyy')}
         </time>
         <CopyButton />
       </div>

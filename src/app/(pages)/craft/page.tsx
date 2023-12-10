@@ -1,6 +1,5 @@
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
-import Separator from '@/app/components/generic/Separator';
 import Text from '@/app/components/generic/Text';
 import CustomLink from '@/app/components/ui/CustomLink';
 import List from '@/app/components/ui/List';
@@ -38,8 +37,7 @@ export default function Craft() {
       <Text className="mb-10" colour="secondary">
         Crafting web interfaces.
       </Text>
-      <Separator className="mb-3" />
-      <List items={allPrototypes} route="craft" showSummary />
+      <List items={allPrototypes} route="craft" />
       <span className="mt-12">
         <CustomLink href="/" arrowIcon className="p-1" hideUnderline>
           Back
