@@ -14,6 +14,8 @@ interface ListProps {
 }
 
 export default function List({ items, route }: ListProps) {
+  const craftRoute = 'craft';
+
   return (
     <>
       <div className="flex justify-between">
@@ -21,14 +23,14 @@ export default function List({ items, route }: ListProps) {
           Title
         </Text>
         <Text as="span" colour="secondary">
-          {route === 'craft' ? 'Created at' : 'Published at'}
+          {route === craftRoute ? 'Created at' : 'Published at'}
         </Text>
       </div>
       <Separator className="my-3" />
       <ol>
         {items
           .sort((a, b) => compareDesc(parseISO(a.publishedAt), parseISO(b.publishedAt)))
-          .map(({ publishedAt, slug, title }) => {
+          .map(({ publishedAt, slug, title, summary }) => {
             const publishedDate = parseISO(publishedAt);
             const isNewItem = isWithin1Month(publishedDate);
             return (
@@ -38,13 +40,18 @@ export default function List({ items, route }: ListProps) {
                   hideUnderline
                   className={c('flex justify-between gap-2 p-1')}
                 >
-                  <div className="flex items-center font-medium">
+                  <div className="flex items-center gap-2 font-medium">
                     <span>{title}</span>
+                    {route === craftRoute && (
+                      <Text as="span" colour="secondary" size="small" className="hidden md:block">
+                        {summary}
+                      </Text>
+                    )}
                     {isNewItem && <Badge ariaHidden>new</Badge>}
                   </div>
 
                   <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
-                    {route === 'craft'
+                    {route === craftRoute
                       ? format(publishedDate, 'MMM yyyy')
                       : format(publishedDate, 'dd/MM/yy')}
                   </time>
