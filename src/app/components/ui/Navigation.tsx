@@ -43,7 +43,7 @@ export function Navigation({ currentItem, allItems, route }: NavigationProps) {
       {previousItem && (
         <CustomLink href={`/${route}/${previousItem.slug}`} hideUnderline>
           <div className="flex flex-col gap-1">
-            <Icon name="arrow-left" className="text-[#6F6F6F] dark:text-[#A0A0A0]" />
+            <Icon name="arrow-left" className="text-secondary dark:text-secondary-dark" />
             {previousItem.title}
             <span className="sr-only">Previous</span>
           </div>

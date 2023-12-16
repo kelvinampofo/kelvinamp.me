@@ -7,7 +7,7 @@ export type Prototype = {
   href: string;
   publishedAt: string;
   summary: string;
-  image?: string | undefined;
+  image?: string;
 };
 
 export const allPrototypes: Prototype[] = [
