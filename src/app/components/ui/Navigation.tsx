@@ -43,9 +43,15 @@ export function Navigation({ currentItem, allItems, route }: NavigationProps) {
       {previousItem && (
         <CustomLink href={`/${route}/${previousItem.slug}`} hideUnderline>
           <div className="flex flex-col gap-1">
-            <Icon name="arrow-left" className="text-secondary dark:text-secondary-dark" />
+            <Icon
+              name="arrow-left"
+              className="text-secondary dark:text-secondary-dark"
+              ariaHidden="true"
+            />
+            <span className="sr-only">
+              Previous {`${route === 'writing' ? 'post,' : 'prototype,'}`}
+            </span>
             {previousItem.title}
-            <span className="sr-only">Previous</span>
           </div>
         </CustomLink>
       )}
@@ -53,9 +59,15 @@ export function Navigation({ currentItem, allItems, route }: NavigationProps) {
       {nextItem && (
         <CustomLink href={`/${route}/${nextItem.slug}`} hideUnderline>
           <div className="flex flex-col items-end gap-1">
-            <Icon name="arrow-right" className="flex-1 text-[#6F6F6F] dark:text-[#A0A0A0]" />
+            <Icon
+              name="arrow-right"
+              className="flex-1 text-[#6F6F6F] dark:text-[#A0A0A0]"
+              ariaHidden="true"
+            />
+            <span className="sr-only">
+              Next {`${route === 'writing' ? 'post,' : 'prototype,'}`}
+            </span>
             {nextItem.title}
-            <span className="sr-only">Next</span>
           </div>
         </CustomLink>
       )}

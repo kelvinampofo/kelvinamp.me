@@ -12,8 +12,12 @@ export default function CopyButton() {
   useHotKey(['Control', 'Meta'], 'c', copyUrl);
 
   return (
-    <Tooltip content="Copy Link ⌃⌘C">
-      <button onClick={copyUrl} className="px-1 text-secondary dark:text-secondary-dark">
+    <Tooltip content="Copy Link (⌃⌘C)">
+      <button
+        onClick={copyUrl}
+        className="px-1 text-secondary dark:text-secondary-dark"
+        aria-label="Copy Link"
+      >
         {isError ? (
           error.message
         ) : isCopied ? (
@@ -26,6 +30,7 @@ export default function CopyButton() {
             className="text-secondary transition-colors hover:text-primary dark:text-secondary-dark dark:hover:text-primary-dark"
             width={18}
             height={18}
+            ariaHidden="true"
           />
         )}
       </button>

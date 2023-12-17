@@ -8,14 +8,16 @@ type IconName =
   | 'reload'
   | 'rocket';
 
-interface IconProps {
-  className?: string;
+interface IconProps extends Partial<SVGElement> {
   width?: number;
   height?: number;
   name: IconName;
+  className?: string;
+  ariaHidden?: string;
+  ariaLabel?: string;
 }
 
-export function Icon({ className, width = 15, height = 15, name }: IconProps) {
+export function Icon({ className, width = 15, height = 15, name, ariaLabel }: IconProps) {
   switch (name) {
     case 'arrow-left':
       return (
@@ -23,7 +25,7 @@ export function Icon({ className, width = 15, height = 15, name }: IconProps) {
           className={className}
           height={height}
           width={width}
-          aria-label="Arrow Left icon"
+          aria-label={ariaLabel}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 15 15"
@@ -42,7 +44,7 @@ export function Icon({ className, width = 15, height = 15, name }: IconProps) {
           className={className}
           height={height}
           width={width}
-          aria-label="Arrow Right icon"
+          aria-label={ariaLabel}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 15 15"
