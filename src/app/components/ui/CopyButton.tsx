@@ -9,10 +9,10 @@ import Tooltip from './Tooltip';
 export default function CopyButton() {
   const { isCopied, isError, error, copyUrl } = useClipboard();
 
-  useHotKey(['Control', 'Shift'], 'c', copyUrl);
+  useHotKey(['Control', 'Meta'], 'c', copyUrl);
 
   return (
-    <Tooltip content="Copy URL">
+    <Tooltip content="Copy Link ⌃⌘C">
       <button onClick={copyUrl} className="px-1 text-secondary dark:text-secondary-dark">
         {isError ? (
           error.message
