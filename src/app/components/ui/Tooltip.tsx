@@ -14,7 +14,7 @@ export default function Tooltip({ children, content, className }: TooltipProps) 
           {children}
         </TooltipPrimitive.Trigger>
         <TooltipPrimitive.Content
-          className="tooltip-content rounded-md border px-2 py-1 text-xs shadow-md duration-200 dark:border-neutral-800 dark:shadow-neutral-950"
+          className="tooltip-content rounded-md border px-2 py-1 text-xs font-medium shadow-md duration-200 dark:border-neutral-800 dark:shadow-neutral-950"
           sideOffset={5}
         >
           {content}
