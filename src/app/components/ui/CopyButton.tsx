@@ -1,11 +1,15 @@
 'use client';
 
 import { useClipboard } from '@/app/hooks/useClipboard';
+import { useHotKey } from '@/app/hooks/useHotkey';
+import Text from '../generic/Text';
 import { Icon } from './Icon';
 import Tooltip from './Tooltip';
 
 export default function CopyButton() {
-  const { copyUrl, isCopied, isError, error } = useClipboard();
+  const { isCopied, isError, error, copyUrl } = useClipboard();
+
+  useHotKey(['Control', 'Shift'], 'c', copyUrl);
 
   return (
     <Tooltip content="Copy URL">
@@ -13,7 +17,9 @@ export default function CopyButton() {
         {isError ? (
           error.message
         ) : isCopied ? (
-          <span>Link copied</span>
+          <Text as="span" colour="secondary" size="small">
+            Link copied!
+          </Text>
         ) : (
           <Icon
             name="link"
