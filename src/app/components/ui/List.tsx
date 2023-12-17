@@ -18,14 +18,6 @@ export default function List({ items, route }: ListProps) {
 
   return (
     <>
-      <div className="flex justify-between">
-        <Text as="span" colour="secondary">
-          Title
-        </Text>
-        <Text as="span" colour="secondary">
-          {route === craftRoute ? 'Created at' : 'Published at'}
-        </Text>
-      </div>
       <Separator className="my-3" />
       <ol>
         {items
@@ -43,7 +35,13 @@ export default function List({ items, route }: ListProps) {
                   <div className="flex items-center gap-2 font-medium">
                     <span>{title}</span>
                     {route === craftRoute && (
-                      <Text as="span" colour="secondary" size="small" className="hidden md:block">
+                      <Text
+                        as="span"
+                        colour="secondary"
+                        className="hidden md:block"
+                        size="small"
+                        aria-hidden="true"
+                      >
                         {summary}
                       </Text>
                     )}
