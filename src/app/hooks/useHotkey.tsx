@@ -1,24 +1,31 @@
 import { useCallback, useEffect, type ModifierKey } from 'react';
 
+type Options = {
+  preventDefault?: boolean; //* to prevent the browsers default behavior on certain keystrokes e.g. ctrl+s
+};
+
 export function useHotKey(
-  modifiers: ModifierKey | ModifierKey[],
-  shortcut: string,
-  callback: () => void
+  modifierkey: ModifierKey | ModifierKey[],
+  key: string,
+  callback: () => void,
+  options: Options = {}
 ) {
+  const { preventDefault = false } = options;
+
   const handleKeyboardShortcut = useCallback(
     (event: KeyboardEvent) => {
-      const isCorrectKey = event.key.toLowerCase() === shortcut.toLowerCase();
-      const modifiersArray = Array.isArray(modifiers) ? modifiers : [modifiers];
-      const hasCorrectModifiers = modifiersArray.every((modifier) =>
-        event.getModifierState(modifier)
-      );
+      const isHotkeyPressed = event.key.toLowerCase() === key.toLowerCase();
 
-      if (isCorrectKey && hasCorrectModifiers) {
-        event.preventDefault();
+      const isModifierPressed = Array.isArray(modifierkey)
+        ? modifierkey.every((modifier) => event.getModifierState(modifier))
+        : event.getModifierState(modifierkey);
+
+      if (isHotkeyPressed && isModifierPressed) {
+        if (preventDefault) event.preventDefault();
         callback();
       }
     },
-    [modifiers, shortcut, callback]
+    [key, modifierkey, preventDefault, callback]
   );
 
   useEffect(() => {
