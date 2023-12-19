@@ -9,7 +9,11 @@ export const isWithin1Month = (postDate: Date) => {
   });
 };
 
-export const getErrorMessage = (error: unknown) => {
+export const findPrototype = (prototype: Prototype[], titleToMatch: string) => {
+  return prototype.find(({ title }) => title === titleToMatch) as Prototype;
+};
+
+export const getErrorMessage = (error: unknown): string => {
   if (error instanceof Error) {
     return error.message;
   }
@@ -18,16 +22,17 @@ export const getErrorMessage = (error: unknown) => {
     return error;
   }
 
-  const hasValidMessage =
-    error && typeof error === 'object' && 'message' in error && typeof error.message === 'string';
-
-  if (hasValidMessage) {
-    return error.message as string;
+  if (
+    typeof error === 'object' &&
+    error !== null &&
+    'message' in error &&
+    typeof error.message === 'string'
+  ) {
+    return error.message;
   }
 
   return 'Something went wrong.';
 };
 
-export const findPrototype = (prototype: Prototype[], titleToMatch: string) => {
-  return prototype.find(({ title }) => title === titleToMatch) as Prototype;
-};
+export const isMacOS =
+  typeof window !== 'undefined' ? /\bMacintosh\b|\bMac OS X\b/.test(navigator.userAgent) : false;
