@@ -2,6 +2,7 @@
 
 import { useClipboard } from '@/app/hooks/useClipboard';
 import { useHotKey } from '@/app/hooks/useHotkey';
+import { isMacOS } from '@/app/lib/utils';
 import Text from '../generic/Text';
 import { Icon } from './Icon';
 import Tooltip from './Tooltip';
@@ -9,10 +10,10 @@ import Tooltip from './Tooltip';
 export default function CopyButton() {
   const { isCopied, isError, error, copyUrl } = useClipboard();
 
-  useHotKey(['Control', 'Meta'], 'c', copyUrl);
+  useHotKey(isMacOS ? ['Control', 'Meta'] : ['Control', 'Alt'], 'c', copyUrl);
 
   return (
-    <Tooltip content="Copy Link (⌃⌘C)">
+    <Tooltip content={`Copy Link (${isMacOS ? '⌃⌘C' : 'CTRL + ALT + C'})`}>
       <button
         onClick={copyUrl}
         className="px-1 text-secondary dark:text-secondary-dark"
