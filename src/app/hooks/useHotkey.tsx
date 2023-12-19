@@ -1,7 +1,7 @@
 import { useCallback, useEffect, type ModifierKey } from 'react';
 
 type Options = {
-  preventDefault?: boolean; //* to prevent the browsers default behavior on certain keystrokes e.g. ctrl+s
+  preventDefault?: boolean;
 };
 
 export function useHotKey(
@@ -10,9 +10,11 @@ export function useHotKey(
   callback: () => void,
   options: Options = {}
 ) {
+  if (modifierkey.length === 0) throw new Error('A valid modifier key or keys must be provided.');
+
   const { preventDefault = false } = options;
 
-  const handleKeyboardShortcut = useCallback(
+  const handleHotkey = useCallback(
     (event: KeyboardEvent) => {
       const isHotkeyPressed = event.key.toLowerCase() === key.toLowerCase();
 
@@ -25,12 +27,12 @@ export function useHotKey(
         callback();
       }
     },
-    [key, modifierkey, preventDefault, callback]
+    [callback, key, modifierkey, preventDefault]
   );
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyboardShortcut);
+    document.addEventListener('keydown', handleHotkey);
 
-    return () => window.removeEventListener('keydown', handleKeyboardShortcut);
-  }, [handleKeyboardShortcut]);
+    return () => document.removeEventListener('keydown', handleHotkey);
+  }, [handleHotkey]);
 }
