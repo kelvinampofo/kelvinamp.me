@@ -1,6 +1,7 @@
 import '@/app/styles/globals.css';
 import c from 'clsx';
-import { GeistMono, GeistSans } from 'geist/font';
+import { GeistMono } from 'geist/font/mono';
+import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import Providers from './providers';
