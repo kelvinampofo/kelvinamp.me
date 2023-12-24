@@ -31,8 +31,8 @@ export function useHotKey(
   );
 
   useEffect(() => {
-    document.addEventListener('keydown', handleHotkey);
+    window.addEventListener('keydown', handleHotkey);
 
-    return () => document.removeEventListener('keydown', handleHotkey);
+    return () => window.removeEventListener('keydown', handleHotkey);
   }, [handleHotkey]);
 }
