@@ -20,11 +20,6 @@ export function useClipboard() {
     }
   }, []);
 
-  const handleErrorMessage = (error: unknown) => {
-    const message = getErrorMessage(error);
-    setError({ message });
-  };
-
   /**
    * clipboard copy text pattern
    * @see https://web.dev/patterns/clipboard/copy-text
@@ -34,7 +29,7 @@ export function useClipboard() {
       await navigator.clipboard.writeText(currentUrl);
       setIsCopied(true);
     } catch (error) {
-      handleErrorMessage(error);
+      setError({ message: getErrorMessage(error) });
       setIsError(true);
       setIsCopied(false);
     }
@@ -57,9 +52,9 @@ export function useClipboard() {
       document.execCommand('copy');
       setIsCopied(true);
     } catch (error) {
-      handleErrorMessage(error);
-      setIsError(true);
       setIsCopied(false);
+      setIsError(true);
+      setError({ message: getErrorMessage(error) });
     }
   };
 
