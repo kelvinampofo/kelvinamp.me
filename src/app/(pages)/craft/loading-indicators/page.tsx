@@ -53,7 +53,7 @@ export default function Page() {
     <Container>
       <header className="flex flex-col justify-between gap-6">
         <span>
-          <CustomLink href="/craft" arrowIcon hideUnderline>
+          <CustomLink href="/craft" arrowIcon hideUnderline className="p-1">
             Craft
           </CustomLink>
         </span>
