@@ -4,7 +4,7 @@ type Options = {
   preventDefault?: boolean;
 };
 
-export function useHotKey(
+export function useHotkey(
   modifierkey: ModifierKey | ModifierKey[],
   key: string,
   callback: () => void,
