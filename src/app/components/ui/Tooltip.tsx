@@ -2,7 +2,7 @@ import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 
 interface TooltipProps {
   children: React.ReactNode;
-  content: string;
+  content: string | React.ReactNode;
   className?: string;
 }
 
