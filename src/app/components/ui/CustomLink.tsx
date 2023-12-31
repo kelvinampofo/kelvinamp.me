@@ -25,7 +25,7 @@ export default function CustomLink({
     className,
     !hideUnderline &&
       'underline decoration-neutral-300 decoration-1 underline-offset-[2.5px] dark:decoration-[#505050]',
-    'transition-colors hover:text-secondary dark:hover:text-secondary-dark'
+    'transition-colors dark:hover:decoration-secondary-dark hover:decoration-secondary'
   );
 
   if (isInternalLink) {
