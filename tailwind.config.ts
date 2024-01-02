@@ -1,9 +1,14 @@
+import typograhpy from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
 
 export default {
   content: ['./src/**/*.{ts,tsx}', './content/**/*.{md,mdx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-geist-sans)'],
+        mono: ['var(--font-geist-mono)']
+      },
       colors: {
         primary: '#161616',
         secondary: '#6F6F6F',
@@ -15,22 +20,6 @@ export default {
         'page-top-mobile': 'var(--page-top-mobile)',
         'page-bottom': 'var(--page-bottom)',
         'page-bottom-mobile': 'var(--page-bottom-mobile)'
-      },
-      fontFamily: {
-        sans: ['var(--font-geist-sans)'],
-        mono: ['var(--font-geist-mono)']
-      },
-      animation: {
-        shine: 'shineAnimation 2.5s linear 0s infinite normal forwards'
-      },
-      keyframes: {
-        shineAnimation: {
-          '0%': { 'background-position': 'left' },
-          '50%': { 'background-position': 'right' }
-        }
-      },
-      backgroundSize: {
-        '200': '200%'
       }
     }
   },
@@ -38,5 +27,5 @@ export default {
   future: {
     hoverOnlyWhenSupported: true
   },
-  plugins: [require('@tailwindcss/typography')]
+  plugins: [typograhpy]
 } satisfies Config;
