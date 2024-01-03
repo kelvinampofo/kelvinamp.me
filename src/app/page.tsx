@@ -1,5 +1,3 @@
-'use client';
-
 import AnimateEnter from '@/app/components/generic/AnimateEnter';
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
@@ -7,12 +5,9 @@ import Separator from '@/app/components/generic/Separator';
 import Text from '@/app/components/generic/Text';
 import Contact from '@/app/components/ui/Contact';
 import CustomLink from '@/app/components/ui/CustomLink';
-import Tooltip from '@/app/components/ui/Tooltip';
-import useTime from '@/app/hooks/useTime';
+import TimeWidget from './components/ui/TimeWidget';
 
 export default function Home() {
-  const { currentTime, timezoneOffset } = useTime();
-
   return (
     <Container>
       <AnimateEnter delay={0.4}>
@@ -51,15 +46,7 @@ export default function Home() {
         <Contact />
       </AnimateEnter>
       <AnimateEnter delay={1}>
-        <Tooltip content={timezoneOffset} className="mt-24">
-          <span
-            className="inline-block cursor-crosshair font-mono text-xs text-secondary dark:text-secondary-dark"
-            aria-live="off"
-            role="status"
-          >
-            {currentTime}
-          </span>
-        </Tooltip>
+        <TimeWidget />
       </AnimateEnter>
     </Container>
   );
