@@ -11,10 +11,15 @@ export default function Heading({
   as: HeadingTag = 'h1',
   ...rest
 }: HeadingProps) {
-  const fontSizeClass = HeadingTag === 'h1' ? 'text-lg' : 'text-base';
-
   return (
-    <HeadingTag className={c('font-medium', fontSizeClass, className)} {...rest}>
+    <HeadingTag
+      className={c(
+        HeadingTag === 'h1' ? 'text-lg' : 'text-base',
+        className,
+        'font-medium text-balance'
+      )}
+      {...rest}
+    >
       {children}
     </HeadingTag>
   );
