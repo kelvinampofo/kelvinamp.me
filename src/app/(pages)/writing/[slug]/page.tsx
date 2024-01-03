@@ -10,7 +10,6 @@ import { allPosts } from 'contentlayer/generated';
 import { format, parseISO } from 'date-fns';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Balancer from 'react-wrap-balancer';
 
 interface Params {
   params: { slug: string };
@@ -94,9 +93,7 @@ export default async function Post({ params }: Params) {
             Writing
           </CustomLink>
         </span>
-        <Heading>
-          <Balancer>{title}</Balancer>
-        </Heading>
+        <Heading>{title}</Heading>
       </header>
       <div className="mb-3 flex justify-between text-sm">
         <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
