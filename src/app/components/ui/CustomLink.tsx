@@ -24,7 +24,7 @@ export default function CustomLink({
   const classes = c(
     className,
     !hideUnderline &&
-      'underline decoration-neutral-300 decoration-1 underline-offset-[2.5px] dark:decoration-[#505050]',
+      'underline decoration-neutral-300 decoration-1 underline-offset-2 dark:decoration-[#505050]',
     'transition-colors dark:hover:decoration-secondary-dark hover:decoration-secondary'
   );
 
