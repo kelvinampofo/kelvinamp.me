@@ -41,7 +41,11 @@ export function Navigation({ currentItem, allItems, route }: NavigationProps) {
   return (
     <nav className="flex list-none justify-between text-sm">
       {previousItem && (
-        <CustomLink href={`/${route}/${previousItem.slug}`} hideUnderline className="p-1">
+        <CustomLink
+          href={`/${route}/${previousItem.slug}`}
+          hideUnderline
+          className="p-1 hover:text-secondary dark:hover:text-secondary-dark"
+        >
           <div className="flex flex-col gap-1">
             <Icon
               name="arrow-left"
@@ -57,7 +61,11 @@ export function Navigation({ currentItem, allItems, route }: NavigationProps) {
       )}
       <div className="flex grow" /> {/* fill remaining space */}
       {nextItem && (
-        <CustomLink href={`/${route}/${nextItem.slug}`} hideUnderline className="p-1">
+        <CustomLink
+          href={`/${route}/${nextItem.slug}`}
+          hideUnderline
+          className="p-1 hover:text-secondary dark:hover:text-secondary-dark"
+        >
           <div className="flex flex-col items-end gap-1">
             <Icon
               name="arrow-right"
