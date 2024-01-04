@@ -39,7 +39,7 @@
     "postcss": "^8.4.30",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.6",
-    "rehype-autolink-headings": "^7.0.0",
+    "rehype-autolink-headings": "^7.1.0",
     "rehype-pretty-code": "^0.10.1",
     "remark-gfm": "^4.0.0",
     "shiki": "^0.14.5",
