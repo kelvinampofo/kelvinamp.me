@@ -35,7 +35,7 @@ export default function Craft() {
     <Container>
       <Heading className="mb-3">Craft</Heading>
       <Text className="mb-10 text-balance" colour="secondary">
-        Crafting interfaces, adventures in art+technology
+        Crafting interfaces.
       </Text>
       <List items={allPrototypes} route="craft" />
       <span className="mt-12">

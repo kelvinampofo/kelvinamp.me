@@ -1,11 +1,11 @@
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 
-interface UseTimeOptions {
+interface Options {
   useLondonTime?: boolean;
 }
 
-export const useTime = (options: UseTimeOptions = {}) => {
+export const useTime = (options: Options = {}) => {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -16,9 +16,9 @@ export const useTime = (options: UseTimeOptions = {}) => {
 
   const { useLondonTime = true } = options;
 
-  let currentTime;
-  let meridiem;
-  let timezoneOffset;
+  let currentTime: string;
+  let meridiem: string;
+  let timezoneOffset: string;
 
   if (useLondonTime) {
     // convert the current time to 'Europe/London' timezone

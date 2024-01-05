@@ -5,7 +5,7 @@ import Separator from '@/app/components/generic/Separator';
 import Text from '@/app/components/generic/Text';
 import Contact from '@/app/components/ui/Contact';
 import CustomLink from '@/app/components/ui/CustomLink';
-import TimeWidget from './components/ui/TimeWidget';
+import TimeWidget from '@/app/components/ui/TimeWidget';
 
 export default function Home() {
   return (
@@ -28,6 +28,8 @@ export default function Home() {
             Read further on <CustomLink href="/now">now</CustomLink> page.
           </p>
         </section>
+      </AnimateEnter>
+      <AnimateEnter delay={0.8}>
         <nav className="flex flex-col">
           <span>
             <CustomLink href="/craft" ariaLabel="Craft page">
@@ -42,10 +44,10 @@ export default function Home() {
         </nav>
         <Separator className="my-12" />
       </AnimateEnter>
-      <AnimateEnter delay={0.8}>
+      <AnimateEnter delay={1}>
         <Contact />
       </AnimateEnter>
-      <AnimateEnter delay={1}>
+      <AnimateEnter delay={1.2}>
         <TimeWidget />
       </AnimateEnter>
     </Container>
