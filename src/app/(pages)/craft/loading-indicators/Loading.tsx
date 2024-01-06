@@ -21,7 +21,7 @@ export default function Loading({ variant }: LoadingProps) {
           className="loading-text hidden w-20 cursor-not-allowed sm:block"
         >
           Loading
-          <span className="loading-dots ml-1"></span>
+          <span className="loading-dots ml-[2px]"></span>
         </Text>
       );
     case 'loading-dots':
