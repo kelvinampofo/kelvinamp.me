@@ -1,37 +1,39 @@
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 
-interface Options {
-  useLondonTime?: boolean;
-}
+type Options = {
+  useLondonTime: boolean;
+};
 
-export const useTime = (options: Options = {}) => {
+export const useTime = (options: Options = { useLondonTime: true }) => {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
-    const updateCurrentTime = () => setTime(new Date());
-    const intervalId = setInterval(updateCurrentTime, 1000);
+    const updateTime = () => setTime(new Date());
+    const intervalId = setInterval(updateTime, 1000);
     return () => clearInterval(intervalId);
   }, []);
 
-  const { useLondonTime = true } = options;
+  const { useLondonTime } = options;
 
-  let currentTime: string;
-  let meridiem: string;
-  let timezoneOffset: string;
+  // convert the current time to 'Europe/London' timezone, otherwise use system time directly
+  const convertedTime = useLondonTime
+    ? new Date(time.toLocaleString('en', { timeZone: 'Europe/London' }))
+    : time;
 
-  if (useLondonTime) {
-    // convert the current time to 'Europe/London' timezone
-    const londonTime = new Date(time.toLocaleString('en', { timeZone: 'Europe/London' }));
-    currentTime = format(londonTime, 'HH:mm:ss');
-    meridiem = format(londonTime, 'a');
-    timezoneOffset = `UTC ${format(londonTime, 'xxx')}`;
-  } else {
-    // use system time directly
-    currentTime = format(time, 'HH:mm:ss');
-    meridiem = format(time, 'a');
-    timezoneOffset = `UTC ${format(time, 'xxx')}`;
-  }
+  const formatTime = () => {
+    const formattedTime = format(convertedTime, 'HH:mm:ss');
+    const formattedMeridiem = format(convertedTime, 'a');
+    const formattedTimezoneOffset = `UTC ${format(convertedTime, 'xxx')}`;
 
-  return { currentTime, meridiem, timezoneOffset };
+    return { formattedTime, formattedMeridiem, formattedTimezoneOffset };
+  };
+
+  const { formattedTime, formattedMeridiem, formattedTimezoneOffset } = formatTime();
+
+  return {
+    currentTime: formattedTime,
+    meridiem: formattedMeridiem,
+    timezoneOffset: formattedTimezoneOffset
+  };
 };
