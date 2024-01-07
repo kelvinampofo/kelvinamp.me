@@ -30,9 +30,14 @@ export default function CopyButton() {
         {isError ? (
           error.message
         ) : isCopied ? (
-          <Text as="span" colour="secondary" size="small">
-            Link copied!
-          </Text>
+          <>
+            <div role="log" aria-live="polite" className="sr-only">
+              Link copied to clipboard
+            </div>
+            <Text as="span" colour="secondary" size="small">
+              Link copied!
+            </Text>
+          </>
         ) : (
           <Icon
             name="link"
