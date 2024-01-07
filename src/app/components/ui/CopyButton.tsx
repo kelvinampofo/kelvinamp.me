@@ -1,24 +1,24 @@
 'use client';
 
 import { useClipboard } from '@/app/hooks/useClipboard';
-import { useHotkey } from '@/app/hooks/useHotkey';
+import { useShortcut } from '@/app/hooks/useShortcut';
 import { isMacOS } from '@/app/lib/utils';
 import Text from '../generic/Text';
-import Hotkeys from './Hotkeys';
 import { Icon } from './Icon';
+import ShortcutKey from './ShortcutKey';
 import Tooltip from './Tooltip';
 
 export default function CopyButton() {
   const { isCopied, isError, error, copyUrl } = useClipboard();
 
-  useHotkey(isMacOS ? ['Control', 'Meta'] : ['Control', 'Alt'], 'c', copyUrl);
+  useShortcut(isMacOS ? ['Control', 'Meta'] : ['Control', 'Alt'], 'c', copyUrl);
 
   return (
     <Tooltip
       content={
         <div className="flex items-center gap-1">
           Copy Link
-          {isMacOS ? <Hotkeys keys={['⌃', '⌘', 'C']} /> : <Hotkeys keys={['CTRL', 'ALT', 'C']} />}
+          <ShortcutKey keyShortcuts={isMacOS ? ['⌃', '⌘', 'C'] : ['CTRL', 'ALT', 'C']} />
         </div>
       }
     >
