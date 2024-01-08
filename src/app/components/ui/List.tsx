@@ -13,7 +13,7 @@ interface ListProps {
 }
 
 export default function List({ items, route }: ListProps) {
-  const craftRoute = 'craft';
+  const isCraftRoute = route === 'craft';
 
   return (
     <>
@@ -33,7 +33,7 @@ export default function List({ items, route }: ListProps) {
                 >
                   <div className="flex items-center gap-2 font-medium">
                     <span>{title}</span>
-                    {route === craftRoute && (
+                    {isCraftRoute && (
                       <Text
                         as="span"
                         colour="secondary"
@@ -47,7 +47,7 @@ export default function List({ items, route }: ListProps) {
                     {isNewItem && <Badge ariaHidden>new</Badge>}
                   </div>
                   <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
-                    {route === craftRoute
+                    {isCraftRoute
                       ? format(publishedDate, 'MMM yyyy')
                       : format(publishedDate, 'dd/MM/yy')}
                   </time>
