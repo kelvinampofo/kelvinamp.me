@@ -44,7 +44,7 @@ export default function CopyButton() {
             className="text-secondary transition-colors hover:text-primary dark:text-secondary-dark dark:hover:text-primary-dark"
             width={18}
             height={18}
-            ariaHidden="true"
+            aria-hidden="true"
           />
         )}
       </button>

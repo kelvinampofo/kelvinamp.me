@@ -50,7 +50,7 @@ export function Navigation({ currentItem, allItems, route }: NavigationProps) {
             <Icon
               name="arrow-left"
               className="text-secondary dark:text-secondary-dark"
-              ariaHidden="true"
+              aria-hidden="true"
             />
             <span className="sr-only">
               Previous {`${route === 'writing' ? 'post,' : 'prototype,'}`}
@@ -70,7 +70,7 @@ export function Navigation({ currentItem, allItems, route }: NavigationProps) {
             <Icon
               name="arrow-right"
               className="flex-1 text-[#6F6F6F] dark:text-[#A0A0A0]"
-              ariaHidden="true"
+              aria-hidden="true"
             />
             <span className="sr-only">
               Next {`${route === 'writing' ? 'post,' : 'prototype,'}`}

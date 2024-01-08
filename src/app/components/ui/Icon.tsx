@@ -6,18 +6,17 @@ type IconName =
   | 'chevron-left'
   | 'chevron-right'
   | 'reload'
-  | 'rocket';
+  | 'rocket'
+  | 'check';
 
-interface IconProps extends Partial<SVGElement> {
-  width?: number;
-  height?: number;
+interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;
   className?: string;
-  ariaHidden?: string;
   ariaLabel?: string;
+  ariaHidden?: boolean;
 }
 
-export function Icon({ className, width = 15, height = 15, name, ariaLabel }: IconProps) {
+export function Icon({ className, width = 15, height = 15, name, ariaLabel, ...rest }: IconProps) {
   switch (name) {
     case 'arrow-left':
       return (
@@ -25,10 +24,11 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel }: Ic
           className={className}
           height={height}
           width={width}
-          aria-label={ariaLabel}
+          aria-label={ariaLabel || 'Arrow left icon'}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 15 15"
+          {...rest}
         >
           <path
             fill="currentColor"
@@ -44,7 +44,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel }: Ic
           className={className}
           height={height}
           width={width}
-          aria-label={ariaLabel}
+          aria-label={ariaLabel || 'Arrow right icon'}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 15 15"
@@ -63,7 +63,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel }: Ic
           className={className}
           height={height}
           width={width}
-          aria-label="Arrow Top Left Icon"
+          aria-label={ariaLabel || 'Arrow top left icon'}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 15 15"
@@ -80,7 +80,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel }: Ic
           className={className}
           height={height}
           width={width}
-          aria-label="Link icon"
+          aria-label={ariaLabel || 'Link icon'}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 15 15"
@@ -97,7 +97,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel }: Ic
           className={className}
           height={height}
           width={width}
-          aria-label="Chevron Left icon"
+          aria-label={ariaLabel || 'Chevron left Icon'}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 15 15"
@@ -115,7 +115,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel }: Ic
           className={className}
           height={height}
           width={width}
-          aria-label="Chevron Right icon"
+          aria-label={ariaLabel || 'Chevron rigt Icon'}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 15 15"
@@ -132,7 +132,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel }: Ic
           className={className}
           height={height}
           width={width}
-          aria-label="Reload icon"
+          aria-label={ariaLabel || 'Reload icon'}
           viewBox="0 0 15 15"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -151,6 +151,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel }: Ic
           className={className}
           height={height}
           width={width}
+          aria-label={ariaLabel || 'Rocket icon'}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
         >
@@ -162,7 +163,24 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel }: Ic
           />
         </svg>
       );
-
+    case 'check':
+      return (
+        <svg
+          className={className}
+          height={height}
+          width={width}
+          aria-label={ariaLabel || 'Check icon'}
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+        >
+          <path
+            fill="currentColor"
+            fillRule="evenodd"
+            d="M11.467 3.727c.289.189.37.576.181.865l-4.25 6.5a.625.625 0 0 1-.944.12l-2.75-2.5a.625.625 0 0 1 .841-.925l2.208 2.007 3.849-5.886a.625.625 0 0 1 .865-.181Z"
+            clipRule="evenodd"
+          />
+        </svg>
+      );
     default:
       null;
   }
