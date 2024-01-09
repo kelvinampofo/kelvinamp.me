@@ -24,7 +24,7 @@ export const useTime = (options: Options = { useLondonTime: true }) => {
   const formatTime = () => {
     const formattedTime = format(convertedTime, 'HH:mm:ss');
     const formattedMeridiem = format(convertedTime, 'a');
-    const formattedTimezoneOffset = `UTC ${format(convertedTime, 'xxx')}`;
+    const formattedTimezoneOffset = `${format(convertedTime, 'zzzz')}`;
 
     return { formattedTime, formattedMeridiem, formattedTimezoneOffset };
   };
