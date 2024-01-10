@@ -17,7 +17,7 @@
 
   :focus,
   :focus-visible {
-    outline-color: #6f6f6f;
+    outline-color: #df6437;
   }
 
   ::-webkit-scrollbar {
@@ -48,11 +48,6 @@
 
     ::-webkit-scrollbar-thumb:hover {
       background: #525252;
-    }
-
-    :focus,
-    :focus-visible {
-      outline-color: #a0a0a0;
     }
   }
 
