@@ -44,7 +44,7 @@ export default function List({ items, route }: ListProps) {
                         {summary}
                       </Text>
                     )}
-                    {isNewItem && <Badge ariaHidden>new</Badge>}
+                    {isNewItem && <Badge ariaHidden>New</Badge>}
                   </div>
                   <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
                     {isCraftRoute
