@@ -17,7 +17,7 @@
 
   :focus,
   :focus-visible {
-    outline-color: #df6437;
+    outline-color: #6f6f6f;
   }
 
   ::-webkit-scrollbar {
@@ -42,6 +42,11 @@
   }
 
   @media (prefers-color-scheme: dark) {
+    :focus,
+    :focus-visible {
+      outline-color: #a0a0a0;
+    }
+
     ::-webkit-scrollbar-thumb {
       background: #404040;
     }
@@ -251,5 +256,19 @@
   div.ios-spinner div:nth-child(12) {
     transform: rotate(330deg) translate(0, -130%);
     animation-delay: -0;
+  }
+
+  @keyframes shineAnimation {
+    0% {
+      background-position: left;
+    }
+    50% {
+      background-position: right;
+    }
+  }
+
+  .shine-animation {
+    animation: shineAnimation 2.5s linear 0s infinite normal forwards;
+    background-size: 200%;
   }
 }
