@@ -44,7 +44,7 @@ export default function Now() {
           Design + code pursuits aside, probably reading and/or listening to{' '}
           <CustomLink href="https://literal.club/kelvinamp/goals">books</CustomLink>, enjoying
           emotionally evocative music or playing with the Porsche{' '}
-          <CustomLink href="https://configurator.porsche.com/porsche-code/PRWFJS71">
+          <CustomLink href="https://configurator.porsche.com/porsche-code/PRU42FZ7">
             configurator
           </CustomLink>
           .
@@ -52,7 +52,7 @@ export default function Now() {
         <Text>Speaking less, unless I can improve the silence.</Text>
       </section>
       <Text colour="secondary" size="small" className="mb-12">
-        Last updated <time dateTime="2023-01-08">January 8th, 2024</time>
+        Last updated <time dateTime="2023-01-10">January 10th, 2024</time>
       </Text>
       <span>
         <CustomLink href="/" ariaLabel="Back to home page" arrowIcon hideUnderline className="p-1">
