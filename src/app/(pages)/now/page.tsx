@@ -44,7 +44,7 @@ export default function Now() {
           Design + code pursuits aside, probably reading and/or listening to{' '}
           <CustomLink href="https://literal.club/kelvinamp/goals">books</CustomLink>, enjoying
           emotionally evocative music or playing with the Porsche{' '}
-          <CustomLink href="https://configurator.porsche.com/porsche-code/PRU42FZ7">
+          <CustomLink href="https://configurator.porsche.com/porsche-code/PRDHXUQ2">
             configurator
           </CustomLink>
           .
