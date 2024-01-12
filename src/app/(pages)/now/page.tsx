@@ -32,8 +32,8 @@ export default function Now() {
       <Heading>Now</Heading>
       <section className="mb-8 mt-6 flex flex-col gap-6">
         <Text>
-          Spending time enhancing craft through guilt-free, hands-on exploration in art +
-          technology.
+          Spending time enhancing craft through guilt-free, hands-on exploration in technology +
+          design.
         </Text>
         <Text>
           For now, all I want to do is design and build software. Interactivity, typography, motion,
@@ -51,9 +51,6 @@ export default function Now() {
         </Text>
         <Text>Speaking less, unless I can improve the silence.</Text>
       </section>
-      <Text colour="secondary" size="small" className="mb-12">
-        Last updated <time dateTime="2023-01-10">January 10th, 2024</time>
-      </Text>
       <span>
         <CustomLink href="/" ariaLabel="Back to home page" arrowIcon hideUnderline className="p-1">
           Back
