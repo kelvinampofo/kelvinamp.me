@@ -97,7 +97,7 @@ export default async function Post({ params }: Params) {
       </header>
       <div className="mb-3 flex justify-between text-sm">
         <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
-          {format(parseISO(publishedAt), 'dd MMM yyyy')}
+          {format(parseISO(publishedAt), 'MMMM dd yyyy')}
         </time>
         <CopyButton />
       </div>

@@ -48,7 +48,7 @@ export default function List({ items, route }: ListProps) {
                   </div>
                   <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
                     {isCraftRoute
-                      ? format(publishedDate, 'MMM yyyy')
+                      ? format(publishedDate, 'MMMM yyyy')
                       : format(publishedDate, 'dd/MM/yy')}
                   </time>
                 </CustomLink>
