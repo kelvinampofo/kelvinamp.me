@@ -23,6 +23,7 @@ export default function CustomLink({
 
   const classes = c(
     className,
+    children === 'Back' && 'transition-colors hover:text-secondary dark:hover:text-secondary-dark',
     !hideUnderline &&
       'underline decoration-neutral-300 decoration-1 underline-offset-2 dark:decoration-[#505050]',
     'transition-colors dark:hover:decoration-secondary-dark hover:decoration-secondary'

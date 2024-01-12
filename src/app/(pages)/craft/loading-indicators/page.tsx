@@ -53,7 +53,12 @@ export default function Page() {
     <Container>
       <header className="flex flex-col justify-between gap-6">
         <span>
-          <CustomLink href="/craft" arrowIcon hideUnderline className="p-1">
+          <CustomLink
+            href="/craft"
+            arrowIcon
+            hideUnderline
+            className="p-1 transition-colors hover:text-secondary dark:hover:text-secondary-dark"
+          >
             Craft
           </CustomLink>
         </span>
@@ -61,7 +66,7 @@ export default function Page() {
       </header>
       <div className="flex justify-between text-sm">
         <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
-          {format(parseISO(publishedAt), 'MMM yyyy')}
+          {format(parseISO(publishedAt), 'MMMM yyyy')}
         </time>
         <CopyButton />
       </div>
