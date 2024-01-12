@@ -35,4 +35,4 @@ export const getErrorMessage = (error: unknown): string => {
 };
 
 export const isMacOS =
-  typeof window !== 'undefined' ? /\bMacintosh\b|\bMac OS X\b/.test(navigator.userAgent) : false;
+  typeof window !== 'undefined' && /^(?=.*Macintosh)(?=.*Mac OS X).*$/.test(navigator.userAgent);

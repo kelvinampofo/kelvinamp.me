@@ -10,7 +10,7 @@ export default function ShortcutKeys({ keyShortcuts }: ShortcutKeysProps) {
       {keyShortcuts.map((keyShortcut, index) => (
         <span
           key={index}
-          className="rounded-sm border px-1 shadow-neutral-200 dark:border-neutral-800 dark:bg-neutral-800 dark:shadow-neutral-950"
+          className="rounded-sm border px-1 dark:border-neutral-800 dark:bg-neutral-800"
         >
           {keyShortcut}
         </span>
