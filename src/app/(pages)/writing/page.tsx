@@ -40,7 +40,7 @@ export default function Writing() {
       </Text>
       <List items={allPosts} route="writing" />
       <span className="mt-12">
-        <CustomLink href="/" ariaLabel="back to home page" arrowIcon className="p-1" hideUnderline>
+        <CustomLink href="/" className="p-1" arrowIcon hideUnderline ariaLabel="back to home page">
           Back
         </CustomLink>
       </span>

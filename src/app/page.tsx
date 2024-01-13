@@ -23,19 +23,23 @@ export default function Home() {
             architecture. Currently working in digital banking.
           </p>
           <p>
-            Read further on <CustomLink href="/now">now</CustomLink> page.
+            Read further on{' '}
+            <CustomLink href="/now" ariaLabel="now page">
+              now
+            </CustomLink>{' '}
+            page.
           </p>
         </section>
       </AnimateEnter>
       <AnimateEnter delay={0.8}>
         <nav className="flex flex-col">
           <span>
-            <CustomLink href="/craft" ariaLabel="Craft page">
+            <CustomLink href="/craft" ariaLabel="craft page">
               Craft
             </CustomLink>
           </span>
           <span>
-            <CustomLink href="/writing" ariaLabel="Writing page">
+            <CustomLink href="/writing" ariaLabel="writing page">
               Writing
             </CustomLink>
           </span>
