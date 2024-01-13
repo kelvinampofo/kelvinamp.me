@@ -1,6 +1,5 @@
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
-import Text from '@/app/components/generic/Text';
 import CustomLink from '@/app/components/ui/CustomLink';
 import { Metadata } from 'next';
 
@@ -31,16 +30,16 @@ export default function Now() {
     <Container>
       <Heading>Now</Heading>
       <section className="mb-8 mt-6 flex flex-col gap-6">
-        <Text>
+        <p>
           Spending time enhancing craft through guilt-free, hands-on exploration in technology +
           design.
-        </Text>
-        <Text>
+        </p>
+        <p>
           For now, all I want to do is design and build software. Interactivity, typography, motion,
           touch optimisations, accessibility, design, copywriting&mdash;an infinite canvas for
           creativity + opportunity.
-        </Text>
-        <Text>
+        </p>
+        <p>
           Design + code pursuits aside, probably reading and/or listening to{' '}
           <CustomLink href="https://literal.club/kelvinamp/goals">books</CustomLink>, enjoying
           emotionally evocative music or playing with the Porsche{' '}
@@ -48,8 +47,8 @@ export default function Now() {
             configurator
           </CustomLink>
           .
-        </Text>
-        <Text>Speaking less, unless I can improve the silence.</Text>
+        </p>
+        <p>Speaking less, unless I can improve the silence.</p>
       </section>
       <span>
         <CustomLink href="/" ariaLabel="Back to home page" arrowIcon hideUnderline className="p-1">

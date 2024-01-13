@@ -35,7 +35,7 @@ export default function Writing() {
   return (
     <Container>
       <Heading className="mb-3">Writing</Heading>
-      <Text className="mb-10" colour="secondary">
+      <Text as="p" className="mb-10 text-balance" colour="secondary">
         Infrequent thoughts on technology, design and things in between.
       </Text>
       <List items={allPosts} route="writing" />

@@ -1,11 +1,11 @@
 import Separator from '@/app/components/generic/Separator';
+import Text from '@/app/components/generic/Text';
+import Badge from '@/app/components/ui/Badge';
 import CustomLink from '@/app/components/ui/CustomLink';
 import type { Prototype } from '@/app/lib/prototypes';
 import { isWithin1Month } from '@/app/lib/utils';
 import type { Post } from 'contentlayer/generated';
 import { compareDesc, format, parseISO } from 'date-fns';
-import Text from '../generic/Text';
-import Badge from './Badge';
 
 interface ListProps {
   items: Post[] | Prototype[];
@@ -35,7 +35,6 @@ export default function List({ items, route }: ListProps) {
                     <span>{title}</span>
                     {isCraftRoute && (
                       <Text
-                        as="span"
                         colour="secondary"
                         className="hidden md:block"
                         size="small"

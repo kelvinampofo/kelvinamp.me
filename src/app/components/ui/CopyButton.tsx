@@ -1,11 +1,11 @@
 'use client';
 
+import Text from '@/app/components/generic/Text';
+import { Icon } from '@/app/components/ui/Icon';
+import ShortcutKey from '@/app/components/ui/ShortcutKey';
 import { useClipboard } from '@/app/hooks/useClipboard';
 import { useShortcut } from '@/app/hooks/useShortcut';
 import { isMacOS } from '@/app/lib/utils';
-import Text from '../generic/Text';
-import { Icon } from './Icon';
-import ShortcutKey from './ShortcutKey';
 import Tooltip from './Tooltip';
 
 export default function CopyButton() {
@@ -34,7 +34,7 @@ export default function CopyButton() {
             <div role="log" aria-live="polite" className="sr-only">
               Link copied to clipboard
             </div>
-            <Text as="span" colour="secondary" size="small">
+            <Text colour="secondary" size="small">
               Link copied!
             </Text>
           </>

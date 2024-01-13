@@ -15,11 +15,7 @@ export default function Loading({ variant }: LoadingProps) {
   switch (variant) {
     case 'loading-text':
       return (
-        <Text
-          as="span"
-          size="small"
-          className="loading-text hidden w-20 cursor-not-allowed sm:block"
-        >
+        <Text size="small" className="loading-text hidden w-20 cursor-not-allowed sm:block">
           Loading
           <span className="loading-dots ml-[2px]"></span>
         </Text>

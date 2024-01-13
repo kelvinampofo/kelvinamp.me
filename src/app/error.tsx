@@ -1,9 +1,8 @@
 'use client';
 
 import Container from '@/app/components/generic/Container';
-import Heading from './components/generic/Heading';
-import Text from './components/generic/Text';
-import { Icon } from './components/ui/Icon';
+import Heading from '@/app/components/generic/Heading';
+import { Icon } from '@/app/components/ui/Icon';
 
 interface ErrorBoundaryProps {
   error: Error;
@@ -17,7 +16,7 @@ export default function ErrorBoundary({ error, reset }: ErrorBoundaryProps) {
     <Container>
       <Heading className="mb-6 text-lg font-medium">Oops, something went wrong...</Heading>
       <div className="flex flex-col items-start gap-3">
-        <Text>Very much sad, very high priority. Maybe refresh?</Text>
+        <p>Very much sad, very high priority. Maybe refresh?</p>
         <button
           onClick={reset}
           className="rounded-md border bg-neutral-50 p-1 shadow-sm dark:border-neutral-800 dark:bg-[#1C1C1C]"

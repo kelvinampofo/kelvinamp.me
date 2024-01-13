@@ -13,9 +13,7 @@ export default function Home() {
       <AnimateEnter delay={0.4}>
         <header>
           <Heading>Kelvin Ampofo</Heading>
-          <Text as="span" colour="secondary">
-            Software Engineer
-          </Text>
+          <Text colour="secondary">Software Engineer</Text>
         </header>
       </AnimateEnter>
       <AnimateEnter delay={0.6}>
