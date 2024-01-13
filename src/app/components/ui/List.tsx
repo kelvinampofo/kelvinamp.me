@@ -31,7 +31,7 @@ export default function List({ items, route }: ListProps) {
                   hideUnderline
                   className="flex justify-between gap-2 p-1 hover:text-secondary dark:hover:text-secondary-dark"
                 >
-                  <div className="flex items-center gap-2 font-medium">
+                  <div className="flex items-center gap-2">
                     <span>{title}</span>
                     {isCraftRoute && (
                       <Text
