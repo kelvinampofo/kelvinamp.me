@@ -18,7 +18,7 @@ export default function CopyButton() {
       content={
         <div className="flex items-center gap-2">
           Copy Link
-          <ShortcutKey keyShortcuts={isMacOS ? ['⌃', '⌘', 'C'] : ['CTRL', 'ALT', 'C']} />
+          <ShortcutKey keyShortcuts={isMacOS ? ['⌃', '⌘', 'C'] : ['Ctrl', 'Alt', 'C']} />
         </div>
       }
     >
