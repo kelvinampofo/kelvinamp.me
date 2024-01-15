@@ -10,17 +10,17 @@ export const metadata: Metadata = {
   title: 'Writing',
   publisher: 'Kelvin Ampofo',
   authors: [{ name: 'Kelvin Ampofo' }],
-  description: 'Infrequent thoughts on technology, design and things in between.',
+  description: 'Thoughts on technology, design + things in between.',
   openGraph: {
     title: 'Writing',
-    description: 'Infrequent thoughts on technology, design and things in between.'
+    description: 'Thoughts on technology, design + things in between.'
   },
   twitter: {
     title: 'Writing',
     site: '@kelvinamp_',
     creator: '@kelvinamp',
     card: 'summary',
-    description: 'Infrequent thoughts on technology, design and things in between.',
+    description: 'Thoughts on technology, design + things in between.',
     images: [
       {
         url: 'https://kelvinamp.me/og.jpeg',
@@ -35,8 +35,8 @@ export default function Writing() {
   return (
     <Container>
       <Heading className="mb-3">Writing</Heading>
-      <Text as="p" className="mb-10 text-balance" colour="secondary">
-        Infrequent thoughts on technology, design and things in between.
+      <Text as="p" className="mb-10" colour="secondary">
+        Thoughts on technology, design + things in between.
       </Text>
       <List items={allPosts} route="writing" />
       <span className="mt-12">
