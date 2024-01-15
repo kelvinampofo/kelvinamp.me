@@ -32,10 +32,10 @@ export default function CopyButton() {
         ) : isCopied ? (
           <>
             <div role="log" aria-live="polite" className="sr-only">
-              Link copied to clipboard
+              Copied link to clipboard
             </div>
             <Text colour="secondary" size="small">
-              Link copied!
+              Copied link to clipboard
             </Text>
           </>
         ) : (
