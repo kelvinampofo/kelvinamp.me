@@ -6,12 +6,14 @@ import ShortcutKey from '@/app/components/ui/ShortcutKey';
 import { useClipboard } from '@/app/hooks/useClipboard';
 import { useShortcut } from '@/app/hooks/useShortcut';
 import { isMacOS } from '@/app/lib/utils';
+import { type ModifierKey } from 'react';
 import Tooltip from './Tooltip';
 
 export default function CopyButton() {
   const { isCopied, isError, error, copyUrl } = useClipboard();
 
-  useShortcut(isMacOS ? ['Control', 'Meta'] : ['Control', 'Alt'], 'c', copyUrl);
+  const modifierkey: ModifierKey[] = isMacOS ? ['Control', 'Meta'] : ['Control', 'Alt'];
+  useShortcut(modifierkey, 'c', copyUrl);
 
   return (
     <Tooltip
