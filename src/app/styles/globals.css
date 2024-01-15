@@ -20,6 +20,18 @@
     outline-color: #6f6f6f;
   }
 
+  .focus-mode :where(p, pre, li, img, div) {
+    opacity: 0.8;
+    filter: blur(2px);
+    transition: 150ms;
+    transition-property: opacity filter;
+  }
+
+  .focus-mode :where(p, pre, li, img, div):hover {
+    opacity: 1;
+    filter: none;
+  }
+
   ::-webkit-scrollbar {
     width: 0.375rem;
     height: 0.375rem;
@@ -256,15 +268,5 @@
   div.ios-spinner div:nth-child(12) {
     transform: rotate(330deg) translate(0, -130%);
     animation-delay: -0;
-  }
-
-  .focus-mode :where(p, pre, li, img, div) {
-    filter: blur(2px);
-    transition: 150ms;
-    transition-property: filter;
-  }
-
-  .focus-mode :where(p, pre, li, img, div):hover {
-    filter: none;
   }
 }
