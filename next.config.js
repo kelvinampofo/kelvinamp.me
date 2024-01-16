@@ -7,6 +7,30 @@ const nextConfig = {
   },
   experimental: {
     typedRoutes: true
+  },
+  async redirects() {
+    return [
+      {
+        source: '/github',
+        destination: 'https://github.com/kelvinampofo',
+        permanent: true
+      },
+      {
+        source: '/meet',
+        destination: 'https://cal.com/kelvinamp/30min?layout=week_view',
+        permanent: true
+      },
+      {
+        source: '/x',
+        destination: 'https://twitter.com/kelvinamp_',
+        permanent: true
+      },
+      {
+        source: '/cv',
+        destination: 'https://read.cv/kelvinampofo',
+        permanent: true
+      }
+    ];
   }
 };
 
