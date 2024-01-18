@@ -31,11 +31,18 @@ export default function CustomLink({
 
   if (isInternalLink) {
     return (
-      <Link href={href} className={classes} aria-label={ariaLabel}>
+      <Link
+        href={href}
+        className={c(
+          classes,
+          arrowIcon && 'inline-flex items-center gap-1 rounded-sm leading-5 -m-1 p-1 text-sm'
+        )}
+        aria-label={ariaLabel}
+      >
         {arrowIcon && (
           <Icon
             name="arrow-top-left"
-            className="mr-1 inline-flex items-center"
+            className="translate-y-[1.5px]"
             aria-hidden="true"
             width={15}
             height={15}

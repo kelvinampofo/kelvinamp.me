@@ -56,7 +56,7 @@ export default function Page() {
             href="/craft"
             arrowIcon
             hideUnderline
-            className="p-1 transition-colors hover:text-secondary dark:hover:text-secondary-dark"
+            className="transition-colors hover:text-secondary dark:hover:text-secondary-dark"
           >
             Craft
           </CustomLink>

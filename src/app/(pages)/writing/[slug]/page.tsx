@@ -89,7 +89,7 @@ export default async function Post({ params }: Params) {
             ariaLabel="Back to writing page"
             arrowIcon
             hideUnderline
-            className="p-1 transition-colors hover:text-secondary dark:hover:text-secondary-dark"
+            className="transition-colors hover:text-secondary dark:hover:text-secondary-dark"
           >
             Writing
           </CustomLink>
