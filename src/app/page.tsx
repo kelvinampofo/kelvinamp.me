@@ -32,7 +32,7 @@ export default function Home() {
         </section>
       </AnimateEnter>
       <AnimateEnter delay={0.8}>
-        <nav className="flex flex-col">
+        <nav className="flex gap-2">
           <span>
             <CustomLink href="/craft" ariaLabel="craft page">
               Craft
