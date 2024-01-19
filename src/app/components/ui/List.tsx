@@ -17,11 +17,10 @@ export default function List({ items, route }: ListProps) {
 
   return (
     <>
-      <Separator className="my-3" />
       <ol>
         {items
           .sort((a, b) => compareDesc(parseISO(a.publishedAt), parseISO(b.publishedAt)))
-          .map(({ publishedAt, slug, title, summary }) => {
+          .map(({ publishedAt, slug, title, summary }, index) => {
             const publishedDate = parseISO(publishedAt);
             const isNewItem = isWithin1Month(publishedDate);
             return (
@@ -43,7 +42,7 @@ export default function List({ items, route }: ListProps) {
                         {summary}
                       </Text>
                     )}
-                    {isNewItem && <Badge ariaHidden>New</Badge>}
+                    {isNewItem && <Badge ariaHidden>new</Badge>}
                   </div>
                   <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
                     {isCraftRoute
@@ -51,7 +50,7 @@ export default function List({ items, route }: ListProps) {
                       : format(publishedDate, 'dd/MM/yy')}
                   </time>
                 </CustomLink>
-                <Separator className="my-3" />
+                {index !== items.length - 1 && <Separator className="my-3" />}
               </li>
             );
           })}
