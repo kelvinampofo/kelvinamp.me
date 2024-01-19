@@ -1,4 +1,3 @@
-import Text from '@/app/components/generic/Text';
 import type { ReactNode } from 'react';
 
 interface BadgeProps {
@@ -8,13 +7,11 @@ interface BadgeProps {
 
 export default function Badge({ children, ariaHidden = false }: BadgeProps) {
   return (
-    <Text
+    <span
       aria-hidden={ariaHidden}
-      size="xsmall"
-      colour="secondary"
-      className="rounded-sm border bg-neutral-50 px-1 dark:border-neutral-700 dark:bg-neutral-800"
+      className="dark:shine-animation text-xs text-blue-600 dark:bg-gradient-to-r dark:from-teal-200 dark:via-blue-600 dark:to-teal-200 dark:bg-clip-text dark:bg-left dark:text-transparent"
     >
       {children}
-    </Text>
+    </span>
   );
 }
