@@ -44,7 +44,10 @@ export default function List({ items, route }: ListProps) {
                     )}
                     {isNewItem && <Badge ariaHidden>new</Badge>}
                   </div>
-                  <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
+                  <time
+                    dateTime={publishedAt}
+                    className="text-sm text-secondary dark:text-secondary-dark"
+                  >
                     {isCraftRoute
                       ? format(publishedDate, 'MMMM yyyy')
                       : format(publishedDate, 'dd/MM/yy')}
