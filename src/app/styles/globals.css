@@ -20,6 +20,10 @@
     outline-color: #6f6f6f;
   }
 
+  .focus-mode {
+    cursor: crosshair;
+  }
+
   .focus-mode :where(p, pre, li, img, div) {
     opacity: 0.8;
     filter: blur(2px);
@@ -32,7 +36,16 @@
     filter: none;
   }
 
-  .focus-mode {
+  .blur-content {
+    opacity: 0.8;
+    filter: blur(2px);
+    transition: 150ms;
+    transition-property: opacity filter;
+  }
+
+  .blur-content:hover {
+    opacity: 1;
+    filter: none;
     cursor: crosshair;
   }
 
