@@ -5,16 +5,16 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Now',
-  description: 'Personal and professional updates.',
+  description: 'Personal + professional updates.',
   openGraph: {
     title: 'Now',
-    description: 'Personal and professional updates.'
+    description: 'Personal + professional updates.'
   },
   twitter: {
     title: 'Now',
     site: '@kelvinamp_',
     card: 'summary',
-    description: 'Personal and professional updates.',
+    description: 'Personal + professional updates.',
     images: [
       {
         url: 'https://kelvinamp.me/og.jpeg',
@@ -31,24 +31,28 @@ export default function Now() {
       <Heading>Now</Heading>
       <section className="mb-8 mt-6 flex flex-col gap-6">
         <p>
-          Spending time enhancing craft through guilt-free, hands-on exploration in technology +
-          design.
+          Dedicating time to enhancing craft, defining my work somewhere between engineer & designer{' '}
+          <span className="blur-content">
+            through guilt-free, hands-on exploration in software + design.
+          </span>
         </p>
         <p>
-          For now, all I want to do is design and build software. Interactivity, typography, motion,
-          touch optimisations, accessibility, design, copywriting&mdash;an infinite canvas for
-          creativity + opportunity.
+          Right now, all I want to do is design and build software. Interactivity, typography,
+          touch, motion, design, optimisations, accessibility, audio
+          <span className="blur-content">
+            &mdash;an infinite canvas for creativity + opportunity.
+          </span>
         </p>
         <p>
-          Design + code pursuits aside, probably reading and/or listening to{' '}
+          Code + design pursuits aside, probably reading and/or listening to{' '}
           <CustomLink href="https://literal.club/kelvinamp/goals">books</CustomLink>, enjoying
-          emotionally evocative music or playing with the Porsche{' '}
+          emotionally evocative music, tinkering with electronics or playing with the Porsche{' '}
           <CustomLink href="https://configurator.porsche.com/porsche-code/PRHVZ6J7">
             configurator
           </CustomLink>
           .
         </p>
-        <p>Speaking less, unless I can improve the silence.</p>
+        <p className="blur-content">Speaking less, unless I can improve the silence.</p>
       </section>
       <span>
         <CustomLink href="/" ariaLabel="Back to home page" arrowIcon hideUnderline className="p-1">
