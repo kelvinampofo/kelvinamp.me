@@ -7,17 +7,23 @@ export default function Contact() {
     {
       label: '@kelvinamp_',
       href: 'https://x.com/kelvinamp_',
-      ariaLabel: 'Twitter profile'
+      ariaLabel: 'twitter profile'
     },
     {
       label: 'GitHub',
       href: 'https://github.com/kelvinampofo',
-      ariaLabel: 'GitHub profile'
+      ariaLabel: 'gitHub profile'
     },
+
     {
       label: 'Email',
       href: 'mailto:k@kelvinamp.me',
-      ariaLabel: 'Email address'
+      ariaLabel: 'email address'
+    },
+    {
+      label: 'Are.na',
+      href: 'https://www.are.na/kelvin-ampofo',
+      ariaLabel: 'are.na profile'
     }
   ];
 
