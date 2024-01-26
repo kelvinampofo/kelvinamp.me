@@ -34,10 +34,10 @@ export default function CopyButton() {
         ) : isCopied ? (
           <>
             <div role="log" aria-live="polite" className="sr-only">
-              Copied link to clipboard
+              Copied to clipboard
             </div>
             <Text colour="secondary" size="small">
-              Copied link to clipboard
+              Copied to clipboard
             </Text>
           </>
         ) : (
