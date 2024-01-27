@@ -7,6 +7,7 @@ interface TextProps
   weight?: 'regular' | 'medium' | 'bold';
   colour?: 'primary' | 'secondary';
   size?: 'xsmall' | 'small' | 'normal' | 'large';
+  ariaHidden?: boolean;
 }
 
 export default function Text({
@@ -15,7 +16,8 @@ export default function Text({
   colour = 'primary',
   size = 'normal',
   className,
-  children
+  children,
+  ariaHidden
 }: TextProps) {
   const weights = c(
     weight === 'regular' && 'font-normal',
@@ -35,5 +37,9 @@ export default function Text({
     size === 'large' && 'text-lg'
   );
 
-  return <Tag className={c(weights, colours, sizes, className)}>{children}</Tag>;
+  return (
+    <Tag className={c(weights, colours, sizes, className)} aria-hidden={ariaHidden}>
+      {children}
+    </Tag>
+  );
 }

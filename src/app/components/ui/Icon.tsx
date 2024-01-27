@@ -16,7 +16,15 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
   ariaHidden?: boolean;
 }
 
-export function Icon({ className, width = 15, height = 15, name, ariaLabel, ...rest }: IconProps) {
+export function Icon({
+  className,
+  width = 15,
+  height = 15,
+  name,
+  ariaLabel,
+  ariaHidden = true,
+  ...rest
+}: IconProps) {
   switch (name) {
     case 'arrow-left':
       return (
@@ -25,6 +33,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel, ...r
           height={height}
           width={width}
           aria-label={ariaLabel || 'Arrow left icon'}
+          aria-hidden={ariaHidden}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 15 15"
@@ -45,6 +54,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel, ...r
           height={height}
           width={width}
           aria-label={ariaLabel || 'Arrow right icon'}
+          aria-hidden={ariaHidden}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 15 15"
@@ -64,6 +74,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel, ...r
           height={height}
           width={width}
           aria-label={ariaLabel || 'Arrow top left icon'}
+          aria-hidden={ariaHidden}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 15 15"
@@ -81,6 +92,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel, ...r
           height={height}
           width={width}
           aria-label={ariaLabel || 'Link icon'}
+          aria-hidden={ariaHidden}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 15 15"
@@ -98,6 +110,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel, ...r
           height={height}
           width={width}
           aria-label={ariaLabel || 'Chevron left Icon'}
+          aria-hidden={ariaHidden}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 15 15"
@@ -116,6 +129,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel, ...r
           height={height}
           width={width}
           aria-label={ariaLabel || 'Chevron rigt Icon'}
+          aria-hidden={ariaHidden}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 15 15"
@@ -133,6 +147,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel, ...r
           height={height}
           width={width}
           aria-label={ariaLabel || 'Reload icon'}
+          aria-hidden={ariaHidden}
           viewBox="0 0 15 15"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -152,6 +167,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel, ...r
           height={height}
           width={width}
           aria-label={ariaLabel || 'Rocket icon'}
+          aria-hidden={ariaHidden}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
         >
@@ -170,6 +186,7 @@ export function Icon({ className, width = 15, height = 15, name, ariaLabel, ...r
           height={height}
           width={width}
           aria-label={ariaLabel || 'Check icon'}
+          aria-hidden={ariaHidden}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
         >
