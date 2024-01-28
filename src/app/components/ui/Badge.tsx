@@ -1,7 +1,5 @@
-import type { ReactNode } from 'react';
-
 interface BadgeProps {
-  children: ReactNode;
+  children: React.ReactNode;
   ariaHidden?: boolean;
 }
 

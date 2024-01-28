@@ -17,7 +17,7 @@ export default function FocusedReading({ children }: FocusedReadingProps) {
   useShortcut(modifierkey, 'F', toggleFocusMode);
 
   function toggleFocusMode() {
-    setIsFocusModeEnabled(true);
+    setIsFocusModeEnabled(!isFocusModeEnabled);
     divRef.current?.classList.toggle('focus-mode');
   }
 
