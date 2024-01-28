@@ -32,16 +32,12 @@ export default function Now() {
       <section className="mb-8 mt-6 flex flex-col gap-6">
         <p>
           Dedicating time to enhancing craft, defining my work somewhere between engineer & designer{' '}
-          <span className="blur-content">
-            through guilt-free, hands-on exploration in software + design.
-          </span>
+          through guilt-free, hands-on exploration in software + design.
         </p>
         <p>
-          Right now, all I want to do is design and build software. Interactivity, typography,
-          touch, motion, design, optimisations, accessibility, audio
-          <span className="blur-content">
-            &mdash;an infinite canvas for creativity + opportunity.
-          </span>
+          Right now, all I want to do is design and build software, particularly novel human
+          interfaces. Interactivity, typography, touch, motion, design, optimisations, accessibility
+          &mdash;an infinite canvas for creativity + opportunity.
         </p>
         <p>
           Code + design pursuits aside, probably reading and/or listening to{' '}
@@ -52,7 +48,7 @@ export default function Now() {
           </CustomLink>
           .
         </p>
-        <p className="blur-content">Speaking less, unless I can improve the silence.</p>
+        <p>Speaking less, unless I can improve the silence.</p>
       </section>
       <span>
         <CustomLink href="/" ariaLabel="Back to home page" arrowIcon hideUnderline className="p-1">
