@@ -56,11 +56,24 @@
     left: 0;
     width: 100%;
     z-index: 10;
-    background: linear-gradient(to top, transparent, hsl(0 0% 99%));
     backdrop-filter: blur(1px);
-    mask-image: linear-gradient(to bottom, hsl(0 0% 99%) 25%, transparent);
-    -webkit-mask-image: linear-gradient(to bottom, hsl(0 0% 99%) 25%, transparent);
     will-change: transform;
+  }
+
+  @media (prefers-color-scheme: light) {
+    .vertical-blur {
+      background: linear-gradient(to top, transparent, hsl(0 0% 99%));
+      mask-image: linear-gradient(to bottom, hsl(0 0% 99%) 25%, transparent);
+      -webkit-mask-image: linear-gradient(to bottom, hsl(0 0% 99%) 25%, transparent);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .vertical-blur {
+      background: linear-gradient(to top, transparent, hsl(0 0% 8.5%));
+      mask-image: linear-gradient(to bottom, hsl(0 0% 8.5%) 25%, transparent);
+      -webkit-mask-image: linear-gradient(to bottom, hsl(0 0% 8.5%) 25%, transparent);
+    }
   }
 
   ::-webkit-scrollbar {
@@ -96,12 +109,6 @@
 
     ::-webkit-scrollbar-thumb:hover {
       background: #525252;
-    }
-
-    .vertical-fade {
-      background: linear-gradient(to top, transparent, hsl(0 0% 8.5%));
-      mask-image: linear-gradient(to bottom, hsl(0 0% 8.5%) 25%, transparent);
-      -webkit-mask-image: linear-gradient(to bottom, hsl(0 0% 8.5%) 25%, transparent);
     }
   }
 
