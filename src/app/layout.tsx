@@ -67,6 +67,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" className={c('scroll-smooth', GeistMono.variable, GeistSans.variable)}>
       <body className="text-sm text-primary antialiased md:text-base lg:text-base dark:bg-primary dark:text-primary-dark">
         <Providers>
+          <div className="vertical-blur h-page-top-mobile md:h-page-top" aria-hidden="true" />
           <main className="container mx-auto min-h-full max-w-3xl pb-page-bottom-mobile pt-page-top-mobile md:pb-page-bottom md:pt-page-top">
             {children}
           </main>
