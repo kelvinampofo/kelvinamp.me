@@ -19,8 +19,9 @@ export default function Home() {
       <AnimateEnter delay={0.6}>
         <section className="my-6 flex flex-col gap-6">
           <p>
-            <em>Crafting interfaces</em> with strong focus on design, human-computer interaction and
-            architecture. Currently working in digital banking.
+            Crafting software with strong focus on design, human-computer interaction and
+            architecture. Insatiably curious about and novel interfaces. Currently working in
+            digital banking.
           </p>
           <p>
             Read further on{' '}
