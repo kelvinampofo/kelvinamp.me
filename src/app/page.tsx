@@ -20,8 +20,8 @@ export default function Home() {
         <section className="my-6 flex flex-col gap-6">
           <p>
             Crafting software with strong focus on design, human-computer interaction and
-            architecture. Insatiably curious about and novel interfaces. Currently working in
-            digital banking.
+            architecture. Insatiably curious about novel interfaces. Currently working in digital
+            banking.
           </p>
           <p>
             Read further on{' '}
