@@ -13,25 +13,10 @@ export const findPrototype = (prototype: Prototype[], titleToMatch: string) => {
   return prototype.find(({ title }) => title === titleToMatch) as Prototype;
 };
 
-export const getErrorMessage = (error: unknown): string => {
-  if (error instanceof Error) {
-    return error.message;
-  }
+export const parseError = (error: unknown): string => {
+  const message = error instanceof Error ? error.message : String(error);
 
-  if (typeof error === 'string') {
-    return error;
-  }
-
-  if (
-    typeof error === 'object' &&
-    error !== null &&
-    'message' in error &&
-    typeof error.message === 'string'
-  ) {
-    return error.message;
-  }
-
-  return 'Something went wrong.';
+  return message;
 };
 
 export const isMacOS =

@@ -1,4 +1,4 @@
-import { getErrorMessage } from '@/app/lib/utils';
+import { parseError } from '@/app/lib/utils';
 import { useEffect, useState } from 'react';
 
 export function useClipboard() {
@@ -29,7 +29,7 @@ export function useClipboard() {
       await navigator.clipboard.writeText(currentUrl);
       setIsCopied(true);
     } catch (error) {
-      setError({ message: getErrorMessage(error) });
+      setError({ message: parseError(error) });
       setIsError(true);
       setIsCopied(false);
     }
@@ -54,7 +54,7 @@ export function useClipboard() {
     } catch (error) {
       setIsCopied(false);
       setIsError(true);
-      setError({ message: getErrorMessage(error) });
+      setError({ message: parseError(error) });
     }
   };
 
