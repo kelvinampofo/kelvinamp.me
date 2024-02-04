@@ -1,5 +1,4 @@
 import Separator from '@/app/components/generic/Separator';
-import Text from '@/app/components/generic/Text';
 import Badge from '@/app/components/ui/Badge';
 import CustomLink from '@/app/components/ui/CustomLink';
 import type { Prototype } from '@/app/lib/prototypes';
@@ -20,7 +19,7 @@ export default function List({ items, route }: ListProps) {
       <ol>
         {items
           .sort((a, b) => compareDesc(parseISO(a.publishedAt), parseISO(b.publishedAt)))
-          .map(({ publishedAt, slug, title, summary }, index) => {
+          .map(({ publishedAt, slug, title }, index) => {
             const publishedDate = parseISO(publishedAt);
             const isNewItem = isWithin1Month(publishedDate);
             return (
@@ -32,16 +31,6 @@ export default function List({ items, route }: ListProps) {
                 >
                   <div className="flex items-center gap-2">
                     <span>{title}</span>
-                    {isCraftRoute && (
-                      <Text
-                        colour="secondary"
-                        className="hidden md:block"
-                        size="small"
-                        aria-hidden="true"
-                      >
-                        {summary}
-                      </Text>
-                    )}
                     {isNewItem && <Badge ariaHidden>new</Badge>}
                   </div>
                   <time
