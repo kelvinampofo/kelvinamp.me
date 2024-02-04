@@ -22,23 +22,17 @@ export default function CustomLink({
   const isInternalLink = href.startsWith('/');
 
   const classes = c(
-    className,
-    children === 'Back' && 'transition-colors hover:text-secondary dark:hover:text-secondary-dark',
+    'transition-colors dark:hover:decoration-secondary-dark hover:decoration-secondary',
+    children === 'Back' && 'hover:text-secondary dark:hover:text-secondary-dark',
     !hideUnderline &&
       'underline decoration-neutral-300 decoration-1 underline-offset-2 dark:decoration-[#505050]',
-    'transition-colors dark:hover:decoration-secondary-dark hover:decoration-secondary'
+    arrowIcon && 'inline-flex items-center gap-1 rounded-sm leading-5 -m-1 p-1 text-sm',
+    className
   );
 
   if (isInternalLink) {
     return (
-      <Link
-        href={href}
-        className={c(
-          classes,
-          arrowIcon && 'inline-flex items-center gap-1 rounded-sm leading-5 -m-1 p-1 text-sm'
-        )}
-        aria-label={ariaLabel}
-      >
+      <Link href={href} className={c(classes)} aria-label={ariaLabel}>
         {arrowIcon && (
           <Icon
             name="arrow-top-left"
