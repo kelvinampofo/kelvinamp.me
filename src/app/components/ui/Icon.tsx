@@ -7,7 +7,8 @@ type IconName =
   | 'chevron-right'
   | 'reload'
   | 'rocket'
-  | 'check';
+  | 'exclamation-triangle'
+  | 'info-circled';
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: IconName;
@@ -179,22 +180,41 @@ export function Icon({
           />
         </svg>
       );
-    case 'check':
+    case 'exclamation-triangle':
       return (
         <svg
           className={className}
           height={height}
           width={width}
-          aria-label={ariaLabel || 'Check icon'}
+          aria-label={ariaLabel || 'Exclamation Triangle icon'}
           aria-hidden={ariaHidden}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
         >
           <path
             fill="currentColor"
-            fillRule="evenodd"
-            d="M11.467 3.727c.289.189.37.576.181.865l-4.25 6.5a.625.625 0 0 1-.944.12l-2.75-2.5a.625.625 0 0 1 .841-.925l2.208 2.007 3.849-5.886a.625.625 0 0 1 .865-.181Z"
-            clipRule="evenodd"
+            fill-rule="evenodd"
+            d="M8.445.609a1.1 1.1 0 0 0-1.89 0L.161 11.337A1.1 1.1 0 0 0 1.106 13h12.788a1.1 1.1 0 0 0 .945-1.663L8.445.609Zm-1.03.512a.1.1 0 0 1 .17 0l6.395 10.728a.1.1 0 0 1-.086.151H1.106a.1.1 0 0 1-.086-.151L7.414 1.12Zm-.588 3.365a.674.674 0 1 1 1.346 0L8.02 8.487a.52.52 0 0 1-1.038 0l-.154-4Zm1.423 5.99a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      );
+    case 'info-circled':
+      return (
+        <svg
+          className={className}
+          height={height}
+          width={width}
+          aria-label={ariaLabel || 'Info Circled icon'}
+          aria-hidden={ariaHidden}
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+        >
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M7.5.877a6.623 6.623 0 1 0 0 13.246A6.623 6.623 0 0 0 7.5.877ZM1.827 7.5a5.673 5.673 0 1 1 11.346 0 5.673 5.673 0 0 1-11.346 0Zm6.423-3a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM6 6h1.5a.5.5 0 0 1 .5.5V10h1v1H6v-1h1V7H6V6Z"
+            clip-rule="evenodd"
           />
         </svg>
       );
