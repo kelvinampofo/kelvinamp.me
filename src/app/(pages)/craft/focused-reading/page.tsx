@@ -13,11 +13,11 @@ import FocusedReadingPrototype from './FocusedReadingPrototype';
 
 export const metadata: Metadata = {
   title: 'Focused reading',
-  description: 'Focused reading mode. Hold shift+F to toggle on/off.',
+  description: 'Press (⌃+F) or (Alt+F) on Windows for focused reading mode.',
   authors: [{ name: 'Kelvin Ampofo' }],
   openGraph: {
     title: 'Focused reading',
-    description: 'Focused reading mode. Hold shift+F to toggle on/off.',
+    description: 'Press (⌃+F) or (Alt+F) on Windows for focused reading mode.',
     images: [
       {
         url: 'https://kelvinamp.me/assets/images/og-images/og-focused-reading.png',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         url: 'https://kelvinamp.me/assets/images/og-images/og-loading-states.png',
         height: 1200,
         width: 1200,
-        alt: 'Focused reading mode. Hold shift+F to toggle on/off.'
+        alt: 'Press (⌃+F) or (Alt+F) on Windows for focused reading mode.'
       }
     ]
   }
