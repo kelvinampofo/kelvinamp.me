@@ -33,7 +33,6 @@ export default function FocusedReadingPrototype() {
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, officia!</p>
               <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum, impedit!</p>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, maiores!</p>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, maiores!</p>
             </div>
           </FocusedReading>
         </Card>
