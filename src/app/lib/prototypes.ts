@@ -26,14 +26,6 @@ export const allPrototypes: Prototype[] = [
     href: '/loading-indicators',
     publishedAt: '2023-11-11',
     summary: 'Simple loading state indicators.'
-  },
-  {
-    slug: '/focused-reading',
-    id: 3,
-    title: 'Focused reading',
-    href: '/focused-reading',
-    publishedAt: '2024-01-21',
-    summary: 'Press (⌃+F) or (Alt+F) on Windows for focused reading mode.'
   }
 ].sort((a, b) => {
   return compareAsc(parseISO(a.publishedAt), parseISO(b.publishedAt));
