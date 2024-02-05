@@ -15,7 +15,7 @@ export default function FocusedReadingPrototype() {
         <div className="flex flex-col gap-3">
           <Callout color="amber">This protype requires a pointer device.</Callout>
           <Card className="m-2 flex h-52 items-center justify-center">
-            <video autoPlay loop className="h-auto w-auto rounded-sm">
+            <video autoPlay playsInline loop className="h-auto w-auto rounded-sm">
               <source src="/assets/videos/focused-reading.mp4" type="video/mp4" />
             </video>
           </Card>
