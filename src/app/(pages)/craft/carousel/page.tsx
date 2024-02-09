@@ -4,7 +4,7 @@ import Separator from '@/app/components/generic/Separator';
 import Text from '@/app/components/generic/Text';
 import CopyButton from '@/app/components/ui/CopyButton';
 import CustomLink from '@/app/components/ui/CustomLink';
-import { Navigation } from '@/app/components/ui/Navigation';
+import Navigation from '@/app/components/ui/Navigation/Navigation';
 import { allPrototypes } from '@/app/lib/prototypes';
 import { findPrototype } from '@/app/lib/utils';
 import { format, parseISO } from 'date-fns';

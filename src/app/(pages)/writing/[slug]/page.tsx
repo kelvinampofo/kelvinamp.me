@@ -5,7 +5,7 @@ import Separator from '@/app/components/generic/Separator';
 import CopyButton from '@/app/components/ui/CopyButton';
 import CustomLink from '@/app/components/ui/CustomLink';
 import FocusedReading from '@/app/components/ui/FocusedReading';
-import { Navigation } from '@/app/components/ui/Navigation';
+import Navigation from '@/app/components/ui/Navigation/Navigation';
 import '@/app/styles/prose.css';
 import { allPosts } from 'contentlayer/generated';
 import { format, parseISO } from 'date-fns';
