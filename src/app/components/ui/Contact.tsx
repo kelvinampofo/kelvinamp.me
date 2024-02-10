@@ -39,7 +39,7 @@ export default function Contact() {
             </CustomLink>
             <span
               className={c(
-                'mx-1 dark:text-secondary-dark',
+                'mx-1 dark:text-secondary-dark text-secondary',
                 index === contactLinks.length - 1 && 'hidden'
               )}
               aria-hidden="true"
