@@ -48,7 +48,7 @@ export default function List({ items, route }: ListProps) {
                       : format(publishedDate, 'dd/MM/yy')}
                   </time>
                 </CustomLink>
-                {index !== items.length - 1 && <Separator className="my-3" />}
+                {index !== items.length - 1 && <Separator className="my-2" />}
               </li>
             );
           })}
