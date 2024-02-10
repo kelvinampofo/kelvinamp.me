@@ -8,15 +8,17 @@
     --page-top: 128px;
     --page-bottom-mobile: 24px;
     --page-bottom: 48px;
+    --focus-colour: #ffb224;
+    --selection-colour: #fff9a8;
   }
 
   ::selection {
-    background-color: #fff9a8;
+    background-color: var(--selection-colour);
     color: #000;
   }
 
   :focus-visible {
-    outline-color: #6f6f6f;
+    outline-color: var(--focus-colour);
   }
 
   .focus-mode {
@@ -57,11 +59,6 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    :focus,
-    :focus-visible {
-      outline-color: #a0a0a0;
-    }
-
     ::-webkit-scrollbar-thumb {
       background: #404040;
     }
