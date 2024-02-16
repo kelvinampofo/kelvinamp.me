@@ -8,9 +8,8 @@ type Options = {
 export const useTime = (options: Options = { useLondonTime: true }) => {
   const [time, setTime] = useState(new Date());
 
-  useEffect(() => {
-    const updateTime = () => setTime(new Date());
-    const intervalId = setInterval(updateTime, 1000);
+  useEffect(function updateTime() {
+    const intervalId = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -21,19 +20,13 @@ export const useTime = (options: Options = { useLondonTime: true }) => {
     ? new Date(time.toLocaleString('en', { timeZone: 'Europe/London' }))
     : time;
 
-  const formatTime = () => {
-    const formattedTime = format(convertedTime, 'HH:mm:ss');
-    const formattedMeridiem = format(convertedTime, 'a');
-    const formattedTimezoneOffset = `${format(convertedTime, 'zzzz')}`;
-
-    return { formattedTime, formattedMeridiem, formattedTimezoneOffset };
-  };
-
-  const { formattedTime, formattedMeridiem, formattedTimezoneOffset } = formatTime();
+  const currentTime = format(convertedTime, 'HH:mm:ss');
+  const meridiem = format(convertedTime, 'a');
+  const timezoneOffset = format(convertedTime, 'zzzz');
 
   return {
-    currentTime: formattedTime,
-    meridiem: formattedMeridiem,
-    timezoneOffset: formattedTimezoneOffset
+    currentTime,
+    meridiem,
+    timezoneOffset
   };
 };
