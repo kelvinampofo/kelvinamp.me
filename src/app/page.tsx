@@ -17,7 +17,7 @@ export default function Home() {
         </header>
       </AnimateEnter>
       <AnimateEnter delay={0.6}>
-        <section className="my-6 flex flex-col gap-6">
+        <section className="my-6 space-y-6">
           <p>
             Crafting software with strong focus on design, human-computer interaction and
             architecture. Insatiably curious about novel interfaces. Currently working in digital
@@ -33,7 +33,7 @@ export default function Home() {
         </section>
       </AnimateEnter>
       <AnimateEnter delay={0.8}>
-        <nav className="flex gap-2">
+        <nav className="space-x-2">
           <span>
             <CustomLink href="/craft" ariaLabel="craft page">
               Craft
