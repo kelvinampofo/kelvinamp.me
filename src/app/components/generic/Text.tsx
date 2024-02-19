@@ -33,7 +33,7 @@ export default function Text({
   const sizes = c(
     size === 'xsmall' && 'text-xs',
     size === 'small' && 'text-sm',
-    size === 'normal' && 'text-base',
+    size === 'normal' && 'md:text-base',
     size === 'large' && 'text-lg'
   );
 
