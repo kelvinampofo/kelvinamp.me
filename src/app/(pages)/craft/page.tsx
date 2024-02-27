@@ -9,17 +9,17 @@ import React from 'react';
 
 export const metadata: Metadata = {
   title: 'Craft',
-  description: 'Crafting web interfaces.',
+  description: 'Crafting interfaces / prototypes.',
   authors: [{ name: 'Kelvin Ampofo' }],
   openGraph: {
     title: 'Craft',
-    description: 'Crafting web interfaces.'
+    description: 'Crafting interfaces / prototypes.'
   },
   twitter: {
     title: 'Craft',
     site: '@kelvinamp_',
     card: 'summary_large_image',
-    description: 'Crafting web interfaces.',
+    description: 'Crafting interfaces / prototypes.',
     images: [
       {
         url: 'https://kelvinamp.me/og.jpeg',
@@ -35,7 +35,7 @@ export default function Craft() {
     <Container>
       <Heading className="mb-3">Craft</Heading>
       <Text as="p" className="mb-10 text-balance" colour="secondary">
-        Crafting interfaces + little experiments.
+        Crafting interfaces / prototypes.
       </Text>
       <List items={allPrototypes} route="craft" />
       <span className="mt-12">
