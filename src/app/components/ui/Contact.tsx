@@ -15,11 +15,6 @@ export default function Contact() {
       ariaLabel: 'gitHub profile'
     },
     {
-      label: 'Are.na',
-      href: 'https://www.are.na/kelvin-ampofo',
-      ariaLabel: 'are.na profile'
-    },
-    {
       label: 'Email',
       href: 'mailto:k@kelvinamp.me',
       ariaLabel: 'email address'
