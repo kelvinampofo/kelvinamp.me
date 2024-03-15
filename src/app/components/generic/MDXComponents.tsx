@@ -16,7 +16,7 @@ export default function MDX({ code }: MdxProps) {
   return (
     <article
       className={c(
-        'prose prose-sm md:prose-base prose-headings:font-medium prose-headings:text-primary prose-h2:text-base dark:prose-headings:text-primary-dark'
+        'prose prose-sm md:prose-base prose-headings:font-medium prose-headings:text-primary prose-h2:text-base dark:prose-headings:text-primary-dark prose-code:before:content-none prose-code:after:content-none'
       )}
     >
       <MDXContent components={{ ...MDXComponents }} />

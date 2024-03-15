@@ -15,7 +15,7 @@
 }
 
 .prose code {
-  @apply text-xs rounded-[4px] bg-neutral-100 px-1 py-0.5 font-medium text-neutral-800 dark:bg-neutral-800 dark:text-[#EDEDED];
+  @apply text-[0.8125rem] rounded-[4px] bg-neutral-100 px-1 py-0.5 font-medium text-neutral-800 dark:bg-[#1c1c1c] dark:text-[#EDEDED] border dark:border-neutral-800 border-neutral-200;
 }
 
 .prose > :first-child {
