@@ -26,7 +26,7 @@ export default function CopyButton() {
     >
       <button
         onClick={copyUrl}
-        className="px-1 text-secondary dark:text-secondary-dark"
+        className="p-1 text-secondary dark:text-secondary-dark"
         aria-label="Copy Link"
       >
         {isError ? (
