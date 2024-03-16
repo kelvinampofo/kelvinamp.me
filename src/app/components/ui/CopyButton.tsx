@@ -44,8 +44,8 @@ export default function CopyButton() {
           <Icon
             name="link"
             className="text-secondary transition-colors hover:text-primary dark:text-secondary-dark dark:hover:text-primary-dark"
-            width={18}
-            height={18}
+            width={20}
+            height={20}
             aria-hidden="true"
           />
         )}
