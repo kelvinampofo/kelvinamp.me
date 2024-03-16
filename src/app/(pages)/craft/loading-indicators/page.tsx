@@ -64,7 +64,7 @@ export default function Page() {
         </span>
         <Heading className="text-lg font-medium">{title}</Heading>
       </header>
-      <div className="flex justify-between text-sm">
+      <div className="flex items-center justify-between text-sm">
         <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
           {format(parseISO(publishedAt), 'MMMM yyyy')}
         </time>
