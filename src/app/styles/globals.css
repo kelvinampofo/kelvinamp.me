@@ -8,8 +8,11 @@
     --page-top: 128px;
     --page-bottom-mobile: 24px;
     --page-bottom: 48px;
+
     --focus-colour: #ffb224;
     --selection-colour: #fff9a8;
+
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   ::selection {
@@ -80,7 +83,7 @@
 
   .tooltip-content {
     animation-duration: 0.6s;
-    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    animation-timing-function: var(--ease-out-expo);
   }
 
   .tooltip-content[data-side='top'] {
@@ -168,7 +171,7 @@
     border-radius: 15%;
     margin: 0 0.125rem;
     display: inline-block;
-    animation: flashing 1.1s infinite ease-out;
+    animation: flashing 1.1s infinite var(--ease-out-circ);
   }
 
   .loading-dots span:nth-child(2) {
