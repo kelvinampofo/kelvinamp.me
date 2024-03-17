@@ -12,7 +12,8 @@
     --focus-colour: #ffb224;
     --selection-colour: #fff9a8;
 
-    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+    --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 
   ::selection {
@@ -82,8 +83,8 @@
   }
 
   .tooltip-content {
-    animation-duration: 0.6s;
-    animation-timing-function: var(--ease-out-expo);
+    animation-duration: 200ms;
+    animation-timing-function: var(--ease-out-quart);
   }
 
   .tooltip-content[data-side='top'] {
