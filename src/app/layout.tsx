@@ -1,4 +1,5 @@
 import '@/app/styles/globals.css';
+import { Analytics } from '@vercel/analytics/react';
 import c from 'clsx';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
@@ -69,6 +70,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Providers>
           <main className="container mx-auto min-h-full max-w-3xl pb-page-bottom-mobile pt-page-top-mobile md:pb-page-bottom md:pt-page-top">
             {children}
+            <Analytics />
           </main>
         </Providers>
       </body>
