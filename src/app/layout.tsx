@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://kelvinamp.me'),
   creator: 'Kelvin Ampofo',
   description:
-    'Crafting interfaces with a focus on design, human-computer interaction and architecture.',
+    'Crafting software with strong focus on design, human-computer interaction and architecture.',
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon-16x16.png',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Kelvin Ampofo',
     description:
-      'Crafting interfaces with a focus on design, human-computer interaction and architecture.',
+      'Crafting software with strong focus on design, human-computer interaction and architecture.',
     url: 'https://kelvinamp.me',
     siteName: 'Kelvin Ampofo',
     locale: 'en-US',
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     creator: '@kelvinamp',
     card: 'summary_large_image',
     description:
-      'Crafting interfaces with a focus on design, human-computer interaction and architecture.'
+      'Crafting software with strong focus on design, human-computer interaction and architecture.'
   }
 };
 
