@@ -7,7 +7,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ['var(--font-geist-sans)'],
-        mono: ['var(--font-geist-mono)']
+        mono: ['var(--font-geist-mono)'],
+        serif: ['var(--font-newsreader)']
       },
       colors: {
         primary: '#161616',
