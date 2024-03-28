@@ -1,11 +1,11 @@
-Designed with a focus on details, minimalism, and typography.
+Crafted with an emphasis on details, minimalism, and typography.
 
 Colophon
 
-Set in [Geist](https://vercel.com/font), built with [Next.js](https://nextjs.org/) using [TypeScript](https://www.typescriptlang.org/) and styled with [Tailwind CSS](https://tailwindcss.com/)
+Set in [Geist](https://vercel.com/font) and [Newsreader](https://fonts.google.com/specimen/Newsreader)
 
-[Contentlayer](https://www.contentlayer.dev/) for written content
+Built with [Next.js](https://nextjs.org/) and [TypeScript](https://www.typescriptlang.org/), styled with [Tailwind CSS](https://tailwindcss.com/)
+
+[Contentlayer](https://www.contentlayer.dev/) – SDK for written content
 
 Deployed with [Vercel](https://vercel.com/)
-
-[kelvinamp.me/](https://kelvinamp.me)
