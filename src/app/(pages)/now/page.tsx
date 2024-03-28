@@ -31,17 +31,17 @@ export default function Now() {
       <Heading>Now</Heading>
       <section className="my-6 space-y-6">
         <p>
-          Devoted to enhancing craft and deploying excellence, through guilt-free, hands-on
-          exploration in software and design.
+          Devoted to enhancing craft, through guilt-free, hands-on exploration in software and
+          design.
         </p>
         <p>
           Interactivity, typography, motion, touch, optimisations, accessibility, design&mdash;an
-          infinite canvas for creativity + opportunity.
+          infinite canvas for creativity and opportunity.
         </p>
         <p>
-          Code + design pursuits aside, probably reading and/or listening to{' '}
-          <CustomLink href="https://literal.club/kelvinamp/goals">books</CustomLink>, enjoying
-          emotionally evocative music, tinkering with electronics or playing with the Porsche{' '}
+          Design <em className="font-serif">&</em> code pursuits aside, probably chasing the tail of
+          my reading <CustomLink href="https://literal.club/kelvinamp/goals">list</CustomLink>,
+          enjoying emotionally evocative music, embracing entropy or playing with the Porsche{' '}
           <CustomLink href="https://configurator.porsche.com/porsche-code/PRIZFKE8">
             configurator
           </CustomLink>
