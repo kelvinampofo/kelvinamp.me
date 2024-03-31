@@ -2,10 +2,10 @@ import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 
 type Options = {
-  useLondonTime: boolean;
+  useSysTimezone: boolean;
 };
 
-export const useTime = (options: Options = { useLondonTime: true }) => {
+export const useTime = (options: Options = { useSysTimezone: false }) => {
   const [time, setTime] = useState(new Date());
 
   useEffect(function updateTime() {
@@ -13,12 +13,12 @@ export const useTime = (options: Options = { useLondonTime: true }) => {
     return () => clearInterval(intervalId);
   }, []);
 
-  const { useLondonTime } = options;
+  const { useSysTimezone } = options;
 
-  // convert the current time to 'Europe/London' timezone, otherwise use system time directly
-  const convertedTime = useLondonTime
-    ? new Date(time.toLocaleString('en', { timeZone: 'Europe/London' }))
-    : time;
+  // use system time directly otherwise convert the current time to 'Europe/London'
+  const convertedTime = useSysTimezone
+    ? time
+    : new Date(time.toLocaleString('en', { timeZone: 'Europe/London' }));
 
   const currentTime = format(convertedTime, 'HH:mm:ss');
   const meridiem = format(convertedTime, 'a');

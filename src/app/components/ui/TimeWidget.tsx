@@ -10,7 +10,7 @@ export default function TimeWidget() {
   return (
     <Tooltip content={timezoneOffset} className="mt-16">
       <span
-        className="inline-flex cursor-crosshair gap-1 font-mono text-xs text-secondary dark:text-secondary-dark"
+        className="inline-flex cursor-default gap-1 font-mono text-xs text-secondary dark:text-secondary-dark"
         aria-live="off"
         role="status"
       >
