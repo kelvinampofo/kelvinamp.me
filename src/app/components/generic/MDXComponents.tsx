@@ -1,9 +1,9 @@
 import c from 'clsx';
 import { useMDXComponent } from 'next-contentlayer/hooks';
-import CustomLink from '../ui/CustomLink';
+import InlineLink from '../ui/InlineLink';
 
 const MDXComponents = {
-  a: CustomLink
+  a: InlineLink
 };
 
 interface MdxProps {
@@ -16,7 +16,7 @@ export default function MDX({ code }: MdxProps) {
   return (
     <article
       className={c(
-        'prose prose-sm md:prose-base prose-headings:font-medium prose-headings:text-primary prose-h2:text-base dark:prose-headings:text-primary-dark prose-code:before:content-none prose-code:after:content-none'
+        'prose prose-sm md:prose-base prose-headings:font-medium prose-headings:text-primary prose-h2:text-base prose-code:before:content-none prose-code:after:content-none dark:prose-headings:text-primary-dark'
       )}
     >
       <MDXContent components={{ ...MDXComponents }} />

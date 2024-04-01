@@ -29,12 +29,12 @@ export default function Contact() {
       <ul className="flex">
         {contactLinks.map(({ label, href, ariaLabel }, index) => (
           <li key={label}>
-            <CustomLink href={href} ariaLabel={ariaLabel}>
+            <InlineLink href={href} ariaLabel={ariaLabel}>
               {label}
-            </CustomLink>
+            </InlineLink>
             <span
               className={c(
-                'mx-1 dark:text-secondary-dark text-secondary',
+                'mx-1 text-secondary dark:text-secondary-dark',
                 index === contactLinks.length - 1 && 'hidden'
               )}
               aria-hidden="true"

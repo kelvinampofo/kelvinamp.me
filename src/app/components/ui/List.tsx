@@ -1,7 +1,7 @@
 import Separator from '@/app/components/generic/Separator';
 import Text from '@/app/components/generic/Text';
 import Badge from '@/app/components/ui/Badge';
-import CustomLink from '@/app/components/ui/CustomLink';
+import InlineLink from '@/app/components/ui/InlineLink';
 import type { Prototype } from '@/app/lib/prototypes';
 import { isWithin1Month } from '@/app/lib/utils';
 import type { Post } from 'contentlayer/generated';
@@ -25,7 +25,7 @@ export default function List({ items, route }: ListProps) {
             const isNewItem = isWithin1Month(publishedDate);
             return (
               <li key={title}>
-                <CustomLink
+                <InlineLink
                   href={`/${route}/${slug}`}
                   hideUnderline
                   className="flex justify-between gap-2 p-1 hover:text-secondary dark:hover:text-secondary-dark"
@@ -49,7 +49,7 @@ export default function List({ items, route }: ListProps) {
                       <span className="tabular-nums">{format(publishedDate, 'dd/MM/yy')}</span>
                     )}
                   </time>
-                </CustomLink>
+                </InlineLink>
                 {index !== items.length - 1 && <Separator className="my-2" />}
               </li>
             );

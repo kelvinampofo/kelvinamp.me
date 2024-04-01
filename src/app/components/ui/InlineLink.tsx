@@ -2,7 +2,7 @@ import c from 'clsx';
 import Link from 'next/link';
 import { Icon } from './Icon';
 
-export interface CustomLinkProps {
+export interface InlineLinkProps {
   href?: any;
   children?: React.ReactNode;
   ariaLabel?: string;
@@ -11,14 +11,14 @@ export interface CustomLinkProps {
   className?: string;
 }
 
-export default function CustomLink({
+export default function InlineLink({
   href,
   children,
   ariaLabel,
   arrowIcon,
   hideUnderline,
   className
-}: CustomLinkProps) {
+}: InlineLinkProps) {
   const isInternalLink = href.startsWith('/');
 
   const classes = c(

@@ -1,6 +1,6 @@
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
-import CustomLink from '@/app/components/ui/CustomLink';
+import InlineLink from '@/app/components/ui/InlineLink';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -40,19 +40,19 @@ export default function Now() {
         </p>
         <p>
           Design <em className="font-serif">&</em> code pursuits aside, probably chasing the tail of
-          my reading <CustomLink href="https://literal.club/kelvinamp/goals">list</CustomLink>,
+          my reading <InlineLink href="https://literal.club/kelvinamp/goals">list</InlineLink>,
           enjoying emotionally evocative music, embracing entropy or playing with the Porsche{' '}
-          <CustomLink href="https://configurator.porsche.com/porsche-code/PRIZFKE8">
+          <InlineLink href="https://configurator.porsche.com/porsche-code/PRIZFKE8">
             configurator
-          </CustomLink>
+          </InlineLink>
           .
         </p>
         <p>Speaking less, unless I can improve the silence.</p>
       </section>
       <span>
-        <CustomLink href="/" ariaLabel="back to home page" arrowIcon hideUnderline className="p-1">
+        <InlineLink href="/" ariaLabel="back to home page" arrowIcon hideUnderline className="p-1">
           Back
-        </CustomLink>
+        </InlineLink>
       </span>
     </Container>
   );

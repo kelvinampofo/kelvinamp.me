@@ -1,6 +1,6 @@
 import c from 'clsx';
-import CustomLink from '../CustomLink';
 import { Icon } from '../Icon';
+import InlineLink from '../InlineLink';
 
 export type Item = {
   title: string;
@@ -16,7 +16,7 @@ type NavigationItemProps = {
 
 export default function NavigationItem({ item, route, direction }: NavigationItemProps) {
   return (
-    <CustomLink
+    <InlineLink
       href={`/${route}/${item.slug}`}
       hideUnderline
       className={c(
@@ -36,6 +36,6 @@ export default function NavigationItem({ item, route, direction }: NavigationIte
         </span>
         {item.title}
       </div>
-    </CustomLink>
+    </InlineLink>
   );
 }

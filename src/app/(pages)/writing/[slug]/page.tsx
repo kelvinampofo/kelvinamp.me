@@ -3,8 +3,8 @@ import Heading from '@/app/components/generic/Heading';
 import MDXContent from '@/app/components/generic/MDXComponents';
 import Separator from '@/app/components/generic/Separator';
 import CopyButton from '@/app/components/ui/CopyButton';
-import CustomLink from '@/app/components/ui/CustomLink';
 import FocusedReading from '@/app/components/ui/FocusedReading';
+import InlineLink from '@/app/components/ui/InlineLink';
 import Navigation from '@/app/components/ui/Navigation/Navigation';
 import '@/app/styles/prose.css';
 import { allPosts } from 'contentlayer/generated';
@@ -84,7 +84,7 @@ export default async function Post({ params }: Params) {
     <Container>
       <header className="flex flex-col justify-between gap-6">
         <span>
-          <CustomLink
+          <InlineLink
             href="/writing"
             ariaLabel="Back to writing page"
             arrowIcon
@@ -92,7 +92,7 @@ export default async function Post({ params }: Params) {
             className="transition-colors hover:text-secondary dark:hover:text-secondary-dark"
           >
             Writing
-          </CustomLink>
+          </InlineLink>
         </span>
         <Heading>{title}</Heading>
       </header>

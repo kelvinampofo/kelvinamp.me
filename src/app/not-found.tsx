@@ -1,6 +1,6 @@
 import Container from '@/app/components/generic/Container';
 import { Metadata } from 'next';
-import CustomLink from './components/ui/CustomLink';
+import InlineLink from './components/ui/InlineLink';
 
 export const metadata: Metadata = {
   title: '404',
@@ -29,9 +29,9 @@ export default function NotFound() {
         <p>Either way, apologies for the inconvenience.</p>
       </section>
       <span className="mt-6">
-        <CustomLink href="/" ariaLabel="go to home page" arrowIcon className="p-1" hideUnderline>
+        <InlineLink href="/" ariaLabel="go to home page" arrowIcon className="p-1" hideUnderline>
           Back
-        </CustomLink>
+        </InlineLink>
       </span>
     </Container>
   );

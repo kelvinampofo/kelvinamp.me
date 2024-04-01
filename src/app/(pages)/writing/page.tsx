@@ -1,7 +1,7 @@
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
 import Text from '@/app/components/generic/Text';
-import CustomLink from '@/app/components/ui/CustomLink';
+import InlineLink from '@/app/components/ui/InlineLink';
 import List from '@/app/components/ui/List';
 import { allPosts } from 'contentlayer/generated';
 import { Metadata } from 'next';
@@ -40,9 +40,9 @@ export default function Writing() {
       </Text>
       <List items={allPosts} route="writing" />
       <span className="mt-12">
-        <CustomLink href="/" className="p-1" arrowIcon hideUnderline ariaLabel="back to home page">
+        <InlineLink href="/" className="p-1" arrowIcon hideUnderline ariaLabel="back to home page">
           Back
-        </CustomLink>
+        </InlineLink>
       </span>
     </Container>
   );
