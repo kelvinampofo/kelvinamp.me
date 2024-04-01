@@ -1,26 +1,9 @@
 import Heading from '@/app/components/generic/Heading';
-import CustomLink from '@/app/components/ui/CustomLink';
+import InlineLink from '@/app/components/ui/InlineLink';
+import { contactLinks } from '@/app/constants/constants';
 import c from 'clsx';
 
 export default function Contact() {
-  const contactLinks = [
-    {
-      label: '@kelvinamp_',
-      href: 'https://x.com/kelvinamp_',
-      ariaLabel: 'twitter profile'
-    },
-    {
-      label: 'GitHub',
-      href: 'https://github.com/kelvinampofo',
-      ariaLabel: 'gitHub profile'
-    },
-    {
-      label: 'Email',
-      href: 'mailto:k@kelvinamp.me',
-      ariaLabel: 'email address'
-    }
-  ];
-
   return (
     <>
       <Heading as="h2" className="mb-6">
