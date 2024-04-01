@@ -10,7 +10,6 @@
     --page-bottom: 48px;
 
     --focus-colour: #ffb224;
-    --selection-colour: #fff9a8;
 
     --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
     --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -66,7 +65,7 @@
   }
 
   ::selection {
-    background-color: var(--selection-colour);
+    background-color: #fff9a8;
     color: #000;
   }
 
