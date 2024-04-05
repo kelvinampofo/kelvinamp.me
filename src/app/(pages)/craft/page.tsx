@@ -37,7 +37,7 @@ export default function Craft() {
       <Text as="p" className="mb-10 text-balance" colour="secondary">
         Crafting interfaces / prototypes.
       </Text>
-      <List items={allPrototypes} route="craft" />
+      <List items={allPrototypes} route="craft" dateFormat="MMMM yyyy" />
       <span className="mt-12">
         <InlineLink href="/" className="p-1" arrowIcon hideUnderline ariaLabel="back to home page">
           Back

@@ -8,11 +8,12 @@ import type { Post } from 'contentlayer/generated';
 import { compareDesc, format, parseISO } from 'date-fns';
 
 interface ListProps {
-  items: Post[] | Prototype[];
+  items: (Post | Prototype)[];
   route: string;
+  dateFormat?: string;
 }
 
-export default function List({ items, route }: ListProps) {
+export default function List({ items, route, dateFormat = 'dd/MM/yy' }: ListProps) {
   const isCraftRoute = route === 'craft';
 
   return (
@@ -43,11 +44,7 @@ export default function List({ items, route }: ListProps) {
                     dateTime={publishedAt}
                     className="text-sm text-secondary dark:text-secondary-dark"
                   >
-                    {isCraftRoute ? (
-                      <span className="tabular-nums">{format(publishedDate, 'MMMM yyyy')}</span>
-                    ) : (
-                      <span className="tabular-nums">{format(publishedDate, 'dd/MM/yy')}</span>
-                    )}
+                    <span className="tabular-nums">{format(publishedDate, dateFormat)}</span>
                   </time>
                 </InlineLink>
                 {index !== items.length - 1 && <Separator className="my-2" />}

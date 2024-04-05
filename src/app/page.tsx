@@ -2,9 +2,8 @@ import AnimateEnter from '@/app/components/generic/AnimateEnter';
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
 import Separator from '@/app/components/generic/Separator';
-import Text from '@/app/components/generic/Text';
 import Contact from '@/app/components/ui/Contact';
-import InternalLink from '@/app/components/ui/InlineLink';
+import InlineLink from '@/app/components/ui/InlineLink';
 import TimeWidget from '@/app/components/ui/TimeWidget';
 import { pages } from './constants/constants';
 
@@ -12,10 +11,7 @@ export default function Home() {
   return (
     <Container>
       <AnimateEnter delay={0.4}>
-        <header>
-          <Heading>Kelvin Ampofo</Heading>
-          <Text colour="secondary">Design Engineer</Text>
-        </header>
+        <Heading>Kelvin Ampofo</Heading>
       </AnimateEnter>
       <AnimateEnter delay={0.6}>
         <section className="my-6 space-y-6">
@@ -26,9 +22,9 @@ export default function Home() {
           </p>
           <p>
             Read further on{' '}
-            <InternalLink href="/now" ariaLabel="now page">
+            <InlineLink href="/now" ariaLabel="now page">
               now
-            </InternalLink>{' '}
+            </InlineLink>{' '}
             page.
           </p>
         </section>
@@ -37,9 +33,9 @@ export default function Home() {
         <nav className="space-x-2">
           {pages.map(({ name, href, ariaLabel }) => (
             <span key={name}>
-              <InternalLink href={href} ariaLabel={ariaLabel}>
+              <InlineLink href={href} ariaLabel={ariaLabel}>
                 {name}
-              </InternalLink>
+              </InlineLink>
             </span>
           ))}
         </nav>
