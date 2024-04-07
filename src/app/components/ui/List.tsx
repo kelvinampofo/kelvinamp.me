@@ -4,6 +4,7 @@ import Badge from '@/app/components/ui/Badge';
 import InlineLink from '@/app/components/ui/InlineLink';
 import type { Prototype } from '@/app/lib/prototypes';
 import { isWithin1Month } from '@/app/lib/utils';
+import c from 'clsx';
 import type { Post } from 'contentlayer/generated';
 import { compareDesc, format, parseISO } from 'date-fns';
 
@@ -31,7 +32,7 @@ export default function List({ items, route, dateFormat = 'dd/MM/yy' }: ListProp
                   hideUnderline
                   className="flex justify-between gap-2 p-1 hover:text-secondary dark:hover:text-secondary-dark"
                 >
-                  <div className="flex items-center gap-2">
+                  <div className={c('flex gap-2', isNewItem ? 'items-center' : 'items-baseline')}>
                     <span>{title}</span>
                     {isCraftRoute && (
                       <Text colour="secondary" size="xsmall" className="hidden md:block">
