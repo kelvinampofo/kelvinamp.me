@@ -8,6 +8,6 @@ interface ContainerProps {
 
 export default function Container({ children, className }: ContainerProps) {
   return (
-    <div className={c('flex flex-col justify-center px-4 md:px-8', className)}>{children}</div>
+    <div className={c('flex flex-col justify-center px-4 md:px-0', className)}>{children}</div>
   );
 }
