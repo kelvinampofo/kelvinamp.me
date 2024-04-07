@@ -30,10 +30,7 @@ export default function Now() {
     <Container>
       <Heading>Now</Heading>
       <section className="my-6 space-y-6">
-        <p>
-          Devoted to enhancing craft, through guilt-free, hands-on exploration in software and
-          design.
-        </p>
+        <p>Committed to developing skill, through guiltless exploration in software and design.</p>
         <p>
           Interactivity, typography, motion, touch, optimisations, accessibility, design&mdash;an
           infinite canvas for creativity and opportunity.
