@@ -14,7 +14,7 @@
     --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
     --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
 
-    --scrollbar-color-thumb: #a0a0a0;
+    --scrollbar-color-thumb: hsl(0deg, 0%, 62.7%);
     --scrollbar-color-track: transparent;
     --scrollbar-width: thin;
   }
@@ -46,27 +46,27 @@
       border-radius: 15px;
       width: auto;
       height: 1.25rem;
-      background: #a3a3a3;
+      background: hsl(0deg, 0%, 63.9%);
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background: #d4d4d4;
+      background: hsl(0deg, 0%, 83.1%);
     }
 
     @media (prefers-color-scheme: dark) {
       ::-webkit-scrollbar-thumb {
-        background: #404040;
+        background: hsl(0deg, 0%, 25.1%);
       }
 
       ::-webkit-scrollbar-thumb:hover {
-        background: #525252;
+        background: hsl(0deg, 0%, 32.2%);
       }
     }
   }
 
   ::selection {
-    background-color: #fff9a8;
-    color: #000;
+    background-color: hsl(55.9deg, 100%, 82.9%);
+    color: black;
   }
 
   :focus-visible {
