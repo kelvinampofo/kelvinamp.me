@@ -39,7 +39,7 @@ export default function Craft() {
       </Text>
       <List items={allPrototypes} route="craft" dateFormat="MMMM yyyy" />
       <span className="mt-12">
-        <InlineLink href="/" className="p-1" arrowIcon hideUnderline ariaLabel="back to home page">
+        <InlineLink href="/" arrowIcon hideUnderline ariaLabel="back to home page">
           Back
         </InlineLink>
       </span>

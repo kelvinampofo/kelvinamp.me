@@ -47,7 +47,7 @@ export default function Now() {
         <p>Speaking less, unless I can improve the silence.</p>
       </section>
       <span>
-        <InlineLink href="/" ariaLabel="back to home page" arrowIcon hideUnderline className="p-1">
+        <InlineLink href="/" ariaLabel="back to home page" arrowIcon hideUnderline>
           Back
         </InlineLink>
       </span>

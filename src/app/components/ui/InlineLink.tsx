@@ -22,7 +22,7 @@ export default function InlineLink({
   const isInternalLink = href.startsWith('/');
 
   const classes = c(
-    'transition-colors dark:hover:decoration-secondary-dark hover:decoration-secondary',
+    'transition-colors dark:hover:decoration-secondary-dark hover:decoration-secondary rounded-sm',
     children === 'Back' && 'hover:text-secondary dark:hover:text-secondary-dark',
     !hideUnderline &&
       'underline decoration-neutral-300 decoration-1 underline-offset-2 dark:decoration-[#505050]',

@@ -9,7 +9,9 @@
     --page-bottom-mobile: 24px;
     --page-bottom: 48px;
 
-    --focus-colour: #ffb224;
+    --focus-inner-colour: hsl(0deg 0% 99%);
+    --focus-inner-colour-dark: hsl(0deg, 0%, 8.63%);
+    --focus-outer-colour: hsl(39deg, 100%, 57%);
 
     --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
     --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -26,7 +28,7 @@
     }
     @media (prefers-color-scheme: dark) {
       * {
-        scrollbar-color: #2e2e2e var(--scrollbar-color-track);
+        scrollbar-color: hsl(0deg, 0%, 18%) var(--scrollbar-color-track);
       }
     }
   }
@@ -70,7 +72,18 @@
   }
 
   :focus-visible {
-    outline-color: var(--focus-colour);
+    box-shadow:
+      0 0 0 2px var(--focus-inner-colour),
+      0 0 0 4px var(--focus-outer-colour);
+    outline: 0px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :focus-visible {
+      box-shadow:
+        0 0 0 2px var(--focus-inner-colour-dark),
+        0 0 0 4px var(--focus-outer-colour);
+    }
   }
 
   .focus-mode {
