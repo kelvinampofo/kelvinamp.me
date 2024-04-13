@@ -16,3 +16,5 @@ Quick notes on Git for reference.
 4. <code>git push --force-with-lease</code> – This is safer than <code>--force</code>. It won't
    overwrite any work on the remote branch if more commits were added by another co-worker. This
    helps prevent accidentally overwriting someone else's work by force pushing.
+5. <code>git log -L FROM_LINE,TO_LINE:FILE_PATH</code> – This allows you to see the git history of a
+   chunk of code within a single file.
