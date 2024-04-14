@@ -24,12 +24,8 @@ export default function NavigationItem({ item, route, direction }: NavigationIte
         direction === 'next' && 'items-end'
       )}
     >
-      <div className={`flex flex-col ${direction === 'next' ? 'items-end' : 'gap-1'}`}>
-        <Icon
-          name={direction === 'next' ? 'arrow-right' : 'arrow-left'}
-          className={c('flex-1', direction === 'next' && 'text-[#6F6F6F] dark:text-[#A0A0A0]')}
-          aria-hidden="true"
-        />
+      <div className={c('flex flex-col gap-1', direction === 'next' && 'items-end')}>
+        <Icon name={direction === 'next' ? 'arrow-right' : 'arrow-left'} aria-hidden="true" />
         <span className="sr-only">
           {direction === 'next' ? 'Next' : 'Previous'}
           {route === 'writing' ? 'post,' : 'prototype,'}
