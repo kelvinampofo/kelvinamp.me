@@ -50,9 +50,9 @@ export default function Carousel() {
   const [isCursorLeft, setIsCursorLeft] = useState(false);
   const [isCursorRight, setIsCursorRight] = useState(false);
 
-  const { isPointerDevice } = usePointerDevice();
-
   const slideRef = useRef<HTMLUListElement | null>(null);
+
+  const { isPointerDevice } = usePointerDevice();
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -128,10 +128,16 @@ export default function Carousel() {
             onClick={() => handleSlideChange(currentSlide - 1)}
             disabled={currentSlide === 0}
             className={c(
-              'mr-2 rounded-sm text-secondary duration-150 dark:border-neutral-800 dark:text-secondary-dark disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600 enabled:dark:hover:bg-neutral-800 enabled:hover:bg-neutral-200'
+              'mr-2 rounded-sm text-secondary duration-150 hover:text-primary disabled:cursor-not-allowed disabled:text-neutral-300 dark:border-neutral-800 dark:text-secondary-dark dark:hover:text-primary-dark dark:disabled:text-neutral-600'
             )}
           >
-            <Icon name="chevron-left" width={25} height={25} aria-hidden="true" />
+            <Icon
+              name="chevron-left"
+              width={25}
+              height={25}
+              aria-hidden="true"
+              className="active:scale-90"
+            />
             <span className="sr-only">Previous slide</span>
           </button>
         </div>
@@ -164,10 +170,16 @@ export default function Carousel() {
             onClick={() => handleSlideChange(currentSlide + 1)}
             disabled={hasReachedEndOfSlide()}
             className={c(
-              'ml-2 rounded-sm text-secondary duration-150 dark:border-neutral-800 dark:text-secondary-dark disabled:cursor-not-allowed disabled:text-neutral-300 dark:disabled:text-neutral-600 enabled:dark:hover:bg-neutral-800 enabled:hover:bg-neutral-200'
+              'ml-2 rounded-sm text-secondary duration-150 hover:text-primary disabled:cursor-not-allowed disabled:text-neutral-300 dark:border-neutral-800 dark:text-secondary-dark dark:hover:text-primary-dark dark:disabled:text-neutral-600'
             )}
           >
-            <Icon name="chevron-right" width={25} height={25} aria-hidden="true" />
+            <Icon
+              name="chevron-right"
+              width={25}
+              height={25}
+              aria-hidden="true"
+              className="active:scale-90"
+            />
             <span className="sr-only">Next slide</span>
           </button>
         </div>

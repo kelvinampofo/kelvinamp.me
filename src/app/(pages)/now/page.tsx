@@ -28,8 +28,8 @@ export const metadata: Metadata = {
 export default function Now() {
   return (
     <Container>
-      <Heading>Now</Heading>
-      <section className="my-6 space-y-6">
+      <Heading className="mb-6">Now</Heading>
+      <section className="mb-6 space-y-6">
         <p>Committed to developing skill, through guiltless exploration in software and design.</p>
         <p>
           Interactivity, typography, motion, touch, optimisations, accessibility, design&mdash;an

@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 export default function Writing() {
   return (
     <Container>
-      <Heading className="mb-3">Writing</Heading>
+      <Heading className="mb-2">Writing</Heading>
       <Text as="p" className="mb-10" colour="secondary">
         Thoughts on technology, design + things in between.
       </Text>

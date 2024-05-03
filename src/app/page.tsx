@@ -11,10 +11,10 @@ export default function Home() {
   return (
     <Container>
       <AnimateEnter delay={0.4}>
-        <Heading>Kelvin Ampofo</Heading>
+        <Heading className="mb-6">Kelvin Ampofo</Heading>
       </AnimateEnter>
       <AnimateEnter delay={0.6}>
-        <section className="my-6 space-y-6">
+        <section className="mb-6 space-y-6">
           <p>
             Crafting software with a focus on design, human-computer interaction and architecture.
             Insatiably curious about novel interfaces. Currently working in digital banking.

@@ -66,7 +66,7 @@ const newsreader = Newsreader({
 });
 
 export interface RootLayoutProps {
-  children: ReactNode;
+  readonly children: ReactNode;
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {

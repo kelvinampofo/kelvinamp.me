@@ -96,7 +96,7 @@ export default async function Post({ params }: Params) {
         </span>
         <Heading>{title}</Heading>
       </header>
-      <div className="mb-3 flex items-center justify-between text-sm">
+      <div className="mb-6 flex items-center justify-between text-sm">
         <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
           {format(parseISO(publishedAt), 'MMMM dd yyyy')}
         </time>

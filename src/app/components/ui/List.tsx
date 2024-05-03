@@ -18,41 +18,39 @@ export default function List({ items, route, dateFormat = 'dd/MM/yy' }: ListProp
   const isCraftRoute = route === 'craft';
 
   return (
-    <>
-      <ol>
-        {items
-          .sort((a, b) => compareDesc(parseISO(a.publishedAt), parseISO(b.publishedAt)))
-          .map(({ publishedAt, slug, title, summary }, index) => {
-            const publishedDate = parseISO(publishedAt);
-            const isNewItem = isWithin1Month(publishedDate);
-            return (
-              <li key={title}>
-                <InlineLink
-                  href={`/${route}/${slug}`}
-                  hideUnderline
-                  className="flex justify-between gap-2 p-1 hover:text-secondary dark:hover:text-secondary-dark"
+    <ol>
+      {items
+        .sort((a, b) => compareDesc(parseISO(a.publishedAt), parseISO(b.publishedAt)))
+        .map(({ publishedAt, slug, title, summary }, index) => {
+          const publishedDate = parseISO(publishedAt);
+          const isNewItem = isWithin1Month(publishedDate);
+          return (
+            <li key={title}>
+              <InlineLink
+                href={`/${route}/${slug}`}
+                hideUnderline
+                className="flex justify-between gap-2 p-1 hover:text-secondary dark:hover:text-secondary-dark"
+              >
+                <div className={c('flex gap-2', isNewItem ? 'items-center' : 'items-baseline')}>
+                  <span>{title}</span>
+                  {isCraftRoute && (
+                    <Text colour="secondary" size="xsmall" className="hidden md:block">
+                      {summary}
+                    </Text>
+                  )}
+                  {isNewItem && <Badge ariaHidden>new</Badge>}
+                </div>
+                <time
+                  dateTime={publishedAt}
+                  className="text-sm text-secondary dark:text-secondary-dark"
                 >
-                  <div className={c('flex gap-2', isNewItem ? 'items-center' : 'items-baseline')}>
-                    <span>{title}</span>
-                    {isCraftRoute && (
-                      <Text colour="secondary" size="xsmall" className="hidden md:block">
-                        {summary}
-                      </Text>
-                    )}
-                    {isNewItem && <Badge ariaHidden>new</Badge>}
-                  </div>
-                  <time
-                    dateTime={publishedAt}
-                    className="text-sm text-secondary dark:text-secondary-dark"
-                  >
-                    <span className="tabular-nums">{format(publishedDate, dateFormat)}</span>
-                  </time>
-                </InlineLink>
-                {index !== items.length - 1 && <Separator className="my-2" />}
-              </li>
-            );
-          })}
-      </ol>
-    </>
+                  <span className="tabular-nums">{format(publishedDate, dateFormat)}</span>
+                </time>
+              </InlineLink>
+              {index !== items.length - 1 && <Separator className="my-2" />}
+            </li>
+          );
+        })}
+    </ol>
   );
 }
