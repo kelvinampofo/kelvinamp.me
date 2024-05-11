@@ -26,6 +26,14 @@ export const allPrototypes: Prototype[] = [
     href: '/loading-indicators',
     publishedAt: '2023-11-11',
     summary: 'Simple loading state indicators.'
+  },
+  {
+    slug: '/sticky-tabs',
+    id: 3,
+    title: 'Sticky tabs',
+    href: '/sticky-tabs',
+    publishedAt: '2024-05-11',
+    summary: 'Inspired by Vercel dashboard.'
   }
 ].sort((a, b) => {
   return compareAsc(parseISO(a.publishedAt), parseISO(b.publishedAt));
