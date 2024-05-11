@@ -22,8 +22,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: 'https://kelvinamp.me/assets/images/og-images/og-sticky-tabs.png',
-        height: 1200,
-        width: 1200,
+        height: 1080,
+        width: 566,
         alt: 'Sticky tabs inspired by Vercel dashboard.'
       }
     ]
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: 'https://kelvinamp.me/assets/images/og-images/og-sticky-tabs.png',
-        height: 1200,
-        width: 1200,
+        height: 1080,
+        width: 566,
         alt: 'Sticky tabs inspired by Vercel dashboard.'
       }
     ]
