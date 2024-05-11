@@ -17,11 +17,6 @@ export const metadata: Metadata = {
   creator: 'Kelvin Ampofo',
   description:
     'Crafting software with strong focus on design, human-computer interaction and architecture.',
-  icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png'
-  },
   openGraph: {
     title: 'Kelvin Ampofo',
     description:
@@ -29,15 +24,7 @@ export const metadata: Metadata = {
     url: 'https://kelvinamp.me',
     siteName: 'Kelvin Ampofo',
     locale: 'en-US',
-    type: 'website',
-    images: [
-      {
-        url: 'https://kelvinamp.me/og.jpeg',
-        height: 1200,
-        width: 1200,
-        alt: 'Black background image'
-      }
-    ]
+    type: 'website'
   },
   robots: {
     index: true,
@@ -52,11 +39,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: 'Kelvin Ampofo',
-    site: '@kelvinamp_',
-    creator: '@kelvinamp',
-    card: 'summary_large_image',
-    description:
-      'Crafting software with strong focus on design, human-computer interaction and architecture.'
+    card: 'summary_large_image'
   }
 };
 
