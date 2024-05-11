@@ -71,7 +71,7 @@ export default function Page() {
         <CopyButton />
       </div>
       <Text className="my-8">{summary}</Text>
-      <Card className="flex h-40 items-center justify-center gap-12 md:gap-20">
+      <Card className="flex h-40 items-center justify-center gap-12 md:gap-14">
         <Loading variant="ios-spinner" />
         <Loading variant="primary-spinner" />
         <Loading variant="secondary-spinner" />

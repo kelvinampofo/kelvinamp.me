@@ -71,7 +71,7 @@ export default function Page() {
         <CopyButton />
       </div>
       <Text className="my-8">{summary}</Text>
-      <Card className="flex h-48 items-center justify-center gap-12 md:gap-20">
+      <Card className="flex h-40 items-center justify-center gap-12 md:gap-20">
         <StickyTabs />
       </Card>
       <Separator className="my-8" />
