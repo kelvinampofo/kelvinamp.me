@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   description:
     'Crafting software with strong focus on design, human-computer interaction and architecture.',
   icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
+    icon: '/favicon.ico',
+    shortcut: '/icon.png',
     apple: '/apple-touch-icon.png'
   },
   openGraph: {
