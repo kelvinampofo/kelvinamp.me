@@ -14,19 +14,19 @@ export default function StickyTabs() {
   };
 
   return (
-    <div className="relative mx-auto flex h-14 w-[600px] items-center">
-      <MotionConfig transition={{ type: 'spring', bounce: 0.3, duration: 0.5 }}>
-        <motion.ul layout className="mx-auto flex gap-2">
+    <div className="relative mx-auto">
+      <MotionConfig transition={{ type: 'spring', bounce: 0.3, duration: 0.4 }}>
+        <motion.ul layout className="flex gap-2">
           {tabs.map((tab) => (
             <motion.li
               key={tab}
               tabIndex={0}
               layout
               className={c(
-                'relative cursor-pointer rounded-[4px] px-2 py-1 text-sm',
+                'relative mx-auto cursor-pointer rounded-[4px] px-2 py-1 text-sm',
                 activeTab === tab
-                  ? 'text-neutral-800 dark:text-primary-dark'
-                  : 'text-neutral-700 dark:text-primary-dark'
+                  ? 'text-neutral-800 dark:text-neutral-100'
+                  : 'text-neutral-700 dark:text-neutral-200'
               )}
               onFocus={() => handleTabChange(tab)}
               onMouseOver={() => handleTabChange(tab)}
