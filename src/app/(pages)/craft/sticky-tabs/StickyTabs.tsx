@@ -15,7 +15,7 @@ export default function StickyTabs() {
 
   return (
     <div className="relative mx-auto">
-      <MotionConfig transition={{ type: 'spring', bounce: 0.3, duration: 0.4 }}>
+      <MotionConfig transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}>
         <motion.ul layout className="flex gap-2">
           {tabs.map((tab) => (
             <motion.li
@@ -34,7 +34,7 @@ export default function StickyTabs() {
               {activeTab === tab ? (
                 <motion.div
                   layoutId="tab-indicator"
-                  className="absolute inset-0 rounded-[4px] bg-black/5 dark:bg-neutral-600/40"
+                  className="absolute inset-0 rounded-[4px] bg-black/5 dark:bg-neutral-600/30"
                 />
               ) : null}
               <span className="relative text-inherit">{tab}</span>
