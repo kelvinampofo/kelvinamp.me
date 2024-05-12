@@ -33,7 +33,7 @@ export const allPrototypes: Prototype[] = [
     title: 'Sticky tabs',
     href: '/sticky-tabs',
     publishedAt: '2024-05-11',
-    summary: 'Inspired by Vercel dashboard.'
+    summary: 'Tabs from the Vercel dashboard.'
   }
 ].sort((a, b) => {
   return compareAsc(parseISO(a.publishedAt), parseISO(b.publishedAt));
