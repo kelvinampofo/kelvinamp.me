@@ -19,7 +19,7 @@ export default function CopyButton() {
     <Tooltip
       content={
         <div className="flex items-center gap-2">
-          Copy Link
+          Copy URL
           <ShortcutKey keyShortcuts={isMacOS ? ['⌃', '⌘', 'C'] : ['Ctrl', 'Alt', 'C']} />
         </div>
       }
@@ -27,7 +27,7 @@ export default function CopyButton() {
       <button
         onClick={copyUrl}
         className="rounded-full p-1 text-secondary dark:text-secondary-dark"
-        aria-label="Copy Link"
+        aria-label="Copy URL"
       >
         {isError ? (
           error.message

@@ -13,7 +13,7 @@ export default function ShortcutKeys({ keyShortcuts }: ShortcutKeysProps) {
           key={index}
           size="xsmall"
           colour="secondary"
-          className="rounded-sm border px-1 font-medium dark:border-neutral-800 dark:bg-neutral-800"
+          className="rounded-sm bg-neutral-100 px-1 font-medium dark:bg-neutral-800"
         >
           {keyShortcut}
         </Text>
