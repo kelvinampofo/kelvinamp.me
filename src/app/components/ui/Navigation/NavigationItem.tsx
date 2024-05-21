@@ -1,36 +1,31 @@
 import c from 'clsx';
-import { Icon } from '../Icon';
 import InlineLink from '../InlineLink';
 
-export type Item = {
+export interface Item {
   title: string;
   slug: string;
   publishedAt: string;
-};
+}
 
-type NavigationItemProps = {
+interface NavigationItemProps {
   item: Item;
   route: string;
   direction: 'next' | 'previous';
-};
+}
 
 export default function NavigationItem({ item, route, direction }: NavigationItemProps) {
   return (
     <InlineLink
       href={`/${route}/${item.slug}`}
       hideUnderline
-      className={c(
-        'p-1 hover:text-secondary dark:hover:text-secondary-dark',
-        direction === 'next' && 'items-end'
-      )}
+      className="p-1 hover:text-secondary dark:hover:text-secondary-dark"
     >
-      <div className={c('flex flex-col gap-1', direction === 'next' && 'items-end')}>
-        <Icon name={direction === 'next' ? 'arrow-right' : 'arrow-left'} aria-hidden="true" />
-        <span className="sr-only">
-          {direction === 'next' ? 'Next' : 'Previous'}
-          {route === 'writing' ? 'post,' : 'prototype,'}
+      <div className={c('flex flex-col gap-1', { 'items-end': direction === 'next' })}>
+        <span className="text-secondary dark:text-secondary-dark">
+          {direction === 'previous' ? 'Previous' : 'Next'}
         </span>
-        {item.title}
+        <span className="sr-only">{route === 'writing' ? 'post,' : 'prototype,'}</span>
+        <span>{item.title}</span>
       </div>
     </InlineLink>
   );

@@ -1,11 +1,11 @@
 import React from 'react';
 import NavigationItem, { type Item } from './NavigationItem';
 
-type NavigationProps = {
+interface NavigationProps {
   currentItem: Item;
   allItems: Item[];
   route: string;
-};
+}
 
 export default function Navigation({ currentItem, allItems, route }: NavigationProps) {
   const nextItem = findNextItem(currentItem, allItems);
