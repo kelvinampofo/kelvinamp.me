@@ -23,7 +23,6 @@ export default function InlineLink({
 
   const classes = c(
     'transition-colors dark:hover:decoration-secondary-dark hover:decoration-secondary rounded-sm',
-    children === 'Back' && 'hover:text-secondary dark:hover:text-secondary-dark',
     !hideUnderline &&
       'underline decoration-neutral-300 decoration-1 underline-offset-2 dark:decoration-[#505050]',
     arrowIcon && 'inline-flex items-center gap-1 rounded-sm leading-5 -m-1 p-1 text-sm',

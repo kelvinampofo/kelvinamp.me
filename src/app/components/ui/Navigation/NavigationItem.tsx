@@ -15,11 +15,7 @@ interface NavigationItemProps {
 
 export default function NavigationItem({ item, route, direction }: NavigationItemProps) {
   return (
-    <InlineLink
-      href={`/${route}/${item.slug}`}
-      hideUnderline
-      className="p-1 hover:text-secondary dark:hover:text-secondary-dark"
-    >
+    <InlineLink href={`/${route}/${item.slug}`} hideUnderline className="p-1">
       <div className={c('flex flex-col gap-1', { 'items-end': direction === 'next' })}>
         <span className="text-secondary dark:text-secondary-dark">
           {direction === 'previous' ? 'Previous' : 'Next'}

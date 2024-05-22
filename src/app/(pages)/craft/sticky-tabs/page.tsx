@@ -53,12 +53,7 @@ export default function Page() {
     <Container>
       <header className="flex flex-col justify-between gap-6">
         <span>
-          <InlineLink
-            href="/craft"
-            arrowIcon
-            hideUnderline
-            className="transition-colors hover:text-secondary dark:hover:text-secondary-dark"
-          >
+          <InlineLink href="/craft" arrowIcon hideUnderline>
             Craft
           </InlineLink>
         </span>
