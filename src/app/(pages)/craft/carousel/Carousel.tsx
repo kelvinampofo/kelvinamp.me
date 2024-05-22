@@ -149,7 +149,7 @@ export default function Carousel() {
           setSlidePosition(e.currentTarget.scrollLeft);
         }}
         className={c(
-          'flex h-[350px] overflow-x-auto bg-scroll pb-10 md:h-[600px] md:snap-x md:snap-mandatory md:pb-12 lg:h-[600px] lg:pb-12',
+          'flex h-[350px] overflow-x-auto bg-scroll pb-10 will-change-scroll md:h-[600px] md:snap-x md:snap-mandatory md:pb-12 lg:h-[600px] lg:pb-12',
           cursorClasses
         )}
       >
