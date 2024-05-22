@@ -136,7 +136,7 @@ export default function Carousel() {
               width={25}
               height={25}
               aria-hidden="true"
-              className="active:scale-90"
+              className="active:scale-95"
             />
             <span className="sr-only">Previous slide</span>
           </button>
@@ -178,7 +178,7 @@ export default function Carousel() {
               width={25}
               height={25}
               aria-hidden="true"
-              className="active:scale-90"
+              className="active:scale-95"
             />
             <span className="sr-only">Next slide</span>
           </button>
