@@ -305,16 +305,13 @@
   }
 
   @keyframes shine {
-    0% {
-      background-position: left;
-    }
-    50% {
-      background-position: right;
+    to {
+      background-position: -200% 0;
     }
   }
 
-  .shine-animation {
-    animation: shine 2.5s linear 0s infinite normal forwards;
+  .shine {
+    animation: 2s linear infinite shine;
     background-size: 200%;
   }
 }
