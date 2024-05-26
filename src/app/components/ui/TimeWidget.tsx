@@ -8,7 +8,7 @@ export default function TimeWidget() {
   const { currentTime, meridiem, timezoneOffset } = useTime();
 
   return (
-    <Tooltip content={timezoneOffset} className="mt-16">
+    <Tooltip content={timezoneOffset} className="mt-14">
       <span
         className="inline-flex cursor-default gap-1 font-mono text-xs text-secondary dark:text-secondary-dark"
         aria-live="off"

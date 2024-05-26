@@ -5,7 +5,7 @@ import Separator from '@/app/components/generic/Separator';
 import Contact from '@/app/components/ui/Contact';
 import InlineLink from '@/app/components/ui/InlineLink';
 import TimeWidget from '@/app/components/ui/TimeWidget';
-import { pages } from './constants/constants';
+import { pages } from './constants';
 
 export default function Home() {
   return (

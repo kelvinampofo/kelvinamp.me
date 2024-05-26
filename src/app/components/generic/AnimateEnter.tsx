@@ -28,7 +28,7 @@ export default function AnimateEnter({ children, delay = 0 }: AnimateEnterProps)
   }
 
   return (
-    <LazyMotion features={domAnimation}>
+    <LazyMotion features={domAnimation} strict>
       <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

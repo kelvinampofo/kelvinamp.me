@@ -1,6 +1,6 @@
 import Heading from '@/app/components/generic/Heading';
 import InlineLink from '@/app/components/ui/InlineLink';
-import { contactLinks } from '@/app/constants/constants';
+import { contactLinks } from '@/app/constants';
 import c from 'clsx';
 
 export default function Contact() {

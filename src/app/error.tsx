@@ -16,19 +16,15 @@ export default function ErrorBoundary({ error, reset }: ErrorBoundaryProps) {
     <Container>
       <Heading className="mb-6 text-lg font-medium">Oops, something went wrong...</Heading>
       <div className="flex flex-col items-start gap-3">
-        <p>Very much sad, very high priority. Maybe refresh?</p>
-        <button
-          onClick={reset}
-          className="rounded-md border bg-neutral-50 p-1 shadow-sm dark:border-neutral-800 dark:bg-[#1C1C1C]"
-        >
-          Refresh
-          <Icon
-            name="reload"
-            height={15}
-            width={15}
-            className="mx-1 inline-flex items-center text-secondary"
-          />
-        </button>
+        <p>
+          Very much sad, very high priority.{' '}
+          <button
+            onClick={reset}
+            className="rounded-sm underline decoration-neutral-300 decoration-1 underline-offset-2 transition-colors hover:decoration-secondary dark:decoration-[#505050] dark:hover:decoration-secondary-dark"
+          >
+            Maybe refresh?
+          </button>
+        </p>
         <details className="dark:border-neutral-800 [&_svg]:open:rotate-90">
           <summary className="mb-3 flex cursor-pointer list-none items-center gap-1">
             <div>
