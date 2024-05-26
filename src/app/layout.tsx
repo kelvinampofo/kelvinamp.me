@@ -4,8 +4,8 @@ import c from 'clsx';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
-import { Newsreader } from 'next/font/google';
 import type { ReactNode } from 'react';
+import { newsreader } from './lib/fonts';
 import Providers from './providers';
 
 export const metadata: Metadata = {
@@ -59,11 +59,6 @@ export const metadata: Metadata = {
       'Crafting software with strong focus on design, human-computer interaction and architecture.'
   }
 };
-
-const newsreader = Newsreader({
-  subsets: ['latin'],
-  variable: '--font-newsreader'
-});
 
 export interface RootLayoutProps {
   readonly children: ReactNode;
