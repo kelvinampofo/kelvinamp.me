@@ -12,7 +12,7 @@ export type Prototype = {
 
 export const allPrototypes: Prototype[] = [
   {
-    slug: '/carousel',
+    slug: 'carousel',
     id: 1,
     title: 'Carousel',
     href: '/carousel',
@@ -20,7 +20,7 @@ export const allPrototypes: Prototype[] = [
     summary: 'A minimal CSS based carousel.'
   },
   {
-    slug: '/loading-indicators',
+    slug: 'loading-indicators',
     id: 2,
     title: 'Loading indicators',
     href: '/loading-indicators',
@@ -28,7 +28,7 @@ export const allPrototypes: Prototype[] = [
     summary: 'Simple loading state indicators.'
   },
   {
-    slug: '/sticky-tabs',
+    slug: 'sticky-tabs',
     id: 3,
     title: 'Sticky tabs',
     href: '/sticky-tabs',
