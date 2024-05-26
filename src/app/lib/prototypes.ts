@@ -28,9 +28,9 @@ export const allPrototypes: Prototype[] = [
     summary: 'Simple loading state indicators.'
   },
   {
-    slug: 'sticky-tabs',
+    slug: 'tabs',
     id: 3,
-    title: 'Sticky tabs',
+    title: 'Tabs',
     href: '/sticky-tabs',
     publishedAt: '2024-05-11',
     summary: 'Tabs from the Vercel dashboard.'

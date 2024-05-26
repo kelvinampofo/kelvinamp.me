@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 const tabs = ['Software', 'Design', 'HCI', 'Architecture'];
 
-export default function StickyTabs() {
+export default function Tabs() {
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
   const handleTabChange = (tab: string) => {

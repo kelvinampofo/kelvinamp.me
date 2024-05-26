@@ -10,42 +10,42 @@ import { allPrototypes } from '@/app/lib/prototypes';
 import { findPrototype } from '@/app/lib/utils';
 import { format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
-import StickyTabs from './StickyTabs';
+import Tabs from './Tabs';
 
 export const metadata: Metadata = {
-  title: 'Sticky tabs',
-  description: 'Sticky tabs inspired by Vercel dashboard.',
+  title: 'Tabs',
+  description: 'Tabs inspired by Vercel dashboard.',
   authors: [{ name: 'Kelvin Ampofo' }],
   openGraph: {
-    title: 'Sticky tabs',
-    description: 'Sticky tabs inspired by Vercel dashboard.',
+    title: 'Tabs',
+    description: 'Tabs inspired by Vercel dashboard.',
     images: [
       {
         url: 'https://kelvinamp.me/assets/images/og-images/og-sticky-tabs.png',
         height: 1080,
         width: 566,
-        alt: 'Sticky tabs inspired by Vercel dashboard.'
+        alt: 'Tabs inspired by Vercel dashboard.'
       }
     ]
   },
   twitter: {
-    title: 'Sticky tabs',
+    title: 'Tabs',
     site: '@kelvinamp_',
     card: 'summary_large_image',
-    description: 'Sticky tabs inspired by Vercel dashboard.',
+    description: 'Tabs inspired by Vercel dashboard.',
     images: [
       {
         url: 'https://kelvinamp.me/assets/images/og-images/og-sticky-tabs.png',
         height: 1080,
         width: 566,
-        alt: 'Sticky tabs inspired by Vercel dashboard.'
+        alt: 'Tabs inspired by Vercel dashboard.'
       }
     ]
   }
 };
 
 export default function Page() {
-  const stickyTabs = findPrototype(allPrototypes, 'Sticky tabs');
+  const stickyTabs = findPrototype(allPrototypes, 'Tabs');
 
   const { title, publishedAt, summary } = stickyTabs;
 
@@ -66,8 +66,8 @@ export default function Page() {
         <CopyButton />
       </div>
       <Text className="my-8">{summary}</Text>
-      <Card className="flex h-40 items-center justify-center gap-12 md:gap-20">
-        <StickyTabs />
+      <Card className="flex h-48 items-center justify-center gap-12 md:gap-20">
+        <Tabs />
       </Card>
       <Separator className="my-8" />
       <Navigation allItems={allPrototypes} currentItem={stickyTabs} route="craft" />
