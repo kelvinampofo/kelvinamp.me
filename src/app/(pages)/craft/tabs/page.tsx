@@ -12,43 +12,42 @@ import { format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
 import Tabs from './Tabs';
 
+const stickyTabs = findPrototype(allPrototypes, 'Tabs');
+const { title, publishedAt, summary } = stickyTabs;
+
 export const metadata: Metadata = {
-  title: 'Tabs',
-  description: 'Tabs inspired by Vercel dashboard.',
+  title,
+  description: summary,
   authors: [{ name: 'Kelvin Ampofo' }],
   openGraph: {
-    title: 'Tabs',
-    description: 'Tabs inspired by Vercel dashboard.',
+    title,
+    description: summary,
     images: [
       {
         url: 'https://kelvinamp.me/assets/images/og-images/og-sticky-tabs.png',
         height: 1080,
         width: 566,
-        alt: 'Tabs inspired by Vercel dashboard.'
+        alt: summary
       }
     ]
   },
   twitter: {
-    title: 'Tabs',
+    title,
     site: '@kelvinamp_',
     card: 'summary_large_image',
-    description: 'Tabs inspired by Vercel dashboard.',
+    description: summary,
     images: [
       {
         url: 'https://kelvinamp.me/assets/images/og-images/og-sticky-tabs.png',
         height: 1080,
         width: 566,
-        alt: 'Tabs inspired by Vercel dashboard.'
+        alt: summary
       }
     ]
   }
 };
 
 export default function Page() {
-  const stickyTabs = findPrototype(allPrototypes, 'Tabs');
-
-  const { title, publishedAt, summary } = stickyTabs;
-
   return (
     <Container>
       <header className="flex flex-col justify-between gap-6">
@@ -65,7 +64,13 @@ export default function Page() {
         </time>
         <CopyButton />
       </div>
-      <Text className="my-8">{summary}</Text>
+      <Text className="my-8">
+        Tabs from the Vercel dashboard using Framer&apos;s{' '}
+        <InlineLink href="https://www.framer.com/motion/layout-animations/">
+          layout animations
+        </InlineLink>
+        .
+      </Text>
       <Card className="flex h-48 items-center justify-center gap-12 md:gap-20">
         <Tabs />
       </Card>
