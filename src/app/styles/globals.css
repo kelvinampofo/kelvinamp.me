@@ -102,16 +102,6 @@
     filter: none;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    /* disable animations and transitions for users who prefer reduced motion. */
-    *,
-    *::before,
-    *::after {
-      animation: none !important;
-      transition: none !important;
-    }
-  }
-
   .tooltip-content {
     animation-duration: 200ms;
     animation-timing-function: var(--ease-out-quart);
@@ -315,8 +305,23 @@
     background-size: 200%;
   }
 
+  @keyframes marquee {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
   .marquee {
     animation: marquee 20s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee {
+      animation: marquee 50s linear infinite;
+    }
   }
 
   .mask-gradient {
@@ -334,14 +339,5 @@
       #000 75%,
       transparent
     );
-  }
-
-  @keyframes marquee {
-    from {
-      transform: translateX(0%);
-    }
-    to {
-      transform: translateX(-100%);
-    }
   }
 }
