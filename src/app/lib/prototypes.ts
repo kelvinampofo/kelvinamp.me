@@ -34,6 +34,15 @@ export const allPrototypes: Prototype[] = [
     href: '/sticky-tabs',
     publishedAt: '2024-05-11',
     summary: 'Tabs from the Vercel dashboard.'
+  },
+  {
+    slug: 'progressive-blur',
+    id: 4,
+    title: 'Progressive Blur',
+    href: '/progress-blur',
+    publishedAt: '2024-05-27',
+    summary: 'Apple inspired progressive blur.',
+    image: 'https://kelvinamp.me/assets/images/og-images/og-progressive-blur.png'
   }
 ].sort((a, b) => {
   return compareAsc(parseISO(a.publishedAt), parseISO(b.publishedAt));

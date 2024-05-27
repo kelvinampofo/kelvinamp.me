@@ -314,4 +314,34 @@
     animation: 2s linear infinite shine;
     background-size: 200%;
   }
+
+  .marquee {
+    animation: marquee 20s linear infinite;
+  }
+
+  .mask-gradient {
+    mask-image: linear-gradient(
+      in srgb-linear to right,
+      transparent,
+      #000 25%,
+      #000 75%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      in srgb-linear to right,
+      transparent,
+      #000 25%,
+      #000 75%,
+      transparent
+    );
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
 }
