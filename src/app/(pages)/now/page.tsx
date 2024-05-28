@@ -39,7 +39,7 @@ export default function Now() {
           Design <em className="font-serif">&</em> code pursuits aside, probably chasing the tail of
           my reading <InlineLink href="https://literal.club/kelvinamp/goals">list</InlineLink>,
           enjoying emotionally evocative music, or playing with the Porsche{' '}
-          <InlineLink href="https://configurator.porsche.com/porsche-code/PRIZFKE8">
+          <InlineLink href="https://configurator.porsche.com/porsche-code/PSDVI5H9">
             configurator
           </InlineLink>
           .
