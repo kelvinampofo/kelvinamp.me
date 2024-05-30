@@ -31,9 +31,9 @@ export const allPrototypes: Prototype[] = [
     slug: 'tabs',
     id: 3,
     title: 'Tabs',
-    href: '/sticky-tabs',
+    href: '/tabs',
     publishedAt: '2024-05-11',
-    summary: 'Tabs from the Vercel dashboard.'
+    summary: 'Tab bars from the Vercel dashboard.'
   },
   {
     slug: 'progressive-blur',

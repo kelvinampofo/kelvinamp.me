@@ -12,8 +12,8 @@ import { format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
 import Tabs from './Tabs';
 
-const stickyTabs = findPrototype(allPrototypes, 'Tabs');
-const { title, publishedAt, summary } = stickyTabs;
+const tabs = findPrototype(allPrototypes, 'Tabs');
+const { title, publishedAt, summary } = tabs;
 
 export const metadata: Metadata = {
   title,
@@ -75,7 +75,7 @@ export default function Page() {
         <Tabs />
       </Card>
       <Separator className="my-8" />
-      <Navigation allItems={allPrototypes} currentItem={stickyTabs} route="craft" />
+      <Navigation allItems={allPrototypes} currentItem={tabs} route="craft" />
     </Container>
   );
 }
