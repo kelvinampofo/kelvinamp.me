@@ -13,7 +13,7 @@ export default function FocusedReading({ children }: FocusedReadingProps) {
   const [isFocusModeEnabled, setIsFocusModeEnabled] = useState(false);
   const divRef = useRef<HTMLDivElement>(null);
 
-  const modifierkey: ModifierKey = isMacOS ? 'Control' : 'Alt';
+  const modifierkey: ModifierKey = isMacOS ? 'Control' : 'AltGraph';
   useShortcut(modifierkey, 'F', toggleFocusMode);
 
   function toggleFocusMode() {
