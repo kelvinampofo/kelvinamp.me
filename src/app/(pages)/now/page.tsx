@@ -45,7 +45,6 @@ export default function Now() {
           .
         </p>
         <p>Speaking less, unless I can improve the silence.</p>
-        <p>-K</p>
       </section>
       <span>
         <InlineLink href="/" ariaLabel="back to home page" arrowIcon hideUnderline>
