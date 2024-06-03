@@ -24,7 +24,7 @@ export default function AnalogClock() {
         }}
       />
       <div
-        className="absolute left-1/2 top-[3.1px] z-20 ml-[-0.25px] h-[7px] w-px bg-secondary dark:bg-secondary-dark"
+        className="absolute left-1/2 top-[3.1px] z-20 ml-[-0.25px] h-[7px] w-px bg-secondary/80 dark:bg-secondary-dark/80"
         style={{
           transform: `rotateZ(${minuteAngle}deg)`,
           transformOrigin: '50% 7px'
