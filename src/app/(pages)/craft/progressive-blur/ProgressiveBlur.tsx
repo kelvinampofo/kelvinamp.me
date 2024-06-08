@@ -22,12 +22,11 @@ export default function ProgressiveBlur() {
   return (
     <div
       className="mask-gradient relative w-full overflow-hidden whitespace-nowrap"
-      role="marquee"
       aria-label="scrolling text with progressive blur effect"
     >
       <div
         ref={ref}
-        className="marquee inline-flex items-center gap-4 pl-[100%] will-change-transform"
+        className="inline-flex animate-marquee items-center gap-4 pl-[100%] will-change-transform motion-reduce:animate-marquee-reduced"
       >
         <p>The quick brown fox jumps over the lazy dog.</p>
         <p>The five boxing wizards jump quickly.</p>

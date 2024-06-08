@@ -7,6 +7,11 @@ function formatDate(date: Date) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const routes = ['', '/now', '/writing', '/craft'].map((route) => ({
+    url: `https://kelvinamp.me${route}`,
+    lastModified: formatDate(new Date())
+  }));
+
   const posts = allPosts.map(({ slug }) => ({
     url: `https://kelvinamp.me/writing/${slug}`,
     lastModified: formatDate(new Date())
@@ -14,11 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const prototypes = allPrototypes.map(({ slug }) => ({
     url: `https://kelvinamp.me/craft${slug}`,
-    lastModified: formatDate(new Date())
-  }));
-
-  const routes = ['', '/now', '/writing', '/craft'].map((route) => ({
-    url: `https://kelvinamp.me${route}`,
     lastModified: formatDate(new Date())
   }));
 

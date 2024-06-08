@@ -294,36 +294,6 @@
     animation-delay: -0;
   }
 
-  @keyframes shine {
-    to {
-      background-position: -200% 0;
-    }
-  }
-
-  .shine {
-    animation: 2s linear infinite shine;
-    background-size: 200%;
-  }
-
-  @keyframes marquee {
-    from {
-      transform: translateX(0%);
-    }
-    to {
-      transform: translateX(-100%);
-    }
-  }
-
-  .marquee {
-    animation: marquee 20s linear infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .marquee {
-      animation: marquee 50s linear infinite;
-    }
-  }
-
   .mask-gradient {
     mask-image: linear-gradient(
       in srgb-linear to right,
