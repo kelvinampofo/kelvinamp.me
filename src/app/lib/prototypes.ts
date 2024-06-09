@@ -39,10 +39,19 @@ export const allPrototypes: Prototype[] = [
     slug: 'progressive-blur',
     id: 4,
     title: 'Progressive Blur',
-    href: '/progress-blur',
+    href: '/progressive-blur',
     publishedAt: '2024-05-27',
     summary: 'Apple inspired progressive blur.',
     image: 'https://kelvinamp.me/assets/images/og-images/og-progressive-blur.png'
+  },
+  {
+    slug: 'hold-to-delete',
+    id: 5,
+    title: 'Hold to delete',
+    href: '/hold-to-delete',
+    publishedAt: '2024-06-09',
+    summary: 'Hold to delete microinteraction.',
+    image: 'https://kelvinamp.me/assets/images/og-images/og-hold-to-delete.png'
   }
 ].sort((a, b) => {
   return compareAsc(parseISO(a.publishedAt), parseISO(b.publishedAt));
