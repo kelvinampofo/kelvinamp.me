@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description: summary,
     images: [
       {
-        url: 'https://kelvinamp.me/assets/images/og-images/og-sticky-tabs.png',
+        url: 'https://kelvinamp.me/assets/images/og-images/og-tabs.png',
         height: 1080,
         width: 566,
         alt: summary
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description: summary,
     images: [
       {
-        url: 'https://kelvinamp.me/assets/images/og-images/og-sticky-tabs.png',
+        url: 'https://kelvinamp.me/assets/images/og-images/og-tabs.png',
         height: 1080,
         width: 566,
         alt: summary
@@ -65,7 +65,7 @@ export default function Page() {
         <CopyButton />
       </div>
       <Text className="my-8">
-        Tabs from the Vercel dashboard using Framer&apos;s{' '}
+        Tabs from the Vercel dashboard using Framer motion{' '}
         <InlineLink href="https://www.framer.com/motion/layout-animations/">
           layout animations
         </InlineLink>
