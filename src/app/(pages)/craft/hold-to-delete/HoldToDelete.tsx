@@ -80,7 +80,7 @@ export default function HoldToDelete() {
       <div
         aria-hidden="true"
         style={{ width: `${progress}%`, transition: 'width 0.2s linear' }}
-        className="absolute left-0 h-full bg-red-500/75"
+        className="absolute left-0 h-full bg-red-500/80"
       />
       <div className="flex items-center gap-2 text-primary dark:text-primary-dark">
         <Icon
@@ -89,7 +89,7 @@ export default function HoldToDelete() {
           width={18}
           height={18}
         />
-        <span className="text-xs sm:text-sm">Hold to delete</span>
+        <span className="tracking-wide sm:text-sm sm:leading-4">Hold to delete</span>
       </div>
     </button>
   );
