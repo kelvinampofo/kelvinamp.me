@@ -70,7 +70,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       lang="en"
       className={c('scroll-smooth', GeistMono.variable, GeistSans.variable, newsreader.variable)}
     >
-      <body className="text-sm text-primary antialiased dark:bg-primary dark:text-primary-dark md:text-base lg:text-base">
+      <body className="text-sm text-primary antialiased dark:bg-[#161616] dark:text-primary-dark md:text-base lg:text-base">
         <Providers>
           <main className="mx-auto min-h-screen max-w-2xl pb-page-bottom-mobile pt-page-top-mobile md:pb-page-bottom md:pt-page-top">
             {children}

@@ -11,7 +11,7 @@ export default {
         serif: ['var(--font-newsreader)']
       },
       colors: {
-        primary: '#161616',
+        primary: '#404040',
         secondary: '#6F6F6F',
         'primary-dark': '#EDEDED',
         'secondary-dark': '#A0A0A0'
