@@ -14,7 +14,7 @@ export default function TimeWidget() {
   };
 
   return (
-    <Tooltip content={timezoneOffset} className="mt-14" onClick={toggleDisplay}>
+    <Tooltip content={timezoneOffset} className="mt-12" onClick={toggleDisplay}>
       <span
         className="inline-flex cursor-default gap-1 font-mono text-xs text-secondary dark:text-secondary-dark"
         aria-live="off"
