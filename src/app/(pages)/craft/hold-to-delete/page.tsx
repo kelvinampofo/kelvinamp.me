@@ -63,6 +63,16 @@ export default function Page() {
         </time>
         <CopyButton />
       </div>
+      <div className="flex flex-col gap-2">
+        <p className="mt-8">
+          Derived from Apple&apos;s swipe-to-delete and{' '}
+          <InlineLink href="https://www.reddit.com/r/web_design/comments/247nb2/hold_to_delete_pingdoms_clever_alternative_to_the/">
+            Pingdom&apos;s hold-to-delete
+          </InlineLink>{' '}
+          interactions&mdash;offers a more subtle and delightful way to confirm deletion, rather
+          than a confirmation modal.
+        </p>
+      </div>
       <Card className="mt-8 flex h-48 items-center justify-center gap-12 md:gap-20">
         <HoldToDelete />
       </Card>
