@@ -2,10 +2,9 @@ import '@/app/styles/globals.css';
 import { Analytics } from '@vercel/analytics/react';
 import c from 'clsx';
 import { GeistMono } from 'geist/font/mono';
-import { GeistSans } from 'geist/font/sans';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import { newsreader } from './lib/fonts';
+import { inter, newsreader } from './lib/fonts';
 import Providers from './providers';
 
 export const metadata: Metadata = {
@@ -68,7 +67,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="en"
-      className={c('scroll-smooth', GeistMono.variable, GeistSans.variable, newsreader.variable)}
+      className={c('scroll-smooth', GeistMono.variable, inter.variable, newsreader.variable)}
     >
       <body className="text-sm text-primary antialiased dark:bg-[#161616] dark:text-primary-dark md:text-base lg:text-base">
         <Providers>

@@ -6,9 +6,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-geist-sans)'],
-        mono: ['var(--font-geist-mono)'],
-        serif: ['var(--font-newsreader)']
+        sans: ['var(--font-inter)'],
+        serif: ['var(--font-newsreader)'],
+        mono: ['var(--font-geist-mono)']
       },
       colors: {
         primary: '#404040',
