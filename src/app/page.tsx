@@ -16,8 +16,8 @@ export default function Home() {
       <AnimateEnter delay={0.6}>
         <section className="mb-6 space-y-6">
           <p>
-            Crafting software with a focus on design, human-computer interaction and architecture.
-            Instatiable curiosity for novel interfaces. Engineer at NatWest.
+            Crafting software with a focus on design, human-computer interaction, and architecture.
+            Insatiable curiosity for novel interfaces. Engineer at NatWest.
           </p>
           <p>
             Read further on{' '}

@@ -15,7 +15,7 @@ export default function Tabs() {
 
   return (
     <div className="relative mx-auto">
-      <MotionConfig transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}>
+      <MotionConfig transition={{ type: 'spring', bounce: 0.1, duration: 0.4 }}>
         <motion.ul layout className="flex gap-2">
           {tabs.map((tab) => (
             <motion.li
@@ -30,6 +30,7 @@ export default function Tabs() {
               )}
               onFocus={() => handleTabChange(tab)}
               onMouseOver={() => handleTabChange(tab)}
+              onMouseLeave={() => handleTabChange(tab)}
             >
               {activeTab === tab ? (
                 <motion.div
