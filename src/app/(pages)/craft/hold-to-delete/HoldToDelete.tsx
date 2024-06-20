@@ -86,8 +86,8 @@ export default function HoldToDelete() {
         <Icon
           name="trash"
           className="text-secondary dark:text-secondary-dark"
-          width={18}
-          height={18}
+          width={22}
+          height={22}
         />
         <span className="tracking-wide sm:text-sm sm:leading-4">Hold to delete</span>
       </div>
