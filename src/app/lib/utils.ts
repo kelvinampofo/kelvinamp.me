@@ -9,8 +9,12 @@ export const isWithin1Month = (postDate: Date) => {
   });
 };
 
-export const findPrototype = (prototype: Prototype[], titleToMatch: string) => {
-  return prototype.find(({ title }) => title === titleToMatch) as Prototype;
+export const findPrototype = (prototypes: Prototype[], titleToMatch: string) => {
+  const found = prototypes.find(({ title }) => title === titleToMatch);
+  if (!found) {
+    throw new Error(`Prototype "${titleToMatch}" is not found.`);
+  }
+  return found;
 };
 
 export const parseError = (error: unknown): string => {
