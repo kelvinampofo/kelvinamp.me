@@ -20,7 +20,12 @@ export const contactLinks = [
   {
     label: 'GitHub',
     href: 'https://github.com/kelvinampofo',
-    ariaLabel: 'gitHub profile'
+    ariaLabel: 'github profile'
+  },
+  {
+    label: 'Are.na',
+    href: 'https://www.are.na/kelvin-ampofo/channels',
+    ariaLabel: 'are.na profile'
   },
   {
     label: 'Email',
