@@ -69,8 +69,15 @@ export default function Page() {
           <InlineLink href="https://www.reddit.com/r/web_design/comments/247nb2/hold_to_delete_pingdoms_clever_alternative_to_the/">
             Pingdom&apos;s hold-to-delete
           </InlineLink>{' '}
-          interactions&mdash;offers a more subtle and delightful way to confirm deletion, rather
-          than a confirmation modal.
+          micro-interactions. Uses{' '}
+          <code className="rounded-[4px] border border-neutral-200 bg-neutral-100 px-1 py-0.5 text-[0.8125rem] text-neutral-800 dark:border-neutral-800 dark:bg-[#1c1c1c] dark:text-primary-dark">
+            clip-path
+          </code>{' '}
+          to animate the progress&mdash;leveraging{' '}
+          <InlineLink href="https://en.wikipedia.org/wiki/Hardware_acceleration">
+            hardware acceleration
+          </InlineLink>{' '}
+          for a more more performant interaction.
         </p>
       </div>
       <Card className="mt-8 flex h-48 items-center justify-center gap-12 md:gap-20">
