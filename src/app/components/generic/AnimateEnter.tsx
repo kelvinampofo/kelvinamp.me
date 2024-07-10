@@ -1,14 +1,16 @@
 'use client';
 
 import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion';
-import { useEffect, useState, type ReactNode } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 
 interface AnimateEnterProps {
-  children: ReactNode;
   delay?: number;
 }
 
-export default function AnimateEnter({ children, delay = 0 }: AnimateEnterProps) {
+export default function AnimateEnter({
+  children,
+  delay = 0
+}: PropsWithChildren<AnimateEnterProps>) {
   const [isClient, setIsClient] = useState(false);
   const prefersReducedMotion = useReducedMotion();
 
