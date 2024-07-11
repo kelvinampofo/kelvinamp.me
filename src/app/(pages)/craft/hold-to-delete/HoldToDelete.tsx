@@ -77,7 +77,7 @@ export default function HoldToDelete() {
           clipPath: `polygon(0 0, ${progress}% 0, ${progress}% 100%, 0 100%)`,
           transition: 'clip-path 0.2s linear'
         }}
-        className="absolute inset-0 bg-red-500/80"
+        className="absolute inset-0 bg-red-500/75"
       />
       <div className="flex items-center gap-2 text-primary dark:text-primary-dark">
         <Icon
