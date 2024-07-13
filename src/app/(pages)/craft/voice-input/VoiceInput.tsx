@@ -1,7 +1,7 @@
 export default function VoiceInput() {
   return (
-    <div className="flex h-[4.5rem] w-80 items-center justify-between rounded-2xl bg-neutral-50/60 px-6 py-4 backdrop-blur-md dark:bg-neutral-900/60 dark:backdrop-blur-xl">
-      <div className="flex cursor-default flex-col bg-[length:200%] text-xs text-black dark:bg-gradient-to-r dark:from-blue-600 dark:via-teal-300 dark:to-blue-600 dark:bg-clip-text dark:text-transparent dark:hover:animate-shine">
+    <div className="mx-6 flex h-[4.5rem] w-80 items-center justify-between rounded-2xl bg-neutral-50/60 px-6 py-4 backdrop-blur-md dark:bg-neutral-900/60 dark:backdrop-blur-xl">
+      <div className="flex cursor-default flex-col bg-[length:200%] text-xs text-blue-700 dark:bg-gradient-to-r dark:from-blue-600 dark:via-teal-300 dark:to-blue-600 dark:bg-clip-text dark:text-transparent dark:hover:animate-shine">
         <span className="text-lg font-medium">Kelvin</span>
         <span className="font-medium">is speaking ...</span>
       </div>
