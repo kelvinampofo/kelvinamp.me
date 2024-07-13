@@ -52,6 +52,15 @@ export const allPrototypes: Prototype[] = [
     publishedAt: '2024-06-09',
     summary: 'Hold to delete microinteraction.',
     image: 'https://kelvinamp.me/assets/images/og-images/og-hold-to-delete.png'
+  },
+  {
+    slug: 'voice-input',
+    id: 6,
+    title: 'Voice Input',
+    href: '/voice-input',
+    publishedAt: '2024-07-13',
+    summary: 'Interface exploration.',
+    image: 'https://kelvinamp.me/assets/images/og-images/og-voice-input.png'
   }
 ].sort((a, b) => {
   return compareAsc(parseISO(a.publishedAt), parseISO(b.publishedAt));
