@@ -64,12 +64,9 @@ export default function Page() {
         <CopyButton />
       </div>
       <p className="mt-8">{summary}</p>
-      <Card className="caravaggio-background-image mt-8 flex h-48 items-center justify-center gap-12 md:gap-20">
+      <Card className="mt-8 flex h-48 items-center justify-center gap-12 bg-[url('/assets/images/caravaggio-painting.jpeg')] bg-cover bg-center md:gap-20">
         <VoiceInput />
       </Card>
-      <span className="pt-2 text-center text-xs text-secondary dark:text-secondary-dark">
-        Painting by Caravaggio.
-      </span>
       <Separator className="my-8" />
       <Navigation allItems={allPrototypes} currentItem={voiceInput} route="craft" />
     </Container>

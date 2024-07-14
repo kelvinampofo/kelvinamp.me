@@ -311,12 +311,6 @@
     );
   }
 
-  .caravaggio-background-image {
-    background-image: url('/assets/images/caravaggio-painting.jpeg');
-    background-size: cover;
-    background-position: center;
-  }
-
   .waveform g > rect {
     fill: #fff;
     transform: scaleY(0.8); /* initial state to match first keyframe */
@@ -345,7 +339,7 @@
   }
 
   .waveform g > rect:nth-child(3) {
-    animation-delay: 0.1s;
+    animation-delay: 0.15s;
   }
 
   .waveform g > rect:nth-child(4) {
@@ -353,10 +347,10 @@
   }
 
   .waveform g > rect:nth-child(5) {
-    animation-delay: 0.3s;
+    animation-delay: 0.25s;
   }
 
   .waveform g > rect:nth-child(6) {
-    animation-delay: 0.4s;
+    animation-delay: 0.3s;
   }
 }
