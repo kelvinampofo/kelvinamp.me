@@ -65,17 +65,9 @@ export default function Page() {
         <CopyButton />
       </div>
       <Text className="mt-8 leading-[1.375rem]">
-        Progressive blur using{' '}
+        Progressive blur effect using{' '}
         <code className="rounded-[4px] border border-neutral-200 bg-neutral-100 px-1 py-0.5 text-[0.8125rem] text-neutral-800 dark:border-neutral-800 dark:bg-[#1c1c1c] dark:text-primary-dark">
           mask-image
-        </code>{' '}
-        CSS{' '}
-        <InlineLink href="https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image">
-          property,
-        </InlineLink>{' '}
-        with a{' '}
-        <code className="rounded-[4px] border border-neutral-200 bg-neutral-100 px-1 py-0.5 text-[0.8125rem] text-neutral-800 dark:border-neutral-800 dark:bg-[#1c1c1c] dark:text-primary-dark">
-          linear-gradient
         </code>
         .
       </Text>

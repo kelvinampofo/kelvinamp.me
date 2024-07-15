@@ -26,7 +26,7 @@ export default function ProgressiveBlur() {
     >
       <div
         ref={ref}
-        className="inline-flex animate-marquee items-center gap-4 pl-[100%] will-change-transform motion-reduce:animate-marquee-reduced"
+        className="inline-flex animate-marquee items-center gap-1 pl-[100%] will-change-transform motion-reduce:animate-marquee-reduced"
       >
         <p>The quick brown fox jumps over the lazy dog.</p>
         <p>The five boxing wizards jump quickly.</p>
