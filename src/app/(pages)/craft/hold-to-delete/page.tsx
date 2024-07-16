@@ -65,11 +65,7 @@ export default function Page() {
       </div>
       <div className="flex flex-col gap-2">
         <p className="mt-8">
-          Derived from Apple&apos;s swipe-to-delete and{' '}
-          <InlineLink href="https://www.reddit.com/r/web_design/comments/247nb2/hold_to_delete_pingdoms_clever_alternative_to_the/">
-            Pingdom&apos;s hold-to-delete
-          </InlineLink>{' '}
-          micro-interactions. Uses{' '}
+          Uses{' '}
           <code className="rounded-[4px] border border-neutral-200 bg-neutral-100 px-1 py-0.5 text-[0.8125rem] text-neutral-800 dark:border-neutral-800 dark:bg-[#1c1c1c] dark:text-primary-dark">
             clip-path
           </code>{' '}
