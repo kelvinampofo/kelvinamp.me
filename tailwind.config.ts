@@ -11,7 +11,7 @@ export default {
         mono: ['var(--font-geist-mono)']
       },
       colors: {
-        primary: '#404040',
+        primary: '#171717',
         secondary: '#6F6F6F',
         'primary-dark': '#EDEDED',
         'secondary-dark': '#A0A0A0'
