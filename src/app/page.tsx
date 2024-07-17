@@ -5,7 +5,6 @@ import Separator from '@/app/components/generic/Separator';
 import Contact from '@/app/components/ui/Contact';
 import InlineLink from '@/app/components/ui/InlineLink';
 import TimeWidget from '@/app/components/ui/TimeWidget';
-import { pages } from './constants';
 
 export default function Home() {
   return (
@@ -30,13 +29,12 @@ export default function Home() {
       </AnimateEnter>
       <AnimateEnter delay={0.8}>
         <nav className="space-x-2">
-          {pages.map(({ name, href, ariaLabel }) => (
-            <span key={name}>
-              <InlineLink href={href} ariaLabel={ariaLabel}>
-                {name}
-              </InlineLink>
-            </span>
-          ))}
+          <InlineLink href="/craft" ariaLabel="craft page">
+            Craft
+          </InlineLink>
+          <InlineLink href="/writing" ariaLabel="writing page">
+            Writing
+          </InlineLink>
         </nav>
         <Separator className="my-12" />
       </AnimateEnter>
