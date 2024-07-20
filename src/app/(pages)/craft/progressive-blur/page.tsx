@@ -2,7 +2,6 @@ import Card from '@/app/components/generic/Card';
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
 import Separator from '@/app/components/generic/Separator';
-import Text from '@/app/components/generic/Text';
 import CopyButton from '@/app/components/ui/CopyButton';
 import InlineLink from '@/app/components/ui/InlineLink';
 import Navigation from '@/app/components/ui/Navigation/Navigation';
@@ -64,13 +63,13 @@ export default function Page() {
         </time>
         <CopyButton />
       </div>
-      <Text className="mt-8 leading-[1.375rem]">
+      <p className="mt-8 leading-[1.375rem]">
         Progressive blur effect using{' '}
         <code className="rounded-[4px] border border-neutral-200 bg-neutral-100 px-1 py-0.5 text-[0.8125rem] text-neutral-800 dark:border-neutral-800 dark:bg-[#1c1c1c] dark:text-primary-dark">
           mask-image
         </code>
         .
-      </Text>
+      </p>
       <Card className="mt-8 flex h-48 items-center justify-center gap-12 md:gap-20">
         <ProgressiveBlur />
       </Card>

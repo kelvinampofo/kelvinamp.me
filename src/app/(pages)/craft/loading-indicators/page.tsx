@@ -2,7 +2,6 @@ import Card from '@/app/components/generic/Card';
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
 import Separator from '@/app/components/generic/Separator';
-import Text from '@/app/components/generic/Text';
 import CopyButton from '@/app/components/ui/CopyButton';
 import InlineLink from '@/app/components/ui/InlineLink';
 import Navigation from '@/app/components/ui/Navigation/Navigation';
@@ -65,7 +64,7 @@ export default function Page() {
         </time>
         <CopyButton />
       </div>
-      <Text className="my-8">{summary}</Text>
+      <p className="my-8">{summary}</p>
       <Card className="flex h-48 items-center justify-center gap-12 md:gap-14">
         <Loading variant="ios-spinner" />
         <Loading variant="primary-spinner" />

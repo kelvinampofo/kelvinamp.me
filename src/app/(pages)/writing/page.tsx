@@ -1,6 +1,5 @@
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
-import Text from '@/app/components/generic/Text';
 import InlineLink from '@/app/components/ui/InlineLink';
 import List from '@/app/components/ui/List';
 import { allPosts } from 'contentlayer/generated';
@@ -35,15 +34,13 @@ export default function Writing() {
   return (
     <Container>
       <Heading className="mb-2">Writing</Heading>
-      <Text as="p" className="mb-10" colour="secondary">
+      <p className="mb-10 text-secondary dark:text-secondary-dark">
         Thoughts on technology, design + things in between.
-      </Text>
+      </p>
       <List items={allPosts} route="writing" />
-      <span className="mt-12">
-        <InlineLink href="/" arrowIcon hideUnderline ariaLabel="back to home page">
-          Back
-        </InlineLink>
-      </span>
+      <InlineLink className="mt-12" href="/" arrowIcon hideUnderline ariaLabel="back to home page">
+        Back
+      </InlineLink>
     </Container>
   );
 }

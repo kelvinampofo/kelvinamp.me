@@ -1,5 +1,4 @@
 import Separator from '@/app/components/generic/Separator';
-import Text from '@/app/components/generic/Text';
 import Badge from '@/app/components/ui/Badge';
 import InlineLink from '@/app/components/ui/InlineLink';
 import type { Prototype } from '@/app/lib/prototypes';
@@ -34,9 +33,9 @@ export default function List({ items, route, dateFormat = 'dd/MM/yy' }: ListProp
                 <div className={c('flex gap-2', isNewItem ? 'items-center' : 'items-baseline')}>
                   <span>{title}</span>
                   {isCraftRoute && (
-                    <Text colour="secondary" size="xsmall" className="hidden md:block">
+                    <p className="hidden text-xs text-secondary dark:text-secondary-dark md:block">
                       {summary}
-                    </Text>
+                    </p>
                   )}
                   {isNewItem && <Badge ariaHidden>new</Badge>}
                 </div>

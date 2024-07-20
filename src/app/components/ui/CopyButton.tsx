@@ -1,6 +1,5 @@
 'use client';
 
-import Text from '@/app/components/generic/Text';
 import { Icon } from '@/app/components/ui/Icon';
 import ShortcutKey from '@/app/components/ui/ShortcutKey';
 import { useClipboard } from '@/app/hooks/useClipboard';
@@ -36,9 +35,7 @@ export default function CopyButton() {
             <div role="log" aria-live="polite" className="sr-only">
               Copied to clipboard
             </div>
-            <Text colour="secondary" size="small">
-              Copied to clipboard
-            </Text>
+            <p className="text-sm text-secondary dark:text-secondary-dark">Copied to clipboard</p>
           </>
         ) : (
           <Icon

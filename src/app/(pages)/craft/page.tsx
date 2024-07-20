@@ -1,6 +1,5 @@
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
-import Text from '@/app/components/generic/Text';
 import InlineLink from '@/app/components/ui/InlineLink';
 import List from '@/app/components/ui/List';
 import { allPrototypes } from '@/app/lib/prototypes';
@@ -34,15 +33,13 @@ export default function Craft() {
   return (
     <Container>
       <Heading className="mb-3">Craft</Heading>
-      <Text as="p" className="mb-10 text-balance" colour="secondary">
+      <p className="mb-10 text-balance text-secondary dark:text-secondary-dark">
         Crafting interfaces / prototypes.
-      </Text>
+      </p>
       <List items={allPrototypes} route="craft" dateFormat="MMMM yyyy" />
-      <span className="mt-12">
-        <InlineLink href="/" arrowIcon hideUnderline ariaLabel="back to home page">
-          Back
-        </InlineLink>
-      </span>
+      <InlineLink className="mt-12" href="/" arrowIcon hideUnderline ariaLabel="back to home page">
+        Back
+      </InlineLink>
     </Container>
   );
 }

@@ -1,5 +1,3 @@
-import Text from '@/app/components/generic/Text';
-
 type LoadingVariant =
   | 'loading-text'
   | 'loading-dots'
@@ -15,10 +13,10 @@ export default function Loading({ variant }: LoadingProps) {
   switch (variant) {
     case 'loading-text':
       return (
-        <Text size="small" className="loading-text hidden w-20 cursor-not-allowed sm:block">
+        <p className="loading-text hidden w-20 cursor-not-allowed text-sm sm:block">
           Loading
           <span className="loading-dots ml-[2px]" />
-        </Text>
+        </p>
       );
     case 'loading-dots':
       return (

@@ -1,22 +1,15 @@
-import Text from '@/app/components/generic/Text';
 import React from 'react';
 
-interface ShortcutKeysProps {
-  keyShortcuts: string[];
-}
-
-export default function ShortcutKeys({ keyShortcuts }: ShortcutKeysProps) {
+export default function ShortcutKeys({ keyShortcuts }: { keyShortcuts: string[] }) {
   return (
     <div className="flex gap-1 text-secondary-dark" aria-keyshortcuts={keyShortcuts.join('+')}>
       {keyShortcuts.map((keyShortcut, index) => (
-        <Text
+        <span
           key={index}
-          size="xsmall"
-          colour="secondary"
-          className="rounded-sm bg-neutral-100 px-1 font-medium dark:bg-neutral-800"
+          className="rounded-sm bg-neutral-100 px-1 text-xs font-medium text-secondary dark:bg-neutral-800 dark:text-secondary-dark"
         >
           {keyShortcut}
-        </Text>
+        </span>
       ))}
     </div>
   );
