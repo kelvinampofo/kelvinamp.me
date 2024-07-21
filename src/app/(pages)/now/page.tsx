@@ -29,16 +29,19 @@ export default function Now() {
   return (
     <Container>
       <Heading className="mb-6">Now</Heading>
-      <section className="mb-6 space-y-6">
-        <p>Committed to developing skill, through guiltless exploration in software and design.</p>
+      <section className="mb-6 flex flex-col gap-6">
+        <p>
+          Committed to developing skill, through guiltless exploration in software{' '}
+          <em className="font-serif">&</em> design.
+        </p>
         <p>
           Interactivity, typography, motion, touch, optimisations, accessibility, design&mdash;an
           infinite canvas for creativity and opportunity.
         </p>
         <p>
-          Design <em className="font-serif">&</em> code pursuits aside, probably chasing the tail of
-          my reading <InlineLink href="https://literal.club/kelvinamp/goals">list</InlineLink>,
-          enjoying emotionally evocative music, or playing with the Porsche{' '}
+          Pursuits aside, probably{' '}
+          <InlineLink href="https://literal.club/kelvinamp/goals">reading</InlineLink>, enjoying
+          emotionally evocative music, or playing with the Porsche{' '}
           <InlineLink href="https://configurator.porsche.com/porsche-code/PSDVI5H9">
             configurator
           </InlineLink>
@@ -46,11 +49,9 @@ export default function Now() {
         </p>
         <p>Speaking less, unless I can improve the silence.</p>
       </section>
-      <span>
-        <InlineLink href="/" ariaLabel="back to home page" arrowIcon hideUnderline>
-          Back
-        </InlineLink>
-      </span>
+      <InlineLink href="/" ariaLabel="back to home page" arrowIcon hideUnderline>
+        Back
+      </InlineLink>
     </Container>
   );
 }
