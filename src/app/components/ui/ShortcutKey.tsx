@@ -6,7 +6,7 @@ export default function ShortcutKeys({ keyShortcuts }: { keyShortcuts: string[] 
       {keyShortcuts.map((keyShortcut, index) => (
         <span
           key={index}
-          className="rounded-sm bg-neutral-100 px-1 text-xs font-medium text-secondary dark:bg-neutral-800 dark:text-secondary-dark"
+          className="rounded-sm bg-neutral-100 px-1 text-xs text-secondary dark:bg-neutral-800 dark:text-secondary-dark"
         >
           {keyShortcut}
         </span>
