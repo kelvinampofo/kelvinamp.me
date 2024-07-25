@@ -83,10 +83,10 @@ export default function HoldToDelete() {
         <Icon
           name="trash"
           className="text-secondary dark:text-secondary-dark"
-          width={22}
-          height={22}
+          width={20}
+          height={20}
         />
-        <span className="tracking-wide sm:text-sm sm:leading-4">Hold to delete</span>
+        <span className="text-sm">Hold to delete</span>
       </div>
     </button>
   );
