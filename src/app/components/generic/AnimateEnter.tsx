@@ -33,8 +33,8 @@ export default function AnimateEnter({
     <LazyMotion features={domAnimation} strict>
       <m.div
         initial={{ opacity: 0, y: 20, filter: 'blur(2px)' }}
-        animate={{ opacity: 0.8, y: 0, filter: 'none' }}
-        exit={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0, filter: 'none' }}
+        exit={{ opacity: 0, y: 20, filter: 'blur(2px)' }}
         transition={{ ease: 'easeOut', duration: 0.3, delay }}
       >
         {children}
