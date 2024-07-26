@@ -9,7 +9,7 @@ import TimeWidget from '@/app/components/ui/TimeWidget';
 export default function Home() {
   return (
     <Container>
-      <AnimateEnter delay={0.3}>
+      <AnimateEnter delay={0.25}>
         <Heading className="mb-6">Kelvin Ampofo</Heading>
       </AnimateEnter>
       <AnimateEnter delay={0.4}>
@@ -27,7 +27,7 @@ export default function Home() {
           </p>
         </section>
       </AnimateEnter>
-      <AnimateEnter delay={0.5}>
+      <AnimateEnter delay={0.55}>
         <nav className="flex gap-2">
           <InlineLink href="/craft" ariaLabel="craft page">
             Craft
@@ -38,10 +38,10 @@ export default function Home() {
         </nav>
         <Separator className="my-12" />
       </AnimateEnter>
-      <AnimateEnter delay={0.6}>
+      <AnimateEnter delay={0.7}>
         <Contact />
       </AnimateEnter>
-      <AnimateEnter delay={0.7}>
+      <AnimateEnter delay={0.8}>
         <TimeWidget />
       </AnimateEnter>
     </Container>
