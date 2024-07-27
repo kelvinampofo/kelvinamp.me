@@ -42,7 +42,7 @@ export default function Now() {
           Pursuits aside, probably{' '}
           <InlineLink href="https://literal.club/kelvinamp/goals">reading</InlineLink>, enjoying
           emotionally evocative music, or playing with the Porsche{' '}
-          <InlineLink href="https://configurator.porsche.com/porsche-code/PSDVI5H9">
+          <InlineLink href="https://configurator.porsche.com/porsche-code/PSR3WDD9">
             configurator
           </InlineLink>
           .
