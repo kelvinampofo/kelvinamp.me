@@ -12,7 +12,7 @@ export default function Home() {
       <AnimateEnter delay={0.2}>
         <Heading className="mb-6">Kelvin Ampofo</Heading>
       </AnimateEnter>
-      <AnimateEnter delay={0.4}>
+      <AnimateEnter delay={0.35}>
         <section className="mb-6 flex flex-col gap-6">
           <p>
             Crafting software with a focus on design, human-computer interaction, and architecture.
@@ -27,7 +27,7 @@ export default function Home() {
           </p>
         </section>
       </AnimateEnter>
-      <AnimateEnter delay={0.6}>
+      <AnimateEnter delay={0.5}>
         <nav className="flex gap-2">
           <InlineLink href="/craft" ariaLabel="craft page">
             Craft
@@ -38,10 +38,10 @@ export default function Home() {
         </nav>
         <Separator className="my-12" />
       </AnimateEnter>
-      <AnimateEnter delay={0.8}>
+      <AnimateEnter delay={0.65}>
         <Contact />
       </AnimateEnter>
-      <AnimateEnter delay={1}>
+      <AnimateEnter delay={0.8}>
         <TimeWidget />
       </AnimateEnter>
     </Container>
