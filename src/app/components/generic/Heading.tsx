@@ -16,7 +16,7 @@ export default function Heading({
       className={c(
         HeadingTag === 'h1' ? 'text-lg' : 'text-base',
         className,
-        'font-medium text-balance'
+        'text-balance font-medium'
       )}
       {...rest}
     >

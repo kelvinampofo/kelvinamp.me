@@ -9,10 +9,10 @@ Quick notes on Git for reference.
 
 1. <code>git maintenance start</code> – This command starts maintenance on a specific repository and
    speeds up other Git commands by optimising repository data.
-2. <code>git config -g branch.sort -committerdate</code> – I never liked that git branches are not sorted
-   by the last commit time first. This fixes the problem.
-3. <code>git config -g column.ui auto</code> – Git branches are laid out in a list by default. I prefer
-   them to be displayed in columns graphically.
+2. <code>git config -g branch.sort -committerdate</code> – I never liked that git branches are not
+   sorted by the last commit time first. This fixes the problem.
+3. <code>git config -g column.ui auto</code> – Git branches are laid out in a list by default. I
+   prefer them to be displayed in columns graphically.
 4. <code>git push --force-with-lease</code> – This is safer than <code>--force</code>. It won't
    overwrite any work on the remote branch if more commits were added by another co-worker. This
    helps prevent accidentally overwriting someone else's work by force pushing.
