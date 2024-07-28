@@ -1,7 +1,4 @@
-import { defineDocumentType, makeSource } from 'contentlayer/source-files';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypePrettCode from 'rehype-pretty-code';
-import remarkGfm from 'remark-gfm';
+import { defineDocumentType, makeSource } from 'contentlayer2/source-files';
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -39,30 +36,5 @@ export const Post = defineDocumentType(() => ({
 export default makeSource({
   contentDirPath: 'content',
   documentTypes: [Post],
-  mdx: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [
-      [
-        rehypePrettCode,
-        {
-          theme: 'github-dark',
-          onVisitHighlightedLine(node: any) {
-            node.properties.className.push('line--highlighted');
-          },
-          onVisitHighlightedChars(node: any) {
-            node.properties.className = ['word--highlighted'];
-          }
-        }
-      ],
-      [
-        rehypeAutolinkHeadings,
-        {
-          properties: {
-            className: ['anchor'],
-            ariaLabel: 'Link to section'
-          }
-        }
-      ]
-    ]
-  }
+  mdx: {}
 });
