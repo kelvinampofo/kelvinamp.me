@@ -7,7 +7,7 @@ import Tooltip from './Tooltip';
 
 export default function TimeWidget() {
   const [showAnalogueClock, setShowAnalogueClock] = useState(false);
-  const { currentTime, meridiem, timezoneOffset } = useTime();
+  const { currentTime, timezoneOffset } = useTime();
 
   const toggleDisplay = () => {
     setShowAnalogueClock((prevState) => !prevState);
@@ -20,14 +20,7 @@ export default function TimeWidget() {
         aria-live="off"
         role="status"
       >
-        {showAnalogueClock ? (
-          <AnalogueClock />
-        ) : (
-          <>
-            {currentTime}
-            <span className="font-sans">{meridiem}</span>
-          </>
-        )}
+        {showAnalogueClock ? <AnalogueClock /> : currentTime}
       </span>
     </Tooltip>
   );
