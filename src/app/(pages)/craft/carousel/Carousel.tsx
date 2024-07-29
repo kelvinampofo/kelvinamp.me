@@ -121,7 +121,7 @@ export default function Carousel() {
   );
 
   return (
-    <Card className="flex sm:pt-6 md:px-2 md:pt-8 lg:px-2 lg:pt-8">
+    <Card className="flex sm:pt-6 md:px-2 md:pt-8 lg:-mx-28 lg:px-2 lg:pt-8">
       {isPointerDevice && (
         <div className="flex items-center">
           <button
