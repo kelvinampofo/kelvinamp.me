@@ -17,7 +17,7 @@
     "clsx": "^2.0.0",
     "contentlayer2": "^0.5.0",
     "date-fns": "^2.30.0",
-    "framer-motion": "^11.2.10",
+    "framer-motion": "^11.3.21",
     "geist": "^1.2.1",
     "next": "^14.2.5",
     "next-contentlayer2": "^0.5.0",
