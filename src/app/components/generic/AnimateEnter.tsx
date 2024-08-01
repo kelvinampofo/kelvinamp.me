@@ -21,20 +21,20 @@ export default function AnimateEnter({
   /*
    * This is to ensure the component is rendered consistently on both the server and the client, resolving hydration errors.
    */
-  if (isClient) {
-    if (prefersReducedMotion) {
-      return children;
-    }
-  } else {
+  if (!isClient) {
     return null;
+  }
+
+  if (prefersReducedMotion) {
+    return children;
   }
 
   return (
     <LazyMotion features={domAnimation} strict>
       <m.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 20, filter: 'blur(1px)' }}
+        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+        exit={{ opacity: 0, y: 20, filter: 'blur(1px)' }}
         transition={{ ease: 'easeOut', duration: 0.3, delay }}
       >
         {children}
