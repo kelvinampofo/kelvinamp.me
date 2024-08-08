@@ -28,16 +28,8 @@ export const allPrototypes: Prototype[] = [
     summary: 'Simple loading state indicators.'
   },
   {
-    slug: 'tabs',
-    id: 3,
-    title: 'Tabs',
-    href: '/tabs',
-    publishedAt: '2024-05-11',
-    summary: 'Tab bars from the Vercel dashboard.'
-  },
-  {
     slug: 'progressive-blur',
-    id: 4,
+    id: 3,
     title: 'Progressive Blur',
     href: '/progressive-blur',
     publishedAt: '2024-05-27',
@@ -46,7 +38,7 @@ export const allPrototypes: Prototype[] = [
   },
   {
     slug: 'hold-to-delete',
-    id: 5,
+    id: 4,
     title: 'Hold to delete',
     href: '/hold-to-delete',
     publishedAt: '2024-06-09',
