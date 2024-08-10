@@ -2,27 +2,21 @@
 
 import { useShortcut } from '@/app/hooks/useShortcut';
 import { isMacOS } from '@/app/lib/utils';
-import c from 'clsx';
-import { useRef, useState, type ModifierKey } from 'react';
+import { useRef, useState, type ModifierKey, type PropsWithChildren } from 'react';
 
-interface FocusedReadingProps {
-  children: React.ReactNode;
-}
-
-export default function FocusedReading({ children }: FocusedReadingProps) {
+export default function FocusedReading({ children }: PropsWithChildren) {
   const [isFocusModeEnabled, setIsFocusModeEnabled] = useState(false);
-  const divRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
-  const modifierkey: ModifierKey = isMacOS ? 'Control' : 'AltGraph';
-  useShortcut(modifierkey, 'F', toggleFocusMode);
+  const toggleFocusMode = () => {
+    setIsFocusModeEnabled((prev) => !prev);
+  };
 
-  function toggleFocusMode() {
-    setIsFocusModeEnabled(!isFocusModeEnabled);
-    divRef.current?.classList.toggle('focus-mode');
-  }
+  const modifierKey: ModifierKey = isMacOS ? 'Control' : 'Shift';
+  useShortcut(modifierKey, 'F', toggleFocusMode);
 
   return (
-    <div className={c(isFocusModeEnabled && 'focus-mode')} ref={divRef}>
+    <div ref={ref} data-focus-mode={isFocusModeEnabled ? 'enabled' : 'disabled'}>
       {children}
     </div>
   );

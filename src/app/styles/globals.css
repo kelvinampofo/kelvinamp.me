@@ -86,18 +86,14 @@
     }
   }
 
-  .focus-mode {
-    cursor: crosshair;
-  }
-
-  .focus-mode :where(p, pre, li, img, div) {
+  div[data-focus-mode='enabled'] :where(p, pre, li, img, div) {
     opacity: 0.8;
     filter: blur(2px);
     transition: 150ms;
     transition-property: opacity filter;
   }
 
-  .focus-mode :where(p, pre, li, img, div):hover {
+  div[data-focus-mode='enabled'] :where(p, pre, li, img, div):hover {
     opacity: 1;
     filter: none;
   }
@@ -309,48 +305,5 @@
       #000 75%,
       transparent
     );
-  }
-
-  .waveform g > rect {
-    fill: #fff;
-    transform: scaleY(0.8); /* initial state to match first keyframe */
-    animation: bounce 1s infinite ease-in-out;
-    transition: transform 0.5s ease-in-out; /* initial smooth transition */
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .waveform g > rect {
-      animation: bounce 1.5s infinite ease-in-out;
-    }
-  }
-
-  @keyframes bounce {
-    0%,
-    100% {
-      transform: scaleY(0.8);
-    }
-    50% {
-      transform: scaleY(1);
-    }
-  }
-
-  .waveform g > rect:nth-child(2) {
-    animation-delay: 0.1s;
-  }
-
-  .waveform g > rect:nth-child(3) {
-    animation-delay: 0.15s;
-  }
-
-  .waveform g > rect:nth-child(4) {
-    animation-delay: 0.2s;
-  }
-
-  .waveform g > rect:nth-child(5) {
-    animation-delay: 0.25s;
-  }
-
-  .waveform g > rect:nth-child(6) {
-    animation-delay: 0.3s;
   }
 }
