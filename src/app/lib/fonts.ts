@@ -14,5 +14,6 @@ export const robotoMono = Roboto_Mono({
 export const newsreader = Newsreader({
   subsets: ['latin'],
   variable: '--font-newsreader',
-  display: 'swap'
+  display: 'swap',
+  style: ['italic', 'normal']
 });
