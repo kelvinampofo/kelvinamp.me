@@ -16,7 +16,7 @@ export default function Home() {
         <section className="mb-6 flex flex-col gap-6">
           <p>
             Crafting software with a focus on design, human-computer interaction, and architecture.
-            Insatiable curiosity for novel interfaces. Engineer at NatWest.
+            Insatiable curiosity for <em>novel interfaces</em>.
           </p>
           <p>
             Read further on{' '}
