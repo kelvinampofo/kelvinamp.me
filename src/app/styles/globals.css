@@ -306,4 +306,8 @@
       transparent
     );
   }
+
+  kbd {
+    font-family: inherit;
+  }
 }
