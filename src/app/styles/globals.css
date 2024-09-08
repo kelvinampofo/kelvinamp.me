@@ -310,4 +310,12 @@
   kbd {
     font-family: inherit;
   }
+
+  em {
+    font:
+      400 italic calc(1em + 1px) / normal var(--font-newsreader),
+      'Signifier',
+      'Times',
+      serif;
+  }
 }
