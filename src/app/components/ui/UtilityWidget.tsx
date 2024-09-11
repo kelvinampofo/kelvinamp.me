@@ -7,26 +7,34 @@ import React, { useState } from 'react';
 import AnalogueClock from './AnalogueClock';
 import Tooltip from './Tooltip';
 
+enum Views {
+  Time,
+  Clock,
+  Dimensions,
+  BrowserInfo
+}
+
 export default function UtilityWidget() {
-  const [viewIndex, setViewIndex] = useState(0);
+  const [viewIndex, setViewIndex] = useState<Views>(Views.Time);
 
   const { currentTime, timezoneOffset } = useTime();
   const { name, version } = useBrowserInfo();
   const { width, height } = useWindowDimension();
 
-  const handleView = () => {
-    setViewIndex((prevIndex) => (prevIndex + 1) % 4);
-  };
+  // dividing by 2 because enums create both string and number keys
+  const totalViews = Object.keys(Views).length / 2;
+
+  const handleView = () => setViewIndex((prevIndex) => (prevIndex + 1) % totalViews);
 
   const renderView = () => {
     switch (viewIndex) {
-      case 0:
+      case Views.Time:
         return currentTime;
-      case 1:
+      case Views.Clock:
         return <AnalogueClock />;
-      case 2:
+      case Views.Dimensions:
         return `${width}x${height}`;
-      case 3:
+      case Views.BrowserInfo:
         return `${name} ${version}`;
       default:
         return null;
