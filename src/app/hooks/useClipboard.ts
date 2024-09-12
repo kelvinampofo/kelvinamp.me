@@ -1,81 +1,57 @@
 import { parseError } from '@/app/lib/utils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export function useClipboard() {
   const [isCopied, setIsCopied] = useState(false);
   const [isError, setIsError] = useState(false);
   const [error, setError] = useState({ message: '' });
-  const [currentUrl, setCurrentUrl] = useState('');
+
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => setIsCopied(false), 3000);
-    return () => {
-      clearTimeout(timeoutId);
-    };
+    if (isCopied) {
+      const timeoutId = setTimeout(() => setIsCopied(false), 3000);
+      return () => clearTimeout(timeoutId);
+    }
   }, [isCopied]);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setCurrentUrl(location.href);
-    }
-  }, []);
-
-  /**
-   * clipboard copy text pattern
-   * @see https://web.dev/patterns/clipboard/copy-text
-   */
-  const handleCopy = async () => {
+  const handleCopy = useCallback(async () => {
     try {
-      await navigator.clipboard.writeText(currentUrl);
+      if (navigator.clipboard && navigator.clipboard.write) {
+        const mimeType = 'text/plain';
+
+        const clipboardItem = new ClipboardItem({
+          mimeType: new Promise(async (resolve) => {
+            try {
+              const copyText = currentUrl || ''; // fallback to empty string if currentUrl is falsy
+
+              // if the result is valid, resolve with a Blob containing the text
+              resolve(new Blob([copyText], { type: mimeType }));
+            } catch (error) {
+              resolve(new Blob([''], { type: mimeType }));
+            }
+          })
+        });
+
+        await navigator.clipboard.write([clipboardItem]);
+      } else {
+        // fallback for browsers that don't support clipboard.write
+        await navigator.clipboard.writeText(currentUrl);
+      }
       setIsCopied(true);
+      setIsError(false);
+      setError({ message: '' });
     } catch (error) {
       setError({ message: parseError(error) });
       setIsError(true);
       setIsCopied(false);
     }
-  };
-
-  const createTmpElement = () => {
-    const tmpElement = document.createElement('textarea');
-    tmpElement.value = window.location.href;
-    tmpElement.setAttribute('readonly', '');
-    tmpElement.style.opacity = '0';
-    document.body.appendChild(tmpElement);
-    tmpElement.focus();
-    tmpElement.select();
-    return tmpElement;
-  };
-
-  const copyTextToClipboard = (tmpElement: HTMLTextAreaElement) => {
-    try {
-      tmpElement.select();
-      document.execCommand('copy');
-      setIsCopied(true);
-    } catch (error) {
-      setIsCopied(false);
-      setIsError(true);
-      setError({ message: parseError(error) });
-    }
-  };
-
-  /**
-   * fallback to clipboard api because safari (webkit) treats user activation differently:
-   * @see https://bugs.webkit.org/show_bug.cgi?id=222262.
-   */
-  const handleFallbackCopy = () => {
-    const tmpElement = createTmpElement();
-    copyTextToClipboard(tmpElement);
-    document.body.removeChild(tmpElement);
-  };
-
-  const handleCopyUrl = () => {
-    navigator.clipboard ? handleCopy() : handleFallbackCopy();
-  };
+  }, [currentUrl]);
 
   return {
     isCopied,
     isError,
     error,
-    copyUrl: handleCopyUrl
+    copyUrl: handleCopy
   };
 }
