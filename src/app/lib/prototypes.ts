@@ -44,6 +44,15 @@ export const allPrototypes: Prototype[] = [
     publishedAt: '2024-06-09',
     summary: 'Hold to delete microinteraction.',
     image: 'https://kelvinamp.me/assets/images/og-images/og-hold-to-delete.png'
+  },
+  {
+    slug: 'loading-text',
+    id: 5,
+    title: 'Loading text',
+    href: '/loading-text',
+    publishedAt: '2024-09-13',
+    summary: 'Loading text animation from OpenAI',
+    image: 'https://kelvinamp.me/assets/images/og-images/og-loading-text.png'
   }
 ].sort((a, b) => {
   return compareAsc(parseISO(a.publishedAt), parseISO(b.publishedAt));
