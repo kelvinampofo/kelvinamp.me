@@ -8,8 +8,8 @@ const phrases = [
   'Thinking',
   'Analysing',
   'Reflecting',
-  'Researching',
-  'Searching'
+  'Searching',
+  'Assessing'
 ];
 
 export default function LoadingText() {
@@ -17,11 +17,11 @@ export default function LoadingText() {
 
   useEffect(() => {
     const duration = 4000;
-    const interval = setInterval(() => {
+    const intervalId = setInterval(() => {
       setViewIndex((prevIndex) => (prevIndex + 1) % phrases.length);
     }, duration);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
@@ -32,19 +32,20 @@ export default function LoadingText() {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
-        className="text-lg font-medium"
       >
-        <div
-          className="animate-shine bg-[length:200%] bg-clip-text text-transparent"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right, #555555 0%, #d1d5db 40%, #9ca3af 50%, #555555 60%, #555555 100%)',
-            WebkitBackgroundClip: 'text',
-            MozBackgroundClip: 'text'
-          }}
+        <span
+          aria-label="loading text"
+          className="
+            animate-shine
+            bg-[length:200%]
+            bg-clip-text 
+            font-medium 
+            text-transparent 
+            [background-image:linear-gradient(to_right,_#555555_0%,_#d1d5db_40%,_#9ca3af_50%,_#555555_60%,_#555555_100%)] 
+          "
         >
           {phrases[viewIndex]}
-        </div>
+        </span>
       </motion.div>
     </AnimatePresence>
   );
