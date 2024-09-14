@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 
 const phrases = [
@@ -25,28 +25,26 @@ export default function LoadingText() {
   }, []);
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={viewIndex}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <span
-          aria-label="loading text"
-          className="
-            animate-shine
-            bg-[length:200%]
-            bg-clip-text 
-            font-medium 
-            text-transparent 
-            [background-image:linear-gradient(to_right,_#555555_0%,_#d1d5db_40%,_#9ca3af_50%,_#555555_60%,_#555555_100%)] 
-          "
+    <div className="relative w-full">
+      {phrases.map((phrase, index) => (
+        <div
+          key={phrase}
+          className={clsx(
+            'absolute inset-0 flex items-center justify-center transition-opacity duration-300',
+            {
+              'opacity-100': index === viewIndex,
+              'opacity-0': index !== viewIndex
+            }
+          )}
         >
-          {phrases[viewIndex]}
-        </span>
-      </motion.div>
-    </AnimatePresence>
+          <span
+            className="animate-shine bg-[length:200%] bg-clip-text font-medium text-transparent [background-image:linear-gradient(to_right,_#555555_0%,_#d1d5db_40%,_#9ca3af_50%,_#555555_60%,_#555555_100%)]
+            "
+          >
+            {phrase}
+          </span>
+        </div>
+      ))}
+    </div>
   );
 }
