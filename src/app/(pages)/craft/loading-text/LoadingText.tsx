@@ -30,7 +30,7 @@ export default function LoadingText() {
         <div
           key={phrase}
           className={clsx(
-            'absolute inset-0 flex items-center justify-center transition-opacity duration-300',
+            'absolute inset-0 flex items-center justify-center transition-opacity duration-[350ms]',
             {
               'opacity-100': index === viewIndex,
               'opacity-0': index !== viewIndex
@@ -38,7 +38,7 @@ export default function LoadingText() {
           )}
         >
           <span
-            className="animate-shine bg-[length:200%] bg-clip-text font-medium text-transparent [background-image:linear-gradient(to_right,_#555555_0%,_#d1d5db_40%,_#9ca3af_50%,_#555555_60%,_#555555_100%)]
+            className="animate-shine bg-[length:200%] bg-clip-text font-medium text-transparent [background-image:linear-gradient(to_right,_#555555_0%,_#d1d5db_40%,_#d1d5db_50%,_#555555_60%,_#555555_100%)]
             "
           >
             {phrase}
