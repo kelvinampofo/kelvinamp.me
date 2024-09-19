@@ -12,6 +12,7 @@ export const useBrowserInfo = () => {
     const browsers = [
       { name: 'Chrome', regex: /Chrome\/(\d+\.\d+)/ },
       { name: 'Firefox', regex: /Firefox\/(\d+\.\d+)/ },
+      // more precise match for safari to avoid chrome/safari overlap on ios
       { name: 'Safari', regex: /Version\/(\d+\.\d+)/ }
     ];
 
