@@ -13,12 +13,13 @@ export function useClipboard() {
     }
   }, [isCopied]);
 
-  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
-
   const copyUrl = async () => {
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+
     if (navigator.clipboard) {
       try {
         await navigator.clipboard.writeText(currentUrl);
+
         setIsCopied(true);
         setIsError(false);
         setError({ message: '' });
