@@ -5,15 +5,16 @@ interface BrowserInfo {
   version: string;
 }
 
-export const useBrowserInfo = () => {
+export function useBrowserInfo(): BrowserInfo {
   const browserInfo = useMemo<BrowserInfo>(() => {
     const userAgent = navigator.userAgent;
 
     const browsers = [
+      // more precise match to avoid chrome/safari overlap on ios devices
+      { name: 'Safari', regex: /Version\/(\d+\.\d+).*Safari/ },
       { name: 'Chrome', regex: /Chrome\/(\d+\.\d+)/ },
       { name: 'Firefox', regex: /Firefox\/(\d+\.\d+)/ },
-      // more precise match for safari to avoid chrome/safari overlap on ios
-      { name: 'Safari', regex: /Version\/(\d+\.\d+)/ }
+      { name: 'Edge', regex: /Edg\/(\d+\.\d+)/ }
     ];
 
     const matchedBrowser = browsers.find(({ regex }) => regex.test(userAgent));
@@ -21,8 +22,7 @@ export const useBrowserInfo = () => {
     if (matchedBrowser) {
       const match = userAgent.match(matchedBrowser.regex);
       if (match) {
-        const [major, minor] = match[1].split('.');
-        return { name: matchedBrowser.name, version: `${major}.${minor}` };
+        return { name: matchedBrowser.name, version: match[1] };
       }
     }
 
@@ -30,4 +30,4 @@ export const useBrowserInfo = () => {
   }, []);
 
   return browserInfo;
-};
+}
