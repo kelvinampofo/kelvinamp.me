@@ -41,15 +41,20 @@ export default function UtilityWidget() {
     }
   };
 
+  const children = (
+    <span
+      className="inline-flex cursor-default gap-0.5 text-[10px] tabular-nums tracking-wider text-secondary dark:text-secondary-dark sm:text-xs"
+      aria-live="off"
+      role="status"
+      onMouseDown={handleView}
+    >
+      {renderView()}
+    </span>
+  );
+
   return (
-    <Tooltip content={timezoneOffset} className="mt-12" onClick={handleView}>
-      <span
-        className="inline-flex cursor-default gap-0.5 text-[10px] tabular-nums tracking-wider text-secondary dark:text-secondary-dark sm:text-xs"
-        aria-live="off"
-        role="status"
-      >
-        {renderView()}
-      </span>
-    </Tooltip>
+    <div className="mt-12">
+      {viewIndex === Views.Time ? <Tooltip content={timezoneOffset}>{children}</Tooltip> : children}
+    </div>
   );
 }

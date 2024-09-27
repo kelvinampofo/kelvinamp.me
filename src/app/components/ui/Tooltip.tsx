@@ -4,19 +4,19 @@ import type { PropsWithChildren, ReactNode } from 'react';
 interface TooltipProps {
   content: ReactNode;
   className?: string;
-  onClick?: () => void;
+  onMouseDown?: () => void;
 }
 
 export default function Tooltip({
   children,
   content,
   className,
-  onClick
+  onMouseDown
 }: PropsWithChildren<TooltipProps>) {
   return (
     <TooltipPrimitive.Provider>
       <TooltipPrimitive.Root delayDuration={350}>
-        <TooltipPrimitive.Trigger asChild className={className} onClick={onClick}>
+        <TooltipPrimitive.Trigger asChild className={className} onMouseDown={onMouseDown}>
           {children}
         </TooltipPrimitive.Trigger>
         <TooltipPrimitive.Content
