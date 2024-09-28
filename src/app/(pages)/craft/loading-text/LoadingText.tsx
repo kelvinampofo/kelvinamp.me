@@ -30,9 +30,9 @@ export default function LoadingText() {
         <div
           key={phrase}
           className={clsx(
-            'absolute inset-0 flex items-center justify-center transition-opacity duration-[350ms]',
+            'absolute inset-0 flex items-center justify-center transition-opacity duration-300',
             {
-              'opacity-100': index === viewIndex,
+              'opacity-80': index === viewIndex,
               'opacity-0': index !== viewIndex
             }
           )}
