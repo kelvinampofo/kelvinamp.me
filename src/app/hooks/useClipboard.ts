@@ -1,5 +1,5 @@
-import { parseError } from '@/app/lib/utils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { parseError } from '../utils/parse';
 
 export function useClipboard() {
   const [isCopied, setIsCopied] = useState(false);
@@ -13,7 +13,7 @@ export function useClipboard() {
     }
   }, [isCopied]);
 
-  const copyUrl = async () => {
+  const copyUrl = useCallback(async () => {
     const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
 
     if (navigator.clipboard) {
@@ -29,7 +29,7 @@ export function useClipboard() {
         setIsCopied(false);
       }
     }
-  };
+  }, []);
 
   return {
     isCopied,

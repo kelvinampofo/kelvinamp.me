@@ -5,7 +5,7 @@ import CopyButton from '@/app/components/ui/CopyButton';
 import InlineLink from '@/app/components/ui/InlineLink';
 import Navigation from '@/app/components/ui/Navigation/Navigation';
 import { allPrototypes } from '@/app/lib/prototypes';
-import { findPrototype } from '@/app/lib/utils';
+import { findPrototype } from '@/app/utils/search';
 import { format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
 import Carousel from './Carousel';

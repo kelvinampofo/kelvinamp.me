@@ -4,7 +4,7 @@ import { Icon } from '@/app/components/ui/Icon';
 import ShortcutKey from '@/app/components/ui/ShortcutKey';
 import { useClipboard } from '@/app/hooks/useClipboard';
 import { useShortcut } from '@/app/hooks/useShortcut';
-import { isMacOS } from '@/app/lib/utils';
+import { isMacOS } from '@/app/utils/os';
 import { type ModifierKey } from 'react';
 import Tooltip from './Tooltip';
 
@@ -24,7 +24,7 @@ export default function CopyButton() {
       }
     >
       <button
-        onClick={copyUrl}
+        onMouseDown={copyUrl}
         className="rounded-full p-1 text-secondary dark:text-secondary-dark"
         aria-label="Copy Link"
       >

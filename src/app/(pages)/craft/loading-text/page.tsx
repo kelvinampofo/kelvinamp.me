@@ -6,7 +6,7 @@ import CopyButton from '@/app/components/ui/CopyButton';
 import InlineLink from '@/app/components/ui/InlineLink';
 import Navigation from '@/app/components/ui/Navigation/Navigation';
 import { allPrototypes } from '@/app/lib/prototypes';
-import { findPrototype } from '@/app/lib/utils';
+import { findPrototype } from '@/app/utils/search';
 import { format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
 import LoadingText from './LoadingText';
@@ -64,7 +64,10 @@ export default function Page() {
         <CopyButton />
       </div>
       <div className="flex flex-col gap-2">
-        <p className="mt-8">Loading text animation from OpenAI.</p>
+        <p className="mt-8">
+          Loading text animation from{' '}
+          <InlineLink href="https://openai.com/o1/#ui-video">OpenAI o1</InlineLink>.
+        </p>
       </div>
       <Card className="mt-8 flex h-48 items-center justify-center gap-12 md:gap-20">
         <LoadingText />

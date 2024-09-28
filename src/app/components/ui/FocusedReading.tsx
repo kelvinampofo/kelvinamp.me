@@ -1,7 +1,7 @@
 'use client';
 
 import { useShortcut } from '@/app/hooks/useShortcut';
-import { isMacOS } from '@/app/lib/utils';
+import { isMacOS } from '@/app/utils/os';
 import { useRef, useState, type ModifierKey, type PropsWithChildren } from 'react';
 
 export default function FocusedReading({ children }: PropsWithChildren) {

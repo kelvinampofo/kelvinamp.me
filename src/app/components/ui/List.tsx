@@ -2,7 +2,7 @@ import Separator from '@/app/components/generic/Separator';
 import Badge from '@/app/components/ui/Badge';
 import InlineLink from '@/app/components/ui/InlineLink';
 import type { Prototype } from '@/app/lib/prototypes';
-import { isWithin1Month } from '@/app/lib/utils';
+import { isWithin1Month } from '@/app/utils/date';
 import c from 'clsx';
 import type { Post } from 'contentlayer/generated';
 import { compareDesc, format, parseISO } from 'date-fns';

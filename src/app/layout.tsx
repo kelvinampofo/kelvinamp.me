@@ -13,8 +13,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL('https://kelvinamp.me'),
   creator: 'Kelvin Ampofo',
-  description:
-    'Crafting software with strong focus on design, human-computer interaction and architecture.',
+  description: 'Software Engineer',
   icons: {
     icon: '/favicon.ico',
     shortcut: '/icon.png',
@@ -22,8 +21,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Kelvin Ampofo',
-    description:
-      'Crafting software with strong focus on design, human-computer interaction and architecture.',
+    description: 'Software Engineer',
     url: 'https://kelvinamp.me',
     siteName: 'Kelvin Ampofo',
     locale: 'en-US',
@@ -52,9 +50,8 @@ export const metadata: Metadata = {
     title: 'Kelvin Ampofo',
     site: '@kelvinamp_',
     creator: '@kelvinamp',
-    card: 'summary_large_image',
-    description:
-      'Crafting software with strong focus on design, human-computer interaction and architecture.'
+    card: 'summary',
+    description: 'Software Engineer'
   }
 };
 

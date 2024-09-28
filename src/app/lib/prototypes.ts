@@ -51,9 +51,7 @@ export const allPrototypes: Prototype[] = [
     title: 'Loading text',
     href: '/loading-text',
     publishedAt: '2024-09-13',
-    summary: 'Loading text animation from OpenAI',
+    summary: 'Loading text animation from OpenAI o1.',
     image: 'https://kelvinamp.me/assets/images/og-images/og-loading-text.png'
   }
-].sort((a, b) => {
-  return compareAsc(parseISO(a.publishedAt), parseISO(b.publishedAt));
-});
+];
