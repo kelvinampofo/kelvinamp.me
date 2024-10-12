@@ -153,21 +153,36 @@
   @keyframes loading-animation {
     0% {
       content: '';
+      opacity: 0.8;
+      filter: blur(0);
     }
     25% {
       content: '.';
+      opacity: 0.8;
+      filter: blur(0);
     }
     50% {
       content: '..';
+      opacity: 0.8;
+      filter: blur(0);
     }
     75% {
       content: '...';
+      opacity: 0.8;
+      filter: blur(0);
+    }
+    100% {
+      content: '';
+      opacity: 0;
+      filter: blur(1px);
     }
   }
 
   .loading-text .loading-dots::after {
     animation: loading-animation 1.5s infinite;
     content: '';
+    display: inline-block;
+    transition: opacity 0.8s ease;
   }
 
   @keyframes flashing {
