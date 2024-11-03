@@ -3,6 +3,7 @@
 import { useBrowserInfo } from '@/app/hooks/useBrowserInfo';
 import { useTime } from '@/app/hooks/useTime';
 import { useWindowDimension } from '@/app/hooks/useWindowDimension';
+import { format } from 'date-fns';
 import React, { useState } from 'react';
 import AnalogueClock from './AnalogueClock';
 import Tooltip from './Tooltip';
@@ -10,6 +11,7 @@ import Tooltip from './Tooltip';
 enum Views {
   Time,
   Clock,
+  CurrentDate,
   Dimensions,
   BrowserInfo
 }
@@ -34,6 +36,8 @@ export default function UtilityWidget() {
         return <AnalogueClock />;
       case Views.Dimensions:
         return `${width}x${height}`;
+      case Views.CurrentDate:
+        return `${format(new Date(), 'EEEE dd MMMM')}`;
       case Views.BrowserInfo:
         return `${name} ${version}`;
       default:
