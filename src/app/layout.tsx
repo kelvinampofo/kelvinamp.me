@@ -20,7 +20,6 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png'
   },
   openGraph: {
-    title: 'Kelvin Ampofo',
     description: 'Software Engineer',
     url: 'https://kelvinamp.me',
     siteName: 'Kelvin Ampofo',
@@ -47,7 +46,6 @@ export const metadata: Metadata = {
     }
   },
   twitter: {
-    title: 'Kelvin Ampofo',
     site: '@kelvinamp_',
     creator: '@kelvinamp',
     card: 'summary',
