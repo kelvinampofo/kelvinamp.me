@@ -1,5 +1,3 @@
-import { compareAsc, parseISO } from 'date-fns';
-
 export type Prototype = {
   slug: string;
   id: number;
