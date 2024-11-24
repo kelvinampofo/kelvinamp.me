@@ -22,7 +22,6 @@ export const metadata: Metadata = {
   openGraph: {
     description: 'Software Engineer',
     url: 'https://kelvinamp.me',
-    siteName: 'Kelvin Ampofo',
     locale: 'en-US',
     type: 'website',
     images: [
