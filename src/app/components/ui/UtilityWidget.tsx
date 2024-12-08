@@ -21,7 +21,7 @@ export default function UtilityWidget() {
 
   const { currentTime, timezoneOffset } = useTime();
   const { name, version } = useBrowserInfo();
-  const { width, height } = useWindowDimension();
+  const { width, height } = useWindowDimension({ debounceDelay: 100 });
 
   const totalViews = Object.keys(Views).length / 2;
 
@@ -29,12 +29,11 @@ export default function UtilityWidget() {
     [Views.Time]: currentTime,
     [Views.Clock]: <AnalogueClock />,
     [Views.Dimensions]: `${width}x${height}`,
-    [Views.CurrentDate]: format(new Date(), 'EEEE dd MMMM'),
+    [Views.CurrentDate]: format(new Date(), 'EEE dd MMMM, yyyy'),
     [Views.BrowserInfo]: `${name} ${version}`
   };
 
-  const handleView = () =>
-    setViewIndex((prevIndex) => (prevIndex + 1) % totalViews);
+  const handleView = () => setViewIndex((prevIndex) => (prevIndex + 1) % totalViews);
 
   const children = (
     <span
@@ -49,11 +48,7 @@ export default function UtilityWidget() {
 
   return (
     <div className="mt-12">
-      {viewIndex === Views.Time ? (
-        <Tooltip content={timezoneOffset}>{children}</Tooltip>
-      ) : (
-        children
-      )}
+      {viewIndex === Views.Time ? <Tooltip content={timezoneOffset}>{children}</Tooltip> : children}
     </div>
   );
 }
