@@ -71,7 +71,10 @@ export default function Page() {
         .
       </p>
       <Card className="mt-8 flex h-48 items-center justify-center gap-12 md:gap-20">
-        <ProgressiveBlur />
+        <ProgressiveBlur>
+          <p>The quick brown fox jumps over the lazy dog.</p>
+          <p>The five boxing wizards jump quickly.</p>
+        </ProgressiveBlur>
       </Card>
       <Separator className="my-8" />
       <Navigation allItems={allPrototypes} currentItem={progressiveBlur} route="craft" />
