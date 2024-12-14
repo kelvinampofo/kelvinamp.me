@@ -64,7 +64,7 @@ export default function Page() {
         <CopyButton />
       </div>
       <p className="mt-8 leading-[1.375rem]">
-        Progressive blur effect using{' '}
+        Progressive linear blur effect using{' '}
         <code className="rounded-[4px] border border-neutral-200 bg-neutral-100 px-1 py-0.5 text-[0.8125rem] text-neutral-800 dark:border-neutral-800 dark:bg-[#1c1c1c] dark:text-primary-dark">
           mask-image
         </code>

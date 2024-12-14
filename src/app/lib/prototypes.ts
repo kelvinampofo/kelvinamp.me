@@ -31,7 +31,7 @@ export const allPrototypes: Prototype[] = [
     title: 'Progressive Blur',
     href: '/progressive-blur',
     publishedAt: '2024-05-27',
-    summary: 'Instagram inspired progressive blur.',
+    summary: 'Progressive linear blur.',
     image: 'https://kelvinamp.me/assets/images/og-images/og-progressive-blur.png'
   },
   {
