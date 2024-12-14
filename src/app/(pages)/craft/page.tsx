@@ -33,7 +33,7 @@ export default function Craft() {
   return (
     <Container>
       <Heading className="mb-3">Craft</Heading>
-      <p className="mb-10 text-balance text-secondary dark:text-secondary-dark">
+      <p className="mb-10 text-secondary dark:text-secondary-dark">
         Crafting interfaces / prototypes.
       </p>
       <List items={allPrototypes} route="craft" dateFormat="MMMM yyyy" />

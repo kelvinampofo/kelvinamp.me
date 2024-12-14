@@ -56,7 +56,7 @@ export default function Page() {
             Craft
           </InlineLink>
         </span>
-        <Heading className="text-lg font-medium">{title}</Heading>
+        <Heading>{title}</Heading>
       </header>
       <div className="flex items-center justify-between text-sm">
         <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
