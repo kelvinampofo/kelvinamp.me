@@ -71,6 +71,11 @@
     color: black;
   }
 
+  ::target-text {
+    background-color: hsl(55.9deg, 100%, 82.9%);
+    color: black;
+  }
+
   :focus-visible {
     box-shadow:
       0 0 0 2px var(--focus-inner-colour),
