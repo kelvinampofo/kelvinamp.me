@@ -1,36 +1,20 @@
 'use client';
 
-import { type CSSProperties, useEffect, useRef } from 'react';
+import type { PropsWithChildren } from 'react';
 
-type AnimationPlayState = CSSProperties['animationPlayState'];
-
-export default function ProgressiveBlur() {
-  const ref = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      const playState: AnimationPlayState = document.hidden ? 'paused' : 'running';
-      if (ref.current) ref.current.style.animationPlayState = playState;
-    };
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-    };
-  }, []);
-
+export default function ProgressiveBlur({ children }: PropsWithChildren) {
   return (
     <div
       className="mask-gradient relative w-full overflow-hidden whitespace-nowrap"
-      aria-label="scrolling text with progressive blur effect"
+      aria-label="scrolling text with a progressive linear blur effect"
+      role="marquee"
     >
-      <div
-        ref={ref}
-        className="inline-flex animate-marquee items-center gap-1 pl-[100%] will-change-transform motion-reduce:animate-marquee-reduced"
+      <span
+        className="marquee inline-flex items-center gap-1 pl-[100%] will-change-transform"
+        aria-hidden="true"
       >
-        <p>The quick brown fox jumps over the lazy dog.</p>
-        <p>The five boxing wizards jump quickly.</p>
-      </div>
+        {children}
+      </span>
     </div>
   );
 }
