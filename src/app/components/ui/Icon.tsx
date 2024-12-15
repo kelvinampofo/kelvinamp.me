@@ -170,6 +170,7 @@ export function Icon({
         </svg>
       );
     default:
-      null;
+      name satisfies never;
+      break;
   }
 }

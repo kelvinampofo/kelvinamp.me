@@ -51,6 +51,7 @@ export default function Loading({ variant }: LoadingProps) {
         </div>
       );
     default:
-      return null;
+      variant satisfies never;
+      break;
   }
 }
