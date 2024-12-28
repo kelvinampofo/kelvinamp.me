@@ -44,12 +44,12 @@ export const allPrototypes: Prototype[] = [
     image: 'https://kelvinamp.me/assets/images/og-images/og-hold-to-delete.png'
   },
   {
-    slug: 'loading-text',
+    slug: 'shimmer-text',
     id: 5,
-    title: 'Loading text',
-    href: '/loading-text',
+    title: 'Shimmer text',
+    href: '/shimmer-text',
     publishedAt: '2024-09-13',
-    summary: 'Loading text animation from OpenAI o1.',
-    image: 'https://kelvinamp.me/assets/images/og-images/og-loading-text.png'
+    summary: 'Loading shimmer text from OpenAI o1.',
+    image: 'https://kelvinamp.me/assets/images/og-images/og-shimmer-text.png'
   }
 ];

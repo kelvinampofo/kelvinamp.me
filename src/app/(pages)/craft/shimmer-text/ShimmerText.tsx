@@ -1,28 +1,22 @@
 'use client';
 
 import clsx from 'clsx';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, PropsWithChildren } from 'react';
 
-const phrases = [
-  'Crafting the solution',
-  'Thinking',
-  'Analysing',
-  'Reflecting',
-  'Searching',
-  'Assessing'
-];
+const DURATION = 4000;
 
-export default function LoadingText() {
+export default function LoadingText({ children }: PropsWithChildren) {
   const [viewIndex, setViewIndex] = useState(0);
 
+  const phrases = Array.isArray(children) ? children : [children];
+
   useEffect(() => {
-    const duration = 4000;
     const intervalId = setInterval(() => {
       setViewIndex((prevIndex) => (prevIndex + 1) % phrases.length);
-    }, duration);
+    }, DURATION);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [phrases.length]);
 
   return (
     <div className="relative w-full">
