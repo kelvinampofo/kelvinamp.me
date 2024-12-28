@@ -1,6 +1,6 @@
 import Card from '@/app/components/generic/Card';
 import Container from '@/app/components/generic/Container';
-import Heading from '@/app/components/generic/Heading/Heading';
+import Heading from '@/app/components/generic/Heading';
 import Separator from '@/app/components/generic/Separator';
 import CopyButton from '@/app/components/ui/CopyButton';
 import InlineLink from '@/app/components/ui/InlineLink';
