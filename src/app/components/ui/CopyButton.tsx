@@ -3,23 +3,20 @@
 import { Icon } from '@/app/components/ui/Icon';
 import ShortcutKey from '@/app/components/ui/ShortcutKey';
 import { useClipboard } from '@/app/hooks/useClipboard';
-import { useShortcut } from '@/app/hooks/useShortcut';
-import { isMacOS } from '@/app/utils/os';
-import { type ModifierKey } from 'react';
+import useShortcut from '@/app/hooks/useShortcut';
 import Tooltip from './Tooltip';
 
 export default function CopyButton() {
   const { isCopied, isError, error, copyUrl } = useClipboard();
 
-  const modifierkey: ModifierKey[] = isMacOS ? ['Control', 'Meta'] : ['Control', 'Alt'];
-  useShortcut(modifierkey, 'c', copyUrl);
+  useShortcut('c', copyUrl);
 
   return (
     <Tooltip
       content={
         <div className="flex items-center gap-2">
           Copy Link
-          <ShortcutKey keyShortcuts={isMacOS ? ['⌃', '⌘', 'C'] : ['Ctrl', 'Alt', 'C']} />
+          <ShortcutKey>c</ShortcutKey>
         </div>
       }
     >

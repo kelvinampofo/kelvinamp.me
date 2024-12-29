@@ -1,8 +1,7 @@
 'use client';
 
-import { useShortcut } from '@/app/hooks/useShortcut';
-import { isMacOS } from '@/app/utils/os';
-import { useRef, useState, type ModifierKey, type PropsWithChildren } from 'react';
+import useShortcut from '@/app/hooks/useShortcut';
+import { useRef, useState, type PropsWithChildren } from 'react';
 
 export default function FocusedReading({ children }: PropsWithChildren) {
   const [isFocusModeEnabled, setIsFocusModeEnabled] = useState(false);
@@ -12,8 +11,7 @@ export default function FocusedReading({ children }: PropsWithChildren) {
     setIsFocusModeEnabled((prev) => !prev);
   };
 
-  const modifierKey: ModifierKey = isMacOS ? 'Control' : 'Shift';
-  useShortcut(modifierKey, 'F', toggleFocusMode);
+  useShortcut('f', toggleFocusMode);
 
   return (
     <div ref={ref} data-focus-mode={isFocusModeEnabled ? 'enabled' : 'disabled'}>
