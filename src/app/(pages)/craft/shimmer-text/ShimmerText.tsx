@@ -1,11 +1,19 @@
 'use client';
 
 import clsx from 'clsx';
-import React, { useEffect, useState, PropsWithChildren } from 'react';
+import { useEffect, useState, type PropsWithChildren, type ElementType } from 'react';
 
 const DURATION = 4000;
 
-export default function LoadingText({ children }: PropsWithChildren) {
+interface ShimmerTextProps extends PropsWithChildren {
+  as?: ElementType;
+}
+
+export default function ShimmerText({
+  children,
+
+  as: Component = 'p'
+}: ShimmerTextProps) {
   const [viewIndex, setViewIndex] = useState(0);
 
   const phrases = Array.isArray(children) ? children : [children];
@@ -19,7 +27,7 @@ export default function LoadingText({ children }: PropsWithChildren) {
   }, [phrases.length]);
 
   return (
-    <div className="relative w-full">
+    <Component className="relative w-full">
       {phrases.map((phrase, index) => (
         <div
           key={phrase}
@@ -39,6 +47,6 @@ export default function LoadingText({ children }: PropsWithChildren) {
           </span>
         </div>
       ))}
-    </div>
+    </Component>
   );
 }
