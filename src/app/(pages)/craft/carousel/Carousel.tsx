@@ -131,13 +131,7 @@ export default function Carousel() {
               'mr-2 rounded-sm text-secondary duration-150 hover:text-primary disabled:cursor-not-allowed disabled:text-neutral-300 dark:border-neutral-800 dark:text-secondary-dark dark:hover:text-primary-dark dark:disabled:text-neutral-600'
             )}
           >
-            <Icon
-              name="chevron-left"
-              width={25}
-              height={25}
-              aria-hidden="true"
-              className="active:scale-95"
-            />
+            <Icon name="chevron-left" width={25} height={25} aria-hidden="true" />
             <span className="sr-only">Previous slide</span>
           </button>
         </div>
@@ -173,13 +167,7 @@ export default function Carousel() {
               'ml-2 rounded-sm text-secondary duration-150 hover:text-primary disabled:cursor-not-allowed disabled:text-neutral-300 dark:border-neutral-800 dark:text-secondary-dark dark:hover:text-primary-dark dark:disabled:text-neutral-600'
             )}
           >
-            <Icon
-              name="chevron-right"
-              width={25}
-              height={25}
-              aria-hidden="true"
-              className="active:scale-95"
-            />
+            <Icon name="chevron-right" width={25} height={25} aria-hidden="true" />
             <span className="sr-only">Next slide</span>
           </button>
         </div>
