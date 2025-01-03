@@ -354,7 +354,7 @@
   }
 
   .shimmer {
-    animation: shimmer 2s linear infinite;
+    animation: shimmer 1.6s linear infinite;
   }
 
   .marquee {
