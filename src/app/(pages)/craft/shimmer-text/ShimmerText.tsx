@@ -41,7 +41,7 @@ export default function ShimmerText({
             }
           )}
         >
-          <span className="shimmer bg-[length:200%] bg-clip-text font-medium text-transparent [background-image:linear-gradient(to_right,_#555555_0%,_#d1d5db_40%,_#d1d5db_50%,_#555555_60%,_#555555_100%)]">
+          <span className="shimmer bg-[length:200%] bg-clip-text font-medium text-transparent [background-image:linear-gradient(to_right,_#0F0F11_0%,_#e5e7eb_40%,_#e5e7eb_50%,_#0F0F11_60%,_#0F0F11_100%)] dark:[background-image:linear-gradient(to_right,_#555555_0%,_#e5e7eb_40%,_#e5e7eb_50%,_#555555_60%,_#555555_100%)]">
             {phrase}
           </span>
         </div>
