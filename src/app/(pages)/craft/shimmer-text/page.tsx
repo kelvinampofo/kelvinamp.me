@@ -19,11 +19,8 @@ const phrases = [
   'Crafting the solution',
   'Thinking',
   'Analysing',
-  'Searching the web...',
-  'Assessing',
-  'Processing request',
-  'Generating response',
-  'Computing results'
+  'Searching the web',
+  'Assessing'
 ];
 
 export const metadata: Metadata = {
