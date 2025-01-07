@@ -1,6 +1,6 @@
 'use client';
 
-import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion';
+import { LazyMotion, domAnimation, m, useReducedMotion } from 'motion/react';
 import { PropsWithChildren, useEffect, useState } from 'react';
 
 interface AnimateEnterProps {
