@@ -12,7 +12,7 @@ interface ShimmerTextProps extends PropsWithChildren {
 
 export default function ShimmerText({
   children,
-  as: Component = 'p',
+  as: Component = 'div',
   ariaLabel = 'Shimmer text loop'
 }: ShimmerTextProps) {
   const [viewIndex, setViewIndex] = useState(0);
