@@ -11,7 +11,8 @@ export default function ProgressivelyHidden() {
   const [usageCount, setUsageCount] = useState(0);
 
   useShortcut('d', () => setUsageCount((prev) => prev + 1), {
-    preventDefault: true
+    preventDefault: true,
+    modifierKeys: ['Meta']
   });
 
   const { isPointerDevice } = usePointerDevice();
@@ -30,10 +31,10 @@ export default function ProgressivelyHidden() {
       case 'large':
         return (
           <div className={c(baseClasses, 'space-x-1 py-2 pl-2 pr-2.5')}>
-            <Icon name="trash" />
+            <Icon name="trash" width={20} height={20} />
             <span className="inline-flex gap-4 text-sm text-primary dark:text-primary-dark">
               Delete{' '}
-              <span className="text-secondary dark:text-secondary-dark">
+              <span className="space-x-0.5 text-secondary dark:text-secondary-dark">
                 <kbd>⌘</kbd>
                 <kbd>D</kbd>
               </span>
@@ -43,7 +44,7 @@ export default function ProgressivelyHidden() {
       case 'medium':
         return (
           <div className={c(baseClasses, 'gap-1 px-2 py-1')}>
-            <Icon name="trash" />
+            <Icon name="trash" width={20} height={20} />
             <span className="text-sm text-primary dark:text-primary-dark">Delete</span>
           </div>
         );
@@ -51,7 +52,7 @@ export default function ProgressivelyHidden() {
         return (
           <div className={c(baseClasses, 'justify-center p-1')}>
             <div className="flex size-4 items-center justify-center rounded-sm bg-[#fefefe] text-primary dark:bg-[#1C1C1C] dark:text-primary-dark">
-              <Icon name="trash" />
+              <Icon name="trash" width={20} height={20} />
             </div>
           </div>
         );
