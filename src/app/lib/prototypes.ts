@@ -51,5 +51,13 @@ export const allPrototypes: Prototype[] = [
     publishedAt: '2024-09-13',
     summary: 'Loading shimmer text from OpenAI o1.',
     image: 'https://kelvinamp.me/assets/images/og-images/og-shimmer-text.png'
+  },
+  {
+    slug: 'adaptive-interface',
+    id: 6,
+    title: 'Adaptive interface',
+    href: '/adaptive-interface',
+    publishedAt: '2025-01-10',
+    summary: 'Adaptive interface based on usage.'
   }
 ];
