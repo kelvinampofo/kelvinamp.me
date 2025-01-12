@@ -59,32 +59,23 @@ export default function Page() {
         <Heading>{title}</Heading>
       </header>
       <div className="flex items-center justify-between text-sm">
-        <time
-          dateTime={publishedAt}
-          className="text-secondary dark:text-secondary-dark"
-        >
+        <time dateTime={publishedAt} className="text-secondary dark:text-secondary-dark">
           {format(parseISO(publishedAt), 'MMMM yyyy')}
         </time>
         <CopyButton />
       </div>
       <div className="flex flex-col gap-2">
         <p className="mt-8">
-          Adaptive interface based on usage. Inpsired by this{' '}
-          <InlineLink href="https://x.com/carmguti/status/1877132625388716124">
-            tweet
-          </InlineLink>{' '}
-          on game design.
+          Adaptive interface based on usage. Inspired by this{' '}
+          <InlineLink href="https://x.com/carmguti/status/1877132625388716124">tweet</InlineLink> on
+          game design.
         </p>
       </div>
       <Card className="mt-8 flex h-48 items-center justify-center gap-12 md:gap-20">
         <AdaptiveInterface />
       </Card>
       <Separator className="my-8" />
-      <Navigation
-        allItems={allPrototypes}
-        currentItem={adaptiveInterface}
-        route="craft"
-      />
+      <Navigation allItems={allPrototypes} currentItem={adaptiveInterface} route="craft" />
     </Container>
   );
 }
