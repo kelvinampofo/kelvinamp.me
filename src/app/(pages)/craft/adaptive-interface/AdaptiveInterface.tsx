@@ -6,13 +6,14 @@ import { Icon } from '@/app/components/ui/Icon';
 import useShortcut from '@/app/hooks/useShortcut';
 import c from 'clsx';
 import usePointerDevice from '@/app/hooks/usePointerDevice';
+import ShortcutKey from '@/app/components/ui/ShortcutKey';
 
 export default function ProgressivelyHidden() {
   const [usageCount, setUsageCount] = useState(0);
 
   useShortcut('d', () => setUsageCount((prev) => prev + 1), {
     preventDefault: true,
-    modifierKeys: ['Meta']
+    modifierKeys: 'Meta'
   });
 
   const { isPointerDevice } = usePointerDevice();
@@ -34,9 +35,9 @@ export default function ProgressivelyHidden() {
             <Icon name="trash" width={20} height={20} />
             <span className="inline-flex gap-4 text-sm text-primary dark:text-primary-dark">
               Delete{' '}
-              <span className="space-x-0.5 text-secondary dark:text-secondary-dark">
-                <kbd>⌘</kbd>
-                <kbd>D</kbd>
+              <span className="flex items-center gap-1 text-secondary dark:text-secondary-dark">
+                <ShortcutKey>⌘</ShortcutKey>
+                <ShortcutKey>D</ShortcutKey>
               </span>
             </span>
           </div>
