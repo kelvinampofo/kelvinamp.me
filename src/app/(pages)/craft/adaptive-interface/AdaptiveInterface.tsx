@@ -70,7 +70,13 @@ export default function ProgressivelyHidden() {
           initial={{ opacity: 0, scale: 0.8, filter: 'blur(4px)' }}
           animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
           exit={{ opacity: 0, scale: 0.8, filter: 'blur(4px)' }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
+          transition={{
+            type: 'spring',
+            stiffness: 500,
+            damping: 20,
+            bounce: 0.3,
+            duration: 0.5
+          }}
           className="inline-flex justify-center"
         >
           {renderContent()}
