@@ -59,6 +59,6 @@ export const allPrototypes: Prototype[] = [
     href: '/adaptive-interface',
     publishedAt: '2025-01-10',
     summary: 'Adaptive interface based on usage.',
-    image: 'https://kelvinamp.me/assets/images/og-images/og-shimmer-text.png'
+    image: 'https://kelvinamp.me/assets/images/og-images/og-adaptive-interface.png'
   }
 ];
