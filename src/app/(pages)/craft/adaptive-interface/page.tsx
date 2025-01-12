@@ -71,9 +71,18 @@ export default function Page() {
           game design.
         </p>
       </div>
-      <Card className="mt-8 flex h-48 items-center justify-center gap-12 md:gap-20">
+      <Card className="my-8 flex h-48 items-center justify-center gap-12 md:gap-20">
         <AdaptiveInterface />
       </Card>
+      <section className="space-y-2">
+        <p>
+          Was chatting with a friend on the use case of such an interface. What if the visual cues
+          on the screen that aid in learning keyboard shortcuts vanish after a specific number of
+          uses and then reappear when accessed through the GUI? This approach could be of particular
+          benefit for learning keyboard shortcuts in any piece of software. In a sense, it could
+          serve as a behavior reinforcement technique—keyboard training.
+        </p>
+      </section>
       <Separator className="my-8" />
       <Navigation allItems={allPrototypes} currentItem={adaptiveInterface} route="craft" />
     </Container>
