@@ -75,6 +75,13 @@ export default function Page() {
           </InlineLink>{' '}
           for a more more performant interaction.
         </p>
+        <p>
+          Inspired by{' '}
+          <InlineLink href="https://www.reddit.com/r/web_design/comments/247nb2/hold_to_delete_pingdoms_clever_alternative_to_the/?rdt=41624">
+            Pingdom&apos;s
+          </InlineLink>{' '}
+          implementation, this offers a better alternative to confirmation modals and dialogs.
+        </p>
       </div>
       <Card className="mt-8 flex h-48 items-center justify-center gap-12 md:gap-20">
         <HoldToDelete />
