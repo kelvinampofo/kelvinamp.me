@@ -1,6 +1,6 @@
 import { Children, PropsWithChildren } from 'react';
 
-export default function ShortcutKeys({ children }: PropsWithChildren) {
+export default function ShortcutKey({ children }: PropsWithChildren) {
   const keys = Children.toArray(children);
 
   return (
