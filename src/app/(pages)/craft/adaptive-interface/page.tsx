@@ -66,7 +66,7 @@ export default function Page() {
       </div>
       <div className="flex flex-col gap-2">
         <p className="mt-8">
-          Adaptive interface based on usage. Inspired by this{' '}
+          An adaptive interface based on usage. Inspired by this{' '}
           <InlineLink href="https://x.com/carmguti/status/1877132625388716124">tweet</InlineLink> on
           game design.
         </p>
@@ -74,7 +74,7 @@ export default function Page() {
       <Card className="my-8 flex h-48 items-center justify-center gap-12 md:gap-20">
         <AdaptiveInterface />
       </Card>
-      <section className="space-y-2">
+      <section>
         <p>
           Was chatting with a friend on the use case of such an interface. What if the visual cues
           on the screen that aid in learning keyboard shortcuts vanish after a specific number of
