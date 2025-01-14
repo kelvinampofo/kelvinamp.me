@@ -35,7 +35,7 @@ export default function AnimateEnter({
         initial={{ opacity: 0, y: 20, filter: 'blur(0.25px)' }}
         animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
         exit={{ opacity: 0, y: 20, filter: 'blur(0.25px)' }}
-        transition={{ ease: 'circOut', duration: 0.3, delay }}
+        transition={{ ease: 'easeOut', duration: 0.3, delay }}
       >
         {children}
       </m.div>
