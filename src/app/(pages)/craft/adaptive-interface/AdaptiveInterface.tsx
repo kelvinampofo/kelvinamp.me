@@ -10,11 +10,7 @@ import ShortcutKey from '@/app/components/ui/ShortcutKey';
 
 export default function ProgressivelyHidden() {
   const [usageCount, setUsageCount] = useState(0);
-
-  useShortcut('d', () => setUsageCount((prev) => prev + 1), {
-    preventDefault: true,
-    modifierKeys: 'Meta'
-  });
+  const [isPressed, setIsPressed] = useState(false);
 
   const { isPointerDevice } = usePointerDevice();
 
@@ -24,9 +20,27 @@ export default function ProgressivelyHidden() {
     return 'small';
   }, [usageCount]);
 
-  const renderContent = () => {
-    const baseClasses =
-      'flex items-center rounded-md border bg-[#fefefe] dark:border-neutral-800 dark:bg-[#1C1C1C]';
+  useShortcut('d', handleShortcut, {
+    modifierKeys: 'Meta',
+    preventDefault: true
+  });
+
+  function handleShortcut() {
+    setUsageCount((prev) => prev + 1);
+    setIsPressed(true);
+
+    const timer = setTimeout(() => {
+      setIsPressed(false);
+    }, 150);
+
+    return () => clearTimeout(timer);
+  }
+
+  function renderContent() {
+    const baseClasses = c(
+      'flex items-center rounded-md border bg-[#fefefe] dark:border-neutral-800 dark:bg-[#1C1C1C] duration-150 transistion-transform',
+      isPressed && 'scale-[.96]'
+    );
 
     switch (sizeCategory) {
       case 'large':
@@ -61,7 +75,7 @@ export default function ProgressivelyHidden() {
         sizeCategory satisfies never;
         return null;
     }
-  };
+  }
 
   return (
     <AnimatePresence mode="wait">
