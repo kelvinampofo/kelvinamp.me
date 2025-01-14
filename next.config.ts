@@ -1,13 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { withContentlayer } = require('next-contentlayer2');
+import type { NextConfig } from 'next';
+import { withContentlayer } from 'next-contentlayer2';
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp']
-  },
-  experimental: {
-    typedRoutes: true
   },
   async redirects() {
     return [
@@ -35,4 +31,4 @@ const nextConfig = {
   }
 };
 
-module.exports = withContentlayer(nextConfig);
+export default withContentlayer(nextConfig);

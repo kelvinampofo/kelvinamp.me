@@ -13,7 +13,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 interface Params {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -22,7 +22,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: Params): Promise<Metadata | undefined> {
+export async function generateMetadata(props: Params): Promise<Metadata | undefined> {
+  const params = await props.params;
   const post = allPosts.find((post) => post.slug === params.slug);
 
   if (!post) {
@@ -67,7 +68,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata | u
   };
 }
 
-export default async function Post({ params }: Params) {
+export default async function Post(props: Params) {
+  const params = await props.params;
   const post = allPosts.find((post) => post.slug === params.slug);
 
   if (!post) {

@@ -61,6 +61,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="en"
       className={c('scroll-smooth', robotoMono.variable, inter.variable, newsreader.variable)}
+      suppressHydrationWarning
     >
       <body className="text-sm text-primary antialiased dark:bg-[#161616] dark:text-primary-dark md:text-base lg:text-base">
         <Providers>
