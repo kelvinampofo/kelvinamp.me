@@ -78,7 +78,7 @@ export default function ProgressivelyHidden() {
   }
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait" initial={false}>
       <div className="mt-12 inline-flex flex-col items-center">
         <motion.div
           key={sizeCategory}
