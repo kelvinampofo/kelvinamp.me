@@ -35,13 +35,20 @@ export default function Now() {
           <em className="font-serif">&</em> design.
         </p>
         <p>
-          Interactivity, typography, motion, touch, optimisations, accessibility, design&mdash;an
-          infinite canvas for creativity and opportunity.
+          Interactivity, typography, writing, motion, touch, optimisations, accessibility, branding,
+          layout&mdash;an infinite canvas for creativity and opportunity.
         </p>
         <p>
           Pursuits aside, probably{' '}
-          <InlineLink href="https://literal.club/kelvinamp">reading</InlineLink>, enjoying
-          emotionally evocative music, or playing with the Porsche{' '}
+          <InlineLink href="https://literal.club/kelvinamp">reading</InlineLink>,{' '}
+          <InlineLink href="https://music.apple.com/gb/album/the-miseducation-of-lauryn-hill/1276760743">
+            listening
+          </InlineLink>
+          ,{' '}
+          <InlineLink href="https://youtube.com/playlist?list=PL_xPJT_mBnFm9mYbzx3Ed61o1ZD3w17n9&si=jVu1IodbNsjB8LOx">
+            watching
+          </InlineLink>
+          , or playing with the Porsche{' '}
           <InlineLink href="https://configurator.porsche.com/porsche-code/PSR3WDD9">
             configurator
           </InlineLink>
