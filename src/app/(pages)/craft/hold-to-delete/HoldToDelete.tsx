@@ -60,7 +60,7 @@ export default function HoldToDelete() {
 
   return (
     <button
-      className="relative flex items-center justify-center overflow-hidden rounded-md border bg-[#fefefe] px-4 py-2 transition-all will-change-transform hover:border-neutral-200 hover:bg-neutral-100 active:scale-[.98] dark:border-neutral-800 dark:bg-[#1C1C1C] hover:dark:border-neutral-700 hover:dark:bg-neutral-800"
+      className="relative flex items-center justify-center overflow-hidden rounded-md bg-[#fefefe] py-2 pl-2 pr-3 outline outline-1 transition-all will-change-transform hover:bg-neutral-100 hover:outline-neutral-200 active:scale-[.98] dark:bg-[#1C1C1C] dark:outline-neutral-800 hover:dark:bg-neutral-800 hover:dark:outline-neutral-700"
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
@@ -79,7 +79,7 @@ export default function HoldToDelete() {
         }}
         className="absolute inset-0 bg-red-500/75"
       />
-      <div className="flex items-center gap-2 text-primary dark:text-primary-dark">
+      <div className="flex items-center gap-1.5 text-primary dark:text-primary-dark">
         <Icon
           name="trash"
           className="text-secondary dark:text-secondary-dark"

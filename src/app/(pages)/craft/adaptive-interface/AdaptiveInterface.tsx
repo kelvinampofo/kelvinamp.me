@@ -38,37 +38,50 @@ export default function ProgressivelyHidden() {
 
   function renderContent() {
     const baseClasses = c(
-      'flex items-center rounded-md border bg-[#fefefe] dark:border-neutral-800 dark:bg-[#1C1C1C] duration-150 transistion-transform',
-      isPressed && 'scale-[.96]'
+      'flex items-center rounded-md outline outline-1 bg-[#fefefe] dark:outline-neutral-800 dark:bg-[#1A1A1A] duration-150 transistion-transform outline-neutral-200',
+      isPressed && 'scale-[.98]'
     );
 
     switch (sizeCategory) {
       case 'large':
         return (
-          <div className={c(baseClasses, 'space-x-1 py-2 pl-2 pr-2.5')}>
-            <Icon name="trash" width={20} height={20} />
-            <span className="inline-flex gap-4 text-sm text-primary dark:text-primary-dark">
-              Delete{' '}
-              <span className="flex items-center gap-1 text-secondary dark:text-secondary-dark">
+          <div className={c(baseClasses, 'gap-1.5 py-2 pl-2 pr-3')}>
+            <Icon
+              name="trash"
+              width={20}
+              height={20}
+              className="text-neutral-700 dark:text-neutral-300"
+            />
+            <div className="flex gap-4 text-sm text-neutral-700 dark:text-neutral-300">
+              Delete
+              <div className="flex items-center gap-1">
                 <ShortcutKey>⌘</ShortcutKey>
                 <ShortcutKey>D</ShortcutKey>
-              </span>
-            </span>
+              </div>
+            </div>
           </div>
         );
       case 'medium':
         return (
-          <div className={c(baseClasses, 'gap-1 px-2 py-1')}>
-            <Icon name="trash" width={20} height={20} />
-            <span className="text-sm text-primary dark:text-primary-dark">Delete</span>
+          <div className={c(baseClasses, 'gap-1.5 py-1.5 pl-1.5 pr-3')}>
+            <Icon
+              name="trash"
+              width={20}
+              height={20}
+              className="text-neutral-700 dark:text-neutral-300"
+            />
+            <span className="text-sm text-neutral-700 dark:text-neutral-300">Delete</span>
           </div>
         );
       case 'small':
         return (
-          <div className={c(baseClasses, 'justify-center p-1')}>
-            <div className="flex size-4 items-center justify-center rounded-sm bg-[#fefefe] text-primary dark:bg-[#1C1C1C] dark:text-primary-dark">
-              <Icon name="trash" width={20} height={20} />
-            </div>
+          <div className={c(baseClasses, 'p-1')}>
+            <Icon
+              name="trash"
+              width={20}
+              height={20}
+              className="text-neutral-700 dark:text-neutral-300"
+            />
           </div>
         );
       default:
