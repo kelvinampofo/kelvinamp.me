@@ -60,7 +60,7 @@ export default function HoldToDelete() {
 
   return (
     <button
-      className="relative flex items-center justify-center overflow-hidden rounded-md bg-[#fefefe] py-2 pl-2 pr-3 outline outline-1 transition-all will-change-transform hover:bg-neutral-100 hover:outline-neutral-200 active:scale-[.98] dark:bg-[#1C1C1C] dark:outline-neutral-800 hover:dark:bg-neutral-800 hover:dark:outline-neutral-700"
+      className="relative flex items-center justify-center overflow-hidden rounded-md bg-[#fefefe] py-2 pl-2 pr-3 outline outline-1 transition-all will-change-transform hover:bg-neutral-100 hover:outline-neutral-200 active:scale-[.98] dark:bg-[#1A1A1A] dark:outline-neutral-800 hover:dark:bg-neutral-800 hover:dark:outline-neutral-700"
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
