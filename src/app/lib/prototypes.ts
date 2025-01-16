@@ -40,7 +40,7 @@ export const allPrototypes: Prototype[] = [
     title: 'Hold to delete',
     href: '/hold-to-delete',
     publishedAt: '2024-06-09',
-    summary: 'Hold to delete microinteraction.',
+    summary: '"Hold to delete" interaction.',
     image: 'https://kelvinamp.me/assets/images/og-images/og-hold-to-delete.png'
   },
   {
