@@ -1,16 +1,18 @@
-import { Children, PropsWithChildren } from 'react';
+interface ShortcutKeyProps {
+  keyShortcuts: string | string[];
+}
 
-export default function ShortcutKey({ children }: PropsWithChildren) {
-  const keys = Children.toArray(children);
+export default function ShortcutKey({ keyShortcuts }: ShortcutKeyProps) {
+  const keys = Array.isArray(keyShortcuts) ? keyShortcuts : keyShortcuts.split('+');
 
   return (
-    <div className="flex gap-1 text-secondary-dark" aria-keyshortcuts={keys.join('+')}>
-      {keys.map((keyShortcut, index) => (
+    <div className="flex items-center gap-1 text-secondary-dark" aria-keyshortcuts={keys.join('+')}>
+      {keys.map((key, index) => (
         <kbd
           key={index}
           className="rounded-sm bg-neutral-100 px-1 text-xs text-secondary dark:bg-neutral-800 dark:text-secondary-dark"
         >
-          {keyShortcut}
+          {key}
         </kbd>
       ))}
     </div>

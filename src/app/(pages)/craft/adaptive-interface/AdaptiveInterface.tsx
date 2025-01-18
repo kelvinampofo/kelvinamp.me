@@ -53,11 +53,8 @@ export default function ProgressivelyHidden() {
               className="text-neutral-700 dark:text-neutral-300"
             />
             <div className="flex gap-4 text-sm text-neutral-700 dark:text-neutral-300">
-              Delete
-              <div className="flex items-center gap-1">
-                <ShortcutKey>⌘</ShortcutKey>
-                <ShortcutKey>D</ShortcutKey>
-              </div>
+              <span>Delete</span>
+              <ShortcutKey keyShortcuts="⌘+D" />
             </div>
           </div>
         );
