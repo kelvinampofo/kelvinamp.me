@@ -18,7 +18,7 @@ export default function AnimateEnter({
     setIsClient(true);
   }, []);
 
-  // workourand for hydration errors
+  // workaround for hydration errors
   if (!isClient) {
     return null;
   }
