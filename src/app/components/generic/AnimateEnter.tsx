@@ -1,7 +1,7 @@
 'use client';
 
 import { LazyMotion, domAnimation, m, useReducedMotion } from 'motion/react';
-import type { PropsWithChildren } from 'react';
+import { type PropsWithChildren, useEffect, useState } from 'react';
 
 interface AnimateEnterProps {
   delay?: number;
@@ -11,7 +11,17 @@ export default function AnimateEnter({
   children,
   delay = 0
 }: PropsWithChildren<AnimateEnterProps>) {
+  const [isClient, setIsClient] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // workourand for hydration errors
+  if (!isClient) {
+    return null;
+  }
 
   if (prefersReducedMotion) {
     return children;

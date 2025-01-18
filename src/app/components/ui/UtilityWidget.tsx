@@ -41,7 +41,6 @@ export default function UtilityWidget() {
       aria-live="polite"
       role="status"
       onMouseDown={handleView}
-      suppressHydrationWarning={viewIndex === Views.Time}
     >
       {content[viewIndex]}
     </span>
