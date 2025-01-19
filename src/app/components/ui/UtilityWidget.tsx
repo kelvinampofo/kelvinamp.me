@@ -29,7 +29,7 @@ export default function UtilityWidget() {
     [Views.Time]: currentTime,
     [Views.Clock]: <AnalogueClock />,
     [Views.Dimensions]: `${width}x${height}`,
-    [Views.CurrentDate]: format(new Date(), 'EEE dd MMMM, yyyy'),
+    [Views.CurrentDate]: format(new Date(), 'EEE dd MMM, yyyy'),
     [Views.BrowserInfo]: `${name} ${version}`
   };
 
