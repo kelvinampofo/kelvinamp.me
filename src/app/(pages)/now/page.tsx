@@ -31,7 +31,10 @@ export default function Now() {
       <Heading className="mb-6">Now</Heading>
       <section className="mb-6 flex flex-col gap-6">
         <p>
-          Committed to developing skill, through guiltless exploration in software{' '}
+          Committed to developing skill, through guiltless exploration in{' '}
+          <span className="bg-neutral-300 px-1.5 font-mono text-neutral-600 dark:bg-neutral-700 dark:text-secondary-dark">
+            code
+          </span>{' '}
           <em className="font-serif">&</em> design.
         </p>
         <p>
