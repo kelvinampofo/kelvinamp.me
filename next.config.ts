@@ -21,11 +21,6 @@ const nextConfig: NextConfig = {
         source: '/x',
         destination: 'https://twitter.com/kelvinamp_',
         permanent: true
-      },
-      {
-        source: '/cv',
-        destination: 'https://read.cv/kelvinampofo',
-        permanent: true
       }
     ];
   }
