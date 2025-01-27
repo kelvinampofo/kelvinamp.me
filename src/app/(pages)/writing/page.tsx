@@ -35,7 +35,7 @@ export default function Writing() {
     <Container>
       <Heading className="mb-2">Writing</Heading>
       <p className="mb-10 text-secondary dark:text-secondary-dark">
-        Thoughts on technology, design + things in between.
+        Collection of half-formed thoughts.
       </p>
       <List items={allPosts} route="writing" />
       <InlineLink className="mt-12" href="/" arrowIcon hideUnderline ariaLabel="back to home page">

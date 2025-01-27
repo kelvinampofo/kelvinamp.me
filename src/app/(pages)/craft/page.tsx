@@ -33,7 +33,7 @@ export default function Craft() {
   return (
     <Container>
       <Heading className="mb-3">Craft</Heading>
-      <p className="mb-10 text-secondary dark:text-secondary-dark">Interfaces / prototypes.</p>
+      <p className="mb-10 text-secondary dark:text-secondary-dark">Interfaces / web prototypes.</p>
       <List items={allPrototypes} route="craft" dateFormat="MMMM yyyy" />
       <InlineLink className="mt-12" href="/" arrowIcon hideUnderline ariaLabel="back to home page">
         Back
