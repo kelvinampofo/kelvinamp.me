@@ -1,4 +1,4 @@
-import { type ModifierKey, useCallback, useEffect } from 'react';
+import { useEffect, type ModifierKey } from 'react';
 
 interface UseShortcutOptions {
   preventDefault?: boolean;
@@ -10,8 +10,8 @@ export default function useShortcut(
   callback: () => void,
   { preventDefault = false, modifierKeys }: UseShortcutOptions = {}
 ) {
-  const handleShortcut = useCallback(
-    (event: KeyboardEvent) => {
+  useEffect(() => {
+    const handleShortcut = (event: KeyboardEvent) => {
       const isShortcutKeyPressed = event.key.toLowerCase() === key.toLowerCase();
 
       const isModifierPressed = modifierKeys
@@ -26,13 +26,10 @@ export default function useShortcut(
         }
         callback();
       }
-    },
-    [callback, key, modifierKeys, preventDefault]
-  );
+    };
 
-  useEffect(() => {
     window.addEventListener('keydown', handleShortcut);
 
     return () => window.removeEventListener('keydown', handleShortcut);
-  }, [handleShortcut]);
+  }, [key, modifierKeys, preventDefault, callback]);
 }
