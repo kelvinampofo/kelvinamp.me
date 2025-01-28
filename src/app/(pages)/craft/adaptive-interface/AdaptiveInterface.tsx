@@ -1,25 +1,18 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Icon } from '@/app/components/ui/Icon';
 import useShortcut from '@/app/hooks/useShortcut';
-import c from 'clsx';
 import usePointerDevice from '@/app/hooks/usePointerDevice';
 import ShortcutKey from '@/app/components/ui/ShortcutKey';
+import c from 'clsx';
 
-export default function ProgressivelyHidden() {
+export default function AdaptiveInterface() {
   const [usageCount, setUsageCount] = useState(0);
   const [isPressed, setIsPressed] = useState(false);
 
   const { isPointerDevice } = usePointerDevice();
-
-  const sizeCategory = useMemo(() => {
-    if (usageCount < 5) return 'large';
-    if (usageCount < 10) return 'medium';
-    return 'small';
-  }, [usageCount]);
-
   useShortcut('d', handleShortcut, {
     modifierKeys: 'Meta',
     preventDefault: true
@@ -36,56 +29,13 @@ export default function ProgressivelyHidden() {
     return () => clearTimeout(timer);
   }
 
-  function renderContent() {
-    const baseClasses = c(
-      'flex items-center rounded-md outline outline-1 bg-[#fefefe] dark:outline-neutral-800 dark:bg-[#1A1A1A] duration-150 transistion-transform outline-neutral-200',
-      isPressed && 'scale-[.98]'
-    );
-
-    switch (sizeCategory) {
-      case 'large':
-        return (
-          <div className={c(baseClasses, 'gap-1.5 py-2 pl-2 pr-3')}>
-            <Icon
-              name="trash"
-              width={20}
-              height={20}
-              className="text-neutral-700 dark:text-neutral-300"
-            />
-            <div className="flex gap-4 text-sm text-neutral-700 dark:text-neutral-300">
-              <span className="font-medium">Delete</span>
-              <ShortcutKey keyShortcuts="⌘+D" />
-            </div>
-          </div>
-        );
-      case 'medium':
-        return (
-          <div className={c(baseClasses, 'gap-1.5 py-1.5 pl-1.5 pr-3')}>
-            <Icon
-              name="trash"
-              width={20}
-              height={20}
-              className="text-neutral-700 dark:text-neutral-300"
-            />
-            <span className="text-sm text-neutral-700 dark:text-neutral-300">Delete</span>
-          </div>
-        );
-      case 'small':
-        return (
-          <div className={c(baseClasses, 'p-1')}>
-            <Icon
-              name="trash"
-              width={20}
-              height={20}
-              className="text-neutral-700 dark:text-neutral-300"
-            />
-          </div>
-        );
-      default:
-        sizeCategory satisfies never;
-        return null;
-    }
+  function determineSizeCategory(count: number) {
+    if (count < 5) return 'large';
+    if (count < 10) return 'medium';
+    return 'small';
   }
+
+  const sizeCategory = determineSizeCategory(usageCount);
 
   return (
     <AnimatePresence mode="wait" initial={false}>
@@ -104,7 +54,7 @@ export default function ProgressivelyHidden() {
           }}
           className="inline-flex justify-center"
         >
-          {renderContent()}
+          {renderContent(sizeCategory, isPressed)}
         </motion.div>
 
         {isPointerDevice ? (
@@ -128,4 +78,56 @@ export default function ProgressivelyHidden() {
       </div>
     </AnimatePresence>
   );
+}
+
+function renderContent(sizeCategory: string, isPressed: boolean) {
+  const baseClasses = c(
+    'flex items-center rounded-md outline outline-1 bg-[#fefefe] dark:outline-neutral-800 dark:bg-[#1A1A1A] duration-150 transition-transform outline-neutral-200',
+    {
+      'scale-[.98]': isPressed
+    }
+  );
+
+  switch (sizeCategory) {
+    case 'large':
+      return (
+        <div className={c(baseClasses, 'gap-1.5 py-2 pl-2 pr-3')}>
+          <Icon
+            name="trash"
+            width={20}
+            height={20}
+            className="text-neutral-700 dark:text-neutral-300"
+          />
+          <div className="flex gap-4 text-sm text-neutral-700 dark:text-neutral-300">
+            <span className="font-medium">Delete</span>
+            <ShortcutKey keyShortcuts="⌘+D" />
+          </div>
+        </div>
+      );
+    case 'medium':
+      return (
+        <div className={c(baseClasses, 'gap-1.5 py-1.5 pl-1.5 pr-3')}>
+          <Icon
+            name="trash"
+            width={20}
+            height={20}
+            className="text-neutral-700 dark:text-neutral-300"
+          />
+          <span className="text-sm text-neutral-700 dark:text-neutral-300">Delete</span>
+        </div>
+      );
+    case 'small':
+      return (
+        <div className={c(baseClasses, 'p-1')}>
+          <Icon
+            name="trash"
+            width={20}
+            height={20}
+            className="text-neutral-700 dark:text-neutral-300"
+          />
+        </div>
+      );
+    default:
+      return null;
+  }
 }
