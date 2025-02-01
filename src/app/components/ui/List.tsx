@@ -31,7 +31,7 @@ export default function List({ items, route, dateFormat = 'dd/MM/yy' }: ListProp
                 className="flex justify-between gap-2 p-1 hover:text-secondary dark:hover:text-secondary-dark"
               >
                 <div className={c('flex gap-2', isNewItem ? 'items-center' : 'items-baseline')}>
-                  <span>{title}</span>
+                  <span className="font-medium">{title}</span>
                   {isCraftRoute && (
                     <p className="hidden text-xs text-secondary dark:text-secondary-dark md:block">
                       {summary}

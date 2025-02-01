@@ -20,7 +20,7 @@ export default function Tooltip({
           {children}
         </TooltipPrimitive.Trigger>
         <TooltipPrimitive.Content
-          className="tooltip-content rounded-md border border-neutral-200 p-[6px] text-xs shadow-sm duration-200 dark:border-neutral-800 dark:shadow-neutral-950"
+          className="tooltip-content rounded-md border border-neutral-200 bg-[#FEFEFE] p-1.5 text-xs shadow-sm duration-200 dark:border-neutral-800 dark:bg-inherit dark:shadow-neutral-950"
           sideOffset={5}
         >
           {content}

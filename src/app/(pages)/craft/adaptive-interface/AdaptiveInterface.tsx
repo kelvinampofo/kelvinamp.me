@@ -65,7 +65,7 @@ export default function AdaptiveInterface() {
               opacity: usageCount === 0 ? 1 : 0,
               filter: usageCount === 0 ? 'blur(0px)' : 'blur(4px)'
             }}
-            transition={{ duration: 0.1 }}
+            transition={{ duration: 0.15 }}
             className="mt-10 h-4 text-xs text-secondary dark:text-secondary"
           >
             Press keyboard shortcuts a few times
