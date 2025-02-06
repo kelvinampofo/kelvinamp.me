@@ -20,6 +20,8 @@ export default function AdaptiveInterface() {
     preventDefault: true
   });
 
+  useShortcut('r', () => setUsageCount(0));
+
   function handleShortcut() {
     setUsageCount((prev) => prev + 1);
     setIsPressed(true);
