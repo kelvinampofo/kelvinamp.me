@@ -11,8 +11,10 @@ import c from 'clsx';
 export default function AdaptiveInterface() {
   const [usageCount, setUsageCount] = useState(0);
   const [isPressed, setIsPressed] = useState(false);
+  const [hasUsedShortcut, setHasUsedShortcut] = useState(false);
 
   const { isPointerDevice } = usePointerDevice();
+
   useShortcut('d', handleShortcut, {
     modifierKeys: 'Meta',
     preventDefault: true
@@ -21,6 +23,7 @@ export default function AdaptiveInterface() {
   function handleShortcut() {
     setUsageCount((prev) => prev + 1);
     setIsPressed(true);
+    setHasUsedShortcut(true);
 
     const timer = setTimeout(() => {
       setIsPressed(false);
@@ -39,7 +42,7 @@ export default function AdaptiveInterface() {
 
   return (
     <AnimatePresence mode="wait" initial={false}>
-      <div className="mt-12 inline-flex flex-col items-center">
+      <div className="mt-10 inline-flex flex-col items-center">
         <motion.div
           key={sizeCategory}
           initial={{ opacity: 0, scale: 0.8, filter: 'blur(4px)' }}
@@ -57,21 +60,40 @@ export default function AdaptiveInterface() {
           {renderContent(sizeCategory, isPressed)}
         </motion.div>
 
-        {isPointerDevice ? (
-          <motion.div
-            key={usageCount === 0 ? 'visible' : 'hidden'}
-            initial={{ opacity: 1, filter: 'blur(0px)' }}
-            animate={{
-              opacity: usageCount === 0 ? 1 : 0,
-              filter: usageCount === 0 ? 'blur(0px)' : 'blur(4px)'
-            }}
-            transition={{ duration: 0.15 }}
-            className="mt-10 h-4 text-xs text-secondary dark:text-secondary"
-          >
-            Press keyboard shortcuts a few times
+        {isPointerDevice && (
+          <motion.div className="relative mt-8 flex h-4 w-80 justify-center text-xs text-secondary dark:text-secondary">
+            <AnimatePresence mode="wait" initial={false}>
+              {!hasUsedShortcut && (
+                <motion.div
+                  key="visible"
+                  initial={{ opacity: 0, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, filter: 'blur(4px)' }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute"
+                >
+                  Press keyboard shortcuts a few times
+                </motion.div>
+              )}
+              {usageCount >= 10 && (
+                <motion.button
+                  key="reset"
+                  initial={{ opacity: 0, filter: 'blur(1px)' }}
+                  animate={{ opacity: 1, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, filter: 'blur(1px)' }}
+                  transition={{ duration: 0.05 }}
+                  onClick={() => setUsageCount(0)}
+                  className="absolute rounded-sm p-1"
+                >
+                  Reset
+                </motion.button>
+              )}
+            </AnimatePresence>
           </motion.div>
-        ) : (
-          <span className="mt-10 text-xs text-secondary dark:text-secondary">
+        )}
+
+        {!isPointerDevice && (
+          <span className="mt-8 text-xs text-secondary dark:text-secondary">
             This prototype is designed for keyboard users.
           </span>
         )}
@@ -106,7 +128,7 @@ function renderContent(sizeCategory: string, isPressed: boolean) {
       );
     case 'medium':
       return (
-        <div className={c(baseClasses, 'gap-1.5 py-1.5 pl-1.5 pr-3')}>
+        <div className={c(baseClasses, 'gap-1.5 py-1.5 pl-2 pr-3')}>
           <Icon
             name="trash"
             width={20}
@@ -118,7 +140,7 @@ function renderContent(sizeCategory: string, isPressed: boolean) {
       );
     case 'small':
       return (
-        <div className={c(baseClasses, 'p-1')}>
+        <div className={c(baseClasses, 'p-1.5')}>
           <Icon
             name="trash"
             width={20}
