@@ -91,7 +91,7 @@ export default function AdaptiveInterface() {
                   onClick={handleReset}
                   className="absolute rounded-sm p-1"
                 >
-                  Click here (or press R to reset)
+                  Click here or press R to reset
                 </motion.button>
               )}
             </AnimatePresence>
