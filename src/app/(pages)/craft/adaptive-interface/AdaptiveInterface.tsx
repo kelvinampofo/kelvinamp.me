@@ -20,7 +20,11 @@ export default function AdaptiveInterface() {
     preventDefault: true
   });
 
-  useShortcut('r', () => setUsageCount(0));
+  useShortcut('r', handleReset);
+
+  function handleReset() {
+    setUsageCount(0);
+  }
 
   function handleShortcut() {
     setUsageCount((prev) => prev + 1);
@@ -84,10 +88,10 @@ export default function AdaptiveInterface() {
                   animate={{ opacity: 1, filter: 'blur(0px)' }}
                   exit={{ opacity: 0, filter: 'blur(1px)' }}
                   transition={{ duration: 0.05 }}
-                  onClick={() => setUsageCount(0)}
+                  onClick={handleReset}
                   className="absolute rounded-sm p-1"
                 >
-                  Reset
+                  Click here (or press R to reset)
                 </motion.button>
               )}
             </AnimatePresence>
@@ -104,6 +108,8 @@ export default function AdaptiveInterface() {
   );
 }
 
+const ICON_SIZE = 20;
+
 function renderContent(sizeCategory: string, isPressed: boolean) {
   const baseClasses = c(
     'flex items-center rounded-md outline outline-1 bg-[#fefefe] dark:outline-neutral-800 dark:bg-[#1A1A1A] duration-150 transition-transform outline-neutral-200',
@@ -118,8 +124,8 @@ function renderContent(sizeCategory: string, isPressed: boolean) {
         <div className={c(baseClasses, 'gap-1.5 py-2 pl-2 pr-3')}>
           <Icon
             name="trash"
-            width={20}
-            height={20}
+            width={ICON_SIZE}
+            height={ICON_SIZE}
             className="text-neutral-700 dark:text-neutral-300"
           />
           <div className="flex gap-4 text-sm text-neutral-700 dark:text-neutral-300">
@@ -133,8 +139,8 @@ function renderContent(sizeCategory: string, isPressed: boolean) {
         <div className={c(baseClasses, 'gap-1.5 py-1.5 pl-2 pr-3')}>
           <Icon
             name="trash"
-            width={20}
-            height={20}
+            width={ICON_SIZE}
+            height={ICON_SIZE}
             className="text-neutral-700 dark:text-neutral-300"
           />
           <span className="text-sm text-neutral-700 dark:text-neutral-300">Delete</span>
@@ -145,8 +151,8 @@ function renderContent(sizeCategory: string, isPressed: boolean) {
         <div className={c(baseClasses, 'p-1.5')}>
           <Icon
             name="trash"
-            width={20}
-            height={20}
+            width={ICON_SIZE}
+            height={ICON_SIZE}
             className="text-neutral-700 dark:text-neutral-300"
           />
         </div>
