@@ -68,6 +68,6 @@ export const allPrototypes: Prototype[] = [
     href: '/scrolling-tab-bar',
     publishedAt: '2025-02-09',
     summary: 'Scrolling tab bar view with scroll fade.',
-    image: 'https://kelvinamp.me/assets/images/og-images/og-adaptive-interface.png'
+    image: 'https://kelvinamp.me/assets/images/og-images/og-scrolling-tab-bar.png'
   }
 ];
