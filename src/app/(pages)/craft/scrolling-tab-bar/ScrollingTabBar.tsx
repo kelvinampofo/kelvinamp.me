@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
+import useSound from 'use-sound';
 import c from 'clsx';
 
 interface TabProps {
@@ -21,12 +22,18 @@ interface TabButtonProps {
   onClick: () => void;
 }
 
+const clickSfx = '/assets/audio/lighter-click.wav';
+
 export default function ScrollingTabBar({ tabs, defaultValue, onChange }: ScrollingTabBarProps) {
   const [selectedTab, setSelectedTab] = useState(defaultValue || 'all');
   const [isScrolledToStart, setIsScrolledToStart] = useState(true);
   const [isScrolledToEnd, setIsScrolledToEnd] = useState(false);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const [playActive] = useSound(clickSfx, {
+    volume: 0.25
+  });
 
   useEffect(() => {
     const element = scrollContainerRef.current;
@@ -44,6 +51,7 @@ export default function ScrollingTabBar({ tabs, defaultValue, onChange }: Scroll
   }, []);
 
   const handleTabClick = (value: string) => {
+    playActive();
     setSelectedTab(value);
     onChange?.(value);
   };
@@ -61,7 +69,7 @@ export default function ScrollingTabBar({ tabs, defaultValue, onChange }: Scroll
         ref={scrollContainerRef}
         className={c(
           'scroll-container overflow-x-auto overflow-y-visible whitespace-nowrap p-2 transition-all will-change-scroll',
-          // apply a full fade effect when not at the edges. Fade on the right if starting, and fade on the left if not.
+          // apply a full fade effect when not at the edges. fade on the right if starting, and fade on the left if not.
           !isScrolledToStart && !isScrolledToEnd
             ? 'mask-gradient'
             : isScrolledToStart
