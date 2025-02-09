@@ -61,7 +61,7 @@ export default function ScrollingTabBar({ tabs, defaultValue, onChange }: Scroll
         ref={scrollContainerRef}
         className={c(
           'scroll-container overflow-x-auto overflow-y-visible whitespace-nowrap p-2 transition-all will-change-scroll',
-          // apply a full fade effect when not at the edges. Fade on the right if starting, and fade on the left if not.
+          // apply a full fade effect when not at the edges. fade on the right if starting, and fade on the left if not.
           !isScrolledToStart && !isScrolledToEnd
             ? 'mask-gradient'
             : isScrolledToStart
@@ -93,7 +93,7 @@ function TabButton({ label, isSelected, onClick }: TabButtonProps) {
       className={c(
         'cursor-pointer rounded-full border px-3 py-1 text-sm transition-colors active:scale-[.98] dark:border-neutral-800',
         isSelected
-          ? 'border-blue-700 bg-blue-500 text-neutral-50 dark:border-blue-800 dark:bg-blue-600'
+          ? 'border-blue-700 bg-blue-500 text-neutral-50 dark:border-blue-700 dark:bg-blue-600'
           : 'border-neutral-300 bg-neutral-100 text-primary dark:bg-neutral-900 dark:text-primary-dark'
       )}
       aria-selected={isSelected}
