@@ -19,6 +19,10 @@
     --scrollbar-color-thumb: hsl(0deg, 0%, 62.7%);
     --scrollbar-color-track: transparent;
     --scrollbar-width: thin;
+
+    --mask-gradient-black: #000;
+    --mask-gradient-transparent: transparent;
+    --mask-transition-duration: 0.2s;
   }
 
   @supports (scrollbar-width: auto) {
@@ -311,20 +315,42 @@
   }
 
   .mask-gradient {
-    mask-image: linear-gradient(
-      in srgb-linear to right,
-      transparent,
-      #000 25%,
-      #000 75%,
-      transparent
+    --mask-gradient: linear-gradient(
+      to right,
+      var(--mask-gradient-transparent) 0%,
+      var(--mask-gradient-black) 25%,
+      var(--mask-gradient-black) 75%,
+      var(--mask-gradient-transparent) 100%
     );
-    -webkit-mask-image: linear-gradient(
-      in srgb-linear to right,
-      transparent,
-      #000 25%,
-      #000 75%,
-      transparent
+
+    mask-image: var(--mask-gradient);
+    -webkit-mask-image: var(--mask-gradient);
+    transition:
+      mask-image var(--mask-transition-duration) ease-in-out,
+      -webkit-mask-image var(--mask-transition-duration) ease-in-out;
+  }
+  .mask-gradient-right {
+    --mask-gradient-right: linear-gradient(
+      to right,
+      var(--mask-gradient-black) 0%,
+      var(--mask-gradient-black) 90%,
+      var(--mask-gradient-transparent) 100%
     );
+
+    mask-image: var(--mask-gradient-right);
+    -webkit-mask-image: var(--mask-gradient-right);
+  }
+
+  .mask-gradient-left {
+    --mask-gradient-left: linear-gradient(
+      to right,
+      var(--mask-gradient-transparent) 0%,
+      var(--mask-gradient-black) 10%,
+      var(--mask-gradient-black) 100%
+    );
+
+    mask-image: var(--mask-gradient-left);
+    -webkit-mask-image: var(--mask-gradient-left);
   }
 
   kbd {
@@ -364,5 +390,10 @@
     .marquee {
       animation: marquee 50s linear infinite;
     }
+  }
+
+  .scroll-container {
+    -ms-overflow-style: none; /* hide scrollbar for IE/Edge */
+    scrollbar-width: none; /* hide scrollbar for Firefox */
   }
 }

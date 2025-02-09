@@ -60,5 +60,14 @@ export const allPrototypes: Prototype[] = [
     publishedAt: '2025-01-10',
     summary: 'An adaptive interface based on usage.',
     image: 'https://kelvinamp.me/assets/images/og-images/og-adaptive-interface.png'
+  },
+  {
+    slug: 'scrolling-tab-bar',
+    id: 7,
+    title: 'Scrolling tab bar',
+    href: '/scrolling-tab-bar',
+    publishedAt: '2025-02-09',
+    summary: 'Scrolling tab bar view with scroll fade.',
+    image: 'https://kelvinamp.me/assets/images/og-images/og-adaptive-interface.png'
   }
 ];
