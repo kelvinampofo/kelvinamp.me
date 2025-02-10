@@ -10,8 +10,7 @@ interface TabProps {
 
 interface ScrollingTabBarProps {
   tabs: TabProps[];
-  defaultValue?: string;
-  onChange?: (value: string) => void;
+  onChange?: (selectedValues: string[]) => void;
 }
 
 interface TabButtonProps {
@@ -21,11 +20,10 @@ interface TabButtonProps {
   onClick: () => void;
 }
 
-export default function ScrollingTabBar({ tabs, defaultValue, onChange }: ScrollingTabBarProps) {
-  const [selectedTab, setSelectedTab] = useState(defaultValue || 'all');
+export default function ScrollingTabBar({ tabs, onChange }: ScrollingTabBarProps) {
+  const [selectedTabs, setSelectedTabs] = useState<string[]>(['all']);
   const [isScrolledToStart, setIsScrolledToStart] = useState(true);
   const [isScrolledToEnd, setIsScrolledToEnd] = useState(false);
-
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -44,24 +42,50 @@ export default function ScrollingTabBar({ tabs, defaultValue, onChange }: Scroll
   }, []);
 
   const handleTabClick = (value: string) => {
-    setSelectedTab(value);
-    onChange?.(value);
+    let updatedTabs = [...selectedTabs];
+
+    if (value === 'all' && selectedTabs.includes('all')) {
+      // deselect everything if 'all' is already selected
+      updatedTabs = [];
+    }
+
+    if (value === 'all' && !selectedTabs.includes('all')) {
+      // select only 'all' if it wasn't selected
+      updatedTabs = ['all'];
+    }
+
+    if (value !== 'all' && selectedTabs.includes('all')) {
+      // if switching from 'all' to a specific tab
+      updatedTabs = [value];
+    }
+
+    if (value !== 'all' && !selectedTabs.includes('all') && selectedTabs.includes(value)) {
+      // deselect the clicked tab
+      updatedTabs = updatedTabs.filter((tab) => tab !== value);
+    }
+
+    if (value !== 'all' && !selectedTabs.includes('all') && !selectedTabs.includes(value)) {
+      // select the clicked tab
+      updatedTabs = [...updatedTabs, value];
+    }
+
+    setSelectedTabs(updatedTabs);
+    onChange?.(updatedTabs);
   };
 
   return (
-    <div className="flex items-center" role="tablist" aria-label="Navigation tabs">
+    <div className="flex items-center" role="tablist">
       <TabButton
         value="all"
         label="All"
-        isSelected={selectedTab === 'all'}
+        isSelected={selectedTabs.includes('all')}
         onClick={() => handleTabClick('all')}
       />
-
       <div
         ref={scrollContainerRef}
         className={c(
           'scroll-container overflow-x-auto overflow-y-visible whitespace-nowrap p-2 transition-all will-change-scroll',
-          // apply a full fade effect when not at the edges. fade on the right if starting, and fade on the left if not.
+          // apply a full fade effect when not at the edges. fade on the right if starting, and fade on the left if not
           !isScrolledToStart && !isScrolledToEnd
             ? 'mask-gradient'
             : isScrolledToStart
@@ -75,7 +99,7 @@ export default function ScrollingTabBar({ tabs, defaultValue, onChange }: Scroll
               key={value}
               value={value}
               label={label}
-              isSelected={selectedTab === value}
+              isSelected={selectedTabs.includes(value)}
               onClick={() => handleTabClick(value)}
             />
           ))}
