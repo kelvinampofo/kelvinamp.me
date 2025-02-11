@@ -62,12 +62,12 @@ export const allPrototypes: Prototype[] = [
     image: 'https://kelvinamp.me/assets/images/og-images/og-adaptive-interface.png'
   },
   {
-    slug: 'scrolling-tab-bar',
+    slug: 'scroll-fade',
     id: 7,
-    title: 'Scrolling tab bar',
-    href: '/scrolling-tab-bar',
+    title: 'Scroll fade',
+    href: '/scroll-fade',
     publishedAt: '2025-02-09',
-    summary: 'Scrolling tab bar view with scroll fade.',
-    image: 'https://kelvinamp.me/assets/images/og-images/og-scrolling-tab-bar.png'
+    summary: 'Tab bar view with a scroll fade.',
+    image: 'https://kelvinamp.me/assets/images/og-images/og-scroll-fade.png'
   }
 ];

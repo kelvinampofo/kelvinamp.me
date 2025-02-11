@@ -9,11 +9,11 @@ import { allPrototypes } from '@/app/lib/prototypes';
 import { findPrototype } from '@/app/utils/search';
 import { format, parseISO } from 'date-fns';
 import { Metadata } from 'next';
-import ScrollingTabBar from './ScrollingTabBar';
+import ScrollFadeTabs from './ScrollFadeTabs';
 
-const scrollingTabBar = findPrototype(allPrototypes, 'Scrolling tab bar');
+const scrollFade = findPrototype(allPrototypes, 'Scroll fade');
 
-const { title, publishedAt, summary, image } = scrollingTabBar;
+const { title, publishedAt, summary, image } = scrollFade;
 
 export const metadata: Metadata = {
   title,
@@ -78,11 +78,11 @@ export default function Page() {
       </div>
       <Card className="my-8 flex h-48 items-center justify-center">
         <div className="w-5/6 md:w-3/5">
-          <ScrollingTabBar tabs={tabs} />
+          <ScrollFadeTabs tabs={tabs} />
         </div>
       </Card>
       <Separator className="my-8" />
-      <Navigation allItems={allPrototypes} currentItem={scrollingTabBar} route="craft" />
+      <Navigation allItems={allPrototypes} currentItem={scrollFade} route="craft" />
     </Container>
   );
 }
