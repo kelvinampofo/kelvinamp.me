@@ -21,7 +21,7 @@ interface TabButtonProps {
 }
 
 export default function ScrollFadeTabs({ tabs, onChange }: ScrollFadeTabsProps) {
-  const [selectedTabs, setSelectedTabs] = useState<string[]>(['all']);
+  const [selectedTab, setSelectedTab] = useState('all');
   const [isScrolledToStart, setIsScrolledToStart] = useState(true);
   const [isScrolledToEnd, setIsScrolledToEnd] = useState(false);
 
@@ -43,35 +43,8 @@ export default function ScrollFadeTabs({ tabs, onChange }: ScrollFadeTabsProps) 
   }, []);
 
   function handleClick(value: string) {
-    let updatedTabs = [...selectedTabs];
-
-    if (value === 'all' && selectedTabs.includes('all')) {
-      // deselect everything if 'all' is already selected
-      updatedTabs = [];
-    }
-
-    if (value === 'all' && !selectedTabs.includes('all')) {
-      // select only 'all' if it wasn't selected
-      updatedTabs = ['all'];
-    }
-
-    if (value !== 'all' && selectedTabs.includes('all')) {
-      // if switching from 'all' to a specific tab
-      updatedTabs = [value];
-    }
-
-    if (value !== 'all' && !selectedTabs.includes('all') && selectedTabs.includes(value)) {
-      // deselect the clicked tab
-      updatedTabs = updatedTabs.filter((tab) => tab !== value);
-    }
-
-    if (value !== 'all' && !selectedTabs.includes('all') && !selectedTabs.includes(value)) {
-      // select the clicked tab
-      updatedTabs = [...updatedTabs, value];
-    }
-
-    setSelectedTabs(updatedTabs);
-    onChange?.(updatedTabs);
+    setSelectedTab((prev) => (prev === value ? '' : value)); // deselect if clicking again
+    onChange?.(selectedTab === value ? [] : [value]); // return empty array if deselected
   }
 
   return (
@@ -79,7 +52,7 @@ export default function ScrollFadeTabs({ tabs, onChange }: ScrollFadeTabsProps) 
       <TabButton
         value="all"
         label="All"
-        isSelected={selectedTabs.includes('all')}
+        isSelected={selectedTab === 'all'}
         onClick={() => handleClick('all')}
       />
       <div
@@ -100,7 +73,7 @@ export default function ScrollFadeTabs({ tabs, onChange }: ScrollFadeTabsProps) 
               key={value}
               value={value}
               label={label}
-              isSelected={selectedTabs.includes(value)}
+              isSelected={selectedTab === value}
               onClick={() => handleClick(value)}
             />
           ))}
