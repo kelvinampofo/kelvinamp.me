@@ -1,9 +1,16 @@
-import clsx from 'clsx';
+import c from 'clsx';
+import { ComponentPropsWithoutRef } from 'react';
 
-interface SeparatorProps {
-  className?: string;
-}
+type SeparatorProps = ComponentPropsWithoutRef<'hr'>;
 
-export default function Separator({ className }: SeparatorProps) {
-  return <hr className={clsx('h-px border-0 bg-neutral-200 dark:bg-neutral-800', className)} />;
+export default function Separator({ className, ...props }: SeparatorProps) {
+  return (
+    <hr
+      className={c(
+        'h-px border-0 bg-neutral-200 contrast-more:contrast-50 dark:bg-neutral-800',
+        className
+      )}
+      {...props}
+    />
+  );
 }
