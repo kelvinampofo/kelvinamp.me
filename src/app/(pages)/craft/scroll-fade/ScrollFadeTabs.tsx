@@ -8,7 +8,7 @@ interface TabProps {
   value: string;
 }
 
-interface ScrollingTabBarProps {
+interface ScrollFadeTabsProps {
   tabs: TabProps[];
   onChange?: (selectedValues: string[]) => void;
 }
@@ -20,10 +20,11 @@ interface TabButtonProps {
   onClick: () => void;
 }
 
-export default function ScrollingTabBar({ tabs, onChange }: ScrollingTabBarProps) {
+export default function ScrollFadeTabs({ tabs, onChange }: ScrollFadeTabsProps) {
   const [selectedTabs, setSelectedTabs] = useState<string[]>(['all']);
   const [isScrolledToStart, setIsScrolledToStart] = useState(true);
   const [isScrolledToEnd, setIsScrolledToEnd] = useState(false);
+
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,7 +42,7 @@ export default function ScrollingTabBar({ tabs, onChange }: ScrollingTabBarProps
     return () => element.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleTabClick = (value: string) => {
+  function handleClick(value: string) {
     let updatedTabs = [...selectedTabs];
 
     if (value === 'all' && selectedTabs.includes('all')) {
@@ -71,7 +72,7 @@ export default function ScrollingTabBar({ tabs, onChange }: ScrollingTabBarProps
 
     setSelectedTabs(updatedTabs);
     onChange?.(updatedTabs);
-  };
+  }
 
   return (
     <div className="flex items-center" role="tablist">
@@ -79,7 +80,7 @@ export default function ScrollingTabBar({ tabs, onChange }: ScrollingTabBarProps
         value="all"
         label="All"
         isSelected={selectedTabs.includes('all')}
-        onClick={() => handleTabClick('all')}
+        onClick={() => handleClick('all')}
       />
       <div
         ref={scrollContainerRef}
@@ -100,7 +101,7 @@ export default function ScrollingTabBar({ tabs, onChange }: ScrollingTabBarProps
               value={value}
               label={label}
               isSelected={selectedTabs.includes(value)}
-              onClick={() => handleTabClick(value)}
+              onClick={() => handleClick(value)}
             />
           ))}
         </div>
