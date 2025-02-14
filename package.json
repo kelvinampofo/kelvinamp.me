@@ -38,7 +38,7 @@
     "eslint-plugin-tailwindcss": "^3.17.4",
     "postcss": "^8.4.38",
     "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.5.14",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "rehype-autolink-headings": "^7.0.0",
     "rehype-pretty-code": "^0.10.1",
     "remark-gfm": "^4.0.0",
