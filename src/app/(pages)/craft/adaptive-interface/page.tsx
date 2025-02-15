@@ -71,7 +71,7 @@ export default function Page() {
           game design.
         </p>
       </div>
-      <Card className="my-8 flex h-48 items-center justify-center gap-12 md:gap-20">
+      <Card className="my-8 flex items-center justify-center gap-12 md:gap-20">
         <AdaptiveInterface />
       </Card>
       <section>

@@ -83,7 +83,7 @@ export default function Page() {
           implementation, this offers a better alternative to confirmation modals and dialogs.
         </p>
       </div>
-      <Card className="mt-8 flex h-48 items-center justify-center gap-12 md:gap-20">
+      <Card className="mt-8 flex items-center justify-center gap-12 md:gap-20">
         <HoldToDelete />
       </Card>
       <Separator className="my-8" />

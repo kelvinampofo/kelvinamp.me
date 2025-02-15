@@ -79,7 +79,7 @@ export default function Page() {
           <InlineLink href="https://openai.com/o1/#ui-video">OpenAI o1</InlineLink>.
         </p>
       </div>
-      <Card className="mt-8 flex h-48 items-center justify-center gap-12 md:gap-20">
+      <Card className="mt-8 flex items-center justify-center gap-12 md:gap-20">
         <ShimmerText>{phrases}</ShimmerText>
       </Card>
       <Separator className="my-8" />

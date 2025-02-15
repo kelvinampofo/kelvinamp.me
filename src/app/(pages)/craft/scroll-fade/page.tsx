@@ -76,7 +76,7 @@ export default function Page() {
       <div className="flex flex-col gap-2">
         <p className="mt-8">{summary}</p>
       </div>
-      <Card className="my-8 flex h-48 items-center justify-center">
+      <Card className="my-8 flex items-center justify-center">
         <div className="w-5/6 md:w-3/5">
           <ScrollFadeTabs tabs={tabs} />
         </div>

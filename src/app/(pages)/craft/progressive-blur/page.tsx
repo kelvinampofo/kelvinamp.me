@@ -70,7 +70,7 @@ export default function Page() {
         </code>
         .
       </p>
-      <Card className="mt-8 flex h-48 items-center justify-center gap-12 md:gap-20">
+      <Card className="mt-8 flex items-center justify-center gap-12 md:gap-20">
         <ProgressiveBlur>
           <p>The quick brown fox jumps over the lazy dog.</p>
           <p>The five boxing wizards jump quickly.</p>
