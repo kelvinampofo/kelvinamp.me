@@ -48,12 +48,11 @@ export const metadata: Metadata = {
 };
 
 const tabs = [
-  { label: 'Technology', value: 'technology' },
-  { label: 'Business', value: 'business' },
-  { label: 'Health', value: 'health' },
+  { label: 'Engineering', value: 'engineering' },
+  { label: 'Product', value: 'product' },
   { label: 'Science', value: 'science' },
-  { label: 'Sports', value: 'sports' },
-  { label: 'Entertainment', value: 'entertainment' }
+  { label: 'Technology', value: 'technology' },
+  { label: 'Business', value: 'business' }
 ];
 
 export default function Page() {
