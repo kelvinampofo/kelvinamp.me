@@ -89,10 +89,10 @@ function TabButton({ label, isSelected, onClick }: TabButtonProps) {
       role="tab"
       onClick={onClick}
       className={c(
-        'cursor-pointer rounded-full border px-3 py-1 text-sm transition-colors active:scale-[.98] dark:border-neutral-800',
+        'cursor-pointer rounded-full border px-3 py-1 text-sm transition-colors active:scale-[.98]',
         isSelected
-          ? 'border-blue-700 bg-blue-500 text-neutral-50 dark:border-blue-700 dark:bg-blue-600'
-          : 'border-neutral-300 bg-neutral-100 text-primary dark:bg-neutral-900 dark:text-primary-dark'
+          ? 'border-blue-700 bg-blue-500 text-neutral-50 transition-colors hover:bg-blue-600 dark:border-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700'
+          : 'border-neutral-300 bg-neutral-100 text-primary hover:bg-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 dark:text-primary-dark dark:hover:border-neutral-700 dark:hover:bg-neutral-800'
       )}
       aria-selected={isSelected}
       tabIndex={0}
