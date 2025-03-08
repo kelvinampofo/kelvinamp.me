@@ -4,7 +4,7 @@ import Heading from '@/app/components/generic/Heading';
 import Separator from '@/app/components/generic/Separator';
 import Contact from '@/app/components/ui/Contact';
 import InlineLink from '@/app/components/ui/InlineLink';
-import UtilityWidget from '@/app/components/ui/UtilityWidget';
+import StatusDisplay from '@/app/components/ui/StatusDisplay';
 
 export default function Home() {
   return (
@@ -43,7 +43,7 @@ export default function Home() {
         <Contact />
       </AnimateEnter>
       <AnimateEnter delay={0.5}>
-        <UtilityWidget />
+        <StatusDisplay />
       </AnimateEnter>
     </Container>
   );

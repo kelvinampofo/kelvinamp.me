@@ -13,7 +13,7 @@ enum Views {
   BrowserInfo
 }
 
-export default function UtilityWidget() {
+export default function StatusDisplay() {
   const [viewIndex, setViewIndex] = useState(Views.Clock);
 
   const { currentTime, timezoneOffset } = useTime();
