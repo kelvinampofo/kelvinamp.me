@@ -48,10 +48,10 @@ export const metadata: Metadata = {
 };
 
 const tabs = [
+  { label: 'Design', value: 'design' },
   { label: 'Engineering', value: 'engineering' },
   { label: 'Product', value: 'product' },
   { label: 'Science', value: 'science' },
-  { label: 'Technology', value: 'technology' },
   { label: 'Business', value: 'business' }
 ];
 
