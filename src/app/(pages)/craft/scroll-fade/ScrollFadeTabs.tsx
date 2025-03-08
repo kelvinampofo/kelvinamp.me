@@ -10,22 +10,27 @@ interface TabProps {
 
 interface ScrollFadeTabsProps {
   tabs: TabProps[];
-  onChange?: (selectedValues: string[]) => void;
+  selected?: string;
+  onChange?: (selectedValue: string) => void;
 }
 
-interface TabButtonProps {
-  value: string;
-  label: string;
+interface TabButtonProps extends TabProps {
   isSelected: boolean;
   onClick: () => void;
 }
 
-export default function ScrollFadeTabs({ tabs, onChange }: ScrollFadeTabsProps) {
-  const [selectedTab, setSelectedTab] = useState('all');
+export default function ScrollFadeTabs({ tabs, selected, onChange }: ScrollFadeTabsProps) {
+  const [selectedTab, setSelectedTab] = useState(selected ?? 'all');
   const [isScrolledToStart, setIsScrolledToStart] = useState(true);
   const [isScrolledToEnd, setIsScrolledToEnd] = useState(false);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (selected !== undefined) {
+      setSelectedTab(selected);
+    }
+  }, [selected]);
 
   useEffect(() => {
     const element = scrollContainerRef.current;
@@ -43,8 +48,11 @@ export default function ScrollFadeTabs({ tabs, onChange }: ScrollFadeTabsProps) 
   }, []);
 
   function handleClick(value: string) {
-    setSelectedTab((prev) => (prev === value ? '' : value)); // deselect if clicking again
-    onChange?.(selectedTab === value ? [] : [value]); // return empty array if deselected
+    setSelectedTab((prevSelectedTab) => {
+      const newValue = prevSelectedTab === value ? '' : value;
+      onChange?.(newValue);
+      return newValue;
+    });
   }
 
   return (
@@ -68,13 +76,12 @@ export default function ScrollFadeTabs({ tabs, onChange }: ScrollFadeTabsProps) 
         )}
       >
         <div className="flex gap-1.5">
-          {tabs.map(({ value, label }) => (
+          {tabs.map((tab) => (
             <TabButton
-              key={value}
-              value={value}
-              label={label}
-              isSelected={selectedTab === value}
-              onClick={() => handleClick(value)}
+              key={tab.value}
+              {...tab}
+              isSelected={selectedTab === tab.value}
+              onClick={() => handleClick(tab.value)}
             />
           ))}
         </div>
@@ -91,7 +98,7 @@ function TabButton({ label, isSelected, onClick }: TabButtonProps) {
       className={c(
         'cursor-pointer rounded-full border px-3 py-1 text-sm transition-colors active:scale-[.98]',
         isSelected
-          ? 'border-blue-700 bg-blue-500 text-neutral-50 transition-colors hover:bg-blue-600 dark:border-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700'
+          ? 'border-blue-600 bg-blue-500 text-neutral-50 transition-colors hover:bg-blue-600 dark:border-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700'
           : 'border-neutral-300 bg-neutral-100 text-primary hover:bg-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 dark:text-primary-dark dark:hover:border-neutral-700 dark:hover:bg-neutral-800'
       )}
       aria-selected={isSelected}
