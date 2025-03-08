@@ -22,7 +22,7 @@ export const useTime = (options: Options = { useSysTimezone: false }) => {
 
   const currentTime = format(convertedTime, 'HH:mm:ss');
   const meridiem = format(convertedTime, 'a');
-  const timezoneOffset = format(convertedTime, 'zzz');
+  const timezoneOffset = format(convertedTime, 'zzzz');
 
   return {
     currentTime,
