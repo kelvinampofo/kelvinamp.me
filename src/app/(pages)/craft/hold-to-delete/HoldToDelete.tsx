@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+
 import { Icon } from '../../../components/ui/Icon';
 
 const MAX_PROGRESS = 100;

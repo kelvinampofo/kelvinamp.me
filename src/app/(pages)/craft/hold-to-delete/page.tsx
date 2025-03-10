@@ -1,3 +1,6 @@
+import { format, parseISO } from 'date-fns';
+import { Metadata } from 'next';
+
 import Card from '@/app/components/generic/Card';
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
@@ -7,8 +10,7 @@ import InlineLink from '@/app/components/ui/InlineLink';
 import Navigation from '@/app/components/ui/Navigation/Navigation';
 import { allPrototypes } from '@/app/lib/prototypes';
 import { findPrototype } from '@/app/utils/search';
-import { format, parseISO } from 'date-fns';
-import { Metadata } from 'next';
+
 import HoldToDelete from './HoldToDelete';
 
 const holdToDelete = findPrototype(allPrototypes, 'Hold to delete');

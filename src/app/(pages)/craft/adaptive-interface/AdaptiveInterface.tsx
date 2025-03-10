@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Icon } from '@/app/components/ui/Icon';
-import useShortcut from '@/app/hooks/useShortcut';
-import usePointerDevice from '@/app/hooks/usePointerDevice';
-import ShortcutKey from '@/app/components/ui/ShortcutKey';
 import c from 'clsx';
+import { motion, AnimatePresence } from 'motion/react';
+import { useState } from 'react';
+
+import { Icon } from '@/app/components/ui/Icon';
+import ShortcutKey from '@/app/components/ui/ShortcutKey';
+import usePointerDevice from '@/app/hooks/usePointerDevice';
+import useShortcut from '@/app/hooks/useShortcut';
 
 export default function AdaptiveInterface() {
   const [usageCount, setUsageCount] = useState(0);

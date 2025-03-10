@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react';
 import c from 'clsx';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+
 import { inter, newsreader, robotoMono } from './lib/fonts';
 import Providers from './providers';
 

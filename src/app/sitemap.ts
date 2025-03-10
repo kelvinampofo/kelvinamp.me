@@ -1,5 +1,7 @@
-import { allPosts } from 'contentlayer/generated';
 import { MetadataRoute } from 'next';
+
+import { allPosts } from 'contentlayer/generated';
+
 import { allPrototypes } from './lib/prototypes';
 
 function formatDate(date: Date) {

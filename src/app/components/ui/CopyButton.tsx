@@ -4,6 +4,7 @@ import { Icon } from '@/app/components/ui/Icon';
 import ShortcutKey from '@/app/components/ui/ShortcutKey';
 import { useClipboard } from '@/app/hooks/useClipboard';
 import useShortcut from '@/app/hooks/useShortcut';
+
 import Tooltip from './Tooltip';
 
 export default function CopyButton() {

@@ -1,5 +1,6 @@
 import c from 'clsx';
 import { useMDXComponent } from 'next-contentlayer2/hooks';
+
 import InlineLink from '../ui/InlineLink';
 
 const MDXComponents = {

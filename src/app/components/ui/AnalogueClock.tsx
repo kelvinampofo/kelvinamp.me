@@ -1,7 +1,8 @@
 'use client';
 
-import { useTime } from '@/app/hooks/useTime';
 import c from 'clsx';
+
+import { useTime } from '@/app/hooks/useTime';
 
 export default function AnalogClock() {
   const { currentTime } = useTime();

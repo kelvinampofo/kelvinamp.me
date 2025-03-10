@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
 import c from 'clsx';
+import { useRef, useState, useEffect } from 'react';
 
 interface TabProps {
   label: string;

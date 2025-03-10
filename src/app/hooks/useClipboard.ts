@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+
 import { parseError } from '../utils/parse';
 
 export function useClipboard() {

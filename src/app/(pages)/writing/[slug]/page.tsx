@@ -1,3 +1,7 @@
+import { format, parseISO } from 'date-fns';
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
 import MDXContent from '@/app/components/generic/MDXComponents';
@@ -5,12 +9,9 @@ import Separator from '@/app/components/generic/Separator';
 import CopyButton from '@/app/components/ui/CopyButton';
 import FocusedReading from '@/app/components/ui/FocusedReading';
 import InlineLink from '@/app/components/ui/InlineLink';
-import Navigation from '@/app/components/ui/Navigation/Navigation';
 import '@/app/styles/prose.css';
+import Navigation from '@/app/components/ui/Navigation/Navigation';
 import { allPosts } from 'contentlayer/generated';
-import { format, parseISO } from 'date-fns';
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 
 interface Params {
   params: Promise<{ slug: string }>;

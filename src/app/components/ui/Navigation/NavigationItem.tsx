@@ -1,4 +1,5 @@
 import c from 'clsx';
+
 import InlineLink from '../InlineLink';
 
 export interface Item {

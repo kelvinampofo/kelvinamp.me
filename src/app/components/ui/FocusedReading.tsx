@@ -1,7 +1,8 @@
 'use client';
 
-import useShortcut from '@/app/hooks/useShortcut';
 import { useRef, useState, type PropsWithChildren } from 'react';
+
+import useShortcut from '@/app/hooks/useShortcut';
 
 export default function FocusedReading({ children }: PropsWithChildren) {
   const [isFocusModeEnabled, setIsFocusModeEnabled] = useState(false);

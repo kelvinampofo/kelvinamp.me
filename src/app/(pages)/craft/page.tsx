@@ -1,10 +1,11 @@
+import { Metadata } from 'next';
+import React from 'react';
+
 import Container from '@/app/components/generic/Container';
 import Heading from '@/app/components/generic/Heading';
 import InlineLink from '@/app/components/ui/InlineLink';
 import List from '@/app/components/ui/List';
 import { allPrototypes } from '@/app/lib/prototypes';
-import { Metadata } from 'next';
-import React from 'react';
 
 export const metadata: Metadata = {
   title: 'Craft',

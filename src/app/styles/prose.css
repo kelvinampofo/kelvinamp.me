@@ -43,7 +43,7 @@ pre[class*='language-'] {
 }
 
 [data-rehype-pretty-code-fragment] code {
-  @apply grid min-w-full break-words rounded-none border-0  p-0 text-xs text-black md:text-sm lg:text-sm;
+  @apply grid min-w-full break-words rounded-none border-0 p-0 text-xs text-black md:text-sm lg:text-sm;
   counter-reset: line;
   box-decoration-break: clone;
 }

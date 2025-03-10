@@ -1,5 +1,6 @@
 import c from 'clsx';
 import Link from 'next/link';
+
 import { Icon } from './Icon';
 
 export interface InlineLinkProps {

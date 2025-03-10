@@ -1,14 +1,16 @@
 'use client';
 
+import c from 'clsx';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
 import Card from '@/app/components/generic/Card';
 import { Icon } from '@/app/components/ui/Icon';
 import usePointerDevice from '@/app/hooks/usePointerDevice';
-import c from 'clsx';
 import CentralLibraryImage from 'public/assets/images/carousel/central-library.webp';
 import AliyevCenterImage from 'public/assets/images/carousel/heydar-aliyev-center.webp';
 import KyotoStationImage from 'public/assets/images/carousel/kyoto-station.webp';
 import ConcertHallImage from 'public/assets/images/carousel/walt-disney-concert-hall.webp';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
 import Slide from './Slide';
 
 const slides = [

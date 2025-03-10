@@ -1,6 +1,7 @@
+import c from 'clsx';
+
 import Heading from '@/app/components/generic/Heading';
 import InlineLink from '@/app/components/ui/InlineLink';
-import c from 'clsx';
 
 export default function Contact() {
   const contactLinks = [

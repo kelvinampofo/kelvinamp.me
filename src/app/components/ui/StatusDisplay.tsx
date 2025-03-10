@@ -1,10 +1,12 @@
 'use client';
 
+import { format } from 'date-fns';
+import { useState, ReactNode } from 'react';
+
 import { useBrowserInfo } from '@/app/hooks/useBrowserInfo';
 import { useTime } from '@/app/hooks/useTime';
 import { useWindowDimension } from '@/app/hooks/useWindowDimension';
-import { useState, ReactNode } from 'react';
-import { format } from 'date-fns';
+
 import AnalogueClock from './AnalogueClock';
 import Tooltip from './Tooltip';
 

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import NavigationItem, { type Item } from './NavigationItem';
 
 interface NavigationProps {
