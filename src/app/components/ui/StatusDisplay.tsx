@@ -13,6 +13,7 @@ import Tooltip from './Tooltip';
 enum Views {
   CurrentTime,
   Clock,
+  CurrentDate,
   Dimensions,
   BrowserInfo
 }
@@ -27,6 +28,7 @@ export default function StatusDisplay() {
   const viewContentMap: Record<Views, ReactNode> = {
     [Views.CurrentTime]: currentTime,
     [Views.Clock]: <AnalogueClock />,
+    [Views.CurrentDate]: format(new Date(), 'dd MMM, yyyy'),
     [Views.Dimensions]: `${width}x${height}`,
     [Views.BrowserInfo]: `${name} ${version}`
   };
@@ -56,9 +58,7 @@ export default function StatusDisplay() {
             viewIndex === Views.Clock ? (
               <span className="tabular-nums">{currentTime}</span>
             ) : (
-              <span>
-                {format(new Date(), 'dd MMM')}, {timezoneOffset}
-              </span>
+              timezoneOffset
             )
           }
         >
