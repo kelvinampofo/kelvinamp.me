@@ -56,8 +56,7 @@ const eslintConfig = [
       ],
       'import/default': 'off',
       'import/no-named-as-default-member': 'off',
-      'import/no-named-as-default': 'off',
-      'prettier/prettier': ['error', {}, { usePrettierrc: true }]
+      'import/no-named-as-default': 'off'
     },
     ignores: ['node_modules/']
   }
