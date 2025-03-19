@@ -33,7 +33,7 @@ export default function StatusDisplay() {
 
   const viewElement = (
     <span
-      className="inline-flex cursor-default gap-0.5 text-sm tabular-nums tracking-wider text-secondary dark:text-secondary-dark sm:text-xs"
+      className="inline-flex cursor-default gap-0.5 text-xs tabular-nums tracking-wider text-secondary dark:text-secondary-dark"
       aria-live="polite"
       role="status"
       onMouseDown={toggleView}

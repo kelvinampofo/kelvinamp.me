@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    --page-top-mobile: 64px;
-    --page-top: 128px;
+    --page-top-mobile: 128px;
+    --page-top: 154px;
     --page-bottom-mobile: 24px;
     --page-bottom: 48px;
 
