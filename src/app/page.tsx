@@ -10,32 +10,23 @@ export default function Home() {
   return (
     <Container>
       <AnimateEnter delay={0.1}>
-        <Heading className="mb-6">Kelvin Ampofo</Heading>
+        <Heading className="mb-7">Kelvin Ampofo</Heading>
       </AnimateEnter>
       <AnimateEnter delay={0.2}>
-        <section className="mb-6 flex flex-col gap-6">
+        <section className="mb-7 flex flex-col gap-6">
           <p>
-            Crafting software with a focus on cutting-edge information technology, human-computer
-            interaction, and aesthetic sensibility. Insatiable curiosity for{' '}
-            <em>novel interfaces</em>.
+            Crafting software with a focus on human-computer interaction and aesthetic sensibility.
+            Insatiable curiosity for <em>novel user interfaces</em>.
           </p>
           <p>
-            Read further on{' '}
-            <InlineLink href="/now" ariaLabel="now page">
-              now
-            </InlineLink>{' '}
-            page.
+            Read more on <InlineLink href="/now">now</InlineLink> page.
           </p>
         </section>
       </AnimateEnter>
       <AnimateEnter delay={0.3}>
         <nav className="flex gap-2">
-          <InlineLink href="/craft" ariaLabel="craft page">
-            Craft
-          </InlineLink>
-          <InlineLink href="/writing" ariaLabel="writing page">
-            Writing
-          </InlineLink>
+          <InlineLink href="/craft">Craft</InlineLink>
+          <InlineLink href="/writing">Writing</InlineLink>
         </nav>
         <Separator className="my-12" />
       </AnimateEnter>
