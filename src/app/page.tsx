@@ -15,7 +15,7 @@ export default function Home() {
       <AnimateEnter delay={0.2}>
         <section className="mb-7 flex flex-col gap-6">
           <p>
-            Crafting software with a focus on human-computer interaction and aesthetic sensibility.
+            Making software with a focus on human-computer interaction and aesthetic sensibility.
             Insatiable curiosity for <em>novel user interfaces</em>.
           </p>
           <p>
