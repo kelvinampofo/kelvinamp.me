@@ -75,7 +75,7 @@ export const allPrototypes: Prototype[] = [
     id: 8,
     title: 'Hold for sound',
     href: '/hold-for-sound',
-    publishedAt: '2025-03-05',
+    publishedAt: '2025-04-05',
     summary: 'Audio interface.',
     image: 'https://kelvinamp.me/assets/images/og-images/og-hold-for-sound.png'
   }
