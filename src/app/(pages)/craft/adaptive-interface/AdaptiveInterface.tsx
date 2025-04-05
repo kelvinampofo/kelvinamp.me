@@ -8,7 +8,6 @@ import { Icon } from '@/app/components/ui/Icon';
 import ShortcutKey from '@/app/components/ui/ShortcutKey';
 import usePointerDevice from '@/app/hooks/usePointerDevice';
 import useShortcut from '@/app/hooks/useShortcut';
-import { isMacOS } from '@/app/utils/os';
 
 export default function AdaptiveInterface() {
   const [usageCount, setUsageCount] = useState(0);
@@ -18,7 +17,7 @@ export default function AdaptiveInterface() {
   const { isPointerDevice } = usePointerDevice();
 
   useShortcut('d', handleShortcut, {
-    modifierKeys: isMacOS ? 'Meta' : 'Control',
+    modifierKeys: 'Meta',
     preventDefault: true
   });
 
@@ -114,7 +113,7 @@ const ICON_SIZE = 20;
 
 function renderContent(sizeCategory: string, isPressed: boolean) {
   const baseClasses = c(
-    'flex items-center rounded-md outline outline-1 bg-[#fefefe] dark:outline-neutral-800 dark:bg-[#1A1A1A] duration-150 transition-transform outline-neutral-200',
+    'flex items-center rounded-md outline outline-1 bg-[#fefefe] dark:outline-neutral-800 dark:bg-[#1A1A1A] duration-150 transition-transform outline-neutral-200 shadow-sm',
     {
       'scale-[.98]': isPressed
     }
@@ -132,7 +131,7 @@ function renderContent(sizeCategory: string, isPressed: boolean) {
           />
           <div className="flex gap-4 text-sm text-neutral-700 dark:text-neutral-300">
             <span className="font-medium">Delete</span>
-            <ShortcutKey keyShortcuts={isMacOS ? '⌘+D' : 'Ctrl+D'} />
+            <ShortcutKey keyShortcuts={'⌘+D'} />
           </div>
         </div>
       );
