@@ -69,5 +69,14 @@ export const allPrototypes: Prototype[] = [
     publishedAt: '2025-02-09',
     summary: 'Tab bar view with a scroll fade.',
     image: 'https://kelvinamp.me/assets/images/og-images/og-scroll-fade.png'
+  },
+  {
+    slug: 'hold-for-sound',
+    id: 8,
+    title: 'Hold for sound',
+    href: '/hold-for-sound',
+    publishedAt: '2025-03-15',
+    summary: 'Audio interface',
+    image: 'https://kelvinamp.me/assets/images/og-images/og-hold-for-sound.png'
   }
 ];
