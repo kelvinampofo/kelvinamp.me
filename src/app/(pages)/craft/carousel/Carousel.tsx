@@ -1,6 +1,7 @@
 'use client';
 
 import c from 'clsx';
+import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import Card from '@/app/components/generic/Card';
@@ -11,7 +12,7 @@ import AliyevCenterImage from 'public/assets/images/carousel/heydar-aliyev-cente
 import KyotoStationImage from 'public/assets/images/carousel/kyoto-station.webp';
 import ConcertHallImage from 'public/assets/images/carousel/walt-disney-concert-hall.webp';
 
-import Slide from './Slide';
+const Slide = dynamic(() => import('./Slide'), { ssr: true });
 
 const slides = [
   {
@@ -70,28 +71,32 @@ export default function Carousel() {
       setIsCursorRight(cursorDirection === 'right');
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
+    const animationFrameId = requestAnimationFrame(() => {
+      document.addEventListener('mousemove', handleMouseMove);
+    });
+
     return () => {
+      cancelAnimationFrame(animationFrameId);
       document.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
-  const hasReachedEndOfSlide = () => {
+  function hasReachedEndOfSlide() {
     if (!slideRef.current) return;
 
     return (
       slideRef.current.scrollLeft + slideRef.current.clientWidth === slideRef.current.scrollWidth
     );
-  };
+  }
 
-  const scrollToSlide = (slider: HTMLUListElement | null, currentSlideIndex: number) => {
+  function scrollToSlide(slider: HTMLUListElement | null, currentSlideIndex: number) {
     if (!slider) return;
 
     slider.scrollTo({
       left: currentSlideIndex * (SLIDE_WIDTH + SLIDE_MARGIN),
       behavior: 'smooth'
     });
-  };
+  }
 
   // calculate the current slide index based on slide position
   const currentSlide = useMemo(() => {
