@@ -148,10 +148,11 @@ export default function HoldForSound() {
             <motion.span
               className="block text-xs text-secondary dark:text-secondary"
               key="visible"
-              initial={{ opacity: 0, filter: 'blur(4px)' }}
-              animate={{ opacity: 1, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, filter: 'blur(4px)' }}
-              transition={{ duration: 0.15 }}
+              variants={contentVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={contentTransition}
             >
               (Sound on)
             </motion.span>
