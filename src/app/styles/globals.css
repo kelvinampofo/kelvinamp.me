@@ -361,7 +361,8 @@
     font-family: inherit;
   }
 
-  em {
+  em,
+  .font-italic {
     font:
       400 italic calc(1em + 1px) / normal var(--font-newsreader),
       'Signifier',
