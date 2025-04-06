@@ -1,10 +1,16 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState, KeyboardEvent } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import dynamic from 'next/dynamic';
+import { useState, useEffect, useCallback } from 'react';
+import type { KeyboardEvent } from 'react';
 import useSound from 'use-sound';
 
 import { Icon } from '@/app/components/ui/Icon';
+
+const Waveform = dynamic(() => import('./Waveform').then(({ Waveform }) => Waveform), {
+  ssr: true
+});
 
 const buttonVariants = {
   default: { scale: 1 },
@@ -23,44 +29,68 @@ const buttonTransition = {
   damping: 13,
   bounce: 0.4
 };
+
 const contentTransition = { duration: 0.15 };
+
+const soundUrl = '/assets/sounds/porsche-911.wav';
 
 export default function HoldForSound() {
   const [isPressed, setIsPressed] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
-  const [play, { stop }] = useSound('/assets/sounds/porsche-911.wav', {
-    volume: 0.75,
+
+  const [play, { stop }] = useSound(soundUrl, {
+    volume: 0.5,
     onend: () => setIsPressed(false)
   });
 
-  function handlePress() {
-    setIsPressed(true);
-    if (!hasInteracted) setHasInteracted(true);
-    play();
-    // trigger haptic feedback if supported
+  const triggerHaptic = useCallback(() => {
     if ('vibrate' in navigator) {
       navigator.vibrate([200, 100, 200]);
     }
-  }
+  }, []);
 
-  function handleRelease() {
+  const handlePress = useCallback(() => {
+    setIsPressed(true);
+
+    if (!hasInteracted) {
+      setHasInteracted(true);
+    }
+
+    play();
+
+    triggerHaptic();
+  }, [hasInteracted, play, triggerHaptic]);
+
+  const handleRelease = useCallback(() => {
     setIsPressed(false);
     stop();
-  }
+  }, [stop]);
 
-  function handleKeyDown(e: KeyboardEvent<HTMLButtonElement>) {
-    if ((e.key === ' ' || e.key === 'Enter') && !isPressed) {
-      e.preventDefault();
-      handlePress();
-    }
-  }
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLButtonElement>) => {
+      if ((e.key === ' ' || e.key === 'Enter') && !isPressed) {
+        e.preventDefault();
+        handlePress();
+      }
+    },
+    [isPressed, handlePress]
+  );
 
-  function handleKeyUp(e: KeyboardEvent<HTMLButtonElement>) {
-    if (e.key === ' ' || e.key === 'Enter') {
-      e.preventDefault();
-      handleRelease();
-    }
-  }
+  const handleKeyUp = useCallback(
+    (e: KeyboardEvent<HTMLButtonElement>) => {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        handleRelease();
+      }
+    },
+    [handleRelease]
+  );
+
+  useEffect(() => {
+    return () => {
+      stop();
+    };
+  }, [stop]);
 
   return (
     <div className="mt-4 flex flex-col items-center justify-center gap-6">
@@ -113,7 +143,7 @@ export default function HoldForSound() {
         </motion.button>
       </motion.div>
       <div className="min-h-4">
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
           {!hasInteracted && (
             <motion.span
               className="block text-xs text-secondary dark:text-secondary"
@@ -128,34 +158,6 @@ export default function HoldForSound() {
           )}
         </AnimatePresence>
       </div>
-    </div>
-  );
-}
-
-function Waveform() {
-  const bars = Array.from({ length: 22 });
-
-  return (
-    <div className="flex h-full items-center justify-center gap-[3px]">
-      {bars.map((_, index) => {
-        const minScale = 0.2 + Math.random() * 0.2;
-        const maxScale = 0.7 + Math.random() * 0.3;
-        const duration = 0.8 + Math.random() * 0.5;
-
-        return (
-          <motion.span
-            key={index}
-            className="h-3/5 w-[2px] origin-center rounded-full bg-secondary dark:bg-secondary-dark"
-            animate={{ scaleY: [minScale, maxScale, minScale] }}
-            transition={{
-              repeat: Infinity,
-              duration,
-              delay: index * 0.05,
-              ease: 'easeInOut'
-            }}
-          />
-        );
-      })}
     </div>
   );
 }
