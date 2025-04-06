@@ -61,7 +61,7 @@ export default function HoldToDelete() {
 
   return (
     <button
-      className="relative flex h-10 w-[150px] items-center justify-center rounded-md bg-[#fefefe] px-3 py-2 shadow-sm outline outline-1 outline-neutral-200 transition-all will-change-transform [box-shadow:0_1px_2px_0_rgba(0,0,0,0.05)] hover:bg-neutral-100 focus-visible:[box-shadow:0_1px_2px_0_rgba(0,0,0,0.05),0_0_0_2px_var(--focus-inner-colour),0_0_0_4px_var(--focus-outer-colour)] dark:bg-[#1A1A1A] hover:dark:bg-neutral-800 hover:dark:outline-neutral-700 dark:focus-visible:[box-shadow:0_1px_2px_0_rgba(0,0,0,0.25),0_0_0_2px_var(--focus-inner-colour-dark),0_0_0_4px_var(--focus-outer-colour)]"
+      className="relative flex h-10 w-[150px] items-center justify-center overflow-hidden rounded-md bg-[#fefefe] px-3 py-2 shadow-sm outline outline-1 outline-neutral-200 transition-all will-change-transform [box-shadow:0_1px_2px_0_rgba(0,0,0,0.05)] hover:bg-neutral-100 focus-visible:[box-shadow:0_1px_2px_0_rgba(0,0,0,0.05),0_0_0_2px_var(--focus-inner-colour),0_0_0_4px_var(--focus-outer-colour)] dark:bg-[#1A1A1A] hover:dark:bg-neutral-800 hover:dark:outline-neutral-700 dark:focus-visible:[box-shadow:0_1px_2px_0_rgba(0,0,0,0.25),0_0_0_2px_var(--focus-inner-colour-dark),0_0_0_4px_var(--focus-outer-colour)]"
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
