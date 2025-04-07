@@ -22,8 +22,6 @@ export const metadata: Metadata = {
     images: [
       {
         url: 'https://kelvinamp.me/assets/images/carousel/og-carousel.png',
-        height: 1200,
-        width: 1200,
         alt: 'A minimal CSS based carousel.'
       }
     ]

@@ -26,8 +26,6 @@ export const metadata: Metadata = {
     images: [
       {
         url: image as string,
-        height: 1080,
-        width: 566,
         alt: summary
       }
     ]
@@ -40,8 +38,6 @@ export const metadata: Metadata = {
     images: [
       {
         url: image as string,
-        height: 1080,
-        width: 566,
         alt: summary
       }
     ]

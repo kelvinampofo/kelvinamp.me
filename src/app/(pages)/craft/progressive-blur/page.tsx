@@ -26,8 +26,6 @@ export const metadata: Metadata = {
     images: [
       {
         url: image as string,
-        height: 1200,
-        width: 1200,
         alt: 'progressive blur thumbnail image'
       }
     ]
@@ -40,8 +38,6 @@ export const metadata: Metadata = {
     images: [
       {
         url: image as string,
-        height: 1200,
-        width: 1200,
         alt: 'progressive blur thumbnail image'
       }
     ]

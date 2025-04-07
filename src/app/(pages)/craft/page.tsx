@@ -22,9 +22,7 @@ export const metadata: Metadata = {
     description: 'Collection of interfaces and web prototypes.',
     images: [
       {
-        url: 'https://kelvinamp.me/og.jpeg',
-        height: 1200,
-        width: 1200
+        url: 'https://kelvinamp.me/og.jpeg'
       }
     ]
   }

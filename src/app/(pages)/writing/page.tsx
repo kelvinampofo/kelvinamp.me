@@ -10,17 +10,17 @@ export const metadata: Metadata = {
   title: 'Writing',
   publisher: 'Kelvin Ampofo',
   authors: [{ name: 'Kelvin Ampofo' }],
-  description: 'Thoughts on technology, design + things in between.',
+  description: 'Collection of half-formed thoughts and words.',
   openGraph: {
     title: 'Writing',
-    description: 'Thoughts on technology, design + things in between.'
+    description: 'Collection of half-formed thoughts and words.'
   },
   twitter: {
     title: 'Writing',
     site: '@kelvinamp_',
     creator: '@kelvinamp',
     card: 'summary',
-    description: 'Thoughts on technology, design + things in between.',
+    description: 'Collection of half-formed thoughts and words.',
     images: [
       {
         url: 'https://kelvinamp.me/og.jpeg',
