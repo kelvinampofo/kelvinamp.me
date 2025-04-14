@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/x',
-        destination: 'https://twitter.com/kelvinamp_',
+        destination: 'https://twitter.com/_kelvinamp',
         permanent: true
       }
     ];

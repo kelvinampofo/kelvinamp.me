@@ -7,8 +7,8 @@ export default function Contact() {
   const contactLinks = [
     {
       label: '@kelvinamp_',
-      href: 'https://x.com/kelvinamp_',
-      ariaLabel: 'twitter profile'
+      href: 'https://x.com/_kelvinamp',
+      ariaLabel: 'twitter (X) profile'
     },
     {
       label: 'GitHub',
@@ -39,7 +39,7 @@ export default function Contact() {
             </InlineLink>
             <span
               className={c(
-                'mx-1 text-secondary dark:text-secondary-dark',
+                'text-secondary dark:text-secondary-dark mx-1',
                 index === contactLinks.length - 1 && 'hidden'
               )}
               aria-hidden="true"
