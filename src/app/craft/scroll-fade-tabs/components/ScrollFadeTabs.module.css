@@ -1,0 +1,100 @@
+.container {
+  width: 60%;
+}
+
+@media (max-width: 640px) {
+  .container {
+    width: 83.333333%;
+  }
+}
+
+.tabList {
+  display: flex;
+  align-items: center;
+}
+
+.tabContainer {
+  display: flex;
+  gap: 8px;
+}
+
+.scrollContainer {
+  overflow-x: auto;
+  overflow-y: visible;
+  white-space: nowrap;
+  padding: 0.5rem;
+  transition: all 0.2s ease;
+  will-change: scroll-position;
+  -ms-overflow-style: none; /* hide scrollbar for IE/Edge */
+  scrollbar-width: none; /* hide scrollbar for Firefox */
+}
+
+.maskGradient {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 20%,
+    black 80%,
+    transparent
+  );
+}
+
+.maskGradientRight {
+  mask-image: linear-gradient(to right, black 80%, transparent);
+}
+
+.maskGradientLeft {
+  mask-image: linear-gradient(to right, transparent, black 20%);
+}
+
+.tabButtonBase {
+  cursor: pointer;
+  border-radius: 9999px;
+  border-width: 1px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.tabButtonBase:active {
+  transform: scale(0.98);
+}
+
+.tabButtonSelected {
+  background-color: #3c82f6;
+  color: #fafafa;
+}
+
+.tabButtonDefault {
+  outline: 1px solid #d4d4d4;
+  background-color: #f5f5f5;
+  color: var(--foreground);
+}
+
+.tabButtonSelected:hover {
+  background-color: #2563eb;
+}
+
+.tabButtonDefault:hover {
+  background-color: #e5e5e5;
+}
+
+@media (prefers-color-scheme: dark) {
+  .tabButtonDefault {
+    outline: 1px solid #262626;
+    background-color: #1a1a1a;
+    color: #f9fafb;
+  }
+
+  .tabButtonDefault:hover {
+    background-color: #26262675;
+  }
+
+  .tabButtonSelected {
+    border-color: #2563eb;
+    background-color: #2463eb;
+  }
+}

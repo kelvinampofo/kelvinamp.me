@@ -1,0 +1,41 @@
+.slideItem {
+  position: relative;
+  margin-right: 1.25rem;
+  width: 250px;
+  flex-shrink: 0;
+  overscroll-behavior-x: contain;
+  background-color: #fff;
+  text-align: center;
+  transition: all 300ms ease;
+}
+.slideItem:last-child {
+  margin-right: 0;
+}
+@media (min-width: 768px) {
+  .slideItem {
+    width: 450px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+@media (min-width: 1024px) {
+  .slideItem {
+    width: 450px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+.image {
+  object-fit: fill;
+}
+
+.figcaption {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  width: 100%;
+  text-align: start;
+  font-size: 0.75rem;
+  color: var(--color-foreground-secondary);
+}

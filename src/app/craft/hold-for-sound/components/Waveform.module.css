@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.bar {
+  height: 60%;
+  width: 2px;
+  transform-origin: center;
+  border-radius: 9999px;
+  background-color: var(--color-foreground-secondary);
+}

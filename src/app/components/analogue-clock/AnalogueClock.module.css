@@ -1,0 +1,40 @@
+.analogueClock {
+  --size: 1.25rem;
+
+  box-sizing: border-box;
+  width: var(--size);
+  height: var(--size);
+  display: inline-flex;
+  position: relative;
+  border: 1px solid var(--color-gray-400);
+  border-radius: 50%;
+}
+
+.clockHand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  transform: translate(-50%, -100%) rotate(var(--rotation));
+  width: 1px;
+  border-radius: 2px;
+}
+
+.clockHandHours {
+  height: 25%;
+  z-index: 10;
+  background-color: var(--color-gray-400);
+}
+
+.clockHandMinutes {
+  height: 35%;
+  z-index: 20;
+  background-color: var(--color-gray-400);
+}
+
+.clockHandSeconds {
+  height: 40%;
+  width: 0.5px;
+  z-index: 30;
+  background-color: var(--focus-outer-color);
+}

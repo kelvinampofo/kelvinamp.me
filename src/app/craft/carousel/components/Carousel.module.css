@@ -1,0 +1,87 @@
+.carouselContainer {
+  display: flex;
+  height: auto;
+  position: relative;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 8px;
+  background: hsl(0 0% 97.3%);
+  outline: 1px solid #e5e5e5;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .carouselContainer {
+    outline: 1px solid #262626;
+    background: #171717;
+    border-color: #262626;
+  }
+}
+
+@media (max-width: 767px) {
+  .carouselContainer {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .carouselContainer {
+    width: calc(100% + 2 * (122px + var(--spacing-gutter)));
+    margin-left: calc(-1 * (122px + var(--spacing-gutter)));
+    margin-right: calc(-1 * (122px + var(--spacing-gutter)));
+  }
+}
+
+.slideList {
+  display: flex;
+  height: 300px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  padding: 1rem 0 2rem;
+  scroll-behavior: smooth;
+}
+
+@media (min-width: 768px) {
+  .slideList {
+    height: 600px;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 3rem;
+  }
+}
+@media (min-width: 1024px) {
+  .slideList {
+    height: 600px;
+    padding-bottom: 3rem;
+    padding-top: 2rem;
+  }
+}
+
+.arrowButton {
+  border-radius: 0.125rem;
+  margin: 0 0.5rem;
+  color: var(--color-foreground-secondary);
+  transition: color 150ms;
+  cursor: pointer;
+}
+.arrowButton:hover:not(:disabled) {
+  color: var(--color-foreground);
+}
+.arrowButton:disabled {
+  cursor: not-allowed;
+  color: var(--color-gray-300);
+}
+
+.cursorLeft {
+  cursor: w-resize;
+}
+.cursorRight {
+  cursor: e-resize;
+}

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /private/
+Sitemap: https://kelvinamp.me/sitemap.xml
+Host: https://kelvinamp.me

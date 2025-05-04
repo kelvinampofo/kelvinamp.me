@@ -1,0 +1,79 @@
+import type { MDXComponents } from "mdx/types";
+import Link from "next/link";
+
+import Heading from "./src/app/components/heading/Heading";
+
+type Props<T extends keyof React.JSX.IntrinsicElements> =
+  React.ComponentPropsWithoutRef<T>;
+
+const createHeading = <T extends "h1" | "h2" | "h3" | "h4">(as: T) => {
+  const HeadingComponent = ({ children, ...props }: Props<T>) => (
+    <Heading as={as} {...props}>
+      {children}
+    </Heading>
+  );
+
+  HeadingComponent.displayName = `Heading(${as})`;
+  return HeadingComponent;
+};
+
+const Anchor = ({ href, children, ...props }: Props<"a">) => {
+  if (href?.startsWith("/")) {
+    return (
+      <Link href={href} className="basic-link" {...props}>
+        {children}
+      </Link>
+    );
+  }
+
+  if (href?.startsWith("#")) {
+    return (
+      <a href={href} className="basic-link" {...props}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="basic-link"
+      {...props}
+    >
+      {children}
+    </a>
+  );
+};
+
+const Code = ({ children, ...props }: Props<"code">) => (
+  <code dangerouslySetInnerHTML={{ __html: children as string }} {...props} />
+);
+
+const components = {
+  h1: createHeading("h1"),
+  h2: createHeading("h2"),
+  h3: createHeading("h3"),
+  h4: createHeading("h4"),
+
+  p: (props: Props<"p">) => <p {...props} />,
+
+  ol: (props: Props<"ul">) => <ol {...props} className="prose-lists" />,
+  ul: (props: Props<"ul">) => <ul {...props} className="prose-lists" />,
+  li: (props: Props<"li">) => <li {...props} className="prose-lists" />,
+
+  em: (props: Props<"em">) => <em {...props} />,
+  strong: (props: Props<"strong">) => <strong {...props} />,
+
+  a: Anchor,
+  code: Code,
+
+  blockquote: (props: Props<"blockquote">) => <blockquote {...props} />,
+};
+
+export function useMDXComponents(): MDXComponents {
+  return {
+    ...components,
+  };
+}

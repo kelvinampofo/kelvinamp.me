@@ -1,0 +1,110 @@
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.basic-link,
+.basic-prose a {
+  position: relative;
+  transition: 200ms;
+  transition-property: -webkit-text-decoration-color, text-decoration-color;
+  text-decoration: underline;
+  -webkit-text-decoration-color: var(--color-gray-300);
+  text-decoration-color: var(--color-gray-300);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2.5px;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.basic-prose {
+  width: 100%;
+  max-width: var(--content-max-width);
+  color: var(--color-foreground);
+}
+
+.basic-prose > :not(:last-child),
+.basic-prose > .animate-enter-wrapper:not(:last-child) {
+  margin-bottom: 28px;
+}
+
+article.basic-prose {
+  position: relative;
+}
+
+@media (hover: hover) {
+  :is(.basic-prose :where(a), .basic-link):hover:not([disabled]) {
+    transition: 100ms;
+    -webkit-text-decoration-color: var(--color-gray-600);
+    text-decoration-color: var(--color-gray-600);
+  }
+}
+
+em,
+i {
+  font: var(--font-style-italic);
+}
+
+ul.prose-lists,
+ol.prose-lists {
+  list-style-position: outside;
+  padding-left: 18px;
+}
+
+ul.prose-lists {
+  list-style-type: disc;
+}
+
+ul.prose-lists ul {
+  list-style-type: circle;
+}
+
+ol.prose-lists {
+  list-style-type: decimal;
+}
+
+.prose-lists li::marker {
+  color: var(--color-foreground-secondary);
+}
+
+ul.prose-lists li + li,
+ol.prose-lists li + li {
+  margin-top: 8px;
+}
+
+ul.prose-lists li,
+ol.prose-lists li {
+  line-height: var(--line-height-base);
+  margin-top: 8px;
+}
+
+code {
+  font-family: var(--font-family-mono);
+  font-size: 0.85em;
+  background-color: #ededed;
+  border-radius: 4px;
+  padding: 0.2em 0.4em;
+  color: var(--color-foreground);
+  font-size: 0.8125rem;
+}
+
+pre code {
+  font-family: var(--font-family-mono);
+  background: transparent;
+  font-size: 0.85em;
+  line-height: 1.45;
+  padding: 1em;
+  display: block;
+  overflow-x: auto;
+  border-radius: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  code {
+    background-color: #222222;
+    border-color: #262626;
+  }
+  pre {
+    background-color: #2d2d2d;
+  }
+}

@@ -1,0 +1,18 @@
+.contactList {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.contactList .dot {
+  pointer-events: none;
+  user-select: none;
+}
+
+.contactListHeading {
+  margin-bottom: 28px;
+}
+
+.dot {
+  color: var(--color-foreground-secondary);
+}

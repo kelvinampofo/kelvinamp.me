@@ -1,0 +1,57 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.textContainer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 300ms;
+}
+
+.textContainer.visible {
+  opacity: 0.8;
+}
+
+.textContainer.hidden {
+  filter: blur(0.5px);
+  opacity: 0;
+}
+
+.shimmer {
+  font-weight: 500;
+  background-size: 200%;
+  background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    to right,
+    #0f0f11 0%,
+    #e5e7eb 40%,
+    #e5e7eb 50%,
+    #0f0f11 60%,
+    #0f0f11 100%
+  );
+  animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .shimmer {
+    background-image: linear-gradient(
+      to right,
+      #555555 0%,
+      #e5e7eb 40%,
+      #e5e7eb 50%,
+      #555555 60%,
+      #555555 100%
+    );
+  }
+}

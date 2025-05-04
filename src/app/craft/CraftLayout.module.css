@@ -1,0 +1,39 @@
+.craftLayout {
+  grid-column: 2;
+}
+
+.description {
+  color: var(--color-foreground-secondary);
+}
+
+.demoDate {
+  font-size: 0.875rem;
+  color: var(--color-foreground-secondary);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  margin-left: auto;
+}
+
+.navWrapper {
+  grid-column: 1;
+  justify-self: center;
+  align-self: start;
+}
+
+.navBackButton {
+  border-radius: 4px;
+  padding: 4px 6px 4px 4px;
+  display: flex;
+  gap: 6px;
+  color: var(--color-foreground);
+  transition: color 150ms ease;
+}
+
+.navBackButton svg {
+  transform: translateY(4px);
+  fill: currentColor;
+}
+
+.navBackButton:hover {
+  color: var(--color-foreground-secondary);
+}

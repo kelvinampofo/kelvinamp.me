@@ -1,0 +1,24 @@
+.badge {
+  display: inline-block;
+  align-self: center;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #2563eb;
+  background-size: 200%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .badge {
+    background-image: linear-gradient(to right, #2563eb, #5eead4, #2563eb);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: shimmer 2s linear infinite;
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}

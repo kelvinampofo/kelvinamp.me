@@ -1,0 +1,17 @@
+.separator {
+  background-color: #e5e5e5;
+  height: 0.5px;
+  width: 100%;
+}
+
+@media (prefers-contrast: more) {
+  .separator {
+    background-color: #7f7f7f;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .separator {
+    background-color: #2a2a2a;
+  }
+}

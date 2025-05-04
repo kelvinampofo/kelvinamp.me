@@ -1,0 +1,210 @@
+.loadingText {
+  display: block;
+  width: 5rem;
+  cursor: not-allowed;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.loadingText .loadingDots::after {
+  content: "";
+  display: inline-block;
+  animation: loadingAnimation 1.5s infinite;
+  transition: opacity 0.8s ease;
+}
+
+@media (max-width: 639px) {
+  .loadingText {
+    display: none;
+  }
+}
+
+.loadingDots {
+  display: inline-block;
+  cursor: not-allowed;
+}
+
+.dot {
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 15%;
+  margin: 0 0.125rem;
+  display: inline-block;
+  animation: flashing 1.1s infinite;
+  background-color: #262626;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.dot:nth-child(3) {
+  animation-delay: 0.25s;
+}
+
+.primarySpinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  border-top-color: #262626;
+  animation: donutSpin 1.4s linear infinite;
+  cursor: not-allowed;
+}
+
+.secondarySpinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 9999px;
+  border: 2px solid #d1d5db;
+  border-top-color: #262626;
+  animation: donutSpin 0.8s ease-in-out infinite;
+  cursor: not-allowed;
+}
+
+.iosSpinner {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: inline-block;
+  border-radius: 10%;
+  cursor: not-allowed;
+}
+
+.iosSpinner div {
+  width: 5%;
+  height: 15%;
+  background: #404040;
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  opacity: 0;
+  border-radius: 20%;
+  box-shadow: 0 0 0.1875rem #00000033;
+  animation: fade 1s linear infinite;
+}
+
+.iosSpinner div:nth-child(1) {
+  transform: rotate(0deg) translate(0, -130%);
+  animation-delay: 0s;
+}
+.iosSpinner div:nth-child(2) {
+  transform: rotate(30deg) translate(0, -130%);
+  animation-delay: -0.9s;
+}
+.iosSpinner div:nth-child(3) {
+  transform: rotate(60deg) translate(0, -130%);
+  animation-delay: -0.8s;
+}
+.iosSpinner div:nth-child(4) {
+  transform: rotate(90deg) translate(0, -130%);
+  animation-delay: -0.7s;
+}
+.iosSpinner div:nth-child(5) {
+  transform: rotate(120deg) translate(0, -130%);
+  animation-delay: -0.6s;
+}
+.iosSpinner div:nth-child(6) {
+  transform: rotate(150deg) translate(0, -130%);
+  animation-delay: -0.55s;
+}
+.iosSpinner div:nth-child(7) {
+  transform: rotate(180deg) translate(0, -130%);
+  animation-delay: -0.5s;
+}
+.iosSpinner div:nth-child(8) {
+  transform: rotate(210deg) translate(0, -130%);
+  animation-delay: -0.4s;
+}
+.iosSpinner div:nth-child(9) {
+  transform: rotate(240deg) translate(0, -130%);
+  animation-delay: -0.3s;
+}
+.iosSpinner div:nth-child(10) {
+  transform: rotate(270deg) translate(0, -130%);
+  animation-delay: -0.2s;
+}
+.iosSpinner div:nth-child(11) {
+  transform: rotate(300deg) translate(0, -130%);
+  animation-delay: -0.1s;
+}
+.iosSpinner div:nth-child(12) {
+  transform: rotate(330deg) translate(0, -130%);
+  animation-delay: 0s;
+}
+
+@media (prefers-color-scheme: dark) {
+  .primarySpinner {
+    border-top-color: #ffffff;
+  }
+
+  .secondarySpinner {
+    border-color: #404040;
+    border-top-color: var(--color-foreground);
+  }
+
+  .dot {
+    background-color: #d1d5db;
+  }
+
+  .iosSpinner div {
+    background: #d1d5db;
+  }
+}
+
+@keyframes donutSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loadingAnimation {
+  0% {
+    content: "";
+    opacity: 0.8;
+    filter: blur(0);
+  }
+  25% {
+    content: ".";
+    opacity: 0.8;
+    filter: blur(0);
+  }
+  50% {
+    content: "..";
+    opacity: 0.8;
+    filter: blur(0);
+  }
+  75% {
+    content: "...";
+    opacity: 0.8;
+    filter: blur(0);
+  }
+  100% {
+    content: "";
+    opacity: 0;
+    filter: blur(1px);
+  }
+}
+
+@keyframes flashing {
+  0% {
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.3;
+  }
+}

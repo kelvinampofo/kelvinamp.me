@@ -1,0 +1,20 @@
+import Loading from "./components/Loading";
+import Card from "../../components/card/Card";
+
+export const metadata = {
+  title: "Loading indicators",
+  summary: "Simple loading state indicators.",
+  publishedDate: "2023-11-11",
+};
+
+# Loading indicators
+
+Simple loading state indicators.
+
+<Card style={{ display: "flex", gap: "8px" }}>
+  <Loading variant="ios-spinner" />
+  <Loading variant="primary-spinner" />
+  <Loading variant="secondary-spinner" />
+  <Loading variant="loading-dots" />
+  <Loading variant="loading-text" />
+</Card>
