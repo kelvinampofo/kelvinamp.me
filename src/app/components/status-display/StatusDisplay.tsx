@@ -30,7 +30,7 @@ export default function StatusDisplay() {
       className={styles.statusDisplay}
       onMouseDown={toggleView}
       data-animate
-      data-delay="0.45s"
+      data-delay="450ms"
     >
       <ActiveView />
     </div>

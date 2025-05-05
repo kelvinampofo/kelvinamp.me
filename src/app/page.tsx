@@ -8,21 +8,21 @@ import StatusDisplay from "./components/status-display/StatusDisplay";
 export default function Home() {
   return (
     <article className="basic-prose">
-      <Heading data-animate data-delay="0.1s">
+      <Heading data-animate data-delay="100ms">
         Kelvin Ampofo
       </Heading>
-      <p data-animate data-delay="0.2s">
+      <p data-animate data-delay="200ms">
         Making software with a focus on human-computer interaction and aesthetic
         sensibility. Insatiable curiosity for <em>novel interfaces</em>.
       </p>
-      <p data-animate data-delay="0.25s">
+      <p data-animate data-delay="250ms">
         Read more on{" "}
         <Link href="/now" className="basic-link">
           now
         </Link>{" "}
         page.
       </p>
-      <ul className="pages-list" data-animate data-delay="0.3s">
+      <ul className="pages-list" data-animate data-delay="300ms">
         <li>
           <Link href="/craft" className="basic-link">
             Craft
@@ -34,7 +34,7 @@ export default function Home() {
           </Link>
         </li>
       </ul>
-      <Separator data-animate data-delay="0.35s" />
+      <Separator data-animate data-delay="350ms" />
       <Contact />
       <StatusDisplay />
     </article>

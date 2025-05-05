@@ -8,17 +8,14 @@ const contactLinks = [
   {
     label: "Twitter",
     href: "https://x.com/_kelvinamp",
-    ariaLabel: "twitter (X) profile",
   },
   {
     label: "GitHub",
     href: "https://github.com/kelvinampofo",
-    ariaLabel: "github profile",
   },
   {
     label: "Are.na",
     href: "https://www.are.na/kelvin-ampofo/channels",
-    ariaLabel: "are.na profile",
   },
   {
     label: "Email",
@@ -28,17 +25,16 @@ const contactLinks = [
 
 export default function Contact() {
   return (
-    <div data-animate data-delay="0.4s">
+    <div data-animate data-delay="400ms">
       <Heading as="h2" className={styles.contactListHeading}>
         Connect
       </Heading>
       <ul className={styles.contactList}>
-        {contactLinks.map(({ label, href, ariaLabel }, index) => (
+        {contactLinks.map(({ label, href }, index) => (
           <Fragment key={label}>
             <li>
               <a
                 href={href}
-                aria-label={ariaLabel}
                 className="basic-link"
                 target="_blank"
                 rel="noopener noreferrer"
