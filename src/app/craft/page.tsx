@@ -16,7 +16,7 @@ export default async function CraftPage() {
       <List
         items={demos}
         basePath="/craft"
-        showSummary
+        showDescription
         dateFormat="MMMM yyyy"
       />
     </>
