@@ -2,6 +2,7 @@
 @import "./tokens.css";
 @import "./typography.css";
 @import "./utilities.css";
+@import "./animations.css";
 
 * {
   box-sizing: border-box;

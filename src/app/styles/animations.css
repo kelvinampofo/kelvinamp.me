@@ -1,0 +1,47 @@
+@keyframes fade-transition {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-animate] {
+  opacity: 0;
+  animation-name: fade-transition;
+  animation-duration: 0.6s;
+  animation-timing-function: var(--ease-out-cubic);
+  animation-fill-mode: forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+[data-animate][data-delay="0.1s"] {
+  --delay: 0.1s;
+}
+
+[data-animate][data-delay="0.2s"] {
+  --delay: 0.2s;
+}
+
+[data-animate][data-delay="0.25s"] {
+  --delay: 0.25s;
+}
+
+[data-animate][data-delay="0.3s"] {
+  --delay: 0.3s;
+}
+
+[data-animate][data-delay="0.35s"] {
+  --delay: 0.35s;
+}
+
+[data-animate][data-delay="0.4s"] {
+  --delay: 0.4s;
+}
+
+[data-animate][data-delay="0.45s"] {
+  --delay: 0.45s;
+}
