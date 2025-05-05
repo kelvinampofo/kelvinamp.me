@@ -26,7 +26,12 @@ export default function StatusDisplay() {
   const ActiveView = views[index];
 
   return (
-    <div className={styles.statusDisplay} onMouseDown={toggleView}>
+    <div
+      className={styles.statusDisplay}
+      onMouseDown={toggleView}
+      data-animate
+      data-delay="0.45s"
+    >
       <ActiveView />
     </div>
   );

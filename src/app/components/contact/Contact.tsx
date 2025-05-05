@@ -28,7 +28,7 @@ const contactLinks = [
 
 export default function Contact() {
   return (
-    <>
+    <div data-animate data-delay="0.4s">
       <Heading as="h2" className={styles.contactListHeading}>
         Connect
       </Heading>
@@ -54,6 +54,6 @@ export default function Contact() {
           </Fragment>
         ))}
       </ul>
-    </>
+    </div>
   );
 }
