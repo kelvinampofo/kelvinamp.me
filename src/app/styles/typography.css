@@ -6,7 +6,7 @@ a {
 a.basic-link,
 .basic-prose a {
   position: relative;
-  transition: 200ms;
+  transition: var(--transition-hover);
   transition-property: -webkit-text-decoration-color, text-decoration-color;
   text-decoration: underline;
   -webkit-text-decoration-color: var(--color-gray-300);
@@ -34,7 +34,7 @@ article.basic-prose {
 
 @media (hover: hover) {
   :is(.basic-prose :where(a), .basic-link):hover:not([disabled]) {
-    transition: 100ms;
+    transition: var(--transition-hover);
     -webkit-text-decoration-color: var(--color-gray-600);
     text-decoration-color: var(--color-gray-600);
   }

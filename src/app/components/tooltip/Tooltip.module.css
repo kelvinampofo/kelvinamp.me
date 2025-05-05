@@ -16,7 +16,7 @@
   padding: 0.375rem 0.75rem;
   border-radius: 0.375rem;
   transform-origin: var(--transform-origin);
-  --tooltip-transform-duration: 250ms;
+  --tooltip-transform-duration: 150ms;
   --tooltip-opacity-duration: 150ms;
   transition:
     transform var(--tooltip-transform-duration),
@@ -27,7 +27,6 @@
 }
 
 .tooltipPopup[data-open] {
-  --tooltip-transform-duration: 150ms;
   --tooltip-opacity-duration: 50ms;
 }
 
