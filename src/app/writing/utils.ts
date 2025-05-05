@@ -10,7 +10,7 @@ export interface Post {
 interface MDXModule {
   metadata: {
     title: string;
-    summary: string;
+    description: string;
     publishedDate: string;
   };
 }

@@ -5,13 +5,13 @@ interface Demo {
   slug: string;
   title: string;
   publishedDate: string;
-  summary: string;
+  description: string;
 }
 
 interface MDXModule {
   metadata: {
     title: string;
-    summary: string;
+    description: string;
     publishedDate: string;
   };
 }
@@ -26,13 +26,13 @@ export async function getDemos(): Promise<Demo[]> {
   const demos: Demo[] = await Promise.all(
     directories.map(async (directory): Promise<Demo> => {
       const mod: MDXModule = await import(`./${directory.name}/page.mdx`);
-      const { title, summary, publishedDate } = mod.metadata;
+      const { title, description, publishedDate } = mod.metadata;
 
       return {
         id: directory.name,
         slug: directory.name,
         title,
-        summary,
+        description,
         publishedDate,
       };
     })

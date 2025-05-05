@@ -31,14 +31,14 @@ a.listItemLink:hover {
   gap: 0.375rem;
 }
 
-.summary {
+.description {
   font-size: 0.75rem;
   color: var(--color-foreground-secondary);
   margin-top: 0.25rem;
 }
 
 @media (max-width: 640px) {
-  .summary {
+  .description {
     display: none;
   }
 }

@@ -12,25 +12,25 @@ interface ListItem {
   slug: string;
   title: string;
   publishedDate: string;
-  summary?: string;
+  description?: string;
 }
 
 interface ListProps {
   items: ListItem[];
   basePath: string;
-  showSummary?: boolean;
+  showDescription?: boolean;
   dateFormat?: string;
 }
 
 export default function List({
   items,
   basePath,
-  showSummary = false,
+  showDescription = false,
   dateFormat = "dd/MM/yy",
 }: ListProps) {
   return (
     <ol>
-      {items.map(({ id, slug, title, publishedDate, summary }, index) => {
+      {items.map(({ id, slug, title, publishedDate, description }, index) => {
         const isNew = isAfter(
           parseISO(publishedDate),
           subMonths(new Date(), 1)
@@ -45,8 +45,8 @@ export default function List({
               >
                 <span className={styles.titleRow}>
                   <p>{title}</p>
-                  {showSummary && (
-                    <span className={styles.summary}>{summary}</span>
+                  {showDescription && (
+                    <span className={styles.description}>{description}</span>
                   )}
                   {isNew && <Badge>new</Badge>}
                 </span>
