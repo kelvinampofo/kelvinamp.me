@@ -2,6 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 
 import Heading from "./src/app/components/heading/Heading";
+import Separator from "./src/app/components/separator/Separator";
 
 type Props<T extends keyof React.JSX.IntrinsicElements> =
   React.ComponentPropsWithoutRef<T>;
@@ -70,6 +71,8 @@ const components = {
   code: Code,
 
   blockquote: (props: Props<"blockquote">) => <blockquote {...props} />,
+
+  hr: () => <Separator />,
 };
 
 export function useMDXComponents(): MDXComponents {
