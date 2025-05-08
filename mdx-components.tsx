@@ -48,9 +48,19 @@ const Anchor = ({ href, children, ...props }: Props<"a">) => {
   );
 };
 
-const Code = ({ children, ...props }: Props<"code">) => (
-  <code dangerouslySetInnerHTML={{ __html: children as string }} {...props} />
-);
+const Code = ({ children, className, ...props }: Props<"code">) => {
+  // for code blocks (className present), render raw text; for inline code, render HTML.
+  if (className) {
+    return (
+      <code className={className} {...props}>
+        {children}
+      </code>
+    );
+  }
+  return (
+    <code dangerouslySetInnerHTML={{ __html: children as string }} {...props} />
+  );
+};
 
 const components = {
   h1: createHeading("h1"),
