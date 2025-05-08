@@ -88,9 +88,15 @@ code {
   font-size: 0.8125rem;
 }
 
+pre {
+  border-radius: 8px;
+  margin-top: 1rem;
+  background-color: #ededed;
+}
+
 pre code {
   font-family: var(--font-family-mono);
-  background: transparent;
+  background: #ededed;
   font-size: 0.85em;
   line-height: 1.45;
   padding: 1em;
@@ -101,10 +107,10 @@ pre code {
 
 @media (prefers-color-scheme: dark) {
   code {
-    background-color: #222222;
+    background-color: #222;
     border-color: #262626;
   }
-  pre {
-    background-color: #2d2d2d;
+  pre code {
+    background: #222;
   }
 }
