@@ -1,0 +1,68 @@
+export const metadata = {
+  title: "On Media Formats",
+  description: "Some notes on media formats for reference.",
+  publishedDate: "2025-05-08",
+};
+
+# On Media Formats
+
+Some notes on media formats. Recommended watch: [Explore media formats for the web](https://youtu.be/qB9L-ZYM1_0?si=ZRq60cGJWnDxZFxX).
+
+## Existing formats
+
+### GIF
+
+- 8 bits per pixel (256 colours), huge file sizes.
+  - good for memes, bad for actual image quality&mdash;avoid for anything longer than a few seconds
+
+## JPEG
+
+- lossy compression, great for photos
+- no transparency support&mdash;supports progressive loading
+
+## PNG
+
+- lossless with alpha transparency
+- best for UI elements, not efficient for photo-like images
+
+## Modern formats
+
+### WebP
+
+- supports animation, transparency, and compression
+- better than GIF, PNG, and JPEG in most cases&mdash;ideal for the modern web though ensure fallback for older Safari versions (< 14)
+
+## AVIF
+
+- newer format built on AV1 codec to achieve high compression rate with no sacrifice to video quality
+  - smaller than JPEG/WebP, supports up to 12 bits colour depth, HDR and animation&mdash;should be the default if supported, though decoding can be CPU-intensive on some platforms
+
+## JPEG XL
+
+- designed to replace JPEG
+- supports lossless/lossy, still not widely supported&mdash;some browsers have discontinued or disabled support by default (e.g., Chrome)
+
+## HEIC
+
+- Apple’s format for iOS photos
+
+  - great compression, Live Photo support, depth data&mdash;not safe for Web-convert to WebP or AVIF first
+  - use the `&lt;picture&gt;` element with `&lt;source&gt;` fallbacks to serve HEIC where supported:
+
+  ```html
+  <picture>
+    <source srcset="image.heic" type="image/heic" />
+    <source srcset="image.webp" type="image/webp" />
+    <source srcset="image.avif" type="image/avif" />
+    <img src="image.jpg" alt="descriptive text" />
+  </picture>
+  ```
+
+## General Guidelines
+
+- prefer AVIF → WebP → JPEG/PNG
+- for UI assets: SVG > PNG
+- avoid GIF unless essential
+- use WebP or video formats for animations
+- if intending to use [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview)&mdash;use HEIC as it's [hardware accelerated](https://en.wikipedia.org/wiki/Hardware_acceleration)
+- always serve the smallest viable file
