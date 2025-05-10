@@ -22,14 +22,18 @@ Some notes on media formats. Recommended watch: [Explore media formats for the w
 
 ## PNG
 
-- lossless with alpha transparency
+- lossless with alpha channel
 - best for UI elements, not efficient for photo-like images
 
 ## Modern formats
 
 ### WebP
 
-- supports animation, transparency, and compression
+- supports animation, transparency, and both lossy and lossless compression
+
+  - lossy: similar to JPEG but ~25-35% smaller files
+  - lossless: similar to PNG but ~26% smaller files
+
 - better than GIF, PNG, and JPEG in most cases&mdash;ideal for the modern web though ensure fallback for older Safari versions (< 14)
 
 ## AVIF
@@ -40,14 +44,14 @@ Some notes on media formats. Recommended watch: [Explore media formats for the w
 ## JPEG XL
 
 - designed to replace JPEG
-- supports lossless/lossy, still not widely supported&mdash;some browsers have discontinued or disabled support by default (e.g., Chrome)
+- supports both lossy and lossles, still not widely supported&mdash;some browsers have discontinued or disabled support by default (e.g., Chrome)
 
 ## HEIC
 
 - Apple’s format for iOS photos
 
   - great compression, Live Photo support, depth data&mdash;not safe for Web-convert to WebP or AVIF first
-  - use the `&lt;picture&gt;` element with `&lt;source&gt;` fallbacks to serve HEIC where supported:
+  - use the HTML `&lt;picture&gt;` element, which allows you to specify alternative `&lt;source&gt;` elements&mdash;enabling the browser to choose a format it supports from top to bottom.
 
   ```html
   <picture>
