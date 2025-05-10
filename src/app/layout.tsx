@@ -25,6 +25,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
     <html lang="en" suppressHydrationWarning>
       <body>
         <div id="__next">
+          <div className="blur-overlay" aria-hidden />
           <main>
             <div className="main-grid">
               <ThemeProvider>

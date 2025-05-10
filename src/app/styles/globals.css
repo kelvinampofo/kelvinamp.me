@@ -110,3 +110,56 @@ main {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
 }
+
+.blur-overlay {
+  --h: min(96px, var(--spacing-page-top));
+  --direction: to bottom;
+  --blur-radius: 4px;
+  --mask-stop: 25%;
+  --blur-opacity: 0.95;
+  --blur-z: 1;
+
+  position: sticky;
+
+  width: calc(
+    100% + var(--spacing-body-margin-left) + var(--spacing-body-margin-right)
+  );
+  height: var(--h);
+  margin-left: calc(-1 * var(--spacing-body-margin-left));
+
+  user-select: none;
+  pointer-events: none;
+
+  -webkit-backdrop-filter: blur(var(--blur-radius));
+  backdrop-filter: blur(var(--blur-radius));
+
+  -webkit-mask-image: linear-gradient(
+    var(--direction),
+    #000 var(--mask-stop),
+    transparent
+  );
+  mask-image: linear-gradient(
+    var(--direction),
+    #000 var(--mask-stop),
+    transparent
+  );
+
+  opacity: var(--blur-opacity);
+  z-index: var(--blur-z);
+}
+
+.blur-overlay:first-child {
+  top: 0;
+  margin-bottom: calc(-1 * var(--h));
+}
+
+.blur-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    var(--direction),
+    var(--background) 0%,
+    transparent 100%
+  );
+}
