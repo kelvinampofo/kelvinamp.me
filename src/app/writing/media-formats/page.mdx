@@ -53,14 +53,16 @@ Some notes on media formats. Recommended watch: [Explore media formats for the w
   - great compression, Live Photo support, depth data&mdash;not safe for Web-convert to WebP or AVIF first
   - use the HTML `&lt;picture&gt;` element, which allows you to specify alternative `&lt;source&gt;` elements&mdash;enabling the browser to choose a format it supports from top to bottom.
 
+<aside aria-label="This is a code block of an HTML picture element with source fallbacks for HEIC, AVIF, WebP, and JPEG.">
   ```html
   <picture>
     <source srcset="image.heic" type="image/heic" />
-    <source srcset="image.webp" type="image/webp" />
     <source srcset="image.avif" type="image/avif" />
+    <source srcset="image.webp" type="image/webp" />
     <img src="image.jpg" alt="descriptive text" />
   </picture>
   ```
+</aside>
 
 ## General Guidelines
 
