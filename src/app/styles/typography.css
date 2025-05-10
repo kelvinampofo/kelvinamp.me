@@ -1,3 +1,17 @@
+.basic-prose {
+  width: 100%;
+  max-width: var(--content-max-width);
+  color: var(--color-foreground);
+}
+
+.basic-prose > :not(:last-child) {
+  margin-bottom: 28px;
+}
+
+article.basic-prose {
+  position: relative;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -17,32 +31,12 @@ a.basic-link,
   border-radius: 2px;
 }
 
-.basic-prose {
-  width: 100%;
-  max-width: var(--content-max-width);
-  color: var(--color-foreground);
-}
-
-.basic-prose > :not(:last-child),
-.basic-prose > .animate-enter-wrapper:not(:last-child) {
-  margin-bottom: 28px;
-}
-
-article.basic-prose {
-  position: relative;
-}
-
 @media (hover: hover) {
   :is(.basic-prose :where(a), .basic-link):hover:not([disabled]) {
     transition: var(--transition-hover);
     -webkit-text-decoration-color: var(--color-gray-600);
     text-decoration-color: var(--color-gray-600);
   }
-}
-
-em,
-i {
-  font: var(--font-style-italic);
 }
 
 ul.prose-lists,
@@ -76,6 +70,11 @@ ul.prose-lists li,
 ol.prose-lists li {
   line-height: var(--line-height-base);
   margin-top: 8px;
+}
+
+em,
+i {
+  font: var(--font-style-italic);
 }
 
 code {
