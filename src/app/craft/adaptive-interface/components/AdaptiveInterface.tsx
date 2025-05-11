@@ -25,7 +25,7 @@ export default function AdaptiveInterface() {
   }, []);
 
   useShortcut("D", handleShortcut, {
-    modifierKeys: "Meta",
+    modifiers: "Meta",
     preventDefault: true,
   });
 
