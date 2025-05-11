@@ -1,7 +1,7 @@
 .focusedReading[data-focus-mode="enabled"] :where(p, pre, li, img, div) {
-  opacity: 0.8;
+  opacity: 0.6;
   filter: blur(2px);
-  transition: 180ms;
+  transition: 220ms;
   transition-property: opacity filter;
   cursor: crosshair;
 }
