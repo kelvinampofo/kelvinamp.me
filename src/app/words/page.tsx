@@ -52,6 +52,12 @@ const wordEntries: WordEntryProps[] = [
     type: "adjective",
     definition: "(of an appetite or desire) impossible to satisfy",
   },
+  {
+    word: "titbit",
+    type: "noun",
+    definition:
+      "a small and particularly interesting item of gossip or information",
+  },
 ];
 
 export default function Words() {
