@@ -12,8 +12,9 @@ export default function Home() {
         Kelvin Ampofo
       </Heading>
       <p data-animate data-delay="200ms">
-        Making software with a focus on human-computer interaction and aesthetic
-        sensibility. Insatiable curiosity for <em>novel interfaces</em>.
+        Making software with an emphasis on human-computer interaction and
+        aesthetic sensibility. Insatiable curiosity for{" "}
+        <em>novel interfaces</em>.
       </p>
       <p data-animate data-delay="250ms">
         Read more on{" "}
