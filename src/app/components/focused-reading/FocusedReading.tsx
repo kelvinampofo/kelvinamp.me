@@ -13,7 +13,9 @@ interface FocusedReadingProps {
 export default function FocusedReading({ children }: FocusedReadingProps) {
   const [isFocused, setIsFocused] = useState(false);
 
-  useShortcut("F", () => setIsFocused((prev) => !prev));
+  useShortcut("F", () => setIsFocused((prev) => !prev), {
+    pressDelay: 300,
+  });
 
   return (
     <div
