@@ -123,3 +123,13 @@
   --transition-enter: 200ms;
   --transition-exit: 150ms;
 }
+
+:root {
+  --border-thin: 1px;
+}
+
+@media (resolution: 2), (min-resolution: 192dpi) {
+  :root {
+    --border-thin: 0.5px;
+  }
+}
