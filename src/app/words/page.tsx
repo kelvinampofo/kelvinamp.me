@@ -3,7 +3,7 @@ import clsx from "clsx";
 import BackButton from "../components/back-button/BackButton";
 import Heading from "../components/heading/Heading";
 import Separator from "../components/separator/Separator";
-import layoutStyles from "../writing/WritingLayout.module.css";
+import layoutStyles from "../styles/layout.module.css";
 
 import styles from "./Words.module.css";
 
