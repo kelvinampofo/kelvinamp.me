@@ -1,17 +1,17 @@
+.pageLayout {
+  grid-column: 2;
+}
+
+.writingLayout {
+  grid-column: 2;
+}
+
 .craftLayout {
   grid-column: 2;
 }
 
 .description {
   color: var(--color-foreground-secondary);
-}
-
-.demoDate {
-  font-size: 0.875rem;
-  color: var(--color-foreground-secondary);
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-  margin-left: auto;
 }
 
 .navWrapper {

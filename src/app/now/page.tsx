@@ -2,7 +2,8 @@ import clsx from "clsx";
 
 import BackButton from "../components/back-button/BackButton";
 import Heading from "../components/heading/Heading";
-import styles from "../writing/WritingLayout.module.css";
+import Separator from "../components/separator/Separator";
+import styles from "../styles/layout.module.css";
 
 export default function Now() {
   return (
@@ -10,7 +11,7 @@ export default function Now() {
       <nav className={styles.navWrapper}>
         <BackButton href="/" />
       </nav>
-      <article className={clsx("basic-prose", styles.writingLayout)}>
+      <article className={clsx("basic-prose", styles.pageLayout)}>
         <Heading>Now</Heading>
         <p>
           Committed to developing skill, through guiltless exploration in

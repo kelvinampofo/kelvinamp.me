@@ -1,6 +1,6 @@
 import Link, { LinkProps } from "next/link";
 
-import styles from "../../writing/WritingLayout.module.css";
+import styles from "../../styles/layout.module.css";
 
 export default function BackButton({ href, ...props }: LinkProps) {
   return (
