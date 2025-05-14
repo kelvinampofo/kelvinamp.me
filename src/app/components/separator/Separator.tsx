@@ -1,10 +1,11 @@
 import clsx from "clsx";
-import type { ComponentProps } from "react";
 
 import styles from "./Separator.module.css";
 
-interface SeparatorProps extends ComponentProps<"div"> {
+interface SeparatorProps extends React.ComponentProps<"hr"> {
   orientation?: "horizontal" | "vertical";
+  rotated?: boolean;
+  rotationAngle?: number;
 }
 
 export default function Separator({
@@ -13,8 +14,9 @@ export default function Separator({
   ...props
 }: SeparatorProps) {
   return (
-    <div
+    <hr
       role="separator"
+      aria-orientation={orientation}
       className={clsx(
         styles.separator,
         orientation === "vertical" ? styles.vertical : styles.horizontal,

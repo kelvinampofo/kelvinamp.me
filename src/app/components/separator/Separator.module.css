@@ -1,7 +1,26 @@
 .separator {
   background-color: #e5e5e5;
-  height: 0.5px;
+  border: none;
+  margin: 0;
+  display: block;
+  transform-origin: center;
+}
+
+.horizontal {
+  height: var(--border-thin);
   width: 100%;
+}
+
+.vertical {
+  height: 100%;
+  width: 1px;
+  align-self: stretch;
+  display: inline-block;
+}
+
+.separator-container {
+  display: flex;
+  height: 1.2em;
 }
 
 @media (prefers-contrast: more) {

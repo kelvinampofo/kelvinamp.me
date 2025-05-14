@@ -13,7 +13,7 @@ a.listItemLink:hover {
   color: var(--color-foreground-secondary);
 }
 
-.listSeparator {
+hr.listSeparator {
   margin: 0.5rem 0;
 }
 
