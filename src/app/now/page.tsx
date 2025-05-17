@@ -32,7 +32,7 @@ export default function Now() {
           </a>
           ,{" "}
           <a
-            href="https://music.apple.com/gb/album/the-miseducation-of-lauryn-hill/1276760743"
+            href="https://music.apple.com/gb/album/wishful-thinking/1812297817"
             target="_blank"
             rel="noopener noreferrer"
           >
