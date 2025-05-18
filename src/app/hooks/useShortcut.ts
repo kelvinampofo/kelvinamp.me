@@ -1,12 +1,15 @@
 "use client";
 
-import { useEffect, useRef, type ModifierKey } from "react";
+import { useEffect, useRef } from "react";
+
+const MODIFIER_KEYS = ["Alt", "Control", "Meta", "Shift"] as const;
+type ModifierKey = (typeof MODIFIER_KEYS)[number];
 
 interface Options {
   preventDefault?: boolean;
   modifiers?: ModifierKey | ModifierKey[];
   target?: Window | Document | HTMLElement;
-  pressDelay?: number;
+  delay?: number;
 }
 
 export default function useShortcut(
@@ -14,7 +17,8 @@ export default function useShortcut(
   callback: () => void,
   options: Options = {}
 ) {
-  const { preventDefault = false, modifiers, target, pressDelay = 0 } = options;
+  const { preventDefault = false, modifiers, target, delay = 0 } = options;
+
   const callbackRef = useRef(callback);
 
   useEffect(() => {
@@ -24,15 +28,6 @@ export default function useShortcut(
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const clearHoldTimer = () => {
-      if (holdTimerRef.current !== null) {
-        clearTimeout(holdTimerRef.current);
-        holdTimerRef.current = null;
-      }
-    };
-
-    clearHoldTimer();
-
     if (typeof window === "undefined" && !target) {
       return;
     }
@@ -45,47 +40,62 @@ export default function useShortcut(
         : [shortcutKeys.toLowerCase()]
     );
 
-    const hasActiveModifiers = modifiers
-      ? Array.isArray(modifiers)
-        ? (e: KeyboardEvent) =>
-            modifiers.every((modifier) => e.getModifierState(modifier))
-        : (e: KeyboardEvent) => e.getModifierState(modifiers)
-      : () => true;
+    const clearHoldTimer = () => {
+      if (holdTimerRef.current !== null) {
+        clearTimeout(holdTimerRef.current);
+        holdTimerRef.current = null;
+      }
+    };
 
-    const triggerCallback = (e: KeyboardEvent) => {
+    const hasActiveModifiers = (e: KeyboardEvent) => {
+      const activeModifiers = MODIFIER_KEYS.filter((mod) =>
+        e.getModifierState(mod)
+      );
+
+      if (!modifiers) {
+        return activeModifiers.length === 0;
+      }
+
+      const expected = Array.isArray(modifiers) ? modifiers : [modifiers];
+
+      return (
+        activeModifiers.length === expected.length &&
+        expected.every((mod) => activeModifiers.includes(mod))
+      );
+    };
+
+    const handleCallback = (e: KeyboardEvent) => {
       if (preventDefault) {
         e.preventDefault();
       }
       callbackRef.current();
     };
 
-    const handleKeyDown: EventListener = (e) => {
+    const handleKeyDown = (e: Event) => {
       if (!(e instanceof KeyboardEvent)) {
         return;
       }
 
       const pressedKey = e.key.toLowerCase();
       const keyMatch = shortcutKeysSet.has(pressedKey);
+
       const modifierMatch = hasActiveModifiers(e);
 
       if (!keyMatch || !modifierMatch || holdTimerRef.current !== null) {
         return;
       }
 
-      if (pressDelay === 0) {
-        triggerCallback(e);
-        return;
+      if (delay === 0) {
+        handleCallback(e);
+      } else {
+        holdTimerRef.current = setTimeout(() => {
+          handleCallback(e);
+          holdTimerRef.current = null;
+        }, delay);
       }
-
-      holdTimerRef.current = setTimeout(() => {
-        triggerCallback(e);
-        holdTimerRef.current = null;
-      }, pressDelay);
     };
 
-    const handleKeyUp = () => {
-      clearHoldTimer();
-    };
+    const handleKeyUp = () => clearHoldTimer();
 
     targetElement.addEventListener("keydown", handleKeyDown);
     targetElement.addEventListener("keyup", handleKeyUp);
@@ -96,5 +106,5 @@ export default function useShortcut(
 
       clearHoldTimer();
     };
-  }, [shortcutKeys, modifiers, preventDefault, target, pressDelay]);
+  }, [shortcutKeys, modifiers, preventDefault, target, delay]);
 }
