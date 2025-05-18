@@ -3,8 +3,8 @@
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 
-import BackButton from "../components/back-button/BackButton";
-import styles from "../styles/layout.module.css";
+import BackButton from "../../components/back-button/BackButton";
+import styles from "../../styles/layout.module.css";
 
 interface CraftLayoutProps {
   children: React.ReactNode;

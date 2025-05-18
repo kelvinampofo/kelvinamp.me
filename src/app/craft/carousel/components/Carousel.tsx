@@ -8,7 +8,7 @@ import CentralLibraryImage from "../../../../../public/assets/images/carousel/ce
 import AliyevCenterImage from "../../../../../public/assets/images/carousel/heydar-aliyev-center.webp";
 import KyotoStationImage from "../../../../../public/assets/images/carousel/kyoto-station.webp";
 import ConcertHallImage from "../../../../../public/assets/images/carousel/walt-disney-concert-hall.webp";
-import usePointerDevice from "../../../hooks/usePointerDevice";
+import usePointerDevice from "../../../../hooks/usePointerDevice";
 
 import styles from "./Carousel.module.css";
 

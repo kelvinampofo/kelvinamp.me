@@ -4,9 +4,9 @@ import clsx from "clsx";
 import { motion, AnimatePresence } from "motion/react";
 import { useState, useCallback } from "react";
 
-import ShortcutKey from "../../../components/shortcut-key/ShortcutKey";
-import usePointerDevice from "../../../hooks/usePointerDevice";
-import useShortcut from "../../../hooks/useShortcut";
+import ShortcutKey from "../../../../components/shortcut-key/ShortcutKey";
+import usePointerDevice from "../../../../hooks/usePointerDevice";
+import useShortcut from "../../../../hooks/useShortcut";
 
 import styles from "./AdaptiveInterface.module.css";
 

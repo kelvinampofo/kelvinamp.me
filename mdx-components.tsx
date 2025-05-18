@@ -1,8 +1,8 @@
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 
-import Heading from "./src/app/components/heading/Heading";
-import Separator from "./src/app/components/separator/Separator";
+import Heading from "./src/components/heading/Heading";
+import Separator from "./src/components/separator/Separator";
 
 type Props<T extends keyof React.JSX.IntrinsicElements> =
   React.ComponentPropsWithoutRef<T>;

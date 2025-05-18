@@ -14,10 +14,6 @@ const contactLinks = [
     href: "https://github.com/kelvinampofo",
   },
   {
-    label: "Are.na",
-    href: "https://www.are.na/kelvin-ampofo/channels",
-  },
-  {
     label: "Email",
     href: "mailto:k@kelvinamp.me",
   },

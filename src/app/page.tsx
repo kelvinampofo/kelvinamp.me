@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-import Contact from "./components/contact/Contact";
-import Heading from "./components/heading/Heading";
-import Separator from "./components/separator/Separator";
-import StatusDisplay from "./components/status-display/StatusDisplay";
+import Contact from "../components/contact/Contact";
+import Heading from "../components/heading/Heading";
+import Separator from "../components/separator/Separator";
+import StatusDisplay from "../components/status-display/StatusDisplay";
 
 export default function Home() {
   return (

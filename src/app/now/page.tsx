@@ -1,8 +1,8 @@
 import clsx from "clsx";
 
-import BackButton from "../components/back-button/BackButton";
-import Heading from "../components/heading/Heading";
-import styles from "../styles/layout.module.css";
+import BackButton from "../../components/back-button/BackButton";
+import Heading from "../../components/heading/Heading";
+import styles from "../../styles/layout.module.css";
 
 export default function Now() {
   return (

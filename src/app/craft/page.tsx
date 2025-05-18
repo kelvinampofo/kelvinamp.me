@@ -1,6 +1,6 @@
-import Heading from "../components/heading/Heading";
-import List from "../components/list/List";
-import styles from "../styles/layout.module.css";
+import Heading from "../../components/heading/Heading";
+import List from "../../components/list/List";
+import styles from "../../styles/layout.module.css";
 
 import { getDemos } from "./utils";
 

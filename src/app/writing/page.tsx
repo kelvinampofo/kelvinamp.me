@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-import Heading from "../components/heading/Heading";
-import List from "../components/list/List";
-import styles from "../styles/layout.module.css";
+import Heading from "../../components/heading/Heading";
+import List from "../../components/list/List";
+import styles from "../../styles/layout.module.css";
 
 import { getPosts } from "./utils";
 
