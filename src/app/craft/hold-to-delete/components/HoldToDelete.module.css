@@ -7,18 +7,18 @@
   justify-content: center;
   overflow: hidden;
   border-radius: 0.375rem;
-  background-color: #fefefe;
+  background-color: var(--grey1);
   padding: 2px 3px;
-  outline: 1px solid rgb(229 231 235);
+  outline: var(--border-thin) solid var(--grey6);
   transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+  transition-timing-function: var(--ease-out-cubic);
+  transition-duration: var(--transition-hover);
   will-change: transform;
   user-select: none;
 }
 
 .button:hover {
-  background-color: rgb(243 244 246);
+  background-color: var(--grey3);
 }
 
 .button:active {
@@ -32,19 +32,8 @@
   color: var(--primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  .button {
-    background-color: #1a1a1a;
-    outline: 0.0625rem solid #262626;
-  }
-
-  .button:hover {
-    background-color: #26262675;
-  }
-
-  .content {
-    color: var(--color-foreground);
-  }
+.content {
+  color: var(--color-foreground);
 }
 
 .progress {
@@ -55,7 +44,7 @@
   height: 100%;
   background-color: rgba(239, 68, 68, 0.7);
   clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-  transition: clip-path 200ms linear;
+  transition: clip-path var(--transition-enter) linear;
 }
 
 .button:active .progress {

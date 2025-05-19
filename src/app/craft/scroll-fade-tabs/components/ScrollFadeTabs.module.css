@@ -23,7 +23,7 @@
   overflow-y: visible;
   white-space: nowrap;
   padding: 0.5rem;
-  transition: all 0.2s ease;
+  transition: all var(--transition-hover) var(--ease-out-cubic);
   will-change: scroll-position;
   -ms-overflow-style: none; /* hide scrollbar for IE/Edge */
   scrollbar-width: none; /* hide scrollbar for Firefox */
@@ -50,13 +50,13 @@
 .tabButtonBase {
   cursor: pointer;
   border-radius: 9999px;
-  border-width: 1px;
+  border-width: var(--border-thin);
   padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
   transition:
-    color 0.2s ease,
-    background-color 0.2s ease,
-    transform 0.1s ease;
+    color var(--transition-hover) var(--ease-out-cubic),
+    background-color var(--transition-hover) var(--ease-out-cubic),
+    transform var(--transition-exit) var(--ease-out-cubic);
 }
 
 .tabButtonBase:active {
@@ -64,37 +64,23 @@
 }
 
 .tabButtonSelected {
-  background-color: #3c82f6;
-  color: #fafafa;
+  background-color: var(--indigo);
+  color: var(--grey1);
 }
 
 .tabButtonDefault {
-  outline: 1px solid #d4d4d4;
-  background-color: #f5f5f5;
-  color: var(--foreground);
+  outline: var(--border-thin) solid var(--grey7);
+  background-color: var(--grey3);
+  color: var(--color-foreground);
 }
 
 .tabButtonSelected:hover {
-  background-color: #2563eb;
+  background-color: var(--indigo);
+  opacity: 0.9;
 }
 
 .tabButtonDefault:hover {
-  background-color: #e5e5e5;
+  background-color: var(--grey4);
 }
 
-@media (prefers-color-scheme: dark) {
-  .tabButtonDefault {
-    outline: 1px solid #262626;
-    background-color: #1a1a1a;
-    color: #f9fafb;
-  }
 
-  .tabButtonDefault:hover {
-    background-color: #26262675;
-  }
-
-  .tabButtonSelected {
-    border-color: #2563eb;
-    background-color: #2463eb;
-  }
-}

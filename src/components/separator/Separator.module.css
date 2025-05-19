@@ -1,5 +1,5 @@
 .separator {
-  background-color: #e5e5e5;
+  background-color: var(--grey5);
   border: none;
   margin: 0;
   display: block;
@@ -25,12 +25,6 @@
 
 @media (prefers-contrast: more) {
   .separator {
-    background-color: #7f7f7f;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .separator {
-    background-color: #2a2a2a;
+    background-color: var(--grey10);
   }
 }

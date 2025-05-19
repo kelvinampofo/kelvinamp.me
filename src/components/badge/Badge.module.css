@@ -3,13 +3,18 @@
   align-self: center;
   font-size: 0.75rem;
   line-height: 1rem;
-  color: #2563eb;
+  color: var(--indigo);
   background-size: 200%;
 }
 
 @media (prefers-color-scheme: dark) {
   .badge {
-    background-image: linear-gradient(to right, #2563eb, #5eead4, #2563eb);
+    background-image: linear-gradient(
+      to right,
+      var(--indigo),
+      var(--teal),
+      var(--indigo)
+    );
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;

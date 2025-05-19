@@ -4,9 +4,9 @@
   width: 250px;
   flex-shrink: 0;
   overscroll-behavior-x: contain;
-  background-color: #fff;
+  background-color: var(--color-background);
   text-align: center;
-  transition: all 300ms ease;
+  transition: all var(--transition-enter) var(--ease-out-cubic);
 }
 .slideItem:last-child {
   margin-right: 0;

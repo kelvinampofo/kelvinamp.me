@@ -2,24 +2,24 @@
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  color: #374151;
 }
 
 .key {
-  border-radius: 0.125rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  width: 20px;
+  height: 20px;
   padding: 0 4px;
+  border-radius: 0.125rem;
+
   font-size: 0.75rem;
-}
+  color: var(--grey11);
 
-@media (prefers-color-scheme: light) {
-  .key {
-    background-color: #f5f5f5;
-  }
-}
+  background-color: var(--grey3);
 
-@media (prefers-color-scheme: dark) {
-  .key {
-    background-color: #262626;
-    color: #d1d5db;
-  }
+  user-select: none;
+  -webkit-user-select: none;
 }

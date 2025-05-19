@@ -28,11 +28,11 @@
   color: transparent;
   background-image: linear-gradient(
     to right,
-    #0f0f11 0%,
-    #e5e7eb 40%,
-    #e5e7eb 50%,
-    #0f0f11 60%,
-    #0f0f11 100%
+    var(--grey12) 0%,
+    var(--greyA7) 40%,
+    var(--greyA7) 50%,
+    var(--grey12) 60%,
+    var(--grey12) 100%
   );
   animation: shimmer 2s linear infinite;
 }
@@ -40,18 +40,5 @@
 @keyframes shimmer {
   100% {
     background-position: -200% 0;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .shimmer {
-    background-image: linear-gradient(
-      to right,
-      #555555 0%,
-      #e5e7eb 40%,
-      #e5e7eb 50%,
-      #555555 60%,
-      #555555 100%
-    );
   }
 }

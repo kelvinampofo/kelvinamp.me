@@ -14,19 +14,14 @@
   display: flex;
   align-items: center;
   border-radius: 0.375rem;
-  outline: 1px solid #e5e7eb;
-  background-color: #fefefe;
-  transition: transform 150ms;
+  outline: var(--border-thin) solid var(--grey6);
+  background-color: var(--grey1);
+  transition: transform var(--transition-hover);
 
   color: var(--color-foreground);
 }
 
-@media (prefers-color-scheme: dark) {
-  .buttonBase {
-    outline: 0.0625rem solid #262626;
-    background-color: #1a1a1a;
-  }
-}
+
 
 .pressed {
   transform: scale(0.98);

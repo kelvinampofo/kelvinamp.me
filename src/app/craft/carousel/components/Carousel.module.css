@@ -6,18 +6,10 @@
   margin-left: 0;
   margin-right: 0;
   border-radius: 8px;
-  background: hsl(0 0% 97.3%);
-  outline: 1px solid #e5e5e5;
+  background: var(--grey1);
+  outline: 1px solid var(--grey4);
   margin-top: 2rem;
   margin-bottom: 2rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  .carouselContainer {
-    outline: 1px solid #262626;
-    background: #171717;
-    border-color: #262626;
-  }
 }
 
 @media (max-width: 767px) {
@@ -68,7 +60,7 @@
   border-radius: 0.125rem;
   margin: 0 0.5rem;
   color: var(--color-foreground-secondary);
-  transition: color 150ms;
+  transition: color var(--transition-hover);
   cursor: pointer;
 }
 .arrowButton:hover:not(:disabled) {
@@ -76,7 +68,7 @@
 }
 .arrowButton:disabled {
   cursor: not-allowed;
-  color: var(--color-gray-300);
+  color: var(--grey8);
 }
 
 .cursorLeft {

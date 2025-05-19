@@ -1,33 +1,43 @@
 .tooltipTrigger {
   display: inline-flex;
+  user-select: none;
   background-color: transparent;
   border: 0;
   border-radius: var(--tooltip-trigger-radius, 0.125rem);
-  user-select: none;
 }
 
 .tooltipPopup {
+  --tooltip-shadow-sm: rgb(0 0 0 / 0.1);
+  --tooltip-shadow-md: rgb(0 0 0 / 0.2);
+  --tooltip-transform-duration: 150ms;
+  --tooltip-opacity-duration: 150ms;
+
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  font-size: 0.8125rem;
-  font-variant-numeric: tabular-nums;
-  line-height: 1.25rem;
+
   padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  font-variant-numeric: tabular-nums;
   border-radius: 0.375rem;
+
   transform-origin: var(--transform-origin);
-  --tooltip-transform-duration: 150ms;
-  --tooltip-opacity-duration: 150ms;
   transition:
     transform var(--tooltip-transform-duration),
     opacity var(--tooltip-opacity-duration);
   box-shadow:
-    0 2px 2px rgb(0 0 0 / 0.1),
-    0 4px 12px rgb(0 0 0 / 0.2);
+    0 2px 2px var(--tooltip-shadow-sm),
+    0 4px 12px var(--tooltip-shadow-md);
 }
 
 .tooltipPopup[data-open] {
   --tooltip-opacity-duration: 6ms;
+}
+
+.tooltipPopup[data-instant] {
+  --tooltip-transform-duration: 0ms;
+  --tooltip-opacity-duration: 0ms;
 }
 
 .tooltipPopup[data-starting-style],
@@ -36,20 +46,14 @@
   transform: scale(0.9);
 }
 
-.tooltipPopup[data-instant] {
-  --tooltip-transform-duration: 0ms;
-  --tooltip-opacity-duration: 0ms;
-}
-
 @media (prefers-color-scheme: light) {
   .tooltipPopup {
-    background-color: #fefefe;
+    background-color: var(--grey1);
     outline: 1px solid rgb(9 9 11 / 0.1);
     box-shadow:
-      0 0.375rem 0.9375rem -0.5rem var(--color-gray-200),
-      0 0.25rem 0.375rem -0.25rem var(--color-gray-200);
+      0 0.375rem 0.9375rem -0.5rem var(--greyA3),
+      0 0.25rem 0.375rem -0.25rem var(--greyA3);
   }
-
   .tooltipArrowOuterStroke {
     fill: rgb(9 9 11 / 0.1);
   }
@@ -57,13 +61,12 @@
 
 @media (prefers-color-scheme: dark) {
   .tooltipPopup {
-    background-color: #171717;
-    outline: 1px solid #262626;
+    background-color: var(--grey1);
+    outline: 1px solid var(--grey4);
     outline-offset: -1px;
   }
-
   .tooltipArrowInnerStroke {
-    fill: #262626;
+    fill: var(--grey4);
   }
 }
 
@@ -92,11 +95,5 @@
 }
 
 .tooltipArrowFill {
-  fill: #fefefe;
-}
-
-@media (prefers-color-scheme: dark) {
-  .tooltipArrowFill {
-    fill: #171717;
-  }
+  fill: var(--grey1);
 }

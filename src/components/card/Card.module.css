@@ -2,18 +2,10 @@
   position: relative;
   width: 100%;
   border-radius: 8px;
-  background: hsl(0 0% 97.3%);
-  outline: 1px solid #e5e5e5;
+  outline: 1px solid var(--grey4);
+  background: var(--grey2);
   margin-top: 2rem;
   margin-bottom: 2rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  .cardContainer {
-    outline: 1px solid #262626;
-    background: #171717;
-    border-color: #262626;
-  }
 }
 
 .cardContent {
@@ -30,24 +22,6 @@
   font-size: 0.75rem;
   color: var(--color-foreground-secondary);
   text-align: center;
-}
-
-.cardContainer {
-  position: relative;
-  width: 100%;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  border-radius: 8px;
-  outline: 1px solid #e5e5e5;
-  background: hsl(0 0% 97.3%);
-}
-
-@media (prefers-color-scheme: dark) {
-  .cardContainer {
-    outline: 1px solid #262626;
-    border-color: #262626;
-    background: #171717;
-  }
 }
 
 .cardContent {
