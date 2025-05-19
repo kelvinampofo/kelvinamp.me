@@ -1,7 +1,6 @@
 .basic-prose {
   width: 100%;
   max-width: var(--content-max-width);
-  color: var(--color-foreground);
 }
 
 .basic-prose > :not(:last-child) {
@@ -23,8 +22,8 @@ a.basic-link,
   transition: var(--transition-hover);
   transition-property: -webkit-text-decoration-color, text-decoration-color;
   text-decoration: underline;
-  -webkit-text-decoration-color: var(--color-gray-300);
-  text-decoration-color: var(--color-gray-300);
+  -webkit-text-decoration-color: var(--grey6);
+  text-decoration-color: var(--grey6);
   text-decoration-thickness: 1px;
   text-underline-offset: 2.5px;
   outline-offset: 2px;
@@ -34,8 +33,8 @@ a.basic-link,
 @media (hover: hover) {
   :is(.basic-prose :where(a), .basic-link):hover:not([disabled]) {
     transition: var(--transition-hover);
-    -webkit-text-decoration-color: var(--color-gray-600);
-    text-decoration-color: var(--color-gray-600);
+    -webkit-text-decoration-color: var(--grey11);
+    text-decoration-color: var(--grey11);
   }
 }
 
