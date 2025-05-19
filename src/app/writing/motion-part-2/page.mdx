@@ -15,7 +15,7 @@ Here are a few notes on animation timing and restraint, especially in the contex
 Most UI animations should live between 150–300ms. This range feels quick, yet readable from a cognitive standpoint. It gives the eye just enough time to register change, without making the interface feel slow.
 
 - 150ms for hover transitions&mdash;our focus is already on the element.
-- 200ms enter / 150ms exit for popovers and modals&mdash;paired with an `ease-out` or `ease-in-out` curve for natural responsiveness.
+- 200ms enter / 150ms exit transitions for popovers and modals&mdash;paired with an `ease-out` or `ease-in-out` curve for natural responsiveness.
   - Tip: default to using [custom easing curves](https://gist.github.com/bendc/ac03faac0bf2aee25b49e5fd260a727d) if the built-in curve is not strong enough.
 - Evaluate anything else on a case-by-case basis, depending on spatial distance, frequency of use, and emotional tone
   - For instance, a gentle fade-in for a success notification can evoke calmness, while a quick bounce can suggest energy or urgency.
@@ -36,7 +36,7 @@ In these contexts:
 
 As a rule of thumb: if a component appears more than a few times a day, then default to no animation. If it’s a novel moment (like a login flow or onboarding), consider using motion to enhance perception and delight.
 
-Always be mindful of users who prefer reduced motion and respect the system preference. Provide a thoughtful default by using the `prefers-reduced-motion` media query on the web or equivalent iOS/Android APIs.
+Always be mindful of users who prefer reduced motion and respect the system preference. Provide a thoughtful default by using the `prefers-reduced-motion` media query on the web or equivalent iOS and Android APIs.
 
 ## Taste and Restraint
 
