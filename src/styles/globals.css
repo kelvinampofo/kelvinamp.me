@@ -163,3 +163,8 @@ main {
     transparent 100%
   );
 }
+
+* {
+  scrollbar-color: var(--grey7) transparent;
+  scrollbar-width: thin;
+}
