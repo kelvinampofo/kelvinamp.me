@@ -1,47 +1,30 @@
-@keyframes fade-transition {
-  from {
+[data-animate] {
+  --delay: 100ms;
+  --stagger: 0;
+
+  --animation-duration: 0.6s;
+  --animation-easing: ease;
+  --animation-delay: calc(var(--stagger) * var(--delay));
+
+  opacity: 0;
+  animation: enter-transition var(--animation-duration) var(--animation-easing)
+    var(--animation-delay) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@keyframes enter-transition {
+  0% {
     opacity: 0;
     transform: translateY(10px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-[data-animate] {
-  opacity: 0;
-  animation-name: fade-transition;
-  animation-duration: 0.6s;
-  animation-timing-function: var(--ease-out-cubic);
-  animation-fill-mode: forwards;
-  animation-delay: var(--delay, 0ms);
-}
-
-[data-animate][data-delay="100ms"] {
-  --delay: 100ms;
-}
-
-[data-animate][data-delay="200ms"] {
-  --delay: 200ms;
-}
-
-[data-animate][data-delay="250ms"] {
-  --delay: 250ms;
-}
-
-[data-animate][data-delay="300ms"] {
-  --delay: 300ms;
-}
-
-[data-animate][data-delay="350ms"] {
-  --delay: 350ms;
-}
-
-[data-animate][data-delay="400ms"] {
-  --delay: 400ms;
-}
-
-[data-animate][data-delay="450ms"] {
-  --delay: 450ms;
 }

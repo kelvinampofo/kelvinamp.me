@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { type CSSProperties, Fragment } from "react";
 
 import Heading from "../heading/Heading";
 
@@ -21,11 +21,14 @@ const contactLinks = [
 
 export default function Contact() {
   return (
-    <div data-animate data-delay="400ms">
+    <div data-animate style={{ "--stagger": "5" } as CSSProperties}>
       <Heading as="h2" className={styles.contactListHeading}>
         Connect
       </Heading>
-      <ul className={styles.contactList}>
+      <ul
+        className={styles.contactList}
+        style={{ "--stagger": "2" } as CSSProperties}
+      >
         {contactLinks.map(({ label, href }, index) => (
           <Fragment key={label}>
             <li>
@@ -39,9 +42,9 @@ export default function Contact() {
               </a>
             </li>
             {index < contactLinks.length - 1 && (
-              <li className={styles.dot} aria-hidden="true">
+              <span className={styles.dot} aria-hidden="true">
                 &middot;
-              </li>
+              </span>
             )}
           </Fragment>
         ))}
