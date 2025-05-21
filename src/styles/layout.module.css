@@ -37,3 +37,9 @@
 .navBackButton:hover {
   color: var(--color-foreground-secondary);
 }
+
+.errorStack {
+  background-color: transparent;
+  font-size: 0.875rem;
+  white-space: pre-wrap;
+}
