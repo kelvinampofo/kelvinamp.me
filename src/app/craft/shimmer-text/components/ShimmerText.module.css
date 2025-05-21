@@ -28,11 +28,11 @@
   color: transparent;
   background-image: linear-gradient(
     to right,
-    var(--grey12) 0%,
-    var(--greyA7) 40%,
-    var(--greyA7) 50%,
-    var(--grey12) 60%,
-    var(--grey12) 100%
+    var(--greyA8) 0%,
+    var(--grey12) 40%,
+    var(--grey12) 50%,
+    var(--greyA8) 60%,
+    var(--greyA8) 100%
   );
   animation: shimmer 2s linear infinite;
 }
