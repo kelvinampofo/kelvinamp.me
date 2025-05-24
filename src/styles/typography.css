@@ -112,3 +112,27 @@ pre code {
     background: #222;
   }
 }
+
+.prose-sup {
+  font-size: 0.75em;
+  line-height: 1;
+  color: var(--color-foreground-secondary);
+}
+
+.prose-sup a {
+  text-decoration: none;
+  border-radius: 2px;
+  padding: 1px 2px;
+  transition: var(--transition-hover);
+}
+
+@media (hover: hover) {
+  .prose-sup a:hover {
+    background-color: var(--grey3);
+  }
+}
+
+.footnotes {
+  color: var(--color-foreground-secondary);
+  font-size: 0.875em;
+}
