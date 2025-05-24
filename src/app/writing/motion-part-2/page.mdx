@@ -1,6 +1,6 @@
 export const metadata = {
   title: "Motion Part 2",
-  description: "Guidelines on when to animate&mdash;and when not to.",
+  description: "Notes on when to animate and when not to.",
   publishedDate: "2025-05-05",
 };
 
@@ -12,7 +12,7 @@ Here are a few notes on animation timing and restraint, especially in the contex
 
 ## General Guidelines
 
-Most UI animations should live between 150–300ms. This range feels quick, yet readable from a cognitive standpoint. It gives the eye just enough time to register change, without making the interface feel slow.
+Most UI animations should live between 200–300ms.<sup className="prose-sup"><a href="#fn-1">1</a></sup> This range feels quick, yet readable from a cognitive standpoint. It gives the eye just enough time to register change, without making the interface feel slow.
 
 - 150ms for hover transitions&mdash;our focus is already on the element.
 - 200ms enter / 150ms exit transitions for popovers and modals&mdash;paired with an `ease-out` or `ease-in-out` curve for natural responsiveness.
@@ -26,13 +26,13 @@ As a baseline, transitions should serve the user’s mental model. They shouldn�
 
 Animations are not always helpful. There are cases where motion gets in the way&mdash;especially with high-frequency UI patterns.
 
-For example, macOS menus and tools like Raycast avoid entrance animations for things like context menus or launchers. These are tools you call upon dozens of times a day. Any added delay, even 100ms, can accumulate into friction. Perceived performance _feels_ faster.
+For example, macOS menus and tools like Raycast avoid entrance animations for things like context menus or launchers. These are tools you call upon dozens of times a day. Any added delay, even 100ms, can accumulate into friction. Perceived performance _feels_ faster.<sup className="prose-sup"><a href="#fn-2">2</a></sup>
 
 In these contexts:
 
 - Skip entrance animations. Fade out if needed, but keep presentation instant.
 - Avoid transitions between submenu items (e.g., hover states or delayed fades).
-- Function over flourish. Motion should never block comprehension or speed.
+- Function over flourish. Motion should never block comprehension or speed.<sup className="prose-sup"><a href="#fn-3">3</a></sup>
 
 As a rule of thumb: if a component appears more than a few times a day, then default to no animation. If it’s a novel moment (like a login flow or onboarding), consider using motion to enhance perception and delight.
 
@@ -44,11 +44,24 @@ Animation is a tool for _storytelling_ but it requires taste&mdash;knowing when 
 
 Approach motion design like editing a film: just as every cut and transition in a film supports the narrative and guides the viewer’s attention, every bit of motion in an interface should support the user’s journey and serve the story.
 
-## Resources
-
 ---
 
-1. [Human processor model](https://en.wikipedia.org/wiki/Human_processor_model)
-2. [Learning From Terminals to Design the Future of User Interfaces](https://brandur.org/interfaces)
-3. [Executing UX Animations: Duration and Motion Characteristics](https://www.nngroup.com/articles/animation-duration)
-4. [Fitts' law](https://en.wikipedia.org/wiki/Fitts%27s_law)
+<section className="footnotes">
+  <ol className="prose-lists">
+    <li id="fn-1">
+      The average [visual reaction time is 230
+      ms](https://en.wikipedia.org/wiki/Human_processor_model). This indicates
+      that a duration of 200-300 ms is ideal for most animations, while 100-150
+      ms is effective for micro-interactions.
+    </li>
+    <li id="fn-2">
+      Interfaces that respond instantly are often [perceived as more
+      performant](https://brandur.org/interfaces), even if they aren't.
+    </li>
+    <li id="fn-3">
+      When used sparingly, animation helps communicate state changes, reduce
+      ambiguity, and reinforce intent. The key is to stay out of the way.{" "}
+    </li>
+  </ol>
+</section>
+ 
