@@ -136,3 +136,9 @@ pre code {
   color: var(--color-foreground-secondary);
   font-size: 0.875em;
 }
+
+q::before,
+q::after {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-indent: -0.4em;
+}
