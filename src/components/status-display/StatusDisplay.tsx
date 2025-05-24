@@ -1,6 +1,6 @@
 "use client";
 
-import { type CSSProperties, useState } from "react";
+import { useState } from "react";
 
 import BrowserInfoView from "./components/BrowserInfo";
 import ClockView from "./components/Clock";
@@ -30,7 +30,7 @@ export default function StatusDisplay() {
       className={styles.statusDisplay}
       onMouseDown={toggleView}
       data-animate
-      style={{ "--stagger": "7" } as CSSProperties}
+      style={{ "--stagger": "7" }}
     >
       <ActiveView />
     </div>
