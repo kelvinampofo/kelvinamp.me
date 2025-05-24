@@ -1,8 +1,15 @@
 import clsx from "clsx";
+import { Metadata } from "next";
 
 import BackButton from "../../components/back-button/BackButton";
 import Heading from "../../components/heading/Heading";
 import styles from "../../styles/layout.module.css";
+
+export const metadata: Metadata = {
+  title: "Now",
+  description: "Current focus and stage in life",
+  metadataBase: new URL("https://kelvinamp.me/now"),
+};
 
 export default function Now() {
   return (
