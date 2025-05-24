@@ -62,11 +62,11 @@
 @media (prefers-color-scheme: dark) {
   .tooltipPopup {
     background-color: var(--grey1);
-    outline: 1px solid var(--grey4);
+    outline: 1px solid var(--grey5);
     outline-offset: -1px;
   }
   .tooltipArrowInnerStroke {
-    fill: var(--grey4);
+    fill: var(--grey5);
   }
 }
 
