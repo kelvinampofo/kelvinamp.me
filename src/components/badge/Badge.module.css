@@ -3,7 +3,7 @@
   align-self: center;
   font-size: 0.75rem;
   line-height: 1rem;
-  color: var(--indigo);
+  color: var(--blue);
   background-size: 200%;
 }
 
@@ -11,9 +11,9 @@
   .badge {
     background-image: linear-gradient(
       to right,
-      var(--indigo),
+      var(--blue),
       var(--teal),
-      var(--indigo)
+      var(--blue)
     );
     background-clip: text;
     -webkit-background-clip: text;
