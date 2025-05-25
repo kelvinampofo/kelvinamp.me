@@ -1,7 +1,7 @@
 .contactList {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .contactList .dot {
@@ -14,5 +14,5 @@
 }
 
 .dot {
-  color: var(--grey8);
+  color: var(--grey11);
 }
