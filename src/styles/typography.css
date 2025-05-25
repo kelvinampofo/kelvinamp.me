@@ -79,8 +79,8 @@ i {
 code {
   font-family: var(--font-family-mono);
   font-size: 0.85em;
-  background-color: #ededed;
-  border-radius: 4px;
+  background-color: var(--grey3);
+  border-radius: 3px;
   padding: 0.2em 0.4em;
   color: var(--color-foreground);
   font-size: 0.8125rem;
@@ -89,18 +89,18 @@ code {
 pre {
   border-radius: 8px;
   margin-top: 1rem;
-  background-color: #ededed;
+  background-color: var(--grey3);
 }
 
 pre code {
   font-family: var(--font-family-mono);
-  background: #ededed;
+  background: var(--grey3);
   font-size: 0.85em;
   line-height: 1.45;
   padding: 1em;
   display: block;
   overflow-x: auto;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 @media (prefers-color-scheme: dark) {
