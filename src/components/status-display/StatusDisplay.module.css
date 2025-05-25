@@ -1,7 +1,7 @@
 .statusDisplay {
   display: inline-flex;
   margin-top: 18px;
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-variant-numeric: tabular-nums;
   color: var(--color-foreground-secondary);
   cursor: default;
