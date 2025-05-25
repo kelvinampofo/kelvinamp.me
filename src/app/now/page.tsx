@@ -20,13 +20,13 @@ export default function Now() {
       <article className={clsx("basic-prose", styles.pageLayout)}>
         <Heading>Now</Heading>
         <p>
-          Committed to developing skill, through guiltless exploration in
-          software <em className="font-serif">&</em> design.
+          Nurturing a taste for <em>quality</em> and allowing it to guide
+          everything I design and engineer.
         </p>
         <p>
           All I want to do is make software. Interactivity, typography, motion,
-          touch optimisations, accessibility, design&mdash;an infinite canvas
-          for creativity and opportunity.
+          touch, optimisations, accessibility, design, architecture&mdash;an
+          infinite canvas for creativity and opportunity.
         </p>
         <p>
           Pursuits aside, probably{" "}
@@ -44,14 +44,6 @@ export default function Now() {
             rel="noopener noreferrer"
           >
             listening
-          </a>
-          ,{" "}
-          <a
-            href="https://youtube.com/playlist?list=PL_xPJT_mBnFm9mYbzx3Ed61o1ZD3w17n9&si=jVu1IodbNsjB8LOx"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            watching
           </a>
           , or playing with the Porsche{" "}
           <a
