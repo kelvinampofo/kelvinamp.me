@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { useState, useEffect, CSSProperties } from "react";
+import { useState, useEffect } from "react";
 
 import { useTime } from "../../hooks/useTime";
 
@@ -51,7 +51,7 @@ function ClockHand({ rotation, type }: ClockHandProps) {
   return (
     <div
       className={clsx(styles.clockHand, typeClass)}
-      style={{ "--rotation": `${rotation}deg` } as CSSProperties}
+      style={{ "--rotation": `${rotation}deg` }}
     />
   );
 }
