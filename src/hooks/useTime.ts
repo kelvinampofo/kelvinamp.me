@@ -1,46 +1,45 @@
-import { format } from "date-fns";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 
 type Options = {
   timeZone?: string;
 };
 
 export const useTime = ({ timeZone = "Europe/London" }: Options = {}) => {
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState<Date | null>(null);
 
-  useEffect(function updateTime() {
+  useEffect(() => {
+    setTime(new Date());
     const intervalId = setInterval(() => setTime(new Date()), 1000);
+
     return () => clearInterval(intervalId);
   }, []);
 
-  // convert the current time based on the provided timeZone
-  const convertedTime = useMemo(() => {
-    return timeZone ? new Date(time.toLocaleString("en", { timeZone })) : time;
-  }, [time, timeZone]);
+  if (time === null) {
+    return { currentTime: "", timezoneOffset: "", timezoneName: "" };
+  }
 
-  const currentTime = useMemo(
-    () => format(convertedTime, "HH:mm:ss"),
-    [convertedTime]
-  );
+  const currentTime = new Intl.DateTimeFormat("en-GB", {
+    timeZone,
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).format(time);
 
-  const timezoneOffset = useMemo(
-    () => format(convertedTime, "zzzz"),
-    [convertedTime]
-  );
+  const offsetParts = new Intl.DateTimeFormat("en-GB", {
+    timeZone,
+    timeZoneName: "longOffset",
+  }).formatToParts(time);
 
-  const timezoneName = useMemo(() => {
-    const formatter = new Intl.DateTimeFormat("en-GB", {
-      timeZone,
-      timeZoneName: "short",
-    });
+  const timezoneOffset =
+    offsetParts.find((part) => part.type === "timeZoneName")?.value ?? "";
 
-    const parts = formatter.formatToParts(convertedTime);
-    return parts.find((p) => p.type === "timeZoneName")?.value ?? "";
-  }, [convertedTime, timeZone]);
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone,
+    timeZoneName: "short",
+  }).formatToParts(time);
 
-  return {
-    currentTime,
-    timezoneOffset,
-    timezoneName,
-  };
+  const timezoneName =
+    parts.find((part) => part.type === "timeZoneName")?.value ?? "";
+
+  return { currentTime, timezoneOffset, timezoneName };
 };
