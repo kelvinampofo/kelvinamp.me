@@ -58,6 +58,16 @@ const wordEntries: WordEntryProps[] = [
     definition:
       "a small and particularly interesting item of gossip or information",
   },
+  {
+    word: "anomalous",
+    type: "adjective",
+    definition: "deviating from what is standard, normal, or expected",
+  },
+  {
+    word: "trawling",
+    type: "noun",
+    definition: "the activity of searching or sifting through something",
+  },
 ];
 
 export default function Words() {
