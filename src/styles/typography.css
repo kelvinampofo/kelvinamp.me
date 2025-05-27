@@ -128,7 +128,7 @@ pre code {
 
 @media (hover: hover) {
   .prose-sup a:hover {
-    background-color: var(--grey3);
+    background-color: var(--grey6);
   }
 }
 
