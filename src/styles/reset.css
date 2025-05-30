@@ -1,14 +1,3 @@
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-
-p {
-  text-wrap: pretty;
-}
-
 h1,
 h2,
 h3,
@@ -16,19 +5,35 @@ h4 {
   text-wrap: balance;
 }
 
-ul,
-ol {
-  list-style: none;
+p {
+  text-wrap: pretty;
 }
 
-* {
-  font-synthesis: none;
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
 }
 
 button {
   all: unset;
 }
 
+ul,
+ol {
+  list-style: none;
+}
+
 kbd {
   font-family: inherit;
+}
+
+* {
+  font-synthesis: none;
 }
