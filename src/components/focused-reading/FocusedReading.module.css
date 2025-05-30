@@ -1,9 +1,12 @@
 .focusedReading[data-focus-mode="enabled"] :where(p, pre, li, img, div) {
+  --transition: 200ms ease;
+
   opacity: 0.6;
   filter: blur(2px);
-  transition: 220ms;
-  transition-property: opacity filter;
   cursor: crosshair;
+  transition:
+    opacity var(--transition),
+    filter var(--transition);
 }
 
 .focusedReading[data-focus-mode="enabled"] :where(p, pre, li, img, div):hover {
