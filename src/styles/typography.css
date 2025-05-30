@@ -11,29 +11,19 @@ article.basic-prose {
   position: relative;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-a.basic-link,
-.basic-prose a {
+:is(.basic-prose a, a.basic-link) {
   position: relative;
-  transition: var(--transition-hover);
-  transition-property: -webkit-text-decoration-color, text-decoration-color;
   text-decoration: underline;
-  -webkit-text-decoration-color: var(--grey6);
   text-decoration-color: var(--grey6);
   text-decoration-thickness: 1px;
   text-underline-offset: 2.5px;
-  outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: 4px;
+  transition: text-decoration-color var(--transition-hover);
 }
 
 @media (hover: hover) {
-  :is(.basic-prose :where(a), .basic-link):hover:not([disabled]) {
-    transition: var(--transition-hover);
-    -webkit-text-decoration-color: var(--grey11);
+  :is(.basic-prose a, a.basic-link):hover:not([disabled]),
+  :is(.basic-prose a, a.basic-link):focus-visible {
     text-decoration-color: var(--grey11);
   }
 }
