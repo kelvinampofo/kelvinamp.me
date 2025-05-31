@@ -29,8 +29,8 @@
   --greyA11: rgba(0, 0, 0, 0.565);
   --greyA12: rgba(0, 0, 0, 0.91);
 
-  --blue: #094ACE;
-  --teal: #5eead4;
+  --blue: oklch(54.6% 0.245 262.881);
+  --teal: oklch(77.7% 0.152 181.912);
 }
 
 @media (prefers-color-scheme: dark) {
