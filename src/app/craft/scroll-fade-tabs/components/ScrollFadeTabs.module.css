@@ -25,8 +25,8 @@
   padding: 0.5rem;
   transition: all var(--transition-hover) var(--ease-out-cubic);
   will-change: scroll-position;
-  -ms-overflow-style: none; /* hide scrollbar for IE/Edge */
-  scrollbar-width: none; /* hide scrollbar for Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .maskGradient {
@@ -64,7 +64,7 @@
 }
 
 .tabButtonSelected {
-  background-color: var(--indigo);
+  background-color: var(--blue);
   color: var(--grey1);
 }
 
@@ -75,12 +75,10 @@
 }
 
 .tabButtonSelected:hover {
-  background-color: var(--indigo);
+  background-color: var(--blue);
   opacity: 0.9;
 }
 
 .tabButtonDefault:hover {
   background-color: var(--grey4);
 }
-
-
