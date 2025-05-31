@@ -34,6 +34,13 @@
   fill: currentColor;
 }
 
+/* workaround for firefox to align the svg icon vertically */
+@supports (-moz-appearance: none) {
+  .navBackButton svg {
+    transform: translateY(1.5px);
+  }
+}
+
 .navBackButton:hover {
   color: var(--color-foreground-secondary);
 }
