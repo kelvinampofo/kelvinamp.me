@@ -1,4 +1,4 @@
-import { format, isAfter, subMonths, parseISO } from "date-fns";
+import { format, isAfter, subMonths, parseISO, isThisYear } from "date-fns";
 import Link from "next/link";
 import { Fragment } from "react";
 
@@ -28,6 +28,17 @@ export default function List({
   showDescription = false,
   dateFormat = "dd/MM/yy",
 }: ListProps) {
+  function getDisplayDate(dateString: string, dateFormat: string) {
+    const date = parseISO(dateString);
+    const formatString = isThisYear(dateString)
+      ? dateFormat === "MMMM yyyy"
+        ? "MMMM"
+        : "dd/MM"
+      : dateFormat;
+
+    return format(date, formatString);
+  }
+
   return (
     <ol>
       {items.map(({ id, slug, title, publishedDate, description }, index) => {
@@ -51,7 +62,7 @@ export default function List({
                   {isNew && <Badge>new</Badge>}
                 </span>
                 <span className={styles.postDate}>
-                  {format(new Date(publishedDate), dateFormat)}
+                  {getDisplayDate(publishedDate, dateFormat)}
                 </span>
               </Link>
             </li>
