@@ -19,22 +19,22 @@ interface ListProps {
   items: ListItem[];
   basePath: string;
   showDescription?: boolean;
-  dateFormat?: string;
 }
 
 export default function List({
   items,
   basePath,
   showDescription = false,
-  dateFormat = "dd/MM/yy",
 }: ListProps) {
-  function getDisplayDate(dateString: string, dateFormat: string) {
+  function getDisplayDate(dateString: string) {
     const date = parseISO(dateString);
-    const formatString = isThisYear(dateString)
-      ? dateFormat === "MMMM yyyy"
+    const formatString = basePath.includes("writing")
+      ? isThisYear(date)
+        ? "dd MMMM"
+        : "dd MMM yyyy"
+      : isThisYear(date)
         ? "MMMM"
-        : "dd/MM"
-      : dateFormat;
+        : "MMMM yyyy";
 
     return format(date, formatString);
   }
@@ -62,7 +62,7 @@ export default function List({
                   {isNew && <Badge>new</Badge>}
                 </span>
                 <span className={styles.postDate}>
-                  {getDisplayDate(publishedDate, dateFormat)}
+                  {getDisplayDate(publishedDate)}
                 </span>
               </Link>
             </li>

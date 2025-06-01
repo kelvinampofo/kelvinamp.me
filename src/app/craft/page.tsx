@@ -13,12 +13,7 @@ export default async function CraftPage() {
       <p className={styles.description}>
         Collection of web prototypes <em>&</em> interfaces.
       </p>
-      <List
-        items={demos}
-        basePath="/craft"
-        showDescription
-        dateFormat="MMMM yyyy"
-      />
+      <List items={demos} basePath="/craft" showDescription />
     </>
   );
 }
