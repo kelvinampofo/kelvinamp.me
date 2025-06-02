@@ -50,7 +50,6 @@
 .tabButtonBase {
   cursor: pointer;
   border-radius: 9999px;
-  border-width: var(--border-thin);
   padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
   transition:
@@ -65,7 +64,7 @@
 
 .tabButtonSelected {
   background-color: var(--blue);
-  color: var(--grey1);
+  color: #fcfcfc;
 }
 
 .tabButtonDefault {
