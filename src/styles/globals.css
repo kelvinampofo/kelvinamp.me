@@ -22,11 +22,14 @@ html {
 }
 
 body {
-  font-family: var(--font-family-sans);
+  font-family: var(--font-inter);
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1;
   font-size: var(--font-size-base);
-  font-feature-settings: "calt" 1;
-  touch-action: manipulation;
   line-height: 1.5;
+
+  touch-action: manipulation;
   background: var(--color-background);
   color: var(--color-foreground);
   -webkit-font-smoothing: antialiased;

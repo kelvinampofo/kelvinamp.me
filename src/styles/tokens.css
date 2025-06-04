@@ -69,10 +69,6 @@
 
 :root {
   --font-size-base: 16px;
-  --font-family-sans:
-    "Inter", -apple-system, "BlinkMacSystemFont", "Roboto", "Oxygen", "Ubuntu",
-    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  --font-display: "Inter", var(--font-fallback);
   --font-family-serif: "Newsreader", "Georgia", "Times", serif;
   --font-family-mono: "Jetbrains mono", "Roboto Mono", monospace;
   --font-style-italic:
