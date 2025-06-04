@@ -1,10 +1,10 @@
-import Link, { LinkProps } from "next/link";
+import Link, { type LinkProps } from "next/link";
 
-import styles from "../../styles/layout.module.css";
+import styles from "./BackButton.module.css";
 
 export default function BackButton({ href, ...props }: LinkProps) {
   return (
-    <Link href={href} className={styles.navBackButton} {...props}>
+    <Link href={href} className={styles.backButton} {...props}>
       <ArrowTopLeft />
       <em>Back</em>
     </Link>

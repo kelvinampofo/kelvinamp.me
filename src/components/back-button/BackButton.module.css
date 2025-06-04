@@ -1,0 +1,23 @@
+.backButton {
+  border-radius: 4px;
+  display: flex;
+  gap: 6px;
+  color: var(--color-foreground);
+  transition: color 150ms ease;
+}
+
+.backButton svg {
+  transform: translateY(4px);
+  fill: currentColor;
+}
+
+/* workaround for firefox to align the svg icon vertically */
+@supports (-moz-appearance: none) {
+  .backButton svg {
+    transform: translateY(1.5px);
+  }
+}
+
+.backButton:hover {
+  color: var(--color-foreground-secondary);
+}

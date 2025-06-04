@@ -20,31 +20,6 @@
   align-self: start;
 }
 
-.navBackButton {
-  border-radius: 4px;
-  padding: 4px 6px 4px 4px;
-  display: flex;
-  gap: 6px;
-  color: var(--color-foreground);
-  transition: color 150ms ease;
-}
-
-.navBackButton svg {
-  transform: translateY(4px);
-  fill: currentColor;
-}
-
-/* workaround for firefox to align the svg icon vertically */
-@supports (-moz-appearance: none) {
-  .navBackButton svg {
-    transform: translateY(1.5px);
-  }
-}
-
-.navBackButton:hover {
-  color: var(--color-foreground-secondary);
-}
-
 .errorStack {
   background-color: transparent;
   font-size: 0.875rem;
