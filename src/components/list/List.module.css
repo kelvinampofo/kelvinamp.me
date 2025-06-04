@@ -3,7 +3,7 @@ a.listItemLink {
   justify-content: flex-start;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.25rem;
+  padding: 0.5rem;
   text-decoration: none;
   color: var(--color-foreground);
   transition: color 150ms ease;
@@ -14,14 +14,14 @@ a.listItemLink:hover {
 }
 
 hr.listSeparator {
-  margin: 0.5rem 0;
+  margin: 0.25rem 0;
 }
 
 .postDate {
   font-size: 0.875rem;
+  font-feature-settings: "tnum";
   color: var(--color-foreground-secondary);
   white-space: nowrap;
-  font-variant-numeric: tabular-nums;
   margin-left: auto;
 }
 
