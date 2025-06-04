@@ -12,7 +12,7 @@ export default function Home() {
         Kelvin Ampofo
       </Heading>
       <p data-animate style={{ "--stagger": "2" }}>
-        Making software with an emphasis on human-computer interaction and
+        Making software with emphasis on human-computer interaction and
         aesthetic sensibility. Insatiable curiosity for{" "}
         <em>novel interfaces</em>.
       </p>
