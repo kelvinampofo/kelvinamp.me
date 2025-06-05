@@ -1,11 +1,10 @@
 import Heading from "../../components/heading/Heading";
 import List from "../../components/list/List";
 import styles from "../../styles/layout.module.css";
-
-import { getDemos } from "./utils";
+import { getEntries } from "../utils";
 
 export default async function CraftPage() {
-  const demos = await getDemos();
+  const demos = await getEntries("craft");
 
   return (
     <>
