@@ -11,6 +11,11 @@
   scrollbar-width: thin;
 }
 
+* {
+  scrollbar-color: var(--grey7) transparent;
+  scrollbar-width: thin;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -55,10 +60,14 @@ main {
 }
 
 .main-grid {
+  --column-length: 192px;
+
   display: grid;
-  grid-template-columns: 192px var(--content-max-width) 192px;
-  column-gap: var(--spacing-gutter);
   align-items: flex-start;
+  grid-template-columns: var(--column-length) var(--content-max-width) var(
+      --column-length
+    );
+  column-gap: var(--spacing-gutter);
 }
 
 @media (max-width: 1024px) {
@@ -165,9 +174,4 @@ main {
     var(--background) 0%,
     transparent 100%
   );
-}
-
-* {
-  scrollbar-color: var(--grey7) transparent;
-  scrollbar-width: thin;
 }
