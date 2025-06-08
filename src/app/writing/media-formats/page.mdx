@@ -8,12 +8,10 @@ export const metadata = {
 
 Some notes on media formats. Recommended watch: [Explore media formats for the web](https://youtu.be/qB9L-ZYM1_0?si=ZRq60cGJWnDxZFxX).
 
-## Existing formats
-
-### GIF
+## GIF
 
 - 8 bits per pixel (256 colours), huge file sizes.
-  - good for memes, bad for actual image quality&mdash;avoid for anything longer than a few seconds
+- good for memes, bad for actual image quality&mdash;avoid for anything longer than a few seconds
 
 ## JPEG
 
@@ -25,33 +23,29 @@ Some notes on media formats. Recommended watch: [Explore media formats for the w
 - lossless with alpha channel
 - best for UI elements, not efficient for photo-like images
 
-## Modern formats
-
-### WebP
+## WebP
 
 - supports animation, transparency, and both lossy and lossless compression
-
-  - lossy: similar to JPEG but ~25-35% smaller files
-  - lossless: similar to PNG but ~26% smaller files
-
-- better than GIF, PNG, and JPEG in most cases&mdash;ideal for the modern web though ensure fallback for older Safari versions (< 14)
+  - lossy: [~25-34%](https://developers.google.com/speed/webp/docs/webp_study) smaller than JPEG
+  - lossless: [~26%](https://developers.google.com/speed/webp/docs/webp_lossless_alpha_study#results) smaller than PNG
+- better than GIF, PNG, and JPEG in most cases&mdash;ideal for the modern web; ensure fallback for older Safari versions (< 14)
 
 ## AVIF
 
-- newer format built on AV1 codec to achieve high compression rate with no sacrifice to video quality
-  - smaller than JPEG/WebP, supports up to 12 bits colour depth, HDR and animation&mdash;should be the default if supported, though decoding can be CPU-intensive on some platforms
+- newer format built on AV1 codec to achieve a high compression rate with no sacrifice to video quality
+- smaller than JPEG/WebP, supports up to 12 bits colour depth, HDR, and animation
+- should be the default if supported, though decoding can be CPU-intensive on some platforms
 
 ## JPEG XL
 
-- designed to replace JPEG
-- supports both lossy and lossles, still not widely supported&mdash;some browsers have discontinued or disabled support by default (e.g., Chrome)
+- designed to replace JPEG, with both lossy and lossless support
+- discontinued or disabled support (e.g., Chrome)
 
 ## HEIC
 
 - Apple’s format for iOS photos
-
-  - great compression, Live Photo support, depth data&mdash;not safe for Web-convert to WebP or AVIF first
-  - use the HTML `&lt;picture&gt;` element, which allows you to specify alternative `&lt;source&gt;` elements&mdash;enabling the browser to choose a format it supports from top to bottom.
+- great compression, Live Photo support, depth data&mdash;not safe for the web, convert to WebP or AVIF first
+- use the HTML `&lt;picture&gt;` element to specify fallbacks, allowing the browser to choose a supported format from top to bottom.
 
 <aside aria-label="This is a code block of an HTML picture element with source fallbacks for HEIC, AVIF, WebP, and JPEG.">
   ```html
@@ -66,9 +60,9 @@ Some notes on media formats. Recommended watch: [Explore media formats for the w
 
 ## General Guidelines
 
-- prefer AVIF → WebP → JPEG/PNG
+- prefer AVIF -> WebP -> JPEG/PNG
 - for UI assets: SVG > PNG
 - avoid GIF unless essential
 - use WebP or video formats for animations
-- if intending to use [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview)&mdash;use HEIC as it's [hardware accelerated](https://en.wikipedia.org/wiki/Hardware_acceleration)
+- for [WKWebView](https://developer.apple.com/documentation/webkit/wkwebview): use HEIC for hardware acceleration
 - always serve the smallest viable file
