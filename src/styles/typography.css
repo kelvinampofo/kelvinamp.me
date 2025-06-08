@@ -128,4 +128,29 @@ q::before,
 q::after {
   font-family: var(--font-quote);
   text-indent: -0.4em;
+  padding: 0 0.1em;
+}
+
+.basic-prose blockquote {
+  --quote-offset: 2px;
+
+  position: relative;
+  color: var(--color-foreground-secondary);
+  quotes: "“" "”" "‘" "’";
+}
+
+.basic-prose blockquote::before {
+  content: open-quote;
+  font-family: var(--font-quote);
+  position: absolute;
+  left: calc(-1 * var(--quote-offset));
+  transform: translateX(-100%);
+  line-height: var(--leading);
+  color: var(--color-foreground-secondary);
+}
+
+.basic-prose blockquote :last-child::after {
+  content: close-quote;
+  font-family: var(--font-quote);
+  margin-left: var(--quote-offset);
 }
