@@ -69,11 +69,11 @@
 
 :root {
   --font-size-base: 16px;
-  --font-family-serif: "Newsreader", "Georgia", "Times", serif;
   --font-family-mono: "Jetbrains mono", "Roboto Mono", monospace;
   --font-style-italic:
     400 italic calc(1em + 1px) / normal "Newsreader", "Signifier", "Times",
     serif;
+  --font-quote: Georgia, "Times New Roman", Times, serif;
   --font-weight-heading: 500;
 
   --leading: 28px;

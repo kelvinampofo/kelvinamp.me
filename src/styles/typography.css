@@ -129,6 +129,6 @@ pre code {
 
 q::before,
 q::after {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--font-quote);
   text-indent: -0.4em;
 }
