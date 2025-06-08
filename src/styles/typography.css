@@ -70,27 +70,24 @@ code {
   font-family: var(--font-family-mono);
   font-size: 0.85em;
   background-color: var(--grey3);
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0.2em 0.4em;
   color: var(--color-foreground);
-  font-size: 0.8125rem;
 }
 
 pre {
   border-radius: 8px;
   margin-top: 1rem;
   background-color: var(--grey3);
+  padding: 1em;
+  overflow-x: auto;
 }
 
 pre code {
-  font-family: var(--font-family-mono);
-  background: var(--grey3);
+  display: block;
   font-size: 0.85em;
   line-height: 1.45;
-  padding: 1em;
-  display: block;
-  overflow-x: auto;
-  border-radius: 3px;
+  color: var(--color-foreground);
 }
 
 @media (prefers-color-scheme: dark) {
