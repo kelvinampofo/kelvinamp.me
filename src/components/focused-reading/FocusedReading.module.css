@@ -1,4 +1,5 @@
-.focusedReading[data-focus-mode="enabled"] :where(p, pre, li, img, div) {
+.focusedReading[data-focus-mode="enabled"]
+  :where(p, pre, li, img, div, blockquote) {
   --transition: 200ms ease;
 
   opacity: 0.6;
@@ -9,7 +10,8 @@
     filter var(--transition);
 }
 
-.focusedReading[data-focus-mode="enabled"] :where(p, pre, li, img, div):hover {
+.focusedReading[data-focus-mode="enabled"]
+  :where(p, pre, li, img, div, blockquote):hover {
   opacity: 1;
   filter: none;
 }
