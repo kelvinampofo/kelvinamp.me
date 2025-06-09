@@ -3,7 +3,8 @@ a.listItemLink {
   justify-content: flex-start;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
+  margin: 0 -0.5rem;
   text-decoration: none;
   color: var(--color-foreground);
   transition: color 150ms ease;
