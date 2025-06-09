@@ -64,7 +64,6 @@ ol.prose-lists li {
 em,
 i {
   font: var(--font-style-italic);
-  color: var(--grey12);
 }
 
 code {
