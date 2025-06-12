@@ -14,14 +14,12 @@
   display: flex;
   align-items: center;
   border-radius: 0.375rem;
-  outline: var(--border-thin) solid var(--grey6);
+  outline: 1px solid var(--grey4);
   background-color: var(--grey1);
   transition: transform var(--transition-hover);
 
   color: var(--color-foreground);
 }
-
-
 
 .pressed {
   transform: scale(0.98);

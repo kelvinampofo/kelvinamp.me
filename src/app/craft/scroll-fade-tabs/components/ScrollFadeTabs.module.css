@@ -68,7 +68,7 @@
 }
 
 .tabButtonDefault {
-  outline: var(--border-thin) solid var(--grey7);
+  outline: 1px solid var(--grey5);
   background-color: var(--grey3);
   color: var(--color-foreground);
 }
