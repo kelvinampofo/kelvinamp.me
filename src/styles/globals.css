@@ -8,7 +8,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  scrollbar-width: thin;
 }
 
 * {
@@ -123,12 +122,12 @@ main {
   }
 }
 
-.blur-overlay {
+.blur {
   --h: min(96px, var(--spacing-page-top));
   --direction: to bottom;
   --blur-radius: 4px;
   --mask-stop: 25%;
-  --blur-opacity: 0.95;
+  --blur-opacity: 0.92;
   --blur-z: 1;
 
   position: sticky;
@@ -143,29 +142,29 @@ main {
   pointer-events: none;
 
   -webkit-backdrop-filter: blur(var(--blur-radius));
-  backdrop-filter: blur(var(--blur-radius));
-
   -webkit-mask-image: linear-gradient(
     var(--direction),
     #000 var(--mask-stop),
     transparent
   );
+
   mask-image: linear-gradient(
     var(--direction),
     #000 var(--mask-stop),
     transparent
   );
+  backdrop-filter: blur(var(--blur-radius));
 
   opacity: var(--blur-opacity);
   z-index: var(--blur-z);
 }
 
-.blur-overlay:first-child {
+.blur:first-child {
   top: 0;
   margin-bottom: calc(-1 * var(--h));
 }
 
-.blur-overlay::after {
+.blur::after {
   content: "";
   position: absolute;
   inset: 0;

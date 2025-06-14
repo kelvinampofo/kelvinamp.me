@@ -31,7 +31,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
     <html lang="en" suppressHydrationWarning className={inter.variable}>
       <body>
         <div id="__next">
-          <div className="blur-overlay" aria-hidden />
+          <div className="blur" aria-hidden />
           <main>
             <div className="main-grid">
               <ThemeProvider>
