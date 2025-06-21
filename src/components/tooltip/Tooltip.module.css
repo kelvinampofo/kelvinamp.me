@@ -16,18 +16,18 @@
   display: flex;
   flex-direction: column;
 
-  padding: 0.375rem 0.75rem;
+  padding: 0.375rem 0.625rem;
   font-size: 0.8125rem;
   line-height: 1.25rem;
   font-variant-numeric: tabular-nums;
-  border-radius: 0.375rem;
+  border-radius: 0.5rem;
 
   transform-origin: var(--transform-origin);
   transition:
     transform var(--tooltip-transform-duration),
     opacity var(--tooltip-opacity-duration);
   box-shadow:
-    0 2px 2px var(--tooltip-shadow-sm),
+    0px 2px 4px 0px var(--tooltip-shadow-sm),
     0 4px 12px var(--tooltip-shadow-md);
 }
 
@@ -48,14 +48,16 @@
 
 @media (prefers-color-scheme: light) {
   .tooltipPopup {
-    background-color: var(--grey1);
-    outline: 1px solid rgb(9 9 11 / 0.1);
+    --tooltip-outline-color: rgb(9 9 11 / 0.1);
+
+    background-color: var(--grey2);
+    outline: 1px solid var(--tooltip-outline-color);
     box-shadow:
-      0 0.375rem 0.9375rem -0.5rem var(--greyA3),
-      0 0.25rem 0.375rem -0.25rem var(--greyA3);
+      0px 6px 15px -8px var(--greyA6),
+      0px 4px 6px -4px var(--greyA6);
   }
   .tooltipArrowOuterStroke {
-    fill: rgb(9 9 11 / 0.1);
+    fill: var(--tooltip-outline-color);
   }
 }
 
