@@ -15,6 +15,8 @@
 }
 
 .navWrapper {
+  position: sticky;
+  top: var(--spacing-page-top);
   grid-column: 1;
   justify-self: center;
   align-self: start;
@@ -24,4 +26,11 @@
   background-color: transparent;
   font-size: 0.875rem;
   white-space: pre-wrap;
+}
+
+@media (max-width: 768px) {
+  .navWrapper {
+    position: static;
+    top: auto;
+  }
 }
