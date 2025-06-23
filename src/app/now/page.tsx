@@ -17,7 +17,7 @@ export default function Now() {
       <nav className={styles.navWrapper}>
         <BackButton href="/" />
       </nav>
-      <article className={clsx("basic-prose", styles.pageLayout)}>
+      <article className={clsx("prose", styles.pageLayout)}>
         <Heading>Now</Heading>
         <p>
           Nurturing a taste for <em>quality</em> and allowing it to guide

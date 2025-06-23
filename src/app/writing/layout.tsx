@@ -25,12 +25,12 @@ export default function WritingLayout({
       </nav>
       {isPost ? (
         <FocusedReading>
-          <article className={clsx("basic-prose", styles.writingLayout)}>
+          <article className={clsx("prose", styles.writingLayout)}>
             {children}
           </article>
         </FocusedReading>
       ) : (
-        <article className={clsx("basic-prose", styles.writingLayout)}>
+        <article className={clsx("prose", styles.writingLayout)}>
           {children}
         </article>
       )}

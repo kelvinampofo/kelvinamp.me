@@ -1,17 +1,17 @@
-.basic-prose {
+.prose {
   width: 100%;
   max-width: var(--content-max-width);
 }
 
-.basic-prose > :not(:last-child) {
+.prose > :not(:last-child) {
   margin-bottom: 28px;
 }
 
-article.basic-prose {
+article.prose {
   position: relative;
 }
 
-:is(.basic-prose a, a.basic-link) {
+:is(.prose a, a.prose-link) {
   position: relative;
   text-decoration: underline;
   text-decoration-color: var(--grey6);
@@ -22,41 +22,41 @@ article.basic-prose {
 }
 
 @media (hover: hover) {
-  :is(.basic-prose a, a.basic-link):hover:not([disabled]),
-  :is(.basic-prose a, a.basic-link):focus-visible {
+  :is(.prose a, a.prose-link):hover:not([disabled]),
+  :is(.prose a, a.prose-link):focus-visible {
     text-decoration-color: var(--grey11);
   }
 }
 
-ul.prose-lists,
-ol.prose-lists {
+ul.prose-list,
+ol.prose-list {
   list-style-position: outside;
   padding-left: 18px;
 }
 
-ul.prose-lists {
+ul.prose-list {
   list-style-type: disc;
 }
 
-ul.prose-lists ul {
+ul.prose-list ul {
   list-style-type: circle;
 }
 
-ol.prose-lists {
+ol.prose-list {
   list-style-type: decimal;
 }
 
-.prose-lists li::marker {
+.prose-list li::marker {
   color: var(--color-foreground-secondary);
 }
 
-ul.prose-lists li + li,
-ol.prose-lists li + li {
+ul.prose-list li + li,
+ol.prose-list li + li {
   margin-top: 8px;
 }
 
-ul.prose-lists li,
-ol.prose-lists li {
+ul.prose-list li,
+ol.prose-list li {
   line-height: var(--line-height-base);
   margin-top: 8px;
 }
@@ -66,7 +66,8 @@ i {
   font: var(--font-style-italic);
 }
 
-code {
+code,
+.prose-code--inline {
   font-family: var(--font-family-mono);
   font-size: 0.85em;
   background-color: var(--grey3);
@@ -75,7 +76,7 @@ code {
   color: var(--color-foreground);
 }
 
-pre {
+.prose-pre {
   border-radius: 8px;
   margin-top: 1rem;
   background-color: var(--grey3);
@@ -83,7 +84,7 @@ pre {
   overflow-x: auto;
 }
 
-pre code {
+.prose-code--block {
   display: block;
   font-size: 0.85em;
   line-height: 1.45;
@@ -95,18 +96,18 @@ pre code {
     background-color: #222;
     border-color: #262626;
   }
-  pre code {
+  .prose-code--block {
     background: #222;
   }
 }
 
-.prose-sup {
+.prose-superscript {
   font-size: 0.75em;
   line-height: 1;
   color: var(--color-foreground-secondary);
 }
 
-.prose-sup a {
+.prose-superscript a {
   text-decoration: none;
   border-radius: 2px;
   padding: 1px 2px;
@@ -114,12 +115,12 @@ pre code {
 }
 
 @media (hover: hover) {
-  .prose-sup a:hover {
-    background-color: var(--grey6);
+  .prose-superscript a:hover {
+    background-color: var(--grey4);
   }
 }
 
-.footnotes {
+.prose-footnotes {
   color: var(--color-foreground-secondary);
   font-size: 0.875em;
 }
@@ -131,7 +132,7 @@ q::after {
   padding: 0 0.1em;
 }
 
-.basic-prose blockquote {
+.prose .prose-blockquote {
   --quote-offset: 2px;
 
   position: relative;
@@ -139,7 +140,7 @@ q::after {
   quotes: "“" "”" "‘" "’";
 }
 
-.basic-prose blockquote::before {
+.prose .prose-blockquote::before {
   content: open-quote;
   font-family: var(--font-quote);
   position: absolute;
@@ -149,7 +150,7 @@ q::after {
   color: var(--color-foreground-secondary);
 }
 
-.basic-prose blockquote :last-child::after {
+.prose .prose-blockquote :last-child::after {
   content: close-quote;
   font-family: var(--font-quote);
   margin-left: var(--quote-offset);

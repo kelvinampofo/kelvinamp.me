@@ -16,7 +16,7 @@ export default function NotFound() {
       <nav className={styles.navWrapper}>
         <BackButton href="/" />
       </nav>
-      <article className={clsx("basic-prose", styles.pageLayout)}>
+      <article className={clsx("prose", styles.pageLayout)}>
         <Heading>404</Heading>
         <p>
           Do you know what else is not found? That one perfect hex code you

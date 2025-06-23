@@ -7,7 +7,7 @@ import StatusDisplay from "../components/status-display/StatusDisplay";
 
 export default function Home() {
   return (
-    <article className="basic-prose">
+    <article className="prose">
       <Heading data-animate style={{ "--stagger": "1" }}>
         Kelvin Ampofo
       </Heading>

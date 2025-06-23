@@ -77,14 +77,12 @@ export default function Words() {
         <BackButton href="/writing" />
       </nav>
 
-      <article className={clsx("basic-prose", layoutStyles.writingLayout)}>
+      <article className={clsx("prose", layoutStyles.writingLayout)}>
         <Heading>Words</Heading>
         <p className={layoutStyles.description}>
           Curated collection of appealing language.
         </p>
-
         <Separator className={styles.wordsSeparator} />
-
         <dl className={styles.wordsList}>
           {wordEntries.map(({ word, type, definition, variations }) => (
             <WordEntry

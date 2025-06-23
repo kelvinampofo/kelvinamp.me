@@ -20,7 +20,7 @@ export default function CraftLayout({ children }: Readonly<CraftLayoutProps>) {
       <nav className={styles.navWrapper}>
         <BackButton href={backHref} />
       </nav>
-      <article className={clsx("basic-prose", styles.craftLayout)}>
+      <article className={clsx("prose", styles.craftLayout)}>
         {children}
       </article>
     </>

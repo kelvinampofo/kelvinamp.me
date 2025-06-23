@@ -11,7 +11,7 @@ export default function Error({
   error: Error & { digest?: string };
 }) {
   return (
-    <article className={clsx("basic-prose", styles.pageLayout)}>
+    <article className={clsx("prose", styles.pageLayout)}>
       <Heading>{error.name}</Heading>
       <p>{error.message}</p>
       <pre className={styles.errorStack}>{error.stack}</pre>
