@@ -20,8 +20,8 @@ export default function Now() {
       <article className={clsx("prose", styles.pageLayout)}>
         <Heading>Now</Heading>
         <p>
-          Nurturing a taste for <em>quality</em> and allowing it to guide
-          everything I design and engineer.
+          Nurturing a taste for quality by <em>doing</em>, through pacing,
+          practice, and consistency.
         </p>
         <p>
           All I want to do is make software. Interactivity, typography, motion,
@@ -55,7 +55,9 @@ export default function Now() {
           </a>
           .
         </p>
-        <p>Speaking less, unless I can improve the silence.</p>
+        <blockquote className="prose-blockquote">
+          <p>Don&apos;t talk unless you can improve the silence</p>
+        </blockquote>
       </article>
     </>
   );
