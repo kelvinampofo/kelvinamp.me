@@ -1,0 +1,114 @@
+.timelineContainer {
+  --tick-width: 1px;
+  --tick-height: 16px;
+  --tick-width-active: 2px;
+  --tick-border-radius: 3px;
+  --tick-margin-horizontal: 6px;
+  --tick-height-mobile: 16px;
+  --tick-active-height-multiplier: 1.8;
+  --tick-margin-bottom-active: 12px;
+  --tick-margin-bottom-mobile: 9px;
+  --active-tick-color: #ff4c00;
+  --tick-easing: cubic-bezier(0.4, 2, 0.6, 1);
+  --transition-tick:
+    background 200ms var(--tick-easing), transform 200ms var(--tick-easing);
+
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.timelineButton {
+  display: flex;
+  color: var(--grey10);
+  font-size: 24px;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.timelineButton:hover:not(.disabled) {
+  background: var(--greyA3);
+  transition: var(--transition-hover);
+}
+
+.timelineButton.disabled {
+  cursor: not-allowed;
+  color: var(--greyA6);
+}
+
+.timelineTicks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-width: min-content;
+  width: 100%;
+}
+
+.timelineTick {
+  height: var(--tick-height);
+  width: var(--tick-width);
+  border-radius: var(--tick-border-radius);
+  background: var(--grey10);
+  margin: 0 var(--tick-margin-horizontal);
+  transition: var(--transition-tick);
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.timelineTick::after {
+  --hit-area: 8px;
+
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  padding: var(--hit-area);
+  pointer-events: auto;
+}
+
+.timelineTick:nth-of-type(even) {
+  background: var(--grey8);
+}
+
+.timelineTick.active {
+  width: var(--tick-width-active);
+  margin-bottom: var(--tick-margin-bottom-active);
+  background: var(--active-tick-color);
+  transform: scaleY(var(--tick-active-height-multiplier));
+  border-radius: var(--tick-border-radius);
+  z-index: 5;
+}
+
+.timelineYearLabel {
+  position: absolute;
+  left: 50%;
+  top: -150%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  color: var(--color-foreground-secondary);
+}
+
+@media (max-width: 600px) {
+  .timelineContainer {
+    padding: 0 8px;
+  }
+
+  .timelineTicks {
+    min-width: 100px;
+  }
+
+  .timelineTick {
+    height: var(--tick-height-mobile);
+    width: var(--tick-width);
+    border-radius: var(--tick-border-radius);
+  }
+
+  .timelineTick.active {
+    margin-bottom: var(--tick-margin-bottom-mobile);
+  }
+}
