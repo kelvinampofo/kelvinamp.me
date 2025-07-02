@@ -48,12 +48,16 @@
 .timelineTick {
   height: var(--tick-height);
   width: var(--tick-width);
-  background: var(--grey10);
+  background: var(--grey8);
   margin: 0 var(--tick-margin-horizontal);
   transition: var(--transition-tick);
   align-items: center;
   position: relative;
   z-index: 1;
+}
+
+.timelineTick:nth-of-type(4n) {
+  background: var(--grey10);
 }
 
 .timelineTick::after {
@@ -68,10 +72,6 @@
   height: 100%;
   padding: var(--hit-area);
   pointer-events: auto;
-}
-
-.timelineTick:nth-of-type(even) {
-  background: var(--grey8);
 }
 
 .timelineTick.active {
