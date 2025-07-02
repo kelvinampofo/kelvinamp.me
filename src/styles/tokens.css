@@ -110,7 +110,7 @@
 
 @media (max-width: 768px) {
   :root {
-    --spacing-page-top: 96px;
+    --spacing-page-top: 64px;
   }
 }
 
