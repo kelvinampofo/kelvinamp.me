@@ -1,11 +1,11 @@
 .timelineContainer {
   --tick-width: 1px;
   --tick-height: 18px;
-  --tick-width-active: 1.5px;
+  --tick-width-active: 1.6px;
   --tick-border-radius: 3px;
   --tick-margin-horizontal: 6px;
   --tick-height-mobile: 16px;
-  --tick-active-height-multiplier: 1.2;
+  --tick-active-height-multiplier: 1.8;
   --tick-margin-bottom-active: 12px;
   --tick-margin-bottom-mobile: 9px;
   --active-tick-color: #ff4d00;
