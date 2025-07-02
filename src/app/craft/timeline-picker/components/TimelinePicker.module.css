@@ -1,14 +1,14 @@
 .timelineContainer {
   --tick-width: 1px;
-  --tick-height: 16px;
-  --tick-width-active: 2px;
+  --tick-height: 18px;
+  --tick-width-active: 1.5px;
   --tick-border-radius: 3px;
   --tick-margin-horizontal: 6px;
   --tick-height-mobile: 16px;
-  --tick-active-height-multiplier: 1.8;
+  --tick-active-height-multiplier: 1.2;
   --tick-margin-bottom-active: 12px;
   --tick-margin-bottom-mobile: 9px;
-  --active-tick-color: #ff4c00;
+  --active-tick-color: #ff4d00;
   --tick-easing: cubic-bezier(0.4, 2, 0.6, 1);
   --transition-tick:
     background 200ms var(--tick-easing), transform 200ms var(--tick-easing);
@@ -48,7 +48,6 @@
 .timelineTick {
   height: var(--tick-height);
   width: var(--tick-width);
-  border-radius: var(--tick-border-radius);
   background: var(--grey10);
   margin: 0 var(--tick-margin-horizontal);
   transition: var(--transition-tick);
@@ -80,17 +79,7 @@
   margin-bottom: var(--tick-margin-bottom-active);
   background: var(--active-tick-color);
   transform: scaleY(var(--tick-active-height-multiplier));
-  border-radius: var(--tick-border-radius);
   z-index: 5;
-}
-
-.timelineYearLabel {
-  position: absolute;
-  left: 50%;
-  top: -150%;
-  transform: translateX(-50%);
-  pointer-events: none;
-  color: var(--color-foreground-secondary);
 }
 
 @media (max-width: 600px) {
