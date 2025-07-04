@@ -56,7 +56,7 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
 
       <div className={styles.timelineTicks}>
         {ticks.map((_, index) => (
-          <TimelineTick
+          <Tick
             key={index}
             index={index}
             tick={index}
@@ -80,7 +80,7 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
   );
 }
 
-function TimelineTick({
+function Tick({
   tick,
   index,
   isActive,
@@ -92,14 +92,10 @@ function TimelineTick({
   onSelect: (index: number) => void;
 }) {
   return (
-    <button
-      className={clsx(styles.timelineTick, {
-        [styles.active]: isActive,
-      })}
-      type="button"
+    <div
+      className={styles.timelineTick}
+      data-active={isActive}
       key={tick}
-      aria-pressed={isActive}
-      tabIndex={isActive ? 0 : -1}
       onClick={() => onSelect(index)}
     />
   );
