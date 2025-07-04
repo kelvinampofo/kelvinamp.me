@@ -1,7 +1,7 @@
 .cardContainer {
   position: relative;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 12px;
   outline: 1px solid var(--grey4);
   background: var(--grey2);
   margin-top: 2rem;
