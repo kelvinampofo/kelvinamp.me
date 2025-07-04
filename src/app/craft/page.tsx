@@ -10,7 +10,7 @@ export default async function CraftPage() {
     <>
       <Heading>Craft</Heading>
       <p className={styles.description}>
-        Collection of web prototypes <em>&</em> interfaces.
+        Collection of interfaces <em>&</em> interactions.
       </p>
       <List items={demos} basePath="/craft" showDescription />
     </>
