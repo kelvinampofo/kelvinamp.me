@@ -20,13 +20,13 @@ export default function Now() {
       <article className={clsx("prose", styles.pageLayout)}>
         <Heading>Now</Heading>
         <p>
-          Nurturing a taste for quality by <em>doing</em>, through pacing,
-          practice, and consistency.
+          Cultivating a taste for quality through deliberate practice, pacing,
+          and consistency.
         </p>
         <p>
           All I want to do is make software. Interactivity, typography, motion,
-          touch, optimisations, accessibility, design, architecture&mdash;an
-          infinite canvas for creativity and opportunity.
+          touch, performance, accessibility, design—an endless canvas for
+          creativity and <em>possibility</em>.
         </p>
         <p>
           Pursuits aside, probably{" "}
