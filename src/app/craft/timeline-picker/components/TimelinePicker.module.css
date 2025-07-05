@@ -7,7 +7,7 @@
   --tick-active-height-multiplier: 1.6;
   --tick-margin-bottom-active: 12px;
   --tick-margin-bottom-mobile: 9px;
-  --active-tick-color: #ffc600;
+  --active-tick-color: var(--yellow);
   --tick-easing: cubic-bezier(0.4, 2, 0.6, 1);
   --transition-tick:
     background 150ms var(--tick-easing), transform 150ms var(--tick-easing);
@@ -54,12 +54,8 @@
   z-index: 1;
 }
 
-.timelineTick:nth-of-type(2n) {
+.timelineTick:nth-of-type(3n) {
   background: var(--grey10);
-}
-
-.timelineTick:nth-child(11) {
-  background: var(--active-tick-color);
 }
 
 .timelineTick::after {

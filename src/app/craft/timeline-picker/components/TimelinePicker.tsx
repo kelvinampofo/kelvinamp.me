@@ -7,14 +7,14 @@ import useSound from "use-sound";
 import styles from "./TimelinePicker.module.css";
 
 const SOUND_URL = "/assets/sounds/tick.mp3";
-const TICK_COUNT = 21;
+const TICK_COUNT = 20;
 
 interface TimelinePickerProps {
   onSelect?: (tick: number) => void;
 }
 
 export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
-  const [currentIndex, setCurrentIndex] = useState(10);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [play] = useSound(SOUND_URL, {
     volume: 0.25,
   });
