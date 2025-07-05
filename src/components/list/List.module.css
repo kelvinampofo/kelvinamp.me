@@ -1,20 +1,21 @@
-a.listItemLink {
+.listItem {
+  --spacing: 0.75rem;
+
+  gap: var(--spacing);
+  padding: var(--spacing);
+  margin: 0 calc(var(--spacing) * -1);
+  color: var(--color-foreground);
+}
+
+.listItem > a {
   display: flex;
   justify-content: flex-start;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  margin: 0 -0.5rem;
   text-decoration: none;
-  color: var(--color-foreground);
   transition: color 150ms ease;
 }
 
-a.listItemLink:hover {
+.listItem:hover {
   color: var(--color-foreground-secondary);
-}
-
-.listSeparator {
-  margin: 0.25rem 0;
 }
 
 .postDate {

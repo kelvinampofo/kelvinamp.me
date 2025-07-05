@@ -49,18 +49,15 @@ export default function List({
 
         return (
           <Fragment key={id}>
-            <li>
-              <Link
-                href={`${basePath}/${slug}`}
-                className={styles.listItemLink}
-              >
-                <span className={styles.titleRow}>
+            <li className={styles.listItem}>
+              <Link href={`${basePath}/${slug}`}>
+                <div className={styles.titleRow}>
                   <p>{title}</p>
                   {showDescription && (
                     <span className={styles.description}>{description}</span>
                   )}
                   {isNew && <Badge>new</Badge>}
-                </span>
+                </div>
                 <span className={styles.postDate}>
                   {getDisplayDate(publishedDate)}
                 </span>
