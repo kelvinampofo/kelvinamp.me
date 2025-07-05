@@ -29,11 +29,17 @@
   display: flex;
   align-items: center;
   gap: 0.375rem;
-  color: var(--primary);
+  color: var(--color-foreground);
 }
 
-.content {
-  color: var(--color-foreground);
+.content > svg {
+  opacity: 0.9;
+}
+
+@media (prefers-color-scheme: dark) {
+  .content > svg {
+    opacity: 0.9;
+  }
 }
 
 .progress {
