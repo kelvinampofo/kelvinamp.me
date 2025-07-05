@@ -29,6 +29,7 @@
   --greyA11: rgba(0, 0, 0, 0.565);
   --greyA12: rgba(0, 0, 0, 0.91);
 
+  --yellow: oklch(85.4% 0.175 87.5deg);
   --blue: oklch(54.6% 0.245 262.881);
   --teal: oklch(77.7% 0.152 181.912);
 }
@@ -64,6 +65,12 @@
     --greyA10: hsla(0, 0%, 100%, 0.446);
     --greyA11: hsla(0, 0%, 100%, 0.592);
     --greyA12: hsla(0, 0%, 100%, 0.923);
+  }
+}
+
+@supports (color: color(display-p3 1 1 1)) {
+  :root {
+    --yellow: color(display-p3 1 0.78 0/1);
   }
 }
 
