@@ -27,9 +27,6 @@ html {
 
 body {
   font-family: var(--font-inter);
-  font-feature-settings:
-    "liga" 1,
-    "calt" 1;
   font-size: var(--font-size-base);
   line-height: 1.5;
 

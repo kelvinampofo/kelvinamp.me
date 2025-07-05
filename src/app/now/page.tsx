@@ -56,7 +56,7 @@ export default function Now() {
           .
         </p>
         <blockquote className="prose-blockquote">
-          <p>Don&apos;t talk unless you can improve the silence</p>
+          <p>Don’t talk unless you can improve the silence</p>
         </blockquote>
       </article>
     </>

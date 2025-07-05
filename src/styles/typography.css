@@ -1,6 +1,14 @@
 .prose {
   width: 100%;
   max-width: var(--content-max-width);
+  /* see https://rsms.me/inter/#features for font feature options and details */
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1,
+    "kern",
+    "frac",
+    "ss08",
+    "ss07";
 }
 
 .prose > :not(:last-child) {
@@ -50,15 +58,14 @@ ol.prose-list {
   color: var(--color-foreground-secondary);
 }
 
-ul.prose-list li + li,
-ol.prose-list li + li {
+ul.prose-list li,
+ol.prose-list li {
   margin-top: 8px;
 }
 
-ul.prose-list li,
-ol.prose-list li {
-  line-height: var(--line-height-base);
-  margin-top: 8px;
+ul.prose-list li:first-child,
+ol.prose-list li:first-child {
+  margin-top: 0;
 }
 
 em,
@@ -66,8 +73,7 @@ i {
   font: var(--font-style-italic);
 }
 
-code,
-.prose-code--inline {
+code {
   font-family: var(--font-family-mono);
   font-size: 0.85em;
   background-color: var(--grey3);
@@ -82,23 +88,6 @@ code,
   background-color: var(--grey3);
   padding: 1em;
   overflow-x: auto;
-}
-
-.prose-code--block {
-  display: block;
-  font-size: 0.85em;
-  line-height: 1.45;
-  color: var(--color-foreground);
-}
-
-@media (prefers-color-scheme: dark) {
-  code {
-    background-color: #222;
-    border-color: #262626;
-  }
-  .prose-code--block {
-    background: #222;
-  }
 }
 
 .prose-superscript {
@@ -125,13 +114,6 @@ code,
   font-size: 0.875em;
 }
 
-q::before,
-q::after {
-  font-family: var(--font-quote);
-  text-indent: -0.4em;
-  padding: 0 0.1em;
-}
-
 .prose .prose-blockquote {
   --quote-offset: 2px;
 
@@ -142,7 +124,6 @@ q::after {
 
 .prose .prose-blockquote::before {
   content: open-quote;
-  font-family: var(--font-quote);
   position: absolute;
   left: calc(-1 * var(--quote-offset));
   transform: translateX(-100%);
@@ -152,6 +133,5 @@ q::after {
 
 .prose .prose-blockquote :last-child::after {
   content: close-quote;
-  font-family: var(--font-quote);
   margin-left: var(--quote-offset);
 }
