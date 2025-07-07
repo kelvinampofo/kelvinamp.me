@@ -1,6 +1,7 @@
 "use client";
 
 import clsx from "clsx";
+import { motion } from "motion/react";
 import { useState } from "react";
 import useSound from "use-sound";
 
@@ -91,12 +92,31 @@ function Tick({
   isActive: boolean;
   onSelect: (index: number) => void;
 }) {
+  const activeProps = {
+    scaleY: 1.6,
+    marginBottom: 12,
+  };
+
+  const inactiveProps = {
+    scaleY: 1,
+    marginBottom: 0,
+  };
+
   return (
-    <div
+    <motion.div
+      initial={false}
       className={styles.timelineTick}
       data-active={isActive}
       key={tick}
       onClick={() => onSelect(index)}
+      animate={isActive ? activeProps : inactiveProps}
+      transition={{
+        type: "spring",
+        stiffness: 600,
+        damping: 25,
+        bounce: 0.22,
+        duration: 0.22,
+      }}
     />
   );
 }

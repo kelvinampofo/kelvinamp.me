@@ -4,13 +4,9 @@
   --tick-width-active: 1.6px;
   --tick-border-radius: 3px;
   --tick-margin-horizontal: 6px;
-  --tick-active-height-multiplier: 1.6;
   --tick-margin-bottom-active: 12px;
   --tick-margin-bottom-mobile: 9px;
   --active-tick-color: var(--yellow);
-  --tick-easing: cubic-bezier(0.4, 2, 0.6, 1);
-  --transition-tick:
-    background 150ms var(--tick-easing), transform 150ms var(--tick-easing);
 
   display: flex;
   align-items: center;
@@ -44,13 +40,12 @@
 }
 
 .timelineTick {
+  position: relative;
   height: var(--tick-height);
   width: var(--tick-width);
-  background: var(--grey8);
-  margin: 0 var(--tick-margin-horizontal);
-  transition: var(--transition-tick);
   align-items: center;
-  position: relative;
+  margin: 0 var(--tick-margin-horizontal);
+  background: var(--grey8);
   z-index: 1;
 }
 
@@ -76,7 +71,6 @@
   width: var(--tick-width-active);
   margin-bottom: var(--tick-margin-bottom-active);
   background: var(--active-tick-color);
-  transform: scaleY(var(--tick-active-height-multiplier));
   z-index: 5;
 }
 
