@@ -29,17 +29,10 @@
   display: flex;
   align-items: center;
   gap: 0.375rem;
-  color: var(--color-foreground);
 }
 
 .content > svg {
   opacity: 0.9;
-}
-
-@media (prefers-color-scheme: dark) {
-  .content > svg {
-    opacity: 0.9;
-  }
 }
 
 .progress {
@@ -56,4 +49,8 @@
 .button:active .progress {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   transition: clip-path 1600ms linear;
+}
+
+.button:active .content > svg {
+  opacity: 1;
 }
