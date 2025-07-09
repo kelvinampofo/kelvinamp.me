@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import useShortcut from "../../hooks/useShortcut";
+import useShortcuts from "../../hooks/useShortcuts";
 
 import styles from "./FocusedReading.module.css";
 
@@ -13,7 +13,7 @@ interface FocusedReadingProps {
 export default function FocusedReading({ children }: FocusedReadingProps) {
   const [isFocused, setIsFocused] = useState(false);
 
-  useShortcut("F", () => setIsFocused((prev) => !prev), {
+  useShortcuts("F", () => setIsFocused((prev) => !prev), {
     delay: 300,
   });
 

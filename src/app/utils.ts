@@ -27,7 +27,7 @@ export async function getEntries(context: Context): Promise<Entry[]> {
         slug: directory.name,
         title,
         publishedDate,
-        description: context === "craft" ? description : undefined,
+        description,
       };
     })
   );

@@ -12,7 +12,7 @@ interface Options {
   delay?: number;
 }
 
-export default function useShortcut(
+export default function useShortcuts(
   shortcutKeys: string | string[],
   callback: () => void,
   options: Options = {}

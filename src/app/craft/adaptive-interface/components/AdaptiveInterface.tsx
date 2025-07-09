@@ -6,7 +6,7 @@ import { useState, useCallback } from "react";
 
 import ShortcutKey from "../../../../components/shortcut-key/ShortcutKey";
 import usePointerDevice from "../../../../hooks/usePointerDevice";
-import useShortcut from "../../../../hooks/useShortcut";
+import useShortcuts from "../../../../hooks/useShortcuts";
 
 import styles from "./AdaptiveInterface.module.css";
 
@@ -26,12 +26,12 @@ export default function AdaptiveInterface() {
 
   const resetUsage = useCallback(() => setUsageCount(0), []);
 
-  useShortcut("D", handleShortcut, {
+  useShortcuts("D", handleShortcut, {
     modifiers: "Meta",
     preventDefault: true,
   });
 
-  useShortcut("R", resetUsage);
+  useShortcuts("R", resetUsage);
 
   function determineSizeCategory(count: number) {
     if (count < 5) return "large";
