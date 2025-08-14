@@ -3,6 +3,8 @@ import { Metadata } from "next";
 import localInterFont from "next/font/local";
 import { ThemeProvider } from "next-themes";
 
+import Fade from "../components/fade/fade";
+
 import "../styles/globals.css";
 
 const inter = localInterFont({
@@ -31,7 +33,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
     <html lang="en" suppressHydrationWarning className={inter.variable}>
       <body>
         <div id="__next">
-          <div className="blur" aria-hidden />
+          <Fade />
           <main>
             <div className="main-grid">
               <ThemeProvider>
