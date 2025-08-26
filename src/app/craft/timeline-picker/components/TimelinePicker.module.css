@@ -17,11 +17,12 @@
   display: flex;
   color: var(--grey10);
   padding: 8px;
-  border-radius: 6px;
+  border-radius: 8px;
+  margin: 0 6px;
 }
 
 .timelineButton:hover:not(.disabled) {
-  background: var(--greyA3);
+  background: var(--greyA4);
   transition: var(--transition-hover);
 }
 
@@ -77,6 +78,10 @@
 @media (max-width: 600px) {
   .timelineContainer {
     padding: 0 8px;
+  }
+
+  .timelineButton {
+    margin: 0;
   }
 
   .timelineTicks {
