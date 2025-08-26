@@ -6,7 +6,7 @@
   --tick-margin-horizontal: 6px;
   --tick-margin-bottom-active: 12px;
   --tick-margin-bottom-mobile: 9px;
-  --active-tick-color: var(--yellow);
+  --active-tick-color: var(--orange);
 
   display: flex;
   align-items: center;
