@@ -6,7 +6,7 @@
   height: var(--size);
   display: inline-flex;
   position: relative;
-  border: 1px solid var(--grey7);
+  border: 1px solid var(--grey8);
   border-radius: 50%;
 }
 
@@ -23,13 +23,13 @@
 .clockHandHours {
   height: 25%;
   z-index: 10;
-  background-color: var(--grey7);
+  background-color: var(--grey8);
 }
 
 .clockHandMinutes {
   height: 35%;
   z-index: 20;
-  background-color: var(--grey7);
+  background-color: var(--grey8);
 }
 
 .clockHandSeconds {
