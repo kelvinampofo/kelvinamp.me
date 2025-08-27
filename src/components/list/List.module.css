@@ -1,9 +1,7 @@
 .listItem {
   --spacing: 0.75rem;
 
-  gap: var(--spacing);
-  padding: var(--spacing);
-  margin: 0 calc(var(--spacing) * -1);
+  margin: 0;
   color: var(--color-foreground);
 }
 
@@ -12,9 +10,12 @@
   justify-content: flex-start;
   text-decoration: none;
   transition: color 150ms ease;
+  width: 100%;
+  gap: var(--spacing);
+  padding: var(--spacing) 0;
 }
 
-.listItem:hover {
+.listItem > a:hover {
   color: var(--color-foreground-secondary);
 }
 
