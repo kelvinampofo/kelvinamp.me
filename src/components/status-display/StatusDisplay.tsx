@@ -10,8 +10,8 @@ import Principle from "./components/Principle";
 import styles from "./StatusDisplay.module.css";
 
 const views = [
-  CurrentTimeView,
   ClockView,
+  CurrentTimeView,
   Principle,
   DimensionsView,
   BrowserInfoView,
