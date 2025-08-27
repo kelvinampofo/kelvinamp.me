@@ -14,13 +14,20 @@ export default function AnalogueClock() {
   const [displayTime, setDisplayTime] = useState("00:00:00");
 
   useEffect(() => {
-    setDisplayTime(currentTime);
+    if (currentTime) {
+      setDisplayTime(currentTime);
+    }
   }, [currentTime]);
 
-  const [hours, minutes, seconds] = displayTime.split(":").map(Number);
+  const [hh = "0", mm = "0", ss = "0"] = displayTime.split(":");
 
-  const hoursDeg = (hours % 12) * 30 + (minutes / 60) * 30;
-  const minutesDeg = minutes * 6 + (seconds / 60) * 6;
+  const hours = parseInt(hh, 10) || 0;
+  const minutes = parseInt(mm, 10) || 0;
+  const seconds = parseInt(ss, 10) || 0;
+
+  // include minute and second contribution for smoother hands
+  const hoursDeg = ((hours % 12) + minutes / 60 + seconds / 3600) * 30;
+  const minutesDeg = (minutes + seconds / 60) * 6;
   const secondsDeg = seconds * 6;
 
   return (
