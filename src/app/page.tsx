@@ -17,22 +17,14 @@ export default function Home() {
         <em>novel interfaces</em>.
       </p>
       <p data-animate style={{ "--stagger": "3" }}>
-        Read more on{" "}
-        <Link href="/now" className="basic-link">
-          now
-        </Link>{" "}
-        page.
+        Read more on <Link href="/now">now</Link> page.
       </p>
       <ul className="pages-list" data-animate style={{ "--stagger": "4" }}>
         <li>
-          <Link href="/craft" className="basic-link">
-            Craft
-          </Link>
+          <Link href="/craft">Craft</Link>
         </li>
         <li>
-          <Link href="/writing" className="basic-link">
-            Writing
-          </Link>
+          <Link href="/writing">Writing</Link>
         </li>
       </ul>
       <Separator data-animate style={{ "--stagger": "5" }} />
