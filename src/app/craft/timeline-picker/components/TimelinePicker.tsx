@@ -1,6 +1,5 @@
 "use client";
 
-import clsx from "clsx";
 import { motion } from "motion/react";
 import { useState } from "react";
 import useSound from "use-sound";
@@ -45,12 +44,10 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
   return (
     <div className={styles.timelineContainer}>
       <button
-        className={clsx(styles.timelineButton, {
-          [styles.disabled]: currentIndex === 0,
-        })}
+        className={styles.timelineButton}
         onClick={handlePrev}
         disabled={currentIndex === 0}
-        aria-label="Previous"
+        aria-label="Previous selection"
       >
         <ChevronLeftIcon />
       </button>
@@ -68,12 +65,10 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
       </div>
 
       <button
-        className={clsx(styles.timelineButton, {
-          [styles.disabled]: currentIndex === ticks.length - 1,
-        })}
+        className={styles.timelineButton}
         onClick={handleNext}
         disabled={currentIndex === ticks.length - 1}
-        aria-label="Next"
+        aria-label="Next selection"
       >
         <ChevronRightIcon />
       </button>
@@ -82,7 +77,6 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
 }
 
 function Tick({
-  tick,
   index,
   isActive,
   onSelect,
@@ -94,11 +88,13 @@ function Tick({
 }) {
   const activeProps = {
     scaleY: 1.6,
+    scaleX: 2,
     marginBottom: 12,
   };
 
   const inactiveProps = {
     scaleY: 1,
+    scaleX: 1.4,
     marginBottom: 0,
   };
 
@@ -107,8 +103,8 @@ function Tick({
       initial={false}
       className={styles.timelineTick}
       data-active={isActive}
-      key={tick}
       onClick={() => onSelect(index)}
+      aria-hidden
       animate={isActive ? activeProps : inactiveProps}
       transition={{
         type: "spring",

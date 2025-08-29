@@ -1,8 +1,9 @@
 .timelineContainer {
-  --tick-width: 1px;
+  --tick-width: 1.4px;
   --tick-height: 20px;
-  --tick-width-active: 1.6px;
-  --tick-border-radius: 3px;
+  --tick-width-active: 2px;
+  --tick-base-width: 1px; /* layout width to avoid rounding drift */
+  --tick-border-radius: 8px;
   --tick-margin-horizontal: 6px;
   --tick-margin-bottom-active: 12px;
   --tick-margin-bottom-mobile: 9px;
@@ -19,14 +20,14 @@
   padding: 8px;
   border-radius: 8px;
   margin: 0 6px;
-}
-
-.timelineButton:hover:not(.disabled) {
-  background: var(--greyA4);
   transition: var(--transition-hover);
 }
 
-.timelineButton.disabled {
+.timelineButton:hover:not(:disabled) {
+  background: var(--greyA4);
+}
+
+.timelineButton:disabled {
   cursor: not-allowed;
   color: var(--greyA6);
 }
@@ -43,10 +44,12 @@
 .timelineTick {
   position: relative;
   height: var(--tick-height);
-  width: var(--tick-width);
+  width: var(--tick-base-width);
   align-items: center;
   margin: 0 var(--tick-margin-horizontal);
   background: var(--grey8);
+  border-radius: var(--tick-border-radius);
+  touch-action: manipulation;
   z-index: 1;
 }
 
@@ -69,7 +72,6 @@
 }
 
 .timelineTick[data-active="true"] {
-  width: var(--tick-width-active);
   margin-bottom: var(--tick-margin-bottom-active);
   background: var(--active-tick-color);
   z-index: 5;
