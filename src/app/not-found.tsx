@@ -17,11 +17,11 @@ export default function NotFound() {
         <BackButton href="/" />
       </nav>
       <article className={clsx("prose", styles.pageLayout)}>
-        <Heading>404</Heading>
+        <Heading>404 — Not Found</Heading>
         <p>
-          Do you know what else is not found? That one perfect hex code you
-          swear you saved. Maybe it&apos;s in a bookmark. Maybe it&apos;s lost
-          to the void.
+          You know what else isn’t found? Those old Intel stickers on Windows
+          machines—the ones with the hidden holographic chips on the back that
+          nobody ever saw.
         </p>
       </article>
     </>
