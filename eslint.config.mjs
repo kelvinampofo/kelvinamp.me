@@ -36,7 +36,19 @@ const eslintConfig = [
       "import/no-named-as-default-member": "off",
       "import/no-named-as-default": "off",
     },
-    ignores: ["node_modules/"],
+  },
+  {
+    ignores: [
+      "**/node_modules/**",
+      "**/.next/**",
+      "**/out/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/.vercel/**",
+      "public/",
+      "next-env.d.ts",
+      "**/.*",
+    ],
   },
 ];
 
