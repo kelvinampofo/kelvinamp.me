@@ -19,9 +19,9 @@ const createHeading = <T extends "h1" | "h2" | "h3" | "h4">(as: T) => {
 };
 
 const Anchor = ({ href, children, ...props }: Props<"a">) => {
-  if (href?.startsWith("/")) {
+  if (href && href.startsWith("/")) {
     return (
-      <Link href={href} className="prose-link" {...props}>
+      <Link href={{ pathname: href }} className="prose-link" {...props}>
         {children}
       </Link>
     );

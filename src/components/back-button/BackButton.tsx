@@ -1,8 +1,10 @@
-import Link, { type LinkProps } from "next/link";
+import Link from "next/link";
 
 import styles from "./BackButton.module.css";
 
-export default function BackButton({ href, ...props }: LinkProps) {
+type BackButtonProps = React.ComponentPropsWithoutRef<typeof Link>;
+
+export default function BackButton({ href, ...props }: BackButtonProps) {
   return (
     <Link href={href} className={styles.backButton} {...props}>
       <ArrowTopLeft />

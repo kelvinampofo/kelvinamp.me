@@ -50,7 +50,7 @@ export default function List({
         return (
           <Fragment key={id}>
             <li className={styles.listItem}>
-              <Link href={`${basePath}/${slug}`}>
+              <Link href={{ pathname: `${basePath}/${slug}` }}>
                 <div className={styles.titleRow}>
                   <p>{title}</p>
                   {showDescription && (
