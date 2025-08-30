@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-import { getEntries } from "../lib/utils";
+import { getEntries } from "../utils/getEntries";
 
 export const baseUrl = "https://kelvinamp.me";
 
