@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  typedRoutes: true,
   async redirects() {
     return [
       {
