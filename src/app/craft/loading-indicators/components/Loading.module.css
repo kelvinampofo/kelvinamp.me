@@ -44,24 +44,48 @@
 
 .primarySpinner {
   --size: 1.5rem;
+  position: relative;
+  display: inline-block;
   width: var(--size);
   height: var(--size);
   border-radius: 9999px;
+  transform-origin: 50% 50%;
+  animation: spin 1s linear infinite;
+  cursor: not-allowed;
+}
+
+.primarySpinner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
   border: 2px solid transparent;
   border-top-color: var(--grey12);
-  animation: donutSpin 1s var(--ease-in-out-cubic) infinite;
-  cursor: not-allowed;
+  transform-origin: 50% 50%;
+  animation: spin 1s var(--ease-in-out-quad) infinite;
 }
 
 .secondarySpinner {
   --size: 1.5rem;
+  position: relative;
+  display: inline-block;
   width: var(--size);
   height: var(--size);
   border-radius: 9999px;
+  transform-origin: 50% 50%;
+  animation: spin 0.8s linear infinite;
+  cursor: not-allowed;
+}
+
+.secondarySpinner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
   border: 2px solid var(--grey7);
   border-top-color: var(--grey12);
-  animation: donutSpin 0.8s var(--ease-in-out-cubic) infinite;
-  cursor: not-allowed;
+  transform-origin: 50% 50%;
+  animation: spin 0.8s var(--ease-in-out-quad) infinite;
 }
 
 .iosSpinner {
@@ -136,11 +160,11 @@
   animation-delay: 0s;
 }
 
-@keyframes donutSpin {
-  from {
-    transform: rotate(0deg);
+@keyframes spin {
+  0% {
+    transform: rotate(0);
   }
-  to {
+  100% {
     transform: rotate(360deg);
   }
 }
