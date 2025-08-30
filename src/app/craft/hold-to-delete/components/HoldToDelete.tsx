@@ -1,12 +1,45 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useEffect, useRef } from "react";
+
+import { animateThemeColor } from "../../../../utils/themeColor";
 
 import styles from "./HoldToDelete.module.css";
 
+const HOLD_TINT_RED = "rgb(170, 35, 41)";
+const HOLD_ANIMATION_MS = 1600;
+
 export default function HoldToDelete() {
+  const cancelAnimationRef = useRef<null | (() => void)>(null);
+
+  const handleDown = useCallback(() => {
+    cancelAnimationRef.current?.();
+    cancelAnimationRef.current = animateThemeColor(
+      HOLD_TINT_RED,
+      HOLD_ANIMATION_MS
+    );
+  }, []);
+
+  const handleUp = useCallback(() => {
+    cancelAnimationRef.current?.();
+    cancelAnimationRef.current = animateThemeColor(
+      getComputedStyle(document.body).backgroundColor
+    );
+  }, []);
+
+  useEffect(() => {
+    return () => cancelAnimationRef.current?.();
+  }, []);
+
   return (
-    <button className={styles.button} aria-label="hold to delete">
+    <button
+      className={styles.button}
+      aria-label="hold to delete"
+      onPointerDown={handleDown}
+      onPointerUp={handleUp}
+      onPointerCancel={handleUp}
+      onPointerLeave={handleUp}
+    >
       <div aria-hidden="true" className={styles.progress} />
       <div className={styles.content}>
         <svg
