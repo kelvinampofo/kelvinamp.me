@@ -4,7 +4,6 @@ import clsx from "clsx";
 import { usePathname } from "next/navigation";
 
 import BackButton from "../../components/back-button/BackButton";
-import styles from "../../styles/layout.module.css";
 
 interface CraftLayoutProps {
   children: React.ReactNode;
@@ -17,10 +16,10 @@ export default function CraftLayout({ children }: Readonly<CraftLayoutProps>) {
 
   return (
     <>
-      <nav className={styles.navWrapper}>
+      <nav className="nav-wrapper">
         <BackButton href={backHref} />
       </nav>
-      <article className={clsx("prose", styles.craftLayout)}>
+      <article className={clsx("prose", "craft-layout")}>
         {children}
       </article>
     </>

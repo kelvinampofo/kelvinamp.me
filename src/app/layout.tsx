@@ -6,6 +6,7 @@ import { ThemeProvider } from "next-themes";
 import Fade from "../components/fade/fade";
 
 import "../styles/globals.css";
+import "../styles/layout.css";
 
 const inter = localInterFont({
   src: "../../public/assets/fonts/InterVariable.woff2",

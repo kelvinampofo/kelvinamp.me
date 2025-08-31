@@ -3,7 +3,6 @@
 import clsx from "clsx";
 
 import Heading from "../components/heading/Heading";
-import styles from "../styles/layout.module.css";
 
 export default function Error({
   error,
@@ -11,10 +10,10 @@ export default function Error({
   error: Error & { digest?: string };
 }) {
   return (
-    <article className={clsx("prose", styles.pageLayout)}>
+    <article className={clsx("prose", "page-layout")}>
       <Heading>{error.name}</Heading>
       <p>{error.message}</p>
-      <pre className={styles.errorStack}>{error.stack}</pre>
+      <pre className="error-stack">{error.stack}</pre>
     </article>
   );
 }

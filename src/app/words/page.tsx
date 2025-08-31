@@ -3,7 +3,6 @@ import clsx from "clsx";
 import BackButton from "../../components/back-button/BackButton";
 import Heading from "../../components/heading/Heading";
 import Separator from "../../components/separator/Separator";
-import layoutStyles from "../../styles/layout.module.css";
 
 import styles from "./Words.module.css";
 
@@ -73,15 +72,13 @@ const wordEntries: WordEntryProps[] = [
 export default function Words() {
   return (
     <>
-      <nav className={layoutStyles.navWrapper}>
+      <nav className="nav-wrapper">
         <BackButton href="/writing" />
       </nav>
 
-      <article className={clsx("prose", layoutStyles.writingLayout)}>
+      <article className={clsx("prose", "writing-layout")}>
         <Heading>Words</Heading>
-        <p className={layoutStyles.description}>
-          Curated collection of appealing language.
-        </p>
+        <p className="description">Curated collection of appealing language.</p>
         <Separator className={styles.wordsSeparator} />
         <dl className={styles.wordsList}>
           {wordEntries.map(({ word, type, definition, variations }) => (

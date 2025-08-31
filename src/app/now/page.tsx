@@ -3,7 +3,6 @@ import { Metadata } from "next";
 
 import BackButton from "../../components/back-button/BackButton";
 import Heading from "../../components/heading/Heading";
-import styles from "../../styles/layout.module.css";
 
 export const metadata: Metadata = {
   title: "Now",
@@ -14,10 +13,10 @@ export const metadata: Metadata = {
 export default function Now() {
   return (
     <>
-      <nav className={styles.navWrapper}>
+      <nav className="nav-wrapper">
         <BackButton href="/" />
       </nav>
-      <article className={clsx("prose", styles.pageLayout)}>
+      <article className={clsx("prose", "page-layout")}>
         <Heading>Now</Heading>
         <p>
           Cultivating a taste for quality through deliberate practice, pacing,

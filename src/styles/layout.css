@@ -1,12 +1,12 @@
-.pageLayout {
+.page-layout {
   grid-column: 2;
 }
 
-.writingLayout {
+.writing-layout {
   grid-column: 2;
 }
 
-.craftLayout {
+.craft-layout {
   grid-column: 2;
 }
 
@@ -14,7 +14,7 @@
   color: var(--color-foreground-secondary);
 }
 
-.navWrapper {
+.nav-wrapper {
   position: sticky;
   top: var(--spacing-page-top);
   grid-column: 1;
@@ -22,15 +22,16 @@
   align-self: start;
 }
 
-.errorStack {
+.error-stack {
   background-color: transparent;
   font-size: 0.875rem;
   white-space: pre-wrap;
 }
 
 @media (max-width: 768px) {
-  .navWrapper {
+  .nav-wrapper {
     position: static;
     top: auto;
   }
 }
+
