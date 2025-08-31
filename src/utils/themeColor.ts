@@ -1,4 +1,6 @@
-export const THEME_META_NAME = "theme-color";
+import { clamp, lerp } from "./math";
+
+const THEME_META_NAME = "theme-color";
 
 function ensureThemeMeta() {
   let element: HTMLMetaElement | null = document.querySelector(
@@ -57,9 +59,7 @@ function hexToRgb(hex: string) {
 
 function rgbToHex([r, g, b]: [number, number, number]) {
   const toHex = (channel: number) =>
-    Math.max(0, Math.min(255, Math.round(channel)))
-      .toString(16)
-      .padStart(2, "0");
+    clamp(Math.round(channel), 0, 255).toString(16).padStart(2, "0");
 
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
@@ -68,7 +68,7 @@ function parseColorToRgb(color: string) {
   return (
     hexToRgb(color) ||
     parseRgb(color) ||
-    // fallback: let the browser resolve it then parse
+    // fallback to resolving via browser then parse
     (typeof document !== "undefined"
       ? parseRgb(
           getComputedStyle(
@@ -79,7 +79,9 @@ function parseColorToRgb(color: string) {
   );
 }
 
-// Animates the theme-color to `toColor` over `duration` ms. Returns a cancel function.
+/**
+ * animates `<meta name="theme-color">` toward a target colour over a specified `durations` ms.
+ */
 export function animateThemeColor(toColor: string, duration = 200) {
   const isClientUnavailable =
     typeof document === "undefined" || typeof window === "undefined";
@@ -97,14 +99,14 @@ export function animateThemeColor(toColor: string, duration = 200) {
   const start = performance.now();
   const tick = () => {
     const now = performance.now();
-    const progress = Math.min(1, (now - start) / duration);
+    const progress = clamp((now - start) / duration, 0, 1);
 
     // cosine ease-in-out for a nicer feel
     const easedProgress = 0.5 - 0.5 * Math.cos(Math.PI * progress);
 
-    const r = from[0] + (to[0] - from[0]) * easedProgress;
-    const g = from[1] + (to[1] - from[1]) * easedProgress;
-    const b = from[2] + (to[2] - from[2]) * easedProgress;
+    const r = lerp(from[0], to[0], easedProgress);
+    const g = lerp(from[1], to[1], easedProgress);
+    const b = lerp(from[2], to[2], easedProgress);
 
     meta.content = rgbToHex([r, g, b]);
 
