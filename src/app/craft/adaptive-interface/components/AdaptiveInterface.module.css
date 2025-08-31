@@ -19,6 +19,7 @@
   transition: transform var(--transition-hover);
 
   color: var(--color-foreground);
+  box-shadow: var(--button-shadow);
 }
 
 .pressed {
