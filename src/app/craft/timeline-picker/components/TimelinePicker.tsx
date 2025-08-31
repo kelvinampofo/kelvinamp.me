@@ -11,13 +11,11 @@ const TICK_COUNT = 20;
 
 const ACTIVE_PROPS: Target = {
   scaleY: 1.6,
-  scaleX: 2.5,
   marginBottom: 12,
 };
 
 const INACTIVE_PROPS: Target = {
   scaleY: 1,
-  scaleX: 1.4,
   marginBottom: 0,
 };
 
@@ -69,7 +67,7 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
         disabled={currentIndex === 0}
         aria-label="Previous selection"
       >
-        <Chevron dir="left" />
+        <Chevron direction="left" />
       </button>
 
       <div className={styles.timelineTicks}>
@@ -77,7 +75,6 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
           <Tick
             key={index}
             index={index}
-            tick={index}
             isActive={index === currentIndex}
             onSelect={selectIndex}
           />
@@ -90,7 +87,7 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
         disabled={currentIndex === ticks.length - 1}
         aria-label="Next selection"
       >
-        <Chevron dir="right" />
+        <Chevron direction="right" />
       </button>
     </div>
   );
@@ -101,7 +98,6 @@ function Tick({
   isActive,
   onSelect,
 }: {
-  tick: number;
   index: number;
   isActive: boolean;
   onSelect: (index: number) => void;
@@ -123,11 +119,11 @@ type ChevronDirection = "left" | "right";
 type SvgPropsNoDir = Omit<SVGProps<SVGSVGElement>, "dir">;
 
 interface ChevronProps extends SvgPropsNoDir {
-  dir?: ChevronDirection;
+  direction?: ChevronDirection;
 }
 
 function Chevron({
-  dir = "right",
+  direction = "right",
   width = 20,
   height = 20,
   ...props
@@ -148,7 +144,7 @@ function Chevron({
       {...props}
     >
       <path
-        d={dir === "left" ? dirLeft : dirRight}
+        d={direction === "left" ? dirLeft : dirRight}
         fill="currentColor"
         fillRule="evenodd"
         clipRule="evenodd"

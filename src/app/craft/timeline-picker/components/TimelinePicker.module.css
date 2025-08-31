@@ -2,7 +2,6 @@
   --tick-width: 1.4px;
   --tick-height: 20px;
   --tick-width-active: 2px;
-  --tick-base-width: 1px; /* layout width to avoid rounding drift */
   --tick-border-radius: 8px;
   --tick-margin-horizontal: 6px;
   --tick-margin-bottom-active: 12px;
@@ -44,7 +43,7 @@
 .timelineTick {
   position: relative;
   height: var(--tick-height);
-  width: var(--tick-base-width);
+  width: var(--tick-width);
   align-items: center;
   margin: 0 var(--tick-margin-horizontal);
   background: var(--grey8);
@@ -72,6 +71,7 @@
 }
 
 .timelineTick[data-active="true"] {
+  width: var(--tick-width-active);
   margin-bottom: var(--tick-margin-bottom-active);
   background: var(--active-tick-color);
   z-index: 5;
