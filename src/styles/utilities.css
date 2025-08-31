@@ -13,3 +13,7 @@
   white-space: nowrap;
   border: 0;
 }
+
+.text-secondary.text-secondary {
+  color: var(--color-foreground-secondary);
+}
