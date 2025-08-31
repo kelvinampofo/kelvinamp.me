@@ -23,19 +23,3 @@
   color: var(--color-foreground-secondary);
   text-align: center;
 }
-
-.cardContent {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3rem;
-  width: 100%;
-  height: 220px;
-}
-
-.cardDescription {
-  padding: 0.625rem;
-  font-size: 0.75rem;
-  color: var(--color-foreground-secondary);
-  text-align: center;
-}
