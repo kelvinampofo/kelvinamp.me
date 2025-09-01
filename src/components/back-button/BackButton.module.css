@@ -4,6 +4,10 @@
   gap: 6px;
   color: var(--color-foreground);
   transition: color 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .backButton svg {
@@ -18,6 +22,8 @@
   }
 }
 
-.backButton:hover {
-  color: var(--color-foreground-secondary);
+@media (hover: hover) and (pointer: fine) {
+  .backButton:hover {
+    color: var(--color-foreground-secondary);
+  }
 }
