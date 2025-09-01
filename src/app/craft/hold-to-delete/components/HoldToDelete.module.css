@@ -10,20 +10,27 @@
   background-color: var(--grey1);
   padding: 1px 4px;
   outline: 1px solid var(--grey4);
-  transition-property: all;
+  transition-property: background-color, box-shadow, transform;
   transition-timing-function: var(--ease-out-cubic);
   transition-duration: var(--transition-hover);
   will-change: transform;
   user-select: none;
+  -webkit-user-select: none;
   box-shadow: var(--button-shadow);
+
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-.button:hover {
-  background-color: var(--greyA1);
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    background-color: var(--greyA1);
+  }
 }
 
 .button:active {
   transform: scale(0.98);
+  box-shadow: none;
 }
 
 .content {

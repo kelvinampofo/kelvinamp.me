@@ -107,11 +107,11 @@ export default function HoldForSound() {
           className={styles.button}
           aria-label="press and hold the button to hear the engine revving sound of the Porsche 911"
           aria-pressed={isPressed}
-          onMouseDown={handlePress}
-          onMouseUp={handleRelease}
-          onMouseLeave={handleRelease}
-          onTouchStart={handlePress}
-          onTouchEnd={handleRelease}
+          onPointerDown={handlePress}
+          onPointerUp={handleRelease}
+          onPointerLeave={handleRelease}
+          onPointerCancel={handleRelease}
+          onContextMenu={(e) => e.preventDefault()}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
           title="porsche-911.wav"

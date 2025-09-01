@@ -35,6 +35,7 @@ export default function HoldToDelete() {
     <button
       className={styles.button}
       aria-label="hold to delete"
+      onContextMenu={(e) => e.preventDefault()}
       onPointerDown={handleDown}
       onPointerUp={handleUp}
       onPointerCancel={handleUp}

@@ -7,6 +7,10 @@
   gap: 1.5rem;
 }
 
+.wrapper {
+  will-change: transform;
+}
+
 .button {
   position: relative;
   display: flex;
@@ -25,10 +29,19 @@
   -webkit-user-select: none;
   color: var(--color-foreground);
   box-shadow: var(--button-shadow);
+
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-.button:hover {
-  background-color: var(--greyA1);
+.button:active {
+  box-shadow: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    background-color: var(--greyA1);
+  }
 }
 
 .contentDefault {
