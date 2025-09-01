@@ -28,7 +28,7 @@
   user-select: none;
   -webkit-user-select: none;
   color: var(--color-foreground);
-  box-shadow: var(--button-shadow);
+  box-shadow: var(--elevation-1);
 
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
