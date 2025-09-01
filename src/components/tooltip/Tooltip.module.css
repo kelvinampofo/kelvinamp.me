@@ -7,8 +7,6 @@
 }
 
 .tooltipPopup {
-  --tooltip-shadow-sm: rgb(0 0 0 / 0.1);
-  --tooltip-shadow-md: rgb(0 0 0 / 0.2);
   --tooltip-transform-duration: 150ms;
   --tooltip-opacity-duration: 150ms;
 
@@ -26,9 +24,7 @@
   transition:
     transform var(--tooltip-transform-duration),
     opacity var(--tooltip-opacity-duration);
-  box-shadow:
-    0px 2px 4px 0px var(--tooltip-shadow-sm),
-    0 4px 12px var(--tooltip-shadow-md);
+  box-shadow: var(--elevation-3);
 }
 
 .tooltipPopup[data-open] {
