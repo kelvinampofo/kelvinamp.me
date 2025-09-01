@@ -13,10 +13,14 @@
   width: 100%;
   gap: var(--spacing);
   padding: var(--spacing) 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-.listItem > a:hover {
-  color: var(--color-foreground-secondary);
+@media (hover: hover) and (pointer: fine) {
+  .listItem > a:hover {
+    color: var(--color-foreground-secondary);
+  }
 }
 
 .postDate {
