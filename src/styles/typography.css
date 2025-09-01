@@ -27,9 +27,12 @@ article.prose {
   text-underline-offset: 2.5px;
   border-radius: 4px;
   transition: text-decoration-color var(--transition-hover);
+
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   :is(.prose a, a.prose-link):hover:not([disabled]),
   :is(.prose a, a.prose-link):focus-visible {
     text-decoration-color: var(--grey11);
@@ -103,7 +106,7 @@ code {
   transition: var(--transition-hover);
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .prose-superscript a:hover {
     background-color: var(--grey4);
   }
