@@ -34,11 +34,13 @@
   --blue: oklch(54.6% 0.245 262.881);
   --teal: oklch(77.7% 0.152 181.912);
 }
+
 @supports (color: color(display-p3 1 1 1)) {
   :root {
     --yellow: color(display-p3 1 0.78 0/1);
   }
 }
+
 @media (prefers-color-scheme: dark) {
   :root {
     --color-background: #161616;
@@ -72,10 +74,11 @@
     --greyA12: hsla(0, 0%, 100%, 0.923);
   }
 }
+
 :root {
-  --shadow-ambient: oklch(0% 0 0 / 0.03);
-  --shadow-key: oklch(0% 0 0 / 0.08);
-  --shadow-specular: oklch(100% 0 0 / 0.06);
+  --shadow-ambient: lch(0% 0 0 / 0.03);
+  --shadow-key: lch(0% 0 0 / 0.08);
+  --shadow-specular: lch(100% 0 0 / 0.06);
 
   --elevation-1:
     var(--shadow-ambient) 0 1px 1px, var(--shadow-key) 0 2px 4px -2px;
@@ -84,11 +87,12 @@
   --elevation-3:
     var(--shadow-ambient) 0 8px 16px -4px, var(--shadow-key) 0 12px 24px -6px;
 }
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --shadow-ambient: oklch(0% 0 0 / 0.06);
-    --shadow-key: oklch(0% 0 0 / 0.08);
-    --shadow-specular: oklch(100% 0 0 / 0.07);
+    --shadow-ambient: lch(0% 0 0 / 0.06);
+    --shadow-key: lch(0% 0 0 / 0.08);
+    --shadow-specular: lch(100% 0 0 / 0.07);
 
     --elevation-1:
       var(--shadow-key) 0 4px 4px -1px, var(--shadow-key) 0 1px 1px 0;
@@ -100,6 +104,7 @@
     --button-shadow: var(--elevation-1);
   }
 }
+
 :root {
   --font-size-base: 16px;
   --font-family-mono: "Jetbrains mono", "Roboto Mono", monospace;
@@ -114,6 +119,7 @@
   --type-heading: var(--font-weight-heading) var(--font-size-base) /
     var(--leading) var(--font-family-sans);
 }
+
 :root {
   --spacing-page-top: 128px;
   --spacing-page-bottom: 48px;
@@ -133,6 +139,7 @@
   --spacing-gap-sm: 8px;
   --spacing-gap-md: 16px;
 }
+
 @media (max-width: 1024px) {
   :root {
     --spacing-page-top: 120px;
@@ -144,6 +151,7 @@
     --spacing-page-top: 64px;
   }
 }
+
 :root {
   --focus-inner-color-light: hsl(0, 0%, 99%);
   --focus-inner-color-dark: hsl(0, 0%, 8.63%);
@@ -152,6 +160,7 @@
   --selection-bg-color: rgb(255, 249, 168);
   --selection-text-color: #000000;
 }
+
 :root {
   --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
   --ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
@@ -174,11 +183,13 @@
   --ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
   --ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
+
 :root {
   --transition-hover: 150ms;
   --transition-enter: 200ms;
   --transition-exit: 150ms;
 }
+
 :root {
   --border-thin: 1px;
 }
