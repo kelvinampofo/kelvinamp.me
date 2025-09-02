@@ -52,6 +52,7 @@
   border-radius: 9999px;
   padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
+  font-weight: 500;
   transition:
     color var(--transition-hover) var(--ease-out-cubic),
     background-color var(--transition-hover) var(--ease-out-cubic),
@@ -70,7 +71,7 @@
 .tabButtonDefault {
   outline: 1px solid var(--grey5);
   background-color: var(--grey3);
-  color: var(--color-foreground);
+  color: var(--grey11);
 }
 
 .tabButtonSelected:hover {
