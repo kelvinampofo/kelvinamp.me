@@ -18,7 +18,7 @@
   width: 150px;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
+  border-radius: var(--radius-4);
   background-color: var(--grey1);
   padding: 1px 4px;
   outline: 1px solid var(--grey4);

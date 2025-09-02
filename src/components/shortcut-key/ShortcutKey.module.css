@@ -13,7 +13,7 @@
   width: 20px;
   height: 20px;
   padding: 0 4px;
-  border-radius: 0.125rem;
+  border-radius: var(--radius-2);
 
   font-size: 0.75rem;
   color: var(--grey11);

@@ -2,7 +2,7 @@
   --tick-width: 1.4px;
   --tick-height: 20px;
   --tick-width-active: 2px;
-  --tick-border-radius: 8px;
+  --tick-border-radius: var(--radius-8);
   --tick-margin-horizontal: 6px;
   --tick-margin-bottom-active: 12px;
   --tick-margin-bottom-mobile: 9px;
@@ -17,7 +17,7 @@
   display: flex;
   color: var(--grey10);
   padding: 8px;
-  border-radius: 8px;
+  border-radius: var(--radius-8);
   margin: 0 6px;
   transition: var(--transition-hover);
 }

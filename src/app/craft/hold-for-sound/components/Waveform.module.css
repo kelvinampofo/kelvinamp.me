@@ -10,6 +10,6 @@
   height: 60%;
   width: 2px;
   transform-origin: center;
-  border-radius: 9999px;
+  border-radius: var(--radius-full);
   background-color: var(--color-foreground-secondary);
 }

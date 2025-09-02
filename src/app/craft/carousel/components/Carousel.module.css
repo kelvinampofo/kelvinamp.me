@@ -5,7 +5,7 @@
   width: 100%;
   margin-left: 0;
   margin-right: 0;
-  border-radius: 8px;
+  border-radius: var(--radius-8);
   background: var(--grey1);
   outline: 1px solid var(--grey4);
   margin-top: 2rem;
@@ -57,7 +57,7 @@
 }
 
 .arrowButton {
-  border-radius: 0.125rem;
+  border-radius: var(--radius-2);
   margin: 0 0.5rem;
   color: var(--color-foreground-secondary);
   transition: color var(--transition-hover);

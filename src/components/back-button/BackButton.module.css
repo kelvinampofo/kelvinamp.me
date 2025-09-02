@@ -1,5 +1,5 @@
 .backButton {
-  border-radius: 4px;
+  border-radius: var(--radius-4);
   display: flex;
   gap: 6px;
   color: var(--color-foreground);

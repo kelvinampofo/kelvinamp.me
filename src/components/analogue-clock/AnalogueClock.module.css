@@ -17,7 +17,7 @@
   transform-origin: bottom center;
   transform: translate(-50%, -100%) rotate(var(--rotation));
   width: 1px;
-  border-radius: 2px;
+  border-radius: var(--radius-2);
 }
 
 .clockHandHours {

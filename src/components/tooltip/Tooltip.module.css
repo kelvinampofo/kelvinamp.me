@@ -3,7 +3,7 @@
   user-select: none;
   background-color: transparent;
   border: 0;
-  border-radius: var(--tooltip-trigger-radius, 0.125rem);
+  border-radius: var(--tooltip-trigger-radius, var(--radius-2));
 }
 
 .tooltipPopup {
@@ -18,7 +18,7 @@
   font-size: 0.8125rem;
   line-height: 1.25rem;
   font-variant-numeric: tabular-nums;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-8);
 
   transform-origin: var(--transform-origin);
   transition:
