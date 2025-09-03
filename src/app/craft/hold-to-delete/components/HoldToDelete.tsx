@@ -6,18 +6,14 @@ import { animateThemeColor } from "../../../../utils/themeColor";
 
 import styles from "./HoldToDelete.module.css";
 
-const HOLD_TINT_RED = "rgb(170, 35, 41)";
-const HOLD_ANIMATION_MS = 1600;
+const HOLD_TINT_COLOR = "rgb(170, 35, 41)";
 
 export default function HoldToDelete() {
   const cancelAnimationRef = useRef<null | (() => void)>(null);
 
   const handleDown = useCallback(() => {
     cancelAnimationRef.current?.();
-    cancelAnimationRef.current = animateThemeColor(
-      HOLD_TINT_RED,
-      HOLD_ANIMATION_MS
-    );
+    cancelAnimationRef.current = animateThemeColor(HOLD_TINT_COLOR);
   }, []);
 
   const handleUp = useCallback(() => {

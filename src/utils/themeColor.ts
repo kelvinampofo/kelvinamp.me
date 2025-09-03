@@ -27,7 +27,7 @@ function getCurrentThemeColor() {
 
 function parseRgb(input: string) {
   const match = input.match(
-    /rgb\s*\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)/i
+    /rgba?\s*\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})(?:\s*,\s*(\d*\.?\d+|\.\d+))?\s*\)/i
   );
 
   if (!match) return null;
@@ -68,7 +68,7 @@ function parseColorToRgb(color: string) {
   return (
     hexToRgb(color) ||
     parseRgb(color) ||
-    // fallback to resolving via browser then parse
+    // fallback to resolving via browser then parse (handles named colors, hsl, etc.)
     (typeof document !== "undefined"
       ? parseRgb(
           getComputedStyle(
@@ -79,10 +79,8 @@ function parseColorToRgb(color: string) {
   );
 }
 
-/**
- * animates `<meta name="theme-color">` toward a target colour over a specified `durations` ms.
- */
-export function animateThemeColor(toColor: string, duration = 200) {
+/** animates the `<meta name="theme-color">` towards `toColor` over `duration` ms (default 250); returns a cancel function and no-ops on the server. */
+export function animateThemeColor(toColor: string, duration = 250) {
   const isClientUnavailable =
     typeof document === "undefined" || typeof window === "undefined";
 
