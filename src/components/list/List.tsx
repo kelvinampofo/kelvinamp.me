@@ -30,7 +30,7 @@ export default function List({
     const date = parseISO(dateString);
     const formatString = basePath.includes("writing")
       ? isThisYear(date)
-        ? "dd MMMM"
+        ? "dd MMM"
         : "dd MMM yyyy"
       : isThisYear(date)
         ? "MMMM"
