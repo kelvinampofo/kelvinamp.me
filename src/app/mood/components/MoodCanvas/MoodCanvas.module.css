@@ -15,7 +15,6 @@
   position: absolute;
   left: 0;
   top: 0;
-  border: var(--border-thin) solid var(--greyA5);
   cursor: grab;
   touch-action: none;
 }
