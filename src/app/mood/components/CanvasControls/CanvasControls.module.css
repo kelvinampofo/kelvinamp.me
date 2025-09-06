@@ -1,0 +1,69 @@
+.canvasControls {
+  position: fixed;
+  bottom: var(--spacing-gap-md);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-gap-sm);
+  padding: 6px;
+  background: var(--color-background);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-radius: var(--radius-8);
+  box-shadow: var(--elevation-3);
+  border: var(--border-thin) solid var(--greyA6);
+  user-select: none;
+}
+
+.canvasButton {
+  border-radius: var(--radius-4);
+  padding: 4px 7px;
+  line-height: 1;
+}
+
+.canvasButton:hover {
+  background: var(--greyA3);
+  box-shadow: var(--elevation-1);
+}
+
+.canvasButton:active {
+  background: var(--greyA4);
+  transform: scale(0.96);
+}
+
+.canvasButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  pointer-events: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.canvasButton svg {
+  display: block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .enterIcon {
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  .canvasButton:hover .enterIcon {
+    animation: enter-pulse 320ms ease-out 1;
+  }
+
+  @keyframes enter-pulse {
+    0% {
+      transform: scale(1);
+    }
+    55% {
+      transform: scale(1.12);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}

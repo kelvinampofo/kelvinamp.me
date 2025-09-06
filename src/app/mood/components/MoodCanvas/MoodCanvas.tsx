@@ -7,7 +7,7 @@ import useDrag from "../../../../hooks/useDrag";
 import useShortcuts from "../../../../hooks/useShortcuts";
 import useCanvasViewport from "../../hooks/useCanvasViewport";
 import type { CanvasElement } from "../../types";
-import ZoomControls from "../ZoomControls/ZoomControls";
+import CanvasControls from "../CanvasControls/CanvasControls";
 
 import { CANVAS_ELEMENTS } from "./canvasElements";
 import styles from "./MoodCanvas.module.css";
@@ -89,7 +89,7 @@ export default function MoodCanvas() {
         </div>
       </div>
 
-      <ZoomControls
+      <CanvasControls
         zoomPercent={zoomPercent}
         onZoomIn={zoomIn}
         onZoomOut={zoomOut}
