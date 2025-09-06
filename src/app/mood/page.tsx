@@ -1,0 +1,18 @@
+import type { Metadata } from "next";
+
+import MoodCanvas from "./components/MoodCanvas/MoodCanvas";
+import "./mood.css";
+
+export const metadata: Metadata = {
+  title: "Mood",
+  description: "A mood board inspiring my craft.",
+  metadataBase: new URL("https://kelvinamp.me/mood"),
+};
+
+export default function MoodPage() {
+  return (
+    <div className="mood-root">
+      <MoodCanvas />
+    </div>
+  );
+}

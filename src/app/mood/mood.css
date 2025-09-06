@@ -1,0 +1,6 @@
+.mood-root {
+  position: fixed;
+  inset: 0;
+  background: var(--grey4);
+  overflow: hidden;
+}

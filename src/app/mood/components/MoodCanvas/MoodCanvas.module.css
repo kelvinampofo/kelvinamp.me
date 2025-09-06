@@ -1,0 +1,25 @@
+.moodCanvas {
+  position: absolute;
+  inset: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+  touch-action: none;
+}
+
+.moodSurface {
+  position: relative;
+  width: 2000px;
+  height: 1400px;
+}
+.moodElement {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: var(--border-thin) solid var(--greyA5);
+  cursor: grab;
+  touch-action: none;
+}
+
+.moodElement:active {
+  cursor: grabbing;
+}
