@@ -35,9 +35,12 @@
   --teal: oklch(77.7% 0.152 181.912);
 }
 
-@supports (color: color(display-p3 1 1 1)) {
+@supports (color: color(display-p3 0 0 0)) {
   :root {
-    --yellow: color(display-p3 1 0.78 0/1);
+    --yellow: color(display-p3 1 0.78 0);
+    --orange: color(display-p3 1 0.36 0);
+    --blue: color(display-p3 0.071 0.442 0.945);
+    --teal: color(display-p3 0 0.78 0.72);
   }
 }
 
