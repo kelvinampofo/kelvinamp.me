@@ -1,7 +1,6 @@
 .timelineContainer {
-  --tick-width: 1.4px;
+  --tick-width: 1px;
   --tick-height: 20px;
-  --tick-width-active: 2px;
   --tick-border-radius: var(--radius-8);
   --tick-margin-horizontal: 6px;
   --tick-margin-bottom-active: 12px;
@@ -71,7 +70,6 @@
 }
 
 .timelineTick[data-active="true"] {
-  width: var(--tick-width-active);
   margin-bottom: var(--tick-margin-bottom-active);
   background: var(--active-tick-color);
   z-index: 5;
