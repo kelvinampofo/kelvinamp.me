@@ -31,20 +31,26 @@ export default function MoodCanvas() {
 
   const { onElementPointerDown } = useDrag({
     getScale,
-    getElementById: (elementId: string) =>
-      canvasElements.find((element) => element.id === elementId),
-    setElements: setCanvasElements,
+    getInitialPositionById: (elementId: string) => {
+      const element = canvasElements.find((e) => e.id === elementId);
+      return element ? { x: element.x, y: element.y } : undefined;
+    },
+    onDrag: ({ id, nextElementX, nextElementY }) => {
+      setCanvasElements((prev) =>
+        prev.map((element) => {
+          if (element.id === id) {
+            return { ...element, x: nextElementX, y: nextElementY };
+          }
+
+          return element;
+        })
+      );
+    },
   });
 
   useShortcuts(["=", "+"], zoomIn, { preventDefault: true, modifiers: "Meta" });
   useShortcuts("-", zoomOut, { preventDefault: true, modifiers: "Meta" });
   useShortcuts("0", resetZoom, { preventDefault: true, modifiers: "Meta" });
-  useShortcuts(["=", "+"], zoomIn, {
-    preventDefault: true,
-    modifiers: "Control",
-  });
-  useShortcuts("-", zoomOut, { preventDefault: true, modifiers: "Control" });
-  useShortcuts("0", resetZoom, { preventDefault: true, modifiers: "Control" });
 
   return (
     <>
@@ -66,8 +72,8 @@ export default function MoodCanvas() {
               className={styles.moodElement}
               onPointerDown={onElementPointerDown(element.id)}
               style={{
-                width: element.w,
-                height: element.h,
+                width: element.width,
+                height: element.height,
                 transform: `translate3d(${element.x}px, ${element.y}px, 0)`,
               }}
             >
@@ -75,7 +81,7 @@ export default function MoodCanvas() {
                 src={element.src}
                 alt={element.alt ?? ""}
                 fill
-                sizes={`${element.w}px`}
+                sizes={`${element.width}px`}
                 objectFit="fill"
               />
             </div>
