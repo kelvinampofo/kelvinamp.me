@@ -11,8 +11,10 @@
   -webkit-backdrop-filter: saturate(180%) blur(10px);
   backdrop-filter: saturate(180%) blur(10px);
   border-radius: var(--radius-8);
-  box-shadow: var(--elevation-3);
-  border: 1px solid var(--greyA6);
+  box-shadow:
+    0 0 0 1px var(--greyA3),
+    var(--elevation-3);
+  border: 1px solid transparent;
   user-select: none;
 }
 
