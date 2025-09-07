@@ -4,6 +4,13 @@
 
   opacity: 0.6;
   filter: blur(2px);
+
+  /* workaround for Safari blur cut-off  */
+  will-change: filter;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  overflow: visible;
+
   cursor: crosshair;
   transition:
     opacity var(--transition),
