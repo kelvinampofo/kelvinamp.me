@@ -4,7 +4,7 @@ export const CANVAS_ELEMENTS = [
   {
     id: "mood:sketch",
     x: 440,
-    y: 120,
+    y: 200,
     width: 340,
     height: 400,
     src: "/assets/images/mood/sketch.webp",
@@ -13,7 +13,7 @@ export const CANVAS_ELEMENTS = [
   {
     id: "mood:polaroids-bill-atkinson",
     x: 400,
-    y: 500,
+    y: 580,
     width: 240,
     height: 180,
     src: "/assets/images/mood/polaroids-bill-atkinson.webp",
@@ -22,7 +22,7 @@ export const CANVAS_ELEMENTS = [
   {
     id: "mood:flow-diagram",
     x: 720,
-    y: 138,
+    y: 218,
     width: 380,
     height: 260,
     src: "/assets/images/mood/flow-diagram.webp",
@@ -31,7 +31,7 @@ export const CANVAS_ELEMENTS = [
   {
     id: "mood:caravaggio",
     x: 800,
-    y: 420,
+    y: 500,
     width: 400,
     height: 400,
     src: "/assets/images/mood/caravaggio.webp",
@@ -40,7 +40,7 @@ export const CANVAS_ELEMENTS = [
   {
     id: "mood:nasa-spacecraft-markings",
     x: 1130,
-    y: 100,
+    y: 180,
     width: 600,
     height: 400,
     src: "/assets/images/mood/nasa-spacecraft-markings.webp",
