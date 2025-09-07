@@ -1,11 +1,11 @@
-import type { StaticImageData } from "next/image";
+export type ElementId = `mood:${string}`;
 
 export interface CanvasElement {
-  id: string;
+  id: ElementId;
   x: number;
   y: number;
   width: number;
   height: number;
-  src: string | StaticImageData;
+  src: string;
   alt?: string;
 }
