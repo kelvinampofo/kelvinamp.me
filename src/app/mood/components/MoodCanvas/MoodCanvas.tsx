@@ -127,6 +127,7 @@ export default function MoodCanvas() {
         zoomPercent={percent}
         onZoomIn={zoomIn}
         onZoomOut={zoomOut}
+        onReset={reset}
       />
     </>
   );

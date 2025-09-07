@@ -57,6 +57,15 @@
     animation: enter-pulse 320ms ease-out 1;
   }
 
+  .resetIcon {
+    transform-origin: center;
+    transition: transform 320ms ease-out;
+  }
+
+  .canvasButton:active .resetIcon {
+    transform: rotate(90deg);
+  }
+
   @keyframes enter-pulse {
     0% {
       transform: scale(1);
