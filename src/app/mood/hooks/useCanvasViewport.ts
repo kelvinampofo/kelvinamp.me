@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { clamp } from "../../../utils/math";
+import { CANVAS_ELEMENTS } from "../components/MoodCanvas/canvasElements";
 
 type PointerRecord = { x: number; y: number; isElement: boolean };
 
@@ -29,10 +30,13 @@ interface UseCanvasViewportOptions {
   initialScale?: number;
 }
 
+// slight right bias on mobile to account for UI affordances
+const RIGHT_BIAS_PX = 132;
+
 /**
  * canvas viewport controls for pan/zoom and gestures.
  *
- * @returns grouped controls:
+ * @returns canvas viewport controls:
  * - canvas: ref, pan, and pointer handlers for attaching to the canvas element
  * - zoom: scale, percent, and common helpers (zoomIn/zoomOut/reset/getScale)
  */
@@ -68,6 +72,35 @@ export default function useCanvasViewport({
   useEffect(() => {
     canvasPanRef.current = canvasPan;
   }, [canvasPan]);
+
+  // compute static content bounds from the mood elements
+  const computedBounds = useMemo(() => {
+    const minX = Math.min(...CANVAS_ELEMENTS.map((e) => e.x));
+    const minY = Math.min(...CANVAS_ELEMENTS.map((e) => e.y));
+    const maxX = Math.max(...CANVAS_ELEMENTS.map((e) => e.x + e.width));
+    const maxY = Math.max(...CANVAS_ELEMENTS.map((e) => e.y + e.height));
+    return { minX, minY, maxX, maxY };
+  }, []);
+
+  // center canvas so that content appears centred in the viewport
+  const centerToContentBounds = useCallback(() => {
+    const { minX, minY, maxX, maxY } = computedBounds;
+    const contentCenterX = (minX + maxX) / 2;
+    const contentCenterY = (minY + maxY) / 2;
+
+    const viewportW = window.innerWidth;
+    const viewportH = window.innerHeight;
+    const s = canvasScaleRef.current;
+
+    const nextPanX = viewportW / 2 + RIGHT_BIAS_PX - contentCenterX * s;
+    const nextPanY = viewportH / 2 - contentCenterY * s;
+
+    setCanvasPan((prev) =>
+      prev.x === nextPanX && prev.y === nextPanY
+        ? prev
+        : { x: nextPanX, y: nextPanY }
+    );
+  }, [computedBounds]);
 
   // multiplicative zoom anchored at a given screen point
   const scaleByAtPoint = useCallback(
@@ -226,6 +259,10 @@ export default function useCanvasViewport({
       }
     }
   };
+
+  useEffect(() => {
+    return centerToContentBounds();
+  }, [centerToContentBounds]);
 
   useEffect(() => {
     // zoom with Meta/Ctrl (trackpad pinch) else pan; prevent page scroll
