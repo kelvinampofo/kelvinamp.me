@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { Metadata } from "next";
+import Link from "next/link";
 
 import BackButton from "../../components/back-button/BackButton";
 import Heading from "../../components/heading/Heading";
@@ -44,7 +45,8 @@ export default function Now() {
           >
             listening
           </a>
-          , or playing with the Porsche{" "}
+          , updating my <Link href="/mood">mood board</Link>, or playing with
+          the Porsche{" "}
           <a
             href="https://configurator.porsche.com/porsche-code/PSR3WDD9"
             target="_blank"
