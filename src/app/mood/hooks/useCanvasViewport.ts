@@ -32,8 +32,9 @@ interface UseCanvasViewportOptions {
 /**
  * canvas viewport controls for pan/zoom and gestures.
  *
- * @returns refs, current transform state, common zoom helpers,
- * and handlers to attach to the canvas element.
+ * @returns grouped controls:
+ * - canvas: ref, pan, and pointer handlers for attaching to the canvas element
+ * - zoom: scale, percent, and common helpers (zoomIn/zoomOut/reset/getScale)
  */
 export default function useCanvasViewport({
   minScale = 0.25,
@@ -332,15 +333,19 @@ export default function useCanvasViewport({
   }, [zoomStep, wheelZoomDamping, scaleByAtPoint, setScaleAtPoint]);
 
   return {
-    canvasRef,
-    canvasScale,
-    canvasPan,
-    zoomPercent,
-    zoomIn,
-    zoomOut,
-    resetZoom,
-    handleCanvasPointerDown,
-    handleCanvasPointerMove,
-    getScale: () => canvasScaleRef.current,
+    canvas: {
+      ref: canvasRef,
+      pan: canvasPan,
+      onPointerDown: handleCanvasPointerDown,
+      onPointerMove: handleCanvasPointerMove,
+    },
+    zoom: {
+      scale: canvasScale,
+      percent: zoomPercent,
+      zoomIn,
+      zoomOut,
+      reset: resetZoom,
+      getScale: () => canvasScaleRef.current,
+    },
   };
 }
