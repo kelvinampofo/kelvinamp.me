@@ -5,9 +5,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { clamp } from "../../../utils/math";
 import { CANVAS_ELEMENTS } from "../components/MoodCanvas/canvasElements";
 
-type PointerRecord = { x: number; y: number; isElement: boolean };
+type PointerState = { x: number; y: number; isElement: boolean };
 
-interface CanvasPanDrag {
+interface PanDragState {
   pointerId: number;
   startClientX: number;
   startClientY: number;
@@ -15,7 +15,7 @@ interface CanvasPanDrag {
   startPanY: number;
 }
 
-interface CanvasPinchGesture {
+interface PinchGestureState {
   primaryPointerId: number;
   secondaryPointerId: number;
   startDist: number;
@@ -57,13 +57,13 @@ export default function useCanvasViewport({
   const canvasPanRef = useRef(canvasPan);
 
   // active pointers keyed by pointerId for multi-touch tracking
-  const activePointersRef = useRef<Map<number, PointerRecord>>(new Map());
+  const activePointersRef = useRef<Map<number, PointerState>>(new Map());
 
   // ongoing panning drag (single pointer)
-  const panningRef = useRef<CanvasPanDrag | null>(null);
+  const panningRef = useRef<PanDragState | null>(null);
 
   // ongoing pinch gesture (two pointers)
-  const pinchRef = useRef<CanvasPinchGesture | null>(null);
+  const pinchRef = useRef<PinchGestureState | null>(null);
 
   useEffect(() => {
     canvasScaleRef.current = canvasScale;
@@ -74,7 +74,7 @@ export default function useCanvasViewport({
   }, [canvasPan]);
 
   // compute static content bounds from the mood elements
-  const computedBounds = useMemo(() => {
+  const contentBounds = useMemo(() => {
     const minX = Math.min(...CANVAS_ELEMENTS.map((element) => element.x));
     const minY = Math.min(...CANVAS_ELEMENTS.map((element) => element.y));
     const maxX = Math.max(
@@ -86,94 +86,80 @@ export default function useCanvasViewport({
     return { minX, minY, maxX, maxY };
   }, []);
 
+  const clampScale = useCallback(
+    (value: number) => clamp(value, minScale, maxScale),
+    [minScale, maxScale]
+  );
+
+  const computeCentredPan = useCallback(
+    (scale: number) => {
+      const { minX, minY, maxX, maxY } = contentBounds;
+      const contentCenterX = (minX + maxX) / 2;
+      const contentCenterY = (minY + maxY) / 2;
+
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      return {
+        x: viewportWidth / 2 + RIGHT_BIAS_PX - contentCenterX * scale,
+        y: viewportHeight / 2 - contentCenterY * scale,
+      };
+    },
+    [contentBounds]
+  );
+
   // center canvas so that content appears centred in the viewport
   const centerToContentBounds = useCallback(() => {
-    const { minX, minY, maxX, maxY } = computedBounds;
-    const contentCenterX = (minX + maxX) / 2;
-    const contentCenterY = (minY + maxY) / 2;
-
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    const currentScale = canvasScaleRef.current;
-
-    const nextPanX =
-      viewportWidth / 2 + RIGHT_BIAS_PX - contentCenterX * currentScale;
-    const nextPanY = viewportHeight / 2 - contentCenterY * currentScale;
-
+    const nextPan = computeCentredPan(canvasScaleRef.current);
     setCanvasPan((prev) =>
-      prev.x === nextPanX && prev.y === nextPanY
-        ? prev
-        : { x: nextPanX, y: nextPanY }
+      prev.x === nextPan.x && prev.y === nextPan.y ? prev : nextPan
     );
-  }, [computedBounds]);
+  }, [computeCentredPan]);
+
+  // set a target scale while keeping the given screen point anchored
+  const setScaleKeepingPoint = useCallback(
+    (clientX: number, clientY: number, targetScale: number) => {
+      const canvasElement = canvasRef.current;
+      if (!canvasElement) {
+        setCanvasScale(clampScale(targetScale));
+
+        return;
+      }
+
+      const previousScale = canvasScaleRef.current;
+      const nextScale = clampScale(targetScale);
+
+      const canvasBounds = canvasElement.getBoundingClientRect();
+      const worldX =
+        (clientX - canvasBounds.left - canvasPanRef.current.x) / previousScale;
+      const worldY =
+        (clientY - canvasBounds.top - canvasPanRef.current.y) / previousScale;
+
+      const newPanX = clientX - canvasBounds.left - worldX * nextScale;
+      const newPanY = clientY - canvasBounds.top - worldY * nextScale;
+
+      setCanvasPan({ x: newPanX, y: newPanY });
+      setCanvasScale(nextScale);
+    },
+    [clampScale]
+  );
 
   // multiplicative zoom anchored at a given screen point
   const scaleByAtPoint = useCallback(
     (clientX: number, clientY: number, factor: number) => {
-      const canvasElement = canvasRef.current;
-      if (!canvasElement) {
-        setCanvasScale((previousScale) =>
-          clamp(
-            parseFloat((previousScale * factor).toFixed(3)),
-            minScale,
-            maxScale
-          )
-        );
-
-        return;
-      }
-
       const previousScale = canvasScaleRef.current;
-      const nextScale = clamp(
-        parseFloat((previousScale * factor).toFixed(3)),
-        minScale,
-        maxScale
-      );
+      const nextScale = parseFloat((previousScale * factor).toFixed(3));
 
-      // compute world coordinates of the screen point so it stays fixed while zooming
-      const canvasBounds = canvasElement.getBoundingClientRect();
-      const worldX =
-        (clientX - canvasBounds.left - canvasPanRef.current.x) / previousScale;
-      const worldY =
-        (clientY - canvasBounds.top - canvasPanRef.current.y) / previousScale;
-
-      // adjust pan so the same world point maps back to the same screen point
-      const newPanX = clientX - canvasBounds.left - worldX * nextScale;
-      const newPanY = clientY - canvasBounds.top - worldY * nextScale;
-
-      setCanvasPan({ x: newPanX, y: newPanY });
-      setCanvasScale(nextScale);
+      setScaleKeepingPoint(clientX, clientY, nextScale);
     },
-
-    [maxScale, minScale]
+    [setScaleKeepingPoint]
   );
 
   const setScaleAtPoint = useCallback(
     (clientX: number, clientY: number, targetScale: number) => {
-      const canvasElement = canvasRef.current;
-      if (!canvasElement) {
-        setCanvasScale(clamp(targetScale, minScale, maxScale));
-
-        return;
-      }
-
-      const previousScale = canvasScaleRef.current;
-      const nextScale = clamp(targetScale, minScale, maxScale);
-
-      // keep the given screen point anchored while changing scale
-      const canvasBounds = canvasElement.getBoundingClientRect();
-      const worldX =
-        (clientX - canvasBounds.left - canvasPanRef.current.x) / previousScale;
-      const worldY =
-        (clientY - canvasBounds.top - canvasPanRef.current.y) / previousScale;
-      const newPanX = clientX - canvasBounds.left - worldX * nextScale;
-      const newPanY = clientY - canvasBounds.top - worldY * nextScale;
-
-      setCanvasPan({ x: newPanX, y: newPanY });
-      setCanvasScale(nextScale);
+      setScaleKeepingPoint(clientX, clientY, targetScale);
     },
-
-    [maxScale, minScale]
+    [setScaleKeepingPoint]
   );
 
   const zoomIn = useCallback(() => {
@@ -195,24 +181,12 @@ export default function useCanvasViewport({
   }, [zoomStep, scaleByAtPoint]);
 
   const resetZoom = useCallback(() => {
-    const targetScale = initial; // restore to initialScale
-
-    // compute pan to re-center content at target scale
-    const { minX, minY, maxX, maxY } = computedBounds;
-    const contentCenterX = (minX + maxX) / 2;
-    const contentCenterY = (minY + maxY) / 2;
-
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-
-    const targetScaleClamped = clamp(targetScale, minScale, maxScale);
-    const nextPanX =
-      viewportWidth / 2 + RIGHT_BIAS_PX - contentCenterX * targetScaleClamped;
-    const nextPanY = viewportHeight / 2 - contentCenterY * targetScaleClamped;
+    const targetScaleClamped = clampScale(initial);
+    const nextPan = computeCentredPan(targetScaleClamped);
 
     setCanvasScale(targetScaleClamped);
-    setCanvasPan({ x: nextPanX, y: nextPanY });
-  }, [computedBounds, initial, maxScale, minScale]);
+    setCanvasPan(nextPan);
+  }, [clampScale, computeCentredPan, initial]);
 
   const zoomPercent = useMemo(
     () => Math.round(canvasScale * 100),
@@ -254,10 +228,11 @@ export default function useCanvasViewport({
   const handleCanvasPointerMove = (
     event: React.PointerEvent<HTMLDivElement>
   ) => {
-    const pointerRecord = activePointersRef.current.get(event.pointerId);
-    if (pointerRecord) {
-      pointerRecord.x = event.clientX;
-      pointerRecord.y = event.clientY;
+    const pointerState = activePointersRef.current.get(event.pointerId);
+
+    if (pointerState) {
+      pointerState.x = event.clientX;
+      pointerState.y = event.clientY;
     }
 
     if (!pinchRef.current && activePointersRef.current.size === 2) {
@@ -302,13 +277,13 @@ export default function useCanvasViewport({
 
       const bounds = canvasElement.getBoundingClientRect();
 
-      const inside =
+      const isInsideCanvas =
         event.clientX >= bounds.left &&
         event.clientX <= bounds.right &&
         event.clientY >= bounds.top &&
         event.clientY <= bounds.bottom;
 
-      if (!inside) return;
+      if (!isInsideCanvas) return;
 
       const isZoomGesture = event.metaKey || event.ctrlKey;
       if (isZoomGesture) {
@@ -345,12 +320,12 @@ export default function useCanvasViewport({
       }
 
       if (pinchRef.current) {
-        const activePinch = pinchRef.current;
+        const pinchGesture = pinchRef.current;
         const primaryPointer = activePointersRef.current.get(
-          activePinch.primaryPointerId
+          pinchGesture.primaryPointerId
         );
         const secondaryPointer = activePointersRef.current.get(
-          activePinch.secondaryPointerId
+          pinchGesture.secondaryPointerId
         );
 
         if (primaryPointer && secondaryPointer) {
@@ -364,7 +339,7 @@ export default function useCanvasViewport({
 
           // scale changes in proportion to distance delta
           const rawScale =
-            (activePinch.startScale * distance) / activePinch.startDist;
+            (pinchGesture.startScale * distance) / pinchGesture.startDist;
 
           setScaleAtPoint(midpointX, midpointY, rawScale);
         }
