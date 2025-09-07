@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { clamp } from "../../../utils/math";
-import { centerOfBounds, elementsBoundingBox } from "../utils/canvasDom";
 
 type PointerRecord = { x: number; y: number; isElement: boolean };
 
@@ -51,7 +50,6 @@ export default function useCanvasViewport({
   const canvasRef = useRef<HTMLDivElement | null>(null);
   const canvasScaleRef = useRef(canvasScale);
   const canvasPanRef = useRef(canvasPan);
-  const hasCentredRef = useRef(false);
 
   // active pointers keyed by pointerId for multi-touch tracking
   const activePointersRef = useRef<Map<number, PointerRecord>>(new Map());
@@ -69,55 +67,6 @@ export default function useCanvasViewport({
   useEffect(() => {
     canvasPanRef.current = canvasPan;
   }, [canvasPan]);
-
-  // center the canvas on mount (default behaviour) by inferring from DOM elements.
-  useEffect(() => {
-    const applyCenter = (center: { x: number; y: number } | undefined) => {
-      if (!center || hasCentredRef.current) return false;
-
-      const scale = canvasScaleRef.current;
-      const panX = window.innerWidth / 2 - scale * center.x;
-      const panY = window.innerHeight / 2 - scale * center.y;
-
-      setCanvasPan({ x: panX, y: panY });
-
-      hasCentredRef.current = true;
-
-      return true;
-    };
-
-    const tryInferFromDom = () => {
-      const root = canvasRef.current;
-
-      if (!root) return false;
-
-      const bounds = elementsBoundingBox(root);
-
-      if (!bounds) return false;
-
-      return applyCenter(centerOfBounds(bounds));
-    };
-
-    if (tryInferFromDom()) return;
-
-    const root = canvasRef.current;
-    if (!root) return;
-
-    const observer = new MutationObserver(() => {
-      if (tryInferFromDom()) {
-        return observer.disconnect();
-      }
-    });
-
-    observer.observe(root, { childList: true, subtree: true });
-
-    const timeout = window.setTimeout(() => observer.disconnect(), 3000);
-
-    return () => {
-      observer.disconnect();
-      window.clearTimeout(timeout);
-    };
-  }, []);
 
   // multiplicative zoom anchored at a given screen point
   const scaleByAtPoint = useCallback(
@@ -194,7 +143,6 @@ export default function useCanvasViewport({
 
     // multiplicative step up
     const factor = 1 + zoomStep;
-
     scaleByAtPoint(centerX, centerY, factor);
   }, [zoomStep, scaleByAtPoint]);
 
@@ -300,6 +248,7 @@ export default function useCanvasViewport({
         event.preventDefault();
 
         // smooth, Figma-like multiplicative zoom with damping
+        // negative deltaY => zoom in; positive => zoom out
         const delta = event.deltaY;
         const factor = Math.exp(-delta * wheelZoomDamping);
 
@@ -371,30 +320,27 @@ export default function useCanvasViewport({
       }
     };
 
-    const controller = new AbortController();
-    const { signal } = controller;
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerup", handlePointerUp);
 
-    window.addEventListener("wheel", handleWheel, { passive: false, signal });
-    window.addEventListener("pointermove", handlePointerMove, { signal });
-    window.addEventListener("pointerup", handlePointerUp, { signal });
-
-    return () => controller.abort();
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+    };
   }, [zoomStep, wheelZoomDamping, scaleByAtPoint, setScaleAtPoint]);
 
   return {
-    canvas: {
-      ref: canvasRef,
-      pan: canvasPan,
-      onPointerDown: handleCanvasPointerDown,
-      onPointerMove: handleCanvasPointerMove,
-    },
-    zoom: {
-      scale: canvasScale,
-      percent: zoomPercent,
-      zoomIn,
-      zoomOut,
-      reset: resetZoom,
-      getScale: () => canvasScaleRef.current,
-    },
+    canvasRef,
+    canvasScale,
+    canvasPan,
+    zoomPercent,
+    zoomIn,
+    zoomOut,
+    resetZoom,
+    handleCanvasPointerDown,
+    handleCanvasPointerMove,
+    getScale: () => canvasScaleRef.current,
   };
 }
