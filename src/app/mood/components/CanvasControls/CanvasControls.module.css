@@ -12,7 +12,7 @@
   backdrop-filter: saturate(180%) blur(10px);
   border-radius: var(--radius-8);
   box-shadow: var(--elevation-3);
-  border: var(--border-thin) solid var(--greyA6);
+  border: 1px solid var(--greyA6);
   user-select: none;
 }
 
