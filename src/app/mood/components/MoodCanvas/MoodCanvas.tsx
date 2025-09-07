@@ -24,16 +24,8 @@ export default function MoodCanvas() {
   const timeoutsRef = useRef<number[]>([]);
 
   const {
-    canvasRef,
-    canvasScale,
-    canvasPan,
-    zoomPercent,
-    zoomIn,
-    zoomOut,
-    resetZoom,
-    handleCanvasPointerDown,
-    handleCanvasPointerMove,
-    getScale,
+    canvas: { onPointerDown, onPointerMove, pan, ref },
+    zoom: { scale, getScale, reset, zoomIn, zoomOut, percent },
   } = useCanvasViewport({ initialScale: 0.7 });
 
   const { onElementPointerDown } = useDrag({
@@ -57,9 +49,12 @@ export default function MoodCanvas() {
     },
   });
 
-  useShortcuts(["=", "+"], zoomIn, { preventDefault: true, modifiers: "Meta" });
+  useShortcuts(["=", "+"], zoomIn, {
+    preventDefault: true,
+    modifiers: "Meta",
+  });
   useShortcuts("-", zoomOut, { preventDefault: true, modifiers: "Meta" });
-  useShortcuts("0", resetZoom, { preventDefault: true, modifiers: "Meta" });
+  useShortcuts("0", reset, { preventDefault: true, modifiers: "Meta" });
 
   // schedule staggered visibility
   useEffect(() => {
@@ -83,7 +78,7 @@ export default function MoodCanvas() {
     });
 
     return () => {
-      timeoutsRef.current.forEach((t) => clearTimeout(t));
+      timeoutsRef.current.forEach((timeoutId) => clearTimeout(timeoutId));
       timeoutsRef.current = [];
     };
   }, []);
@@ -91,16 +86,16 @@ export default function MoodCanvas() {
   return (
     <>
       <div
-        ref={canvasRef}
+        ref={ref}
         className={styles.moodCanvas}
-        onPointerDown={handleCanvasPointerDown}
-        onPointerMove={handleCanvasPointerMove}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
       >
         <div
           className={styles.moodSurface}
           style={{
             // order matters here, first translate, then scale the whole surface
-            transform: `translate(${canvasPan.x}px, ${canvasPan.y}px) scale(${canvasScale})`,
+            transform: `translate(${pan.x}px, ${pan.y}px) scale(${scale})`,
           }}
         >
           {canvasElements.map((element) => {
@@ -132,7 +127,7 @@ export default function MoodCanvas() {
       </div>
 
       <CanvasControls
-        zoomPercent={zoomPercent}
+        zoomPercent={percent}
         onZoomIn={zoomIn}
         onZoomOut={zoomOut}
       />
