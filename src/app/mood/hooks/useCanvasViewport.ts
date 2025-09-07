@@ -92,12 +92,13 @@ export default function useCanvasViewport({
     const contentCenterX = (minX + maxX) / 2;
     const contentCenterY = (minY + maxY) / 2;
 
-    const viewportW = window.innerWidth;
-    const viewportH = window.innerHeight;
-    const s = canvasScaleRef.current;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const currentScale = canvasScaleRef.current;
 
-    const nextPanX = viewportW / 2 + RIGHT_BIAS_PX - contentCenterX * s;
-    const nextPanY = viewportH / 2 - contentCenterY * s;
+    const nextPanX =
+      viewportWidth / 2 + RIGHT_BIAS_PX - contentCenterX * currentScale;
+    const nextPanY = viewportHeight / 2 - contentCenterY * currentScale;
 
     setCanvasPan((prev) =>
       prev.x === nextPanX && prev.y === nextPanY
@@ -193,7 +194,25 @@ export default function useCanvasViewport({
     scaleByAtPoint(centerX, centerY, factor);
   }, [zoomStep, scaleByAtPoint]);
 
-  const resetZoom = useCallback(() => setCanvasScale(1), []);
+  const resetZoom = useCallback(() => {
+    const targetScale = initial; // restore to initialScale
+
+    // compute pan to re-center content at target scale
+    const { minX, minY, maxX, maxY } = computedBounds;
+    const contentCenterX = (minX + maxX) / 2;
+    const contentCenterY = (minY + maxY) / 2;
+
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    const targetScaleClamped = clamp(targetScale, minScale, maxScale);
+    const nextPanX =
+      viewportWidth / 2 + RIGHT_BIAS_PX - contentCenterX * targetScaleClamped;
+    const nextPanY = viewportHeight / 2 - contentCenterY * targetScaleClamped;
+
+    setCanvasScale(targetScaleClamped);
+    setCanvasPan({ x: nextPanX, y: nextPanY });
+  }, [computedBounds, initial, maxScale, minScale]);
 
   const zoomPercent = useMemo(
     () => Math.round(canvasScale * 100),
@@ -244,18 +263,19 @@ export default function useCanvasViewport({
     if (!pinchRef.current && activePointersRef.current.size === 2) {
       const pointerIds = Array.from(activePointersRef.current.keys());
       const primaryPointer = activePointersRef.current.get(pointerIds[0]);
-      const pointer2 = activePointersRef.current.get(pointerIds[1]);
+      const secondaryPointer = activePointersRef.current.get(pointerIds[1]);
 
       if (
         primaryPointer &&
-        pointer2 &&
+        secondaryPointer &&
         !primaryPointer.isElement &&
-        !pointer2.isElement
+        !secondaryPointer.isElement
       ) {
         // initialise pinch when two non-element pointers are active
-        const deltaX = pointer2.x - primaryPointer.x;
-        const deltaY = pointer2.y - primaryPointer.y;
+        const deltaX = secondaryPointer.x - primaryPointer.x;
+        const deltaY = secondaryPointer.y - primaryPointer.y;
         const distance = Math.hypot(deltaX, deltaY) || 1;
+
         pinchRef.current = {
           primaryPointerId: pointerIds[0],
           secondaryPointerId: pointerIds[1],
