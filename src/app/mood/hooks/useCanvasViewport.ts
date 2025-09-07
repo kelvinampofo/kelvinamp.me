@@ -321,14 +321,15 @@ export default function useCanvasViewport({
       }
     };
 
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    window.addEventListener("pointermove", handlePointerMove);
-    window.addEventListener("pointerup", handlePointerUp);
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    window.addEventListener("wheel", handleWheel, { passive: false, signal });
+    window.addEventListener("pointermove", handlePointerMove, { signal });
+    window.addEventListener("pointerup", handlePointerUp, { signal });
 
     return () => {
-      window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("pointermove", handlePointerMove);
-      window.removeEventListener("pointerup", handlePointerUp);
+      controller.abort();
     };
   }, [zoomStep, wheelZoomDamping, scaleByAtPoint, setScaleAtPoint]);
 
