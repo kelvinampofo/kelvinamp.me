@@ -16,8 +16,8 @@ interface CanvasPanDrag {
 }
 
 interface CanvasPinchGesture {
-  id1: number;
-  id2: number;
+  primaryPointerId: number;
+  secondaryPointerId: number;
   startDist: number;
   startScale: number;
 }
@@ -75,10 +75,14 @@ export default function useCanvasViewport({
 
   // compute static content bounds from the mood elements
   const computedBounds = useMemo(() => {
-    const minX = Math.min(...CANVAS_ELEMENTS.map((e) => e.x));
-    const minY = Math.min(...CANVAS_ELEMENTS.map((e) => e.y));
-    const maxX = Math.max(...CANVAS_ELEMENTS.map((e) => e.x + e.width));
-    const maxY = Math.max(...CANVAS_ELEMENTS.map((e) => e.y + e.height));
+    const minX = Math.min(...CANVAS_ELEMENTS.map((element) => element.x));
+    const minY = Math.min(...CANVAS_ELEMENTS.map((element) => element.y));
+    const maxX = Math.max(
+      ...CANVAS_ELEMENTS.map((element) => element.x + element.width)
+    );
+    const maxY = Math.max(
+      ...CANVAS_ELEMENTS.map((element) => element.y + element.height)
+    );
     return { minX, minY, maxX, maxY };
   }, []);
 
@@ -239,17 +243,22 @@ export default function useCanvasViewport({
 
     if (!pinchRef.current && activePointersRef.current.size === 2) {
       const pointerIds = Array.from(activePointersRef.current.keys());
-      const pointer1 = activePointersRef.current.get(pointerIds[0]);
+      const primaryPointer = activePointersRef.current.get(pointerIds[0]);
       const pointer2 = activePointersRef.current.get(pointerIds[1]);
 
-      if (pointer1 && pointer2 && !pointer1.isElement && !pointer2.isElement) {
+      if (
+        primaryPointer &&
+        pointer2 &&
+        !primaryPointer.isElement &&
+        !pointer2.isElement
+      ) {
         // initialise pinch when two non-element pointers are active
-        const deltaX = pointer2.x - pointer1.x;
-        const deltaY = pointer2.y - pointer1.y;
+        const deltaX = pointer2.x - primaryPointer.x;
+        const deltaY = pointer2.y - primaryPointer.y;
         const distance = Math.hypot(deltaX, deltaY) || 1;
         pinchRef.current = {
-          id1: pointerIds[0],
-          id2: pointerIds[1],
+          primaryPointerId: pointerIds[0],
+          secondaryPointerId: pointerIds[1],
           startDist: distance,
           startScale: canvasScaleRef.current,
         };
@@ -317,17 +326,21 @@ export default function useCanvasViewport({
 
       if (pinchRef.current) {
         const activePinch = pinchRef.current;
-        const pointer1 = activePointersRef.current.get(activePinch.id1);
-        const pointer2 = activePointersRef.current.get(activePinch.id2);
+        const primaryPointer = activePointersRef.current.get(
+          activePinch.primaryPointerId
+        );
+        const secondaryPointer = activePointersRef.current.get(
+          activePinch.secondaryPointerId
+        );
 
-        if (pointer1 && pointer2) {
-          const deltaX = pointer2.x - pointer1.x;
-          const deltaY = pointer2.y - pointer1.y;
+        if (primaryPointer && secondaryPointer) {
+          const deltaX = secondaryPointer.x - primaryPointer.x;
+          const deltaY = secondaryPointer.y - primaryPointer.y;
           const distance = Math.hypot(deltaX, deltaY) || 1;
 
           // use fingers' midpoint as the zoom anchor
-          const midpointX = (pointer1.x + pointer2.x) / 2;
-          const midpointY = (pointer1.y + pointer2.y) / 2;
+          const midpointX = (primaryPointer.x + secondaryPointer.x) / 2;
+          const midpointY = (primaryPointer.y + secondaryPointer.y) / 2;
 
           // scale changes in proportion to distance delta
           const rawScale =
@@ -351,8 +364,8 @@ export default function useCanvasViewport({
 
       if (
         pinchRef.current &&
-        (event.pointerId === pinchRef.current.id1 ||
-          event.pointerId === pinchRef.current.id2)
+        (event.pointerId === pinchRef.current.primaryPointerId ||
+          event.pointerId === pinchRef.current.secondaryPointerId)
       ) {
         pinchRef.current = null;
       }
