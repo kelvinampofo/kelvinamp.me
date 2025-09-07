@@ -32,7 +32,9 @@ export default function MoodCanvas() {
   const { onElementPointerDown } = useDrag({
     getScale,
     getInitialPositionById: (elementId: string) => {
-      const element = canvasElements.find((e) => e.id === elementId);
+      const element = canvasElements.find(
+        (element) => element.id === elementId
+      );
       return element ? { x: element.x, y: element.y } : undefined;
     },
     onDrag: ({ id, nextElementX, nextElementY }) => {
@@ -59,12 +61,14 @@ export default function MoodCanvas() {
         className={styles.moodCanvas}
         onPointerDown={handleCanvasPointerDown}
         onPointerMove={handleCanvasPointerMove}
-        style={{
-          // order matters here, first translate, then scale the whole surface
-          transform: `translate(${canvasPan.x}px, ${canvasPan.y}px) scale(${canvasScale})`,
-        }}
       >
-        <div className={styles.moodSurface}>
+        <div
+          className={styles.moodSurface}
+          style={{
+            // order matters here, first translate, then scale the whole surface
+            transform: `translate(${canvasPan.x}px, ${canvasPan.y}px) scale(${canvasScale})`,
+          }}
+        >
           {canvasElements.map((element) => (
             <div
               key={element.id}

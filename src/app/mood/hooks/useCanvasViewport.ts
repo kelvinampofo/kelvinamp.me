@@ -25,6 +25,7 @@ interface UseCanvasViewportOptions {
   minScale?: number;
   maxScale?: number;
   zoomStep?: number;
+  wheelZoomDamping?: number;
 }
 
 /**
@@ -36,7 +37,8 @@ interface UseCanvasViewportOptions {
 export default function useCanvasViewport({
   minScale = 0.25,
   maxScale = 3,
-  zoomStep = 0.1,
+  zoomStep = 0.06,
+  wheelZoomDamping = 0.009,
 }: UseCanvasViewportOptions = {}) {
   const [canvasScale, setCanvasScale] = useState(1);
   const [canvasPan, setCanvasPan] = useState({ x: 0, y: 0 });
@@ -62,13 +64,14 @@ export default function useCanvasViewport({
     canvasPanRef.current = canvasPan;
   }, [canvasPan]);
 
-  const applyZoomAtPoint = useCallback(
-    (clientX: number, clientY: number, delta: number) => {
+  // multiplicative zoom anchored at a given screen point
+  const scaleByAtPoint = useCallback(
+    (clientX: number, clientY: number, factor: number) => {
       const canvasElement = canvasRef.current;
       if (!canvasElement) {
         setCanvasScale((previousScale) =>
           clamp(
-            parseFloat((previousScale + delta).toFixed(3)),
+            parseFloat((previousScale * factor).toFixed(3)),
             minScale,
             maxScale
           )
@@ -79,7 +82,7 @@ export default function useCanvasViewport({
 
       const previousScale = canvasScaleRef.current;
       const nextScale = clamp(
-        parseFloat((previousScale + delta).toFixed(3)),
+        parseFloat((previousScale * factor).toFixed(3)),
         minScale,
         maxScale
       );
@@ -134,15 +137,19 @@ export default function useCanvasViewport({
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
 
-    applyZoomAtPoint(centerX, centerY, zoomStep);
-  }, [zoomStep, applyZoomAtPoint]);
+    // multiplicative step up
+    const factor = 1 + zoomStep;
+    scaleByAtPoint(centerX, centerY, factor);
+  }, [zoomStep, scaleByAtPoint]);
 
   const zoomOut = useCallback(() => {
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
 
-    applyZoomAtPoint(centerX, centerY, -zoomStep);
-  }, [zoomStep, applyZoomAtPoint]);
+    // multiplicative step down (invert factor for symmetry)
+    const factor = 1 / (1 + zoomStep);
+    scaleByAtPoint(centerX, centerY, factor);
+  }, [zoomStep, scaleByAtPoint]);
 
   const resetZoom = useCallback(() => setCanvasScale(1), []);
 
@@ -198,7 +205,7 @@ export default function useCanvasViewport({
       const pointer2 = activePointersRef.current.get(pointerIds[1]);
 
       if (pointer1 && pointer2 && !pointer1.isElement && !pointer2.isElement) {
-        // initialize pinch when two non-element pointers are active
+        // initialise pinch when two non-element pointers are active
         const deltaX = pointer2.x - pointer1.x;
         const deltaY = pointer2.y - pointer1.y;
         const distance = Math.hypot(deltaX, deltaY) || 1;
@@ -218,16 +225,30 @@ export default function useCanvasViewport({
   useEffect(() => {
     // zoom with Meta/Ctrl (trackpad pinch) else pan; prevent page scroll
     const handleWheel = (event: WheelEvent) => {
+      const canvasElement = canvasRef.current;
+
+      if (!canvasElement) return;
+
+      const bounds = canvasElement.getBoundingClientRect();
+
+      const inside =
+        event.clientX >= bounds.left &&
+        event.clientX <= bounds.right &&
+        event.clientY >= bounds.top &&
+        event.clientY <= bounds.bottom;
+
+      if (!inside) return;
+
       const isZoomGesture = event.metaKey || event.ctrlKey;
       if (isZoomGesture) {
         event.preventDefault();
 
-        const direction = Math.sign(event.deltaY);
-        applyZoomAtPoint(
-          event.clientX,
-          event.clientY,
-          direction > 0 ? -zoomStep : zoomStep
-        );
+        // smooth, Figma-like multiplicative zoom with damping
+        // negative deltaY => zoom in; positive => zoom out
+        const delta = event.deltaY;
+        const factor = Math.exp(-delta * wheelZoomDamping);
+
+        scaleByAtPoint(event.clientX, event.clientY, factor);
       } else {
         event.preventDefault();
 
@@ -242,6 +263,7 @@ export default function useCanvasViewport({
     // drives the panning and pinch scaling
     const handlePointerMove = (event: PointerEvent) => {
       const activePanDrag = panningRef.current;
+
       if (activePanDrag) {
         const deltaX = event.clientX - activePanDrag.startClientX;
         const deltaY = event.clientY - activePanDrag.startClientY;
@@ -303,7 +325,7 @@ export default function useCanvasViewport({
       window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("pointerup", handlePointerUp);
     };
-  }, [zoomStep, applyZoomAtPoint, setScaleAtPoint]);
+  }, [zoomStep, wheelZoomDamping, scaleByAtPoint, setScaleAtPoint]);
 
   return {
     canvasRef,

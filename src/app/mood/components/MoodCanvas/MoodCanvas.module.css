@@ -8,8 +8,10 @@
 
 .moodSurface {
   position: relative;
-  width: 2000px;
-  height: 1400px;
+  width: 100vw;
+  height: 100vh;
+  transform-origin: 0 0;
+  will-change: transform;
 }
 .moodElement {
   position: absolute;
