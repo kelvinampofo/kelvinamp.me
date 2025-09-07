@@ -5,11 +5,9 @@
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: var(--spacing-gap-sm);
-  padding: 6px;
+  gap: var(--spacing-gap-xs);
+  padding: var(--spacing-gap-xs);
   background: var(--color-background);
-  -webkit-backdrop-filter: saturate(180%) blur(10px);
-  backdrop-filter: saturate(180%) blur(10px);
   border-radius: var(--radius-8);
   box-shadow:
     0 0 0 1px var(--greyA3),
@@ -20,7 +18,7 @@
 
 .canvasButton {
   border-radius: var(--radius-4);
-  padding: 4px 7px;
+  padding: var(--spacing-gap-xs) 6px;
   line-height: 1;
 }
 
@@ -45,6 +43,11 @@
 
 .canvasButton svg {
   display: block;
+}
+
+/* optical alignment tweak */
+.minusIcon {
+  transform: translateY(1px);
 }
 
 @media (prefers-reduced-motion: no-preference) {

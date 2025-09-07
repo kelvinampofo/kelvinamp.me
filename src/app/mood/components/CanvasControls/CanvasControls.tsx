@@ -18,8 +18,8 @@ export default function CanvasControls({
   onReset,
 }: CanvasControlsProps) {
   const { isFullscreen, canFullscreen, toggleFullscreen } = useFullscreen();
-  useShortcuts("f", toggleFullscreen, { preventDefault: true });
-  useShortcuts("r", onReset, { preventDefault: true });
+  useShortcuts("F", toggleFullscreen, { preventDefault: true });
+  useShortcuts("R", onReset, { preventDefault: true });
 
   return (
     <div
@@ -53,7 +53,7 @@ export default function CanvasControls({
         aria-label="Zoom in"
         title="Zoom in"
       >
-        +
+        <Plus />
       </button>
       <span className="sr-only" aria-live="polite">
         {zoomPercent}%
@@ -65,7 +65,7 @@ export default function CanvasControls({
         aria-label="Zoom out"
         title="Zoom out"
       >
-        −
+        <Minus />
       </button>
     </div>
   );
@@ -128,6 +128,50 @@ function Reload() {
     >
       <path
         d="M1.84998 7.49998C1.84998 4.66458 4.05979 1.84998 7.49998 1.84998C10.2783 1.84998 11.6515 3.9064 12.2367 5H10.5C10.2239 5 10 5.22386 10 5.5C10 5.77614 10.2239 6 10.5 6H13.5C13.7761 6 14 5.77614 14 5.5V2.5C14 2.22386 13.7761 2 13.5 2C13.2239 2 13 2.22386 13 2.5V4.31318C12.2955 3.07126 10.6659 0.849976 7.49998 0.849976C3.43716 0.849976 0.849976 4.18537 0.849976 7.49998C0.849976 10.8146 3.43716 14.15 7.49998 14.15C9.44382 14.15 11.0622 13.3808 12.2145 12.2084C12.8315 11.5806 13.3133 10.839 13.6418 10.0407C13.7469 9.78536 13.6251 9.49315 13.3698 9.38806C13.1144 9.28296 12.8222 9.40478 12.7171 9.66014C12.4363 10.3425 12.0251 10.9745 11.5013 11.5074C10.5295 12.4963 9.16504 13.15 7.49998 13.15C4.05979 13.15 1.84998 10.3354 1.84998 7.49998Z"
+        fill="currentColor"
+        fillRule="evenodd"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}
+
+function Plus() {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 15 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+      className={styles.plusIcon}
+    >
+      <path
+        d="M8 2.75C8 2.47386 7.77614 2.25 7.5 2.25C7.22386 2.25 7 2.47386 7 2.75V7H2.75C2.47386 7 2.25 7.22386 2.25 7.5C2.25 7.77614 2.47386 8 2.75 8H7V12.25C7 12.5261 7.22386 12.75 7.5 12.75C7.77614 12.75 8 12.5261 8 12.25V8H12.25C12.5261 8 12.75 7.77614 12.75 7.5C12.75 7.22386 12.5261 7 12.25 7H8V2.75Z"
+        fill="currentColor"
+        fillRule="evenodd"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}
+
+function Minus() {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 15 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+      className={styles.minusIcon}
+    >
+      <path
+        d="M2.25 7.5C2.25 7.22386 2.47386 7 2.75 7H12.25C12.5261 7 12.75 7.22386 12.75 7.5C12.75 7.77614 12.5261 8 12.25 8H2.75C2.47386 8 2.25 7.77614 2.25 7.5Z"
         fill="currentColor"
         fillRule="evenodd"
         clipRule="evenodd"
