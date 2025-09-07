@@ -26,6 +26,7 @@ interface UseCanvasViewportOptions {
   maxScale?: number;
   zoomStep?: number;
   wheelZoomDamping?: number;
+  initialScale?: number;
 }
 
 /**
@@ -39,8 +40,11 @@ export default function useCanvasViewport({
   maxScale = 3,
   zoomStep = 0.06,
   wheelZoomDamping = 0.009,
+  initialScale = 1,
 }: UseCanvasViewportOptions = {}) {
-  const [canvasScale, setCanvasScale] = useState(1);
+  // clamp initial scale within bounds
+  const initial = clamp(initialScale, minScale, maxScale);
+  const [canvasScale, setCanvasScale] = useState(initial);
   const [canvasPan, setCanvasPan] = useState({ x: 0, y: 0 });
 
   const canvasRef = useRef<HTMLDivElement | null>(null);

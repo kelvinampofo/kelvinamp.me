@@ -27,7 +27,7 @@ export default function MoodCanvas() {
     handleCanvasPointerDown,
     handleCanvasPointerMove,
     getScale,
-  } = useCanvasViewport();
+  } = useCanvasViewport({ initialScale: 0.7 });
 
   const { onElementPointerDown } = useDrag({
     getScale,
@@ -85,7 +85,7 @@ export default function MoodCanvas() {
                 src={element.src}
                 alt={element.alt ?? ""}
                 fill
-                sizes={`${element.width}px`}
+                unoptimized
                 objectFit="fill"
               />
             </div>
