@@ -14,9 +14,9 @@ export const CANVAS_ELEMENTS = [
     id: "mood:polaroids-bill-atkinson",
     x: 400,
     y: 580,
-    width: 240,
-    height: 180,
-    src: "/assets/images/mood/polaroids-bill-atkinson.webp",
+    width: 280,
+    height: 220,
+    src: "/assets/images/mood/bill-atkinson-lisa-polaroids.webp",
     alt: "Polaroids by Bill Atkinson",
   },
   {
