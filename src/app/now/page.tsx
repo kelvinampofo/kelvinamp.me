@@ -48,7 +48,7 @@ export default function Now() {
           , updating my <Link href="/mood">mood board</Link>, or playing with
           the Porsche{" "}
           <a
-            href="https://configurator.porsche.com/porsche-code/PSR3WDD9"
+            href="https://porsche-code.com/PTKANXS8"
             target="_blank"
             rel="noopener noreferrer"
           >
