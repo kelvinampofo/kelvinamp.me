@@ -36,14 +36,18 @@ export default function MoodCanvas() {
       );
       return element ? { x: element.x, y: element.y } : undefined;
     },
-    onDrag: ({ id, nextElementX, nextElementY }) => {
-      setCanvasElements((prev) =>
-        prev.map((element) => {
-          if (element.id === id) {
-            return { ...element, x: nextElementX, y: nextElementY };
+    onDrag: ({ element }) => {
+      setCanvasElements((previousElements) =>
+        previousElements.map((canvasElement) => {
+          if (canvasElement.id === element.id) {
+            return {
+              ...canvasElement,
+              x: element.next.x,
+              y: element.next.y,
+            };
           }
 
-          return element;
+          return canvasElement;
         })
       );
     },
