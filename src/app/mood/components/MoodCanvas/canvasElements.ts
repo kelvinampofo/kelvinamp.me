@@ -46,4 +46,22 @@ export const CANVAS_ELEMENTS = [
     src: "/assets/images/mood/nasa-spacecraft-markings.webp",
     alt: "NASA Spacecraft Markings",
   },
+  {
+    id: "mood:apple-think-different",
+    x: 80,
+    y: 300,
+    width: 312,
+    height: 400,
+    src: "/assets/images/mood/apple-think-different.webp",
+    alt: "Apple Think Different - Yum campaign",
+  },
+  {
+    id: "mood:out-of-the-box",
+    x: 80,
+    y: 740,
+    width: 390,
+    height: 260,
+    src: "/assets/images/mood/out-of-the-box.webp",
+    alt: "Out of the box, by Special Projects",
+  },
 ] satisfies CanvasElement[];
