@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 import useDrag from "../../../../hooks/useDrag";
-import useShortcuts from "../../../../hooks/useShortcuts";
 import useCanvasViewport from "../../hooks/useCanvasViewport";
 import type { CanvasElement, ElementId } from "../../types";
 import CanvasControls from "../CanvasControls/CanvasControls";
@@ -25,7 +24,7 @@ export default function MoodCanvas() {
 
   const {
     canvas: { ref, pan, onPointerDown, onPointerMove },
-    zoom: { scale, percent, zoomIn, zoomOut, reset, getScale },
+    zoom: { scale, percent, zoomIn, zoomOut, zoomToFit, zoomTo100, getScale },
   } = useCanvasViewport({ initialScale: 0.7 });
 
   const { onElementPointerDown } = useDrag({
@@ -53,9 +52,6 @@ export default function MoodCanvas() {
     },
   });
 
-  useShortcuts(["=", "+"], zoomIn, { preventDefault: true, modifiers: "Meta" });
-  useShortcuts("-", zoomOut, { preventDefault: true, modifiers: "Meta" });
-  useShortcuts("0", reset, { preventDefault: true, modifiers: "Meta" });
 
   // schedule staggered visibility
   useEffect(() => {
@@ -131,7 +127,8 @@ export default function MoodCanvas() {
         zoomPercent={percent}
         onZoomIn={zoomIn}
         onZoomOut={zoomOut}
-        onReset={reset}
+        onZoomToFit={zoomToFit}
+        onZoomTo100={zoomTo100}
       />
     </>
   );

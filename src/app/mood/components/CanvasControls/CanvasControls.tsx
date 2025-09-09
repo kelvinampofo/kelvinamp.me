@@ -8,18 +8,44 @@ interface CanvasControlsProps {
   zoomPercent: number;
   onZoomIn: () => void;
   onZoomOut: () => void;
-  onReset: () => void;
+  onZoomToFit: () => void;
+  onZoomTo100: () => void;
 }
 
 export default function CanvasControls({
   zoomPercent,
   onZoomIn,
   onZoomOut,
-  onReset,
+  onZoomToFit,
+  onZoomTo100,
 }: CanvasControlsProps) {
   const { isFullscreen, canFullscreen, toggleFullscreen } = useFullscreen();
+
   useShortcuts("F", toggleFullscreen, { preventDefault: true });
-  useShortcuts("R", onReset, { preventDefault: true });
+
+  useShortcuts(["Equal", "NumpadAdd"], onZoomIn, {
+    preventDefault: true,
+    modifiers: "Meta",
+    matchBy: "code",
+  });
+
+  useShortcuts(["Minus", "NumpadSubtract"], onZoomOut, {
+    preventDefault: true,
+    modifiers: "Meta",
+    matchBy: "code",
+  });
+
+  useShortcuts("Digit0", onZoomTo100, {
+    preventDefault: true,
+    modifiers: "Meta",
+    matchBy: "code",
+  });
+
+  useShortcuts("Digit1", onZoomToFit, {
+    preventDefault: true,
+    modifiers: "Shift",
+    matchBy: "code",
+  });
 
   return (
     <div
@@ -40,9 +66,9 @@ export default function CanvasControls({
       <button
         type="button"
         className={styles.canvasButton}
-        onClick={onReset}
-        aria-label="Reset viewport"
-        title="Reset viewport (R)"
+        onClick={onZoomToFit}
+        aria-label="Zoom to fit"
+        title="Zoom to fit (⇧ 1)"
       >
         <Reload />
       </button>
