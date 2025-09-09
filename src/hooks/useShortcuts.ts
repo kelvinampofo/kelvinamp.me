@@ -10,6 +10,7 @@ interface Options {
   modifiers?: ModifierKey | ModifierKey[];
   target?: Window | Document | HTMLElement;
   delay?: number;
+  matchBy?: "key" | "code";
 }
 
 export default function useShortcuts(
@@ -17,7 +18,13 @@ export default function useShortcuts(
   callback: () => void,
   options: Options = {}
 ) {
-  const { preventDefault = false, modifiers, target, delay = 0 } = options;
+  const {
+    preventDefault = false,
+    modifiers,
+    target,
+    delay = 0,
+    matchBy = "key",
+  } = options;
 
   const callbackRef = useRef(callback);
 
@@ -36,8 +43,10 @@ export default function useShortcuts(
 
     const shortcutKeysSet = new Set(
       Array.isArray(shortcutKeys)
-        ? shortcutKeys.map((key) => key.toLowerCase())
-        : [shortcutKeys.toLowerCase()]
+        ? shortcutKeys.map((key) =>
+            matchBy === "key" ? key.toLowerCase() : key
+          )
+        : [matchBy === "key" ? shortcutKeys.toLowerCase() : shortcutKeys]
     );
 
     const clearHoldTimer = () => {
@@ -76,8 +85,8 @@ export default function useShortcuts(
         return;
       }
 
-      const pressedKey = e.key.toLowerCase();
-      const keyMatch = shortcutKeysSet.has(pressedKey);
+      const pressed = matchBy === "key" ? e.key.toLowerCase() : e.code;
+      const keyMatch = shortcutKeysSet.has(pressed);
 
       const modifierMatch = hasActiveModifiers(e);
 
@@ -106,5 +115,5 @@ export default function useShortcuts(
 
       clearHoldTimer();
     };
-  }, [shortcutKeys, modifiers, preventDefault, target, delay]);
+  }, [shortcutKeys, modifiers, preventDefault, target, delay, matchBy]);
 }
