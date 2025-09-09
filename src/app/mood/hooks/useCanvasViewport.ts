@@ -38,7 +38,7 @@ const RIGHT_BIAS_PX = 132;
  *
  * @returns canvas viewport controls:
  * - canvas: ref, pan, and pointer handlers for attaching to the canvas element
- * - zoom: scale, percent, and common helpers (zoomIn/zoomOut/reset/getScale)
+ * - zoom: scale, percent, and common helpers (zoomIn/zoomOut/zoomTo100/zoomToFit/getScale)
  */
 export default function useCanvasViewport({
   minScale = 0.25,
@@ -180,7 +180,13 @@ export default function useCanvasViewport({
     scaleByAtPoint(centerX, centerY, factor);
   }, [zoomStep, scaleByAtPoint]);
 
-  const resetZoom = useCallback(() => {
+  const zoomTo100 = useCallback(() => {
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    setScaleAtPoint(centerX, centerY, 1);
+  }, [setScaleAtPoint]);
+
+  const zoomToFit = useCallback(() => {
     const targetScaleClamped = clampScale(initial);
     const nextPan = computeCentredPan(targetScaleClamped);
 
@@ -313,6 +319,7 @@ export default function useCanvasViewport({
       if (activePanDrag) {
         const deltaX = event.clientX - activePanDrag.startClientX;
         const deltaY = event.clientY - activePanDrag.startClientY;
+
         setCanvasPan({
           x: activePanDrag.startPanX + deltaX,
           y: activePanDrag.startPanY + deltaY,
@@ -321,9 +328,11 @@ export default function useCanvasViewport({
 
       if (pinchRef.current) {
         const pinchGesture = pinchRef.current;
+
         const primaryPointer = activePointersRef.current.get(
           pinchGesture.primaryPointerId
         );
+
         const secondaryPointer = activePointersRef.current.get(
           pinchGesture.secondaryPointerId
         );
@@ -348,20 +357,21 @@ export default function useCanvasViewport({
 
     // clear drag/pinch state when a pointer ends
     const handlePointerUp = (event: PointerEvent) => {
-      if (
-        panningRef.current &&
-        event.pointerId === panningRef.current.pointerId
-      ) {
+      const isPanningPointerReleased =
+        panningRef.current && event.pointerId === panningRef.current.pointerId;
+
+      if (isPanningPointerReleased) {
         panningRef.current = null;
       }
 
       activePointersRef.current.delete(event.pointerId);
 
-      if (
+      const isPinchPointerReleased =
         pinchRef.current &&
         (event.pointerId === pinchRef.current.primaryPointerId ||
-          event.pointerId === pinchRef.current.secondaryPointerId)
-      ) {
+          event.pointerId === pinchRef.current.secondaryPointerId);
+
+      if (isPinchPointerReleased) {
         pinchRef.current = null;
       }
     };
@@ -390,7 +400,8 @@ export default function useCanvasViewport({
       percent: zoomPercent,
       zoomIn,
       zoomOut,
-      reset: resetZoom,
+      zoomTo100,
+      zoomToFit,
       getScale: () => canvasScaleRef.current,
     },
   };
