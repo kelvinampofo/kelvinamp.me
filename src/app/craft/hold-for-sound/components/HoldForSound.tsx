@@ -1,9 +1,13 @@
 "use client";
 
-import { motion, AnimatePresence } from "motion/react";
+import {
+  motion,
+  AnimatePresence,
+  type Transition,
+  TargetAndTransition,
+} from "motion/react";
 import dynamic from "next/dynamic";
-import { useState, useEffect, useCallback } from "react";
-import type { KeyboardEvent } from "react";
+import { useState, useEffect, useCallback, type KeyboardEvent } from "react";
 import useSound from "use-sound";
 
 import styles from "./HoldForSound.module.css";
@@ -15,25 +19,28 @@ const Waveform = dynamic(
   }
 );
 
-const buttonVariants = {
+const buttonVariants: Record<"default" | "pressed", TargetAndTransition> = {
   default: { scale: 1 },
   pressed: { scale: 1.05 },
 };
 
-const contentVariants = {
+const contentVariants: Record<
+  "initial" | "animate" | "exit",
+  TargetAndTransition
+> = {
   initial: { opacity: 0, scale: 0.98, filter: "blur(1px)" },
   animate: { opacity: 1, scale: 1, filter: "blur(0px)" },
   exit: { opacity: 0, scale: 0.98, filter: "blur(1px)" },
 };
 
-const buttonTransition = {
+const buttonTransition: Transition = {
   type: "spring",
   stiffness: 500,
   damping: 13,
   bounce: 0.4,
 };
 
-const contentTransition = { duration: 0.15 };
+const contentTransition: Transition = { duration: 0.15 };
 
 const soundUrl = "/assets/sounds/porsche-911.wav";
 
@@ -127,21 +134,7 @@ export default function HoldForSound() {
                 transition={contentTransition}
                 className={styles.contentDefault}
               >
-                <svg
-                  height={16}
-                  width={16}
-                  aria-label="play icon"
-                  viewBox="0 0 15 15"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M3.24182 2.32181C3.3919 2.23132 3.5784 2.22601 3.73338 2.30781L12.7334 7.05781C12.8974 7.14436 13 7.31457 13 7.5C13 7.68543 12.8974 7.85564 12.7334 7.94219L3.73338 12.6922C3.5784 12.774 3.3919 12.7687 3.24182 12.6782C3.09175 12.5877 3 12.4252 3 12.25V2.75C3 2.57476 3.09175 2.4123 3.24182 2.32181ZM4 3.57925V11.4207L11.4288 7.5L4 3.57925Z"
-                    fill="currentColor"
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <Play />
                 <span className="text-sm">Hold for sound</span>
               </motion.div>
             ) : (
@@ -160,6 +153,7 @@ export default function HoldForSound() {
           </AnimatePresence>
         </motion.button>
       </motion.div>
+
       <div className={styles.tooltipWrapper}>
         <AnimatePresence initial={false}>
           {!hasInteracted && (
@@ -178,5 +172,25 @@ export default function HoldForSound() {
         </AnimatePresence>
       </div>
     </div>
+  );
+}
+
+function Play() {
+  return (
+    <svg
+      height={16}
+      width={16}
+      aria-label="play icon"
+      viewBox="0 0 15 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M3.24182 2.32181C3.3919 2.23132 3.5784 2.22601 3.73338 2.30781L12.7334 7.05781C12.8974 7.14436 13 7.31457 13 7.5C13 7.68543 12.8974 7.85564 12.7334 7.94219L3.73338 12.6922C3.5784 12.774 3.3919 12.7687 3.24182 12.6782C3.09175 12.5877 3 12.4252 3 12.25V2.75C3 2.57476 3.09175 2.4123 3.24182 2.32181ZM4 3.57925V11.4207L11.4288 7.5L4 3.57925Z"
+        fill="currentColor"
+        fillRule="evenodd"
+        clipRule="evenodd"
+      />
+    </svg>
   );
 }
