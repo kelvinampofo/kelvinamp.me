@@ -26,9 +26,9 @@
 
 @media (min-width: 1024px) {
   .carouselContainer {
-    width: calc(100% + 2 * (122px + var(--spacing-gutter)));
-    margin-left: calc(-1 * (122px + var(--spacing-gutter)));
-    margin-right: calc(-1 * (122px + var(--spacing-gutter)));
+    width: calc(100% + 2 * (38px + var(--spacing-gutter)));
+    margin-left: calc(-1 * (38px + var(--spacing-gutter)));
+    margin-right: calc(-1 * (38px + var(--spacing-gutter)));
   }
 }
 
