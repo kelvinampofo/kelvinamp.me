@@ -1,4 +1,11 @@
 .canvasControls {
+  --controls-outer-radius: var(--radius-10);
+  --controls-distance: var(--spacing-gap-xs);
+  --controls-inner-radius: max(
+    0px,
+    calc(var(--controls-outer-radius) - var(--controls-distance))
+  );
+
   position: fixed;
   bottom: var(--spacing-gap-md);
   left: 50%;
@@ -6,9 +13,10 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-gap-xs);
-  padding: var(--spacing-gap-xs);
-  background: var(--color-background);
-  border-radius: var(--radius-8);
+
+  padding: var(--controls-distance);
+  background: var(--grey3);
+  border-radius: var(--controls-outer-radius);
   box-shadow:
     0 0 0 1px var(--greyA3),
     var(--elevation-3);
@@ -17,19 +25,17 @@
 }
 
 .canvasButton {
-  border-radius: var(--radius-4);
-  padding: var(--spacing-gap-xs) 6px;
+  border-radius: var(--controls-inner-radius);
+  padding: var(--spacing-gap-xs);
   line-height: 1;
 }
 
 .canvasButton:hover {
-  background: var(--greyA3);
-  box-shadow: var(--elevation-1);
+  background: var(--grey6);
 }
 
 .canvasButton:active {
   background: var(--greyA4);
-  transform: scale(0.96);
 }
 
 .canvasButton:disabled {
@@ -57,16 +63,16 @@
   }
 
   .canvasButton:hover .enterIcon {
-    animation: enter-pulse 320ms ease-out 1;
+    animation: enter-pulse 360ms var(--ease-out-cubic) 1;
   }
 
   .resetIcon {
     transform-origin: center;
-    transition: transform 320ms ease-out;
+    transition: transform 320ms var(--ease-out-cubic);
   }
 
   .canvasButton:active .resetIcon {
-    transform: rotate(90deg);
+    transform: rotate(70deg);
   }
 
   @keyframes enter-pulse {
@@ -74,7 +80,7 @@
       transform: scale(1);
     }
     55% {
-      transform: scale(1.12);
+      transform: scale(1.14);
     }
     100% {
       transform: scale(1);
