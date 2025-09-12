@@ -15,7 +15,7 @@
   gap: var(--spacing-gap-xs);
 
   padding: var(--controls-distance);
-  background: var(--grey3);
+  background: var(--grey1);
   border-radius: var(--controls-outer-radius);
   box-shadow:
     0 0 0 1px var(--greyA3),
@@ -66,6 +66,15 @@
     animation: enter-pulse 360ms var(--ease-out-cubic) 1;
   }
 
+  .exitIcon {
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  .canvasButton:hover .exitIcon {
+    animation: exit-pulse 360ms var(--ease-out-cubic) 1;
+  }
+
   .resetIcon {
     transform-origin: center;
     transition: transform 320ms var(--ease-out-cubic);
@@ -81,6 +90,18 @@
     }
     55% {
       transform: scale(1.14);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes exit-pulse {
+    0% {
+      transform: scale(1);
+    }
+    55% {
+      transform: scale(0.86);
     }
     100% {
       transform: scale(1);
