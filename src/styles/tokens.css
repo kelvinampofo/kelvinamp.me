@@ -79,6 +79,8 @@
 }
 
 :root {
+  --shadow-border: 0 0 0 1px var(--greyA3);
+
   --shadow-ambient: lch(0% 0 0 / 0.03);
   --shadow-key: lch(0% 0 0 / 0.08);
   --shadow-specular: lch(100% 0 0 / 0.06);
