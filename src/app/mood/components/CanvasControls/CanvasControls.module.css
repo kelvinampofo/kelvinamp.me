@@ -17,21 +17,22 @@
   padding: var(--controls-distance);
   background: var(--grey1);
   border-radius: var(--controls-outer-radius);
-  box-shadow:
-    0 0 0 1px var(--greyA3),
-    var(--elevation-3);
+
+  box-shadow: var(--shadow-border), var(--elevation-3);
+
   border: 1px solid transparent;
   user-select: none;
 }
 
 .canvasButton {
+  color: var(--grey12);
   border-radius: var(--controls-inner-radius);
   padding: var(--spacing-gap-xs);
   line-height: 1;
 }
 
 .canvasButton:hover {
-  background: var(--grey6);
+  background: var(--grey5);
 }
 
 .canvasButton:active {
@@ -89,7 +90,7 @@
       transform: scale(1);
     }
     55% {
-      transform: scale(1.14);
+      transform: scale(1.12);
     }
     100% {
       transform: scale(1);
