@@ -30,11 +30,6 @@ const wordEntries: WordEntryProps[] = [
     definition: "lasting for a very short time",
   },
   {
-    word: "luminous",
-    type: "adjective",
-    definition: "giving off light; bright or shining",
-  },
-  {
     word: "serendipity",
     type: "noun",
     definition:
@@ -66,6 +61,11 @@ const wordEntries: WordEntryProps[] = [
     word: "trawling",
     type: "noun",
     definition: "the activity of searching or sifting through something",
+  },
+  {
+    word: "erroneous",
+    type: "adjective",
+    definition: "wrong; incorrect",
   },
 ];
 
