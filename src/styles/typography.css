@@ -102,7 +102,7 @@ code {
 .prose-superscript a {
   text-decoration: none;
   border-radius: var(--radius-2);
-  padding: 1px 2px;
+  padding: 2px 5px;
   transition: var(--transition-hover);
 }
 
