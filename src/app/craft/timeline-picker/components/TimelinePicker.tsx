@@ -1,12 +1,15 @@
 "use client";
 
 import { motion, type Target, type Transition } from "motion/react";
-import { useState, type SVGProps } from "react";
+import { useState, type SVGProps, useCallback } from "react";
 import useSound from "use-sound";
+
+import useShortcuts from "../../../../hooks/useShortcuts";
 
 import styles from "./TimelinePicker.module.css";
 
 const SOUND_URL = "/assets/sounds/tick.mp3";
+
 const TICK_COUNT = 20;
 
 const ACTIVE_PROPS: Target = {
@@ -33,62 +36,84 @@ interface TimelinePickerProps {
 
 export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [mode, setMode] = useState<"none" | "default" | "increased">("none");
+
   const [play] = useSound(SOUND_URL, {
     volume: 0.25,
   });
 
   const ticks = Array.from({ length: TICK_COUNT }, (_, index) => index);
 
-  function selectIndex(index: number) {
-    if (index !== currentIndex) {
-      setCurrentIndex(index);
-      onSelect?.(index);
-      play();
-    }
-  }
+  const selectIndex = useCallback(
+    (index: number) => {
+      if (index !== currentIndex) {
+        setCurrentIndex(index);
+        onSelect?.(index);
+        play();
+      }
+    },
+    [currentIndex, onSelect, play]
+  );
 
-  function handlePrev() {
+  const handlePrev = useCallback(() => {
     if (currentIndex > 0) {
       selectIndex(currentIndex - 1);
     }
-  }
+  }, [currentIndex, selectIndex]);
 
-  function handleNext() {
+  const handleNext = useCallback(() => {
     if (currentIndex < ticks.length - 1) {
       selectIndex(currentIndex + 1);
     }
-  }
+  }, [currentIndex, ticks.length, selectIndex]);
+
+  useShortcuts("ArrowLeft", handlePrev, {
+    preventDefault: true,
+  });
+
+  useShortcuts("ArrowRight", handleNext, {
+    preventDefault: true,
+  });
+
+  useShortcuts("I", () =>
+    setMode((prevMode) => (prevMode === "increased" ? "none" : "increased"))
+  );
+  useShortcuts("D", () =>
+    setMode((prevMode) => (prevMode === "default" ? "none" : "default"))
+  );
 
   return (
-    <div className={styles.timelineContainer}>
-      <button
-        className={styles.timelineButton}
-        onClick={handlePrev}
-        disabled={currentIndex === 0}
-        aria-label="Previous selection"
-      >
-        <Chevron direction="left" />
-      </button>
+    <div className={styles.timelineWrapper} data-mode={mode}>
+      <div className={styles.timelineContainer}>
+        <button
+          className={styles.timelineButton}
+          onClick={handlePrev}
+          disabled={currentIndex === 0}
+          aria-label="Previous selection"
+        >
+          <Chevron direction="left" />
+        </button>
 
-      <div className={styles.timelineTicks}>
-        {ticks.map((_, index) => (
-          <Tick
-            key={index}
-            index={index}
-            isActive={index === currentIndex}
-            onSelect={selectIndex}
-          />
-        ))}
+        <div className={styles.timelineTicks}>
+          {ticks.map((_, index) => (
+            <Tick
+              key={index}
+              index={index}
+              isActive={index === currentIndex}
+              onSelect={selectIndex}
+            />
+          ))}
+        </div>
+
+        <button
+          className={styles.timelineButton}
+          onClick={handleNext}
+          disabled={currentIndex === ticks.length - 1}
+          aria-label="Next selection"
+        >
+          <Chevron direction="right" />
+        </button>
       </div>
-
-      <button
-        className={styles.timelineButton}
-        onClick={handleNext}
-        disabled={currentIndex === ticks.length - 1}
-        aria-label="Next selection"
-      >
-        <Chevron direction="right" />
-      </button>
     </div>
   );
 }

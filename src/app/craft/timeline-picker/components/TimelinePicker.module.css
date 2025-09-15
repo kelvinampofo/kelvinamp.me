@@ -1,3 +1,10 @@
+.timelineWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-gap-md);
+}
+
 .timelineContainer {
   --tick-width: 1px;
   --tick-height: 20px;
@@ -5,6 +12,7 @@
   --tick-margin-horizontal: 6px;
   --tick-margin-bottom-active: 12px;
   --tick-margin-bottom-mobile: 9px;
+
   --active-tick-color: var(--orange);
 
   display: flex;
@@ -15,7 +23,7 @@
 .timelineButton {
   display: flex;
   color: var(--grey10);
-  padding: 8px;
+  padding: var(--spacing-gap-sm);
   border-radius: var(--radius-8);
   margin: 0 6px;
   transition: var(--transition-hover);
@@ -56,7 +64,7 @@
 }
 
 .timelineTick::after {
-  --hit-area: 8px;
+  --hit-area: var(--spacing-gap-sm); /* baseline */
 
   content: "";
   position: absolute;
@@ -75,9 +83,23 @@
   z-index: 5;
 }
 
+.timelineWrapper[data-mode="default"] .timelineTick {
+  background: var(--active-tick-color);
+}
+
+.timelineWrapper[data-mode="default"] .timelineTick::after {
+  --hit-area: 0px;
+}
+
+.timelineWrapper[data-mode="increased"] .timelineTick::after {
+  --hit-area: var(--spacing-gap-sm);
+  border: 1px dashed color-mix(in oklab, var(--orange) 50%, transparent);
+  background: color-mix(in oklab, var(--orange) 10%, transparent);
+}
+
 @media (max-width: 600px) {
   .timelineContainer {
-    padding: 0 8px;
+    padding: 0 var(--spacing-gap-sm);
   }
 
   .timelineButton {
