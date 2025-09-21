@@ -1,9 +1,10 @@
 import { Analytics } from "@vercel/analytics/next";
 import { Metadata } from "next";
 import localInterFont from "next/font/local";
-import { ThemeProvider } from "next-themes";
 
 import Fade from "../components/fade/fade";
+
+import Providers from "./providers";
 
 import "../styles/globals.css";
 import "../styles/layout.css";
@@ -37,10 +38,10 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
           <Fade />
           <main>
             <div className="main-grid">
-              <ThemeProvider>
+              <Providers>
                 {children}
                 <Analytics />
-              </ThemeProvider>
+              </Providers>
             </div>
           </main>
         </div>
