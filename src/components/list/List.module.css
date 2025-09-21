@@ -19,7 +19,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .listItem > a:hover {
-    color: var(--color-foreground-secondary);
+    color: var(--grey9);
   }
 }
 
