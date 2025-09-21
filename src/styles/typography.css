@@ -19,7 +19,8 @@ article.prose {
   position: relative;
 }
 
-:is(.prose a, a.prose-link) {
+.prose :where(a),
+a.prose-link {
   position: relative;
   text-decoration: underline;
   text-decoration-color: var(--grey6);
@@ -33,8 +34,10 @@ article.prose {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  :is(.prose a, a.prose-link):hover:not([disabled]),
-  :is(.prose a, a.prose-link):focus-visible {
+  .prose :where(a):hover:not([disabled]),
+  .prose :where(a):focus-visible,
+  a.prose-link:hover:not([disabled]),
+  a.prose-link:focus-visible {
     text-decoration-color: var(--grey11);
   }
 }
