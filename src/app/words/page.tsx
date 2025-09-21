@@ -67,6 +67,11 @@ const wordEntries: WordEntryProps[] = [
     type: "adjective",
     definition: "wrong; incorrect",
   },
+  {
+    word: "Devoid",
+    type: "adjective",
+    definition: "entirely lacking or free from",
+  },
 ];
 
 export default function Words() {
