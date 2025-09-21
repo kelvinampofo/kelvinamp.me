@@ -4,40 +4,53 @@ import styles from "./Tooltip.module.css";
 
 interface TooltipProps {
   children: React.ReactNode;
+  rootProps?: React.ComponentProps<typeof TooltipPrimitive.Root>;
   triggerProps?: React.ComponentProps<typeof TooltipPrimitive.Trigger>;
+  positionProps?: React.ComponentProps<typeof TooltipPrimitive.Positioner>;
   content: React.ReactNode;
+}
+
+interface TooltipProviderProps
+  extends React.ComponentProps<typeof TooltipPrimitive.Provider> {
+  children: React.ReactNode;
+}
+
+export function TooltipProvider({ children, ...props }: TooltipProviderProps) {
+  return (
+    <TooltipPrimitive.Provider {...props}>{children}</TooltipPrimitive.Provider>
+  );
 }
 
 export default function Tooltip({
   children,
   content,
+  rootProps,
   triggerProps,
+  positionProps,
 }: TooltipProps) {
   return (
-    <TooltipPrimitive.Provider delay={0}>
-      <TooltipPrimitive.Root closeDelay={150}>
-        <TooltipPrimitive.Trigger
-          className={styles.tooltipTrigger}
-          {...triggerProps}
-        >
-          {children}
-        </TooltipPrimitive.Trigger>
-        <TooltipPrimitive.Portal>
-          <TooltipPrimitive.Positioner sideOffset={11}>
-            <TooltipPrimitive.Popup className={styles.tooltipPopup}>
-              <TooltipPrimitive.Arrow className={styles.tooltipArrow}>
-                <ArrowSvg />
-              </TooltipPrimitive.Arrow>
-              {content}
-            </TooltipPrimitive.Popup>
-          </TooltipPrimitive.Positioner>
-        </TooltipPrimitive.Portal>
-      </TooltipPrimitive.Root>
-    </TooltipPrimitive.Provider>
+    <TooltipPrimitive.Root closeDelay={150} {...rootProps}>
+      <TooltipPrimitive.Trigger
+        className={styles.tooltipTrigger}
+        {...triggerProps}
+      >
+        {children}
+      </TooltipPrimitive.Trigger>
+      <TooltipPrimitive.Portal>
+        <TooltipPrimitive.Positioner sideOffset={11} {...positionProps}>
+          <TooltipPrimitive.Popup className={styles.tooltipPopup}>
+            <TooltipPrimitive.Arrow className={styles.tooltipArrow}>
+              <ArrowIcon />
+            </TooltipPrimitive.Arrow>
+            {content}
+          </TooltipPrimitive.Popup>
+        </TooltipPrimitive.Positioner>
+      </TooltipPrimitive.Portal>
+    </TooltipPrimitive.Root>
   );
 }
 
-function ArrowSvg(props: React.ComponentProps<"svg">) {
+function ArrowIcon(props: React.ComponentProps<"svg">) {
   return (
     <svg width="20" height="10" viewBox="0 0 20 10" fill="none" {...props}>
       <path
