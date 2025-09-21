@@ -1,4 +1,6 @@
 "use client";
+
+import Tooltip from "../../../../components/tooltip/Tooltip";
 import useFullscreen from "../../../../hooks/useFullscreen";
 import useShortcuts from "../../../../hooks/useShortcuts";
 
@@ -53,46 +55,54 @@ export default function CanvasControls({
       role="group"
       aria-label="Canvas controls"
     >
-      <button
-        type="button"
-        className={styles.canvasButton}
-        onClick={toggleFullscreen}
-        aria-label={isFullscreen ? "Minimize" : "Maximize"}
-        title={isFullscreen ? "Exit fullscreen (F)" : "Enter fullscreen (F)"}
-        disabled={!canFullscreen}
+      <Tooltip
+        content={isFullscreen ? "Exit fullscreen (F)" : "Enter fullscreen (F)"}
+        triggerProps={{
+          className: styles.canvasButton,
+          type: "button",
+          onClick: toggleFullscreen,
+          "aria-label": isFullscreen ? "Minimize" : "Maximize",
+          disabled: !canFullscreen,
+        }}
       >
         {isFullscreen ? <ExitFullscreen /> : <EnterFullscreen />}
-      </button>
-      <button
-        type="button"
-        className={styles.canvasButton}
-        onClick={onZoomToFit}
-        aria-label="Zoom to fit"
-        title="Zoom to fit (⇧ 1)"
+      </Tooltip>
+      <Tooltip
+        content="Zoom to fit (⇧ 1)"
+        triggerProps={{
+          className: styles.canvasButton,
+          type: "button",
+          onClick: onZoomToFit,
+          "aria-label": "Zoom to fit",
+        }}
       >
         <Reload />
-      </button>
-      <button
-        type="button"
-        className={styles.canvasButton}
-        onClick={onZoomIn}
-        aria-label="Zoom in"
-        title="Zoom in"
+      </Tooltip>
+      <Tooltip
+        content="Zoom in"
+        triggerProps={{
+          className: styles.canvasButton,
+          type: "button",
+          onClick: onZoomIn,
+          "aria-label": "Zoom in",
+        }}
       >
         <Plus />
-      </button>
+      </Tooltip>
       <span className="sr-only" aria-live="polite">
         {zoomPercent}%
       </span>
-      <button
-        type="button"
-        className={styles.canvasButton}
-        onMouseDown={onZoomOut}
-        aria-label="Zoom out"
-        title="Zoom out"
+      <Tooltip
+        content="Zoom out"
+        triggerProps={{
+          className: styles.canvasButton,
+          type: "button",
+          onClick: onZoomOut,
+          "aria-label": "Zoom out",
+        }}
       >
         <Minus />
-      </button>
+      </Tooltip>
     </div>
   );
 }
