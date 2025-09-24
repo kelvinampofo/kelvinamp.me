@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { Metadata } from "next";
 
 import BackButton from "../../components/back-button/BackButton";
@@ -18,7 +17,7 @@ export default function Readme() {
       <nav className="nav-wrapper">
         <BackButton href="/" />
       </nav>
-      <article className={clsx("prose", "page-layout")}>
+      <article className="prose page-layout">
         <Heading>README</Heading>
         <p className="text-secondary">
           This is a guide to how I work and how we can do our best work{" "}
@@ -86,9 +85,8 @@ export default function Readme() {
           <li>Collaborate closely</li>
           <ul className="prose-list">
             <li>
-              I prefer close designer{" "}
-              <span className="text-secondary">{`<->`}</span> engineer
-              collaboration. Without it, quality risks staying in Figma.
+              I prefer close designer/engineer collaboration. Without it,
+              quality risks staying in Figma.
             </li>
             <li>
               Pair early on flows, states (loading, empty, error), motion, and
