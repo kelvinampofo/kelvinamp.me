@@ -36,7 +36,9 @@ interface TimelinePickerProps {
 
 export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [mode, setMode] = useState<"none" | "default" | "increased">("none");
+  const [debugOverlay, setDebugOverlay] = useState<
+    "none" | "default" | "increased"
+  >("none");
 
   const [play] = useSound(SOUND_URL, {
     volume: 0.25,
@@ -76,14 +78,16 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
   });
 
   useShortcuts("I", () =>
-    setMode((prevMode) => (prevMode === "increased" ? "none" : "increased"))
+    setDebugOverlay((prevMode) =>
+      prevMode === "increased" ? "none" : "increased"
+    )
   );
   useShortcuts("D", () =>
-    setMode((prevMode) => (prevMode === "default" ? "none" : "default"))
+    setDebugOverlay((prevMode) => (prevMode === "default" ? "none" : "default"))
   );
 
   return (
-    <div className={styles.timelineWrapper} data-mode={mode}>
+    <div className={styles.timelineWrapper} data-debug-overlay={debugOverlay}>
       <div className={styles.timelineContainer}>
         <button
           className={styles.timelineButton}

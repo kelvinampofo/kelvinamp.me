@@ -83,17 +83,17 @@
   z-index: 5;
 }
 
-.timelineWrapper[data-mode="default"] .timelineTick {
+.timelineWrapper[data-debug-overlay="default"] .timelineTick {
   background: var(--active-tick-color);
 }
 
-.timelineWrapper[data-mode="default"] .timelineTick::after {
+.timelineWrapper[data-debug-overlay="default"] .timelineTick::after {
   --hit-area: 0px;
 }
 
-.timelineWrapper[data-mode="increased"] .timelineTick::after {
+.timelineWrapper[data-debug-overlay="increased"] .timelineTick::after {
   --hit-area: var(--spacing-gap-sm);
-  border: 1px dashed color-mix(in oklab, var(--orange) 50%, transparent);
+  border: 1px solid color-mix(in oklab, var(--orange) 50%, transparent);
   background: color-mix(in oklab, var(--orange) 10%, transparent);
 }
 
