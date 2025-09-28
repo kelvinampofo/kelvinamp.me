@@ -9,7 +9,7 @@ export default function Fade({ className, ...rest }: FadeProps) {
   return (
     <div
       {...rest}
-      aria-hidden={true}
+      aria-hidden
       role="presentation"
       className={clsx(styles.fade, className)}
     />

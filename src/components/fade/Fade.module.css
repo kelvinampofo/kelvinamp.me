@@ -16,13 +16,14 @@
   z-index: 1;
 
   pointer-events: none;
+
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
 
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  opacity: 0.95;
+  opacity: 0.96;
 
   mask-image: linear-gradient(var(--direction), #000 25%, transparent);
   -webkit-mask-image: linear-gradient(var(--direction), #000 25%, transparent);

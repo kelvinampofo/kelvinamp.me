@@ -9,11 +9,6 @@ import Providers from "./providers";
 import "../styles/globals.css";
 import "../styles/layout.css";
 
-const inter = localInterFont({
-  src: "../../public/assets/fonts/InterVariable.woff2",
-  variable: "--font-inter",
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://kelvinamp.me"),
   alternates: {
@@ -29,6 +24,11 @@ export const metadata: Metadata = {
 interface RootLayoutProps {
   children: React.ReactNode;
 }
+
+const inter = localInterFont({
+  src: "../../public/assets/fonts/InterVariable.woff2",
+  variable: "--font-inter",
+});
 
 export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
   return (
