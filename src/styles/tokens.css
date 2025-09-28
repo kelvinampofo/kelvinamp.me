@@ -112,7 +112,7 @@
 
 :root {
   --font-size-base: 16px;
-  --font-family-mono: "Jetbrains mono", "Roboto Mono", monospace;
+  --font-family-mono: "Jetbrains mono", "Menlo", monospace;
   --font-style-italic:
     400 italic calc(1em + 1px) / normal "Newsreader", "Signifier", "Times",
     serif;
