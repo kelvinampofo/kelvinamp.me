@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 
-import styles from "./fade.module.css";
+import styles from "./Fade.module.css";
 
 export type FadeProps = React.HTMLAttributes<HTMLDivElement>;
 
