@@ -4,3 +4,9 @@
   background: var(--grey4);
   overflow: hidden;
 }
+
+#__next:has(.mood-root) {
+  --fade-opacity: 0;
+  --fade-backdrop-filter: none;
+  --fade-mask: none;
+}
