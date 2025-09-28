@@ -2,7 +2,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { Metadata } from "next";
 import localInterFont from "next/font/local";
 
-import Fade from "../components/fade/fade";
+import Fade from "../components/fade/Fade";
 
 import Providers from "./providers";
 

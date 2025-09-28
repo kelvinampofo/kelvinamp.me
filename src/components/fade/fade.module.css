@@ -1,68 +1,40 @@
-.fadeOverlay {
-  --direction: to bottom; /* top → bottom gradient by default */
-  --mask-stop: 25%; /* where the solid part ends */
-  --h: min(82px, var(--spacing-page-top)); /* height or width of the overlay */
-  --blur-radius: 4px; /* blur radius */
-  --blur-opacity: 0.92; /* overlay opacity */
-  --blur-z: 1; /* z-index for blur overlay */
+.fade {
+  --h: min(96px, var(--spacing-page-top, 96px));
+  --direction: to bottom;
 
   position: sticky;
-  user-select: none;
-  pointer-events: none;
-  z-index: var(--blur-z);
-
-  /* align with site body margin if present (safe default to 0) */
-  margin-left: calc(
-    -1 *
-      (
-        var(--spacing-body-margin-left, 0px) +
-          var(--spacing-body-margin-right, 0px)
-      )
-  );
-
-  height: var(--h); /* overridden to width for L/R fade */
-  backdrop-filter: blur(var(--blur-radius));
-  -webkit-backdrop-filter: blur(var(--blur-radius));
-
-  /* gradient mask defines the fade */
-  mask-image: linear-gradient(
-    var(--direction),
-    #000 var(--mask-stop),
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    var(--direction),
-    #000 var(--mask-stop),
-    transparent 100%
-  );
-
-  opacity: var(--blur-opacity);
-  background: none;
-}
-
-.fadeOverlay--top {
   top: 0;
-  /* cancel the element's own height so it doesn't push content down */
+  display: block;
+  width: calc(
+    100% + var(--spacing-body-margin-left, 0px) +
+      var(--spacing-body-margin-right, 0px)
+  );
+  margin-left: calc(-1 * var(--spacing-body-margin-left, 0px));
+  margin-right: calc(-1 * var(--spacing-body-margin-right, 0px));
   margin-bottom: calc(-1 * var(--h));
+  height: var(--h);
+  z-index: 1;
+
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  opacity: 0.95;
+
+  mask-image: linear-gradient(var(--direction), #000 25%, transparent);
+  -webkit-mask-image: linear-gradient(var(--direction), #000 25%, transparent);
 }
-.fadeOverlay--bottom {
-  bottom: 0;
-  /* cancel the element's own height so it doesn't increase page height */
-  margin-top: calc(-1 * var(--h));
-}
-.fadeOverlay--left,
-.fadeOverlay--right {
-  top: 0;
-  height: 100%;
-  width: var(--h);
-}
-.fadeOverlay--left {
-  left: 0;
-  /* cancel the element's own width so it doesn't affect layout width */
-  margin-right: calc(-1 * var(--h));
-}
-.fadeOverlay--right {
-  right: 0;
-  /* cancel the element's own width so it doesn't affect layout width */
-  margin-left: calc(-1 * var(--h));
+
+.fade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    var(--direction),
+    var(--color-background),
+    transparent
+  );
 }
