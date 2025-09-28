@@ -22,12 +22,18 @@
   -webkit-user-select: none;
   -moz-user-select: none;
 
-  backdrop-filter: blur(var(--blur));
-  -webkit-backdrop-filter: blur(var(--blur));
-  opacity: 0.92;
+  backdrop-filter: var(--fade-backdrop-filter, blur(var(--blur)));
+  -webkit-backdrop-filter: var(--fade-backdrop-filter, blur(var(--blur)));
+  opacity: var(--fade-opacity, 0.92);
 
-  mask-image: linear-gradient(var(--direction), #000 25%, transparent);
-  -webkit-mask-image: linear-gradient(var(--direction), #000 25%, transparent);
+  mask-image: var(
+    --fade-mask,
+    linear-gradient(var(--direction), #000 25%, transparent)
+  );
+  -webkit-mask-image: var(
+    --fade-mask,
+    linear-gradient(var(--direction), #000 25%, transparent)
+  );
 }
 
 .fade::after {
