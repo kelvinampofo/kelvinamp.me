@@ -1,12 +1,13 @@
 .prose {
   width: 100%;
   max-width: var(--content-max-width);
+
   /* see https://rsms.me/inter/#features for font feature options and details */
   font-feature-settings:
     "liga" 1,
     "calt" 1,
-    "kern",
     "frac",
+    "case",
     "ss08",
     "ss07";
 }
@@ -35,9 +36,7 @@ a.prose-link {
 
 @media (hover: hover) and (pointer: fine) {
   .prose :where(a):hover:not([disabled]),
-  .prose :where(a):focus-visible,
-  a.prose-link:hover:not([disabled]),
-  a.prose-link:focus-visible {
+  a.prose-link:hover:not([disabled]) {
     text-decoration-color: var(--grey11);
   }
 }
@@ -61,12 +60,12 @@ ol.prose-list {
 }
 
 .prose-list li::marker {
-  color: var(--color-foreground-secondary);
+  color: var(--grey11);
 }
 
 ul.prose-list li,
 ol.prose-list li {
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 ul.prose-list li:first-child,
@@ -82,10 +81,10 @@ i {
 code {
   font-family: var(--font-family-mono);
   font-size: 0.85em;
-  background-color: var(--grey3);
-  border-radius: var(--radius-4);
   padding: 0.2em 0.4em;
-  color: var(--color-foreground);
+  background-color: var(--grey3);
+  color: inherit;
+  border-radius: var(--radius-4);
 }
 
 .prose-pre {
@@ -113,6 +112,10 @@ code {
   .prose-superscript a:hover {
     background-color: var(--grey4);
   }
+}
+
+.prose-superscript a:focus-visible {
+  background-color: var(--grey4);
 }
 
 .prose-footnotes {
