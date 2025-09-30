@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Children, ReactNode, useEffect, useState } from "react";
 
 import BrowserInfoView from "./components/BrowserInfo";
 import ClockView from "./components/Clock";
@@ -9,30 +9,59 @@ import DimensionsView from "./components/Dimensions";
 import Principle from "./components/Principle";
 import styles from "./StatusDisplay.module.css";
 
-const views = [
-  ClockView,
-  CurrentTimeView,
-  Principle,
-  DimensionsView,
-  BrowserInfoView,
-];
+interface StatusDisplayRootProps {
+  children: ReactNode;
+}
 
-export default function StatusDisplay() {
+function StatusDisplayRoot({ children }: StatusDisplayRootProps) {
   const [index, setIndex] = useState(0);
 
-  const toggleView = () =>
-    setIndex((prevIndex) => (prevIndex + 1) % views.length);
+  const items = Children.toArray(children);
 
-  const ActiveView = views[index];
+  const totalItems = items.length;
+
+  useEffect(() => {
+    if (totalItems === 0) {
+      setIndex(0);
+
+      return;
+    }
+
+    setIndex((currentIndex) => currentIndex % totalItems);
+  }, [totalItems]);
+
+  function showNextItem() {
+    if (totalItems === 0) {
+      return;
+    }
+
+    setIndex((currentIndex) => (currentIndex + 1) % totalItems);
+  }
+
+  if (totalItems === 0) {
+    return null;
+  }
 
   return (
     <div
       className={styles.statusDisplay}
-      onMouseDown={toggleView}
       data-animate
+      onMouseDown={showNextItem}
       style={{ "--stagger": "7" }}
     >
-      <ActiveView />
+      {items[index]}
     </div>
+  );
+}
+
+export default function StatusDisplay() {
+  return (
+    <StatusDisplayRoot>
+      <ClockView />
+      <CurrentTimeView />
+      <Principle />
+      <DimensionsView />
+      <BrowserInfoView />
+    </StatusDisplayRoot>
   );
 }
