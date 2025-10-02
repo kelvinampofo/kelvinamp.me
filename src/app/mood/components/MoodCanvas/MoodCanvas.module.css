@@ -20,7 +20,3 @@
   cursor: grab;
   touch-action: none;
 }
-
-.moodElement:active {
-  cursor: grabbing;
-}

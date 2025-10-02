@@ -17,3 +17,15 @@
 .text-secondary.text-secondary {
   color: var(--color-foreground-secondary);
 }
+
+.gesture-grabbing {
+  cursor: grabbing;
+  user-select: none;
+  -webkit-user-select: none;
+
+  * {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}

@@ -39,6 +39,11 @@ interface UseDragOptions {
   onDrag: (args: DragUpdate) => void;
 }
 
+const grab = {
+  start: () => document.body.classList.add("gesture-grabbing"),
+  end: () => document.body.classList.remove("gesture-grabbing"),
+};
+
 /**
  * custom useDrag hook for moving elements on a scaled canvas.
  *
@@ -58,7 +63,10 @@ export default function useDrag({
   const activeDragRef = useRef<DragState | null>(null);
 
   useEffect(() => {
-    const onMove = (pointerEvent: PointerEvent) => {
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    const onPointerMove = (event: PointerEvent) => {
       const activeDrag = activeDragRef.current;
 
       if (!activeDrag) return;
@@ -66,9 +74,10 @@ export default function useDrag({
       const scale = getScale();
 
       const deltaXInCanvasSpace =
-        (pointerEvent.clientX - activeDrag.startClientX) / scale;
+        (event.clientX - activeDrag.startClientX) / scale;
       const deltaYInCanvasSpace =
-        (pointerEvent.clientY - activeDrag.startClientY) / scale;
+        (event.clientY - activeDrag.startClientY) / scale;
+
       const nextElementX = activeDrag.elementStartX + deltaXInCanvasSpace;
       const nextElementY = activeDrag.elementStartY + deltaYInCanvasSpace;
 
@@ -80,31 +89,43 @@ export default function useDrag({
         },
         client: {
           start: { x: activeDrag.startClientX, y: activeDrag.startClientY },
-          current: { x: pointerEvent.clientX, y: pointerEvent.clientY },
+          current: { x: event.clientX, y: event.clientY },
         },
         canvas: {
           delta: { x: deltaXInCanvasSpace, y: deltaYInCanvasSpace },
           scale,
         },
-        event: pointerEvent,
+        event,
       });
     };
 
-    const onUp = () => {
-      if (activeDragRef.current) activeDragRef.current = null;
-    };
+    function handlePointerEnd() {
+      if (activeDragRef.current) {
+        activeDragRef.current = null;
+      }
 
-    window.addEventListener("pointermove", onMove);
-    window.addEventListener("pointerup", onUp);
+      grab.end();
+    }
+
+    window.addEventListener("pointermove", onPointerMove, { signal });
+    window.addEventListener("pointerup", handlePointerEnd, { signal });
+    window.addEventListener("pointercancel", handlePointerEnd, { signal });
 
     return () => {
-      window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("pointerup", onUp);
+      controller.abort();
     };
   }, [getScale, onDrag]);
 
-  const onElementPointerDown =
-    (id: string) => (pointerDownEvent: React.PointerEvent<HTMLDivElement>) => {
+  useEffect(
+    () => () => {
+      activeDragRef.current = null;
+      grab.end();
+    },
+    []
+  );
+
+  function onElementPointerDown(id: string) {
+    return function (pointerDownEvent: React.PointerEvent<HTMLDivElement>) {
       const initialPosition = getInitialPositionById(id);
 
       if (!initialPosition) return;
@@ -118,13 +139,16 @@ export default function useDrag({
         elementStartY: initialPosition.y,
       };
 
-      (pointerDownEvent.currentTarget as HTMLElement).setPointerCapture(
+      pointerDownEvent.currentTarget.setPointerCapture(
         pointerDownEvent.pointerId
       );
+
+      grab.start();
 
       pointerDownEvent.preventDefault();
       pointerDownEvent.stopPropagation();
     };
+  }
 
   return { onElementPointerDown };
 }
