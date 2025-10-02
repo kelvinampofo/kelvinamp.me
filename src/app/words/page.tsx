@@ -30,10 +30,20 @@ const wordEntries: WordEntryProps[] = [
     definition: "lasting for a very short time",
   },
   {
-    word: "serendipity",
+    word: "insatiable",
+    type: "adjective",
+    definition: "(of an appetite or desire) impossible to satisfy",
+  },
+  {
+    word: "Devoid",
+    type: "adjective",
+    definition: "entirely lacking or free from",
+  },
+  {
+    word: "titbit",
     type: "noun",
     definition:
-      "the occurrence of events by chance in a happy or beneficial way",
+      "a small and particularly interesting item of gossip or information",
   },
   {
     word: "grok",
@@ -42,15 +52,14 @@ const wordEntries: WordEntryProps[] = [
     variations: ["groks", "grokking", "grokked"],
   },
   {
-    word: "insatiable",
+    word: "peculiar",
     type: "adjective",
-    definition: "(of an appetite or desire) impossible to satisfy",
+    definition: "different to what is normal or expected; strange:",
   },
   {
-    word: "titbit",
-    type: "noun",
-    definition:
-      "a small and particularly interesting item of gossip or information",
+    word: "erroneous",
+    type: "adjective",
+    definition: "wrong; incorrect",
   },
   {
     word: "anomalous",
@@ -61,16 +70,6 @@ const wordEntries: WordEntryProps[] = [
     word: "trawling",
     type: "noun",
     definition: "the activity of searching or sifting through something",
-  },
-  {
-    word: "erroneous",
-    type: "adjective",
-    definition: "wrong; incorrect",
-  },
-  {
-    word: "Devoid",
-    type: "adjective",
-    definition: "entirely lacking or free from",
   },
 ];
 
