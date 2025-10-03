@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 import useShortcuts from "../../hooks/useShortcuts";
 
@@ -20,7 +20,7 @@ export default function FocusedReading({ children }: FocusedReadingProps) {
   return (
     <div
       className={styles.focusedReading}
-      data-focus-mode={isFocused && "enabled"}
+      data-focus-mode={isFocused ? "enabled" : "disabled"}
     >
       {children}
     </div>

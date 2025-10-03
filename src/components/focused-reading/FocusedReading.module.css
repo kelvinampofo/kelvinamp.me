@@ -1,11 +1,11 @@
 .focusedReading[data-focus-mode="enabled"]
   :where(p, pre, li, img, div, blockquote) {
-  --transition: 200ms ease;
+  --transition-ease: var(--transition-enter) ease;
 
   opacity: 0.6;
   filter: blur(2px);
 
-  /* workaround for Safari blur cut-off  */
+  /* workaround for Safari blur cut-off */
   will-change: filter;
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -13,12 +13,11 @@
 
   cursor: crosshair;
   transition:
-    opacity var(--transition),
-    filter var(--transition);
-}
+    opacity var(--transition-ease),
+    filter var(--transition-ease);
 
-.focusedReading[data-focus-mode="enabled"]
-  :where(p, pre, li, img, div, blockquote):hover {
-  opacity: 1;
-  filter: none;
+  &:hover {
+    opacity: 1;
+    filter: none;
+  }
 }
