@@ -8,7 +8,7 @@
 
 .bar {
   height: 60%;
-  width: 1px;
+  width: 2px;
   transform-origin: center;
   border-radius: var(--radius-full);
   background-color: var(--grey11);
