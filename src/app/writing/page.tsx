@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import Heading from "../../components/heading/Heading";
 import List from "../../components/list/List";
-import { getEntries } from "../../utils/getEntries";
+import { getEntries } from "../../utils/entries";
 
 export default async function WritingPage() {
   const posts = await getEntries("writing");
