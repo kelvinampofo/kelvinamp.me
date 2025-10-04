@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useRef } from "react";
 
-import { animateThemeColor } from "../../../../utils/themeColor";
+import { animateThemeColor } from "../../../../utils/theme-color";
 
 import styles from "./HoldToDelete.module.css";
 
