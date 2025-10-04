@@ -7,7 +7,6 @@ import Fade from "../components/fade/Fade";
 import Providers from "./providers";
 
 import "../styles/globals.css";
-import "../styles/layout.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kelvinamp.me"),
@@ -37,7 +36,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
         <div id="__next">
           <Fade />
           <main>
-            <div className="main-grid">
+            <div className="layout-grid">
               <Providers>
                 {children}
                 <Analytics />

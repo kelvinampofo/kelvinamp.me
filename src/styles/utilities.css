@@ -29,3 +29,7 @@
     -webkit-user-select: none;
   }
 }
+
+.description {
+  color: var(--color-foreground-secondary);
+}

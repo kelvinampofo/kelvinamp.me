@@ -14,12 +14,12 @@ export const metadata: Metadata = {
 export default function Readme() {
   return (
     <>
-      <nav className="nav-wrapper">
+      <nav className="layout-rail">
         <BackButton href="/" />
       </nav>
-      <article className="prose page-layout">
+      <article className="prose layout-main">
         <Heading>README</Heading>
-        <p className="text-secondary">
+        <p className="description">
           This is a guide to how I work and how we can do our best work{" "}
           <em>together</em>.
         </p>

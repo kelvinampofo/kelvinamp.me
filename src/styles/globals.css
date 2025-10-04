@@ -1,14 +1,17 @@
 @import "./reset.css";
-@import "./tokens.css";
-@import "./typography.css";
-@import "./utilities.css";
-@import "./animations.css";
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@import "./tokens/colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/elevation.css";
+@import "./tokens/motion.css";
+@import "./tokens/radii.css";
+
+@import "./primitives/prose.css";
+@import "./primitives/animations.css";
+
+@import "./utilities.css";
+@import "./layout.css";
 
 * {
   scrollbar-color: var(--grey7) transparent;
@@ -55,41 +58,15 @@ main {
   max-width: var(--page-max-width);
 }
 
-.main-grid {
-  --column-length: 192px;
-
-  display: grid;
-  align-items: flex-start;
-  grid-template-columns: var(--column-length) var(--content-max-width) var(
-      --column-length
-    );
-  column-gap: var(--spacing-gutter);
-}
-
-@media (max-width: 1024px) {
-  .main-grid {
-    grid-template-columns: auto var(--content-max-width) auto;
-    column-gap: var(--spacing-gutter-sm);
-  }
-}
-
-@media (max-width: 768px) {
-  .main-grid {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: unset;
-    gap: 42px;
-  }
-}
-
-.main-grid > * {
-  grid-column: 2;
-}
-
 .pages-list {
   display: flex;
   gap: var(--spacing-gap-sm);
+}
+
+.error-stack {
+  background-color: transparent;
+  font-size: 0.875rem;
+  white-space: pre-wrap;
 }
 
 ::selection {

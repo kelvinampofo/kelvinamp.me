@@ -1,0 +1,31 @@
+:root {
+  --spacing-page-top: 128px;
+  --spacing-page-bottom: 48px;
+  --page-max-width: 1072px;
+  --content-max-width: 670px;
+
+  --safe-area-inset-left: env(safe-area-inset-left);
+  --safe-area-inset-right: env(safe-area-inset-right);
+
+  --spacing-body-margin-left: max(24px, env(safe-area-inset-left));
+  --spacing-body-margin-right: max(24px, env(safe-area-inset-right));
+
+  --spacing-gutter: 24px;
+  --spacing-gutter-sm: 16px;
+
+  --spacing-gap-xs: 4px;
+  --spacing-gap-sm: 8px;
+  --spacing-gap-md: 16px;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --spacing-page-top: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --spacing-page-top: 64px;
+  }
+}

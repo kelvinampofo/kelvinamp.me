@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <>
-      <nav className="nav-wrapper">
+      <nav className="layout-rail">
         <BackButton href="/" />
       </nav>
-      <article className={clsx("prose", "page-layout")}>
+      <article className={clsx("prose", "layout-main")}>
         <Heading>404 — Not Found</Heading>
         <p>
           You know what else isn’t found? Those old Intel stickers on Windows

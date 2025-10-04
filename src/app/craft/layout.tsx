@@ -16,10 +16,10 @@ export default function CraftLayout({ children }: Readonly<CraftLayoutProps>) {
 
   return (
     <>
-      <nav className="nav-wrapper">
+      <nav className="layout-rail">
         <BackButton href={backHref} />
       </nav>
-      <article className={clsx("prose", "craft-layout")}>
+      <article className={clsx("prose", "layout-main")}>
         {children}
       </article>
     </>

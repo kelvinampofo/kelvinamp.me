@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 export default function Now() {
   return (
     <>
-      <nav className="nav-wrapper">
+      <nav className="layout-rail">
         <BackButton href="/" />
       </nav>
-      <article className={clsx("prose", "page-layout")}>
+      <article className={clsx("prose", "layout-main")}>
         <Heading>Now</Heading>
         <p>
           Cultivating a taste for quality through deliberate practice, pacing,

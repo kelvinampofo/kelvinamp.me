@@ -1,15 +1,7 @@
 .prose {
+  font-feature-settings: var(--font-feature-settings);
   width: 100%;
   max-width: var(--content-max-width);
-
-  /* see https://rsms.me/inter/#features for font feature options and details */
-  font-feature-settings:
-    "liga" 1,
-    "calt" 1,
-    "frac",
-    "case",
-    "ss08",
-    "ss07";
 }
 
 .prose > :not(:last-child) {

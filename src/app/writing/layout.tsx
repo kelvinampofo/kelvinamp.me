@@ -19,17 +19,17 @@ export default function WritingLayout({
 
   return (
     <>
-      <nav className="nav-wrapper">
+      <nav className="layout-rail">
         <BackButton href={backHref} />
       </nav>
       {isPost ? (
         <FocusedReading>
-          <article className={clsx("prose", "writing-layout")}>
+          <article className={clsx("prose", "layout-main")}>
             {children}
           </article>
         </FocusedReading>
       ) : (
-        <article className={clsx("prose", "writing-layout")}>
+        <article className={clsx("prose", "layout-main")}>
           {children}
         </article>
       )}

@@ -1,3 +1,10 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-synthesis: none;
+}
+
 h1,
 h2,
 h3,
@@ -32,8 +39,4 @@ ol {
 
 kbd {
   font-family: inherit;
-}
-
-* {
-  font-synthesis: none;
 }

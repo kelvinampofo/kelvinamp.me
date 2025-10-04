@@ -76,11 +76,11 @@ const wordEntries: WordEntryProps[] = [
 export default function Words() {
   return (
     <>
-      <nav className="nav-wrapper">
+      <nav className="layout-rail">
         <BackButton href="/writing" />
       </nav>
 
-      <article className={clsx("prose", "writing-layout")}>
+      <article className={clsx("prose", "layout-main")}>
         <Heading>Words</Heading>
         <p className="description">Curated collection of appealing language.</p>
         <Separator className={styles.wordsSeparator} />
