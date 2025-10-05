@@ -9,3 +9,8 @@ export interface CanvasElement {
   src: string;
   alt?: string;
 }
+
+export interface Point {
+  x: number;
+  y: number;
+}

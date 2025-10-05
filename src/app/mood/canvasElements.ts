@@ -1,4 +1,4 @@
-import { CanvasElement } from "../../types";
+import { CanvasElement } from "./types";
 
 export const CANVAS_ELEMENTS = [
   {

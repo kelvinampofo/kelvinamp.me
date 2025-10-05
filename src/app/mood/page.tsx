@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import MoodCanvas from "./components/MoodCanvas/MoodCanvas";
+import Canvas from "./components/Canvas/Canvas";
 import "./mood.css";
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function MoodPage() {
   return (
     <div className="mood-root">
-      <MoodCanvas />
+      <Canvas />
     </div>
   );
 }

@@ -4,17 +4,17 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 import useDrag from "../../../../hooks/useDrag";
+import { CANVAS_ELEMENTS } from "../../canvasElements";
 import useCanvasViewport from "../../hooks/useCanvasViewport";
 import type { CanvasElement, ElementId } from "../../types";
 import CanvasControls from "../CanvasControls/CanvasControls";
 
-import { CANVAS_ELEMENTS } from "./canvasElements";
-import styles from "./MoodCanvas.module.css";
+import styles from "./Canvas.module.css";
 
 const BASE_DELAY_MS = 5;
 const STAGGER_MS = 150;
 
-export default function MoodCanvas() {
+export default function Canvas() {
   const [canvasElements, setCanvasElements] =
     useState<CanvasElement[]>(CANVAS_ELEMENTS);
 
@@ -51,7 +51,6 @@ export default function MoodCanvas() {
       );
     },
   });
-
 
   // schedule staggered visibility
   useEffect(() => {
