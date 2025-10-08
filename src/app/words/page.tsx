@@ -71,6 +71,18 @@ const wordEntries: WordEntryProps[] = [
     type: "noun",
     definition: "the activity of searching or sifting through something",
   },
+  {
+    word: "resumption",
+    type: "noun",
+    definition:
+      "the action of beginning something again after a pause or interruption",
+  },
+  {
+    word: "grandiose",
+    type: "adjective",
+    definition:
+      "impressive or magnificent in appearance or style, especially pretentiously so",
+  },
 ];
 
 export default function Words() {
