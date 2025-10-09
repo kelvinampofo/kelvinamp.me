@@ -1,47 +1,69 @@
 import { Tooltip as TooltipPrimitive } from "@base-ui-components/react/tooltip";
+import clsx from "clsx";
 
 import styles from "./Tooltip.module.css";
 
+type RootSlotProps = Omit<TooltipPrimitive.Root.Props, "children">;
+type TriggerSlotProps = Omit<TooltipPrimitive.Trigger.Props, "children">;
+type PortalSlotProps = Omit<TooltipPrimitive.Portal.Props, "children">;
+type PositionerSlotProps = Omit<TooltipPrimitive.Positioner.Props, "children">;
+type PopupSlotProps = Omit<TooltipPrimitive.Popup.Props, "children">;
+
 interface TooltipProps {
   children: React.ReactNode;
-  rootProps?: React.ComponentProps<typeof TooltipPrimitive.Root>;
-  triggerProps?: React.ComponentProps<typeof TooltipPrimitive.Trigger>;
-  positionProps?: React.ComponentProps<typeof TooltipPrimitive.Positioner>;
   content: React.ReactNode;
+  rootProps?: RootSlotProps;
+  triggerProps?: TriggerSlotProps;
+  portalProps?: PortalSlotProps;
+  positionerProps?: PositionerSlotProps;
+  popupProps?: PopupSlotProps;
 }
 
-interface TooltipProviderProps
-  extends React.ComponentProps<typeof TooltipPrimitive.Provider> {
-  children: React.ReactNode;
-}
-
-export function TooltipProvider({ children, ...props }: TooltipProviderProps) {
-  return (
-    <TooltipPrimitive.Provider {...props}>{children}</TooltipPrimitive.Provider>
-  );
-}
+const DEFAULT_DELAY = 200;
+const DEFAULT_CLOSE_DELAY = 150;
+const DEFAULT_SIDE_OFFSET = 12;
 
 export default function Tooltip({
   children,
   content,
   rootProps,
   triggerProps,
-  positionProps,
+  portalProps,
+  positionerProps,
+  popupProps,
 }: TooltipProps) {
+  const { closeDelay, delay, ...restRootProps } = rootProps ?? {};
+  const { className: triggerClassName, ...restTriggerProps } =
+    triggerProps ?? {};
+  const { className: popupClassName, ...restPopupProps } = popupProps ?? {};
+  const { sideOffset, ...restPositionerProps } = positionerProps ?? {};
+  const { ...restPortalProps } = portalProps ?? {};
+
   return (
-    <TooltipPrimitive.Root closeDelay={150} {...rootProps}>
+    <TooltipPrimitive.Root
+      delay={delay ?? DEFAULT_DELAY}
+      closeDelay={closeDelay ?? DEFAULT_CLOSE_DELAY}
+      {...restRootProps}
+    >
       <TooltipPrimitive.Trigger
-        className={styles.tooltipTrigger}
-        {...triggerProps}
+        className={clsx(styles.tooltipTrigger, triggerClassName)}
+        {...restTriggerProps}
       >
         {children}
       </TooltipPrimitive.Trigger>
-      <TooltipPrimitive.Portal>
-        <TooltipPrimitive.Positioner sideOffset={11} {...positionProps}>
-          <TooltipPrimitive.Popup className={styles.tooltipPopup}>
+      <TooltipPrimitive.Portal {...restPortalProps}>
+        <TooltipPrimitive.Positioner
+          sideOffset={sideOffset ?? DEFAULT_SIDE_OFFSET}
+          {...restPositionerProps}
+        >
+          <TooltipPrimitive.Popup
+            className={clsx(styles.tooltipPopup, popupClassName)}
+            {...restPopupProps}
+          >
             <TooltipPrimitive.Arrow className={styles.tooltipArrow}>
               <ArrowIcon />
             </TooltipPrimitive.Arrow>
+
             {content}
           </TooltipPrimitive.Popup>
         </TooltipPrimitive.Positioner>
