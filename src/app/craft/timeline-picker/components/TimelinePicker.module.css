@@ -48,6 +48,8 @@
 }
 
 .timelineTick {
+  --hit-area: 8px;
+
   position: relative;
   height: var(--tick-height);
   width: var(--tick-width);
@@ -59,13 +61,11 @@
   z-index: 1;
 }
 
-.timelineTick:nth-of-type(3n) {
-  background: var(--grey10);
+.timelineTick:nth-of-type(2n) {
+  background: var(--grey9);
 }
 
 .timelineTick::after {
-  --hit-area: var(--spacing-gap-sm); /* baseline */
-
   content: "";
   position: absolute;
   top: 50%;
@@ -92,7 +92,6 @@
 }
 
 .timelineWrapper[data-debug-overlay="increased"] .timelineTick::after {
-  --hit-area: var(--spacing-gap-sm);
   border: 1px solid color-mix(in oklab, var(--orange) 50%, transparent);
   background: color-mix(in oklab, var(--orange) 10%, transparent);
 }
