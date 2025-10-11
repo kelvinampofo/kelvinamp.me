@@ -119,7 +119,7 @@ code {
   --quote-offset: 2px;
 
   position: relative;
-  color: var(--color-foreground-secondary);
+  color: var(--grey11);
   quotes: "“" "”" "‘" "’";
 }
 
@@ -129,7 +129,6 @@ code {
   left: calc(-1 * var(--quote-offset));
   transform: translateX(-100%);
   line-height: var(--leading);
-  color: var(--color-foreground-secondary);
 }
 
 .prose .prose-blockquote :last-child::after {
