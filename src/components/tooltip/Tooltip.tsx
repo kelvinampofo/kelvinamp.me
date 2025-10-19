@@ -19,7 +19,6 @@ interface TooltipProps {
   popupProps?: PopupSlotProps;
 }
 
-const DEFAULT_DELAY = 200;
 const DEFAULT_CLOSE_DELAY = 150;
 const DEFAULT_SIDE_OFFSET = 12;
 
@@ -41,7 +40,7 @@ export default function Tooltip({
 
   return (
     <TooltipPrimitive.Root
-      delay={delay ?? DEFAULT_DELAY}
+      delay={delay}
       closeDelay={closeDelay ?? DEFAULT_CLOSE_DELAY}
       {...restRootProps}
     >
