@@ -6,7 +6,7 @@ import { animateThemeColor } from "../../../../utils/theme-color";
 
 import styles from "./HoldToDelete.module.css";
 
-const HOLD_TINT_COLOR = "rgb(170, 35, 41)";
+const HOLD_TINT_COLOR = "rgba(255, 40, 40, 0.7)";
 
 export default function HoldToDelete() {
   const cancelAnimationRef = useRef<null | (() => void)>(null);
