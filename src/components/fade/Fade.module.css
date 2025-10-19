@@ -4,34 +4,24 @@
   --blur: 5px;
 
   position: sticky;
-  top: 0;
   display: block;
-  width: calc(
-    100% + var(--spacing-body-margin-left, 0px) +
-      var(--spacing-body-margin-right, 0px)
-  );
-  margin-left: calc(-1 * var(--spacing-body-margin-left, 0px));
-  margin-right: calc(-1 * var(--spacing-body-margin-right, 0px));
-  margin-bottom: calc(-1 * var(--h));
-  height: var(--h);
   z-index: 1;
-
   pointer-events: none;
 
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
 
-  backdrop-filter: var(--fade-backdrop-filter, blur(var(--blur)));
-  -webkit-backdrop-filter: var(--fade-backdrop-filter, blur(var(--blur)));
-  opacity: var(--fade-opacity, 0.92);
+  backdrop-filter: var(--backdrop-filter, blur(var(--blur)));
+  -webkit-backdrop-filter: var(--backdrop-filter, blur(var(--blur)));
+  opacity: var(--opacity, 0.92);
 
   mask-image: var(
-    --fade-mask,
+    --mask,
     linear-gradient(var(--direction), #000 25%, transparent)
   );
   -webkit-mask-image: var(
-    --fade-mask,
+    --mask,
     linear-gradient(var(--direction), #000 25%, transparent)
   );
 }
@@ -45,4 +35,67 @@
     var(--color-background),
     transparent
   );
+}
+
+.fade[data-axis="vertical"] {
+  top: 0;
+  bottom: auto;
+  left: 0;
+  right: 0;
+
+  width: calc(
+    100% + var(--spacing-body-margin-left, 0px) +
+      var(--spacing-body-margin-right, 0px)
+  );
+  height: var(--h);
+
+  margin-left: calc(-1 * var(--spacing-body-margin-left, 0px));
+  margin-right: calc(-1 * var(--spacing-body-margin-right, 0px));
+  margin-bottom: calc(-1 * var(--h));
+}
+
+.fade[data-axis="vertical"][data-edge="trailing"] {
+  --direction: to top;
+  --h: min(96px, var(--spacing-page-bottom, 96px));
+
+  top: auto;
+  bottom: 0;
+
+  margin-top: calc(-1 * var(--h));
+  margin-bottom: 0;
+}
+
+.fade[data-axis="horizontal"] {
+  --direction: to right;
+
+  top: 0;
+  bottom: auto;
+
+  width: var(--h);
+  height: calc(
+    100% + var(--spacing-page-top, 0px) + var(--spacing-page-bottom, 0px)
+  );
+
+  margin-top: calc(-1 * var(--spacing-page-top, 0px));
+  margin-bottom: calc(-1 * var(--spacing-page-bottom, 0px));
+  margin-left: 0;
+  margin-right: calc(-1 * var(--h));
+}
+
+.fade[data-axis="horizontal"][data-edge="leading"] {
+  --h: min(96px, var(--spacing-body-margin-left, 96px));
+
+  left: 0;
+  right: auto;
+}
+
+.fade[data-axis="horizontal"][data-edge="trailing"] {
+  --direction: to left;
+  --h: min(96px, var(--spacing-body-margin-right, 96px));
+
+  left: auto;
+  right: 0;
+
+  margin-left: calc(-1 * var(--h));
+  margin-right: 0;
 }
