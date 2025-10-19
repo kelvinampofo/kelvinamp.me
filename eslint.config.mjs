@@ -29,7 +29,19 @@ const eslintConfig = [
             "object",
           ],
           "newlines-between": "always",
-          alphabetize: { order: "asc", caseInsensitive: true },
+          alphabetize: {
+            order: "asc",
+            caseInsensitive: true,
+            orderImportKind: "desc",
+          },
+          pathGroups: [
+            {
+              pattern: "**/*.css",
+              group: "type",
+              position: "after",
+            },
+          ],
+          pathGroupsExcludedImportTypes: ["type"],
         },
       ],
       "import/default": "off",
