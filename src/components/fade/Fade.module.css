@@ -8,19 +8,20 @@
   z-index: 1;
   pointer-events: none;
 
-  user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
+  user-select: none;
 
-  backdrop-filter: var(--fade-backdrop-filter, blur(var(--blur)));
   -webkit-backdrop-filter: var(--fade-backdrop-filter, blur(var(--blur)));
+  backdrop-filter: var(--fade-backdrop-filter, blur(var(--blur)));
+
   opacity: var(--fade-opacity, var(--opacity, 0.92));
 
-  mask-image: var(
+  -webkit-mask-image: var(
     --fade-mask,
     var(--mask, linear-gradient(var(--direction), #000 25%, transparent))
   );
-  -webkit-mask-image: var(
+  mask-image: var(
     --fade-mask,
     var(--mask, linear-gradient(var(--direction), #000 25%, transparent))
   );
