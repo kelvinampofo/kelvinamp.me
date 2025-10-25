@@ -1,31 +1,55 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+const subscribeFullscreenChanges = (callback: () => void) => {
+  if (typeof document === "undefined") {
+    return () => undefined;
+  }
+
+  const handleChange = () => callback();
+
+  document.addEventListener("fullscreenchange", handleChange);
+  document.addEventListener("fullscreenerror", handleChange);
+
+  return () => {
+    document.removeEventListener("fullscreenchange", handleChange);
+    document.removeEventListener("fullscreenerror", handleChange);
+  };
+};
+
+const isFullscreenSnapshot = () =>
+  !!(typeof document !== "undefined" && document.fullscreenElement);
+
+const canUseFullscreenSnapshot = () =>
+  !!(
+    typeof document !== "undefined" &&
+    typeof document.documentElement.requestFullscreen === "function"
+  );
+
+const getServerSnapshot = () => false;
+const noopSubscribe = () => () => undefined;
 
 export default function useFullscreen() {
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [canFullscreen, setCanFullscreen] = useState(false);
+  const isFullscreen = useSyncExternalStore(
+    subscribeFullscreenChanges,
+    isFullscreenSnapshot,
+    getServerSnapshot
+  );
 
-  useEffect(() => {
-    const element = document.documentElement;
-
-    setCanFullscreen(typeof element.requestFullscreen === "function");
-
-    const handleChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
-    };
-
-    document.addEventListener("fullscreenchange", handleChange);
-    return () => {
-      document.removeEventListener("fullscreenchange", handleChange);
-    };
-  }, []);
+  const canFullscreen = useSyncExternalStore(
+    noopSubscribe,
+    canUseFullscreenSnapshot,
+    getServerSnapshot
+  );
 
   async function enterFullscreen() {
+    if (!canFullscreen || typeof document === "undefined") return;
     await document.documentElement.requestFullscreen();
   }
 
   async function exitFullscreen() {
+    if (!isFullscreen || typeof document === "undefined") return;
     await document.exitFullscreen();
   }
 
