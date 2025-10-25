@@ -3,14 +3,27 @@ import { memo, useMemo } from "react";
 
 import styles from "./Waveform.module.css";
 
+const BAR_COUNT = 22;
+
+const pseudoRandom = (seed: number) => {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+};
+
+const createBarAnimations = () => {
+  return Array.from({ length: BAR_COUNT }).map((_, index) => {
+    const baseSeed = index + 1;
+
+    return {
+      minScale: 0.2 + pseudoRandom(baseSeed) * 0.2,
+      maxScale: 0.7 + pseudoRandom(baseSeed + BAR_COUNT) * 0.3,
+      duration: 0.8 + pseudoRandom(baseSeed + BAR_COUNT * 2) * 0.5,
+    };
+  });
+};
+
 export const Waveform = memo(() => {
-  const barAnimations = useMemo(() => {
-    return Array.from({ length: 22 }).map(() => ({
-      minScale: 0.2 + Math.random() * 0.2,
-      maxScale: 0.7 + Math.random() * 0.3,
-      duration: 0.8 + Math.random() * 0.5,
-    }));
-  }, []);
+  const barAnimations = useMemo(() => createBarAnimations(), []);
 
   return (
     <div className={styles.container}>
@@ -21,7 +34,7 @@ export const Waveform = memo(() => {
           animate={{ scaleY: [minScale, maxScale, minScale] }}
           transition={{
             repeat: Infinity,
-            duration: duration,
+            duration,
             delay: index * 0.05,
             ease: "easeInOut",
           }}
