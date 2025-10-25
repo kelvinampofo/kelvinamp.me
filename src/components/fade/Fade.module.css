@@ -12,17 +12,17 @@
   -webkit-user-select: none;
   -moz-user-select: none;
 
-  backdrop-filter: var(--backdrop-filter, blur(var(--blur)));
-  -webkit-backdrop-filter: var(--backdrop-filter, blur(var(--blur)));
-  opacity: var(--opacity, 0.92);
+  backdrop-filter: var(--fade-backdrop-filter, blur(var(--blur)));
+  -webkit-backdrop-filter: var(--fade-backdrop-filter, blur(var(--blur)));
+  opacity: var(--fade-opacity, var(--opacity, 0.92));
 
   mask-image: var(
-    --mask,
-    linear-gradient(var(--direction), #000 25%, transparent)
+    --fade-mask,
+    var(--mask, linear-gradient(var(--direction), #000 25%, transparent))
   );
   -webkit-mask-image: var(
-    --mask,
-    linear-gradient(var(--direction), #000 25%, transparent)
+    --fade-mask,
+    var(--mask, linear-gradient(var(--direction), #000 25%, transparent))
   );
 }
 
