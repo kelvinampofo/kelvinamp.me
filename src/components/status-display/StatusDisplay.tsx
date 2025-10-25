@@ -1,6 +1,6 @@
 "use client";
 
-import { Children, ReactNode, useEffect, useState } from "react";
+import { Children, ReactNode, useState } from "react";
 
 import BrowserInfoView from "./components/BrowserInfo";
 import ClockView from "./components/Clock";
@@ -17,18 +17,8 @@ function StatusDisplayRoot({ children }: StatusDisplayRootProps) {
   const [index, setIndex] = useState(0);
 
   const items = Children.toArray(children);
-
   const totalItems = items.length;
-
-  useEffect(() => {
-    if (totalItems === 0) {
-      setIndex(0);
-
-      return;
-    }
-
-    setIndex((currentIndex) => currentIndex % totalItems);
-  }, [totalItems]);
+  const activeIndex = totalItems > 0 ? index % totalItems : 0;
 
   function showNextItem() {
     if (totalItems === 0) {
@@ -49,7 +39,7 @@ function StatusDisplayRoot({ children }: StatusDisplayRootProps) {
       onMouseDown={showNextItem}
       style={{ "--stagger": "7" }}
     >
-      {items[index]}
+      {items[activeIndex]}
     </div>
   );
 }

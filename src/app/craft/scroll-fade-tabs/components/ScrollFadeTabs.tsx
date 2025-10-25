@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import styles from "./ScrollFadeTabs.module.css";
 
@@ -32,17 +32,16 @@ export default function ScrollFadeTabs({
   selected,
   onChange,
 }: ScrollFadeTabsProps) {
-  const [selectedTab, setSelectedTab] = useState(selected ?? "all");
+  const [internalSelected, setInternalSelected] = useState(
+    selected ?? "all"
+  );
   const [isScrolledToStart, setIsScrolledToStart] = useState(true);
   const [isScrolledToEnd, setIsScrolledToEnd] = useState(false);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (selected !== undefined) {
-      setSelectedTab(selected);
-    }
-  }, [selected]);
+  const isControlled = selected !== undefined;
+  const selectedTab = isControlled ? selected! : internalSelected;
 
   useEffect(() => {
     const element = scrollContainerRef.current;
@@ -62,11 +61,12 @@ export default function ScrollFadeTabs({
   }, []);
 
   function handleClick(value: string) {
-    setSelectedTab((prevSelectedTab) => {
-      const newValue = prevSelectedTab === value ? "" : value;
-      onChange?.(newValue);
-      return newValue;
-    });
+    const newValue = selectedTab === value ? "" : value;
+    onChange?.(newValue);
+
+    if (!isControlled) {
+      setInternalSelected(newValue);
+    }
   }
 
   return (

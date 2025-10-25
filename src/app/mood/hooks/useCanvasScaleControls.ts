@@ -1,6 +1,5 @@
 import {
   useCallback,
-  useEffect,
   useMemo,
   useRef,
   useState,
@@ -44,12 +43,21 @@ export function useCanvasScaleControls({
     [initialScale, minScale, maxScale]
   );
 
-  const [canvasScale, setCanvasScale] = useState(initial);
-  const canvasScaleRef = useRef(canvasScale);
+  const [canvasScale, setCanvasScaleState] = useState(initial);
+  const canvasScaleRef = useRef(initial);
 
-  useEffect(() => {
-    canvasScaleRef.current = canvasScale;
-  }, [canvasScale]);
+  const setCanvasScale = useCallback(
+    (value: SetStateAction<number>) => {
+      setCanvasScaleState((previousScale) => {
+        const nextScale =
+          typeof value === "function" ? value(previousScale) : value;
+
+        canvasScaleRef.current = nextScale;
+        return nextScale;
+      });
+    },
+    [setCanvasScaleState]
+  );
 
   const clampScale = useCallback(
     (value: number) => clamp(value, minScale, maxScale),
@@ -80,7 +88,7 @@ export function useCanvasScaleControls({
       setCanvasPan({ x: newPanX, y: newPanY });
       setCanvasScale(nextScale);
     },
-    [canvasPanRef, canvasRef, clampScale, setCanvasPan]
+    [canvasPanRef, canvasRef, clampScale, setCanvasPan, setCanvasScale]
   );
 
   const scaleByAtPoint = useCallback(
@@ -129,7 +137,7 @@ export function useCanvasScaleControls({
 
     setCanvasScale(targetScaleClamped);
     setCanvasPan(nextPan);
-  }, [clampScale, computeCentredPan, initial, setCanvasPan]);
+  }, [clampScale, computeCentredPan, initial, setCanvasPan, setCanvasScale]);
 
   const centerToContentBounds = useCallback(() => {
     const nextPan = computeCentredPan(canvasScaleRef.current);

@@ -1,7 +1,6 @@
 "use client";
 
 import clsx from "clsx";
-import { useState, useEffect } from "react";
 
 import { useTime } from "../../hooks/useTime";
 
@@ -10,14 +9,8 @@ import styles from "./AnalogueClock.module.css";
 export default function AnalogueClock() {
   const { currentTime } = useTime();
 
-  // start at midnight for SSR/initial render, then update to real time after hydration
-  const [displayTime, setDisplayTime] = useState("00:00:00");
-
-  useEffect(() => {
-    if (currentTime) {
-      setDisplayTime(currentTime);
-    }
-  }, [currentTime]);
+  // default to midnight server-side, hydrate to the live time once available
+  const displayTime = currentTime || "00:00:00";
 
   const [hh = "0", mm = "0", ss = "0"] = displayTime.split(":");
 

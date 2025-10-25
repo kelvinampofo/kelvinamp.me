@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import dynamic from "next/dynamic";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 import CentralLibraryImage from "../../../../../public/assets/images/carousel/central-library.webp";
 import AliyevCenterImage from "../../../../../public/assets/images/carousel/heydar-aliyev-center.webp";
@@ -57,32 +57,6 @@ export default function Carousel() {
 
   const { isPointerDevice } = usePointerDevice();
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!slideRef.current) return;
-
-      // get container dimensions and mouse position
-      const containerRect = slideRef.current.getBoundingClientRect();
-      const mouseX = e.clientX;
-      const cursorDirection =
-        mouseX < containerRect.left + containerRect.width / 2
-          ? "left"
-          : "right";
-
-      setIsCursorLeft(cursorDirection === "left");
-      setIsCursorRight(cursorDirection === "right");
-    };
-
-    const animationFrameId = requestAnimationFrame(() => {
-      document.addEventListener("mousemove", handleMouseMove);
-    });
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      document.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
   function hasReachedEndOfSlide() {
     if (!slideRef.current) return;
 
@@ -111,6 +85,25 @@ export default function Carousel() {
 
   const handleSlideChange = useCallback((newSlideIndex: number) => {
     scrollToSlide(slideRef.current, newSlideIndex);
+  }, []);
+
+  const handleMouseMove = useCallback(
+    (event: React.MouseEvent<HTMLUListElement>) => {
+      const containerRect = event.currentTarget.getBoundingClientRect();
+      const cursorDirection =
+        event.clientX < containerRect.left + containerRect.width / 2
+          ? "left"
+          : "right";
+
+      setIsCursorLeft(cursorDirection === "left");
+      setIsCursorRight(cursorDirection === "right");
+    },
+    []
+  );
+
+  const handleMouseLeave = useCallback(() => {
+    setIsCursorLeft(false);
+    setIsCursorRight(false);
   }, []);
 
   const handleCarouselClick = (e: React.MouseEvent<HTMLUListElement>) => {
@@ -161,6 +154,8 @@ export default function Carousel() {
       )}
       <ul
         ref={slideRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         onClick={handleCarouselClick}
         onScroll={(e) => {
           setSlidePosition(e.currentTarget.scrollLeft);

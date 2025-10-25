@@ -1,4 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useRef,
+  useState,
+  type SetStateAction,
+} from "react";
 
 import type { Point } from "../types";
 
@@ -8,12 +13,21 @@ import type { Point } from "../types";
  * @returns pan state, setter, and ref synchronized to the latest values.
  */
 export function useCanvasPanState() {
-  const [canvasPan, setCanvasPan] = useState<Point>({ x: 0, y: 0 });
+  const [canvasPan, setCanvasPanState] = useState<Point>({ x: 0, y: 0 });
   const canvasPanRef = useRef(canvasPan);
 
-  useEffect(() => {
-    canvasPanRef.current = canvasPan;
-  }, [canvasPan]);
+  const setCanvasPan = useCallback(
+    (value: SetStateAction<Point>) => {
+      setCanvasPanState((previousPan) => {
+        const nextPan =
+          typeof value === "function" ? value(previousPan) : value;
+
+        canvasPanRef.current = nextPan;
+        return nextPan;
+      });
+    },
+    [setCanvasPanState]
+  );
 
   return {
     canvasPan,
