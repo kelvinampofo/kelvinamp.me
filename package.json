@@ -26,10 +26,10 @@
     "use-sound": "^5.0.0"
   },
   "devDependencies": {
-    "@types/node": "^24",
+    "@types/node": "^24.9.0",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
-    "eslint": "^9",
+    "eslint": "^9.38.0",
     "eslint-config-next": "16.0.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.3"
