@@ -39,9 +39,6 @@ export const useWindowDimension = (options: UseWindowDimensionOptions = {}) => {
   useLayoutEffect(() => {
     if (IS_SERVER) return;
 
-    // initial measurement
-    updateDimensions();
-
     const handleResize = () => {
       if (debounceDelay) {
         if (timerRef.current) {
