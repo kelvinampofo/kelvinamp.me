@@ -8,10 +8,14 @@ export const useTime = ({ timeZone = "Europe/London" }: Options = {}) => {
   const [time, setTime] = useState<Date | null>(null);
 
   useEffect(() => {
-    setTime(new Date());
-    const intervalId = setInterval(() => setTime(new Date()), 1000);
+    const updateTime = () => setTime(new Date());
 
-    return () => clearInterval(intervalId);
+    updateTime();
+    const intervalId = setInterval(updateTime, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   if (time === null) {
