@@ -9,6 +9,7 @@ import AliyevCenterImage from "../../../../../public/assets/images/carousel/heyd
 import KyotoStationImage from "../../../../../public/assets/images/carousel/kyoto-station.webp";
 import ConcertHallImage from "../../../../../public/assets/images/carousel/walt-disney-concert-hall.webp";
 import usePointerDevice from "../../../../hooks/usePointerDevice";
+import { clamp } from "../../../../utils/math";
 
 import styles from "./Carousel.module.css";
 
@@ -45,6 +46,8 @@ const slides = [
   },
 ];
 
+const MAX_SLIDE_INDEX = slides.length - 1;
+
 const SLIDE_WIDTH = 450;
 const SLIDE_MARGIN = 20;
 
@@ -56,15 +59,6 @@ export default function Carousel() {
   const slideRef = useRef<HTMLUListElement | null>(null);
 
   const { isPointerDevice } = usePointerDevice();
-
-  function hasReachedEndOfSlide() {
-    if (!slideRef.current) return;
-
-    return (
-      slideRef.current.scrollLeft + slideRef.current.clientWidth ===
-      slideRef.current.scrollWidth
-    );
-  }
 
   function scrollToSlide(
     slider: HTMLUListElement | null,
@@ -84,7 +78,9 @@ export default function Carousel() {
   }, [slidePosition]);
 
   const handleSlideChange = useCallback((newSlideIndex: number) => {
-    scrollToSlide(slideRef.current, newSlideIndex);
+    const clampedSlideIndex = clamp(newSlideIndex, 0, MAX_SLIDE_INDEX);
+
+    scrollToSlide(slideRef.current, clampedSlideIndex);
   }, []);
 
   const handleMouseMove = useCallback(
@@ -122,9 +118,12 @@ export default function Carousel() {
     }
   };
 
+  const isAtStartOfSlide = currentSlide === 0;
+  const isAtEndOfSlide = currentSlide >= MAX_SLIDE_INDEX;
+
   const cursorClasses = clsx(
-    currentSlide !== 0 && isCursorLeft && styles.cursorLeft,
-    !hasReachedEndOfSlide() && isCursorRight && styles.cursorRight
+    !isAtStartOfSlide && isCursorLeft && styles.cursorLeft,
+    !isAtEndOfSlide && isCursorRight && styles.cursorRight
   );
 
   return (
@@ -133,7 +132,7 @@ export default function Carousel() {
         <div className={styles.buttonContainer}>
           <button
             onClick={() => handleSlideChange(currentSlide - 1)}
-            disabled={currentSlide === 0}
+            disabled={isAtStartOfSlide}
             className={styles.arrowButton}
           >
             <svg
@@ -177,7 +176,7 @@ export default function Carousel() {
         <div className={styles.buttonContainer}>
           <button
             onClick={() => handleSlideChange(currentSlide + 1)}
-            disabled={hasReachedEndOfSlide()}
+            disabled={isAtEndOfSlide}
             className={styles.arrowButton}
           >
             <svg
