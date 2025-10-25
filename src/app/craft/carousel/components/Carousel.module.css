@@ -20,8 +20,14 @@
 }
 
 .buttonContainer {
-  display: flex;
+  display: none;
   align-items: center;
+}
+
+@media (min-width: 768px) {
+  .buttonContainer {
+    display: flex;
+  }
 }
 
 @media (min-width: 1024px) {
