@@ -96,7 +96,7 @@ code {
 .prose-superscript a {
   text-decoration: none;
   border-radius: var(--radius-2);
-  padding: 2px 5px;
+  padding: 1px 4px 1px 3px;
   transition: var(--transition-hover);
 }
 
