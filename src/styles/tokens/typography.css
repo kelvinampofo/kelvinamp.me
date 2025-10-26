@@ -8,7 +8,7 @@
   --font-weight-heading: 500;
 
   /* https://rsms.me/inter/#features */
-  --font-feature-settings: "liga" 1, "calt" 1, "frac", "case", "ss08", "ss07";
+  --font-feature-settings: "liga" 1, "calt" 1, "frac", "ss08", "ss07";
 
   --leading: 28px;
 
