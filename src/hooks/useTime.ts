@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
 
 type Options = {
@@ -5,45 +6,33 @@ type Options = {
 };
 
 export const useTime = ({ timeZone = "Europe/London" }: Options = {}) => {
-  const [time, setTime] = useState<Date | null>(null);
+  const [time, setTime] = useState(new Date());
 
   useEffect(() => {
-    const updateTime = () => setTime(new Date());
-
-    updateTime();
-    const intervalId = setInterval(updateTime, 1000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
+    const intervalId = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(intervalId);
   }, []);
 
-  if (time === null) {
-    return { currentTime: "", timezoneOffset: "", timezoneName: "" };
-  }
+  const convertedTime = timeZone
+    ? new Date(time.toLocaleString("en", { timeZone }))
+    : time;
 
-  const currentTime = new Intl.DateTimeFormat("en-GB", {
-    timeZone,
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  }).format(time);
+  const currentTime = format(convertedTime, "HH:mm:ss");
+  const timezoneOffset = format(convertedTime, "zzzz");
 
-  const offsetParts = new Intl.DateTimeFormat("en-GB", {
-    timeZone,
-    timeZoneName: "longOffset",
-  }).formatToParts(time);
-
-  const timezoneOffset =
-    offsetParts.find((part) => part.type === "timeZoneName")?.value ?? "";
-
-  const parts = new Intl.DateTimeFormat("en-GB", {
+  const formatter = new Intl.DateTimeFormat("en-GB", {
     timeZone,
     timeZoneName: "short",
-  }).formatToParts(time);
+  });
+
+  const parts = formatter.formatToParts(convertedTime);
 
   const timezoneName =
     parts.find((part) => part.type === "timeZoneName")?.value ?? "";
 
-  return { currentTime, timezoneOffset, timezoneName };
+  return {
+    currentTime,
+    timezoneOffset,
+    timezoneName,
+  };
 };
