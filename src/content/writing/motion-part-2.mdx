@@ -1,0 +1,86 @@
+export const metadata = {
+  title: "Motion Part 2",
+  description: "Notes on when to animate and when not to.",
+  publishedDate: "2025-05-05",
+};
+
+# Motion Part 2
+
+Animation defines how an interface feels. Done well, it creates rhythm, feedback, and intent—guiding the user’s eye and reinforcing their cause and effect. Overdone, it clutters perception and slows the interface’s feel.
+
+When crafted with restraint, motion becomes invisible—it just feels _right_. Here’re some personal notes that I think are worth writing down.
+
+## General Guidelines
+
+Most UI animations live comfortably between ~200–300ms.<sup className="prose-superscript"><a href="#fn-1">1</a></sup> That window feels quick yet readable. It allows the eye sufficient time to notice changes without making the interface feel sluggish.
+
+- 150ms for hover transitions. The user’s attention is already on the element.
+- 200ms enter / 150ms exit for popovers and modals. Pair with `ease-out` or `ease-in-out` curves for natural responsiveness.
+  - Tip: default to [custom easing curves](https://gist.github.com/bendc/ac03faac0bf2aee25b49e5fd260a727d) when built-in options feel too linear.
+- Adjust based on spatial distance, interaction frequency, and tone.
+  - A gentle fade-in for success can feel calm; a sharp bounce can convey energy or urgency.
+
+Transitions should serve comprehension, not decoration. Motion should clarify _what changed and why_—never just move pixels for spectacle.
+
+## On Easing
+
+The curve defines character. It determines how an interface _feels_ as much as how it looks.
+
+- `ease-out` should be your default. It decelerates smoothly, mirroring the physics of a user lifting their finger or mouse. Ideal for most enter and exit transitions.
+- `ease-in-out` starts slow, accelerates, then settles. Use it when elements already on screen move or morph.
+- Avoid `ease-in` for feedback animations—its delayed start can make an interface feel unresponsive.
+- `linear` is purely mechanical. Reserve it for continuous or looping motion such as loading spinners.
+
+Subtle adjustments to easing can convey personality. Custom cubic-bezier curves let you fine-tune pacing and brand tone—turning a generic movement into one that feels deliberate.
+
+## When Not to Animate
+
+Motion can enrich experience, but too much introduces friction.
+
+High-frequency interactions—like macOS context menus or the Raycast launcher—omit entrance animations entirely. These are tools you open dozens of times a day; even a 100 ms delay compounds into fatigue. Instant response feels faster and more natural.<sup className="prose-superscript"><a href="#fn-2">2</a></sup>
+
+Frequent actions form muscle memory. Animation delays interrupt that rhythm, creating dissonance between intention and response.
+
+In such contexts:
+
+- Skip entrance animations. Use instant presentation; fade out if needed.
+- Avoid submenu transitions or delayed hover effects.
+- Prioritise comprehension and speed over flourish.<sup className="prose-superscript"><a href="#fn-3">3</a></sup>
+
+A simple rule: if an element appears repeatedly throughout the day, keep it static. For rare or narrative moments—like onboarding or sign-in—motion can elevate perception and add warmth.
+
+Always respect users who prefer reduced motion. Honour `prefers-reduced-motion` on the web or equivalent APIs on native platforms. Motion should be expressive, never imposed.
+
+## Taste and Restraint
+
+Animation is storytelling in motion. Like film editing, every transition should serve the story—directing attention, pacing rhythm, and making the interface feel alive through intention, not excess.
+
+Taste, in this context, is discernment. It’s knowing what to omit.  
+As Ken Kocienda writes, it’s the ability to form opinions with your gut that you can also justify with your head. Improving it means surrounding yourself with excellence:  
+observe great interfaces, read elegant code, slow down videos frame by frame, and study how easing, distance, and rhythm interact.
+
+Taste grows from exposure and observation. The more you study _why_ something feels right, the better your instincts become.
+
+Ultimately, animation isn’t about flair—it’s about feeling.  
+Every frame should earn its place.
+
+---
+
+<section className="prose-footnotes">
+  <ol className="prose-list">
+    <li id="fn-1">
+      The average [visual reaction time is 230
+      ms](https://en.wikipedia.org/wiki/Human_processor_model). This indicates
+      that a duration of 200-300 ms is ideal for most animations, while 100-150
+      ms is effective for micro-interactions.
+    </li>
+    <li id="fn-2">
+      Interfaces that respond instantly are often [perceived as more
+      performant](https://brandur.org/interfaces), even if they aren’t.
+    </li>
+    <li id="fn-3">
+      When used sparingly, animation helps communicate state changes, reduce
+      ambiguity, and reinforce intent. The key is to stay out of the way.{" "}
+    </li>
+  </ol>
+</section>

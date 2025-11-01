@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 
 import BackButton from "../../components/back-button/BackButton";
 import FocusedReading from "../../components/focused-reading/FocusedReading";
@@ -13,26 +13,21 @@ interface WritingLayoutProps {
 export default function WritingLayout({
   children,
 }: Readonly<WritingLayoutProps>) {
-  const pathname = usePathname();
-  const isPost = /^\/writing\/[a-zA-Z0-9\-]+$/.test(pathname);
-  const backHref = isPost ? "/writing" : "/";
+  const params = useParams<{ slug?: string }>();
+
+  const slug = params?.slug;
+  const isPost = !!slug;
+
+  const content = (
+    <article className={clsx("prose", "layout-main")}>{children}</article>
+  );
 
   return (
     <>
       <nav className="layout-rail">
-        <BackButton href={backHref} />
+        <BackButton href={isPost ? "/writing" : "/"} />
       </nav>
-      {isPost ? (
-        <FocusedReading>
-          <article className={clsx("prose", "layout-main")}>
-            {children}
-          </article>
-        </FocusedReading>
-      ) : (
-        <article className={clsx("prose", "layout-main")}>
-          {children}
-        </article>
-      )}
+      {isPost ? <FocusedReading>{content}</FocusedReading> : content}
     </>
   );
 }
