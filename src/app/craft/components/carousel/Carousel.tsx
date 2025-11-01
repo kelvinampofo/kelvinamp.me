@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import dynamic from "next/dynamic";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import CentralLibraryImage from "../../../../../public/assets/images/carousel/central-library.webp";
 import AliyevCenterImage from "../../../../../public/assets/images/carousel/heydar-aliyev-center.webp";
@@ -70,34 +70,31 @@ export default function Carousel() {
   }
 
   // calculate the current slide index based on slide position
-  const currentSlide = useMemo(() => {
-    return Math.floor(slidePosition / (SLIDE_WIDTH + SLIDE_MARGIN));
-  }, [slidePosition]);
+  const currentSlide = Math.floor(
+    slidePosition / (SLIDE_WIDTH + SLIDE_MARGIN)
+  );
 
-  const handleSlideChange = useCallback((newSlideIndex: number) => {
+  const handleSlideChange = (newSlideIndex: number) => {
     const clampedSlideIndex = clamp(newSlideIndex, 0, MAX_SLIDE_INDEX);
 
     scrollToSlide(slideRef.current, clampedSlideIndex);
-  }, []);
+  };
 
-  const handleMouseMove = useCallback(
-    (event: React.MouseEvent<HTMLUListElement>) => {
-      const containerRect = event.currentTarget.getBoundingClientRect();
-      const cursorDirection =
-        event.clientX < containerRect.left + containerRect.width / 2
-          ? "left"
-          : "right";
+  const handleMouseMove = (event: React.MouseEvent<HTMLUListElement>) => {
+    const containerRect = event.currentTarget.getBoundingClientRect();
+    const cursorDirection =
+      event.clientX < containerRect.left + containerRect.width / 2
+        ? "left"
+        : "right";
 
-      setIsCursorLeft(cursorDirection === "left");
-      setIsCursorRight(cursorDirection === "right");
-    },
-    []
-  );
+    setIsCursorLeft(cursorDirection === "left");
+    setIsCursorRight(cursorDirection === "right");
+  };
 
-  const handleMouseLeave = useCallback(() => {
+  const handleMouseLeave = () => {
     setIsCursorLeft(false);
     setIsCursorRight(false);
-  }, []);
+  };
 
   const handleCarouselClick = (e: React.MouseEvent<HTMLUListElement>) => {
     if (!slideRef.current) return;

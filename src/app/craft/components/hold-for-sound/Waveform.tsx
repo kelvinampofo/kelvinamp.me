@@ -1,5 +1,4 @@
 import { motion } from "motion/react";
-import { memo, useMemo } from "react";
 
 import styles from "./Waveform.module.css";
 
@@ -22,12 +21,12 @@ const createBarAnimations = () => {
   });
 };
 
-export const Waveform = memo(() => {
-  const barAnimations = useMemo(() => createBarAnimations(), []);
+const BAR_ANIMATIONS = createBarAnimations();
 
+export function Waveform() {
   return (
     <div className={styles.container}>
-      {barAnimations.map(({ minScale, maxScale, duration }, index) => (
+      {BAR_ANIMATIONS.map(({ minScale, maxScale, duration }, index) => (
         <motion.span
           key={index}
           className={styles.bar}
@@ -42,6 +41,4 @@ export const Waveform = memo(() => {
       ))}
     </div>
   );
-});
-
-Waveform.displayName = "Waveform";
+}

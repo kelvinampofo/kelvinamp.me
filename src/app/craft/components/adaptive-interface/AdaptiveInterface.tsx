@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import { motion, AnimatePresence } from "motion/react";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
 import ShortcutKey from "../../../../components/shortcut-key/ShortcutKey";
 import usePointerDevice from "../../../../hooks/usePointerDevice";
@@ -16,15 +16,14 @@ export default function AdaptiveInterface() {
 
   const { isPointerDevice } = usePointerDevice();
 
-  const handleShortcut = useCallback(() => {
+  const handleShortcut = () => {
     setUsageCount((prevCount) => prevCount + 1);
     setIsPressed(true);
 
-    const timer = setTimeout(() => setIsPressed(false), 150);
-    return () => clearTimeout(timer);
-  }, []);
+    setTimeout(() => setIsPressed(false), 150);
+  };
 
-  const resetUsage = useCallback(() => setUsageCount(0), []);
+  const resetUsage = () => setUsageCount(0);
 
   useShortcuts("D", handleShortcut, {
     modifiers: "Meta",

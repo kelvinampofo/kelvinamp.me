@@ -11,18 +11,15 @@ interface Entry {
 }
 
 export async function getEntries(collection: Collection): Promise<Entry[]> {
-  if (collection === "writing") {
-    const basePath = "./src/content/writing";
-    const files = await readdir(basePath, { withFileTypes: true });
+  const basePath = `./src/content/${collection}`;
+  const files = await readdir(basePath, { withFileTypes: true });
 
-    const mdxFiles = files.filter(
-      (entry) => entry.isFile() && entry.name.endsWith(".mdx")
-    );
-
-    const entries = await Promise.all(
-      mdxFiles.map(async (file): Promise<Entry> => {
+  const entries = await Promise.all(
+    files
+      .filter((entry) => entry.isFile() && entry.name.endsWith(".mdx"))
+      .map(async (file): Promise<Entry> => {
         const slug = file.name.replace(/\.mdx$/, "");
-        const mod = await import(`../content/writing/${slug}.mdx`);
+        const mod = await import(`../content/${collection}/${slug}.mdx`);
 
         const { title, description, publishedDate } = mod.metadata;
 
@@ -34,31 +31,6 @@ export async function getEntries(collection: Collection): Promise<Entry[]> {
           description,
         };
       })
-    );
-
-    return sortEntries(entries);
-  }
-
-  const basePath = `./src/app/${collection}`;
-  const directories = (await readdir(basePath, { withFileTypes: true })).filter(
-    (entry) => entry.isDirectory()
-  );
-
-  const entries = await Promise.all(
-    directories.map(async (directory): Promise<Entry> => {
-      const mod = await import(
-        `../app/${collection}/${directory.name}/page.mdx`
-      );
-      const { title, description, publishedDate } = mod.metadata;
-
-      return {
-        id: directory.name,
-        slug: directory.name,
-        title,
-        publishedDate,
-        description,
-      };
-    })
   );
 
   return sortEntries(entries);

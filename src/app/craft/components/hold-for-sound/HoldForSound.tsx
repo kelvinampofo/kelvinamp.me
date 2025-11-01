@@ -7,7 +7,7 @@ import {
   TargetAndTransition,
 } from "motion/react";
 import dynamic from "next/dynamic";
-import { useState, useEffect, useCallback, type KeyboardEvent } from "react";
+import { useState, useEffect, type KeyboardEvent } from "react";
 import useSound from "use-sound";
 
 import styles from "./HoldForSound.module.css";
@@ -53,13 +53,13 @@ export default function HoldForSound() {
     onend: () => setIsPressed(false),
   });
 
-  const triggerHaptic = useCallback(() => {
+  const triggerHaptic = () => {
     if ("vibrate" in navigator) {
       navigator.vibrate([200, 100, 200]);
     }
-  }, []);
+  };
 
-  const handlePress = useCallback(() => {
+  const handlePress = () => {
     setIsPressed(true);
 
     if (!hasInteracted) {
@@ -69,32 +69,26 @@ export default function HoldForSound() {
     play();
 
     triggerHaptic();
-  }, [hasInteracted, play, triggerHaptic]);
+  };
 
-  const handleRelease = useCallback(() => {
+  const handleRelease = () => {
     setIsPressed(false);
     stop();
-  }, [stop]);
+  };
 
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLButtonElement>) => {
-      if ((e.key === " " || e.key === "Enter") && !isPressed) {
-        e.preventDefault();
-        handlePress();
-      }
-    },
-    [isPressed, handlePress]
-  );
+  const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if ((e.key === " " || e.key === "Enter") && !isPressed) {
+      e.preventDefault();
+      handlePress();
+    }
+  };
 
-  const handleKeyUp = useCallback(
-    (e: KeyboardEvent<HTMLButtonElement>) => {
-      if (e.key === " " || e.key === "Enter") {
-        e.preventDefault();
-        handleRelease();
-      }
-    },
-    [handleRelease]
-  );
+  const handleKeyUp = (e: KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === " " || e.key === "Enter") {
+      e.preventDefault();
+      handleRelease();
+    }
+  };
 
   useEffect(() => {
     return () => {

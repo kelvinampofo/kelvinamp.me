@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Target, type Transition } from "motion/react";
-import { useState, type SVGProps, useCallback } from "react";
+import { useState, type SVGProps } from "react";
 import useSound from "use-sound";
 
 import useShortcuts from "../../../../hooks/useShortcuts";
@@ -46,28 +46,25 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
 
   const ticks = Array.from({ length: TICK_COUNT }, (_, index) => index);
 
-  const selectIndex = useCallback(
-    (index: number) => {
-      if (index !== currentIndex) {
-        setCurrentIndex(index);
-        onSelect?.(index);
-        play();
-      }
-    },
-    [currentIndex, onSelect, play]
-  );
+  const selectIndex = (index: number) => {
+    if (index !== currentIndex) {
+      setCurrentIndex(index);
+      onSelect?.(index);
+      play();
+    }
+  };
 
-  const handlePrev = useCallback(() => {
+  const handlePrev = () => {
     if (currentIndex > 0) {
       selectIndex(currentIndex - 1);
     }
-  }, [currentIndex, selectIndex]);
+  };
 
-  const handleNext = useCallback(() => {
+  const handleNext = () => {
     if (currentIndex < ticks.length - 1) {
       selectIndex(currentIndex + 1);
     }
-  }, [currentIndex, ticks.length, selectIndex]);
+  };
 
   useShortcuts("ArrowLeft", handlePrev, {
     preventDefault: true,

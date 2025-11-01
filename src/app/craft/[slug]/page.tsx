@@ -6,22 +6,22 @@ import { loadMdxModule } from "../../../utils/mdx-loader";
 
 type Params = Promise<{ slug: string }>;
 
-export default async function WritingPage({ params }: { params: Params }) {
+export default async function CraftPage({ params }: { params: Params }) {
   const { slug } = await params;
 
-  const post = await loadMdxModule("writing", slug);
+  const demo = await loadMdxModule("craft", slug);
 
-  if (!post) {
+  if (!demo) {
     notFound();
   }
 
-  const { default: Post } = post;
+  const { default: Demo } = demo;
 
-  return <Post />;
+  return <Demo />;
 }
 
 export async function generateStaticParams() {
-  const entries = await getEntries("writing");
+  const entries = await getEntries("craft");
 
   return entries.map(({ slug }) => ({ slug }));
 }
@@ -33,13 +33,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
 
-  const post = await loadMdxModule("writing", slug);
+  const demo = await loadMdxModule("craft", slug);
 
-  if (!post?.metadata) {
+  if (!demo?.metadata) {
     return {};
   }
 
-  const { title, description } = post.metadata;
+  const { title, description } = demo.metadata;
 
   return {
     title,
