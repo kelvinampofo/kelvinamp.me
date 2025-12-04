@@ -1,6 +1,7 @@
 import { clamp, lerp } from "./math";
 
 const THEME_META_NAME = "theme-color";
+const SAFARI_TINT_ELEMENT_ID = "safari-ui-tint-anchor";
 
 function ensureThemeMeta() {
   let element: HTMLMetaElement | null = document.querySelector(
@@ -17,7 +18,42 @@ function ensureThemeMeta() {
   return element;
 }
 
+function ensureSafariTintElement() {
+  let element = document.getElementById(
+    SAFARI_TINT_ELEMENT_ID
+  ) as HTMLDivElement | null;
+
+  if (!element) {
+    element = document.createElement("div");
+    element.id = SAFARI_TINT_ELEMENT_ID;
+    element.setAttribute("aria-hidden", "true");
+
+    Object.assign(element.style, {
+      position: "fixed",
+      top: "0",
+      left: "0",
+      width: "100%",
+      height: "4px",
+      backgroundColor: getCurrentThemeColor(),
+      pointerEvents: "none",
+      opacity: "0",
+    });
+
+    document.body.appendChild(element);
+  }
+
+  return element;
+}
+
 function getCurrentThemeColor() {
+  const tintElement = document.getElementById(
+    SAFARI_TINT_ELEMENT_ID
+  ) as HTMLDivElement | null;
+
+  if (tintElement?.style.backgroundColor) {
+    return tintElement.style.backgroundColor;
+  }
+
   const element: HTMLMetaElement | null = document.querySelector(
     `meta[name="${THEME_META_NAME}"]`
   );
@@ -89,6 +125,7 @@ export function animateThemeColor(toColor: string, duration = 250) {
   }
 
   const meta = ensureThemeMeta();
+  const safariTintElement = ensureSafariTintElement();
   const from = parseColorToRgb(getCurrentThemeColor());
   const to = parseColorToRgb(toColor);
 
@@ -106,7 +143,13 @@ export function animateThemeColor(toColor: string, duration = 250) {
     const g = lerp(from[1], to[1], easedProgress);
     const b = lerp(from[2], to[2], easedProgress);
 
-    meta.content = rgbToHex([r, g, b]);
+    const hexColor = rgbToHex([r, g, b]);
+
+    // keep legacy <meta name="theme-color"> updated for Safari versions 15 through 18.6
+    // and mirror the colour to a fixed element so Safari 26+ can pick it up
+    meta.content = hexColor;
+
+    safariTintElement.style.backgroundColor = hexColor;
 
     if (progress < 1) {
       animationFrameId = requestAnimationFrame(tick);
