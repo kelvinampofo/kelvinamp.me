@@ -32,11 +32,12 @@ function ensureSafariTintElement() {
       position: "fixed",
       top: "0",
       left: "0",
-      width: "100%",
+      width: "100vw",
       height: "4px",
       backgroundColor: getCurrentThemeColor(),
       pointerEvents: "none",
-      opacity: "0",
+      // Keep a hair of opacity so Safari 26+ still samples the color while remaining visually invisible.
+      opacity: "0.02",
     });
 
     document.body.appendChild(element);
