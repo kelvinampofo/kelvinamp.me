@@ -83,6 +83,16 @@ const wordEntries: WordEntryProps[] = [
     definition:
       "impressive or magnificent in appearance or style, especially pretentiously so",
   },
+  {
+    word: "Tangentially",
+    type: "adverb",
+    definition: "in a way that relates only slightly to a matter; peripherally",
+  },
+  {
+    word: "cyclical",
+    type: "adjective",
+    definition: "occurring in cycles; recurrent",
+  },
 ];
 
 export default function Words() {
