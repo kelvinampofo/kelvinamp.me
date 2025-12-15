@@ -1,4 +1,4 @@
-import { Tooltip as TooltipPrimitive } from "@base-ui-components/react/tooltip";
+import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
 import clsx from "clsx";
 
 import styles from "./Tooltip.module.css";
@@ -30,7 +30,7 @@ export default function Tooltip({
   positionerProps,
   popupProps,
 }: TooltipProps) {
-  const { closeDelay, delay, ...restRootProps } = rootProps ?? {};
+  const { ...restRootProps } = rootProps ?? {};
   const { className: triggerClassName, ...restTriggerProps } =
     triggerProps ?? {};
   const { className: popupClassName, ...restPopupProps } = popupProps ?? {};
@@ -38,11 +38,7 @@ export default function Tooltip({
   const { ...restPortalProps } = portalProps ?? {};
 
   return (
-    <TooltipPrimitive.Root
-      delay={delay}
-      closeDelay={closeDelay}
-      {...restRootProps}
-    >
+    <TooltipPrimitive.Root {...restRootProps}>
       <TooltipPrimitive.Trigger
         className={clsx(styles.tooltipTrigger, triggerClassName)}
         {...restTriggerProps}
