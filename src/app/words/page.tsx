@@ -93,6 +93,11 @@ const wordEntries: WordEntryProps[] = [
     type: "adjective",
     definition: "occurring in cycles; recurrent",
   },
+  {
+    word: "orthogonal",
+    type: "adjective",
+    definition: "of or involving right angles; at right angles.",
+  },
 ];
 
 export default function Words() {
