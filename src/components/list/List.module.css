@@ -1,7 +1,6 @@
 .listItem {
   --spacing: 0.75rem;
 
-  margin: 0;
   color: var(--color-foreground);
 }
 
@@ -12,7 +11,9 @@
   transition: color 150ms ease;
   width: 100%;
   gap: var(--spacing);
-  padding: var(--spacing) 0;
+  padding: var(--spacing) calc(var(--spacing) * 0.5);
+  margin: 0 calc(var(--spacing) * -0.5);
+  border-radius: 0.375rem;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
