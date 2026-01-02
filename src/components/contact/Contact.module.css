@@ -1,7 +1,7 @@
 .contactList {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-6);
   padding-left: 0;
 }
 
@@ -15,7 +15,7 @@
 }
 
 .contactListHeading {
-  margin-bottom: 28px;
+  margin-bottom: var(--space-28);
 }
 
 .dot {

@@ -5,7 +5,7 @@
 }
 
 .prose > :not(:last-child) {
-  margin-bottom: 28px;
+  margin-bottom: var(--space-28);
 }
 
 article.prose {
@@ -36,8 +36,7 @@ a.prose-link {
 .prose :where(ul, ol),
 ul.prose-list,
 ol.prose-list {
-  list-style-position: outside;
-  padding-left: 18px;
+  list-style-position: inside;
 }
 
 .prose ul,
@@ -63,7 +62,7 @@ ol.prose-list {
 .prose :where(ul, ol) li,
 ul.prose-list li,
 ol.prose-list li {
-  margin-top: 10px;
+  margin-top: var(--space-10);
 }
 
 .prose :where(ul, ol) li:first-child,
@@ -89,7 +88,7 @@ code {
 .prose pre,
 .prose-pre {
   border-radius: var(--radius-12);
-  margin-top: 1rem;
+  margin-top: var(--space-16);
   background-color: var(--grey3);
   padding: 1em;
   overflow-x: auto;
@@ -104,7 +103,7 @@ code {
 .prose-superscript a {
   text-decoration: none;
   border-radius: var(--radius-2);
-  padding: 1px 4px 1px 3px;
+  padding: var(--space-2) var(--space-4);
   transition: var(--transition-hover);
 }
 
@@ -125,7 +124,7 @@ code {
 
 .prose blockquote,
 .prose .prose-blockquote {
-  --quote-offset: 2px;
+  --quote-offset: var(--space-2);
 
   position: relative;
   color: var(--grey11);

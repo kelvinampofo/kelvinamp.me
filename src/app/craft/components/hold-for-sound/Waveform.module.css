@@ -3,7 +3,7 @@
   height: 100%;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: var(--space-4);
 }
 
 .bar {

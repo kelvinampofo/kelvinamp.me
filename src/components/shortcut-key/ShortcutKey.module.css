@@ -1,18 +1,18 @@
 .container {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: var(--space-4);
 }
 
 .key {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: var(--space-4);
 
   width: 20px;
   height: 20px;
-  padding: 0 4px;
+  padding: 0 var(--space-4);
   border-radius: var(--radius-2);
 
   font-size: 0.75rem;

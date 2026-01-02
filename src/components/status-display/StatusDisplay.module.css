@@ -1,6 +1,6 @@
 .statusDisplay {
   display: inline-flex;
-  margin-top: 18px;
+  margin-top: var(--space-18);
   font-size: 0.75rem;
   font-variant-numeric: tabular-nums;
   color: var(--color-foreground-secondary);

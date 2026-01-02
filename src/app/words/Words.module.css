@@ -1,13 +1,13 @@
 .wordsSeparator {
-  margin: 2rem 0;
+  margin: var(--space-32) 0;
 }
 
 .wordsList {
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-48);
   display: grid;
   grid-template-columns: 1fr;
-  column-gap: 6rem;
-  row-gap: 3rem;
+  column-gap: var(--space-96);
+  row-gap: var(--space-48);
 }
 
 @media (min-width: 640px) {
@@ -19,7 +19,7 @@
 .wordEntry {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--space-12);
 }
 
 .word {
@@ -30,7 +30,7 @@
 .wordDetails {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--space-12);
 }
 
 .wordType {

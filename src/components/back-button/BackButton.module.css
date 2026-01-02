@@ -1,7 +1,7 @@
 .backButton {
   border-radius: var(--radius-4);
   display: flex;
-  gap: 6px;
+  gap: var(--space-6);
   color: var(--color-foreground);
   transition: color 150ms ease;
   -webkit-tap-highlight-color: transparent;

@@ -29,7 +29,7 @@
   width: var(--size);
   height: var(--size);
   border-radius: 15%;
-  margin: 0 0.125rem;
+  margin: 0 var(--space-2);
   display: inline-block;
   animation: flashing 1.1s var(--ease-in-out-cubic) infinite;
   background-color: var(--grey12);

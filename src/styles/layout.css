@@ -6,7 +6,7 @@
   grid-template-columns: var(--column-length) var(--content-max-width) var(
       --column-length
     );
-  column-gap: var(--spacing-gutter);
+  column-gap: var(--space-24);
 }
 
 .layout-grid > * {
@@ -31,7 +31,7 @@
 @media (max-width: 1024px) {
   .layout-grid {
     grid-template-columns: auto var(--content-max-width) auto;
-    column-gap: var(--spacing-gutter-sm);
+    column-gap: var(--space-16);
   }
 }
 
@@ -41,7 +41,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
-    gap: 42px;
+    gap: var(--space-42);
   }
 
   .layout-rail {

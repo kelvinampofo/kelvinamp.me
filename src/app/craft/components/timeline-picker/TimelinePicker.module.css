@@ -2,16 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-gap-md);
+  gap: var(--space-16);
 }
 
 .timelineContainer {
   --tick-width: 1px;
   --tick-height: 20px;
   --tick-border-radius: var(--radius-8);
-  --tick-margin-horizontal: 6px;
-  --tick-margin-bottom-active: 12px;
-  --tick-margin-bottom-mobile: 9px;
+  --tick-margin-horizontal: var(--space-6);
+  --tick-margin-bottom-active: var(--space-12);
+  --tick-margin-bottom-mobile: var(--space-10);
 
   --active-tick-color: var(--orange);
 
@@ -23,9 +23,9 @@
 .timelineButton {
   display: flex;
   color: var(--grey10);
-  padding: var(--spacing-gap-sm);
+  padding: var(--space-8);
   border-radius: var(--radius-8);
-  margin: 0 6px;
+  margin: 0 var(--space-6);
   transition: var(--transition-hover);
 }
 
@@ -48,7 +48,7 @@
 }
 
 .timelineTick {
-  --hit-area: 8px;
+  --hit-area: var(--space-8);
 
   position: relative;
   height: var(--tick-height);
@@ -98,7 +98,7 @@
 
 @media (max-width: 600px) {
   .timelineContainer {
-    padding: 0 var(--spacing-gap-sm);
+    padding: 0 var(--space-8);
   }
 
   .timelineButton {

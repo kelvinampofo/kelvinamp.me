@@ -60,7 +60,7 @@ main {
 
 .pages-list {
   display: flex;
-  gap: var(--spacing-gap-sm);
+  gap: var(--space-8);
   list-style: none;
   list-style-type: none;
   margin: 0;

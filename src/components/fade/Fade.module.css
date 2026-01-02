@@ -1,5 +1,5 @@
 .fade {
-  --h: min(96px, var(--spacing-page-top, 96px));
+  --h: min(var(--space-96), var(--spacing-page-top, var(--space-96)));
   --direction: to bottom;
   --blur: 5px;
 
@@ -57,7 +57,7 @@
 
 .fade[data-axis="vertical"][data-edge="trailing"] {
   --direction: to top;
-  --h: min(96px, var(--spacing-page-bottom, 96px));
+  --h: min(var(--space-96), var(--spacing-page-bottom, var(--space-96)));
 
   top: auto;
   bottom: 0;
@@ -84,7 +84,10 @@
 }
 
 .fade[data-axis="horizontal"][data-edge="leading"] {
-  --h: min(96px, var(--spacing-body-margin-left, 96px));
+  --h: min(
+    var(--space-96),
+    var(--spacing-body-margin-left, var(--space-96))
+  );
 
   left: 0;
   right: auto;
@@ -92,7 +95,10 @@
 
 .fade[data-axis="horizontal"][data-edge="trailing"] {
   --direction: to left;
-  --h: min(96px, var(--spacing-body-margin-right, 96px));
+  --h: min(
+    var(--space-96),
+    var(--spacing-body-margin-right, var(--space-96))
+  );
 
   left: auto;
   right: 0;

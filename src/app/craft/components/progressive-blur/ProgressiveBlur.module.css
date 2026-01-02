@@ -1,7 +1,7 @@
 .maskGradient {
   --mask-gradient-start: 20%;
   --mask-gradient-end: 80%;
-  --mask-gradient-padding: 1rem;
+  --mask-gradient-padding: var(--space-16);
   --marquee-duration: 20s;
 
   position: relative;
