@@ -2,6 +2,11 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  padding-left: 0;
+}
+
+.contactList li {
+  margin-top: 0;
 }
 
 .contactList .dot {
