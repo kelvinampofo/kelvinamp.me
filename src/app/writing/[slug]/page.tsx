@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { loadContentModule } from "../../../utils/content-loader";
 import { getEntries } from "../../../utils/entries";
-import { loadMdxModule } from "../../../utils/mdx-loader";
 
 type Params = Promise<{ slug: string }>;
 
 export default async function WritingPage({ params }: { params: Params }) {
   const { slug } = await params;
 
-  const post = await loadMdxModule("writing", slug);
+  const post = await loadContentModule("writing", slug);
 
   if (!post) {
     notFound();
@@ -33,7 +33,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
 
-  const post = await loadMdxModule("writing", slug);
+  const post = await loadContentModule("writing", slug);
 
   if (!post?.metadata) {
     return {};

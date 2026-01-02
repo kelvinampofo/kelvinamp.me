@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
 
-interface MdxModule {
+interface ContentModule {
   default: ComponentType;
   metadata: {
     title: string;
@@ -11,16 +11,16 @@ interface MdxModule {
 
 type Collection = "writing" | "craft";
 
-export async function loadMdxModule(
+export async function loadContentModule(
   collection: Collection,
   slug: string
-): Promise<MdxModule | null> {
+): Promise<ContentModule | null> {
   try {
-    const mdxModule: MdxModule = await import(
-      `../content/${collection}/${slug}.mdx`
+    const contentModule: ContentModule = await import(
+      `../content/${collection}/${slug}.tsx`
     );
 
-    return mdxModule;
+    return contentModule;
   } catch (error) {
     console.error(
       `Failed to load ${collection} entry for slug: ${slug}`,

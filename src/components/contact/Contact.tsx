@@ -25,7 +25,7 @@ export default function Contact() {
       <Heading as="h2" className={styles.contactListHeading}>
         Connect
       </Heading>
-      <ul className={styles.contactList} style={{ "--stagger": "2" }}>
+      <ul data-list="unstyled" className={styles.contactList} style={{ "--stagger": "2" }}>
         {contactLinks.map(({ label, href }, index) => (
           <Fragment key={label}>
             <li>

@@ -33,33 +33,40 @@ a.prose-link {
   }
 }
 
+.prose :where(ul, ol),
 ul.prose-list,
 ol.prose-list {
   list-style-position: outside;
   padding-left: 18px;
 }
 
+.prose ul,
 ul.prose-list {
   list-style-type: disc;
 }
 
+.prose ul ul,
 ul.prose-list ul {
   list-style-type: circle;
 }
 
+.prose ol,
 ol.prose-list {
   list-style-type: decimal;
 }
 
+.prose :where(ul, ol) li::marker,
 .prose-list li::marker {
   color: var(--grey11);
 }
 
+.prose :where(ul, ol) li,
 ul.prose-list li,
 ol.prose-list li {
   margin-top: 10px;
 }
 
+.prose :where(ul, ol) li:first-child,
 ul.prose-list li:first-child,
 ol.prose-list li:first-child {
   margin-top: 0;
@@ -79,6 +86,7 @@ code {
   border-radius: var(--radius-4);
 }
 
+.prose pre,
 .prose-pre {
   border-radius: var(--radius-12);
   margin-top: 1rem;
@@ -115,6 +123,7 @@ code {
   font-size: 0.875em;
 }
 
+.prose blockquote,
 .prose .prose-blockquote {
   --quote-offset: 2px;
 
@@ -123,6 +132,7 @@ code {
   quotes: "“" "”" "‘" "’";
 }
 
+.prose blockquote::before,
 .prose .prose-blockquote::before {
   content: open-quote;
   position: absolute;
@@ -131,7 +141,14 @@ code {
   line-height: var(--leading);
 }
 
+.prose blockquote :last-child::after,
 .prose .prose-blockquote :last-child::after {
   content: close-quote;
   margin-left: var(--quote-offset);
+}
+
+@media (prefers-contrast: more) {
+  .prose hr {
+    background-color: var(--grey10);
+  }
 }

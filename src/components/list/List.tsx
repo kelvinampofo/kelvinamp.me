@@ -40,7 +40,7 @@ export default function List({
   }
 
   return (
-    <ol>
+    <ol data-list="unstyled">
       {items.map(({ id, slug, title, publishedDate, description }, index) => {
         const isNew = isAfter(
           parseISO(publishedDate),

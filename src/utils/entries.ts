@@ -16,10 +16,10 @@ export async function getEntries(collection: Collection): Promise<Entry[]> {
 
   const entries = await Promise.all(
     files
-      .filter((entry) => entry.isFile() && entry.name.endsWith(".mdx"))
+      .filter((entry) => entry.isFile() && entry.name.endsWith(".tsx"))
       .map(async (file): Promise<Entry> => {
-        const slug = file.name.replace(/\.mdx$/, "");
-        const mod = await import(`../content/${collection}/${slug}.mdx`);
+        const slug = file.name.replace(/\.tsx$/, "");
+        const mod = await import(`../content/${collection}/${slug}.tsx`);
 
         const { title, description, publishedDate } = mod.metadata;
 

@@ -61,6 +61,19 @@ main {
 .pages-list {
   display: flex;
   gap: var(--spacing-gap-sm);
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.pages-list li {
+  margin-top: 0;
+  list-style: none;
+}
+
+.pages-list li::marker {
+  content: "";
 }
 
 .error-stack {

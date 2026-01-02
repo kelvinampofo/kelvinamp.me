@@ -32,9 +32,20 @@ button {
   all: unset;
 }
 
-ul,
-ol {
+[data-list="unstyled"] {
   list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+[data-list="unstyled"] li {
+  margin-top: 0;
+  list-style: none;
+}
+
+[data-list="unstyled"] li::marker {
+  content: "";
 }
 
 kbd {

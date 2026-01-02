@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { loadContentModule } from "../../../utils/content-loader";
 import { getEntries } from "../../../utils/entries";
-import { loadMdxModule } from "../../../utils/mdx-loader";
 
 type Params = Promise<{ slug: string }>;
 
 export default async function CraftPage({ params }: { params: Params }) {
   const { slug } = await params;
 
-  const demo = await loadMdxModule("craft", slug);
+  const demo = await loadContentModule("craft", slug);
 
   if (!demo) {
     notFound();
@@ -33,7 +33,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
 
-  const demo = await loadMdxModule("craft", slug);
+  const demo = await loadContentModule("craft", slug);
 
   if (!demo?.metadata) {
     return {};
