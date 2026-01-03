@@ -1,7 +1,6 @@
 import Heading from "../../components/heading/Heading";
 import Separator from "../../components/separator/Separator";
 
-
 export const metadata = {
   title: "What is Design",
   description: "Design Q & A with Charles Eames",

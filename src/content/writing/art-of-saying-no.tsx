@@ -1,7 +1,4 @@
-import { Metadata } from "next";
-
 import Heading from "../../components/heading/Heading";
-
 
 export const metadata = {
   title: "The Art of Saying No",

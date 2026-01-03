@@ -1,7 +1,6 @@
 import Heading from "../../components/heading/Heading";
 import Separator from "../../components/separator/Separator";
 
-
 export const metadata = {
   title: "Motion",
   description: "Some thoughts on motion and macOS interaction design.",
