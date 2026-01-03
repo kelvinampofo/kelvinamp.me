@@ -103,6 +103,11 @@ const wordEntries: WordEntryProps[] = [
     type: "adjective",
     definition: "having or relating to subjects or a particular subject",
   },
+  {
+    word: "salient",
+    type: "adjective",
+    definition: "most noticeable or important",
+  },
 ];
 
 export default function Words() {
