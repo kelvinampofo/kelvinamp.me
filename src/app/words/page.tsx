@@ -96,7 +96,12 @@ const wordEntries: WordEntryProps[] = [
   {
     word: "orthogonal",
     type: "adjective",
-    definition: "of or involving right angles; at right angles.",
+    definition: "of or involving right angles; at right angles",
+  },
+  {
+    word: "thematic",
+    type: "adjective",
+    definition: "having or relating to subjects or a particular subject",
   },
 ];
 
