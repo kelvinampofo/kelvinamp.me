@@ -78,6 +78,8 @@ i {
 
 code {
   font-family: var(--font-family-mono);
+  font-feature-settings: normal;
+  font-variant-numeric: lining-nums tabular-nums;
   font-size: 0.85em;
   padding: 0.2em 0.4em;
   background-color: var(--grey3);
