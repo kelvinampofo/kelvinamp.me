@@ -68,7 +68,7 @@
 }
 
 .tooltipArrowFill {
-  fill: var(--grey1);
+  fill: var(--tooltip-arrow-fill, var(--grey1));
 }
 
 @media (prefers-color-scheme: light) {
@@ -83,26 +83,27 @@
   }
 
   .tooltipArrowFill {
-    fill: #1f1f1f;
+    fill: var(--tooltip-arrow-fill, #1f1f1f);
   }
 
   .tooltipArrowOuterStroke {
-    fill: var(--grey12);
+    fill: var(--tooltip-arrow-outer-stroke, var(--grey12));
   }
 }
 
 @media (prefers-color-scheme: dark) {
   .tooltipPopup {
-    background-color: var(--grey1);
+    background-color: var(--grey2);
     outline: 1px solid var(--grey6);
     outline-offset: -1px;
+    box-shadow: var(--elevation-3);
   }
 
   .tooltipArrowFill {
-    fill: var(--grey1);
+    fill: var(--tooltip-arrow-fill, var(--grey2));
   }
 
   .tooltipArrowInnerStroke {
-    fill: var(--grey6);
+    fill: var(--tooltip-arrow-inner-stroke, var(--grey6));
   }
 }
