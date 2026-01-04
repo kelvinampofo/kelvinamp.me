@@ -84,10 +84,7 @@
 }
 
 .fade[data-axis="horizontal"][data-edge="leading"] {
-  --h: min(
-    var(--space-96),
-    var(--spacing-body-margin-left, var(--space-96))
-  );
+  --h: min(var(--space-96), var(--spacing-body-margin-left, var(--space-96)));
 
   left: 0;
   right: auto;
@@ -95,10 +92,7 @@
 
 .fade[data-axis="horizontal"][data-edge="trailing"] {
   --direction: to left;
-  --h: min(
-    var(--space-96),
-    var(--spacing-body-margin-right, var(--space-96))
-  );
+  --h: min(var(--space-96), var(--spacing-body-margin-right, var(--space-96)));
 
   left: auto;
   right: 0;

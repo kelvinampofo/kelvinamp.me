@@ -2,7 +2,6 @@ import HoldForSound from "../../app/craft/components/hold-for-sound/HoldForSound
 import Card from "../../components/card/Card";
 import Heading from "../../components/heading/Heading";
 
-
 export const metadata = {
   title: "Hold for Sound",
   description: "“Hold for Sound” interaction.",

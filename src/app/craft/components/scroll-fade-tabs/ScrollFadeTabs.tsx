@@ -32,9 +32,7 @@ export default function ScrollFadeTabs({
   selected,
   onChange,
 }: ScrollFadeTabsProps) {
-  const [internalSelected, setInternalSelected] = useState(
-    selected ?? "all"
-  );
+  const [internalSelected, setInternalSelected] = useState(selected ?? "all");
   const [isScrolledToStart, setIsScrolledToStart] = useState(true);
   const [isScrolledToEnd, setIsScrolledToEnd] = useState(false);
 

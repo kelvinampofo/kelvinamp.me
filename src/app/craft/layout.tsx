@@ -1,6 +1,5 @@
 "use client";
 
-import clsx from "clsx";
 import { useParams } from "next/navigation";
 
 import BackButton from "../../components/back-button/BackButton";
@@ -19,9 +18,7 @@ export default function CraftLayout({ children }: Readonly<CraftLayoutProps>) {
       <nav className="layout-rail">
         <BackButton href={isDemo ? "/craft" : "/"} />
       </nav>
-      <article className={clsx("prose", "layout-main")}>
-        {children}
-      </article>
+      <article className="prose layout-main">{children}</article>
     </>
   );
 }

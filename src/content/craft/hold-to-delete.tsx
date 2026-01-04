@@ -2,7 +2,6 @@ import HoldToDelete from "../../app/craft/components/hold-to-delete/HoldToDelete
 import Card from "../../components/card/Card";
 import Heading from "../../components/heading/Heading";
 
-
 export const metadata = {
   title: "Hold to Delete",
   description: "“Hold to Delete” interaction.",

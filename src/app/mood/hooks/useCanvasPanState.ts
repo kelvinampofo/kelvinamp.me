@@ -1,9 +1,4 @@
-import {
-  useCallback,
-  useRef,
-  useState,
-  type SetStateAction,
-} from "react";
+import { useCallback, useRef, useState, type SetStateAction } from "react";
 
 import type { Point } from "../types";
 

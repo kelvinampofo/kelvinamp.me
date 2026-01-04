@@ -70,9 +70,7 @@ export default function Carousel() {
   }
 
   // calculate the current slide index based on slide position
-  const currentSlide = Math.floor(
-    slidePosition / (SLIDE_WIDTH + SLIDE_MARGIN)
-  );
+  const currentSlide = Math.floor(slidePosition / (SLIDE_WIDTH + SLIDE_MARGIN));
 
   const handleSlideChange = (newSlideIndex: number) => {
     const clampedSlideIndex = clamp(newSlideIndex, 0, MAX_SLIDE_INDEX);

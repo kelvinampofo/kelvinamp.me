@@ -23,9 +23,9 @@ export default function GitNotes() {
           This fixes the problem.
         </li>
         <li>
-          <code>git config --global column.ui auto</code> – git branches are laid
-          out in a list by default. I prefer them to be displayed in columns
-          graphically.
+          <code>git config --global column.ui auto</code> – git branches are
+          laid out in a list by default. I prefer them to be displayed in
+          columns graphically.
         </li>
         <li>
           <code>git push --force-with-lease</code> – safer than{" "}

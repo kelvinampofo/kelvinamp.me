@@ -36,7 +36,6 @@
 
   --spacing-body-margin-left: max(var(--space-24), env(safe-area-inset-left));
   --spacing-body-margin-right: max(var(--space-24), env(safe-area-inset-right));
-
 }
 
 @media (max-width: 1024px) {

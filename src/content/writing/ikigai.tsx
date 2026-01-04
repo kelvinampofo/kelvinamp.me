@@ -53,8 +53,8 @@ export default function Ikigai() {
         and what I’m currently building.
       </p>
       <p>
-        My goal was to build a place that feels like a home on the internet. I’ll
-        keep iterating over this. You can find the source code{" "}
+        My goal was to build a place that feels like a home on the internet.
+        I’ll keep iterating over this. You can find the source code{" "}
         <a href="https://github.com/kelvinampofo/kelvinamp.me">here</a> if
         interested.
       </p>

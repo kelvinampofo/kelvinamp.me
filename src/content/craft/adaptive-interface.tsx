@@ -2,7 +2,6 @@ import AdaptiveInterface from "../../app/craft/components/adaptive-interface/Ada
 import Card from "../../components/card/Card";
 import Heading from "../../components/heading/Heading";
 
-
 export const metadata = {
   title: "Adaptive Interface",
   description: "An adaptive interface based on usage.",

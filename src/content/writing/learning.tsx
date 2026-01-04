@@ -35,7 +35,9 @@ export default function Learning() {
           Time-blocking is not really my thing, calendar white space creates a
           buffer for work + play.
         </li>
-        <li>AI is just a tool; use it to enhance creative and technical work.</li>
+        <li>
+          AI is just a tool; use it to enhance creative and technical work.
+        </li>
         <li>Think different.</li>
         <li>
           Keep a log, note down the small details – they help remind you of the

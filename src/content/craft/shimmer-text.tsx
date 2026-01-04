@@ -2,7 +2,6 @@ import ShimmerText from "../../app/craft/components/shimmer-text/ShimmerText";
 import Card from "../../components/card/Card";
 import Heading from "../../components/heading/Heading";
 
-
 export const metadata = {
   title: "Shimmer Text",
   description: "Loading shimmer text from OpenAI o1.",

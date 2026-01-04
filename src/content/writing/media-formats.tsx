@@ -58,8 +58,8 @@ export default function MediaFormats() {
           </ul>
         </li>
         <li>
-          better than GIF, PNG, and JPEG in most cases&mdash;ideal for the modern
-          web; ensure fallback for older Safari versions (&lt; 14)
+          better than GIF, PNG, and JPEG in most cases&mdash;ideal for the
+          modern web; ensure fallback for older Safari versions (&lt; 14)
         </li>
       </ul>
       <Heading as="h2">AVIF</Heading>
@@ -90,8 +90,9 @@ export default function MediaFormats() {
           the web, convert to WebP or AVIF first
         </li>
         <li>
-          use the HTML <code>&lt;picture&gt;</code> element to specify fallbacks,
-          allowing the browser to choose a supported format from top to bottom.
+          use the HTML <code>&lt;picture&gt;</code> element to specify
+          fallbacks, allowing the browser to choose a supported format from top
+          to bottom.
         </li>
       </ul>
       <aside aria-label="This is a code block of an HTML picture element with source fallbacks for HEIC, AVIF, WebP, and JPEG.">

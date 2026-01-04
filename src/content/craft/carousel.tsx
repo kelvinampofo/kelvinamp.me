@@ -1,7 +1,6 @@
 import Carousel from "../../app/craft/components/carousel/Carousel";
 import Heading from "../../components/heading/Heading";
 
-
 export const metadata = {
   title: "Carousel",
   description: "A minimal CSS based carousel.",
