@@ -124,17 +124,21 @@ code {
 
 @media (hover: hover) and (pointer: fine) {
   .prose-superscript a:hover {
-    background-color: var(--grey4);
+    color: var(--color-foreground);
   }
 }
 
 .prose-superscript a:focus-visible {
-  background-color: var(--grey4);
+  color: var(--color-foreground);
 }
 
 .prose-footnotes {
   color: var(--color-foreground-secondary);
   font-size: 0.875em;
+}
+
+.prose-footnotes > :not(:last-child) {
+  margin-bottom: var(--space-12);
 }
 
 .prose blockquote,
