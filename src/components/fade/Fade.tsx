@@ -1,36 +1,43 @@
 import clsx from "clsx";
-import type { HTMLAttributes } from "react";
+import type { CSSProperties, HTMLAttributes, Ref } from "react";
 
 import styles from "./Fade.module.css";
 
-type FadeAxis = "vertical" | "horizontal";
-type FadeEdge = "leading" | "trailing";
+type Side = "top" | "bottom" | "left" | "right";
 
-interface FadeProps extends HTMLAttributes<HTMLDivElement> {
-  /** Axis the scroll container flows on. */
-  axis?: FadeAxis;
-  /** Edge of the scroll container to anchor the fade against. */
-  edge?: FadeEdge;
+interface FadeProps extends Omit<HTMLAttributes<HTMLDivElement>, "style"> {
+  stop?: string;
+  blur?: string;
+  side?: Side;
+  className?: string;
+  background?: string;
+  style?: CSSProperties;
+  ref?: Ref<HTMLDivElement>;
 }
 
-/**
- * Overlay that fades content at a scroll edge, similar to SwiftUI's
- * `ScrollEdgeEffectStyle`. Acts as a purely visual element.
- */
 export default function Fade({
-  axis = "vertical",
-  edge = "leading",
+  stop,
+  blur,
+  side = "top",
   className,
+  background = "var(--color-background)",
+  style,
+  ref,
   ...props
 }: FadeProps) {
   return (
     <div
       {...props}
+      ref={ref}
       aria-hidden
-      role="presentation"
-      data-axis={axis}
-      data-edge={edge}
+      data-side={side}
       className={clsx(styles.fade, className)}
+      style={{
+        ...(stop ? { "--stop": stop } : {}),
+        ...(blur ? { "--blur": blur } : {}),
+        "--background": background,
+        ...style,
+      }}
     />
   );
 }

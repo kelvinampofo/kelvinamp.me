@@ -2,6 +2,8 @@
   --h: min(var(--space-96), var(--spacing-page-top, var(--space-96)));
   --direction: to bottom;
   --blur: 5px;
+  --stop: 25%;
+  --background: var(--color-background);
 
   position: sticky;
   display: block;
@@ -19,84 +21,98 @@
 
   -webkit-mask-image: var(
     --fade-mask,
-    var(--mask, linear-gradient(var(--direction), #000 25%, transparent))
+    var(
+      --mask,
+      linear-gradient(var(--direction), #000 var(--stop), transparent)
+    )
   );
   mask-image: var(
     --fade-mask,
-    var(--mask, linear-gradient(var(--direction), #000 25%, transparent))
-  );
-}
-
-.fade::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    var(--direction),
-    var(--color-background),
-    transparent
-  );
-}
-
-.fade[data-axis="vertical"] {
-  top: 0;
-  bottom: auto;
-  left: 0;
-  right: 0;
-
-  width: calc(
-    100% + var(--spacing-body-margin-left, 0px) +
-      var(--spacing-body-margin-right, 0px)
-  );
-  height: var(--h);
-
-  margin-left: calc(-1 * var(--spacing-body-margin-left, 0px));
-  margin-right: calc(-1 * var(--spacing-body-margin-right, 0px));
-  margin-bottom: calc(-1 * var(--h));
-}
-
-.fade[data-axis="vertical"][data-edge="trailing"] {
-  --direction: to top;
-  --h: min(var(--space-96), var(--spacing-page-bottom, var(--space-96)));
-
-  top: auto;
-  bottom: 0;
-
-  margin-top: calc(-1 * var(--h));
-  margin-bottom: 0;
-}
-
-.fade[data-axis="horizontal"] {
-  --direction: to right;
-
-  top: 0;
-  bottom: auto;
-
-  width: var(--h);
-  height: calc(
-    100% + var(--spacing-page-top, 0px) + var(--spacing-page-bottom, 0px)
+    var(
+      --mask,
+      linear-gradient(var(--direction), #000 var(--stop), transparent)
+    )
   );
 
-  margin-top: calc(-1 * var(--spacing-page-top, 0px));
-  margin-bottom: calc(-1 * var(--spacing-page-bottom, 0px));
-  margin-left: 0;
-  margin-right: calc(-1 * var(--h));
-}
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      var(--direction),
+      var(--background),
+      transparent
+    );
+  }
 
-.fade[data-axis="horizontal"][data-edge="leading"] {
-  --h: min(var(--space-96), var(--spacing-body-margin-left, var(--space-96)));
+  &[data-side="top"],
+  &[data-side="bottom"] {
+    left: 0;
+    right: 0;
 
-  left: 0;
-  right: auto;
-}
+    width: calc(
+      100% + var(--spacing-body-margin-left, 0px) +
+        var(--spacing-body-margin-right, 0px)
+    );
+    height: var(--h);
 
-.fade[data-axis="horizontal"][data-edge="trailing"] {
-  --direction: to left;
-  --h: min(var(--space-96), var(--spacing-body-margin-right, var(--space-96)));
+    margin-left: calc(-1 * var(--spacing-body-margin-left, 0px));
+    margin-right: calc(-1 * var(--spacing-body-margin-right, 0px));
+  }
 
-  left: auto;
-  right: 0;
+  &[data-side="top"] {
+    top: 0;
+    bottom: auto;
+    margin-bottom: calc(-1 * var(--h));
+  }
 
-  margin-left: calc(-1 * var(--h));
-  margin-right: 0;
+  &[data-side="bottom"] {
+    --direction: to top;
+    --h: min(var(--space-96), var(--spacing-page-bottom, var(--space-96)));
+
+    top: auto;
+    bottom: 0;
+
+    margin-top: calc(-1 * var(--h));
+    margin-bottom: 0;
+  }
+
+  &[data-side="left"],
+  &[data-side="right"] {
+    top: 0;
+    bottom: auto;
+
+    width: var(--h);
+    height: calc(
+      100% + var(--spacing-page-top, 0px) + var(--spacing-page-bottom, 0px)
+    );
+
+    margin-top: calc(-1 * var(--spacing-page-top, 0px));
+    margin-bottom: calc(-1 * var(--spacing-page-bottom, 0px));
+  }
+
+  &[data-side="left"] {
+    --direction: to right;
+    --h: min(var(--space-96), var(--spacing-body-margin-left, var(--space-96)));
+
+    left: 0;
+    right: auto;
+
+    margin-left: 0;
+    margin-right: calc(-1 * var(--h));
+  }
+
+  &[data-side="right"] {
+    --direction: to left;
+    --h: min(
+      var(--space-96),
+      var(--spacing-body-margin-right, var(--space-96))
+    );
+
+    left: auto;
+    right: 0;
+
+    margin-left: calc(-1 * var(--h));
+    margin-right: 0;
+  }
 }
