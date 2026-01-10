@@ -25,7 +25,7 @@
   transition:
     transform var(--tooltip-transform-duration),
     opacity var(--tooltip-opacity-duration);
-  box-shadow: var(--elevation-3);
+  box-shadow: var(--shadow-tooltip);
 
   &[data-open] {
     --tooltip-opacity-duration: 6ms;
@@ -77,9 +77,6 @@
     color: #f0f0f0;
     background-color: #1f1f1f;
     outline: 1px solid var(--grey12);
-    box-shadow:
-      0px 6px 15px -8px var(--greyA6),
-      0px 4px 6px -4px var(--greyA6);
   }
 
   .tooltipArrowFill {
@@ -96,7 +93,6 @@
     background-color: var(--grey2);
     outline: 1px solid var(--grey6);
     outline-offset: -1px;
-    box-shadow: var(--elevation-3);
   }
 
   .tooltipArrowFill {

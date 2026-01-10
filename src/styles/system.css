@@ -182,6 +182,13 @@
     --shadow-key: lch(0% 0 0 / 0.08);
     --shadow-specular: lch(100% 0 0 / 0.06);
 
+    --shadow-border-color: rgba(0, 0, 0, 0.05);
+    --shadow-border: 0 0 0 1px var(--shadow-border-color);
+
+    --shadow-tooltip:
+      var(--shadow-border), 0px 1px 1px rgba(0, 0, 0, 0.02),
+      0px 4px 8px rgba(0, 0, 0, 0.04);
+
     --elevation-1:
       var(--shadow-ambient) 0 1px 1px, var(--shadow-key) 0 2px 4px -2px;
     --elevation-2:
