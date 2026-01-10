@@ -23,6 +23,10 @@
   height: 1.2em;
 }
 
+:global(article.prose.layout-main) > .separator {
+  margin-bottom: var(--space-28);
+}
+
 @media (prefers-contrast: more) {
   .separator {
     background-color: var(--grey10);
