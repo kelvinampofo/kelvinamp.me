@@ -1,6 +1,5 @@
 import { format, isAfter, subMonths, parseISO, isThisYear } from "date-fns";
 import Link from "next/link";
-import { Fragment } from "react";
 
 import Badge from "../badge/Badge";
 import Separator from "../separator/Separator";
@@ -48,25 +47,21 @@ export default function List({
         );
 
         return (
-          <Fragment key={id}>
-            <li className={styles.listItem}>
-              <Link href={{ pathname: `${basePath}/${slug}` }}>
-                <div className={styles.titleRow}>
-                  <p>{title}</p>
-                  {showDescription && (
-                    <span className={styles.description}>{description}</span>
-                  )}
-                  {isNew && <Badge>new</Badge>}
-                </div>
-                <span className={styles.postDate}>
-                  {getDisplayDate(publishedDate)}
-                </span>
-              </Link>
-            </li>
-            {index < items.length - 1 && (
-              <Separator className={styles.listSeparator} />
-            )}
-          </Fragment>
+          <li key={id} className={styles.listItem}>
+            <Link href={{ pathname: `${basePath}/${slug}` }}>
+              <div className={styles.titleRow}>
+                <p>{title}</p>
+                {showDescription && (
+                  <span className={styles.description}>{description}</span>
+                )}
+                {isNew && <Badge>new</Badge>}
+              </div>
+              <span className={styles.postDate}>
+                {getDisplayDate(publishedDate)}
+              </span>
+            </Link>
+            {index < items.length - 1 && <Separator />}
+          </li>
         );
       })}
     </ol>
