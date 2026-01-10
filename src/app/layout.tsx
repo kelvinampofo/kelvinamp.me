@@ -1,12 +1,11 @@
 import { Analytics } from "@vercel/analytics/next";
 import { Metadata } from "next";
-import localInterFont from "next/font/local";
 
 import Fade from "../components/fade/Fade";
 
 import Providers from "./providers";
 
-import "../styles/globals.css";
+import "../styles/system.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kelvinamp.me"),
@@ -24,14 +23,9 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-const inter = localInterFont({
-  src: "../../public/assets/fonts/InterVariable.woff2",
-  variable: "--font-inter",
-});
-
 export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
   return (
-    <html lang="en" suppressHydrationWarning className={inter.variable}>
+    <html lang="en" suppressHydrationWarning>
       <body>
         <div id="__next">
           <Fade />

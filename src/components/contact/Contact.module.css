@@ -15,7 +15,7 @@
 }
 
 .contactListHeading {
-  margin-bottom: var(--space-28);
+  margin: var(--space-28) 0;
 }
 
 .dot {
