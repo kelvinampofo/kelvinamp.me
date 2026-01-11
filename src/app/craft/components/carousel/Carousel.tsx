@@ -8,6 +8,7 @@ import CentralLibraryImage from "../../../../../public/assets/images/carousel/ce
 import AliyevCenterImage from "../../../../../public/assets/images/carousel/heydar-aliyev-center.webp";
 import KyotoStationImage from "../../../../../public/assets/images/carousel/kyoto-station.webp";
 import ConcertHallImage from "../../../../../public/assets/images/carousel/walt-disney-concert-hall.webp";
+import Chevron from "../../../../components/icons/Chevron";
 import { clamp } from "../../../../utils/math";
 
 import styles from "./Carousel.module.css";
@@ -126,18 +127,7 @@ export default function Carousel() {
           disabled={isAtStartOfSlide}
           className={styles.arrowButton}
         >
-          <svg
-            height={20}
-            width={20}
-            aria-label="Chevron left Icon"
-            fill="none"
-            viewBox="0 0 15 15"
-          >
-            <path
-              fill="currentColor"
-              d="M8.842 3.135a.5.5 0 0 1 .023.707L5.435 7.5l3.43 3.658a.5.5 0 0 1-.73.684l-3.75-4a.5.5 0 0 1 0-.684l3.75-4a.5.5 0 0 1 .707-.023Z"
-            />
-          </svg>
+          <Chevron direction="left" size={20} aria-label="Chevron left Icon" />
           <span className="sr-only">Previous slide</span>
         </button>
       </div>
@@ -168,19 +158,7 @@ export default function Carousel() {
           disabled={isAtEndOfSlide}
           className={styles.arrowButton}
         >
-          <svg
-            data-name="chevron-right"
-            height={20}
-            width={20}
-            aria-label="Chevron right Icon"
-            fill="none"
-            viewBox="0 0 15 15"
-          >
-            <path
-              fill="currentColor"
-              d="M6.158 3.135a.5.5 0 0 1 .707.023l3.75 4a.5.5 0 0 1 0 .684l-3.75 4a.5.5 0 1 1-.73-.684L9.566 7.5l-3.43-3.658a.5.5 0 0 1 .023-.707Z"
-            />
-          </svg>
+          <Chevron direction="right" size={20} aria-label="Chevron right Icon" />
           <span className="sr-only">Next slide</span>
         </button>
       </div>
