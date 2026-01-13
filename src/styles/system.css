@@ -692,6 +692,18 @@
     }
   }
 
+  .gesture-ew-resize {
+    cursor: ew-resize;
+    user-select: none;
+    -webkit-user-select: none;
+
+    * {
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+  }
+
   .description {
     color: var(--color-foreground-secondary);
   }
