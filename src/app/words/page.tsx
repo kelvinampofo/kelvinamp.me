@@ -108,6 +108,11 @@ const wordEntries: WordEntryProps[] = [
     type: "adjective",
     definition: "most noticeable or important",
   },
+  {
+    word: "myopic",
+    type: "adjective",
+    definition: "short-sighted; lacking foresight, or intellectual insight",
+  },
 ];
 
 export default function Words() {
