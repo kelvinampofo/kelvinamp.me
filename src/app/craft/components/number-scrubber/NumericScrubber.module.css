@@ -1,0 +1,171 @@
+.scrubberPopoverTrigger {
+  position: relative;
+  font-variant-numeric: tabular-nums;
+}
+
+.scrubberPopoverTrigger::after {
+  --hit-area: var(--space-8);
+
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  padding: var(--hit-area);
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+.scrubberPopover {
+  --scrubber-scale: 1;
+  --scrubber-surface: var(--grey2);
+  --scrubber-outline: var(--grey6);
+  --scrubber-arrow-fill: var(--scrubber-surface);
+  --scrubber-arrow-outer-stroke: var(--scrubber-outline);
+  --scrubber-arrow-inner-stroke: var(--scrubber-outline-contrast);
+
+  padding: 3px calc(var(--space-2) - 4px);
+  border-radius: var(--radius-10);
+  outline: 1px solid var(--scrubber-outline);
+  transform-origin: var(--transform-origin);
+  transform: scale(var(--scrubber-scale));
+  box-shadow:
+    var(--shadow-border),
+    0px 2px 4px rgba(0, 0, 0, 0.06),
+    0px 14px 28px rgba(0, 0, 0, 0.12);
+  transition:
+    transform var(--transition-hover) var(--ease-in-out-cubic),
+    opacity var(--transition-hover) var(--ease-in-out-cubic);
+
+  &[data-starting-style],
+  &[data-ending-style] {
+    opacity: 0;
+    transform: scale(var(--scrubber-scale)) scale(0.9);
+  }
+}
+
+.scrubberPopoverArrow {
+  display: flex;
+
+  &[data-side="top"] {
+    bottom: calc(-1 * var(--space-8));
+    rotate: 180deg;
+  }
+
+  &[data-side="bottom"] {
+    top: calc(-1 * var(--space-8));
+    rotate: 0deg;
+  }
+
+  &[data-side="left"] {
+    right: calc(-1 * var(--space-14));
+    rotate: 90deg;
+  }
+
+  &[data-side="right"] {
+    left: calc(-1 * var(--space-14));
+    rotate: -90deg;
+  }
+}
+
+.scrubberArrowFill {
+  fill: var(--scrubber-arrow-fill, var(--grey1));
+}
+
+.scrubberArrowOuterStroke {
+  fill: var(--scrubber-arrow-outer-stroke, var(--grey12));
+}
+
+.scrubberArrowInnerStroke {
+  fill: var(--scrubber-arrow-inner-stroke, transparent);
+}
+
+.scrubberControls {
+  display: flex;
+  align-items: center;
+  padding: 1px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.scrubberStepButton {
+  --size: var(--space-20);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size);
+  height: var(--size);
+  border-radius: var(--radius-10);
+  color: var(--grey10);
+}
+
+.scrubberTrackViewport {
+  --mask-gradient-start: 15%;
+  --mask-gradient-end: 85%;
+
+  display: flex;
+  align-items: center;
+  height: var(--space-16);
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black var(--mask-gradient-start),
+    black var(--mask-gradient-end),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black var(--mask-gradient-start),
+    black var(--mask-gradient-end),
+    transparent 100%
+  );
+}
+
+.scrubberTrack {
+  display: flex;
+  align-items: center;
+  gap: var(--tick-gap);
+  transform: translateX(var(--track-offset));
+  transition: transform var(--track-duration) var(--ease-out-cubic);
+  will-change: transform;
+
+  &[data-animating="false"] {
+    transition: none;
+  }
+}
+
+.scrubberTick {
+  width: var(--tick-width);
+  height: var(--space-10);
+  border-radius: var(--radius-full);
+  background: var(--grey9);
+  transition: var(--transition-hover);
+
+  &[data-active="true"] {
+    height: var(--space-14);
+    background: var(--grey12);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .scrubberPopover {
+    --scrubber-surface: #f1f1f1;
+    --scrubber-outline: var(--grey8);
+    --scrubber-outline-contrast: transparent;
+    --scrubber-arrow-fill: #f1f1f1;
+    --scrubber-arrow-outer-stroke: var(--scrubber-outline);
+    --scrubber-arrow-inner-stroke: transparent;
+
+    color: var(--grey12);
+    background-color: #f1f1f1;
+    outline: 1px solid var(--grey8);
+  }
+}
