@@ -133,6 +133,7 @@ export default function Carousel() {
       </div>
       <ul
         ref={slideRef}
+        data-list="unstyled"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         onClick={handleCarouselClick}
@@ -158,7 +159,11 @@ export default function Carousel() {
           disabled={isAtEndOfSlide}
           className={styles.arrowButton}
         >
-          <Chevron direction="right" size={20} aria-label="Chevron right Icon" />
+          <Chevron
+            direction="right"
+            size={20}
+            aria-label="Chevron right Icon"
+          />
           <span className="sr-only">Next slide</span>
         </button>
       </div>
