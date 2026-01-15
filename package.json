@@ -16,7 +16,7 @@
     "@vercel/analytics": "^1.6.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
-    "motion": "^12.24.0",
+    "motion": "^12.26.1",
     "next": "16.1.1",
     "next-themes": "^0.4.6",
     "react": "19.2.3",
@@ -24,7 +24,7 @@
     "use-sound": "^5.0.0"
   },
   "devDependencies": {
-    "@types/node": "^25.0.3",
+    "@types/node": "^25.0.6",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "eslint": "^9.39.2",
