@@ -2,7 +2,6 @@ import { format, isAfter, subMonths, parseISO, isThisYear } from "date-fns";
 import Link from "next/link";
 
 import Badge from "../badge/Badge";
-import Separator from "../separator/Separator";
 
 import styles from "./List.module.css";
 
@@ -60,7 +59,6 @@ export default function List({
                 {getDisplayDate(publishedDate)}
               </span>
             </Link>
-            {index < items.length - 1 && <Separator />}
           </li>
         );
       })}

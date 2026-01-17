@@ -2,13 +2,17 @@
   color: var(--color-foreground);
 }
 
+.listItem:not(:last-child) {
+  border-bottom: var(--border-thin) solid var(--grey5);
+}
+
 .listItem > a {
   display: flex;
   justify-content: flex-start;
   text-decoration: none;
   transition: color 150ms ease;
   width: 100%;
-  padding: var(--space-10) 0 var(--space-18) 0;
+  padding: var(--space-10) 0 var(--space-18);
   margin: 0;
   border-radius: var(--radius-8);
   -webkit-tap-highlight-color: transparent;
