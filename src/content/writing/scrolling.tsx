@@ -32,7 +32,7 @@ export default function Scrolling() {
             <li>
               it’s primarily an Apple-platform UI affordance, supported by
               Safari and Firefox for both page-level and container scrolling
-              <sup className="prose-superscript">
+              <sup>
                 <a href="#fn-overscroll">1</a>
               </sup>
             </li>
@@ -111,7 +111,7 @@ export default function Scrolling() {
         </li>
       </ul>
       <Separator />
-      <ol className="prose-footnotes">
+      <ol data-footnotes>
         <li id="fn-overscroll">
           Browser support varies by engine and platform. On iOS, all browsers
           are WebKit and inherit elastic overscroll behaviour. On macOS, Chrome

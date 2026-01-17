@@ -418,12 +418,11 @@
     margin-bottom: var(--space-28);
   }
 
-  article.prose {
+  .prose {
     position: relative;
   }
 
-  .prose :where(a),
-  a.prose-link {
+  .prose a {
     position: relative;
     text-decoration: underline;
     text-decoration-color: var(--grey6);
@@ -437,60 +436,51 @@
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .prose :where(a):hover:not([disabled]),
-    a.prose-link:hover:not([disabled]) {
+    .prose a:hover:not([disabled]) {
       text-decoration-color: var(--grey11);
     }
   }
 
-  .prose :where(ul, ol),
-  ul.prose-list,
-  ol.prose-list {
+  .prose :where(ul, ol) {
     list-style-position: outside;
     padding-left: var(--space-20);
   }
 
-  .prose :where(ul, ol)[data-list="unstyled"] {
-    padding-left: 0;
-  }
-
-  .prose ul,
-  ul.prose-list {
+  .prose :where(ul) {
     list-style-type: disc;
   }
 
-  .prose ul ul,
-  ul.prose-list ul {
-    list-style-type: circle;
-    margin-top: var(--space-8);
-    padding-left: var(--space-20);
-  }
-
-  .prose ol,
-  ol.prose-list {
+  .prose :where(ol) {
     list-style-type: decimal;
   }
 
-  .prose ol ol,
-  ol.prose-list ol {
+  .prose :where(ul ul) {
+    list-style-type: circle;
+  }
+
+  .prose :where(ul ul, ol ol) {
     margin-top: var(--space-8);
     padding-left: var(--space-20);
   }
 
-  .prose :where(ul, ol) li::marker,
-  .prose-list li::marker {
+  .prose :where(ul, ol) li::marker {
     color: var(--grey11);
   }
 
-  .prose :where(ul, ol) li,
-  ul.prose-list li,
-  ol.prose-list li {
+  .prose :where(ul, ol) li {
     margin-top: var(--space-10);
   }
 
-  .prose :where(ul, ol) li:first-child,
-  ul.prose-list li:first-child,
-  ol.prose-list li:first-child {
+  .prose :where(ul, ol) li:first-child {
+    margin-top: 0;
+  }
+
+  .prose :where(ul, ol)[data-list="unstyled"] {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .prose :where(ul, ol)[data-list="unstyled"] li {
     margin-top: 0;
   }
 
@@ -510,8 +500,7 @@
     border-radius: var(--radius-4);
   }
 
-  .prose pre,
-  .prose-pre {
+  .prose pre {
     border-radius: var(--radius-12);
     margin-top: var(--space-16);
     background-color: var(--grey3);
@@ -519,13 +508,13 @@
     overflow-x: auto;
   }
 
-  .prose-superscript {
+  .prose sup {
     font-size: 0.75em;
     line-height: 1;
     color: var(--color-foreground-secondary);
   }
 
-  .prose-superscript a {
+  .prose sup a {
     text-decoration: none;
     border-radius: var(--radius-2);
     padding: var(--space-2) var(--space-4);
@@ -533,26 +522,25 @@
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .prose-superscript a:hover {
+    .prose sup a:hover {
       color: var(--color-foreground);
     }
   }
 
-  .prose-superscript a:focus-visible {
+  .prose sup a:focus-visible {
     color: var(--color-foreground);
   }
 
-  .prose-footnotes {
+  .prose ol[data-footnotes] {
     color: var(--color-foreground-secondary);
     font-size: 0.875em;
   }
 
-  .prose-footnotes > :not(:last-child) {
+  .prose ol[data-footnotes] > :not(:last-child) {
     margin-bottom: var(--space-12);
   }
 
-  .prose blockquote,
-  .prose .prose-blockquote {
+  .prose blockquote {
     --quote-offset: var(--space-2);
 
     position: relative;
@@ -560,8 +548,7 @@
     quotes: "“" "”" "‘" "’";
   }
 
-  .prose blockquote::before,
-  .prose .prose-blockquote::before {
+  .prose blockquote::before {
     content: open-quote;
     position: absolute;
     left: calc(-1 * var(--quote-offset));
@@ -569,8 +556,7 @@
     line-height: var(--leading);
   }
 
-  .prose blockquote :last-child::after,
-  .prose .prose-blockquote :last-child::after {
+  .prose blockquote :last-child::after {
     content: close-quote;
     margin-left: var(--quote-offset);
   }
