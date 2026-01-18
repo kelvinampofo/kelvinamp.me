@@ -10,8 +10,9 @@ import {
   useEffectEvent,
   useRef,
   useState,
+  type PointerEvent,
+  TransitionEvent,
 } from "react";
-import type { PointerEvent, TransitionEvent } from "react";
 
 import Chevron from "../../../../components/icons/Chevron";
 import PopupArrow from "../../../../components/icons/PopupArrow";
@@ -19,7 +20,7 @@ import { clamp, lerp } from "../../../../utils/math";
 
 import styles from "./NumericScrubber.module.css";
 
-const DEFAULT_VALUE = 42;
+const DEFAULT_VALUE = 28;
 
 const TICK_WIDTH = 1.5;
 const TICK_GAP = 7;
@@ -458,17 +459,17 @@ export default function NumericScrubber() {
 
   return (
     <p>
-      Set the calm to{" "}
+      The perfect temperature is{" "}
       <Popover.Root open={isPopoverOpen} onOpenChange={handlePopoverOpenChange}>
         <Popover.Trigger
           openOnHover
           closeDelay={HOVER_CLOSE_DELAY_MS}
           className={styles.scrubberPopoverTrigger}
-          aria-label={`Current value ${value}`}
+          aria-label={`${value} degrees Celsius`}
         >
           {value}
         </Popover.Trigger>
-        <span aria-hidden>%</span>
+        <span aria-hidden>°C</span>
         <Popover.Portal>
           <Popover.Positioner side="top" sideOffset={6}>
             <Popover.Popup
@@ -482,6 +483,7 @@ export default function NumericScrubber() {
                   innerStrokeClassName={styles.scrubberArrowInnerStroke}
                 />
               </Popover.Arrow>
+
               <div className={styles.scrubberControls}>
                 <button
                   className={styles.scrubberStepButton}
@@ -538,8 +540,7 @@ export default function NumericScrubber() {
             </Popover.Popup>
           </Popover.Positioner>
         </Popover.Portal>
-      </Popover.Root>{" "}
-      and let the day restart
+      </Popover.Root>
     </p>
   );
 }
