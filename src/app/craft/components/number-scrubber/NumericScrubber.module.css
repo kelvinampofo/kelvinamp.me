@@ -26,14 +26,11 @@
   --scrubber-arrow-inner-stroke: var(--scrubber-outline-contrast);
 
   padding: 3px calc(var(--space-2) - 4px);
-  border-radius: var(--radius-10);
+  border-radius: var(--radius-8);
   outline: 1px solid var(--scrubber-outline);
   transform-origin: var(--transform-origin);
   transform: scale(var(--scrubber-scale));
-  box-shadow:
-    var(--shadow-border),
-    0px 2px 4px rgba(0, 0, 0, 0.06),
-    0px 14px 28px rgba(0, 0, 0, 0.12);
+  box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
   transition:
     transform var(--transition-hover) var(--ease-in-out-cubic),
     opacity var(--transition-hover) var(--ease-in-out-cubic);
@@ -167,5 +164,9 @@
     color: var(--grey12);
     background-color: #f1f1f1;
     outline: 1px solid var(--grey8);
+    box-shadow:
+      var(--shadow-border),
+      0px 2px 4px rgba(0, 0, 0, 0.06),
+      0px 14px 28px rgba(0, 0, 0, 0.12);
   }
 }
