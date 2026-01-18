@@ -15,11 +15,11 @@ export default function NumericScrubberEntry() {
       <p>
         A re-implementation of Apple’s Math Notes number scrubbing—
         <span data-pointer="only">
-          Hover over the number and drag the slider to change the value
+          hover over the number and drag the slider to change the value
           interactively.
         </span>
         <span data-touch="only">
-          Tap the number and swipe left/right to adjust the value interactively.
+          tap the number and swipe left/right to adjust the value interactively.
         </span>
       </p>
       <Card>
