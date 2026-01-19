@@ -40,7 +40,10 @@ export default function Now() {
           .
         </p>
         <blockquote>
-          <p>Don’t talk unless you can improve the silence</p>
+          <p>
+            To do the useful thing, to say the courageous thing, to contemplate
+            the beautiful thing― that is enough for one man’s life.
+          </p>
         </blockquote>
       </article>
     </>
