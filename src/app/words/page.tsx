@@ -113,6 +113,11 @@ const wordEntries: WordEntryProps[] = [
     type: "adjective",
     definition: "short-sighted; lacking foresight, or intellectual insight",
   },
+  {
+    word: "cognoscente",
+    type: "noun",
+    definition: "a connoisseur; a discerning expert",
+  },
 ];
 
 export default function Words() {
