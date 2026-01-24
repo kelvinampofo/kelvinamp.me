@@ -110,4 +110,9 @@ export const wordEntries: WordEntryProps[] = [
     type: "noun",
     definition: "a connoisseur; a discerning expert",
   },
+  {
+    word: "pictorial",
+    type: "adjective",
+    definition: "of or expressed in pictures; illustrated",
+  },
 ];
