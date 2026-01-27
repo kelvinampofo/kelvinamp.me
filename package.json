@@ -16,7 +16,7 @@
     "@vercel/analytics": "^1.6.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
-    "motion": "^12.26.1",
+    "motion": "^12.29.2",
     "next": "16.1.5",
     "next-themes": "^0.4.6",
     "react": "19.2.4",
