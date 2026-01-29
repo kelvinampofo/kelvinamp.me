@@ -115,4 +115,10 @@ export const wordEntries: WordEntryProps[] = [
     type: "adjective",
     definition: "of or expressed in pictures; illustrated",
   },
+  {
+    word: "horology",
+    type: "noun",
+    definition:
+      "the study and measurement of time and the art of making clocks and watches",
+  },
 ];
