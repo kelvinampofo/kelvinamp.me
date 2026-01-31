@@ -1,17 +1,30 @@
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 
-type Options = {
+interface Options {
   timeZone?: string;
-};
+}
 
 export const useTime = ({ timeZone = "Europe/London" }: Options = {}) => {
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState<Date | null>(null);
 
   useEffect(() => {
     const intervalId = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(intervalId);
+    const timeoutId = setTimeout(() => setTime(new Date()), 0);
+
+    return () => {
+      clearInterval(intervalId);
+      clearTimeout(timeoutId);
+    };
   }, []);
+
+  if (!time) {
+    return {
+      currentTime: "",
+      timezoneOffset: "",
+      timezoneName: "",
+    };
+  }
 
   const convertedTime = timeZone
     ? new Date(time.toLocaleString("en", { timeZone }))
@@ -28,7 +41,7 @@ export const useTime = ({ timeZone = "Europe/London" }: Options = {}) => {
   const parts = formatter.formatToParts(convertedTime);
 
   const timezoneName =
-    parts.find((part) => part.type === "timeZoneName")?.value ?? "";
+    parts.find(({ type }) => type === "timeZoneName")?.value ?? "";
 
   return {
     currentTime,
