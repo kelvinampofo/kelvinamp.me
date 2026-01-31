@@ -5,5 +5,7 @@ import { useWindowDimension } from "../../../hooks/useWindowDimension";
 export default function DimensionsView() {
   const { width, height } = useWindowDimension({ debounceDelay: 100 });
 
-  return `${width} x ${height}`;
+  return (
+    <span style={{ whiteSpace: "pre" }}>{`w: ${width}  h: ${height}`}</span>
+  );
 }
