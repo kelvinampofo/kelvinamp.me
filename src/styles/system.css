@@ -489,10 +489,18 @@
     font: var(--font-style-italic);
   }
 
-  code {
+  code,
+  .prose pre {
     font-family: var(--font-family-mono);
-    font-feature-settings: normal;
+    font-feature-settings:
+      "tnum" 1,
+      "lnum" 1,
+      "liga" 0,
+      "calt" 0;
     font-variant-numeric: lining-nums tabular-nums;
+  }
+
+  code {
     font-size: 0.85em;
     padding: 0.2em 0.4em;
     background-color: var(--grey3);
