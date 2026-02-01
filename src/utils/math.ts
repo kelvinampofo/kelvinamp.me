@@ -4,6 +4,6 @@ export function clamp(value: number, min: number, max: number) {
 }
 
 /** interpolates linearly between two numbers for smooth animations. */
-export function lerp(start: number, end: number, factor: number) {
-  return start + (end - start) * factor;
+export function lerp(a: number, b: number, t: number) {
+  return a + (b - a) * t;
 }
