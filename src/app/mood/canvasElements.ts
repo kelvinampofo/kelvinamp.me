@@ -47,6 +47,15 @@ export const CANVAS_ELEMENTS = [
     alt: "NASA Spacecraft Markings",
   },
   {
+    id: "mood:earthrise-apollo-8-nasa-1968",
+    x: 1230,
+    y: 620,
+    width: 280,
+    height: 293,
+    src: "/assets/images/mood/earthrise-apollo-8-nasa-1968.avif",
+    alt: "Earthrise photograph from Apollo 8 by NASA, 1968",
+  },
+  {
     id: "mood:neue-haas-grotesk-specimen",
     x: 1640,
     y: 180,
