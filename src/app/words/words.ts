@@ -96,6 +96,11 @@ export const wordEntries: WordEntryProps[] = [
     definition: "having or relating to subjects or a particular subject",
   },
   {
+    word: "schematic",
+    type: "adjective",
+    definition: "of or in the form of a diagram; symbolic and simplified",
+  },
+  {
     word: "salient",
     type: "adjective",
     definition: "most noticeable or important",
