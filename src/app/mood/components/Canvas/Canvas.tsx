@@ -4,10 +4,11 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 import useDrag from "../../../../hooks/useDrag";
+import useFullscreen from "../../../../hooks/useFullscreen";
+import useShortcuts from "../../../../hooks/useShortcuts";
 import { CANVAS_ELEMENTS } from "../../canvasElements";
 import useCanvasViewport from "../../hooks/useCanvasViewport";
 import type { CanvasElement, ElementId } from "../../types";
-import CanvasControls from "../CanvasControls/CanvasControls";
 
 import styles from "./Canvas.module.css";
 
@@ -24,8 +25,35 @@ export default function Canvas() {
 
   const {
     canvas: { ref, pan, onPointerDown, onPointerMove },
-    zoom: { scale, percent, zoomIn, zoomOut, zoomToFit, zoomTo100, getScale },
+    zoom: { scale, zoomIn, zoomOut, zoomToFit, zoomTo100, getScale },
   } = useCanvasViewport({ initialScale: 0.7 });
+  const { toggleFullscreen } = useFullscreen();
+
+  useShortcuts("F", toggleFullscreen, { preventDefault: true });
+
+  useShortcuts(["Equal", "NumpadAdd"], zoomIn, {
+    preventDefault: true,
+    modifiers: "Meta",
+    matchBy: "code",
+  });
+
+  useShortcuts(["Minus", "NumpadSubtract"], zoomOut, {
+    preventDefault: true,
+    modifiers: "Meta",
+    matchBy: "code",
+  });
+
+  useShortcuts("Digit0", zoomTo100, {
+    preventDefault: true,
+    modifiers: "Meta",
+    matchBy: "code",
+  });
+
+  useShortcuts("Digit1", zoomToFit, {
+    preventDefault: true,
+    modifiers: "Shift",
+    matchBy: "code",
+  });
 
   const { onElementPointerDown } = useDrag({
     getScale,
@@ -80,55 +108,45 @@ export default function Canvas() {
   }, []);
 
   return (
-    <>
+    <div
+      ref={ref}
+      className={styles.moodCanvas}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+    >
       <div
-        ref={ref}
-        className={styles.moodCanvas}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
+        className={styles.moodSurface}
+        style={{
+          // order matters here, first translate, then scale the whole surface
+          transform: `translate(${pan.x}px, ${pan.y}px) scale(${scale})`,
+        }}
       >
-        <div
-          className={styles.moodSurface}
-          style={{
-            // order matters here, first translate, then scale the whole surface
-            transform: `translate(${pan.x}px, ${pan.y}px) scale(${scale})`,
-          }}
-        >
-          {canvasElements.map((element) => {
-            if (!revealedIds.has(element.id)) return null;
+        {canvasElements.map((element) => {
+          if (!revealedIds.has(element.id)) return null;
 
-            return (
-              <div
-                key={element.id}
-                data-element="true"
-                className={styles.moodElement}
-                onPointerDown={onElementPointerDown(element.id)}
-                style={{
-                  width: element.width,
-                  height: element.height,
-                  transform: `translate3d(${element.x}px, ${element.y}px, 0)`,
-                }}
-              >
-                <Image
-                  src={element.src}
-                  alt={element.alt ?? ""}
-                  fill
-                  unoptimized
-                  objectFit="fill"
-                />
-              </div>
-            );
-          })}
-        </div>
+          return (
+            <div
+              key={element.id}
+              data-element="true"
+              className={styles.moodElement}
+              onPointerDown={onElementPointerDown(element.id)}
+              style={{
+                width: element.width,
+                height: element.height,
+                transform: `translate3d(${element.x}px, ${element.y}px, 0)`,
+              }}
+            >
+              <Image
+                src={element.src}
+                alt={element.alt ?? ""}
+                fill
+                unoptimized
+                objectFit="fill"
+              />
+            </div>
+          );
+        })}
       </div>
-
-      <CanvasControls
-        zoomPercent={percent}
-        onZoomIn={zoomIn}
-        onZoomOut={zoomOut}
-        onZoomToFit={zoomToFit}
-        onZoomTo100={zoomTo100}
-      />
-    </>
+    </div>
   );
 }
