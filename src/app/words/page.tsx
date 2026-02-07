@@ -16,7 +16,9 @@ export default function Words() {
 
       <article className={clsx("prose", "layout-main")}>
         <Heading>Words</Heading>
-        <p className="description">Curated collection of appealing language.</p>
+        <p className="description">
+          Curated dictionary for software and design.
+        </p>
         <Separator className={styles.wordsSeparator} />
         <dl className={styles.wordsList}>
           {wordEntries.map(({ word, type, definition, variations }) => (
