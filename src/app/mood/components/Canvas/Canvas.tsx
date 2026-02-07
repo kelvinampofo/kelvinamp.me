@@ -1,14 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { startTransition, useEffect, useRef, useState } from "react";
 
 import useDrag from "../../../../hooks/useDrag";
 import useFullscreen from "../../../../hooks/useFullscreen";
 import useShortcuts from "../../../../hooks/useShortcuts";
-import { CANVAS_ELEMENTS } from "../../canvasElements";
-import useCanvasViewport from "../../hooks/useCanvasViewport";
-import type { CanvasElement, ElementId } from "../../types";
+import { CANVAS_ELEMENTS } from "../../elements";
+import useCanvasCamera from "../../hooks/useCanvasCamera";
 
 import styles from "./Canvas.module.css";
 
@@ -16,17 +15,16 @@ const BASE_DELAY_MS = 5;
 const STAGGER_MS = 150;
 
 export default function Canvas() {
-  const [canvasElements, setCanvasElements] =
-    useState<CanvasElement[]>(CANVAS_ELEMENTS);
+  const [canvasElements, setCanvasElements] = useState(() => CANVAS_ELEMENTS);
+  const [revealedIds, setRevealedIds] = useState<Set<string>>(() => new Set());
 
-  // reveal elements sequentially to introduce the space gradually
-  const [revealedIds, setRevealedIds] = useState<Set<ElementId>>(new Set());
+  const canvasRef = useRef<HTMLDivElement | null>(null);
   const timeoutsRef = useRef<number[]>([]);
 
-  const {
-    canvas: { ref, pan, onPointerDown, onPointerMove },
-    zoom: { scale, zoomIn, zoomOut, zoomToFit, zoomTo100, getScale },
-  } = useCanvasViewport({ initialScale: 0.7 });
+  const { camera, cameraRef, onPointerDown, zoomIn, zoomOut } = useCanvasCamera(
+    { canvasRef }
+  );
+
   const { toggleFullscreen } = useFullscreen();
 
   useShortcuts("F", toggleFullscreen, { preventDefault: true });
@@ -43,56 +41,24 @@ export default function Canvas() {
     matchBy: "code",
   });
 
-  useShortcuts("Digit0", zoomTo100, {
-    preventDefault: true,
-    modifiers: "Meta",
-    matchBy: "code",
-  });
-
-  useShortcuts("Digit1", zoomToFit, {
-    preventDefault: true,
-    modifiers: "Shift",
-    matchBy: "code",
-  });
-
   const { onElementPointerDown } = useDrag({
-    getScale,
-    getInitialPositionById: (elementId: string) => {
-      const element = canvasElements.find(
-        (element) => element.id === elementId
-      );
-      return element ? { x: element.x, y: element.y } : undefined;
-    },
-    onDrag: ({ element }) => {
-      setCanvasElements((previousElements) =>
-        previousElements.map((canvasElement) => {
-          if (canvasElement.id === element.id) {
-            return {
-              ...canvasElement,
-              x: element.next.x,
-              y: element.next.y,
-            };
-          }
-
-          return canvasElement;
-        })
-      );
-    },
+    getScale: () => cameraRef.current.z,
+    getInitialPositionById,
+    onDrag: handleElementDrag,
   });
 
-  // schedule staggered visibility
+  // reveal elements sequentially to introduce the space gradually
   useEffect(() => {
-    // clear any previous timers before scheduling again
-    timeoutsRef.current.forEach((t) => clearTimeout(t));
-    timeoutsRef.current = [];
-
     CANVAS_ELEMENTS.forEach((element, index) => {
       const timeoutId = window.setTimeout(
         () => {
-          setRevealedIds((prevRevealIds) => {
-            const next = new Set(prevRevealIds);
-            next.add(element.id);
-            return next;
+          startTransition(() => {
+            setRevealedIds((previousRevealIds) => {
+              const next = new Set(previousRevealIds);
+              next.add(element.id);
+
+              return next;
+            });
           });
         },
         BASE_DELAY_MS + index * STAGGER_MS
@@ -107,18 +73,42 @@ export default function Canvas() {
     };
   }, []);
 
+  function getInitialPositionById(elementId: string) {
+    const element = canvasElements.find((item) => item.id === elementId);
+    return element ? { x: element.x, y: element.y } : undefined;
+  }
+
+  function handleElementDrag({
+    element,
+  }: {
+    element: { id: string; next: { x: number; y: number } };
+  }) {
+    setCanvasElements((previousElements) =>
+      previousElements.map((previousElement) => {
+        if (previousElement.id === element.id) {
+          return {
+            ...previousElement,
+            x: element.next.x,
+            y: element.next.y,
+          };
+        }
+
+        return previousElement;
+      })
+    );
+  }
+
   return (
     <div
-      ref={ref}
+      ref={canvasRef}
       className={styles.moodCanvas}
       onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
     >
       <div
         className={styles.moodSurface}
         style={{
-          // order matters here, first translate, then scale the whole surface
-          transform: `translate(${pan.x}px, ${pan.y}px) scale(${scale})`,
+          // order matters here: first scale, then translate
+          transform: `scale(${camera.z}) translate(${camera.x}px, ${camera.y}px)`,
         }}
       >
         {canvasElements.map((element) => {
@@ -127,7 +117,6 @@ export default function Canvas() {
           return (
             <div
               key={element.id}
-              data-element="true"
               className={styles.moodElement}
               onPointerDown={onElementPointerDown(element.id)}
               style={{
@@ -138,10 +127,9 @@ export default function Canvas() {
             >
               <Image
                 src={element.src}
-                alt={element.alt ?? ""}
+                alt={element.alt}
                 fill
-                unoptimized
-                objectFit="fill"
+                className={styles.moodImage}
               />
             </div>
           );

@@ -20,3 +20,7 @@
   cursor: grab;
   touch-action: none;
 }
+
+.moodImage {
+  object-fit: fill;
+}

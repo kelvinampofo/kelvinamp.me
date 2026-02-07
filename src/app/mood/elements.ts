@@ -1,8 +1,16 @@
-import { CanvasElement } from "./types";
+interface CanvasElement {
+  id: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  src: string;
+  alt: string;
+}
 
-export const CANVAS_ELEMENTS = [
+export const CANVAS_ELEMENTS: CanvasElement[] = [
   {
-    id: "mood:sketch",
+    id: "sketch",
     x: 440,
     y: 200,
     width: 340,
@@ -11,7 +19,7 @@ export const CANVAS_ELEMENTS = [
     alt: "Sketch",
   },
   {
-    id: "mood:polaroids-bill-atkinson",
+    id: "polaroids-bill-atkinson",
     x: 400,
     y: 580,
     width: 280,
@@ -20,7 +28,7 @@ export const CANVAS_ELEMENTS = [
     alt: "Polaroids by Bill Atkinson",
   },
   {
-    id: "mood:flow-diagram",
+    id: "flow-diagram",
     x: 720,
     y: 218,
     width: 380,
@@ -29,7 +37,7 @@ export const CANVAS_ELEMENTS = [
     alt: "Flow diagram",
   },
   {
-    id: "mood:caravaggio",
+    id: "caravaggio",
     x: 800,
     y: 500,
     width: 400,
@@ -38,7 +46,7 @@ export const CANVAS_ELEMENTS = [
     alt: "Caravaggio",
   },
   {
-    id: "mood:nasa-spacecraft-markings",
+    id: "nasa-spacecraft-markings",
     x: 1130,
     y: 180,
     width: 600,
@@ -47,7 +55,7 @@ export const CANVAS_ELEMENTS = [
     alt: "NASA Spacecraft Markings",
   },
   {
-    id: "mood:earthrise-apollo-8-nasa-1968",
+    id: "earthrise-apollo-8-nasa-1968",
     x: 1230,
     y: 620,
     width: 280,
@@ -56,7 +64,7 @@ export const CANVAS_ELEMENTS = [
     alt: "Earthrise photograph from Apollo 8 by NASA, 1968",
   },
   {
-    id: "mood:neue-haas-grotesk-specimen",
+    id: "neue-haas-grotesk-specimen",
     x: 1640,
     y: 180,
     width: 320,
@@ -65,7 +73,7 @@ export const CANVAS_ELEMENTS = [
     alt: "Neue Haas Grotesk alphabet specimen poster",
   },
   {
-    id: "mood:neue-haas-grotesk-refined-spacing",
+    id: "neue-haas-grotesk-refined-spacing",
     x: 1580,
     y: 650,
     width: 320,
@@ -74,7 +82,7 @@ export const CANVAS_ELEMENTS = [
     alt: "Neue Haas Grotesk comparisons highlighting refined spacing",
   },
   {
-    id: "mood:neue-haas-grotesk-digital-era",
+    id: "neue-haas-grotesk-digital-era",
     x: 1900,
     y: 200,
     width: 360,
@@ -83,7 +91,7 @@ export const CANVAS_ELEMENTS = [
     alt: "Essay on the digital era of Neue Helvetica with warm quote",
   },
   {
-    id: "mood:neue-haas-grotesk-history",
+    id: "neue-haas-grotesk-history",
     x: 1890,
     y: 640,
     width: 340,
@@ -92,7 +100,7 @@ export const CANVAS_ELEMENTS = [
     alt: "History of Neue Haas Grotesk with Helvetica brochure",
   },
   {
-    id: "mood:apple-think-different",
+    id: "apple-think-different",
     x: 80,
     y: 300,
     width: 312,
@@ -101,7 +109,7 @@ export const CANVAS_ELEMENTS = [
     alt: "Apple Think Different - Yum campaign",
   },
   {
-    id: "mood:out-of-the-box",
+    id: "out-of-the-box",
     x: 80,
     y: 740,
     width: 390,
@@ -109,4 +117,4 @@ export const CANVAS_ELEMENTS = [
     src: "/assets/images/mood/out-of-the-box.webp",
     alt: "Out of the box, by Special Projects",
   },
-] satisfies CanvasElement[];
+];
