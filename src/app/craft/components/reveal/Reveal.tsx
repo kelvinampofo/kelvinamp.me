@@ -40,20 +40,21 @@ export default function Reveal() {
   const lastPointerRef = useRef<{ x: number; y: number } | null>(null);
   const debugRef = useRef(debug);
 
-  useShortcuts("D", () =>
-    setDebug((prev) => {
-      const enabled = !prev.enabled;
-      const cursor = lastPointerRef.current ?? prev.cursor;
+  useShortcuts({
+    D: () =>
+      setDebug((prev) => {
+        const enabled = !prev.enabled;
+        const cursor = lastPointerRef.current ?? prev.cursor;
 
-      return {
-        ...prev,
-        enabled,
-        cursor,
-        target: formatPercent(targetRevealRef.current),
-        current: formatPercent(currentRevealRef.current),
-      };
-    })
-  );
+        return {
+          ...prev,
+          enabled,
+          cursor,
+          target: formatPercent(targetRevealRef.current),
+          current: formatPercent(currentRevealRef.current),
+        };
+      }),
+  });
 
   useEffect(() => {
     debugRef.current = debug;

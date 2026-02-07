@@ -27,19 +27,21 @@ export default function Canvas() {
 
   const { toggleFullscreen } = useFullscreen();
 
-  useShortcuts("F", toggleFullscreen, { preventDefault: true });
+  useShortcuts({ F: toggleFullscreen }, { preventDefault: true });
 
-  useShortcuts(["Equal", "NumpadAdd"], zoomIn, {
+  useShortcuts(
+    {
+      Equal: zoomIn,
+      NumpadAdd: zoomIn,
+      Minus: zoomOut,
+      NumpadSubtract: zoomOut,
+    },
+    {
     preventDefault: true,
     modifiers: "Meta",
     matchBy: "code",
-  });
-
-  useShortcuts(["Minus", "NumpadSubtract"], zoomOut, {
-    preventDefault: true,
-    modifiers: "Meta",
-    matchBy: "code",
-  });
+    }
+  );
 
   const { onElementPointerDown } = useDrag({
     getScale: () => cameraRef.current.z,

@@ -67,22 +67,18 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
     }
   };
 
-  useShortcuts("ArrowLeft", handlePrev, {
-    preventDefault: true,
+  useShortcuts({
+    ArrowLeft: handlePrev,
+    ArrowRight: handleNext,
+    I: () =>
+      setDebugOverlay((prevMode) =>
+        prevMode === "increased" ? "none" : "increased"
+      ),
+    D: () =>
+      setDebugOverlay((prevMode) =>
+        prevMode === "default" ? "none" : "default"
+      ),
   });
-
-  useShortcuts("ArrowRight", handleNext, {
-    preventDefault: true,
-  });
-
-  useShortcuts("I", () =>
-    setDebugOverlay((prevMode) =>
-      prevMode === "increased" ? "none" : "increased"
-    )
-  );
-  useShortcuts("D", () =>
-    setDebugOverlay((prevMode) => (prevMode === "default" ? "none" : "default"))
-  );
 
   return (
     <div className={styles.timelineWrapper} data-debug-overlay={debugOverlay}>

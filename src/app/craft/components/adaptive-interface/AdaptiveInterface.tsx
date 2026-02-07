@@ -26,12 +26,15 @@ export default function AdaptiveInterface() {
 
   const resetUsage = () => setUsageCount(0);
 
-  useShortcuts("D", handleShortcut, {
-    modifiers: "Meta",
-    preventDefault: true,
-  });
+  useShortcuts(
+    { D: handleShortcut },
+    {
+      modifiers: "Meta",
+      preventDefault: true,
+    }
+  );
 
-  useShortcuts("R", resetUsage);
+  useShortcuts({ R: resetUsage });
 
   function determineSizeCategory(count: number) {
     if (count < 5) return "large";
