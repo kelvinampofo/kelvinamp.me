@@ -126,4 +126,10 @@ export const wordEntries: WordEntryProps[] = [
     definition:
       "the study and measurement of time and the art of making clocks and watches",
   },
+  {
+    word: "mnemonics",
+    type: "noun",
+    definition:
+      "the study and development of systems for improving and assisting the memory.",
+  },
 ];
