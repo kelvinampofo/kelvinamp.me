@@ -1,22 +1,93 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useEffectEvent, useRef } from "react";
 
-const MODIFIER_KEYS = ["Alt", "Control", "Meta", "Shift"] as const;
-type ModifierKey = (typeof MODIFIER_KEYS)[number];
+type LiteralUnion<T extends string> = T | (string & {});
 
-interface Options {
+type ModifierKey = "Alt" | "Control" | "Meta" | "Shift";
+type MatchBy = "key" | "code";
+type ShortcutTarget = Window | Document | HTMLElement;
+type ShortcutCallback = (event?: KeyboardEvent) => void;
+
+type AlphaKey =
+  | "A"
+  | "B"
+  | "C"
+  | "D"
+  | "E"
+  | "F"
+  | "G"
+  | "H"
+  | "I"
+  | "J"
+  | "K"
+  | "L"
+  | "M"
+  | "N"
+  | "O"
+  | "P"
+  | "Q"
+  | "R"
+  | "S"
+  | "T"
+  | "U"
+  | "V"
+  | "W"
+  | "X"
+  | "Y"
+  | "Z";
+
+type DigitKey = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
+
+type NavigationKey = "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight";
+type EditingKey = "Backspace" | "Delete" | "Enter" | "Tab" | "Escape" | " ";
+
+type KnownShortcutKey =
+  | AlphaKey
+  | DigitKey
+  | NavigationKey
+  | EditingKey
+  | ModifierKey;
+
+type ShortcutKey = LiteralUnion<KnownShortcutKey>;
+type ShortcutMap = Partial<Record<ShortcutKey, ShortcutCallback>>;
+
+interface UseShortcutsOptions {
   preventDefault?: boolean;
   modifiers?: ModifierKey | ModifierKey[];
-  target?: Window | Document | HTMLElement;
+  target?: ShortcutTarget;
   delay?: number;
-  matchBy?: "key" | "code";
+  matchBy?: MatchBy;
+  enabled?: boolean;
+}
+
+const SUPPORTED_MODIFIERS: ModifierKey[] = ["Alt", "Control", "Meta", "Shift"];
+
+function normalizeShortcutKey(key: string, matchBy: MatchBy) {
+  return matchBy === "key" ? key.toLowerCase() : key;
+}
+
+function normalizeModifiers(modifiers?: ModifierKey | ModifierKey[]) {
+  if (!modifiers) return [];
+
+  return Array.isArray(modifiers) ? modifiers : [modifiers];
+}
+
+function hasMatchingModifiers(
+  event: KeyboardEvent,
+  requiredModifiers: ModifierKey[]
+) {
+  const requiredModifierSet = new Set(requiredModifiers);
+
+  return SUPPORTED_MODIFIERS.every(
+    (modifier) =>
+      event.getModifierState(modifier) === requiredModifierSet.has(modifier)
+  );
 }
 
 export default function useShortcuts(
-  shortcutKeys: string | string[],
-  callback: () => void,
-  options: Options = {}
+  shortcuts: ShortcutMap,
+  options: UseShortcutsOptions = {}
 ) {
   const {
     preventDefault = false,
@@ -24,87 +95,87 @@ export default function useShortcuts(
     target,
     delay = 0,
     matchBy = "key",
+    enabled = true,
   } = options;
 
-  const callbackRef = useRef(callback);
+  const shortcutBindings = Object.entries(shortcuts)
+    .filter((entry): entry is [string, ShortcutCallback] => {
+      const [_key, callback] = entry;
 
-  useEffect(() => {
-    callbackRef.current = callback;
-  }, [callback]);
+      return typeof callback === "function";
+    })
+    .map(([key, callback]) => ({
+      id: key,
+      key: normalizeShortcutKey(key, matchBy),
+      callback,
+    }));
 
-  const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const holdTimersRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(
+    new Map()
+  );
 
-  useEffect(() => {
-    if (typeof window === "undefined" && !target) {
-      return;
-    }
+  const clearDelayTimers = useEffectEvent(() => {
+    holdTimersRef.current.forEach((timer) => clearTimeout(timer));
+    holdTimersRef.current.clear();
+  });
 
-    const targetElement = target ?? window;
+  const handleShortcutKeyDown = useEffectEvent((event: KeyboardEvent) => {
+    if (!enabled) return;
 
-    const shortcutKeysSet = new Set(
-      Array.isArray(shortcutKeys)
-        ? shortcutKeys.map((key) =>
-            matchBy === "key" ? key.toLowerCase() : key
-          )
-        : [matchBy === "key" ? shortcutKeys.toLowerCase() : shortcutKeys]
-    );
+    const requiredModifiers = normalizeModifiers(modifiers);
 
-    const clearHoldTimer = () => {
-      if (holdTimerRef.current !== null) {
-        clearTimeout(holdTimerRef.current);
-        holdTimerRef.current = null;
-      }
-    };
+    shortcutBindings.forEach((binding) => {
+      const pressedKey =
+        matchBy === "key" ? event.key.toLowerCase() : event.code;
 
-    const hasActiveModifiers = (e: KeyboardEvent) => {
-      const activeModifiers = MODIFIER_KEYS.filter((mod) =>
-        e.getModifierState(mod)
-      );
+      const isShortcutMatch =
+        pressedKey === binding.key &&
+        hasMatchingModifiers(event, requiredModifiers) &&
+        !holdTimersRef.current.has(binding.id);
 
-      if (!modifiers) {
-        return activeModifiers.length === 0;
-      }
+      if (!isShortcutMatch) return;
 
-      const expected = Array.isArray(modifiers) ? modifiers : [modifiers];
+      function runShortcut() {
+        if (preventDefault) {
+          event.preventDefault();
+        }
 
-      return (
-        activeModifiers.length === expected.length &&
-        expected.every((mod) => activeModifiers.includes(mod))
-      );
-    };
-
-    const handleCallback = (e: KeyboardEvent) => {
-      if (preventDefault) {
-        e.preventDefault();
-      }
-      callbackRef.current();
-    };
-
-    const handleKeyDown = (e: Event) => {
-      if (!(e instanceof KeyboardEvent)) {
-        return;
-      }
-
-      const pressed = matchBy === "key" ? e.key.toLowerCase() : e.code;
-      const keyMatch = shortcutKeysSet.has(pressed);
-
-      const modifierMatch = hasActiveModifiers(e);
-
-      if (!keyMatch || !modifierMatch || holdTimerRef.current !== null) {
-        return;
+        binding.callback(event);
       }
 
       if (delay === 0) {
-        handleCallback(e);
-      } else {
-        holdTimerRef.current = setTimeout(() => {
-          handleCallback(e);
-          holdTimerRef.current = null;
-        }, delay);
+        runShortcut();
+        return;
       }
-    };
 
-    const handleKeyUp = () => clearHoldTimer();
+      holdTimersRef.current.set(
+        binding.id,
+        setTimeout(() => {
+          runShortcut();
+          holdTimersRef.current.delete(binding.id);
+        }, delay)
+      );
+    });
+  });
+
+  const handleShortcutKeyUp = useEffectEvent(() => {
+    clearDelayTimers();
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined" && !target) return;
+
+    const targetElement = target ?? window;
+
+    function handleKeyDown(event: Event) {
+      if (!(event instanceof KeyboardEvent)) return;
+
+      handleShortcutKeyDown(event);
+    }
+
+    function handleKeyUp() {
+      handleShortcutKeyUp();
+    }
 
     targetElement.addEventListener("keydown", handleKeyDown);
     targetElement.addEventListener("keyup", handleKeyUp);
@@ -113,7 +184,7 @@ export default function useShortcuts(
       targetElement.removeEventListener("keydown", handleKeyDown);
       targetElement.removeEventListener("keyup", handleKeyUp);
 
-      clearHoldTimer();
+      clearDelayTimers();
     };
-  }, [shortcutKeys, modifiers, preventDefault, target, delay, matchBy]);
+  }, [target]);
 }
