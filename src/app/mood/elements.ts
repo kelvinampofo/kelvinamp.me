@@ -117,4 +117,13 @@ export const CANVAS_ELEMENTS: CanvasElement[] = [
     src: "/assets/images/mood/out-of-the-box.webp",
     alt: "Out of the box, by Special Projects",
   },
+  {
+    id: "geist-pixel",
+    x: 2280,
+    y: 700,
+    width: 320,
+    height: 311,
+    src: "/assets/images/mood/geist-pixel.webp",
+    alt: "Geist Pixel typeface",
+  },
 ];
