@@ -47,7 +47,7 @@ export default function Canvas() {
     }
   );
 
-  // reveal elements sequentially to introduce the space gradually
+  // stagger the reveal of loaded images
   useEffect(() => {
     const timeoutIds = CANVAS_IMAGES.map(({ id }, index) =>
       window.setTimeout(
