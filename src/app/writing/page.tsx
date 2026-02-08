@@ -14,7 +14,7 @@ export default async function WritingPage() {
         Infrequent thoughts on software <em>&</em> design, along with some
         appealing <Link href="/words">words</Link>.
       </p>
-      <List items={posts} basePath="/writing" />
+      <List items={posts} kind="writing" basePath="/writing" />
     </>
   );
 }
