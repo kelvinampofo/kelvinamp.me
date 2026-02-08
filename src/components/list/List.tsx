@@ -15,39 +15,45 @@ interface ListItem {
 
 interface ListProps {
   items: ListItem[];
+  kind: "writing" | "craft";
   basePath: string;
   showDescription?: boolean;
 }
 
 export default function List({
   items,
+  kind,
   basePath,
   showDescription = false,
 }: ListProps) {
   function getDisplayDate(dateString: string) {
     const date = parseISO(dateString);
-    const formatString = basePath.includes("writing")
-      ? isThisYear(date)
-        ? "dd MMM"
-        : "dd MMM yyyy"
-      : isThisYear(date)
-        ? "MMMM"
-        : "MMMM yyyy";
+
+    const formatString =
+      kind === "writing"
+        ? isThisYear(date)
+          ? "dd MMM"
+          : "dd MMM yyyy"
+        : isThisYear(date)
+          ? "MMMM"
+          : "MMMM yyyy";
 
     return format(date, formatString);
   }
 
   return (
     <ol data-list="unstyled">
-      {items.map(({ id, slug, title, publishedDate, description }, index) => {
+      {items.map(({ id, slug, title, publishedDate, description }) => {
         const isNew = isAfter(
           parseISO(publishedDate),
           subMonths(new Date(), 1)
         );
 
+        const pathname = `${basePath}/${slug}`;
+
         return (
           <li key={id} className={styles.listItem}>
-            <Link href={{ pathname: `${basePath}/${slug}` }}>
+            <Link href={{ pathname }}>
               <div className={styles.titleRow}>
                 <p>{title}</p>
                 {showDescription && (
