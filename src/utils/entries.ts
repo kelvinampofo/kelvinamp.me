@@ -1,5 +1,7 @@
 import { readdir } from "fs/promises";
 
+import { cache } from "react";
+
 type Collection = "craft" | "writing";
 
 interface Entry {
@@ -10,7 +12,9 @@ interface Entry {
   description?: string;
 }
 
-export async function getEntries(collection: Collection): Promise<Entry[]> {
+export const getEntries = cache(async function getEntries(
+  collection: Collection
+): Promise<Entry[]> {
   const basePath = `./src/content/${collection}`;
   const files = await readdir(basePath, { withFileTypes: true });
 
@@ -34,7 +38,7 @@ export async function getEntries(collection: Collection): Promise<Entry[]> {
   );
 
   return sortEntries(entries);
-}
+});
 
 function sortEntries(entries: Entry[]) {
   return entries.sort((a, b) => {
