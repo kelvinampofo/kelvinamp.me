@@ -1,4 +1,4 @@
-interface CanvasElement {
+interface CanvasImage {
   id: string;
   x: number;
   y: number;
@@ -8,7 +8,7 @@ interface CanvasElement {
   alt: string;
 }
 
-export const CANVAS_ELEMENTS: CanvasElement[] = [
+export const CANVAS_IMAGES: CanvasImage[] = [
   {
     id: "sketch",
     x: 440,

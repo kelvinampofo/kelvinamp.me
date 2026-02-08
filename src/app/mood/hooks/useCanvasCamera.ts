@@ -9,7 +9,7 @@ import {
 } from "react";
 
 import { clamp } from "../../../utils/math";
-import { CANVAS_ELEMENTS } from "../elements";
+import { CANVAS_IMAGES } from "../images";
 
 interface ScreenBox {
   minX: number;
@@ -52,7 +52,7 @@ const WHEEL_ZOOM_DAMPING = 0.009;
 const INITIAL_SCALE = 0.7;
 
 function getContentBounds(): ContentBounds {
-  if (CANVAS_ELEMENTS.length === 0) {
+  if (CANVAS_IMAGES.length === 0) {
     return {
       minX: 0,
       minY: 0,
@@ -61,13 +61,13 @@ function getContentBounds(): ContentBounds {
     };
   }
 
-  const minX = Math.min(...CANVAS_ELEMENTS.map((element) => element.x));
-  const minY = Math.min(...CANVAS_ELEMENTS.map((element) => element.y));
+  const minX = Math.min(...CANVAS_IMAGES.map((image) => image.x));
+  const minY = Math.min(...CANVAS_IMAGES.map((image) => image.y));
   const maxX = Math.max(
-    ...CANVAS_ELEMENTS.map((element) => element.x + element.width)
+    ...CANVAS_IMAGES.map((image) => image.x + image.width)
   );
   const maxY = Math.max(
-    ...CANVAS_ELEMENTS.map((element) => element.y + element.height)
+    ...CANVAS_IMAGES.map((image) => image.y + image.height)
   );
 
   const bounds = { minX, minY, maxX, maxY };

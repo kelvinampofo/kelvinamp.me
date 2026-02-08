@@ -3,11 +3,11 @@
 import Image from "next/image";
 import { startTransition, useEffect, useRef, useState } from "react";
 
-import useDrag from "../../../../hooks/useDrag";
 import useFullscreen from "../../../../hooks/useFullscreen";
 import useShortcuts from "../../../../hooks/useShortcuts";
-import { CANVAS_ELEMENTS } from "../../elements";
 import useCanvasCamera from "../../hooks/useCanvasCamera";
+import useDrag from "../../hooks/useDrag";
+import { CANVAS_IMAGES } from "../../images";
 
 import styles from "./Canvas.module.css";
 
@@ -15,17 +15,21 @@ const BASE_DELAY_MS = 5;
 const STAGGER_MS = 150;
 
 export default function Canvas() {
-  const [canvasElements, setCanvasElements] = useState(() => CANVAS_ELEMENTS);
+  const [canvasImages, setCanvasImages] = useState(() => CANVAS_IMAGES);
   const [revealedIds, setRevealedIds] = useState<Set<string>>(() => new Set());
-
   const canvasRef = useRef<HTMLDivElement | null>(null);
-  const timeoutsRef = useRef<number[]>([]);
 
   const { camera, cameraRef, onPointerDown, zoomIn, zoomOut } = useCanvasCamera(
     { canvasRef }
   );
 
   const { toggleFullscreen } = useFullscreen();
+
+  const { onImagePointerDown } = useDrag({
+    getScale: () => cameraRef.current.z,
+    images: canvasImages,
+    setImages: setCanvasImages,
+  });
 
   useShortcuts({ F: toggleFullscreen }, { preventDefault: true });
 
@@ -37,68 +41,32 @@ export default function Canvas() {
       NumpadSubtract: zoomOut,
     },
     {
-    preventDefault: true,
-    modifiers: "Meta",
-    matchBy: "code",
+      preventDefault: true,
+      modifiers: "Meta",
+      matchBy: "code",
     }
   );
 
-  const { onElementPointerDown } = useDrag({
-    getScale: () => cameraRef.current.z,
-    getInitialPositionById,
-    onDrag: handleElementDrag,
-  });
-
   // reveal elements sequentially to introduce the space gradually
   useEffect(() => {
-    CANVAS_ELEMENTS.forEach((element, index) => {
-      const timeoutId = window.setTimeout(
-        () => {
+    const timeoutIds = CANVAS_IMAGES.map(({ id }, index) =>
+      window.setTimeout(
+        () =>
           startTransition(() => {
             setRevealedIds((previousRevealIds) => {
               const next = new Set(previousRevealIds);
-              next.add(element.id);
-
+              next.add(id);
               return next;
             });
-          });
-        },
+          }),
         BASE_DELAY_MS + index * STAGGER_MS
-      );
-
-      timeoutsRef.current.push(timeoutId);
-    });
+      )
+    );
 
     return () => {
-      timeoutsRef.current.forEach((t) => clearTimeout(t));
-      timeoutsRef.current = [];
+      timeoutIds.forEach((timeoutId) => clearTimeout(timeoutId));
     };
   }, []);
-
-  function getInitialPositionById(elementId: string) {
-    const element = canvasElements.find((item) => item.id === elementId);
-    return element ? { x: element.x, y: element.y } : undefined;
-  }
-
-  function handleElementDrag({
-    element,
-  }: {
-    element: { id: string; next: { x: number; y: number } };
-  }) {
-    setCanvasElements((previousElements) =>
-      previousElements.map((previousElement) => {
-        if (previousElement.id === element.id) {
-          return {
-            ...previousElement,
-            x: element.next.x,
-            y: element.next.y,
-          };
-        }
-
-        return previousElement;
-      })
-    );
-  }
 
   return (
     <div
@@ -109,30 +77,24 @@ export default function Canvas() {
       <div
         className={styles.moodSurface}
         style={{
-          // order matters here: first scale, then translate
           transform: `scale(${camera.z}) translate(${camera.x}px, ${camera.y}px)`,
         }}
       >
-        {canvasElements.map((element) => {
-          if (!revealedIds.has(element.id)) return null;
+        {canvasImages.map(({ id, width, height, x, y, src, alt }) => {
+          if (!revealedIds.has(id)) return null;
 
           return (
             <div
-              key={element.id}
+              key={id}
               className={styles.moodElement}
-              onPointerDown={onElementPointerDown(element.id)}
+              onPointerDown={(event) => onImagePointerDown(id, event)}
               style={{
-                width: element.width,
-                height: element.height,
-                transform: `translate3d(${element.x}px, ${element.y}px, 0)`,
+                width,
+                height,
+                transform: `translate3d(${x}px, ${y}px, 0)`,
               }}
             >
-              <Image
-                src={element.src}
-                alt={element.alt}
-                fill
-                className={styles.moodImage}
-              />
+              <Image src={src} alt={alt} fill className={styles.moodImage} />
             </div>
           );
         })}
