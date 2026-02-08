@@ -608,7 +608,12 @@
 
   @media (max-width: 1024px) {
     .layout-grid {
-      grid-template-columns: auto var(--content-max-width) auto;
+      --layout-side-track: minmax(0, 1fr);
+
+      grid-template-columns:
+        var(--layout-side-track)
+        minmax(0, var(--content-max-width))
+        var(--layout-side-track);
       column-gap: var(--space-16);
     }
   }
