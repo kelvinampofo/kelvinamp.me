@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, useEffect } from "react";
+import { type ReactNode, useLayoutEffect } from "react";
 
 interface AnimationControllerProps {
   children: ReactNode;
@@ -13,7 +13,7 @@ export default function AnimationController({
 }: AnimationControllerProps) {
   const shouldAnimate = !hasAnimated;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.documentElement.dataset.animationController = shouldAnimate
       ? "true"
       : "false";
