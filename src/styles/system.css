@@ -403,6 +403,12 @@
         transform: translateY(10px);
       }
     }
+
+    [data-animation-controller="false"] [data-animate] {
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
   }
 }
 
