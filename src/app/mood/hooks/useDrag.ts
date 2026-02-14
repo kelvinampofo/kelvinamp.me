@@ -99,7 +99,7 @@ export default function useDrag<T extends PositionedImage>({
     };
   }, []);
 
-  function onImagePointerDown(
+  function onPan(
     id: string,
     pointerDownEvent: ReactPointerEvent<HTMLDivElement>
   ) {
@@ -125,5 +125,5 @@ export default function useDrag<T extends PositionedImage>({
     pointerDownEvent.stopPropagation();
   }
 
-  return { onImagePointerDown };
+  return { onPan };
 }

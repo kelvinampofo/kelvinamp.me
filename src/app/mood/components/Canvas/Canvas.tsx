@@ -25,7 +25,7 @@ export default function Canvas() {
 
   const { toggleFullscreen } = useFullscreen();
 
-  const { onImagePointerDown } = useDrag({
+  const { onPan } = useDrag({
     getScale: () => cameraRef.current.z,
     images: canvasImages,
     setImages: setCanvasImages,
@@ -87,7 +87,7 @@ export default function Canvas() {
             <div
               key={id}
               className={styles.moodElement}
-              onPointerDown={(event) => onImagePointerDown(id, event)}
+              onPointerDown={(event) => onPan(id, event)}
               style={{
                 width,
                 height,
