@@ -10,24 +10,24 @@ import {
 } from "react";
 
 interface DragState {
-  id: string;
   pointerId: number;
+  imageId: string;
   startClientX: number;
   startClientY: number;
-  imageStartX: number;
-  imageStartY: number;
+  startImageX: number;
+  startImageY: number;
 }
 
-interface PositionedImage {
+interface DraggableImage {
   id: string;
   x: number;
   y: number;
 }
 
-interface UseDragOptions<T extends PositionedImage> {
-  getScale: () => number;
+interface UseDragOptions<T extends DraggableImage> {
   images: T[];
   setImages: Dispatch<SetStateAction<T[]>>;
+  getScale: () => number;
 }
 
 const grab = {
@@ -35,12 +35,21 @@ const grab = {
   end: () => document.body.classList.remove("gesture-grabbing"),
 };
 
-export default function useDrag<T extends PositionedImage>({
-  getScale,
+export default function useDrag<T extends DraggableImage>({
   images,
   setImages,
+  getScale,
 }: UseDragOptions<T>) {
   const activeDragRef = useRef<DragState | null>(null);
+
+  function endDrag(pointerId: number) {
+    const activeDrag = activeDragRef.current;
+    if (!activeDrag || pointerId !== activeDrag.pointerId) return;
+
+    activeDragRef.current = null;
+
+    grab.end();
+  }
 
   const onPointerMove = useEffectEvent((event: PointerEvent) => {
     const activeDrag = activeDragRef.current;
@@ -55,12 +64,12 @@ export default function useDrag<T extends PositionedImage>({
     const deltaYInCanvasSpace =
       (event.clientY - activeDrag.startClientY) / scale;
 
-    const nextImageX = activeDrag.imageStartX + deltaXInCanvasSpace;
-    const nextImageY = activeDrag.imageStartY + deltaYInCanvasSpace;
+    const nextImageX = activeDrag.startImageX + deltaXInCanvasSpace;
+    const nextImageY = activeDrag.startImageY + deltaYInCanvasSpace;
 
     setImages((previousImages) =>
       previousImages.map((image) => {
-        if (image.id !== activeDrag.id) return image;
+        if (image.id !== activeDrag.imageId) return image;
 
         return {
           ...image,
@@ -72,11 +81,7 @@ export default function useDrag<T extends PositionedImage>({
   });
 
   const onPointerEnd = useEffectEvent((event: PointerEvent) => {
-    const activeDrag = activeDragRef.current;
-    if (!activeDrag || event.pointerId !== activeDrag.pointerId) return;
-
-    activeDragRef.current = null;
-    grab.end();
+    endDrag(event.pointerId);
   });
 
   useEffect(() => {
@@ -99,7 +104,7 @@ export default function useDrag<T extends PositionedImage>({
     };
   }, []);
 
-  function onPan(
+  function onPanStart(
     id: string,
     pointerDownEvent: ReactPointerEvent<HTMLDivElement>
   ) {
@@ -107,12 +112,12 @@ export default function useDrag<T extends PositionedImage>({
     if (!initialPosition) return;
 
     activeDragRef.current = {
-      id,
       pointerId: pointerDownEvent.pointerId,
+      imageId: id,
       startClientX: pointerDownEvent.clientX,
       startClientY: pointerDownEvent.clientY,
-      imageStartX: initialPosition.x,
-      imageStartY: initialPosition.y,
+      startImageX: initialPosition.x,
+      startImageY: initialPosition.y,
     };
 
     pointerDownEvent.currentTarget.setPointerCapture(
@@ -125,5 +130,12 @@ export default function useDrag<T extends PositionedImage>({
     pointerDownEvent.stopPropagation();
   }
 
-  return { onPan };
+  function onPanEnd(pointerUpEvent: ReactPointerEvent<HTMLDivElement>) {
+    endDrag(pointerUpEvent.pointerId);
+
+    pointerUpEvent.preventDefault();
+    pointerUpEvent.stopPropagation();
+  }
+
+  return { onPanStart, onPanEnd };
 }

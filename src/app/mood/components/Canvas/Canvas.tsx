@@ -25,10 +25,10 @@ export default function Canvas() {
 
   const { toggleFullscreen } = useFullscreen();
 
-  const { onPan } = useDrag({
-    getScale: () => cameraRef.current.z,
+  const { onPanStart, onPanEnd } = useDrag({
     images: canvasImages,
     setImages: setCanvasImages,
+    getScale: () => cameraRef.current.z,
   });
 
   useShortcuts({ F: toggleFullscreen }, { preventDefault: true });
@@ -87,7 +87,9 @@ export default function Canvas() {
             <div
               key={id}
               className={styles.moodElement}
-              onPointerDown={(event) => onPan(id, event)}
+              onPointerDown={(event) => onPanStart(id, event)}
+              onPointerUp={onPanEnd}
+              onPointerCancel={onPanEnd}
               style={{
                 width,
                 height,
