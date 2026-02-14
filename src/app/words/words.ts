@@ -134,5 +134,10 @@ export const wordEntries = (
       definition:
         "the study and development of systems for improving and assisting the memory.",
     },
+    {
+      word: "insipid",
+      type: "adjective",
+      definition: "lacking flavor; weak or tasteless",
+    },
   ] satisfies WordEntryProps[]
 ).sort((a, b) => a.word.localeCompare(b.word));
