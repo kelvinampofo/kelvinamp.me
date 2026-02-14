@@ -149,5 +149,10 @@ export const wordEntries = (
       type: "adjective",
       definition: "clever, original, and inventive",
     },
+    {
+      word: "minute",
+      type: "adjective",
+      definition: "extremely small; tiny",
+    },
   ] satisfies WordEntryProps[]
 ).sort((a, b) => a.word.localeCompare(b.word));
