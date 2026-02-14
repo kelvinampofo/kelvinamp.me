@@ -139,5 +139,15 @@ export const wordEntries = (
       type: "adjective",
       definition: "lacking flavor; weak or tasteless",
     },
+    {
+      word: "intractable",
+      type: "adjective",
+      definition: "hard to control or deal with",
+    },
+    {
+      word: "ingenious",
+      type: "adjective",
+      definition: "clever, original, and inventive",
+    },
   ] satisfies WordEntryProps[]
 ).sort((a, b) => a.word.localeCompare(b.word));
