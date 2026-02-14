@@ -137,7 +137,7 @@ export const wordEntries = (
     {
       word: "insipid",
       type: "adjective",
-      definition: "lacking flavor; weak or tasteless",
+      definition: "lacking flavour; weak or tasteless",
     },
     {
       word: "intractable",
