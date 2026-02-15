@@ -13,12 +13,17 @@
   transform-origin: 0 0;
   will-change: transform;
 }
+
 .moodElement {
   position: absolute;
   left: 0;
   top: 0;
   cursor: grab;
   touch-action: none;
+}
+
+:global(body.gesture-grabbing) .moodElement {
+  cursor: grabbing;
 }
 
 .moodImage {

@@ -1,4 +1,4 @@
-interface CanvasImage {
+export interface CanvasImage {
   id: string;
   x: number;
   y: number;

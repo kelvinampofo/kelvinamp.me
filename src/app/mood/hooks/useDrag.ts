@@ -9,6 +9,8 @@ import {
   useRef,
 } from "react";
 
+import { type CanvasImage } from "../images";
+
 interface DragState {
   pointerId: number;
   imageId: string;
@@ -18,15 +20,9 @@ interface DragState {
   startImageY: number;
 }
 
-interface DraggableImage {
-  id: string;
-  x: number;
-  y: number;
-}
-
-interface UseDragOptions<T extends DraggableImage> {
-  images: T[];
-  setImages: Dispatch<SetStateAction<T[]>>;
+interface UseDragOptions {
+  images: CanvasImage[];
+  setImages: Dispatch<SetStateAction<CanvasImage[]>>;
   getScale: () => number;
 }
 
@@ -35,20 +31,46 @@ const grab = {
   end: () => document.body.classList.remove("gesture-grabbing"),
 };
 
-export default function useDrag<T extends DraggableImage>({
+export default function useDrag({
   images,
   setImages,
   getScale,
-}: UseDragOptions<T>) {
+}: UseDragOptions) {
   const activeDragRef = useRef<DragState | null>(null);
 
-  function endDrag(pointerId: number) {
-    const activeDrag = activeDragRef.current;
-    if (!activeDrag || pointerId !== activeDrag.pointerId) return;
+  function onPanStart(
+    imageId: string,
+    pointerDownEvent: ReactPointerEvent<HTMLDivElement>
+  ) {
+    const isPrimaryButton = pointerDownEvent.button === 0;
+    const isCtrlClick = pointerDownEvent.ctrlKey;
+    const shouldSkipPan = !isPrimaryButton || isCtrlClick;
 
-    activeDragRef.current = null;
+    if (shouldSkipPan) {
+      pointerDownEvent.stopPropagation();
+      return;
+    }
 
-    grab.end();
+    const initialPosition = images.find((image) => image.id === imageId);
+    if (!initialPosition) return;
+
+    activeDragRef.current = {
+      pointerId: pointerDownEvent.pointerId,
+      imageId,
+      startClientX: pointerDownEvent.clientX,
+      startClientY: pointerDownEvent.clientY,
+      startImageX: initialPosition.x,
+      startImageY: initialPosition.y,
+    };
+
+    pointerDownEvent.currentTarget.setPointerCapture(
+      pointerDownEvent.pointerId
+    );
+
+    grab.start();
+
+    pointerDownEvent.preventDefault();
+    pointerDownEvent.stopPropagation();
   }
 
   const onPointerMove = useEffectEvent((event: PointerEvent) => {
@@ -57,6 +79,7 @@ export default function useDrag<T extends DraggableImage>({
     if (!activeDrag || event.pointerId !== activeDrag.pointerId) return;
 
     const scale = getScale();
+
     if (!scale) return;
 
     const deltaXInCanvasSpace =
@@ -80,12 +103,30 @@ export default function useDrag<T extends DraggableImage>({
     );
   });
 
+  function endDrag(pointerId: number) {
+    const activeDrag = activeDragRef.current;
+
+    if (!activeDrag || pointerId !== activeDrag.pointerId) return;
+
+    activeDragRef.current = null;
+
+    grab.end();
+  }
+
+  function onPanEnd(pointerUpEvent: ReactPointerEvent<HTMLDivElement>) {
+    endDrag(pointerUpEvent.pointerId);
+
+    pointerUpEvent.preventDefault();
+    pointerUpEvent.stopPropagation();
+  }
+
   const onPointerEnd = useEffectEvent((event: PointerEvent) => {
     endDrag(event.pointerId);
   });
 
   useEffect(() => {
     const controller = new AbortController();
+
     const { signal } = controller;
 
     window.addEventListener("pointermove", onPointerMove, { signal });
@@ -96,46 +137,6 @@ export default function useDrag<T extends DraggableImage>({
       controller.abort();
     };
   }, []);
-
-  useEffect(() => {
-    return () => {
-      activeDragRef.current = null;
-      grab.end();
-    };
-  }, []);
-
-  function onPanStart(
-    id: string,
-    pointerDownEvent: ReactPointerEvent<HTMLDivElement>
-  ) {
-    const initialPosition = images.find((image) => image.id === id);
-    if (!initialPosition) return;
-
-    activeDragRef.current = {
-      pointerId: pointerDownEvent.pointerId,
-      imageId: id,
-      startClientX: pointerDownEvent.clientX,
-      startClientY: pointerDownEvent.clientY,
-      startImageX: initialPosition.x,
-      startImageY: initialPosition.y,
-    };
-
-    pointerDownEvent.currentTarget.setPointerCapture(
-      pointerDownEvent.pointerId
-    );
-
-    grab.start();
-
-    pointerDownEvent.preventDefault();
-    pointerDownEvent.stopPropagation();
-  }
-
-  function onPanEnd(pointerUpEvent: ReactPointerEvent<HTMLDivElement>) {
-    endDrag(pointerUpEvent.pointerId);
-
-    pointerUpEvent.preventDefault();
-    pointerUpEvent.stopPropagation();
-  }
 
   return { onPanStart, onPanEnd };
 }
