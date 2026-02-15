@@ -17,15 +17,20 @@ const STAGGER_MS = 150;
 export default function Canvas() {
   const [canvasImages, setCanvasImages] = useState(() => CANVAS_IMAGES);
   const [revealedIds, setRevealedIds] = useState<Set<string>>(() => new Set());
+
   const canvasRef = useRef<HTMLDivElement | null>(null);
 
-  const { camera, cameraRef, onPointerDown, zoomIn, zoomOut } = useCanvasCamera(
-    { canvasRef }
-  );
+  const {
+    camera,
+    cameraRef,
+    onPointerDown: onPan,
+    zoomIn,
+    zoomOut,
+  } = useCanvasCamera({ canvasRef });
 
   const { toggleFullscreen } = useFullscreen();
 
-  const { onPanStart, onPanEnd } = useDrag({
+  const { onPointerDown, onPointerMove, onPointerUp } = useDrag({
     images: canvasImages,
     setImages: setCanvasImages,
     getScale: () => cameraRef.current.z,
@@ -69,11 +74,7 @@ export default function Canvas() {
   }, []);
 
   return (
-    <div
-      ref={canvasRef}
-      className={styles.moodCanvas}
-      onPointerDown={onPointerDown}
-    >
+    <div ref={canvasRef} className={styles.moodCanvas} onPointerDown={onPan}>
       <div
         className={styles.moodSurface}
         style={{
@@ -87,9 +88,10 @@ export default function Canvas() {
             <div
               key={id}
               className={styles.moodElement}
-              onPointerDown={(event) => onPanStart(id, event)}
-              onPointerUp={onPanEnd}
-              onPointerCancel={onPanEnd}
+              onPointerDown={(event) => onPointerDown(id, event)}
+              onPointerMove={onPointerMove}
+              onPointerUp={onPointerUp}
+              onPointerCancel={onPointerUp}
               style={{
                 width,
                 height,
