@@ -15,6 +15,7 @@ interface Point {
 }
 
 interface DragState {
+  state: "idle" | "press" | "drag";
   pointerId: number;
   imageId: string;
   startClient: Point;
@@ -25,6 +26,7 @@ interface UseDragOptions {
   images: CanvasImage[];
   setImages: Dispatch<SetStateAction<CanvasImage[]>>;
   getScale: () => number;
+  threshold?: number;
 }
 
 const grab = {
@@ -36,6 +38,7 @@ export default function useDrag({
   images,
   setImages,
   getScale,
+  threshold = 10,
 }: UseDragOptions) {
   const activeDragRef = useRef<DragState | null>(null);
 
@@ -56,6 +59,7 @@ export default function useDrag({
     if (!initialPosition) return;
 
     activeDragRef.current = {
+      state: "press",
       pointerId: pointerDownEvent.pointerId,
       imageId,
       startClient: {
@@ -81,16 +85,29 @@ export default function useDrag({
   function onPointerMove(pointerMoveEvent: ReactPointerEvent<HTMLDivElement>) {
     const activeDrag = activeDragRef.current;
 
-    if (
-      !activeDrag ||
-      pointerMoveEvent.pointerId !== activeDrag.pointerId
-    ) {
+    if (!activeDrag || pointerMoveEvent.pointerId !== activeDrag.pointerId) {
       return;
     }
 
     const scale = getScale();
 
     if (!scale) return;
+
+    const deltaX = pointerMoveEvent.clientX - activeDrag.startClient.x;
+    const deltaY = pointerMoveEvent.clientY - activeDrag.startClient.y;
+
+    const movement = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+    if (activeDrag.state === "press" && movement < threshold) {
+      return;
+    }
+
+    if (activeDrag.state === "press") {
+      activeDragRef.current = {
+        ...activeDrag,
+        state: "drag",
+      };
+    }
 
     const deltaXInCanvasSpace =
       (pointerMoveEvent.clientX - activeDrag.startClient.x) / scale;
