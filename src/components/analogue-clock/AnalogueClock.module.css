@@ -1,11 +1,31 @@
 .analogueClock {
-  --size: 1.25rem;
+  --size: 1.375rem;
 
+  /*
+   * Horology-inspired targets:
+   * hour ~0.55R-0.65R, minute ~0.75R-0.85R, second ~0.90R-1.00R.
+   * We use 0.56 / 0.80 / 0.92 to keep hour < minute < second, with
+   * the minute clearly readable and the second near the outer track.
+   */
+  --hand-hour-r: 0.56;
+  --hand-minute-r: 0.8;
+  --hand-second-r: 0.92;
+
+  /*
+   * hand heights are percentages of the clock diameter.
+   * 50% equals the radius (center to edge), so length = radius * r.
+   */
+  --clock-radius: 50%;
+  --hand-hour-length: calc(var(--clock-radius) * var(--hand-hour-r));
+  --hand-minute-length: calc(var(--clock-radius) * var(--hand-minute-r));
+  --hand-second-length: calc(var(--clock-radius) * var(--hand-second-r));
+
+  position: relative;
+  display: inline-flex;
   box-sizing: border-box;
   width: var(--size);
   height: var(--size);
-  display: inline-flex;
-  position: relative;
+
   border: 1px solid var(--grey8);
   border-radius: 50%;
 }
@@ -14,27 +34,27 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform-origin: bottom center;
-  transform: translate(-50%, -100%) rotate(var(--rotation));
   width: 1px;
   border-radius: var(--radius-2);
+  transform-origin: bottom center;
+  transform: translate(-50%, -100%) rotate(var(--rotation));
 }
 
 .clockHandHours {
-  height: 25%;
   z-index: 10;
+  height: var(--hand-hour-length);
   background-color: var(--grey8);
 }
 
 .clockHandMinutes {
-  height: 35%;
   z-index: 20;
+  height: var(--hand-minute-length);
   background-color: var(--grey8);
 }
 
 .clockHandSeconds {
-  height: 40%;
-  width: 0.5px;
   z-index: 30;
+  height: var(--hand-second-length);
+  width: 0.5px;
   background-color: var(--focus-outer-color);
 }
