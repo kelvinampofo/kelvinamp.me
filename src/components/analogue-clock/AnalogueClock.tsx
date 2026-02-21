@@ -6,22 +6,24 @@ import { useTime } from "../../hooks/useTime";
 
 import styles from "./AnalogueClock.module.css";
 
+const SECONDS_PER_MINUTE = 60;
+const HOURS_PER_HALF_DAY = 12;
+const DEGREES_PER_HOUR = 30;
+const DEGREES_PER_MINUTE_OR_SECOND = 6;
+
 export default function AnalogueClock() {
-  const { currentTime } = useTime();
+  const { timeParts } = useTime({ tick: "quartz" });
 
-  // default to midnight server-side, hydrate to the live time once available
-  const displayTime = currentTime || "00:00:00";
+  const secondsProgress = timeParts.seconds;
+  const minutesProgress =
+    timeParts.minutes + secondsProgress / SECONDS_PER_MINUTE;
+  const hoursProgress =
+    (timeParts.hours % HOURS_PER_HALF_DAY) +
+    minutesProgress / SECONDS_PER_MINUTE;
 
-  const [hh = "0", mm = "0", ss = "0"] = displayTime.split(":");
-
-  const hours = parseInt(hh, 10) || 0;
-  const minutes = parseInt(mm, 10) || 0;
-  const seconds = parseInt(ss, 10) || 0;
-
-  // include minute and second contribution for smoother hands
-  const hoursDeg = ((hours % 12) + minutes / 60 + seconds / 3600) * 30;
-  const minutesDeg = (minutes + seconds / 60) * 6;
-  const secondsDeg = seconds * 6;
+  const hoursDeg = hoursProgress * DEGREES_PER_HOUR;
+  const minutesDeg = minutesProgress * DEGREES_PER_MINUTE_OR_SECOND;
+  const secondsDeg = secondsProgress * DEGREES_PER_MINUTE_OR_SECOND;
 
   return (
     <div
@@ -40,17 +42,15 @@ interface ClockHandProps {
   rotation: number;
   type: "hours" | "minutes" | "seconds";
 }
-function ClockHand({ rotation, type }: ClockHandProps) {
-  const typeClass =
-    type === "hours"
-      ? styles.clockHandHours
-      : type === "minutes"
-        ? styles.clockHandMinutes
-        : styles.clockHandSeconds;
 
+function ClockHand({ rotation, type }: ClockHandProps) {
   return (
     <div
-      className={clsx(styles.clockHand, typeClass)}
+      className={clsx(styles.clockHand, {
+        [styles.clockHandHours]: type === "hours",
+        [styles.clockHandMinutes]: type === "minutes",
+        [styles.clockHandSeconds]: type === "seconds",
+      })}
       style={{ "--rotation": `${rotation}deg` }}
     />
   );
