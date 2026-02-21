@@ -8,14 +8,15 @@
 
 .stage {
   --reveal-overlap: 2px;
-  --image-overscan: 1.08;
+  --image-scale: 1.08;
+  --image-ring-width: 1px;
+  --image-ring-color: color-mix(in oklab, var(--grey9) 16%, transparent);
 
   position: relative;
 
   width: 800px;
   height: 600px;
 
-  border-radius: var(--radius-2);
   overflow: hidden;
 
   background: var(--grey2);
@@ -26,16 +27,27 @@
   -webkit-user-select: none;
 }
 
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  box-shadow: inset 0 0 0 var(--image-ring-width) var(--image-ring-color);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
 .layerImage {
   position: absolute;
   inset: 0;
+  z-index: 0;
 
   width: 100%;
   height: 100%;
 
   object-fit: cover;
 
-  transform: scale(var(--image-overscan));
+  transform: scale(var(--image-scale));
 }
 
 .revealImage {

@@ -32,7 +32,8 @@ export default function RevealEntry() {
           linear interpolation
         </a>
         , so it lags slightly behind—like pulling a curtain with some conceptual
-        weight.
+        weight. Also, check the use of <code>mix-blend-mode: multiply</code>{" "}
+        along the frame’s edge.
       </p>
 
       <Reveal />
