@@ -1,5 +1,4 @@
 import Heading from "../../components/heading/Heading";
-import Separator from "../../components/separator/Separator";
 
 export const metadata = {
   title: "Scrolling",
@@ -33,8 +32,18 @@ export default function Scrolling() {
               it’s primarily an Apple-platform UI affordance, supported by
               Safari and Firefox for both page-level and container scrolling
               <sup>
-                <a href="#fn-overscroll">1</a>
+                <a href="#sn-scroll-physics">1</a>
               </sup>
+              <aside
+                id="sn-scroll-physics"
+                className="sidenote"
+                aria-label="Note 1 about scrolling physics support"
+              >
+                Support varies by platform: iOS browsers all use WebKit and
+                inherit elastic overscroll. On macOS, Chrome and Firefox can
+                adopt OS-level scroll physics, but overflow containers still
+                behave differently across engines.
+              </aside>
             </li>
             <li>
               Chrome applies elastic bounce to the page, not to scrollable
@@ -53,7 +62,7 @@ export default function Scrolling() {
         </li>
 
         <li>
-          scroll affordances often double as input feedback
+          scroll affordance often double as input feedback
           <ul>
             <li>
               elastic resistance, momentum decay, and boundary feedback are
@@ -110,16 +119,6 @@ export default function Scrolling() {
           </ul>
         </li>
       </ul>
-      <Separator />
-      <ol data-footnotes>
-        <li id="fn-overscroll">
-          Browser support varies by engine and platform. On iOS, all browsers
-          are WebKit and inherit elastic overscroll behaviour. On macOS, Chrome
-          and Firefox can integrate with OS-level scrolling physics, but their
-          behaviour differs for overflow containers and isn’t consistent across
-          engines.
-        </li>
-      </ol>
     </>
   );
 }

@@ -415,6 +415,9 @@
 @layer components {
   /* Prose */
   .prose {
+    position: relative;
+    counter-reset: sidenote;
+
     font-feature-settings: var(--font-feature-settings);
     width: 100%;
     max-width: var(--content-max-width);
@@ -422,10 +425,6 @@
 
   .prose > :not(:last-child) {
     margin-bottom: var(--space-28);
-  }
-
-  .prose {
-    position: relative;
   }
 
   .prose a {
@@ -552,6 +551,64 @@
 
   .prose ol[data-footnotes] > :not(:last-child) {
     margin-bottom: var(--space-12);
+  }
+
+  .prose .sidenote {
+    position: relative;
+    display: block;
+    margin-top: var(--space-8);
+    scroll-margin-top: var(--spacing-page-top);
+    padding-left: var(--space-12);
+    color: var(--color-foreground-secondary);
+    background-color: var(--greyA1);
+    font-size: 0.875em;
+  }
+
+  .prose .sidenote::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-left: var(--border-thin) solid var(--grey5);
+  }
+
+  .prose li:has(> .sidenote) {
+    position: relative;
+  }
+
+  .prose li:has(> .sidenote) > .sidenote::before {
+    counter-increment: sidenote;
+    content: counter(sidenote);
+    display: block;
+    margin-bottom: var(--space-4);
+    color: var(--indigo11);
+    font-size: 0.875em;
+  }
+
+  @media (min-width: 1025px) {
+    .prose .sidenote {
+      --sidenote-width: 24ch;
+
+      float: right;
+      clear: right;
+      top: -1px;
+      width: var(--sidenote-width);
+      margin-left: var(--space-24);
+      margin-right: calc(-1 * (var(--sidenote-width) + var(--space-24)));
+      margin-top: 0;
+      margin-bottom: var(--space-20);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .prose li:has(> .sidenote) > sup {
+      display: none;
+    }
+
+    .prose li:has(> .sidenote) > .sidenote::before {
+      display: none;
+    }
   }
 
   .prose blockquote {
