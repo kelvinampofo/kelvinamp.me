@@ -63,9 +63,7 @@ function getContentBounds(): ContentBounds {
 
   const minX = Math.min(...CANVAS_IMAGES.map((image) => image.x));
   const minY = Math.min(...CANVAS_IMAGES.map((image) => image.y));
-  const maxX = Math.max(
-    ...CANVAS_IMAGES.map((image) => image.x + image.width)
-  );
+  const maxX = Math.max(...CANVAS_IMAGES.map((image) => image.x + image.width));
   const maxY = Math.max(
     ...CANVAS_IMAGES.map((image) => image.y + image.height)
   );
@@ -105,12 +103,15 @@ function zoomCameraTo(
 ): Camera {
   const zoom = clamp(nextZoom, minScale, maxScale);
 
-  const p1 = screenToCanvas(point, cameraValue);
-  const p2 = screenToCanvas(point, { ...cameraValue, z: zoom });
+  const canvasPointAtCurrentZoom = screenToCanvas(point, cameraValue);
+  const canvasPointAtNextZoom = screenToCanvas(point, {
+    ...cameraValue,
+    z: zoom,
+  });
 
   return {
-    x: cameraValue.x + (p2.x - p1.x),
-    y: cameraValue.y + (p2.y - p1.y),
+    x: cameraValue.x + (canvasPointAtNextZoom.x - canvasPointAtCurrentZoom.x),
+    y: cameraValue.y + (canvasPointAtNextZoom.y - canvasPointAtCurrentZoom.y),
     z: zoom,
   };
 }
@@ -250,44 +251,6 @@ export default function useCanvasCamera({
     event.preventDefault();
   }
 
-  useEffect(() => {
-    if (hasCenteredInitiallyRef.current) return;
-
-    hasCenteredInitiallyRef.current = true;
-
-    const canvasElement = canvasRef.current;
-    const rect = canvasElement?.getBoundingClientRect();
-    const screenBox = rect
-      ? {
-          minX: rect.left,
-          minY: rect.top,
-          maxX: rect.right,
-          maxY: rect.bottom,
-          width: rect.width,
-          height: rect.height,
-        }
-      : {
-          minX: 0,
-          minY: 0,
-          maxX: window.innerWidth,
-          maxY: window.innerHeight,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-
-    const centered = getCenteredCamera(
-      cameraRef.current.z,
-      screenBox,
-      RIGHT_BIAS_PX
-    );
-
-    setCamera((previousCamera) => ({
-      ...previousCamera,
-      x: centered.x,
-      y: centered.y,
-    }));
-  }, [canvasRef]);
-
   const onWheel = useEffectEvent(
     (event: WheelEvent, wheelElement: HTMLDivElement) => {
       event.preventDefault();
@@ -343,20 +306,61 @@ export default function useCanvasCamera({
   });
 
   useEffect(() => {
+    if (hasCenteredInitiallyRef.current) return;
+
+    hasCenteredInitiallyRef.current = true;
+
+    const canvasElement = canvasRef.current;
+    const rect = canvasElement?.getBoundingClientRect();
+    const screenBox = rect
+      ? {
+          minX: rect.left,
+          minY: rect.top,
+          maxX: rect.right,
+          maxY: rect.bottom,
+          width: rect.width,
+          height: rect.height,
+        }
+      : {
+          minX: 0,
+          minY: 0,
+          maxX: window.innerWidth,
+          maxY: window.innerHeight,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+
+    const centered = getCenteredCamera(
+      cameraRef.current.z,
+      screenBox,
+      RIGHT_BIAS_PX
+    );
+
+    setCamera((previousCamera) => ({
+      ...previousCamera,
+      x: centered.x,
+      y: centered.y,
+    }));
+  }, [canvasRef]);
+
+  useEffect(() => {
     const wheelElement = canvasRef.current;
 
     if (!wheelElement) return;
+    const activeWheelElement = wheelElement;
 
-    const handleWheel = (event: WheelEvent) => onWheel(event, wheelElement);
+    function handleWheel(event: WheelEvent) {
+      onWheel(event, activeWheelElement);
+    }
 
-    wheelElement.addEventListener("wheel", handleWheel, {
+    activeWheelElement.addEventListener("wheel", handleWheel, {
       passive: false,
     });
     window.addEventListener("pointermove", onWindowPointerMove);
     window.addEventListener("pointerup", onWindowPointerUp);
 
     return () => {
-      wheelElement.removeEventListener("wheel", handleWheel);
+      activeWheelElement.removeEventListener("wheel", handleWheel);
       window.removeEventListener("pointermove", onWindowPointerMove);
       window.removeEventListener("pointerup", onWindowPointerUp);
 

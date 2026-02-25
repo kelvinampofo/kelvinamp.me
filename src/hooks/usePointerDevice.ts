@@ -12,9 +12,9 @@ export default function usePointerDevice() {
   );
 
   useEffect(() => {
-    const handlePointerChange = (e: MediaQueryListEvent) => {
-      setIsPointerDevice(e.matches);
-    };
+    function handlePointerChange(event: MediaQueryListEvent) {
+      setIsPointerDevice(event.matches);
+    }
 
     const pointerMediaQuery = window.matchMedia("(pointer: fine)");
 

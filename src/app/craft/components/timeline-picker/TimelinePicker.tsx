@@ -47,25 +47,25 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
 
   const ticks = Array.from({ length: TICK_COUNT }, (_, index) => index);
 
-  const selectIndex = (index: number) => {
+  function selectIndex(index: number) {
     if (index !== currentIndex) {
       setCurrentIndex(index);
       onSelect?.(index);
       play();
     }
-  };
+  }
 
-  const handlePrev = () => {
+  function handlePrev() {
     if (currentIndex > 0) {
       selectIndex(currentIndex - 1);
     }
-  };
+  }
 
-  const handleNext = () => {
+  function handleNext() {
     if (currentIndex < ticks.length - 1) {
       selectIndex(currentIndex + 1);
     }
-  };
+  }
 
   useShortcuts({
     ArrowLeft: handlePrev,

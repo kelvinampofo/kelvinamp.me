@@ -2,12 +2,14 @@
 
 import { useSyncExternalStore } from "react";
 
-const subscribeFullscreenChanges = (callback: () => void) => {
+function subscribeFullscreenChanges(callback: () => void) {
   if (typeof document === "undefined") {
     return () => undefined;
   }
 
-  const handleChange = () => callback();
+  function handleChange() {
+    callback();
+  }
 
   document.addEventListener("fullscreenchange", handleChange);
   document.addEventListener("fullscreenerror", handleChange);
@@ -16,19 +18,26 @@ const subscribeFullscreenChanges = (callback: () => void) => {
     document.removeEventListener("fullscreenchange", handleChange);
     document.removeEventListener("fullscreenerror", handleChange);
   };
-};
+}
 
-const isFullscreenSnapshot = () =>
-  !!(typeof document !== "undefined" && document.fullscreenElement);
+function isFullscreenSnapshot() {
+  return !!(typeof document !== "undefined" && document.fullscreenElement);
+}
 
-const canUseFullscreenSnapshot = () =>
-  !!(
+function canUseFullscreenSnapshot() {
+  return !!(
     typeof document !== "undefined" &&
     typeof document.documentElement.requestFullscreen === "function"
   );
+}
 
-const getServerSnapshot = () => false;
-const noopSubscribe = () => () => undefined;
+function getServerSnapshot() {
+  return false;
+}
+
+function noopSubscribe() {
+  return () => undefined;
+}
 
 export default function useFullscreen() {
   const isFullscreen = useSyncExternalStore(

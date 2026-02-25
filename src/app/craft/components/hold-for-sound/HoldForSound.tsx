@@ -55,13 +55,13 @@ export default function HoldForSound() {
     onend: () => setIsPressed(false),
   });
 
-  const triggerHaptic = () => {
+  function triggerHaptic() {
     if ("vibrate" in navigator) {
       navigator.vibrate([200, 100, 200]);
     }
-  };
+  }
 
-  const handlePress = () => {
+  function handlePress() {
     setIsPressed(true);
 
     if (!hasInteracted) {
@@ -71,26 +71,26 @@ export default function HoldForSound() {
     play();
 
     triggerHaptic();
-  };
+  }
 
-  const handleRelease = () => {
+  function handleRelease() {
     setIsPressed(false);
     stop();
-  };
+  }
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLButtonElement>) => {
-    if ((e.key === " " || e.key === "Enter") && !isPressed) {
-      e.preventDefault();
+  function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
+    if ((event.key === " " || event.key === "Enter") && !isPressed) {
+      event.preventDefault();
       handlePress();
     }
-  };
+  }
 
-  const handleKeyUp = (e: KeyboardEvent<HTMLButtonElement>) => {
-    if (e.key === " " || e.key === "Enter") {
-      e.preventDefault();
+  function handleKeyUp(event: KeyboardEvent<HTMLButtonElement>) {
+    if (event.key === " " || event.key === "Enter") {
+      event.preventDefault();
       handleRelease();
     }
-  };
+  }
 
   useEffect(() => {
     return () => {
@@ -114,7 +114,7 @@ export default function HoldForSound() {
           onPointerUp={handleRelease}
           onPointerLeave={handleRelease}
           onPointerCancel={handleRelease}
-          onContextMenu={(e) => e.preventDefault()}
+          onContextMenu={(event) => event.preventDefault()}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
           title="porsche-911.wav"

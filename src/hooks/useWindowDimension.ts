@@ -15,7 +15,7 @@ interface UseWindowDimensionOptions {
   initialHeight?: number;
 }
 
-export const useWindowDimension = (options: UseWindowDimensionOptions = {}) => {
+export function useWindowDimension(options: UseWindowDimensionOptions = {}) {
   const {
     debounceDelay = false,
     initialWidth = 0,
@@ -39,7 +39,7 @@ export const useWindowDimension = (options: UseWindowDimensionOptions = {}) => {
   useLayoutEffect(() => {
     if (IS_SERVER) return;
 
-    const handleResize = () => {
+    function handleResize() {
       if (debounceDelay) {
         if (timerRef.current) {
           clearTimeout(timerRef.current);
@@ -48,7 +48,7 @@ export const useWindowDimension = (options: UseWindowDimensionOptions = {}) => {
       } else {
         updateDimensions();
       }
-    };
+    }
 
     window.addEventListener("resize", handleResize);
     window.addEventListener("orientationchange", handleResize);
@@ -63,4 +63,4 @@ export const useWindowDimension = (options: UseWindowDimensionOptions = {}) => {
   }, [debounceDelay, updateDimensions]);
 
   return dimensions;
-};
+}

@@ -58,8 +58,9 @@ function hexToRgb(hex: string) {
 }
 
 function rgbToHex([r, g, b]: [number, number, number]) {
-  const toHex = (channel: number) =>
-    clamp(Math.round(channel), 0, 255).toString(16).padStart(2, "0");
+  function toHex(channel: number) {
+    return clamp(Math.round(channel), 0, 255).toString(16).padStart(2, "0");
+  }
 
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
@@ -95,7 +96,7 @@ export function animateThemeColor(toColor: string, duration = 250) {
   let animationFrameId = 0;
 
   const start = performance.now();
-  const tick = () => {
+  function tick() {
     const now = performance.now();
     const progress = clamp((now - start) / duration, 0, 1);
 
@@ -111,7 +112,7 @@ export function animateThemeColor(toColor: string, duration = 250) {
     if (progress < 1) {
       animationFrameId = requestAnimationFrame(tick);
     }
-  };
+  }
 
   animationFrameId = requestAnimationFrame(tick);
 

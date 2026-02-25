@@ -11,20 +11,28 @@ import useShortcuts from "../../../../hooks/useShortcuts";
 
 import styles from "./AdaptiveInterface.module.css";
 
+function determineSizeCategory(count: number) {
+  if (count < 5) return "large";
+  if (count < 10) return "medium";
+  return "small";
+}
+
 export default function AdaptiveInterface() {
   const [usageCount, setUsageCount] = useState(0);
   const [isPressed, setIsPressed] = useState(false);
 
   const { isPointerDevice } = usePointerDevice();
 
-  const handleShortcut = () => {
+  function handleShortcut() {
     setUsageCount((prevCount) => prevCount + 1);
     setIsPressed(true);
 
     setTimeout(() => setIsPressed(false), 150);
-  };
+  }
 
-  const resetUsage = () => setUsageCount(0);
+  function resetUsage() {
+    setUsageCount(0);
+  }
 
   useShortcuts(
     { D: handleShortcut },
@@ -35,12 +43,6 @@ export default function AdaptiveInterface() {
   );
 
   useShortcuts({ R: resetUsage });
-
-  function determineSizeCategory(count: number) {
-    if (count < 5) return "large";
-    if (count < 10) return "medium";
-    return "small";
-  }
 
   const sizeCategory = determineSizeCategory(usageCount);
 

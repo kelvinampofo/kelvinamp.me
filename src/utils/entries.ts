@@ -12,33 +12,33 @@ interface Entry {
   description?: string;
 }
 
-export const getEntries = cache(async function getEntries(
-  collection: Collection
-): Promise<Entry[]> {
-  const basePath = `./src/content/${collection}`;
-  const files = await readdir(basePath, { withFileTypes: true });
+export const getEntries = cache(
+  async (collection: Collection): Promise<Entry[]> => {
+    const basePath = `./src/content/${collection}`;
+    const files = await readdir(basePath, { withFileTypes: true });
 
-  const entries = await Promise.all(
-    files
-      .filter((entry) => entry.isFile() && entry.name.endsWith(".tsx"))
-      .map(async (file): Promise<Entry> => {
-        const slug = file.name.replace(/\.tsx$/, "");
-        const mod = await import(`../content/${collection}/${slug}.tsx`);
+    const entries = await Promise.all(
+      files
+        .filter((entry) => entry.isFile() && entry.name.endsWith(".tsx"))
+        .map(async (file): Promise<Entry> => {
+          const slug = file.name.replace(/\.tsx$/, "");
+          const mod = await import(`../content/${collection}/${slug}.tsx`);
 
-        const { title, description, publishedDate } = mod.metadata;
+          const { title, description, publishedDate } = mod.metadata;
 
-        return {
-          id: slug,
-          slug,
-          title,
-          publishedDate,
-          description,
-        };
-      })
-  );
+          return {
+            id: slug,
+            slug,
+            title,
+            publishedDate,
+            description,
+          };
+        })
+    );
 
-  return sortEntries(entries);
-});
+    return sortEntries(entries);
+  }
+);
 
 function sortEntries(entries: Entry[]) {
   return entries.sort((a, b) => {

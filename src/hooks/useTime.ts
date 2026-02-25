@@ -18,10 +18,10 @@ const TWO_DIGITS = 2;
 const DECIMAL_RADIX = 10;
 const MILLISECONDS_PER_SECOND = 1000;
 
-export const useTime = ({
+export function useTime({
   timeZone = "Europe/London",
   tick = "interval",
-}: Options = {}) => {
+}: Options = {}) {
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const initTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -59,7 +59,7 @@ export const useTime = ({
 
     // scheduleNextTick aligns updates to exact wall-clock second boundaries
     // (e.g. hh:mm:ss.000) to avoid setInterval drift over time.
-    const scheduleNextTick = () => {
+    function scheduleNextTick() {
       const elapsedInCurrentSecond = Date.now() % MILLISECONDS_PER_SECOND;
 
       const remainingToNextSecond =
@@ -71,7 +71,7 @@ export const useTime = ({
         setCurrentDate(new Date());
         scheduleNextTick();
       }, delay);
-    };
+    }
 
     scheduleNextTick();
 
@@ -154,4 +154,4 @@ export const useTime = ({
     currentDate: date,
     timeParts,
   };
-};
+}

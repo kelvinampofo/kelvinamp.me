@@ -12,17 +12,17 @@ const HOLD_TINT_COLOR = "rgba(255, 40, 40, 0.7)";
 export default function HoldToDelete() {
   const cancelAnimationRef = useRef<null | (() => void)>(null);
 
-  const handleDown = () => {
+  function handleDown() {
     cancelAnimationRef.current?.();
     cancelAnimationRef.current = animateThemeColor(HOLD_TINT_COLOR);
-  };
+  }
 
-  const handleUp = () => {
+  function handleUp() {
     cancelAnimationRef.current?.();
     cancelAnimationRef.current = animateThemeColor(
       getComputedStyle(document.body).backgroundColor
     );
-  };
+  }
 
   useEffect(() => {
     return () => cancelAnimationRef.current?.();
@@ -32,7 +32,7 @@ export default function HoldToDelete() {
     <button
       className={styles.button}
       aria-label="hold to delete"
-      onContextMenu={(e) => e.preventDefault()}
+      onContextMenu={(event) => event.preventDefault()}
       onPointerDown={handleDown}
       onPointerUp={handleUp}
       onPointerCancel={handleUp}

@@ -246,20 +246,6 @@ export default function NumericScrubber() {
     });
   });
 
-  useEffect(() => {
-    if (!trackViewport) {
-      return;
-    }
-
-    trackViewport.addEventListener("wheel", handleNativeWheel, {
-      passive: false,
-    });
-
-    return () => {
-      trackViewport.removeEventListener("wheel", handleNativeWheel);
-    };
-  }, [trackViewport]);
-
   function handleTrackTransitionEnd(event: TransitionEvent<HTMLDivElement>) {
     if (
       event.propertyName !== "transform" ||
@@ -456,6 +442,20 @@ export default function NumericScrubber() {
 
     setIsPopoverOpen(false);
   }
+
+  useEffect(() => {
+    if (!trackViewport) {
+      return;
+    }
+
+    trackViewport.addEventListener("wheel", handleNativeWheel, {
+      passive: false,
+    });
+
+    return () => {
+      trackViewport.removeEventListener("wheel", handleNativeWheel);
+    };
+  }, [trackViewport]);
 
   return (
     <p>

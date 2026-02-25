@@ -4,12 +4,12 @@ import styles from "./Waveform.module.css";
 
 const BAR_COUNT = 22;
 
-const pseudoRandom = (seed: number) => {
+function pseudoRandom(seed: number) {
   const x = Math.sin(seed) * 10000;
   return x - Math.floor(x);
-};
+}
 
-const createBarAnimations = () => {
+function createBarAnimations() {
   return Array.from({ length: BAR_COUNT }).map((_, index) => {
     const baseSeed = index + 1;
 
@@ -19,7 +19,7 @@ const createBarAnimations = () => {
       duration: 0.8 + pseudoRandom(baseSeed + BAR_COUNT * 2) * 0.5,
     };
   });
-};
+}
 
 const BAR_ANIMATIONS = createBarAnimations();
 

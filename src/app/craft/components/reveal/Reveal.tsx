@@ -56,18 +56,6 @@ export default function Reveal() {
       }),
   });
 
-  useEffect(() => {
-    debugRef.current = debug;
-  }, [debug]);
-
-  useEffect(() => {
-    return () => {
-      if (revealRafRef.current !== null) {
-        cancelAnimationFrame(revealRafRef.current);
-      }
-    };
-  }, []);
-
   function setRevealValue(next: number) {
     currentRevealRef.current = next;
     rootRef.current?.style.setProperty("--reveal", `${next}%`);
@@ -159,6 +147,18 @@ export default function Reveal() {
       stage.releasePointerCapture(event.pointerId);
     }
   }
+
+  useEffect(() => {
+    debugRef.current = debug;
+  }, [debug]);
+
+  useEffect(() => {
+    return () => {
+      if (revealRafRef.current !== null) {
+        cancelAnimationFrame(revealRafRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div

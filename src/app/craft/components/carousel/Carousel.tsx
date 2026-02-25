@@ -73,13 +73,13 @@ export default function Carousel() {
   // calculate the current slide index based on slide position
   const currentSlide = Math.floor(slidePosition / (SLIDE_WIDTH + SLIDE_MARGIN));
 
-  const handleSlideChange = (newSlideIndex: number) => {
+  function handleSlideChange(newSlideIndex: number) {
     const clampedSlideIndex = clamp(newSlideIndex, 0, MAX_SLIDE_INDEX);
 
     scrollToSlide(slideRef.current, clampedSlideIndex);
-  };
+  }
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLUListElement>) => {
+  function handleMouseMove(event: React.MouseEvent<HTMLUListElement>) {
     const containerRect = event.currentTarget.getBoundingClientRect();
     const cursorDirection =
       event.clientX < containerRect.left + containerRect.width / 2
@@ -88,18 +88,18 @@ export default function Carousel() {
 
     setIsCursorLeft(cursorDirection === "left");
     setIsCursorRight(cursorDirection === "right");
-  };
+  }
 
-  const handleMouseLeave = () => {
+  function handleMouseLeave() {
     setIsCursorLeft(false);
     setIsCursorRight(false);
-  };
+  }
 
-  const handleCarouselClick = (e: React.MouseEvent<HTMLUListElement>) => {
+  function handleCarouselClick(event: React.MouseEvent<HTMLUListElement>) {
     if (!slideRef.current) return;
 
     const containerRect = slideRef.current.getBoundingClientRect();
-    const mouseX = e.clientX;
+    const mouseX = event.clientX;
     const slideThreshold = containerRect.left + containerRect.width / 2;
 
     // determine the new slide index based on mouse position
@@ -109,7 +109,7 @@ export default function Carousel() {
     if (newSlideIndex >= 0 && newSlideIndex < slides.length) {
       handleSlideChange(newSlideIndex);
     }
-  };
+  }
 
   const isAtStartOfSlide = currentSlide === 0;
   const isAtEndOfSlide = currentSlide >= MAX_SLIDE_INDEX;
@@ -137,8 +137,8 @@ export default function Carousel() {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         onClick={handleCarouselClick}
-        onScroll={(e) => {
-          setSlidePosition(e.currentTarget.scrollLeft);
+        onScroll={(event) => {
+          setSlidePosition(event.currentTarget.scrollLeft);
         }}
         className={clsx(styles.slideList, cursorClasses)}
       >

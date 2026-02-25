@@ -41,23 +41,6 @@ export default function ScrollFadeTabs({
   const isControlled = selected !== undefined;
   const selectedTab = isControlled ? selected! : internalSelected;
 
-  useEffect(() => {
-    const element = scrollContainerRef.current;
-    if (!element) return;
-
-    const handleScroll = () => {
-      setIsScrolledToStart(element.scrollLeft === 0);
-      setIsScrolledToEnd(
-        element.scrollLeft + element.clientWidth >= element.scrollWidth
-      );
-    };
-
-    element.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    return () => element.removeEventListener("scroll", handleScroll);
-  }, []);
-
   function handleClick(value: string) {
     const newValue = selectedTab === value ? "" : value;
     onChange?.(newValue);
@@ -66,6 +49,25 @@ export default function ScrollFadeTabs({
       setInternalSelected(newValue);
     }
   }
+
+  useEffect(() => {
+    const element = scrollContainerRef.current;
+    if (!element) return;
+    const scrollElement = element;
+
+    function handleScroll() {
+      setIsScrolledToStart(scrollElement.scrollLeft === 0);
+      setIsScrolledToEnd(
+        scrollElement.scrollLeft + scrollElement.clientWidth >=
+          scrollElement.scrollWidth
+      );
+    }
+
+    scrollElement.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => scrollElement.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className={styles.container}>
