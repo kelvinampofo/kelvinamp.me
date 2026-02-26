@@ -126,4 +126,13 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     src: "/assets/images/mood/geist-pixel.webp",
     alt: "Geist Pixel typeface",
   },
+  {
+    id: "loewe-mongogram",
+    x: 2360,
+    y: 180,
+    width: 300,
+    height: 453,
+    src: "/assets/images/mood/loewe-mongogram.webp",
+    alt: "Loewe anagram and logo on yellow leather",
+  },
 ];
