@@ -135,4 +135,13 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     src: "/assets/images/mood/loewe-mongogram.webp",
     alt: "Loewe anagram and logo on yellow leather",
   },
+  {
+    id: "windows-2000-professional",
+    x: 2660,
+    y: 560,
+    width: 400,
+    height: 300,
+    src: "/assets/images/mood/windows-2000-professional.webp",
+    alt: "Microsoft Windows 2000 Professional startup screen",
+  },
 ];
