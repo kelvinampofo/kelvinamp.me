@@ -162,4 +162,13 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     src: "/assets/images/mood/swiss-passport-arctic-map-spread.webp",
     alt: "Swiss passport arctic map spread",
   },
+  {
+    id: "classic-blue-cursor-icons",
+    x: 2460,
+    y: 220,
+    width: 420,
+    height: 236,
+    src: "/assets/images/mood/classic-blue-cursor-icons.webp",
+    alt: "Classic blue cursor icon set on a light gray background",
+  },
 ];
