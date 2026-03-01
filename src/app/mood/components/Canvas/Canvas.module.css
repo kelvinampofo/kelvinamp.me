@@ -4,6 +4,8 @@
   transform-origin: 0 0;
   will-change: transform;
   touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .moodSurface {
@@ -12,14 +14,30 @@
   height: 100vh;
   transform-origin: 0 0;
   will-change: transform;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .moodElement {
   position: absolute;
   left: 0;
   top: 0;
-  cursor: grab;
+  cursor: default;
   touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.panMode {
+  cursor: grab;
+}
+
+.panMode .moodElement {
+  cursor: grab;
+}
+
+:global(body.gesture-grabbing) .moodCanvas {
+  cursor: grabbing;
 }
 
 :global(body.gesture-grabbing) .moodElement {
@@ -28,4 +46,6 @@
 
 .moodImage {
   object-fit: fill;
+  user-select: none;
+  -webkit-user-select: none;
 }

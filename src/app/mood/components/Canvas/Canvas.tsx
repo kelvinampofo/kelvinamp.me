@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import Image from "next/image";
 import { startTransition, useEffect, useRef, useState } from "react";
 
@@ -17,6 +18,7 @@ const STAGGER_MS = 150;
 export default function Canvas() {
   const [canvasImages, setCanvasImages] = useState(() => CANVAS_IMAGES);
   const [revealedIds, setRevealedIds] = useState<Set<string>>(() => new Set());
+  const [isPanModeEnabled, setIsPanModeEnabled] = useState(false);
 
   const canvasRef = useRef<HTMLDivElement | null>(null);
 
@@ -26,7 +28,7 @@ export default function Canvas() {
     onPointerDown: onPan,
     zoomIn,
     zoomOut,
-  } = useCanvasCamera({ canvasRef });
+  } = useCanvasCamera({ canvasRef, isPanModeEnabled });
 
   const { toggleFullscreen } = useFullscreen();
 
@@ -34,9 +36,14 @@ export default function Canvas() {
     images: canvasImages,
     setImages: setCanvasImages,
     getScale: () => cameraRef.current.z,
+    isPanModeEnabled,
   });
 
   useShortcuts({ F: toggleFullscreen }, { preventDefault: true });
+  useShortcuts({
+    H: () => setIsPanModeEnabled(true),
+    V: () => setIsPanModeEnabled(false),
+  });
 
   useShortcuts(
     {
@@ -74,7 +81,13 @@ export default function Canvas() {
   }, []);
 
   return (
-    <div ref={canvasRef} className={styles.moodCanvas} onPointerDown={onPan}>
+    <div
+      ref={canvasRef}
+      className={clsx(styles.moodCanvas, {
+        [styles.panMode]: isPanModeEnabled,
+      })}
+      onPointerDown={onPan}
+    >
       <div
         className={styles.moodSurface}
         style={{
@@ -98,7 +111,13 @@ export default function Canvas() {
                 transform: `translate3d(${x}px, ${y}px, 0)`,
               }}
             >
-              <Image src={src} alt={alt} fill className={styles.moodImage} />
+              <Image
+                src={src}
+                alt={alt}
+                title={alt}
+                fill
+                className={styles.moodImage}
+              />
             </div>
           );
         })}

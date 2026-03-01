@@ -152,8 +152,10 @@ function getCenteredCamera(
 
 export default function useCanvasCamera({
   canvasRef,
+  isPanModeEnabled,
 }: {
   canvasRef: RefObject<HTMLDivElement | null>;
+  isPanModeEnabled: boolean;
 }) {
   const initialZoom = clamp(INITIAL_SCALE, MIN_SCALE, MAX_SCALE);
 
@@ -166,6 +168,16 @@ export default function useCanvasCamera({
   const cameraRef = useRef(camera);
   const hasCenteredInitiallyRef = useRef(false);
   const panningRef = useRef<PanDragState | null>(null);
+  const isPanModeEnabledRef = useRef(isPanModeEnabled);
+
+  useEffect(() => {
+    isPanModeEnabledRef.current = isPanModeEnabled;
+
+    if (isPanModeEnabled) return;
+
+    panningRef.current = null;
+    document.body.classList.remove("gesture-grabbing");
+  }, [isPanModeEnabled]);
 
   function setCamera(value: SetStateAction<Camera>) {
     setCameraState((previousCamera) => {
@@ -241,12 +253,18 @@ export default function useCanvasCamera({
   }
 
   function onPointerDown(event: ReactPointerEvent<HTMLDivElement>) {
+    const isPrimaryButton = event.button === 0;
+    const isCtrlClick = event.ctrlKey;
+
+    if (!isPanModeEnabledRef.current || !isPrimaryButton || isCtrlClick) return;
+
     panningRef.current = {
       pointerId: event.pointerId,
       startClientX: event.clientX,
       startClientY: event.clientY,
     };
 
+    document.body.classList.add("gesture-grabbing");
     event.currentTarget.setPointerCapture(event.pointerId);
     event.preventDefault();
   }
@@ -303,6 +321,15 @@ export default function useCanvasCamera({
     if (!panDrag || event.pointerId !== panDrag.pointerId) return;
 
     panningRef.current = null;
+    document.body.classList.remove("gesture-grabbing");
+  });
+
+  const onWindowPointerCancel = useEffectEvent((event: PointerEvent) => {
+    const panDrag = panningRef.current;
+    if (!panDrag || event.pointerId !== panDrag.pointerId) return;
+
+    panningRef.current = null;
+    document.body.classList.remove("gesture-grabbing");
   });
 
   useEffect(() => {
@@ -358,13 +385,16 @@ export default function useCanvasCamera({
     });
     window.addEventListener("pointermove", onWindowPointerMove);
     window.addEventListener("pointerup", onWindowPointerUp);
+    window.addEventListener("pointercancel", onWindowPointerCancel);
 
     return () => {
       activeWheelElement.removeEventListener("wheel", handleWheel);
       window.removeEventListener("pointermove", onWindowPointerMove);
       window.removeEventListener("pointerup", onWindowPointerUp);
+      window.removeEventListener("pointercancel", onWindowPointerCancel);
 
       panningRef.current = null;
+      document.body.classList.remove("gesture-grabbing");
     };
   }, [canvasRef]);
 

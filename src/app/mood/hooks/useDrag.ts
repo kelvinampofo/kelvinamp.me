@@ -26,18 +26,15 @@ interface UseDragOptions {
   images: CanvasImage[];
   setImages: Dispatch<SetStateAction<CanvasImage[]>>;
   getScale: () => number;
+  isPanModeEnabled: boolean;
   threshold?: number;
 }
-
-const grab = {
-  start: () => document.body.classList.add("gesture-grabbing"),
-  end: () => document.body.classList.remove("gesture-grabbing"),
-};
 
 export default function useDrag({
   images,
   setImages,
   getScale,
+  isPanModeEnabled,
   threshold = 10,
 }: UseDragOptions) {
   const activeDragRef = useRef<DragState | null>(null);
@@ -46,6 +43,8 @@ export default function useDrag({
     imageId: string,
     pointerDownEvent: ReactPointerEvent<HTMLDivElement>
   ) {
+    if (isPanModeEnabled) return;
+
     const isPrimaryButton = pointerDownEvent.button === 0;
     const isCtrlClick = pointerDownEvent.ctrlKey;
     const shouldSkipPan = !isPrimaryButton || isCtrlClick;
@@ -75,8 +74,6 @@ export default function useDrag({
     pointerDownEvent.currentTarget.setPointerCapture(
       pointerDownEvent.pointerId
     );
-
-    grab.start();
 
     pointerDownEvent.preventDefault();
     pointerDownEvent.stopPropagation();
@@ -136,8 +133,6 @@ export default function useDrag({
     if (!activeDrag || pointerId !== activeDrag.pointerId) return;
 
     activeDragRef.current = null;
-
-    grab.end();
   }
 
   function onPointerUp(pointerUpEvent: ReactPointerEvent<HTMLDivElement>) {
