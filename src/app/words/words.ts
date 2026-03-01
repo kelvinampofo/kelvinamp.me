@@ -154,5 +154,11 @@ export const wordEntries = (
       type: "adjective",
       definition: "extremely small; tiny",
     },
+    {
+      word: "corroboration",
+      type: "noun",
+      definition:
+        "evidence that confirms or supports a statement, theory, or finding",
+    },
   ] satisfies WordEntryProps[]
 ).sort((a, b) => a.word.localeCompare(b.word));
