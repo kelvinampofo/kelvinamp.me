@@ -160,5 +160,11 @@ export const wordEntries = (
       definition:
         "evidence that confirms or supports a statement, theory, or finding",
     },
+    {
+      word: "zeitgeist",
+      type: "noun",
+      definition:
+        "the defining spirit or mood of a particular period of history as shown by the ideas and beliefs of the time",
+    },
   ] satisfies WordEntryProps[]
 ).sort((a, b) => a.word.localeCompare(b.word));
