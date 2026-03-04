@@ -171,4 +171,13 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     src: "/assets/images/mood/classic-blue-cursor-icons.webp",
     alt: "Classic blue cursor icon set on a light gray background",
   },
+  {
+    id: "ipod-classic-black-and-white",
+    x: 2520,
+    y: 520,
+    width: 520,
+    height: 371,
+    src: "/assets/images/mood/ipod-classic-black-and-white.webp",
+    alt: "Black and white iPod",
+  },
 ];
