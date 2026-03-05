@@ -14,12 +14,11 @@
   display: flex;
   flex-direction: column;
 
-  padding: var(--space-4) var(--space-12);
+  padding: var(--space-4) var(--space-14) 5px;
   font-size: 0.8125rem;
-  font-weight: 500;
   line-height: 1.25rem;
   font-variant-numeric: tabular-nums;
-  border-radius: var(--radius-6);
+  border-radius: 5px;
 
   transform-origin: var(--transform-origin);
   transition:
