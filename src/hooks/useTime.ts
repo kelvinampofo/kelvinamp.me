@@ -113,7 +113,9 @@ export function useTime({ timeZone = "Europe/London" }: Options = {}) {
 
   const currentTime = `${paddedHours}:${paddedMinutes}:${paddedSeconds}`;
 
-  function getTimeZoneLabel(timeZoneName: "short" | "long") {
+  function getTimeZoneLabel(
+    timeZoneName: Intl.DateTimeFormatOptions["timeZoneName"]
+  ) {
     const parts = formatToParts({ timeZoneName });
     const matchedPart = parts.find(({ type }) => type === "timeZoneName");
 
@@ -121,7 +123,7 @@ export function useTime({ timeZone = "Europe/London" }: Options = {}) {
   }
 
   const timezoneName = getTimeZoneLabel("short");
-  const timezoneOffset = getTimeZoneLabel("long");
+  const timezoneOffset = getTimeZoneLabel("longOffset");
 
   return {
     currentTime,
