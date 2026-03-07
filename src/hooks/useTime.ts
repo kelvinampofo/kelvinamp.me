@@ -7,49 +7,53 @@ export interface TimeParts {
   milliseconds: number;
 }
 
-interface Options {
-  timeZone?: string;
+export interface UseTimeOptions {
+  timeZone?: Intl.DateTimeFormatOptions["timeZone"];
 }
+
+export interface UseTimeResult {
+  currentTime: string;
+  timezoneOffset: string;
+  currentDate: Date | null;
+  timeParts: TimeParts;
+}
+
+type DateTimePartType = "hour" | "minute" | "second";
+type TimeZoneNameStyle = Intl.DateTimeFormatOptions["timeZoneName"];
 
 const TWO_DIGITS = 2;
 const DECIMAL_RADIX = 10;
 const MILLISECONDS_PER_SECOND = 1000;
 
-export function useTime({ timeZone = "Europe/London" }: Options = {}) {
-  const [currentDate, setCurrentDate] = useState<Date | null>(null);
+export function useTime({
+  timeZone = "Europe/London",
+}: UseTimeOptions = {}): UseTimeResult {
+  const [currentDate, setCurrentDate] = useState<Date>(() => new Date());
+
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const initTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    initTimeoutRef.current = setTimeout(() => {
-      setCurrentDate(new Date());
-    }, 0);
-
-    return () => {
-      if (initTimeoutRef.current) {
-        clearTimeout(initTimeoutRef.current);
-      }
-    };
-  }, []);
 
   useEffect(() => {
     // scheduleNextTick aligns updates to exact wall-clock second boundaries
     // (e.g. hh:mm:ss.000) to avoid setInterval drift over time.
-    function scheduleNextTick() {
-      const elapsedInCurrentSecond = Date.now() % MILLISECONDS_PER_SECOND;
-
-      const remainingToNextSecond =
-        MILLISECONDS_PER_SECOND - elapsedInCurrentSecond;
-
-      const delay = remainingToNextSecond || MILLISECONDS_PER_SECOND;
-
+    function scheduleTick(delay: number) {
       timeoutRef.current = setTimeout(() => {
         setCurrentDate(new Date());
-        scheduleNextTick();
+
+        const elapsedInCurrentSecond = Date.now() % MILLISECONDS_PER_SECOND;
+        const remainingToNextSecond =
+          MILLISECONDS_PER_SECOND - elapsedInCurrentSecond;
+        const nextDelay = remainingToNextSecond || MILLISECONDS_PER_SECOND;
+
+        scheduleTick(nextDelay);
       }, delay);
     }
 
-    scheduleNextTick();
+    const elapsedInCurrentSecond = Date.now() % MILLISECONDS_PER_SECOND;
+    const remainingToNextSecond =
+      MILLISECONDS_PER_SECOND - elapsedInCurrentSecond;
+    const initialDelay = remainingToNextSecond || MILLISECONDS_PER_SECOND;
+
+    scheduleTick(initialDelay);
 
     return () => {
       if (timeoutRef.current) {
@@ -58,28 +62,17 @@ export function useTime({ timeZone = "Europe/London" }: Options = {}) {
     };
   }, []);
 
-  if (!currentDate) {
-    return {
-      currentTime: "",
-      timezoneOffset: "",
-      timezoneName: "",
-      currentDate: null,
-      timeParts: {
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-        milliseconds: 0,
-      },
-    };
-  }
-
   const date = currentDate;
 
   function formatToParts(options: Intl.DateTimeFormatOptions) {
-    return new Intl.DateTimeFormat("en-GB", {
+    const formatter = new Intl.DateTimeFormat("en-GB", {
       timeZone,
       ...options,
-    }).formatToParts(date);
+    });
+
+    const formattedParts = formatter.formatToParts(date);
+
+    return formattedParts;
   }
 
   const hmsParts = formatToParts({
@@ -89,11 +82,13 @@ export function useTime({ timeZone = "Europe/London" }: Options = {}) {
     hour12: false,
   });
 
-  function parseClockPart(type: "hour" | "minute" | "second") {
-    const { value } = hmsParts.find((part) => part.type === type) ?? {};
-    const parsed = Number.parseInt(value ?? "", DECIMAL_RADIX);
+  function parseClockPart(type: DateTimePartType) {
+    const { value } = hmsParts.find((p) => p.type === type) ?? {};
 
-    return Number.isNaN(parsed) ? undefined : parsed;
+    const parsed = Number.parseInt(value ?? "", DECIMAL_RADIX);
+    const parsedClockPart = Number.isNaN(parsed) ? undefined : parsed;
+
+    return parsedClockPart;
   }
 
   const timeParts: TimeParts = {
@@ -104,7 +99,9 @@ export function useTime({ timeZone = "Europe/London" }: Options = {}) {
   };
 
   function padTimeUnit(value: number) {
-    return String(value).padStart(TWO_DIGITS, "0");
+    const unit = String(value).padStart(TWO_DIGITS, "0");
+
+    return unit;
   }
 
   const paddedHours = padTimeUnit(timeParts.hours);
@@ -113,22 +110,19 @@ export function useTime({ timeZone = "Europe/London" }: Options = {}) {
 
   const currentTime = `${paddedHours}:${paddedMinutes}:${paddedSeconds}`;
 
-  function getTimeZoneLabel(
-    timeZoneName: Intl.DateTimeFormatOptions["timeZoneName"]
-  ) {
-    const parts = formatToParts({ timeZoneName });
-    const matchedPart = parts.find(({ type }) => type === "timeZoneName");
+  function getTimeZoneLabel(style: TimeZoneNameStyle) {
+    const parts = formatToParts({ timeZoneName: style });
+    const matchedPart = parts.find((p) => p.type === "timeZoneName");
+    const timezoneLabel = matchedPart?.value ?? "";
 
-    return matchedPart?.value ?? "";
+    return timezoneLabel;
   }
 
-  const timezoneName = getTimeZoneLabel("short");
   const timezoneOffset = getTimeZoneLabel("longOffset");
 
   return {
     currentTime,
     timezoneOffset,
-    timezoneName,
     currentDate: date,
     timeParts,
   };
