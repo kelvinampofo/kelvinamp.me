@@ -1,27 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 
-interface TimeParts {
+export interface TimeParts {
   hours: number;
   minutes: number;
   seconds: number;
   milliseconds: number;
 }
 
-type Tick = "interval" | "quartz";
-
 interface Options {
   timeZone?: string;
-  tick?: Tick;
 }
 
 const TWO_DIGITS = 2;
 const DECIMAL_RADIX = 10;
 const MILLISECONDS_PER_SECOND = 1000;
 
-export function useTime({
-  timeZone = "Europe/London",
-  tick = "interval",
-}: Options = {}) {
+export function useTime({ timeZone = "Europe/London" }: Options = {}) {
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const initTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -39,24 +33,6 @@ export function useTime({
   }, []);
 
   useEffect(() => {
-    if (tick !== "interval") {
-      return;
-    }
-
-    const intervalId = setInterval(() => {
-      setCurrentDate(new Date());
-    }, MILLISECONDS_PER_SECOND);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [tick]);
-
-  useEffect(() => {
-    if (tick !== "quartz") {
-      return;
-    }
-
     // scheduleNextTick aligns updates to exact wall-clock second boundaries
     // (e.g. hh:mm:ss.000) to avoid setInterval drift over time.
     function scheduleNextTick() {
@@ -80,7 +56,7 @@ export function useTime({
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [tick]);
+  }, []);
 
   if (!currentDate) {
     return {
