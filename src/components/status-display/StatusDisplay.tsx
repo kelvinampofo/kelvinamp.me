@@ -1,57 +1,66 @@
 "use client";
 
-import { Children, ReactNode, useState } from "react";
+import { type ReactNode, useState } from "react";
 
-import BrowserInfoView from "./components/BrowserInfo";
-import ClockView from "./components/Clock";
-import CurrentTimeView from "./components/CurrentTime";
-import DimensionsView from "./components/Dimensions";
+import { useBrowserInfo } from "../../hooks/useBrowserInfo";
+import { useTime } from "../../hooks/useTime";
+import { useWindowDimension } from "../../hooks/useWindowDimension";
+
+import BrowserInfo from "./components/BrowserInfo";
+import Clock from "./components/Clock";
+import CurrentTime from "./components/CurrentTime";
+import Dimensions from "./components/Dimensions";
 import Principle from "./components/Principle";
 import styles from "./StatusDisplay.module.css";
 
-interface StatusDisplayRootProps {
-  children: ReactNode;
+interface StatusItem {
+  render: () => ReactNode;
 }
 
-function StatusDisplayRoot({ children }: StatusDisplayRootProps) {
-  const [index, setIndex] = useState(0);
+export default function StatusDisplay() {
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const items = Children.toArray(children);
-  const totalItems = items.length;
-  const activeIndex = totalItems > 0 ? index % totalItems : 0;
+  const { currentTime, timezoneOffset, timeParts } = useTime();
+  const { width, height } = useWindowDimension({ debounceDelay: 100 });
+  const { name, version } = useBrowserInfo();
 
-  function showNextItem() {
-    if (totalItems === 0) {
-      return;
-    }
+  const statusItems: StatusItem[] = [
+    {
+      render: () => <Clock currentTime={currentTime} timeParts={timeParts} />,
+    },
+    {
+      render: () => (
+        <CurrentTime
+          currentTime={currentTime}
+          timezoneOffset={timezoneOffset}
+        />
+      ),
+    },
+    { render: () => <Principle /> },
+    { render: () => <Dimensions width={width} height={height} /> },
+    { render: () => <BrowserInfo name={name} version={version} /> },
+  ];
 
-    setIndex((currentIndex) => (currentIndex + 1) % totalItems);
+  const totalStatusItems = statusItems.length;
+  if (totalStatusItems === 0) {
+    return null;
   }
 
-  if (totalItems === 0) {
-    return null;
+  const normalizedActiveIndex = activeIndex % totalStatusItems;
+  const activeStatusItem = statusItems[normalizedActiveIndex];
+
+  function handleShowNextItem() {
+    setActiveIndex((currentIndex) => (currentIndex + 1) % totalStatusItems);
   }
 
   return (
     <div
       className={styles.statusDisplay}
       data-animate
-      onMouseDown={showNextItem}
+      onMouseDown={handleShowNextItem}
       style={{ "--stagger": "7" }}
     >
-      {items[activeIndex]}
+      {activeStatusItem.render()}
     </div>
-  );
-}
-
-export default function StatusDisplay() {
-  return (
-    <StatusDisplayRoot>
-      <ClockView />
-      <CurrentTimeView />
-      <Principle />
-      <DimensionsView />
-      <BrowserInfoView />
-    </StatusDisplayRoot>
   );
 }

@@ -1,9 +1,10 @@
 "use client";
 
-import { useBrowserInfo } from "../../../hooks/useBrowserInfo";
+interface BrowserInfoProps {
+  name: string;
+  version: string;
+}
 
-export default function BrowserInfoView() {
-  const { name, version } = useBrowserInfo();
-
+export default function BrowserInfo({ name, version }: BrowserInfoProps) {
   return `${name} ${version}`;
 }

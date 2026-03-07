@@ -1,20 +1,23 @@
 "use client";
 
-import { useTime } from "../../../hooks/useTime";
+import type { TimeParts } from "../../../hooks/useTime";
 import AnalogueClock from "../../analogue-clock/AnalogueClock";
 import Tooltip from "../../tooltip/Tooltip";
 
-export default function ClockView() {
-  const { currentTime, timezoneName } = useTime();
+interface ClockProps {
+  currentTime: string;
+  timeParts: TimeParts;
+}
 
+export default function Clock({ currentTime, timeParts }: ClockProps) {
   return (
     <Tooltip
-      content={`${currentTime} ${timezoneName}`}
+      content={currentTime}
       triggerProps={{
         style: { "--tooltip-trigger-radius": "50%" },
       }}
     >
-      <AnalogueClock />
+      <AnalogueClock timeParts={timeParts} />
     </Tooltip>
   );
 }

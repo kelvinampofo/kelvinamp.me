@@ -1,10 +1,11 @@
 "use client";
 
-import { useWindowDimension } from "../../../hooks/useWindowDimension";
+interface DimensionsProps {
+  width: number | undefined;
+  height: number | undefined;
+}
 
-export default function DimensionsView() {
-  const { width, height } = useWindowDimension({ debounceDelay: 100 });
-
+export default function Dimensions({ width, height }: DimensionsProps) {
   return (
     <span style={{ whiteSpace: "pre" }}>{`w: ${width}  h: ${height}`}</span>
   );
