@@ -166,5 +166,10 @@ export const wordEntries = (
       definition:
         "the defining spirit or mood of a particular period of history as shown by the ideas and beliefs of the time",
     },
+    {
+      word: "triumvirate",
+      type: "noun",
+      definition: "a group of three powerful or notable people or things",
+    },
   ] satisfies WordEntryProps[]
 ).sort((a, b) => a.word.localeCompare(b.word));
