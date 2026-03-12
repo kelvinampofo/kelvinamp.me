@@ -171,5 +171,18 @@ export const wordEntries = (
       type: "noun",
       definition: "a group of three powerful or notable people or things",
     },
+    {
+      word: "emanate",
+      type: "verb",
+      definition:
+        "(of a feeling, quality, or sensation) issue or spread out from (a source)",
+      variations: ["emanates", "emanating", "emanated"],
+    },
+    {
+      word: "proprioception",
+      type: "noun",
+      definition:
+        "perception or awareness of the position and movement of the body",
+    },
   ] satisfies WordEntryProps[]
 ).sort((a, b) => a.word.localeCompare(b.word));
