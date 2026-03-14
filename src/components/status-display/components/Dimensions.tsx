@@ -6,7 +6,5 @@ interface DimensionsProps {
 }
 
 export default function Dimensions({ width, height }: DimensionsProps) {
-  return (
-    <span style={{ whiteSpace: "pre" }}>{`w: ${width}  h: ${height}`}</span>
-  );
+  return <span>{`${width}x${height}`}</span>;
 }
