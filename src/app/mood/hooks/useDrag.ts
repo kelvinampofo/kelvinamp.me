@@ -4,6 +4,7 @@ import {
   type Dispatch,
   PointerEvent as ReactPointerEvent,
   type SetStateAction,
+  useState,
   useRef,
 } from "react";
 
@@ -38,6 +39,7 @@ export default function useDrag({
   threshold = 10,
 }: UseDragOptions) {
   const activeDragRef = useRef<DragState | null>(null);
+  const [activeDragId, setActiveDragId] = useState<string | null>(null);
 
   function onPointerDown(
     imageId: string,
@@ -70,6 +72,7 @@ export default function useDrag({
         y: initialPosition.y,
       },
     };
+    setActiveDragId(imageId);
 
     pointerDownEvent.currentTarget.setPointerCapture(
       pointerDownEvent.pointerId
@@ -95,6 +98,8 @@ export default function useDrag({
 
     const movement = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
+    // A small drag hysteresis prevents incidental pointer jitter from
+    // immediately promoting a press into an active drag.
     if (activeDrag.state === "press" && movement < threshold) {
       return;
     }
@@ -133,6 +138,7 @@ export default function useDrag({
     if (!activeDrag || pointerId !== activeDrag.pointerId) return;
 
     activeDragRef.current = null;
+    setActiveDragId(null);
   }
 
   function onPointerUp(pointerUpEvent: ReactPointerEvent<HTMLDivElement>) {
@@ -142,5 +148,5 @@ export default function useDrag({
     pointerUpEvent.stopPropagation();
   }
 
-  return { onPointerDown, onPointerMove, onPointerUp };
+  return { activeDragId, onPointerDown, onPointerMove, onPointerUp };
 }
