@@ -9,6 +9,7 @@ import useShortcuts from "../../../../hooks/useShortcuts";
 import useCanvasCamera from "../../hooks/useCanvasCamera";
 import useDrag from "../../hooks/useDrag";
 import { CANVAS_IMAGES } from "../../images";
+import { isIntersecting } from "../../utils/isIntersecting";
 
 import styles from "./Canvas.module.css";
 
@@ -21,6 +22,7 @@ export default function Canvas() {
   const [isPanModeEnabled, setIsPanModeEnabled] = useState(false);
 
   const canvasRef = useRef<HTMLDivElement | null>(null);
+  const elementRefs = useRef(new Map<string, HTMLDivElement>());
 
   const {
     camera,
@@ -32,7 +34,7 @@ export default function Canvas() {
 
   const { toggleFullscreen } = useFullscreen();
 
-  const { onPointerDown, onPointerMove, onPointerUp } = useDrag({
+  const { activeDragId, onPointerDown, onPointerMove, onPointerUp } = useDrag({
     images: canvasImages,
     setImages: setCanvasImages,
     getScale: () => cameraRef.current.z,
@@ -40,6 +42,7 @@ export default function Canvas() {
   });
 
   useShortcuts({ F: toggleFullscreen }, { preventDefault: true });
+
   useShortcuts({
     H: () => setIsPanModeEnabled(true),
     V: () => setIsPanModeEnabled(false),
@@ -80,6 +83,55 @@ export default function Canvas() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!activeDragId) return;
+
+    const draggedElement = elementRefs.current.get(activeDragId);
+
+    if (!draggedElement) return;
+
+    const isIntersectingAnotherElement = canvasImages.some(({ id }) => {
+      if (id === activeDragId) return false;
+
+      const element = elementRefs.current.get(id);
+      return element ? isIntersecting(draggedElement, element) : false;
+    });
+
+    if (!isIntersectingAnotherElement) return;
+
+    const animationFrameId = window.requestAnimationFrame(() => {
+      setCanvasImages((previousImages) => {
+        const activeImageIndex = previousImages.findIndex(
+          (image) => image.id === activeDragId
+        );
+
+        if (
+          activeImageIndex === -1 ||
+          activeImageIndex === previousImages.length - 1
+        ) {
+          return previousImages;
+        }
+
+        const nextImages = [...previousImages];
+        const [activeImage] = nextImages.splice(activeImageIndex, 1);
+        nextImages.push(activeImage);
+
+        return nextImages;
+      });
+    });
+
+    return () => window.cancelAnimationFrame(animationFrameId);
+  }, [activeDragId, canvasImages]);
+
+  function setElementRef(id: string, element: HTMLDivElement | null) {
+    if (element) {
+      elementRefs.current.set(id, element);
+      return;
+    }
+
+    elementRefs.current.delete(id);
+  }
+
   return (
     <div
       ref={canvasRef}
@@ -100,6 +152,7 @@ export default function Canvas() {
           return (
             <div
               key={id}
+              ref={(element) => setElementRef(id, element)}
               className={styles.moodElement}
               onPointerDown={(event) => onPointerDown(id, event)}
               onPointerMove={onPointerMove}
@@ -111,13 +164,7 @@ export default function Canvas() {
                 transform: `translate3d(${x}px, ${y}px, 0)`,
               }}
             >
-              <Image
-                src={src}
-                alt={alt}
-                title={alt}
-                fill
-                className={styles.moodImage}
-              />
+              <Image src={src} alt={alt} fill className={styles.moodImage} />
             </div>
           );
         })}
