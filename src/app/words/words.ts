@@ -184,5 +184,15 @@ export const wordEntries = (
       definition:
         "perception or awareness of the position and movement of the body",
     },
+    {
+      word: "spelunking",
+      type: "noun",
+      definition: "the hobby or practice of exploring caves",
+    },
+    {
+      word: "errant",
+      type: "adjective",
+      definition: "erring or straying from the proper course or standards",
+    },
   ] satisfies WordEntryProps[]
 ).sort((a, b) => a.word.localeCompare(b.word));
