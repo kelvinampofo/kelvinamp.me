@@ -144,4 +144,13 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     src: "/assets/images/mood/classic-blue-cursor-icons.webp",
     alt: "Classic blue cursor icon set on a light gray background",
   },
+  {
+    id: "playbit-icon-set",
+    x: 2420,
+    y: 520,
+    width: 420,
+    height: 357,
+    src: "/assets/images/mood/playbit-icon-set.webp",
+    alt: "Playbit app icon set showing dashboard and guest release and debug variants",
+  },
 ];
