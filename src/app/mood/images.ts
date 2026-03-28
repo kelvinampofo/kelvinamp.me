@@ -153,4 +153,13 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     src: "/assets/images/mood/playbit-icon-set.webp",
     alt: "Playbit app icon set showing dashboard and guest release and debug variants",
   },
+  {
+    id: "dot-matrix-generation",
+    x: 2360,
+    y: -180,
+    width: 420,
+    height: 310,
+    src: "/assets/images/mood/dot-matrix-generation.webp",
+    alt: "Dot matrix generation diagram showing ROM format, words, bits, and pulse timing",
+  },
 ];
