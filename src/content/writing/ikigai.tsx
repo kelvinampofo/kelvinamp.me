@@ -1,4 +1,5 @@
 import Heading from "../../components/heading/Heading";
+import MediaPreviewLink from "../../components/media-preview-link/MediaPreviewLink";
 
 export const metadata = {
   title: "Ikigai",
@@ -39,9 +40,14 @@ export default function Ikigai() {
         All I want to do is{" "}
         <q>
           <em>
-            <a href="https://putsomethingback.stevejobsarchive.com/internal-meeting-at-apple">
+            <MediaPreviewLink
+              href="https://putsomethingback.stevejobsarchive.com/internal-meeting-at-apple"
+              media={{
+                src: "/assets/videos/steve-jobs-make-something-wonderful.mp4",
+              }}
+            >
               make something wonderful and put it out there
-            </a>
+            </MediaPreviewLink>
           </em>
         </q>
         .
@@ -57,10 +63,6 @@ export default function Ikigai() {
         I’ll keep iterating over this. You can find the source code{" "}
         <a href="https://github.com/kelvinampofo/kelvinamp.me">here</a> if
         interested.
-      </p>
-      <p>
-        Anyway, these are just some late night thoughts&mdash;I’ll look to
-        explore these ideas further.
       </p>
     </>
   );
