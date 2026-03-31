@@ -2,7 +2,9 @@
 
 import { PreviewCard } from "@base-ui/react/preview-card";
 import clsx from "clsx";
+import { useState } from "react";
 
+import usePointerDevice from "../../hooks/usePointerDevice";
 import { MediaPlayer } from "../media-player/MediaPlayer";
 
 import styles from "./MediaPreviewLink.module.css";
@@ -32,13 +34,26 @@ export default function MediaPreviewLink({
   delay = DELAY,
   closeDelay = CLOSE_DELAY,
 }: MediaPreviewLinkProps) {
+  const [open, setOpen] = useState(false);
+  const { isPointerDevice } = usePointerDevice();
+
   return (
-    <PreviewCard.Root>
+    <PreviewCard.Root open={open} onOpenChange={setOpen}>
       <PreviewCard.Trigger
         href={href}
         delay={delay}
         closeDelay={closeDelay}
         className={clsx(styles.trigger, className)}
+        onClick={(event) => {
+          if (isPointerDevice) {
+            return;
+          }
+
+          if (!open) {
+            event.preventDefault();
+            setOpen(true);
+          }
+        }}
       >
         {children}
       </PreviewCard.Trigger>
@@ -56,6 +71,12 @@ export default function MediaPreviewLink({
                 className={styles.video}
                 src={media.src}
                 poster={media.poster}
+                muted={false}
+                loop={false}
+                preload="auto"
+                onEnded={() => {
+                  setOpen(false);
+                }}
               />
             </MediaPlayer.Root>
           </PreviewCard.Popup>
