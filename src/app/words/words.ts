@@ -199,5 +199,11 @@ export const wordEntries = (
       type: "adjective",
       definition: "be filled with a feeling of love for",
     },
+    {
+      word: "corollary",
+      type: "noun",
+      definition:
+        "a statement that follows directly from another statement or proposition",
+    },
   ] satisfies WordEntryProps[]
 ).sort((a, b) => a.word.localeCompare(b.word));
