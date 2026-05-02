@@ -194,5 +194,10 @@ export const wordEntries = (
       type: "adjective",
       definition: "erring or straying from the proper course or standards",
     },
+    {
+      word: "enamored",
+      type: "adjective",
+      definition: "be filled with a feeling of love for",
+    },
   ] satisfies WordEntryProps[]
 ).sort((a, b) => a.word.localeCompare(b.word));
