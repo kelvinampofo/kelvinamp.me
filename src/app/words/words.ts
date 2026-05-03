@@ -205,5 +205,10 @@ export const wordEntries = (
       definition:
         "a statement that follows directly from another statement or proposition",
     },
+    {
+      word: "ostensible",
+      type: "adjective",
+      definition: "stated or appearing to be true, but not necessarily so",
+    },
   ] satisfies WordEntryProps[]
 ).sort((a, b) => a.word.localeCompare(b.word));
