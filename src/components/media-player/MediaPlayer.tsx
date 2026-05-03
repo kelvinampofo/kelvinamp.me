@@ -6,7 +6,6 @@ import {
   type ComponentProps,
   type ReactNode,
   useRef,
-  useState,
   createContext,
 } from "react";
 
@@ -57,8 +56,6 @@ function Root({
 }: ComponentProps<"div"> & {
   children: ReactNode;
 }) {
-  const [isActive, setIsActive] = useState(false);
-
   const rootRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -219,7 +216,6 @@ function Root({
   };
 
   useShortcuts(shortcutHandlers, {
-    enabled: isActive,
     preventDefault: true,
   });
 
@@ -228,22 +224,6 @@ function Root({
       <div
         ref={rootRef}
         className={clsx(styles.root, className)}
-        onMouseEnter={() => {
-          setIsActive(true);
-        }}
-        onMouseLeave={() => {
-          setIsActive(false);
-        }}
-        onFocusCapture={() => {
-          setIsActive(true);
-        }}
-        onBlurCapture={(event) => {
-          if (
-            !event.currentTarget.contains(event.relatedTarget as Node | null)
-          ) {
-            setIsActive(false);
-          }
-        }}
         {...props}
       >
         {children}
