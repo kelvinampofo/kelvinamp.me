@@ -11,6 +11,7 @@ import {
 } from "react";
 
 import useShortcuts from "../../hooks/useShortcuts";
+import { clamp } from "../../utils/math";
 
 import styles from "./MediaPlayer.module.css";
 
@@ -18,8 +19,15 @@ interface MediaPlayerContextValue {
   setVideoElement: (node: HTMLVideoElement | null) => void;
 }
 
+type ShortcutHandlers = Parameters<typeof useShortcuts>[0];
+
 const MediaPlayerContext = createContext<MediaPlayerContextValue | null>(null);
+
 const PLAYBACK_RATES = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
+const FRAME_DURATION = 1 / 30;
+const KEYBOARD_SEEK_SECONDS = 10;
+const ARROW_KEY_SEEK_SECONDS = 5;
+const PERCENT_SHORTCUT_COUNT = 10;
 
 function useMediaPlayerContext(componentName: string) {
   const context = useContext(MediaPlayerContext);
@@ -34,6 +42,12 @@ function useMediaPlayerContext(componentName: string) {
 function toggleTextTrack(track: TextTrack) {
   track.mode =
     track.mode === "showing" || track.mode === "hidden" ? "disabled" : "hidden";
+}
+
+async function playWithoutInterrupting(video: HTMLVideoElement) {
+  try {
+    await video.play();
+  } catch {}
 }
 
 function Root({
@@ -52,6 +66,22 @@ function Root({
     videoRef.current = node;
   }
 
+  function withVideo(action: (video: HTMLVideoElement) => void) {
+    const video = videoRef.current;
+
+    if (video) {
+      action(video);
+    }
+  }
+
+  function withSeekableVideo(action: (video: HTMLVideoElement) => void) {
+    withVideo((video) => {
+      if (Number.isFinite(video.duration)) {
+        action(video);
+      }
+    });
+  }
+
   async function togglePlayback() {
     const video = videoRef.current;
 
@@ -60,10 +90,7 @@ function Root({
     }
 
     if (video.paused || video.ended) {
-      try {
-        await video.play();
-      } catch {}
-
+      await playWithoutInterrupting(video);
       return;
     }
 
@@ -86,10 +113,7 @@ function Root({
         video.volume = 1;
       }
 
-      try {
-        await video.play();
-      } catch {}
-
+      await playWithoutInterrupting(video);
       return;
     }
 
@@ -97,55 +121,37 @@ function Root({
   }
 
   function seekBy(seconds: number) {
-    const video = videoRef.current;
-
-    if (!video || !Number.isFinite(video.duration)) {
-      return;
-    }
-
-    video.currentTime = Math.max(
-      0,
-      Math.min(video.duration, video.currentTime + seconds)
-    );
+    withSeekableVideo((video) => {
+      video.currentTime = clamp(video.currentTime + seconds, 0, video.duration);
+    });
   }
 
   function seekToPercentage(percentage: number) {
-    const video = videoRef.current;
-
-    if (!video || !Number.isFinite(video.duration)) {
-      return;
-    }
-
-    video.currentTime = video.duration * percentage;
+    withSeekableVideo((video) => {
+      video.currentTime = video.duration * percentage;
+    });
   }
 
   function adjustVolumeBy(delta: number) {
-    const video = videoRef.current;
-
-    if (!video) {
-      return;
-    }
-
-    video.muted = false;
-    video.volume = Math.max(0, Math.min(1, video.volume + delta));
+    withVideo((video) => {
+      video.muted = false;
+      video.volume = clamp(video.volume + delta, 0, 1);
+    });
   }
 
   function cyclePlaybackRate(direction: 1 | -1) {
-    const video = videoRef.current;
+    withVideo((video) => {
+      const currentIndex = PLAYBACK_RATES.indexOf(video.playbackRate);
+      const safeIndex =
+        currentIndex === -1 ? PLAYBACK_RATES.indexOf(1) : currentIndex;
+      const nextIndex = clamp(
+        safeIndex + direction,
+        0,
+        PLAYBACK_RATES.length - 1
+      );
 
-    if (!video) {
-      return;
-    }
-
-    const currentIndex = PLAYBACK_RATES.indexOf(video.playbackRate);
-    const safeIndex =
-      currentIndex === -1 ? PLAYBACK_RATES.indexOf(1) : currentIndex;
-    const nextIndex = Math.max(
-      0,
-      Math.min(PLAYBACK_RATES.length - 1, safeIndex + direction)
-    );
-
-    video.playbackRate = PLAYBACK_RATES[nextIndex];
+      video.playbackRate = PLAYBACK_RATES[nextIndex];
+    });
   }
 
   async function toggleFullscreen() {
@@ -164,119 +170,58 @@ function Root({
   }
 
   function toggleCaptions() {
-    const track = videoRef.current?.textTracks?.[0];
+    withVideo((video) => {
+      const track = video.textTracks?.[0];
 
-    if (!track) {
-      return;
-    }
-
-    toggleTextTrack(track);
+      if (track) {
+        toggleTextTrack(track);
+      }
+    });
   }
 
   function stepFrame(direction: 1 | -1) {
-    const video = videoRef.current;
+    withVideo((video) => {
+      if (!video.paused) {
+        return;
+      }
 
-    if (!video || !video.paused) {
-      return;
-    }
-
-    const frameDuration = 1 / 30;
-
-    video.currentTime = Math.max(
-      0,
-      Math.min(
-        video.duration || Number.MAX_SAFE_INTEGER,
-        video.currentTime + direction * frameDuration
-      )
-    );
+      video.currentTime = clamp(
+        video.currentTime + direction * FRAME_DURATION,
+        0,
+        video.duration || Number.MAX_SAFE_INTEGER
+      );
+    });
   }
 
-  useShortcuts(
-    {
-      S: () => {
-        void toggleMute();
-      },
-      M: () => {
-        void toggleMute();
-      },
-      K: () => {
-        void togglePlayback();
-      },
-      " ": () => {
-        void togglePlayback();
-      },
-      J: () => {
-        seekBy(-10);
-      },
-      L: () => {
-        seekBy(10);
-      },
-      ArrowLeft: () => {
-        seekBy(-5);
-      },
-      ArrowRight: () => {
-        seekBy(5);
-      },
-      ArrowUp: () => {
-        adjustVolumeBy(0.05);
-      },
-      ArrowDown: () => {
-        adjustVolumeBy(-0.05);
-      },
-      F: () => {
-        void toggleFullscreen();
-      },
-      C: () => {
-        toggleCaptions();
-      },
-      ".": () => {
-        stepFrame(1);
-      },
-      ",": () => {
-        stepFrame(-1);
-      },
-      ">": () => {
-        cyclePlaybackRate(1);
-      },
-      "<": () => {
-        cyclePlaybackRate(-1);
-      },
-      "0": () => {
-        seekToPercentage(0);
-      },
-      "1": () => {
-        seekToPercentage(0.1);
-      },
-      "2": () => {
-        seekToPercentage(0.2);
-      },
-      "3": () => {
-        seekToPercentage(0.3);
-      },
-      "4": () => {
-        seekToPercentage(0.4);
-      },
-      "5": () => {
-        seekToPercentage(0.5);
-      },
-      "6": () => {
-        seekToPercentage(0.6);
-      },
-      "7": () => {
-        seekToPercentage(0.7);
-      },
-      "8": () => {
-        seekToPercentage(0.8);
-      },
-      "9": () => {
-        seekToPercentage(0.9);
-      },
-    },
-    {
-      enabled: isActive,
-      preventDefault: true,
-    }
-  );
+  const shortcutHandlers: ShortcutHandlers = {
+    S: () => void toggleMute(),
+    M: () => void toggleMute(),
+    K: () => void togglePlayback(),
+    " ": () => void togglePlayback(),
+    J: () => seekBy(-KEYBOARD_SEEK_SECONDS),
+    L: () => seekBy(KEYBOARD_SEEK_SECONDS),
+    ArrowLeft: () => seekBy(-ARROW_KEY_SEEK_SECONDS),
+    ArrowRight: () => seekBy(ARROW_KEY_SEEK_SECONDS),
+    ArrowUp: () => adjustVolumeBy(0.05),
+    ArrowDown: () => adjustVolumeBy(-0.05),
+    F: () => void toggleFullscreen(),
+    C: toggleCaptions,
+    ".": () => stepFrame(1),
+    ",": () => stepFrame(-1),
+    ">": () => cyclePlaybackRate(1),
+    "<": () => cyclePlaybackRate(-1),
+    ...Object.fromEntries(
+      Array.from({ length: PERCENT_SHORTCUT_COUNT }, (_, digit) => [
+        String(digit),
+        () => seekToPercentage(digit / PERCENT_SHORTCUT_COUNT),
+      ])
+    ),
+  };
+
+  useShortcuts(shortcutHandlers, {
+    enabled: isActive,
+    preventDefault: true,
+  });
 
   return (
     <MediaPlayerContext.Provider value={{ setVideoElement }}>
