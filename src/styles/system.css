@@ -8,15 +8,8 @@
     font-synthesis: none;
   }
 
-  h1,
-  h2,
-  h3,
-  h4 {
+  :where(h1, h2, h3, h4) {
     text-wrap: balance;
-  }
-
-  p {
-    text-wrap: wrap;
   }
 
   a {
@@ -24,10 +17,7 @@
     text-decoration: none;
   }
 
-  input,
-  button,
-  textarea,
-  select {
+  :where(input, button, textarea, select) {
     font: inherit;
   }
 
@@ -37,18 +27,12 @@
 
   [data-list="unstyled"] {
     list-style: none;
-    list-style-type: none;
     margin: 0;
     padding-left: 0;
   }
 
   [data-list="unstyled"] li {
     margin-top: 0;
-    list-style: none;
-  }
-
-  [data-list="unstyled"] li::marker {
-    content: "";
   }
 
   kbd {
@@ -101,6 +85,9 @@
     --focus-inner-color-light: hsl(0, 0%, 99%);
     --focus-inner-color-dark: hsl(0, 0%, 8.63%);
     --focus-outer-color: hsl(39, 100%, 57%);
+    --focus-ring:
+      0 0 0 2px var(--focus-inner-color-light),
+      0 0 0 4px var(--focus-outer-color);
 
     --selection-bg-color: rgb(255, 249, 168);
     --selection-text-color: #000000;
@@ -172,8 +159,6 @@
     );
 
     /* Shadows */
-    --shadow-border: 0 0 0 1px var(--greyA3);
-
     --shadow-ambient: lch(0% 0 0 / 0.03);
     --shadow-key: lch(0% 0 0 / 0.08);
     --shadow-specular: lch(100% 0 0 / 0.06);
@@ -277,6 +262,9 @@
       --shadow-ambient: lch(0% 0 0 / 0.06);
       --shadow-key: lch(0% 0 0 / 0.08);
       --shadow-specular: lch(100% 0 0 / 0.07);
+      --focus-ring:
+        0 0 0 2px var(--focus-inner-color-dark),
+        0 0 0 4px var(--focus-outer-color);
 
       --elevation-1:
         var(--shadow-key) 0 4px 4px -1px, var(--shadow-key) 0 1px 1px 0;
@@ -362,17 +350,7 @@
   :focus-visible {
     border-radius: var(--radius-2);
     outline: 0;
-    box-shadow:
-      0 0 0 2px var(--focus-inner-color-light),
-      0 0 0 4px var(--focus-outer-color);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :focus-visible {
-      box-shadow:
-        0 0 0 2px var(--focus-inner-color-dark),
-        0 0 0 4px var(--focus-outer-color);
-    }
+    box-shadow: var(--focus-ring);
   }
 
   @media (hover: none) and (pointer: coarse) {
@@ -432,7 +410,7 @@
     text-decoration: underline;
     text-decoration-color: var(--grey6);
     text-decoration-thickness: 1px;
-    text-underline-offset: 2.5px;
+    text-underline-offset: 0.1em;
     border-radius: var(--radius-4);
     transition: text-decoration-color var(--transition-hover);
 
@@ -463,7 +441,7 @@
     list-style-type: circle;
   }
 
-  .prose :where(ul ul, ol ol) {
+  .prose :where(ul, ol) :where(ul, ol) {
     margin-top: var(--space-8);
     padding-left: var(--space-20);
   }
@@ -472,12 +450,8 @@
     color: var(--grey11);
   }
 
-  .prose :where(ul, ol) li {
+  .prose :where(ul, ol) li + li {
     margin-top: var(--space-10);
-  }
-
-  .prose :where(ul, ol) li:first-child {
-    margin-top: 0;
   }
 
   .prose :where(ul, ol)[data-list="unstyled"] {
@@ -582,7 +556,6 @@
     content: counter(sidenote);
     display: block;
     margin-bottom: var(--space-4);
-    color: var(--indigo11);
     font-size: 0.875em;
   }
 
@@ -700,18 +673,13 @@
     display: flex;
     gap: var(--space-8);
     list-style: none;
-    list-style-type: none;
     margin: 0;
     padding-left: 0;
   }
 
-  .pages-list li {
+  .pages-list li,
+  .pages-list li + li {
     margin-top: 0;
-    list-style: none;
-  }
-
-  .pages-list li::marker {
-    content: "";
   }
 
   .error-stack {
@@ -722,10 +690,6 @@
 }
 
 @layer utilities {
-  .hidden {
-    display: none;
-  }
-
   .sr-only {
     position: absolute;
     width: 1px;
@@ -742,8 +706,7 @@
     color: var(--color-foreground-secondary);
   }
 
-  .gesture-grabbing {
-    cursor: grabbing;
+  :is(.gesture-grabbing, .gesture-ew-resize) {
     user-select: none;
     -webkit-user-select: none;
 
@@ -754,16 +717,12 @@
     }
   }
 
+  .gesture-grabbing {
+    cursor: grabbing;
+  }
+
   .gesture-ew-resize {
     cursor: ew-resize;
-    user-select: none;
-    -webkit-user-select: none;
-
-    * {
-      pointer-events: none;
-      user-select: none;
-      -webkit-user-select: none;
-    }
   }
 
   .description {
