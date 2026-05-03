@@ -16,6 +16,7 @@ import styles from "./MediaPlayer.module.css";
 
 interface MediaPlayerContextValue {
   setVideoElement: (node: HTMLVideoElement | null) => void;
+  togglePlayback: () => Promise<void>;
 }
 
 type ShortcutHandlers = Parameters<typeof useShortcuts>[0];
@@ -220,7 +221,7 @@ function Root({
   });
 
   return (
-    <MediaPlayerContext.Provider value={{ setVideoElement }}>
+    <MediaPlayerContext.Provider value={{ setVideoElement, togglePlayback }}>
       <div
         ref={rootRef}
         className={clsx(styles.root, className)}
@@ -238,11 +239,13 @@ function Video({
   controls = false,
   loop = true,
   muted = true,
+  onClick,
   playsInline = true,
   preload = "metadata",
   ...props
 }: ComponentProps<"video">) {
-  const { setVideoElement } = useMediaPlayerContext("MediaPlayer.Video");
+  const { setVideoElement, togglePlayback } =
+    useMediaPlayerContext("MediaPlayer.Video");
 
   return (
     <video
@@ -254,6 +257,13 @@ function Video({
       muted={muted}
       playsInline={playsInline}
       preload={preload}
+      onClick={(event) => {
+        onClick?.(event);
+
+        if (!event.defaultPrevented) {
+          void togglePlayback();
+        }
+      }}
       className={clsx(styles.video, className)}
     />
   );
