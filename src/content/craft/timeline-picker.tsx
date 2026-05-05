@@ -1,6 +1,6 @@
-import TimelinePicker from "../../app/craft/components/timeline-picker/TimelinePicker";
 import Card from "../../components/card/Card";
 import Heading from "../../components/heading/Heading";
+import TimelinePicker from "../../craft/demos/timeline-picker/TimelinePicker";
 
 export const metadata = {
   title: "Timeline Picker",

@@ -14,9 +14,9 @@ import {
   TransitionEvent,
 } from "react";
 
-import Chevron from "../../../../components/icons/Chevron";
-import PopupArrow from "../../../../components/icons/PopupArrow";
-import { clamp, lerp } from "../../../../utils/math";
+import Chevron from "../../../components/icons/Chevron";
+import PopupArrow from "../../../components/icons/PopupArrow";
+import { clamp, lerp } from "../../../utils/math";
 
 import styles from "./NumericScrubber.module.css";
 

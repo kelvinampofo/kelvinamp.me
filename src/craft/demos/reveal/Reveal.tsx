@@ -4,10 +4,10 @@ import clsx from "clsx";
 import Image from "next/image";
 import { type PointerEvent, useEffect, useRef, useState } from "react";
 
-import flowers from "../../../../../public/assets/images/reveal/flowers.webp";
-import flutedGlassFlowers from "../../../../../public/assets/images/reveal/fluted-glass-flowers.png";
-import useShortcuts from "../../../../hooks/useShortcuts";
-import { clamp, lerp } from "../../../../utils/math";
+import flowers from "../../../../public/assets/images/reveal/flowers.webp";
+import flutedGlassFlowers from "../../../../public/assets/images/reveal/fluted-glass-flowers.png";
+import useShortcuts from "../../../hooks/useShortcuts";
+import { clamp, lerp } from "../../../utils/math";
 
 import styles from "./Reveal.module.css";
 

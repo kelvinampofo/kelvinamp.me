@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
-import Trash from "../../../../components/icons/Trash";
-import { animateThemeColor } from "../../../../utils/theme-color";
+import Trash from "../../../components/icons/Trash";
+import { animateThemeColor } from "../../../utils/theme-color";
 
 import styles from "./HoldToDelete.module.css";
 

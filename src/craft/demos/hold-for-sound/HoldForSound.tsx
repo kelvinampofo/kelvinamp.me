@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 import { useState, useEffect, type KeyboardEvent } from "react";
 import useSound from "use-sound";
 
-import PlayIcon from "../../../../components/icons/Play";
+import PlayIcon from "../../../components/icons/Play";
 
 import styles from "./HoldForSound.module.css";
 

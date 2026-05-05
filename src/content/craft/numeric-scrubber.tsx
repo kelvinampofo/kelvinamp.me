@@ -1,6 +1,6 @@
-import NumericScrubber from "../../app/craft/components/number-scrubber/NumericScrubber";
 import Card from "../../components/card/Card";
 import Heading from "../../components/heading/Heading";
+import NumericScrubber from "../../craft/demos/number-scrubber/NumericScrubber";
 
 export const metadata = {
   title: "Numeric scrubber",

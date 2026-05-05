@@ -1,6 +1,6 @@
-import ShimmerText from "../../app/craft/components/shimmer-text/ShimmerText";
 import Card from "../../components/card/Card";
 import Heading from "../../components/heading/Heading";
+import ShimmerText from "../../craft/demos/shimmer-text/ShimmerText";
 
 export const metadata = {
   title: "Shimmer Text",

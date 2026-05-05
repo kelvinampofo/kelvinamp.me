@@ -1,6 +1,6 @@
-import Loading from "../../app/craft/components/loading-indicators/Loading";
 import Card from "../../components/card/Card";
 import Heading from "../../components/heading/Heading";
+import Loading from "../../craft/demos/loading-indicators/Loading";
 
 export const metadata = {
   title: "Loading Indicators",
