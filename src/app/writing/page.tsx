@@ -2,10 +2,10 @@ import Link from "next/link";
 
 import Heading from "../../components/heading/Heading";
 import List from "../../components/list/List";
-import { getEntries } from "../../utils/entries";
+import { getContentEntries } from "../../utils/content-collection";
 
 export default async function WritingPage() {
-  const posts = await getEntries("writing");
+  const posts = await getContentEntries("writing");
 
   return (
     <>

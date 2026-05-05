@@ -1,9 +1,9 @@
 import Heading from "../../components/heading/Heading";
 import List from "../../components/list/List";
-import { getEntries } from "../../utils/entries";
+import { getContentEntries } from "../../utils/content-collection";
 
 export default async function CraftPage() {
-  const demos = await getEntries("craft");
+  const demos = await getContentEntries("craft");
 
   return (
     <>
