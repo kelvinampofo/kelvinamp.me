@@ -9,9 +9,8 @@ import {
 
 type Params = Promise<{ slug: string }>;
 
-// This is the Next Adapter over the domain-shaped content collection Module.
-// Keep framework behavior here so collection loading remains usable outside
-// route files.
+// Route handlers are created per collection so Next receives stable exports
+// while collection loading stays independent of route filenames.
 export function createContentRoute(collection: ContentCollection) {
   async function ContentPage({ params }: { params: Params }) {
     const { slug } = await params;

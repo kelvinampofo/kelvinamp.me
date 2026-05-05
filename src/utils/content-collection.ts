@@ -56,9 +56,8 @@ export const getContentEntryModule = cache(
     collection: ContentCollection,
     slug: string
   ): Promise<ContentEntryModule | null> => {
-    // Resolve slug existence from the collection index before dynamic import.
-    // A missing slug is a 404; an existing entry that fails to import should
-    // surface as a broken content module, not be collapsed into "not found".
+    // Existence is defined by the collection index, not by import failures.
+    // That keeps broken entry modules observable during static generation.
     const entries = await getContentEntries(collection);
     const entryExists = entries.some((entry) => entry.slug === slug);
 
@@ -85,8 +84,8 @@ async function importContentEntryModule(
 ) {
   const mod: unknown = await import(`../content/${collection}/${slug}.tsx`);
 
-  // Dynamic imports are runtime data at this Seam. Keep the content module
-  // contract checked here so callers can work with the narrowed type.
+  // Dynamic imports erase the module shape, so this is the runtime gate that
+  // makes the authored content contract explicit.
   assertContentEntryModule(mod, collection, slug);
 
   return mod;
@@ -106,6 +105,7 @@ function assertContentEntryModule(
   const candidate = mod as Partial<ContentEntryModule>;
   const metadata = candidate.metadata;
   const hasComponent = typeof candidate.default === "function";
+
   const hasMetadata =
     !!metadata &&
     typeof metadata.title === "string" &&
