@@ -56,8 +56,8 @@ export const getContentEntryModule = cache(
     collection: ContentCollection,
     slug: string
   ): Promise<ContentEntryModule | null> => {
-    // Existence is defined by the collection index, not by import failures.
-    // That keeps broken entry modules observable during static generation.
+    // Check the index first so only unknown slugs return null. If a known
+    // entry fails to import, let the error through so the broken file is fixed.
     const entries = await getContentEntries(collection);
     const entryExists = entries.some((entry) => entry.slug === slug);
 
@@ -84,8 +84,8 @@ async function importContentEntryModule(
 ) {
   const mod: unknown = await import(`../content/${collection}/${slug}.tsx`);
 
-  // Dynamic imports erase the module shape, so this is the runtime gate that
-  // makes the authored content contract explicit.
+  // TypeScript cannot see what a dynamic content import exports, so validate
+  // the module before returning it as a ContentEntryModule.
   assertContentEntryModule(mod, collection, slug);
 
   return mod;

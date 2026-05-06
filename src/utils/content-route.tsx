@@ -9,8 +9,8 @@ import {
 
 type Params = Promise<{ slug: string }>;
 
-// Route handlers are created per collection so Next receives stable exports
-// while collection loading stays independent of route filenames.
+// Each route file exports concrete Next handlers, but the repeated loading,
+// metadata, and static-param behavior lives here.
 export function createContentRoute(collection: ContentCollection) {
   async function ContentPage({ params }: { params: Params }) {
     const { slug } = await params;
