@@ -1,6 +1,6 @@
 import Card from "../../components/card/Card";
 import Heading from "../../components/heading/Heading";
-import ProgressiveBlur from "../../craft/demos/progressive-blur/ProgressiveBlur";
+import ProgressiveBlur from "../../craft/prototypes/progressive-blur/ProgressiveBlur";
 
 export const metadata = {
   title: "Progressive Blur",

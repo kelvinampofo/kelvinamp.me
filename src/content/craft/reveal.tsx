@@ -1,5 +1,5 @@
 import Heading from "../../components/heading/Heading";
-import Reveal from "../../craft/demos/reveal/Reveal";
+import Reveal from "../../craft/prototypes/reveal/Reveal";
 
 export const metadata = {
   title: "Reveal",

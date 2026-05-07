@@ -1,5 +1,5 @@
 import Heading from "../../components/heading/Heading";
-import Carousel from "../../craft/demos/carousel/Carousel";
+import Carousel from "../../craft/prototypes/carousel/Carousel";
 
 export const metadata = {
   title: "Carousel",
