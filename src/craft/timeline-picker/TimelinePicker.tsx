@@ -4,8 +4,8 @@ import { motion, type Target, type Transition } from "motion/react";
 import { useState } from "react";
 import useSound from "use-sound";
 
-import Chevron from "../../../components/icons/Chevron";
-import useShortcuts from "../../../hooks/useShortcuts";
+import Chevron from "../../components/icons/Chevron";
+import useShortcuts from "../../hooks/useShortcuts";
 
 import styles from "./TimelinePicker.module.css";
 

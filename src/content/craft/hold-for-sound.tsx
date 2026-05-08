@@ -1,6 +1,6 @@
 import Card from "../../components/card/Card";
 import Heading from "../../components/heading/Heading";
-import HoldForSound from "../../craft/prototypes/hold-for-sound/HoldForSound";
+import HoldForSound from "../../craft/hold-for-sound/HoldForSound";
 
 export const metadata = {
   title: "Hold for Sound",

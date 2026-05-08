@@ -4,12 +4,12 @@ import clsx from "clsx";
 import dynamic from "next/dynamic";
 import { useRef, useState } from "react";
 
-import CentralLibraryImage from "../../../../public/assets/images/carousel/central-library.webp";
-import AliyevCenterImage from "../../../../public/assets/images/carousel/heydar-aliyev-center.webp";
-import KyotoStationImage from "../../../../public/assets/images/carousel/kyoto-station.webp";
-import ConcertHallImage from "../../../../public/assets/images/carousel/walt-disney-concert-hall.webp";
-import Chevron from "../../../components/icons/Chevron";
-import { clamp } from "../../../utils/math";
+import CentralLibraryImage from "../../../public/assets/images/carousel/central-library.webp";
+import AliyevCenterImage from "../../../public/assets/images/carousel/heydar-aliyev-center.webp";
+import KyotoStationImage from "../../../public/assets/images/carousel/kyoto-station.webp";
+import ConcertHallImage from "../../../public/assets/images/carousel/walt-disney-concert-hall.webp";
+import Chevron from "../../components/icons/Chevron";
+import { clamp } from "../../utils/math";
 
 import styles from "./Carousel.module.css";
 
