@@ -208,12 +208,16 @@ function Root({
     ",": () => stepFrame(-1),
     ">": () => cyclePlaybackRate(1),
     "<": () => cyclePlaybackRate(-1),
-    ...Object.fromEntries(
-      Array.from({ length: PERCENT_SHORTCUT_COUNT }, (_, digit) => [
-        String(digit),
-        () => seekToPercentage(digit / PERCENT_SHORTCUT_COUNT),
-      ])
-    ),
+    0: () => seekToPercentage(0 / PERCENT_SHORTCUT_COUNT),
+    1: () => seekToPercentage(1 / PERCENT_SHORTCUT_COUNT),
+    2: () => seekToPercentage(2 / PERCENT_SHORTCUT_COUNT),
+    3: () => seekToPercentage(3 / PERCENT_SHORTCUT_COUNT),
+    4: () => seekToPercentage(4 / PERCENT_SHORTCUT_COUNT),
+    5: () => seekToPercentage(5 / PERCENT_SHORTCUT_COUNT),
+    6: () => seekToPercentage(6 / PERCENT_SHORTCUT_COUNT),
+    7: () => seekToPercentage(7 / PERCENT_SHORTCUT_COUNT),
+    8: () => seekToPercentage(8 / PERCENT_SHORTCUT_COUNT),
+    9: () => seekToPercentage(9 / PERCENT_SHORTCUT_COUNT),
   };
 
   useShortcuts(shortcutHandlers, {
@@ -222,11 +226,7 @@ function Root({
 
   return (
     <MediaPlayerContext.Provider value={{ setVideoElement, togglePlayback }}>
-      <div
-        ref={rootRef}
-        className={clsx(styles.root, className)}
-        {...props}
-      >
+      <div ref={rootRef} className={clsx(styles.root, className)} {...props}>
         {children}
       </div>
     </MediaPlayerContext.Provider>
