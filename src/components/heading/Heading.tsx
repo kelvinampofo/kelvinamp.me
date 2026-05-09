@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import { HTMLProps } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 
 import styles from "./Heading.module.css";
 
-interface HeadingProps extends HTMLProps<HTMLHeadingElement> {
+interface HeadingProps extends ComponentPropsWithoutRef<"h1"> {
   as?: "h1" | "h2" | "h3" | "h4";
 }
 

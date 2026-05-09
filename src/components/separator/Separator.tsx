@@ -4,8 +4,6 @@ import styles from "./Separator.module.css";
 
 interface SeparatorProps extends React.ComponentProps<"hr"> {
   orientation?: "horizontal" | "vertical";
-  rotated?: boolean;
-  rotationAngle?: number;
 }
 
 export default function Separator({
