@@ -5,7 +5,7 @@ import List from "../../components/list/List";
 import { getContentEntries } from "../../utils/content-collection";
 
 export default async function WritingPage() {
-  const posts = await getContentEntries("writing");
+  const entries = await getContentEntries("writing");
 
   return (
     <>
@@ -14,7 +14,7 @@ export default async function WritingPage() {
         Infrequent thoughts on software <em>&</em> design, along with some
         appealing <Link href="/words">words</Link>.
       </p>
-      <List items={posts} kind="writing" basePath="/writing" />
+      <List entries={entries} collection="writing" />
     </>
   );
 }

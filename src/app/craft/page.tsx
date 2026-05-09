@@ -3,7 +3,7 @@ import List from "../../components/list/List";
 import { getContentEntries } from "../../utils/content-collection";
 
 export default async function CraftPage() {
-  const demos = await getContentEntries("craft");
+  const entries = await getContentEntries("craft");
 
   return (
     <>
@@ -11,7 +11,7 @@ export default async function CraftPage() {
       <p className="description">
         Collection of interfaces <em>&</em> interactions.
       </p>
-      <List items={demos} kind="craft" basePath="/craft" showDescription />
+      <List entries={entries} collection="craft" showDescription />
     </>
   );
 }
