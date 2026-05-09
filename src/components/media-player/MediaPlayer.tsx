@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import {
   useContext,
-  type ComponentProps,
+  type ComponentPropsWithoutRef,
   type ReactNode,
   useRef,
   createContext,
@@ -20,6 +20,10 @@ interface MediaPlayerContextValue {
 }
 
 type ShortcutHandlers = Parameters<typeof useShortcuts>[0];
+type MediaPlayerRootProps = ComponentPropsWithoutRef<"div"> & {
+  children: ReactNode;
+};
+type MediaPlayerVideoProps = Omit<ComponentPropsWithoutRef<"video">, "ref">;
 
 const MediaPlayerContext = createContext<MediaPlayerContextValue | null>(null);
 
@@ -50,13 +54,7 @@ async function playWithoutInterrupting(video: HTMLVideoElement) {
   } catch {}
 }
 
-function Root({
-  children,
-  className,
-  ...props
-}: ComponentProps<"div"> & {
-  children: ReactNode;
-}) {
+function Root({ children, className, ...props }: MediaPlayerRootProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -243,7 +241,7 @@ function Video({
   playsInline = true,
   preload = "metadata",
   ...props
-}: ComponentProps<"video">) {
+}: MediaPlayerVideoProps) {
   const { setVideoElement, togglePlayback } =
     useMediaPlayerContext("MediaPlayer.Video");
 

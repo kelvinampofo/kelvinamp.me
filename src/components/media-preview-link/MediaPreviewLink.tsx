@@ -9,7 +9,8 @@ import { MediaPlayer } from "../media-player/MediaPlayer";
 
 import styles from "./MediaPreviewLink.module.css";
 
-interface VideoPreview {
+interface MediaPreviewVideo {
+  type: "video";
   poster?: string;
   src: string;
 }
@@ -17,22 +18,22 @@ interface VideoPreview {
 interface MediaPreviewLinkProps {
   children: React.ReactNode;
   href: string;
-  media: VideoPreview;
+  media: MediaPreviewVideo;
   className?: string;
-  delay?: number;
-  closeDelay?: number;
+  openDelayMs?: number;
+  closeDelayMs?: number;
 }
 
-const DELAY = 80;
-const CLOSE_DELAY = 100;
+const OPEN_DELAY_MS = 80;
+const CLOSE_DELAY_MS = 100;
 
 export default function MediaPreviewLink({
   children,
   href,
   media,
   className,
-  delay = DELAY,
-  closeDelay = CLOSE_DELAY,
+  openDelayMs = OPEN_DELAY_MS,
+  closeDelayMs = CLOSE_DELAY_MS,
 }: MediaPreviewLinkProps) {
   const [open, setOpen] = useState(false);
   const { isPointerDevice } = usePointerDevice();
@@ -41,8 +42,8 @@ export default function MediaPreviewLink({
     <PreviewCard.Root open={open} onOpenChange={setOpen}>
       <PreviewCard.Trigger
         href={href}
-        delay={delay}
-        closeDelay={closeDelay}
+        delay={openDelayMs}
+        closeDelay={closeDelayMs}
         className={clsx(styles.trigger, className)}
         onClick={(event) => {
           if (isPointerDevice) {

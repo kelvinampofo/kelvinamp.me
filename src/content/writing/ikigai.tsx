@@ -43,6 +43,7 @@ export default function Ikigai() {
             <MediaPreviewLink
               href="https://putsomethingback.stevejobsarchive.com/internal-meeting-at-apple"
               media={{
+                type: "video",
                 src: "/assets/videos/steve-jobs-make-something-wonderful.mp4",
               }}
             >
