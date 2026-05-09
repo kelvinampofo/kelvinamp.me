@@ -123,17 +123,15 @@ export default function useShortcuts(
     if (!enabled) return;
 
     const requiredModifiers = normalizeModifiers(modifiers);
+    const pressedKey = matchBy === "key" ? event.key.toLowerCase() : event.code;
 
-    shortcutBindings.forEach((binding) => {
-      const pressedKey =
-        matchBy === "key" ? event.key.toLowerCase() : event.code;
-
+    for (const binding of shortcutBindings) {
       const isShortcutMatch =
         pressedKey === binding.key &&
         hasMatchingModifiers(event, requiredModifiers) &&
         !holdTimersRef.current.has(binding.id);
 
-      if (!isShortcutMatch) return;
+      if (!isShortcutMatch) continue;
 
       function runShortcut() {
         if (preventDefault) {
@@ -155,7 +153,7 @@ export default function useShortcuts(
           holdTimersRef.current.delete(binding.id);
         }, delay)
       );
-    });
+    }
   });
 
   const handleShortcutKeyUp = useEffectEvent(() => {
