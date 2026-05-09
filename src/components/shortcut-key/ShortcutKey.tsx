@@ -1,14 +1,10 @@
 import styles from "./ShortcutKey.module.css";
 
 interface ShortcutKeyProps {
-  keyShortcuts: string | string[];
+  keys: readonly string[];
 }
 
-export default function ShortcutKey({ keyShortcuts }: ShortcutKeyProps) {
-  const keys = Array.isArray(keyShortcuts)
-    ? keyShortcuts
-    : keyShortcuts.split("+");
-
+export default function ShortcutKey({ keys }: ShortcutKeyProps) {
   return (
     <div className={styles.container} aria-keyshortcuts={keys.join("+")}>
       {keys.map((key) => (
