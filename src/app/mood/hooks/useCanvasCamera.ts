@@ -150,6 +150,36 @@ function getCenteredCamera(
   };
 }
 
+function getViewportScreenBox(): ScreenBox {
+  return {
+    minX: 0,
+    minY: 0,
+    maxX: window.innerWidth,
+    maxY: window.innerHeight,
+    width: window.innerWidth,
+    height: window.innerHeight,
+  };
+}
+
+function getScreenBoxForElement(
+  canvasElement: HTMLDivElement | null
+): ScreenBox {
+  if (!canvasElement) {
+    return getViewportScreenBox();
+  }
+
+  const rect = canvasElement.getBoundingClientRect();
+
+  return {
+    minX: rect.left,
+    minY: rect.top,
+    maxX: rect.right,
+    maxY: rect.bottom,
+    width: rect.width,
+    height: rect.height,
+  };
+}
+
 export default function useCanvasCamera({
   canvasRef,
   isPanModeEnabled,
@@ -190,29 +220,7 @@ export default function useCanvasCamera({
   }
 
   function getScreenBox(): ScreenBox {
-    const canvasElement = canvasRef.current;
-
-    if (canvasElement) {
-      const rect = canvasElement.getBoundingClientRect();
-
-      return {
-        minX: rect.left,
-        minY: rect.top,
-        maxX: rect.right,
-        maxY: rect.bottom,
-        width: rect.width,
-        height: rect.height,
-      };
-    }
-
-    return {
-      minX: 0,
-      minY: 0,
-      maxX: window.innerWidth,
-      maxY: window.innerHeight,
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
+    return getScreenBoxForElement(canvasRef.current);
   }
 
   function getScreenCenterPoint(): Point {
@@ -337,29 +345,9 @@ export default function useCanvasCamera({
 
     hasCenteredInitiallyRef.current = true;
 
-    const canvasElement = canvasRef.current;
-    const rect = canvasElement?.getBoundingClientRect();
-    const screenBox = rect
-      ? {
-          minX: rect.left,
-          minY: rect.top,
-          maxX: rect.right,
-          maxY: rect.bottom,
-          width: rect.width,
-          height: rect.height,
-        }
-      : {
-          minX: 0,
-          minY: 0,
-          maxX: window.innerWidth,
-          maxY: window.innerHeight,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-
     const centered = getCenteredCamera(
       cameraRef.current.z,
-      screenBox,
+      getScreenBoxForElement(canvasRef.current),
       RIGHT_BIAS_PX
     );
 

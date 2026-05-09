@@ -47,11 +47,7 @@ export default function useDrag({
   ) {
     if (isPanModeEnabled) return;
 
-    const isPrimaryButton = pointerDownEvent.button === 0;
-    const isCtrlClick = pointerDownEvent.ctrlKey;
-    const shouldSkipPan = !isPrimaryButton || isCtrlClick;
-
-    if (shouldSkipPan) {
+    if (pointerDownEvent.button !== 0 || pointerDownEvent.ctrlKey) {
       pointerDownEvent.stopPropagation();
       return;
     }
@@ -96,7 +92,7 @@ export default function useDrag({
     const deltaX = pointerMoveEvent.clientX - activeDrag.startClient.x;
     const deltaY = pointerMoveEvent.clientY - activeDrag.startClient.y;
 
-    const movement = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    const movement = Math.hypot(deltaX, deltaY);
 
     // A small drag hysteresis prevents incidental pointer jitter from
     // immediately promoting a press into an active drag.
@@ -111,10 +107,8 @@ export default function useDrag({
       };
     }
 
-    const deltaXInCanvasSpace =
-      (pointerMoveEvent.clientX - activeDrag.startClient.x) / scale;
-    const deltaYInCanvasSpace =
-      (pointerMoveEvent.clientY - activeDrag.startClient.y) / scale;
+    const deltaXInCanvasSpace = deltaX / scale;
+    const deltaYInCanvasSpace = deltaY / scale;
 
     const nextImageX = activeDrag.startImage.x + deltaXInCanvasSpace;
     const nextImageY = activeDrag.startImage.y + deltaYInCanvasSpace;
