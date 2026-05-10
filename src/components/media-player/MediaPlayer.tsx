@@ -251,10 +251,24 @@ function Video({
 
   const { poster, src } = props;
 
+  function handleVideoRef(node: HTMLVideoElement | null) {
+    setVideoElement(node);
+
+    if (!node) {
+      setHasVideoLoaded(false);
+      return;
+    }
+
+    // Cached videos can already be playable before canplay fires.
+    if (node.readyState >= node.HAVE_FUTURE_DATA) {
+      setHasVideoLoaded(true);
+    }
+  }
+
   const foregroundVideo = (
     <video
       {...props}
-      ref={setVideoElement}
+      ref={handleVideoRef}
       autoPlay={autoPlay}
       controls={controls}
       loop={loop}
@@ -304,10 +318,12 @@ function Video({
             style={{ backgroundImage: `url(${poster})` }}
           />
         )}
-        <p className={styles.loading} role="status">
-          Video loading
-          <span className={styles.loadingDots} />
-        </p>
+        {!hasVideoLoaded && (
+          <p className={styles.loading} role="status">
+            Video loading
+            <span className={styles.loadingDots} />
+          </p>
+        )}
         {foregroundVideo}
       </div>
     </div>
