@@ -29,10 +29,7 @@ export default function StatusDisplay() {
     },
     {
       render: () => (
-        <CurrentTime
-          currentTime={currentTime}
-          timezoneOffset={timezoneOffset}
-        />
+        <CurrentTime time={currentTime} offset={timezoneOffset} />
       ),
     },
     { render: () => <Dimensions width={width} height={height} /> },

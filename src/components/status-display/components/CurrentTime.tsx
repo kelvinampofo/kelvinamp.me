@@ -3,13 +3,10 @@
 import Tooltip from "../../tooltip/Tooltip";
 
 interface CurrentTimeProps {
-  currentTime: string;
-  timezoneOffset: string;
+  time: string;
+  offset: string;
 }
 
-export default function CurrentTime({
-  currentTime,
-  timezoneOffset,
-}: CurrentTimeProps) {
-  return <Tooltip content={timezoneOffset}>{currentTime}</Tooltip>;
+export default function CurrentTime({ time, offset }: CurrentTimeProps) {
+  return <Tooltip content={offset}>{time}</Tooltip>;
 }
