@@ -139,7 +139,7 @@ export default function Carousel() {
           disabled={isAtStartOfSlide}
           className={styles.arrowButton}
         >
-          <Chevron direction="left" size={20} aria-label="Chevron left Icon" />
+          <Chevron direction="left" size={20} aria-hidden />
           <span className="sr-only">Previous slide</span>
         </button>
       </div>
@@ -171,11 +171,7 @@ export default function Carousel() {
           disabled={isAtEndOfSlide}
           className={styles.arrowButton}
         >
-          <Chevron
-            direction="right"
-            size={20}
-            aria-label="Chevron right Icon"
-          />
+          <Chevron direction="right" size={20} aria-hidden />
           <span className="sr-only">Next slide</span>
         </button>
       </div>

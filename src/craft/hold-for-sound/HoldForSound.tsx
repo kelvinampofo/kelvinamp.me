@@ -130,7 +130,7 @@ export default function HoldForSound() {
                 transition={contentTransition}
                 className={styles.contentDefault}
               >
-                <PlayIcon size={16} aria-label="play icon" />
+                <PlayIcon size={16} aria-hidden />
                 <span className="text-sm">Hold for sound</span>
               </motion.div>
             ) : (

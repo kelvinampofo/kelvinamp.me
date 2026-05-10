@@ -89,7 +89,7 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
           disabled={currentIndex === 0}
           aria-label="Previous selection"
         >
-          <Chevron direction="left" />
+          <Chevron direction="left" aria-hidden />
         </button>
 
         <div className={styles.timelineTicks}>
@@ -109,7 +109,7 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
           disabled={currentIndex === ticks.length - 1}
           aria-label="Next selection"
         >
-          <Chevron direction="right" />
+          <Chevron direction="right" aria-hidden />
         </button>
       </div>
     </div>

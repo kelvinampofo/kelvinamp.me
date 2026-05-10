@@ -40,7 +40,7 @@ export default function HoldToDelete() {
     >
       <div aria-hidden="true" className={styles.progress} />
       <div className={styles.content}>
-        <Trash size={20} aria-label="trash icon" />
+        <Trash size={20} aria-hidden />
         <span>Hold to Delete</span>
       </div>
     </button>
