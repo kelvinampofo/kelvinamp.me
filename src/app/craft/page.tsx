@@ -11,7 +11,7 @@ export default async function CraftPage() {
       <p className="description">
         Collection of interfaces <em>&</em> interactions.
       </p>
-      <List entries={entries} collection="craft" showDescription />
+      <List entries={entries} collection="craft" />
     </>
   );
 }

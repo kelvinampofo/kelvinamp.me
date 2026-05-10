@@ -97,7 +97,7 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
             <Tick
               key={index}
               index={index}
-              isActive={index === currentIndex}
+              active={index === currentIndex}
               onSelect={selectIndex}
             />
           ))}
@@ -118,21 +118,21 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
 
 function Tick({
   index,
-  isActive,
+  active,
   onSelect,
 }: {
   index: number;
-  isActive: boolean;
+  active: boolean;
   onSelect: (index: number) => void;
 }) {
   return (
     <motion.div
       initial={false}
       className={styles.timelineTick}
-      data-active={isActive}
+      data-active={active}
       onClick={() => onSelect(index)}
       aria-hidden
-      animate={isActive ? ACTIVE_PROPS : INACTIVE_PROPS}
+      animate={active ? ACTIVE_PROPS : INACTIVE_PROPS}
       transition={SPRING_CONFIG}
     />
   );

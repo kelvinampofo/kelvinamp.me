@@ -12,14 +12,11 @@ import styles from "./List.module.css";
 interface ListProps {
   entries: readonly ContentEntry[];
   collection: ContentCollection;
-  showDescription?: boolean;
 }
 
-export default function List({
-  entries,
-  collection,
-  showDescription = false,
-}: ListProps) {
+export default function List({ entries, collection }: ListProps) {
+  const showDescription = collection === "craft";
+
   return (
     <ol data-list="unstyled">
       {entries.map(({ id, slug, title, publishedDate, description }) => {
