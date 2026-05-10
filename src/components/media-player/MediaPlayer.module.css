@@ -21,7 +21,7 @@
 }
 
 .stage[data-state="loading"] .frame {
-  background-color: #020202;
+  background-color: var(--grey12);
 }
 
 .video {
@@ -62,11 +62,11 @@
   bottom: var(--space-10);
   z-index: 3;
   margin: 0;
-  color: var(--grey12);
+  color: var(--color-background);
   font-size: 0.875rem;
+  font-feature-settings: var(--font-feature-settings);
   line-height: 1.25rem;
-  opacity: 0.72;
-  text-shadow: 0 1px 14px rgb(255 255 255 / 0.34);
+  opacity: 0.92;
   transition: opacity 180ms var(--ease-out-cubic);
   pointer-events: none;
 }
@@ -78,6 +78,7 @@
 .loadingDots::after {
   content: "";
   display: inline-block;
+  font-feature-settings: var(--font-feature-settings);
   animation: loadingAnimation 1.5s infinite;
 }
 

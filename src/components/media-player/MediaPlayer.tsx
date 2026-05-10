@@ -245,9 +245,12 @@ function Video({
   ...props
 }: MediaPlayerVideoProps) {
   const [hasVideoLoaded, setHasVideoLoaded] = useState(false);
+
   const { setVideoElement, togglePlayback } =
     useMediaPlayerContext("MediaPlayer.Video");
+
   const { poster, src } = props;
+
   const foregroundVideo = (
     <video
       {...props}
@@ -302,7 +305,7 @@ function Video({
           />
         )}
         <p className={styles.loading} role="status">
-          Loading
+          Video loading
           <span className={styles.loadingDots} />
         </p>
         {foregroundVideo}
