@@ -36,18 +36,11 @@ export default function MediaPreviewLink({
   closeDelayMs = CLOSE_DELAY_MS,
 }: MediaPreviewLinkProps) {
   const [open, setOpen] = useState(false);
-  const [previewSession, setPreviewSession] = useState(0);
 
   const { isPointerDevice } = usePointerDevice();
 
   function handleOpenChange(nextOpen: boolean) {
     setOpen(nextOpen);
-
-    if (nextOpen) {
-      return;
-    }
-
-    setPreviewSession((currentSession) => currentSession + 1);
   }
 
   return (
@@ -79,7 +72,7 @@ export default function MediaPreviewLink({
           className={styles.positioner}
         >
           <PreviewCard.Popup className={styles.popup}>
-            <MediaPlayer.Root className={styles.player} key={previewSession}>
+            <MediaPlayer.Root className={styles.player}>
               <MediaPlayer.Video
                 className={styles.video}
                 src={media.src}
