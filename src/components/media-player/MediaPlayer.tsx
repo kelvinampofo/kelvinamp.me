@@ -7,6 +7,7 @@ import {
   type ReactNode,
   useRef,
   createContext,
+  useState,
 } from "react";
 
 import useShortcuts from "../../hooks/useShortcuts";
@@ -238,14 +239,16 @@ function Video({
   loop = true,
   muted = true,
   onClick,
+  onCanPlay,
   playsInline = true,
   preload = "metadata",
   ...props
 }: MediaPlayerVideoProps) {
+  const [hasVideoLoaded, setHasVideoLoaded] = useState(false);
   const { setVideoElement, togglePlayback } =
     useMediaPlayerContext("MediaPlayer.Video");
-
-  return (
+  const { poster, src } = props;
+  const foregroundVideo = (
     <video
       {...props}
       ref={setVideoElement}
@@ -255,6 +258,10 @@ function Video({
       muted={muted}
       playsInline={playsInline}
       preload={preload}
+      onCanPlay={(event) => {
+        setHasVideoLoaded(true);
+        onCanPlay?.(event);
+      }}
       onClick={(event) => {
         onClick?.(event);
 
@@ -264,6 +271,39 @@ function Video({
       }}
       className={clsx(styles.video, className)}
     />
+  );
+
+  return (
+    <div
+      className={styles.stage}
+      data-state={hasVideoLoaded ? "loaded" : "loading"}
+    >
+      {src && (
+        <video
+          aria-hidden
+          autoPlay={autoPlay}
+          className={styles.glow}
+          controls={false}
+          loop={loop}
+          muted
+          poster={poster}
+          playsInline={playsInline}
+          preload={preload}
+          src={src}
+          tabIndex={-1}
+        />
+      )}
+      <div className={styles.frame}>
+        {poster && (
+          <div
+            aria-hidden
+            className={styles.poster}
+            style={{ backgroundImage: `url(${poster})` }}
+          />
+        )}
+        {foregroundVideo}
+      </div>
+    </div>
   );
 }
 

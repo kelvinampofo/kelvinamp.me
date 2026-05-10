@@ -1,14 +1,81 @@
 .root {
   position: relative;
   isolation: isolate;
+}
+
+.stage {
+  --media-crop-scale: 1.012;
+
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: 100%;
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   overflow: hidden;
-  background: #000;
 }
 
 .video {
+  position: relative;
+  z-index: 2;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  background: #000;
+  opacity: 0;
+  transform: scale(var(--media-crop-scale));
+  transition: opacity 180ms var(--ease-out-cubic);
+}
+
+.stage[data-state="loaded"] .video {
+  opacity: 1;
+}
+
+.poster {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-position: center;
+  background-size: cover;
+  opacity: 1;
+  transform: scale(var(--media-crop-scale));
+  transition: opacity 180ms var(--ease-out-cubic);
+  pointer-events: none;
+}
+
+.stage[data-state="loaded"] .poster {
+  opacity: 0;
+}
+
+.glow {
+  position: absolute;
+  inset: -2%;
+  z-index: 0;
+  display: block;
+  width: 104%;
+  height: 104%;
+  object-fit: cover;
+  filter: blur(18px) saturate(1.25);
+  opacity: 0.42;
+  transform: translateZ(0) scale(1.02);
+  pointer-events: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .glow {
+    inset: -1%;
+    width: 102%;
+    height: 102%;
+    filter: blur(14px) saturate(1.15);
+    opacity: 0.24;
+    transform: translateZ(0) scale(1.01);
+  }
+}
+
+.stage[data-state="loading"] .glow {
+  opacity: 0;
 }
