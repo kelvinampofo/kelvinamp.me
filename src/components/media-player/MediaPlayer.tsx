@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import {
-  useContext,
+  use,
   type ComponentPropsWithoutRef,
   type ReactNode,
   useRef,
@@ -34,7 +34,7 @@ const ARROW_KEY_SEEK_SECONDS = 5;
 const PERCENT_SHORTCUT_COUNT = 10;
 
 function useMediaPlayerContext(componentName: string) {
-  const context = useContext(MediaPlayerContext);
+  const context = use(MediaPlayerContext);
 
   if (!context) {
     throw new Error(`${componentName} must be used inside MediaPlayer.Root`);
