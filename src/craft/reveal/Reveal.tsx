@@ -17,8 +17,6 @@ const REVEAL_IMAGE_WIDTH = 1600;
 const REVEAL_IMAGE_HEIGHT = 1200;
 const REVEAL_SMOOTHING = 0.12;
 const REVEAL_SNAP_THRESHOLD = 0.05;
-const FLOWERS_BLUR_DATA_URL =
-  "data:image/gif;base64,R0lGODlhAQABAIAAAOXl5f///ywAAAAAAQABAAACAUwAOw==";
 
 function formatPercent(value: number) {
   return Number(value.toFixed(2));
@@ -184,8 +182,6 @@ export default function Reveal() {
           width={REVEAL_IMAGE_WIDTH}
           height={REVEAL_IMAGE_HEIGHT}
           sizes="(max-width: 900px) 100vw, 800px"
-          placeholder="blur"
-          blurDataURL={FLOWERS_BLUR_DATA_URL}
         />
         <Image
           className={clsx(styles.layerImage, styles.revealImage)}

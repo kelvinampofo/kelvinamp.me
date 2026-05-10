@@ -17,6 +17,23 @@
   width: 100%;
   height: 100%;
   margin: 0;
+  overflow: hidden;
+  background: var(--grey3);
+}
+
+.figure::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    90deg,
+    var(--grey3) 0%,
+    var(--grey4) 45%,
+    var(--grey3) 90%
+  );
+  background-size: 200% 100%;
+  animation: image-placeholder 1.4s ease-in-out infinite;
 }
 
 @media (min-width: 768px) {
@@ -34,7 +51,18 @@
   }
 }
 
+.picture {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .image {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: fill;
 }
 
@@ -46,4 +74,20 @@
   text-align: start;
   font-size: 0.75rem;
   color: var(--color-foreground-secondary);
+}
+
+@keyframes image-placeholder {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .figure::before {
+    animation: none;
+  }
 }

@@ -11,38 +11,47 @@ import styles from "./Carousel.module.css";
 
 const Slide = dynamic(() => import("./Slide"), { ssr: true });
 
-const DEFAULT_BLUR_DATA_URL =
-  "data:image/gif;base64,R0lGODlhAQABAIAAAOXl5f///ywAAAAAAQABAAACAUwAOw==";
-
 const slides = [
   {
     title: "Walt Disney Concert Hall",
-    src: "/assets/images/carousel/walt-disney-concert-hall.avif",
-    blurDataURL: DEFAULT_BLUR_DATA_URL,
+    image: {
+      avif: "/assets/images/carousel/walt-disney-concert-hall.avif",
+      webp: "/assets/images/carousel/walt-disney-concert-hall.webp",
+      fallback: "/assets/images/carousel/walt-disney-concert-hall.webp",
+    },
     alt: "Walt Disney Concert Hall",
     author: "Ranjith Alingal",
     isPriority: true,
   },
   {
     title: "Calgary Central Library",
-    src: "/assets/images/carousel/central-library.avif",
-    blurDataURL: DEFAULT_BLUR_DATA_URL,
+    image: {
+      avif: "/assets/images/carousel/central-library.avif",
+      webp: "/assets/images/carousel/central-library.webp",
+      fallback: "/assets/images/carousel/central-library.webp",
+    },
     alt: "The interior of Calgary Central Library, Canada",
     author: "Angela Bailey",
     isPriority: false,
   },
   {
     title: "Heydar Aliyev Center",
-    src: "/assets/images/carousel/heydar-aliyev-center.avif",
-    blurDataURL: DEFAULT_BLUR_DATA_URL,
+    image: {
+      avif: "/assets/images/carousel/heydar-aliyev-center.avif",
+      webp: "/assets/images/carousel/heydar-aliyev-center.webp",
+      fallback: "/assets/images/carousel/heydar-aliyev-center.webp",
+    },
     alt: "The Heydar Aliyev Center, Baku Azerbaijan",
     author: "İltun Huseynli",
     isPriority: false,
   },
   {
     title: "Kyoto Station",
-    src: "/assets/images/carousel/kyoto-station.avif",
-    blurDataURL: DEFAULT_BLUR_DATA_URL,
+    image: {
+      avif: "/assets/images/carousel/kyoto-station.avif",
+      webp: "/assets/images/carousel/kyoto-station.webp",
+      fallback: "/assets/images/carousel/kyoto-station.webp",
+    },
     alt: "Kyoto Station (1997)",
     author: "Hiroshi Hara",
     isPriority: true,
@@ -145,12 +154,11 @@ export default function Carousel() {
         }}
         className={clsx(styles.slideList, cursorClasses)}
       >
-        {slides.map(({ title, src, blurDataURL, alt, author, isPriority }) => (
+        {slides.map(({ title, image, alt, author, isPriority }) => (
           <Slide
             key={title}
             title={title}
-            image={src}
-            blurDataURL={blurDataURL}
+            image={image}
             alt={alt}
             author={author}
             isPriority={isPriority}
