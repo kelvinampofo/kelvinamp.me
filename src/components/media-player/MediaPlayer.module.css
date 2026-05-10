@@ -17,6 +17,11 @@
   inset: 0;
   z-index: 2;
   overflow: hidden;
+  transition: background-color 180ms var(--ease-out-cubic);
+}
+
+.stage[data-state="loading"] .frame {
+  background-color: #020202;
 }
 
 .video {
@@ -51,6 +56,31 @@
   opacity: 0;
 }
 
+.loading {
+  position: absolute;
+  left: var(--space-12);
+  bottom: var(--space-10);
+  z-index: 3;
+  margin: 0;
+  color: var(--grey12);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  opacity: 0.72;
+  text-shadow: 0 1px 14px rgb(255 255 255 / 0.34);
+  transition: opacity 180ms var(--ease-out-cubic);
+  pointer-events: none;
+}
+
+.stage[data-state="loaded"] .loading {
+  opacity: 0;
+}
+
+.loadingDots::after {
+  content: "";
+  display: inline-block;
+  animation: loadingAnimation 1.5s infinite;
+}
+
 .glow {
   position: absolute;
   inset: -2%;
@@ -78,4 +108,36 @@
 
 .stage[data-state="loading"] .glow {
   opacity: 0;
+}
+
+@keyframes loadingAnimation {
+  0% {
+    content: "";
+    opacity: 0.8;
+    filter: blur(0);
+  }
+
+  25% {
+    content: ".";
+    opacity: 0.8;
+    filter: blur(0);
+  }
+
+  50% {
+    content: "..";
+    opacity: 0.8;
+    filter: blur(0);
+  }
+
+  75% {
+    content: "...";
+    opacity: 0.8;
+    filter: blur(0);
+  }
+
+  100% {
+    content: "";
+    opacity: 0;
+    filter: blur(1px);
+  }
 }

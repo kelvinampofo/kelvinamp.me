@@ -301,6 +301,10 @@ function Video({
             style={{ backgroundImage: `url(${poster})` }}
           />
         )}
+        <p className={styles.loading} role="status">
+          Loading
+          <span className={styles.loadingDots} />
+        </p>
         {foregroundVideo}
       </div>
     </div>
