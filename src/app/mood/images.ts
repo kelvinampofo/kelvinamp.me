@@ -15,7 +15,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: 200,
     width: 340,
     height: 400,
-    src: "/assets/images/mood/sketch.webp",
+    src: "/assets/images/mood/sketch.avif",
     alt: "Sketch",
   },
   {
@@ -24,7 +24,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: 580,
     width: 280,
     height: 220,
-    src: "/assets/images/mood/bill-atkinson-lisa-polaroids.webp",
+    src: "/assets/images/mood/bill-atkinson-lisa-polaroids.avif",
     alt: "Polaroids by Bill Atkinson",
   },
   {
@@ -33,7 +33,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: 218,
     width: 380,
     height: 260,
-    src: "/assets/images/mood/flow-diagram.webp",
+    src: "/assets/images/mood/flow-diagram.avif",
     alt: "Flow diagram",
   },
   {
@@ -42,7 +42,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: 500,
     width: 400,
     height: 400,
-    src: "/assets/images/mood/caravaggio.webp",
+    src: "/assets/images/mood/caravaggio.avif",
     alt: "Caravaggio",
   },
   {
@@ -51,7 +51,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: 180,
     width: 600,
     height: 400,
-    src: "/assets/images/mood/nasa-spacecraft-markings.webp",
+    src: "/assets/images/mood/nasa-spacecraft-markings.avif",
     alt: "NASA Spacecraft Markings",
   },
   {
@@ -69,7 +69,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: 180,
     width: 320,
     height: 430,
-    src: "/assets/images/mood/neue-haas-grotesk-specimen.webp",
+    src: "/assets/images/mood/neue-haas-grotesk-specimen.avif",
     alt: "Neue Haas Grotesk alphabet specimen poster",
   },
   {
@@ -78,7 +78,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: 650,
     width: 320,
     height: 420,
-    src: "/assets/images/mood/neue-haas-grotesk-refined-spacing.webp",
+    src: "/assets/images/mood/neue-haas-grotesk-refined-spacing.avif",
     alt: "Neue Haas Grotesk comparisons highlighting refined spacing",
   },
   {
@@ -87,7 +87,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: 200,
     width: 360,
     height: 360,
-    src: "/assets/images/mood/neue-haas-grotesk-digital-era.webp",
+    src: "/assets/images/mood/neue-haas-grotesk-digital-era.avif",
     alt: "Essay on the digital era of Neue Helvetica with warm quote",
   },
   {
@@ -96,7 +96,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: 640,
     width: 340,
     height: 420,
-    src: "/assets/images/mood/neue-haas-grotesk-history.webp",
+    src: "/assets/images/mood/neue-haas-grotesk-history.avif",
     alt: "History of Neue Haas Grotesk with Helvetica brochure",
   },
   {
@@ -105,7 +105,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: 300,
     width: 312,
     height: 400,
-    src: "/assets/images/mood/apple-think-different.webp",
+    src: "/assets/images/mood/apple-think-different.avif",
     alt: "Apple Think Different - Yum campaign",
   },
   {
@@ -114,7 +114,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: 740,
     width: 390,
     height: 260,
-    src: "/assets/images/mood/out-of-the-box.webp",
+    src: "/assets/images/mood/out-of-the-box.avif",
     alt: "Out of the box, by Special Projects",
   },
   {
@@ -123,7 +123,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: -220,
     width: 360,
     height: 360,
-    src: "/assets/images/mood/swiss-passport-2021-crosses-spread.webp",
+    src: "/assets/images/mood/swiss-passport-2021-crosses-spread.avif",
     alt: "Swiss passport spread with white crosses",
   },
   {
@@ -132,7 +132,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: -220,
     width: 360,
     height: 360,
-    src: "/assets/images/mood/swiss-passport-arctic-map-spread.webp",
+    src: "/assets/images/mood/swiss-passport-arctic-map-spread.avif",
     alt: "Swiss passport arctic map spread",
   },
   {
@@ -141,7 +141,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: 220,
     width: 420,
     height: 236,
-    src: "/assets/images/mood/classic-blue-cursor-icons.webp",
+    src: "/assets/images/mood/classic-blue-cursor-icons.avif",
     alt: "Classic blue cursor icon set on a light gray background",
   },
   {
@@ -150,7 +150,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: 520,
     width: 420,
     height: 357,
-    src: "/assets/images/mood/playbit-icon-set.webp",
+    src: "/assets/images/mood/playbit-icon-set.avif",
     alt: "Playbit app icon set showing dashboard and guest release and debug variants",
   },
   {
@@ -159,7 +159,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     y: -180,
     width: 420,
     height: 310,
-    src: "/assets/images/mood/dot-matrix-generation.webp",
+    src: "/assets/images/mood/dot-matrix-generation.avif",
     alt: "Dot matrix generation diagram showing ROM format, words, bits, and pulse timing",
   },
 ];

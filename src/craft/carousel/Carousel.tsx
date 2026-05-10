@@ -4,10 +4,6 @@ import clsx from "clsx";
 import dynamic from "next/dynamic";
 import { useRef, useState } from "react";
 
-import CentralLibraryImage from "../../../public/assets/images/carousel/central-library.webp";
-import AliyevCenterImage from "../../../public/assets/images/carousel/heydar-aliyev-center.webp";
-import KyotoStationImage from "../../../public/assets/images/carousel/kyoto-station.webp";
-import ConcertHallImage from "../../../public/assets/images/carousel/walt-disney-concert-hall.webp";
 import Chevron from "../../components/icons/Chevron";
 import { clamp } from "../../utils/math";
 
@@ -15,31 +11,38 @@ import styles from "./Carousel.module.css";
 
 const Slide = dynamic(() => import("./Slide"), { ssr: true });
 
+const DEFAULT_BLUR_DATA_URL =
+  "data:image/gif;base64,R0lGODlhAQABAIAAAOXl5f///ywAAAAAAQABAAACAUwAOw==";
+
 const slides = [
   {
     title: "Walt Disney Concert Hall",
-    src: ConcertHallImage,
+    src: "/assets/images/carousel/walt-disney-concert-hall.avif",
+    blurDataURL: DEFAULT_BLUR_DATA_URL,
     alt: "Walt Disney Concert Hall",
     author: "Ranjith Alingal",
     isPriority: true,
   },
   {
     title: "Calgary Central Library",
-    src: CentralLibraryImage,
+    src: "/assets/images/carousel/central-library.avif",
+    blurDataURL: DEFAULT_BLUR_DATA_URL,
     alt: "The interior of Calgary Central Library, Canada",
     author: "Angela Bailey",
     isPriority: false,
   },
   {
     title: "Heydar Aliyev Center",
-    src: AliyevCenterImage,
+    src: "/assets/images/carousel/heydar-aliyev-center.avif",
+    blurDataURL: DEFAULT_BLUR_DATA_URL,
     alt: "The Heydar Aliyev Center, Baku Azerbaijan",
     author: "İltun Huseynli",
     isPriority: false,
   },
   {
     title: "Kyoto Station",
-    src: KyotoStationImage,
+    src: "/assets/images/carousel/kyoto-station.avif",
+    blurDataURL: DEFAULT_BLUR_DATA_URL,
     alt: "Kyoto Station (1997)",
     author: "Hiroshi Hara",
     isPriority: true,
@@ -142,11 +145,12 @@ export default function Carousel() {
         }}
         className={clsx(styles.slideList, cursorClasses)}
       >
-        {slides.map(({ title, src, alt, author, isPriority }) => (
+        {slides.map(({ title, src, blurDataURL, alt, author, isPriority }) => (
           <Slide
             key={title}
             title={title}
             image={src}
+            blurDataURL={blurDataURL}
             alt={alt}
             author={author}
             isPriority={isPriority}

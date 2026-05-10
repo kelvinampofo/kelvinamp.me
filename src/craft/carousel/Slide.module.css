@@ -11,6 +11,14 @@
 .slideItem:last-child {
   margin-right: 0;
 }
+
+.figure {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
 @media (min-width: 768px) {
   .slideItem {
     width: 450px;
