@@ -36,14 +36,27 @@ export default function MediaPreviewLink({
   closeDelayMs = CLOSE_DELAY_MS,
 }: MediaPreviewLinkProps) {
   const [open, setOpen] = useState(false);
+  const [previewSession, setPreviewSession] = useState(0);
+
   const { isPointerDevice } = usePointerDevice();
 
+  function handleOpenChange(nextOpen: boolean) {
+    setOpen(nextOpen);
+
+    if (nextOpen) {
+      return;
+    }
+
+    setPreviewSession((currentSession) => currentSession + 1);
+  }
+
   return (
-    <PreviewCard.Root open={open} onOpenChange={setOpen}>
+    <PreviewCard.Root open={open} onOpenChange={handleOpenChange}>
       <PreviewCard.Trigger
         href={href}
         delay={openDelayMs}
         closeDelay={closeDelayMs}
+        data-state={open ? "open" : "closed"}
         className={clsx(styles.trigger, className)}
         onClick={(event) => {
           if (isPointerDevice) {
@@ -52,13 +65,12 @@ export default function MediaPreviewLink({
 
           if (!open) {
             event.preventDefault();
-            setOpen(true);
+            handleOpenChange(true);
           }
         }}
       >
         {children}
       </PreviewCard.Trigger>
-
       <PreviewCard.Portal>
         <PreviewCard.Positioner
           side="top"
@@ -67,7 +79,7 @@ export default function MediaPreviewLink({
           className={styles.positioner}
         >
           <PreviewCard.Popup className={styles.popup}>
-            <MediaPlayer.Root className={styles.player}>
+            <MediaPlayer.Root className={styles.player} key={previewSession}>
               <MediaPlayer.Video
                 className={styles.video}
                 src={media.src}
@@ -76,7 +88,7 @@ export default function MediaPreviewLink({
                 loop={false}
                 preload="auto"
                 onEnded={() => {
-                  setOpen(false);
+                  handleOpenChange(false);
                 }}
               />
             </MediaPlayer.Root>
