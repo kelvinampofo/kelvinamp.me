@@ -13,7 +13,6 @@ export default function Separator({
 }: SeparatorProps) {
   return (
     <hr
-      role="separator"
       aria-orientation={orientation}
       className={clsx(
         styles.separator,
