@@ -28,6 +28,7 @@ export default function Canvas() {
     camera,
     cameraRef,
     onPointerDown: onPan,
+    onWheel,
     zoomIn,
     zoomOut,
   } = useCanvasCamera({ canvasRef, isPanModeEnabled });
@@ -139,6 +140,7 @@ export default function Canvas() {
         [styles.panMode]: isPanModeEnabled,
       })}
       onPointerDown={onPan}
+      onWheel={onWheel}
     >
       <div
         className={styles.moodSurface}

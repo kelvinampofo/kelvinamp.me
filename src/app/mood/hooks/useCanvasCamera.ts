@@ -6,6 +6,7 @@ import {
   type PointerEvent as ReactPointerEvent,
   type RefObject,
   type SetStateAction,
+  type WheelEvent as ReactWheelEvent,
 } from "react";
 
 import { clamp } from "../../../utils/math";
@@ -277,35 +278,35 @@ export default function useCanvasCamera({
     event.preventDefault();
   }
 
-  const onWheel = useEffectEvent(
-    (event: WheelEvent, wheelElement: HTMLDivElement) => {
+  function onWheel(event: ReactWheelEvent<HTMLDivElement>) {
+    if (event.cancelable) {
       event.preventDefault();
-
-      const bounds = wheelElement.getBoundingClientRect();
-
-      const pointInCanvas = {
-        x: event.clientX - bounds.left,
-        y: event.clientY - bounds.top,
-      };
-
-      if (event.metaKey || event.ctrlKey) {
-        setCamera((previousCamera) =>
-          zoomCamera(
-            previousCamera,
-            pointInCanvas,
-            event.deltaY * WHEEL_ZOOM_DAMPING,
-            MIN_SCALE,
-            MAX_SCALE
-          )
-        );
-        return;
-      }
-
-      setCamera((previousCamera) =>
-        panCamera(previousCamera, event.deltaX, event.deltaY)
-      );
     }
-  );
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+
+    const pointInCanvas = {
+      x: event.clientX - bounds.left,
+      y: event.clientY - bounds.top,
+    };
+
+    if (event.metaKey || event.ctrlKey) {
+      setCamera((previousCamera) =>
+        zoomCamera(
+          previousCamera,
+          pointInCanvas,
+          event.deltaY * WHEEL_ZOOM_DAMPING,
+          MIN_SCALE,
+          MAX_SCALE
+        )
+      );
+      return;
+    }
+
+    setCamera((previousCamera) =>
+      panCamera(previousCamera, event.deltaX, event.deltaY)
+    );
+  }
 
   const onWindowPointerMove = useEffectEvent((event: PointerEvent) => {
     const panDrag = panningRef.current;
@@ -359,24 +360,11 @@ export default function useCanvasCamera({
   }, [canvasRef]);
 
   useEffect(() => {
-    const wheelElement = canvasRef.current;
-
-    if (!wheelElement) return;
-    const activeWheelElement = wheelElement;
-
-    function handleWheel(event: WheelEvent) {
-      onWheel(event, activeWheelElement);
-    }
-
-    activeWheelElement.addEventListener("wheel", handleWheel, {
-      passive: false,
-    });
     window.addEventListener("pointermove", onWindowPointerMove);
     window.addEventListener("pointerup", onWindowPointerUp);
     window.addEventListener("pointercancel", onWindowPointerCancel);
 
     return () => {
-      activeWheelElement.removeEventListener("wheel", handleWheel);
       window.removeEventListener("pointermove", onWindowPointerMove);
       window.removeEventListener("pointerup", onWindowPointerUp);
       window.removeEventListener("pointercancel", onWindowPointerCancel);
@@ -390,6 +378,7 @@ export default function useCanvasCamera({
     camera,
     cameraRef,
     onPointerDown,
+    onWheel,
     zoomIn,
     zoomOut,
   };
