@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, useState } from "react";
+import { type KeyboardEvent, type ReactNode, useState } from "react";
 
 import { useBrowserInfo } from "../../hooks/useBrowserInfo";
 import { useTime } from "../../hooks/useTime";
@@ -28,9 +28,7 @@ export default function StatusDisplay() {
       render: () => <Clock currentTime={currentTime} timeParts={timeParts} />,
     },
     {
-      render: () => (
-        <CurrentTime time={currentTime} offset={timezoneOffset} />
-      ),
+      render: () => <CurrentTime time={currentTime} offset={timezoneOffset} />,
     },
     { render: () => <Dimensions width={width} height={height} /> },
     { render: () => <BrowserInfo name={name} version={version} /> },
@@ -48,10 +46,22 @@ export default function StatusDisplay() {
     setActiveIndex((currentIndex) => (currentIndex + 1) % totalStatusItems);
   }
 
+  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key !== "Enter" && event.key !== " ") {
+      return;
+    }
+
+    event.preventDefault();
+    handleShowNextItem();
+  }
+
   return (
     <div
+      role="button"
+      tabIndex={0}
       className={styles.statusDisplay}
       data-animate
+      onKeyDown={handleKeyDown}
       onMouseDown={handleShowNextItem}
       style={{ "--stagger": "7" }}
     >
