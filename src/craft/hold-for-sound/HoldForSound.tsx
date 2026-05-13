@@ -1,10 +1,12 @@
 "use client";
 
 import {
-  motion,
   AnimatePresence,
+  LazyMotion,
+  domAnimation,
+  m,
   type Transition,
-  TargetAndTransition,
+  type TargetAndTransition,
 } from "motion/react";
 import dynamic from "next/dynamic";
 import { useState, useEffect, type KeyboardEvent } from "react";
@@ -99,74 +101,76 @@ export default function HoldForSound() {
   }, [stop]);
 
   return (
-    <div className={styles.container}>
-      <motion.div
-        variants={buttonVariants}
-        animate={isPressed ? "pressed" : "default"}
-        transition={buttonTransition}
-        className={styles.wrapper}
-      >
-        <motion.button
-          className={styles.button}
-          aria-label="press and hold the button to hear the engine revving sound of the Porsche 911"
-          aria-pressed={isPressed}
-          onPointerDown={handlePress}
-          onPointerUp={handleRelease}
-          onPointerLeave={handleRelease}
-          onPointerCancel={handleRelease}
-          onContextMenu={(event) => event.preventDefault()}
-          onKeyDown={handleKeyDown}
-          onKeyUp={handleKeyUp}
-          title="porsche-911.wav"
+    <LazyMotion features={domAnimation}>
+      <div className={styles.container}>
+        <m.div
+          variants={buttonVariants}
+          animate={isPressed ? "pressed" : "default"}
+          transition={buttonTransition}
+          className={styles.wrapper}
         >
-          <AnimatePresence mode="wait" initial={false}>
-            {!isPressed ? (
-              <motion.div
-                key="default"
+          <m.button
+            className={styles.button}
+            aria-label="press and hold the button to hear the engine revving sound of the Porsche 911"
+            aria-pressed={isPressed}
+            onPointerDown={handlePress}
+            onPointerUp={handleRelease}
+            onPointerLeave={handleRelease}
+            onPointerCancel={handleRelease}
+            onContextMenu={(event) => event.preventDefault()}
+            onKeyDown={handleKeyDown}
+            onKeyUp={handleKeyUp}
+            title="porsche-911.wav"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {!isPressed ? (
+                <m.div
+                  key="default"
+                  variants={contentVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  transition={contentTransition}
+                  className={styles.contentDefault}
+                >
+                  <PlayIcon size={16} aria-hidden />
+                  <span className="text-sm">Hold for sound</span>
+                </m.div>
+              ) : (
+                <m.div
+                  key="waveform"
+                  variants={contentVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  transition={contentTransition}
+                  className={styles.contentPressed}
+                >
+                  <Waveform />
+                </m.div>
+              )}
+            </AnimatePresence>
+          </m.button>
+        </m.div>
+
+        <div className={styles.tooltipWrapper}>
+          <AnimatePresence initial={false}>
+            {!hasInteracted && (
+              <m.span
+                className={styles.tooltip}
+                key="visible"
                 variants={contentVariants}
                 initial="initial"
                 animate="animate"
                 exit="exit"
                 transition={contentTransition}
-                className={styles.contentDefault}
               >
-                <PlayIcon size={16} aria-hidden />
-                <span className="text-sm">Hold for sound</span>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="waveform"
-                variants={contentVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={contentTransition}
-                className={styles.contentPressed}
-              >
-                <Waveform />
-              </motion.div>
+                (Sound on)
+              </m.span>
             )}
           </AnimatePresence>
-        </motion.button>
-      </motion.div>
-
-      <div className={styles.tooltipWrapper}>
-        <AnimatePresence initial={false}>
-          {!hasInteracted && (
-            <motion.span
-              className={styles.tooltip}
-              key="visible"
-              variants={contentVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              transition={contentTransition}
-            >
-              (Sound on)
-            </motion.span>
-          )}
-        </AnimatePresence>
+        </div>
       </div>
-    </div>
+    </LazyMotion>
   );
 }

@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { m } from "motion/react";
 
 import styles from "./Waveform.module.css";
 
@@ -27,8 +27,8 @@ export function Waveform() {
   return (
     <div className={styles.container}>
       {BAR_ANIMATIONS.map(({ minScale, maxScale, duration }, index) => (
-        <motion.span
-          key={index}
+        <m.span
+          key={`${minScale}-${maxScale}-${duration}`}
           className={styles.bar}
           animate={{ scaleY: [minScale, maxScale, minScale] }}
           transition={{
