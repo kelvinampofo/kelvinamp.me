@@ -15,8 +15,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/readme",
   ];
 
-  const posts = await getContentEntries("writing");
-  const demos = await getContentEntries("craft");
+  const [posts, demos] = await Promise.all([
+    getContentEntries("writing"),
+    getContentEntries("craft"),
+  ]);
 
   const writingPages = posts.map(({ slug }) => `/writing/${slug}`);
   const demoPages = demos.map(({ slug }) => `/craft/${slug}`);
