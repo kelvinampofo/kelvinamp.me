@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import type { Metadata } from "next";
 
 import BackButton from "../../components/back-button/BackButton";
 import Heading from "../../components/heading/Heading";
@@ -6,6 +7,14 @@ import Separator from "../../components/separator/Separator";
 
 import { wordEntries } from "./words";
 import styles from "./Words.module.css";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/words",
+  },
+  title: "Words",
+  description: "A running list of curated words.",
+};
 
 export default function Words() {
   return (

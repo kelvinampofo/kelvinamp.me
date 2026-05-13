@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import AnimationController from "../components/animation-controller/AnimationController";
@@ -5,6 +6,15 @@ import Contact from "../components/contact/Contact";
 import Heading from "../components/heading/Heading";
 import Separator from "../components/separator/Separator";
 import StatusDisplay from "../components/status-display/StatusDisplay";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+  title: "Kelvin Ampofo",
+  description:
+    "Software engineer making software with emphasis on human-computer interaction and aesthetic sensibility.",
+};
 
 export default function Home() {
   return (
