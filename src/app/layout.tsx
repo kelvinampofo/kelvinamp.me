@@ -32,7 +32,12 @@ const inter = localFont({
 
 export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
   return (
-    <html className={inter.variable} lang="en" suppressHydrationWarning>
+    <html
+      className={inter.variable}
+      data-scroll-behavior="smooth"
+      lang="en"
+      suppressHydrationWarning
+    >
       <body>
         <div id="__next">
           <Fade />
