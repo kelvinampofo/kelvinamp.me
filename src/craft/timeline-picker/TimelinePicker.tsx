@@ -1,6 +1,12 @@
 "use client";
 
-import { motion, type Target, type Transition } from "motion/react";
+import {
+  LazyMotion,
+  domAnimation,
+  m,
+  type Target,
+  type Transition,
+} from "motion/react";
 import { useState } from "react";
 import useSound from "use-sound";
 
@@ -45,7 +51,10 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
     volume: 0.25,
   });
 
-  const ticks = Array.from({ length: TICK_COUNT }, (_, index) => index);
+  const ticks = Array.from({ length: TICK_COUNT }, (_, index) => ({
+    id: `tick-${index + 1}`,
+    index,
+  }));
 
   function selectIndex(index: number) {
     if (index !== currentIndex) {
@@ -81,38 +90,40 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
   });
 
   return (
-    <div className={styles.timelineWrapper} data-debug-overlay={debugOverlay}>
-      <div className={styles.timelineContainer}>
-        <button
-          className={styles.timelineButton}
-          onClick={handlePrev}
-          disabled={currentIndex === 0}
-          aria-label="Previous selection"
-        >
-          <Chevron direction="left" aria-hidden />
-        </button>
+    <LazyMotion features={domAnimation}>
+      <div className={styles.timelineWrapper} data-debug-overlay={debugOverlay}>
+        <div className={styles.timelineContainer}>
+          <button
+            className={styles.timelineButton}
+            onClick={handlePrev}
+            disabled={currentIndex === 0}
+            aria-label="Previous selection"
+          >
+            <Chevron direction="left" aria-hidden />
+          </button>
 
-        <div className={styles.timelineTicks}>
-          {ticks.map((_, index) => (
-            <Tick
-              key={index}
-              index={index}
-              active={index === currentIndex}
-              onSelect={selectIndex}
-            />
-          ))}
+          <div className={styles.timelineTicks}>
+            {ticks.map(({ id, index }) => (
+              <Tick
+                key={id}
+                index={index}
+                active={index === currentIndex}
+                onSelect={selectIndex}
+              />
+            ))}
+          </div>
+
+          <button
+            className={styles.timelineButton}
+            onClick={handleNext}
+            disabled={currentIndex === ticks.length - 1}
+            aria-label="Next selection"
+          >
+            <Chevron direction="right" aria-hidden />
+          </button>
         </div>
-
-        <button
-          className={styles.timelineButton}
-          onClick={handleNext}
-          disabled={currentIndex === ticks.length - 1}
-          aria-label="Next selection"
-        >
-          <Chevron direction="right" aria-hidden />
-        </button>
       </div>
-    </div>
+    </LazyMotion>
   );
 }
 
@@ -126,7 +137,7 @@ function Tick({
   onSelect: (index: number) => void;
 }) {
   return (
-    <motion.div
+    <m.div
       initial={false}
       className={styles.timelineTick}
       data-active={active}
