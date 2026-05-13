@@ -6,12 +6,11 @@ import {
 } from "@base-ui/react/popover";
 import {
   useCallback,
-  useEffect,
-  useEffectEvent,
   useRef,
   useState,
   type PointerEvent,
   TransitionEvent,
+  type WheelEvent as ReactWheelEvent,
 } from "react";
 
 import Chevron from "../../components/icons/Chevron";
@@ -99,9 +98,6 @@ export default function NumericScrubber() {
     isTrackAnimating: false,
     duration: 0,
   });
-  const [trackViewport, setTrackViewport] = useState<HTMLDivElement | null>(
-    null
-  );
 
   const valueRef = useRef(DEFAULT_VALUE);
   const trackFrameRef = useRef<number | null>(null);
@@ -209,7 +205,7 @@ export default function NumericScrubber() {
     [updateValue]
   );
 
-  const handleNativeWheel = useEffectEvent((event: WheelEvent) => {
+  function handleWheel(event: ReactWheelEvent<HTMLDivElement>) {
     // prevent back/forward swipe from hijacking the scrubber gesture
     if (event.cancelable) {
       event.preventDefault();
@@ -244,7 +240,7 @@ export default function NumericScrubber() {
       queue: wheelInput.queue,
       maxStepsPerFrame: MAX_TICK_STEPS_PER_FRAME,
     });
-  });
+  }
 
   function handleTrackTransitionEnd(event: TransitionEvent<HTMLDivElement>) {
     if (
@@ -443,20 +439,6 @@ export default function NumericScrubber() {
     setIsPopoverOpen(false);
   }
 
-  useEffect(() => {
-    if (!trackViewport) {
-      return;
-    }
-
-    trackViewport.addEventListener("wheel", handleNativeWheel, {
-      passive: false,
-    });
-
-    return () => {
-      trackViewport.removeEventListener("wheel", handleNativeWheel);
-    };
-  }, [trackViewport]);
-
   return (
     <p>
       The perfect temperature is{" "}
@@ -495,12 +477,12 @@ export default function NumericScrubber() {
                 </button>
 
                 <div
-                  ref={setTrackViewport}
                   className={styles.scrubberTrackViewport}
                   onPointerDown={handlePointerDown}
                   onPointerMove={handlePointerMove}
                   onPointerUp={handlePointerUp}
                   onPointerCancel={handlePointerCancel}
+                  onWheel={handleWheel}
                 >
                   <div
                     className={styles.scrubberTrack}
@@ -508,12 +490,14 @@ export default function NumericScrubber() {
                     style={{
                       "--tick-width": `${TICK_WIDTH}px`,
                       "--tick-gap": `${TICK_GAP}px`,
-                      "--track-offset": `${trackTransition.offsetSteps * TICK_STEP}px`,
+                      "--track-offset": `${
+                        trackTransition.offsetSteps * TICK_STEP
+                      }px`,
                       "--track-duration": `${trackTransition.duration}ms`,
                     }}
                     onTransitionEnd={handleTrackTransitionEnd}
                   >
-                    {[...Array(TICK_COUNT)].map((_, index) => {
+                    {Array.from({ length: TICK_COUNT }, (_tick, index) => {
                       // derive ticks from the current value so the active tick stays centred
                       const tick = value + index - TICK_OFFSET;
 
