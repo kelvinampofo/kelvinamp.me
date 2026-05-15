@@ -3,7 +3,7 @@
   user-select: none;
   background-color: transparent;
   border: 0;
-  border-radius: var(--tooltip-trigger-radius, var(--radius-2));
+  border-radius: var(--radius-2);
 }
 
 .tooltipPopup {

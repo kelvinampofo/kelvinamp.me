@@ -16,12 +16,7 @@ export default function Clock({
   timeParts,
 }: ClockProps) {
   return (
-    <Tooltip
-      content={`${currentTime} ${timezoneOffset}`}
-      triggerProps={{
-        style: { "--tooltip-trigger-radius": "50%" },
-      }}
-    >
+    <Tooltip content={`${currentTime} ${timezoneOffset}`}>
       <AnalogueClock timeParts={timeParts} />
     </Tooltip>
   );
