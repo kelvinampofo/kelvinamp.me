@@ -25,11 +25,15 @@ export default function StatusDisplay() {
 
   const statusItems: StatusItem[] = [
     {
-      render: () => <Clock currentTime={currentTime} timeParts={timeParts} />,
+      render: () => (
+        <Clock
+          currentTime={currentTime}
+          timezoneOffset={timezoneOffset}
+          timeParts={timeParts}
+        />
+      ),
     },
-    {
-      render: () => <CurrentTime time={currentTime} offset={timezoneOffset} />,
-    },
+    { render: () => <CurrentTime time={currentTime} /> },
     { render: () => <Dimensions width={width} height={height} /> },
     { render: () => <BrowserInfo name={name} version={version} /> },
   ];

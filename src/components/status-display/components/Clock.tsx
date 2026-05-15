@@ -6,13 +6,18 @@ import Tooltip from "../../tooltip/Tooltip";
 
 interface ClockProps {
   currentTime: string;
+  timezoneOffset: string;
   timeParts: TimeParts;
 }
 
-export default function Clock({ currentTime, timeParts }: ClockProps) {
+export default function Clock({
+  currentTime,
+  timezoneOffset,
+  timeParts,
+}: ClockProps) {
   return (
     <Tooltip
-      content={currentTime}
+      content={`${currentTime} ${timezoneOffset}`}
       triggerProps={{
         style: { "--tooltip-trigger-radius": "50%" },
       }}

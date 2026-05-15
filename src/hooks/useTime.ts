@@ -118,7 +118,7 @@ export function useTime({
     return timezoneLabel;
   }
 
-  const timezoneOffset = getTimeZoneLabel("longOffset");
+  const timezoneOffset = getTimeZoneLabel("shortOffset");
 
   return {
     currentTime,
