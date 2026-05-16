@@ -80,17 +80,50 @@
 }
 
 .playbackIndicator[data-indicator="pause"] {
-  animation: playbackIndicatorOut 680ms var(--ease-out-cubic) forwards;
+  animation: playbackIndicatorOut 760ms var(--ease-out-cubic) forwards;
 }
 
-.playbackIcon {
+.playbackIconStack {
+  position: relative;
   display: block;
   width: var(--space-28);
   height: var(--space-28);
 }
 
-.playbackIndicator[data-indicator="play"] .playbackIcon {
-  transform: translateY(var(--space-1));
+.playbackIcon {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition:
+    filter 180ms var(--ease-in-out-cubic),
+    opacity 180ms var(--ease-in-out-cubic),
+    transform 180ms var(--ease-in-out-cubic);
+}
+
+.playbackIcon:first-child {
+  opacity: 0;
+  filter: blur(var(--space-2));
+  transform: translateY(var(--space-1)) rotate(-8deg) scale(0.78);
+}
+
+.playbackIcon:last-child {
+  opacity: 0;
+  filter: blur(var(--space-2));
+  transform: rotate(8deg) scale(0.78);
+}
+
+.playbackIndicator[data-indicator="play"] .playbackIcon:first-child {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(var(--space-1)) rotate(0deg) scale(1);
+}
+
+.playbackIndicator[data-indicator="pause"] .playbackIcon:last-child {
+  opacity: 1;
+  filter: blur(0);
+  transform: rotate(0deg) scale(1);
 }
 
 .glow {
@@ -129,6 +162,12 @@
   opacity: 0;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .playbackIcon {
+    transition: none;
+  }
+}
+
 @keyframes playbackIndicatorOut {
   0% {
     opacity: 1;
@@ -136,7 +175,7 @@
     filter: blur(0);
   }
 
-  54% {
+  58% {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
     filter: blur(0);

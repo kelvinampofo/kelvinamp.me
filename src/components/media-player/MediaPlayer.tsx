@@ -437,11 +437,10 @@ function Video({
               }
             }}
           >
-            {indicator === "play" ? (
+            <span className={styles.playbackIconStack}>
               <PlayIcon className={styles.playbackIcon} />
-            ) : (
               <PauseIcon className={styles.playbackIcon} />
-            )}
+            </span>
           </div>
         )}
       </div>
@@ -453,11 +452,11 @@ function PlayIcon({ className }: MediaPlayerIconProps) {
   return (
     <svg aria-hidden className={className} viewBox="0 0 18 18" fill="none">
       <path
-        d="M5.5 3.9C5.5 3.2 6.2 2.8 6.8 3.2L14 7.5C14.6 7.9 14.6 8.9 14 9.3L6.8 13.6C6.2 14 5.5 13.6 5.5 12.9V3.9Z"
+        d="M5.5 3.8C5.5 3.25 6.08 2.9 6.55 3.18L14.8 8.08C15.28 8.36 15.28 9.08 14.8 9.36L6.55 14.26C6.08 14.54 5.5 14.19 5.5 13.64V3.8Z"
         fill="currentColor"
         stroke="currentColor"
         strokeLinejoin="round"
-        strokeWidth="1"
+        strokeWidth="0.5"
       />
     </svg>
   );
