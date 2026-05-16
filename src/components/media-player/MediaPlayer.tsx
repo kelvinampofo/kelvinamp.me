@@ -437,10 +437,11 @@ function Video({
               }
             }}
           >
-            <span className={styles.playbackIconStack}>
+            {indicator === "play" ? (
               <PlayIcon className={styles.playbackIcon} />
+            ) : (
               <PauseIcon className={styles.playbackIcon} />
-            </span>
+            )}
           </div>
         )}
       </div>
