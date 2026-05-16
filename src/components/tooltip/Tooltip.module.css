@@ -90,8 +90,9 @@
 @media (prefers-color-scheme: dark) {
   .tooltipPopup {
     background-color: var(--grey2);
-    outline: 1px solid var(--grey6);
-    outline-offset: -1px;
+    box-shadow:
+      var(--shadow-tooltip),
+      inset 0 0 0 1px rgb(255 255 255 / 0.1);
   }
 
   .tooltipArrowFill {
@@ -99,6 +100,6 @@
   }
 
   .tooltipArrowInnerStroke {
-    fill: var(--tooltip-arrow-inner-stroke, var(--grey6));
+    fill: var(--tooltip-arrow-inner-stroke, rgb(255 255 255 / 0.1));
   }
 }
