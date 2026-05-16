@@ -5,6 +5,10 @@
 
 .stage {
   --media-crop-scale: 1.012;
+  --playback-material-fill: rgb(210 210 210 / 0.46);
+  --playback-material-highlight: rgb(255 255 255 / 0.38);
+  --playback-material-shadow: rgb(0 0 0 / 0.22);
+  --playback-material-glyph: rgb(0 0 0 / 0.88);
 
   position: relative;
   isolation: isolate;
@@ -17,11 +21,6 @@
   inset: 0;
   z-index: 2;
   overflow: hidden;
-  transition: background-color 180ms var(--ease-out-cubic);
-}
-
-.stage[data-state="loading"] .frame {
-  background-color: var(--grey12);
 }
 
 .video {
@@ -56,89 +55,96 @@
   opacity: 0;
 }
 
-.loading {
+.playbackIndicator {
   position: absolute;
-  left: var(--space-12);
-  bottom: var(--space-10);
-  z-index: 3;
-  margin: 0;
-  color: var(--color-background);
-  font-size: 0.875rem;
-  font-feature-settings: var(--font-feature-settings);
-  line-height: 1.25rem;
-  opacity: 0.92;
-  transition: opacity 180ms var(--ease-out-cubic);
+  top: 50%;
+  left: 50%;
+  z-index: 4;
+  display: grid;
+  width: var(--space-56);
+  height: var(--space-56);
+  place-items: center;
+  color: var(--playback-material-glyph);
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.18), rgb(255 255 255 / 0.03)),
+    var(--playback-material-fill);
+  border-radius: var(--radius-full);
+  box-shadow:
+    0 var(--space-14) var(--space-38) var(--playback-material-shadow),
+    inset 0 0 0 var(--border-thin) var(--playback-material-highlight),
+    inset 0 calc(-1 * var(--space-12)) var(--space-24)
+      rgb(255 255 255 / 0.08);
+  transform: translate(-50%, -50%) scale(1);
+  backdrop-filter: blur(var(--space-20)) saturate(1.8);
   pointer-events: none;
 }
 
-.stage[data-state="loaded"] .loading {
-  opacity: 0;
+.playbackIndicator[data-indicator="pause"] {
+  animation: playbackIndicatorOut 680ms var(--ease-out-cubic) forwards;
 }
 
-.loadingDots::after {
-  content: "";
-  display: inline-block;
-  font-feature-settings: var(--font-feature-settings);
-  animation: loadingAnimation 1.5s infinite;
+.playbackIcon {
+  display: block;
+  width: var(--space-28);
+  height: var(--space-28);
+}
+
+.playbackIndicator[data-indicator="play"] .playbackIcon {
+  transform: translateY(var(--space-1));
 }
 
 .glow {
   position: absolute;
-  inset: -2%;
+  inset: calc(-1 * var(--space-10));
   z-index: 0;
   display: block;
-  width: 104%;
-  height: 104%;
+  width: calc(100% + var(--space-20));
+  height: calc(100% + var(--space-20));
   object-fit: cover;
-  filter: blur(18px) saturate(1.25);
+  filter: blur(var(--space-18)) saturate(1.25);
   opacity: 0.42;
   transform: translateZ(0) scale(1.02);
   pointer-events: none;
 }
 
 @media (prefers-color-scheme: dark) {
+  .stage {
+    --playback-material-fill: rgb(18 18 20 / 0.56);
+    --playback-material-highlight: rgb(255 255 255 / 0.12);
+    --playback-material-shadow: rgb(0 0 0 / 0.42);
+    --playback-material-glyph: rgb(255 255 255 / 0.9);
+  }
+
   .glow {
-    inset: -1%;
-    width: 102%;
-    height: 102%;
-    filter: blur(14px) saturate(1.15);
+    inset: calc(-1 * var(--space-4));
+    width: calc(100% + var(--space-8));
+    height: calc(100% + var(--space-8));
+    filter: blur(var(--space-14)) saturate(1.15);
     opacity: 0.24;
     transform: translateZ(0) scale(1.01);
   }
 }
 
-.stage[data-state="loading"] .glow {
+.stage[data-state="pending"] .glow {
   opacity: 0;
 }
 
-@keyframes loadingAnimation {
+@keyframes playbackIndicatorOut {
   0% {
-    content: "";
-    opacity: 0.8;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
     filter: blur(0);
   }
 
-  25% {
-    content: ".";
-    opacity: 0.8;
-    filter: blur(0);
-  }
-
-  50% {
-    content: "..";
-    opacity: 0.8;
-    filter: blur(0);
-  }
-
-  75% {
-    content: "...";
-    opacity: 0.8;
+  54% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
     filter: blur(0);
   }
 
   100% {
-    content: "";
     opacity: 0;
-    filter: blur(1px);
+    transform: translate(-50%, -50%) scale(0.92);
+    filter: blur(var(--space-4));
   }
 }

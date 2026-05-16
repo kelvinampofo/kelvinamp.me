@@ -18,13 +18,23 @@ import styles from "./MediaPlayer.module.css";
 interface MediaPlayerContextValue {
   setVideoElement: (node: HTMLVideoElement | null) => void;
   togglePlayback: () => Promise<void>;
+  clearPlaybackIndicator: () => void;
+  playbackIndicator: PlaybackIndicatorState;
+}
+
+interface MediaPlayerRootProps extends ComponentPropsWithoutRef<"div"> {
+  children: ReactNode;
+}
+
+interface MediaPlayerIconProps {
+  className: string;
 }
 
 type ShortcutHandlers = Parameters<typeof useShortcuts>[0];
-type MediaPlayerRootProps = ComponentPropsWithoutRef<"div"> & {
-  children: ReactNode;
-};
 type MediaPlayerVideoProps = Omit<ComponentPropsWithoutRef<"video">, "ref">;
+type MediaPlayerVideoSource = MediaPlayerVideoProps["src"];
+type PlaybackIndicator = "play" | "pause";
+type PlaybackIndicatorState = PlaybackIndicator | null;
 
 const MediaPlayerContext = createContext<MediaPlayerContextValue | null>(null);
 
@@ -59,6 +69,17 @@ function Root({ children, className, ...props }: MediaPlayerRootProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
+  const [playbackIndicator, setPlaybackIndicator] =
+    useState<PlaybackIndicatorState>(null);
+
+  function showPlaybackIndicator(indicator: PlaybackIndicator) {
+    setPlaybackIndicator(indicator);
+  }
+
+  function clearPlaybackIndicator() {
+    setPlaybackIndicator(null);
+  }
+
   function setVideoElement(node: HTMLVideoElement | null) {
     videoRef.current = node;
   }
@@ -88,10 +109,12 @@ function Root({ children, className, ...props }: MediaPlayerRootProps) {
 
     if (video.paused || video.ended) {
       await playWithoutInterrupting(video);
+      showPlaybackIndicator("pause");
       return;
     }
 
     video.pause();
+    showPlaybackIndicator("play");
   }
 
   async function toggleMute() {
@@ -224,7 +247,14 @@ function Root({ children, className, ...props }: MediaPlayerRootProps) {
   });
 
   return (
-    <MediaPlayerContext.Provider value={{ setVideoElement, togglePlayback }}>
+    <MediaPlayerContext.Provider
+      value={{
+        setVideoElement,
+        togglePlayback,
+        clearPlaybackIndicator,
+        playbackIndicator,
+      }}
+    >
       <div ref={rootRef} className={clsx(styles.root, className)} {...props}>
         {children}
       </div>
@@ -240,28 +270,37 @@ function Video({
   muted = true,
   onClick,
   onCanPlay,
+  onLoadedData,
   playsInline = true,
   preload = "metadata",
   ...props
 }: MediaPlayerVideoProps) {
-  const [hasVideoLoaded, setHasVideoLoaded] = useState(false);
+  const [loadedSrc, setLoadedSrc] = useState<MediaPlayerVideoSource>();
 
-  const { setVideoElement, togglePlayback } =
-    useMediaPlayerContext("MediaPlayer.Video");
+  const {
+    setVideoElement,
+    togglePlayback,
+    clearPlaybackIndicator,
+    playbackIndicator,
+  } = useMediaPlayerContext("MediaPlayer.Video");
 
   const { poster, src } = props;
+  const hasVideoLoaded = !poster || (src != null && loadedSrc === src);
+
+  function markVideoLoaded() {
+    setLoadedSrc(src);
+  }
 
   function handleVideoRef(node: HTMLVideoElement | null) {
     setVideoElement(node);
 
     if (!node) {
-      setHasVideoLoaded(false);
       return;
     }
 
     // Cached videos can already be playable before canplay fires.
     if (node.readyState >= node.HAVE_FUTURE_DATA) {
-      setHasVideoLoaded(true);
+      markVideoLoaded();
     }
   }
 
@@ -276,8 +315,12 @@ function Video({
       playsInline={playsInline}
       preload={preload}
       onCanPlay={(event) => {
-        setHasVideoLoaded(true);
+        markVideoLoaded();
         onCanPlay?.(event);
+      }}
+      onLoadedData={(event) => {
+        markVideoLoaded();
+        onLoadedData?.(event);
       }}
       onClick={(event) => {
         onClick?.(event);
@@ -293,7 +336,7 @@ function Video({
   return (
     <div
       className={styles.stage}
-      data-state={hasVideoLoaded ? "loaded" : "loading"}
+      data-state={hasVideoLoaded ? "loaded" : "pending"}
     >
       {src && (
         <video
@@ -318,15 +361,74 @@ function Video({
             style={{ backgroundImage: `url(${poster})` }}
           />
         )}
-        {!hasVideoLoaded && (
-          <p className={styles.loading} role="status">
-            Video loading
-            <span className={styles.loadingDots} />
-          </p>
-        )}
         {foregroundVideo}
+        {playbackIndicator && (
+          <div
+            aria-hidden
+            className={styles.playbackIndicator}
+            data-indicator={playbackIndicator}
+            onAnimationEnd={() => {
+              if (playbackIndicator === "pause") {
+                clearPlaybackIndicator();
+              }
+            }}
+          >
+            {playbackIndicator === "play" ? (
+              <PlayIcon className={styles.playbackIcon} />
+            ) : (
+              <PauseIcon className={styles.playbackIcon} />
+            )}
+          </div>
+        )}
       </div>
     </div>
+  );
+}
+
+function PlayIcon({ className }: MediaPlayerIconProps) {
+  return (
+    <svg
+      aria-hidden
+      className={className}
+      viewBox="0 0 18 18"
+      fill="none"
+    >
+      <path
+        d="M5.5 3.9C5.5 3.2 6.2 2.8 6.8 3.2L14 7.5C14.6 7.9 14.6 8.9 14 9.3L6.8 13.6C6.2 14 5.5 13.6 5.5 12.9V3.9Z"
+        fill="currentColor"
+        stroke="currentColor"
+        strokeLinejoin="round"
+        strokeWidth="1"
+      />
+    </svg>
+  );
+}
+
+function PauseIcon({ className }: MediaPlayerIconProps) {
+  return (
+    <svg
+      aria-hidden
+      className={className}
+      viewBox="0 0 18 18"
+      fill="none"
+    >
+      <rect
+        x="4.5"
+        y="3.5"
+        width="3.5"
+        height="11"
+        rx="1"
+        fill="currentColor"
+      />
+      <rect
+        x="10"
+        y="3.5"
+        width="3.5"
+        height="11"
+        rx="1"
+        fill="currentColor"
+      />
+    </svg>
   );
 }
 
