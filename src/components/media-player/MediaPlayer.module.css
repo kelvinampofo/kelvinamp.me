@@ -93,20 +93,6 @@
   transform: translateY(var(--space-1));
 }
 
-.glow {
-  position: absolute;
-  inset: calc(-1 * var(--space-10));
-  z-index: 0;
-  display: block;
-  width: calc(100% + var(--space-20));
-  height: calc(100% + var(--space-20));
-  object-fit: cover;
-  filter: blur(var(--space-18)) saturate(1.25);
-  opacity: 0.42;
-  transform: translateZ(0) scale(1.02);
-  pointer-events: none;
-}
-
 @media (prefers-color-scheme: dark) {
   .stage {
     --playback-material-fill: rgb(18 18 20 / 0.56);
@@ -114,19 +100,6 @@
     --playback-material-shadow: rgb(0 0 0 / 0.42);
     --playback-material-glyph: rgb(255 255 255 / 0.9);
   }
-
-  .glow {
-    inset: calc(-1 * var(--space-4));
-    width: calc(100% + var(--space-8));
-    height: calc(100% + var(--space-8));
-    filter: blur(var(--space-14)) saturate(1.15);
-    opacity: 0.24;
-    transform: translateZ(0) scale(1.01);
-  }
-}
-
-.stage[data-state="pending"] .glow {
-  opacity: 0;
 }
 
 @keyframes playbackIndicatorOut {

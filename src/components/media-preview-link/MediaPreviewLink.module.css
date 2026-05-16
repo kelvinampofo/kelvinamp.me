@@ -10,23 +10,31 @@
 }
 
 .popup {
+  --preview-enter-duration: var(--transition-enter);
+  --preview-exit-duration: var(--transition-exit);
+
   width: min(32rem, var(--available-width));
   max-width: min(32rem, var(--available-width));
   overflow: visible;
   transform-origin: var(--transform-origin);
   transition:
-    transform var(--transition-enter) var(--ease-out-cubic),
-    opacity var(--transition-enter) var(--ease-out-cubic);
+    transform var(--preview-enter-duration) var(--ease-out-cubic),
+    opacity var(--preview-enter-duration) var(--ease-out-cubic);
   box-shadow:
     0 30px 54px -24px rgb(0 0 0 / 0.44),
     0 16px 24px -16px rgb(0 0 0 / 0.28),
     0 0 34px -18px rgb(0 0 0 / 0.18);
+  will-change: transform, opacity;
 }
 
 .popup[data-starting-style],
 .popup[data-ending-style] {
   opacity: 0;
   transform: scale(0.94);
+}
+
+.popup[data-ending-style] {
+  transition-duration: var(--preview-exit-duration);
 }
 
 .player {
@@ -40,4 +48,26 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .popup {
+    --preview-enter-duration: 260ms;
+    --preview-exit-duration: 180ms;
+  }
+
+  .popup[data-starting-style] {
+    transform: translateY(var(--space-10)) scale(0.96);
+  }
+
+  .popup[data-ending-style] {
+    transform: translateY(var(--space-6)) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .popup {
+    transition: none;
+    will-change: auto;
+  }
 }

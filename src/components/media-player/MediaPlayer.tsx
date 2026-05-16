@@ -43,7 +43,6 @@ const FRAME_DURATION = 1 / 30;
 const KEYBOARD_SEEK_SECONDS = 10;
 const ARROW_KEY_SEEK_SECONDS = 5;
 const PERCENT_SHORTCUT_COUNT = 10;
-const MAX_GLOW_DRIFT_SECONDS = 0.08;
 
 function useMediaPlayerContext(componentName: string) {
   const context = use(MediaPlayerContext);
@@ -270,19 +269,11 @@ function Video({
   muted = true,
   onClick,
   onCanPlay,
-  onPause,
-  onPlay,
-  onRateChange,
-  onSeeked,
-  onSeeking,
-  onTimeUpdate,
   onLoadedData,
   playsInline = true,
   preload = "metadata",
   ...props
 }: MediaPlayerVideoProps) {
-  const sourceRef = useRef<HTMLVideoElement | null>(null);
-  const glowRef = useRef<HTMLVideoElement>(null);
   const [loadedSource, setLoadedSource] = useState<VideoSource>();
 
   const { setVideoElement, togglePlayback, clearIndicator, indicator } =
@@ -295,31 +286,7 @@ function Video({
     setLoadedSource(src);
   }
 
-  function syncGlowVideo(video: HTMLVideoElement) {
-    const glow = glowRef.current;
-
-    if (!glow || glow.readyState === glow.HAVE_NOTHING) {
-      return;
-    }
-
-    if (
-      Math.abs(glow.currentTime - video.currentTime) > MAX_GLOW_DRIFT_SECONDS
-    ) {
-      glow.currentTime = video.currentTime;
-    }
-
-    glow.playbackRate = video.playbackRate;
-
-    if (video.paused || video.ended) {
-      glow.pause();
-      return;
-    }
-
-    void playWithoutInterrupting(glow);
-  }
-
   function handleVideoRef(node: HTMLVideoElement | null) {
-    sourceRef.current = node;
     setVideoElement(node);
 
     if (!node) {
@@ -344,12 +311,10 @@ function Video({
       preload={preload}
       onCanPlay={(event) => {
         setSourceLoaded();
-        syncGlowVideo(event.currentTarget);
         onCanPlay?.(event);
       }}
       onLoadedData={(event) => {
         setSourceLoaded();
-        syncGlowVideo(event.currentTarget);
         onLoadedData?.(event);
       }}
       onClick={(event) => {
@@ -358,30 +323,6 @@ function Video({
         if (!event.defaultPrevented) {
           void togglePlayback();
         }
-      }}
-      onPause={(event) => {
-        syncGlowVideo(event.currentTarget);
-        onPause?.(event);
-      }}
-      onPlay={(event) => {
-        syncGlowVideo(event.currentTarget);
-        onPlay?.(event);
-      }}
-      onRateChange={(event) => {
-        syncGlowVideo(event.currentTarget);
-        onRateChange?.(event);
-      }}
-      onSeeked={(event) => {
-        syncGlowVideo(event.currentTarget);
-        onSeeked?.(event);
-      }}
-      onSeeking={(event) => {
-        syncGlowVideo(event.currentTarget);
-        onSeeking?.(event);
-      }}
-      onTimeUpdate={(event) => {
-        syncGlowVideo(event.currentTarget);
-        onTimeUpdate?.(event);
       }}
       className={clsx(styles.video, className)}
     />
@@ -392,31 +333,6 @@ function Video({
       className={styles.stage}
       data-state={hasSourceLoaded ? "loaded" : "pending"}
     >
-      {src && hasSourceLoaded && (
-        <video
-          aria-hidden
-          className={styles.glow}
-          controls={false}
-          loop={loop}
-          muted
-          poster={poster}
-          playsInline={playsInline}
-          preload={preload}
-          ref={glowRef}
-          src={src}
-          tabIndex={-1}
-          onCanPlay={() => {
-            if (sourceRef.current) {
-              syncGlowVideo(sourceRef.current);
-            }
-          }}
-          onLoadedData={() => {
-            if (sourceRef.current) {
-              syncGlowVideo(sourceRef.current);
-            }
-          }}
-        />
-      )}
       <div className={styles.frame}>
         {poster && (
           <div
