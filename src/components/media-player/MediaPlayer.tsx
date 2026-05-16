@@ -43,6 +43,7 @@ const FRAME_DURATION = 1 / 30;
 const KEYBOARD_SEEK_SECONDS = 10;
 const ARROW_KEY_SEEK_SECONDS = 5;
 const PERCENT_SHORTCUT_COUNT = 10;
+const MAX_GLOW_DRIFT_SECONDS = 0.08;
 
 function useMediaPlayerContext(componentName: string) {
   const context = use(MediaPlayerContext);
@@ -269,28 +270,56 @@ function Video({
   muted = true,
   onClick,
   onCanPlay,
+  onPause,
+  onPlay,
+  onRateChange,
+  onSeeked,
+  onSeeking,
+  onTimeUpdate,
   onLoadedData,
   playsInline = true,
   preload = "metadata",
   ...props
 }: MediaPlayerVideoProps) {
+  const sourceRef = useRef<HTMLVideoElement | null>(null);
+  const glowRef = useRef<HTMLVideoElement>(null);
   const [loadedSource, setLoadedSource] = useState<VideoSource>();
 
-  const {
-    setVideoElement,
-    togglePlayback,
-    clearIndicator,
-    indicator,
-  } = useMediaPlayerContext("MediaPlayer.Video");
+  const { setVideoElement, togglePlayback, clearIndicator, indicator } =
+    useMediaPlayerContext("MediaPlayer.Video");
 
   const { poster, src } = props;
-  const hasVideoLoaded = !poster || (src != null && loadedSource === src);
+  const hasSourceLoaded = src != null && loadedSource === src;
 
   function setSourceLoaded() {
     setLoadedSource(src);
   }
 
+  function syncGlowVideo(video: HTMLVideoElement) {
+    const glow = glowRef.current;
+
+    if (!glow || glow.readyState === glow.HAVE_NOTHING) {
+      return;
+    }
+
+    if (
+      Math.abs(glow.currentTime - video.currentTime) > MAX_GLOW_DRIFT_SECONDS
+    ) {
+      glow.currentTime = video.currentTime;
+    }
+
+    glow.playbackRate = video.playbackRate;
+
+    if (video.paused || video.ended) {
+      glow.pause();
+      return;
+    }
+
+    void playWithoutInterrupting(glow);
+  }
+
   function handleVideoRef(node: HTMLVideoElement | null) {
+    sourceRef.current = node;
     setVideoElement(node);
 
     if (!node) {
@@ -315,10 +344,12 @@ function Video({
       preload={preload}
       onCanPlay={(event) => {
         setSourceLoaded();
+        syncGlowVideo(event.currentTarget);
         onCanPlay?.(event);
       }}
       onLoadedData={(event) => {
         setSourceLoaded();
+        syncGlowVideo(event.currentTarget);
         onLoadedData?.(event);
       }}
       onClick={(event) => {
@@ -328,6 +359,30 @@ function Video({
           void togglePlayback();
         }
       }}
+      onPause={(event) => {
+        syncGlowVideo(event.currentTarget);
+        onPause?.(event);
+      }}
+      onPlay={(event) => {
+        syncGlowVideo(event.currentTarget);
+        onPlay?.(event);
+      }}
+      onRateChange={(event) => {
+        syncGlowVideo(event.currentTarget);
+        onRateChange?.(event);
+      }}
+      onSeeked={(event) => {
+        syncGlowVideo(event.currentTarget);
+        onSeeked?.(event);
+      }}
+      onSeeking={(event) => {
+        syncGlowVideo(event.currentTarget);
+        onSeeking?.(event);
+      }}
+      onTimeUpdate={(event) => {
+        syncGlowVideo(event.currentTarget);
+        onTimeUpdate?.(event);
+      }}
       className={clsx(styles.video, className)}
     />
   );
@@ -335,12 +390,11 @@ function Video({
   return (
     <div
       className={styles.stage}
-      data-state={hasVideoLoaded ? "loaded" : "pending"}
+      data-state={hasSourceLoaded ? "loaded" : "pending"}
     >
-      {src && (
+      {src && hasSourceLoaded && (
         <video
           aria-hidden
-          autoPlay={autoPlay}
           className={styles.glow}
           controls={false}
           loop={loop}
@@ -348,8 +402,19 @@ function Video({
           poster={poster}
           playsInline={playsInline}
           preload={preload}
+          ref={glowRef}
           src={src}
           tabIndex={-1}
+          onCanPlay={() => {
+            if (sourceRef.current) {
+              syncGlowVideo(sourceRef.current);
+            }
+          }}
+          onLoadedData={() => {
+            if (sourceRef.current) {
+              syncGlowVideo(sourceRef.current);
+            }
+          }}
         />
       )}
       <div className={styles.frame}>
@@ -386,12 +451,7 @@ function Video({
 
 function PlayIcon({ className }: MediaPlayerIconProps) {
   return (
-    <svg
-      aria-hidden
-      className={className}
-      viewBox="0 0 18 18"
-      fill="none"
-    >
+    <svg aria-hidden className={className} viewBox="0 0 18 18" fill="none">
       <path
         d="M5.5 3.9C5.5 3.2 6.2 2.8 6.8 3.2L14 7.5C14.6 7.9 14.6 8.9 14 9.3L6.8 13.6C6.2 14 5.5 13.6 5.5 12.9V3.9Z"
         fill="currentColor"
@@ -405,12 +465,7 @@ function PlayIcon({ className }: MediaPlayerIconProps) {
 
 function PauseIcon({ className }: MediaPlayerIconProps) {
   return (
-    <svg
-      aria-hidden
-      className={className}
-      viewBox="0 0 18 18"
-      fill="none"
-    >
+    <svg aria-hidden className={className} viewBox="0 0 18 18" fill="none">
       <rect
         x="4.5"
         y="3.5"
@@ -419,14 +474,7 @@ function PauseIcon({ className }: MediaPlayerIconProps) {
         rx="1"
         fill="currentColor"
       />
-      <rect
-        x="10"
-        y="3.5"
-        width="3.5"
-        height="11"
-        rx="1"
-        fill="currentColor"
-      />
+      <rect x="10" y="3.5" width="3.5" height="11" rx="1" fill="currentColor" />
     </svg>
   );
 }
