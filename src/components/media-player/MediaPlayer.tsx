@@ -18,8 +18,8 @@ import styles from "./MediaPlayer.module.css";
 interface MediaPlayerContextValue {
   setVideoElement: (node: HTMLVideoElement | null) => void;
   togglePlayback: () => Promise<void>;
-  clearPlaybackIndicator: () => void;
-  playbackIndicator: PlaybackIndicatorState;
+  clearIndicator: () => void;
+  indicator: IndicatorState;
 }
 
 interface MediaPlayerRootProps extends ComponentPropsWithoutRef<"div"> {
@@ -32,9 +32,9 @@ interface MediaPlayerIconProps {
 
 type ShortcutHandlers = Parameters<typeof useShortcuts>[0];
 type MediaPlayerVideoProps = Omit<ComponentPropsWithoutRef<"video">, "ref">;
-type MediaPlayerVideoSource = MediaPlayerVideoProps["src"];
-type PlaybackIndicator = "play" | "pause";
-type PlaybackIndicatorState = PlaybackIndicator | null;
+type VideoSource = MediaPlayerVideoProps["src"];
+type Indicator = "play" | "pause";
+type IndicatorState = Indicator | null;
 
 const MediaPlayerContext = createContext<MediaPlayerContextValue | null>(null);
 
@@ -69,15 +69,14 @@ function Root({ children, className, ...props }: MediaPlayerRootProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const [playbackIndicator, setPlaybackIndicator] =
-    useState<PlaybackIndicatorState>(null);
+  const [indicator, setIndicator] = useState<IndicatorState>(null);
 
-  function showPlaybackIndicator(indicator: PlaybackIndicator) {
-    setPlaybackIndicator(indicator);
+  function showIndicator(nextIndicator: Indicator) {
+    setIndicator(nextIndicator);
   }
 
-  function clearPlaybackIndicator() {
-    setPlaybackIndicator(null);
+  function clearIndicator() {
+    setIndicator(null);
   }
 
   function setVideoElement(node: HTMLVideoElement | null) {
@@ -109,12 +108,12 @@ function Root({ children, className, ...props }: MediaPlayerRootProps) {
 
     if (video.paused || video.ended) {
       await playWithoutInterrupting(video);
-      showPlaybackIndicator("pause");
+      showIndicator("pause");
       return;
     }
 
     video.pause();
-    showPlaybackIndicator("play");
+    showIndicator("play");
   }
 
   async function toggleMute() {
@@ -251,8 +250,8 @@ function Root({ children, className, ...props }: MediaPlayerRootProps) {
       value={{
         setVideoElement,
         togglePlayback,
-        clearPlaybackIndicator,
-        playbackIndicator,
+        clearIndicator,
+        indicator,
       }}
     >
       <div ref={rootRef} className={clsx(styles.root, className)} {...props}>
@@ -275,20 +274,20 @@ function Video({
   preload = "metadata",
   ...props
 }: MediaPlayerVideoProps) {
-  const [loadedSrc, setLoadedSrc] = useState<MediaPlayerVideoSource>();
+  const [loadedSource, setLoadedSource] = useState<VideoSource>();
 
   const {
     setVideoElement,
     togglePlayback,
-    clearPlaybackIndicator,
-    playbackIndicator,
+    clearIndicator,
+    indicator,
   } = useMediaPlayerContext("MediaPlayer.Video");
 
   const { poster, src } = props;
-  const hasVideoLoaded = !poster || (src != null && loadedSrc === src);
+  const hasVideoLoaded = !poster || (src != null && loadedSource === src);
 
-  function markVideoLoaded() {
-    setLoadedSrc(src);
+  function setSourceLoaded() {
+    setLoadedSource(src);
   }
 
   function handleVideoRef(node: HTMLVideoElement | null) {
@@ -300,7 +299,7 @@ function Video({
 
     // Cached videos can already be playable before canplay fires.
     if (node.readyState >= node.HAVE_FUTURE_DATA) {
-      markVideoLoaded();
+      setSourceLoaded();
     }
   }
 
@@ -315,11 +314,11 @@ function Video({
       playsInline={playsInline}
       preload={preload}
       onCanPlay={(event) => {
-        markVideoLoaded();
+        setSourceLoaded();
         onCanPlay?.(event);
       }}
       onLoadedData={(event) => {
-        markVideoLoaded();
+        setSourceLoaded();
         onLoadedData?.(event);
       }}
       onClick={(event) => {
@@ -362,18 +361,18 @@ function Video({
           />
         )}
         {foregroundVideo}
-        {playbackIndicator && (
+        {indicator && (
           <div
             aria-hidden
             className={styles.playbackIndicator}
-            data-indicator={playbackIndicator}
+            data-indicator={indicator}
             onAnimationEnd={() => {
-              if (playbackIndicator === "pause") {
-                clearPlaybackIndicator();
+              if (indicator === "pause") {
+                clearIndicator();
               }
             }}
           >
-            {playbackIndicator === "play" ? (
+            {indicator === "play" ? (
               <PlayIcon className={styles.playbackIcon} />
             ) : (
               <PauseIcon className={styles.playbackIcon} />
