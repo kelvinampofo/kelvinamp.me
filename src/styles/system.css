@@ -218,15 +218,6 @@
     --radius-full: 9999px;
   }
 
-  @supports (color: color(display-p3 0 0 0)) {
-    :root {
-      --yellow: color(display-p3 1 0.78 0);
-      --orange: color(display-p3 1 0.36 0);
-      --blue: color(display-p3 0.071 0.442 0.945);
-      --teal: color(display-p3 0 0.78 0.72);
-    }
-  }
-
   @media (prefers-color-scheme: dark) {
     :root {
       --color-background: #161616;
@@ -273,6 +264,93 @@
       --elevation-3:
         var(--shadow-ambient) 0 8px 16px -4px,
         var(--shadow-key) 0 12px 24px -6px;
+    }
+  }
+
+  @supports (color: color(display-p3 0 0 0)) {
+    @media (color-gamut: p3) {
+      :root {
+        --color-background: color(display-p3 1 1 1);
+        --color-foreground: color(display-p3 0.228 0.228 0.228);
+        --color-foreground-secondary: color(display-p3 0.435 0.435 0.435);
+
+        --grey1: color(display-p3 0.988 0.988 0.988);
+        --grey2: color(display-p3 0.973 0.973 0.973);
+        --grey3: color(display-p3 0.953 0.953 0.953);
+        --grey4: color(display-p3 0.929 0.929 0.929);
+        --grey5: color(display-p3 0.91 0.91 0.91);
+        --grey6: color(display-p3 0.886 0.886 0.886);
+        --grey7: color(display-p3 0.859 0.859 0.859);
+        --grey8: color(display-p3 0.78 0.78 0.78);
+        --grey9: color(display-p3 0.561 0.561 0.561);
+        --grey10: color(display-p3 0.522 0.522 0.522);
+        --grey11: color(display-p3 0.435 0.435 0.435);
+        --grey12: color(display-p3 0.09 0.09 0.09);
+
+        --greyA1: color(display-p3 0 0 0 / 0.012);
+        --greyA2: color(display-p3 0 0 0 / 0.027);
+        --greyA3: color(display-p3 0 0 0 / 0.047);
+        --greyA4: color(display-p3 0 0 0 / 0.071);
+        --greyA5: color(display-p3 0 0 0 / 0.09);
+        --greyA6: color(display-p3 0 0 0 / 0.114);
+        --greyA7: color(display-p3 0 0 0 / 0.141);
+        --greyA8: color(display-p3 0 0 0 / 0.22);
+        --greyA9: color(display-p3 0 0 0 / 0.439);
+        --greyA10: color(display-p3 0 0 0 / 0.478);
+        --greyA11: color(display-p3 0 0 0 / 0.565);
+        --greyA12: color(display-p3 0 0 0 / 0.91);
+
+        --yellow: color(display-p3 1 0.78 0);
+        --orange: color(display-p3 1 0.36 0);
+        --blue: color(display-p3 0.071 0.442 0.945);
+        --teal: color(display-p3 0 0.78 0.72);
+
+        --focus-inner-color-light: color(display-p3 0.99 0.99 0.99);
+        --focus-inner-color-dark: color(display-p3 0.086 0.086 0.086);
+        --focus-outer-color: color(display-p3 1 0.639 0.118);
+
+        --selection-bg-color: color(display-p3 1 0.976 0.659);
+        --selection-text-color: color(display-p3 0 0 0);
+
+        --shadow-border-color: color(display-p3 0 0 0 / 0.05);
+        --shadow-tooltip:
+          var(--shadow-border), 0px 1px 1px color(display-p3 0 0 0 / 0.02),
+          0px 4px 8px color(display-p3 0 0 0 / 0.04);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --color-background: color(display-p3 0.086 0.086 0.086);
+          --color-foreground: color(display-p3 0.929 0.929 0.929);
+          --color-foreground-secondary: color(display-p3 0.627 0.627 0.627);
+
+          --grey1: color(display-p3 0.102 0.102 0.102);
+          --grey2: color(display-p3 0.11 0.11 0.11);
+          --grey3: color(display-p3 0.137 0.137 0.137);
+          --grey4: color(display-p3 0.157 0.157 0.157);
+          --grey5: color(display-p3 0.18 0.18 0.18);
+          --grey6: color(display-p3 0.204 0.204 0.204);
+          --grey7: color(display-p3 0.243 0.243 0.243);
+          --grey8: color(display-p3 0.314 0.314 0.314);
+          --grey9: color(display-p3 0.439 0.439 0.439);
+          --grey10: color(display-p3 0.494 0.494 0.494);
+          --grey11: color(display-p3 0.627 0.627 0.627);
+          --grey12: color(display-p3 0.929 0.929 0.929);
+
+          --greyA1: color(display-p3 1 1 1 / 0);
+          --greyA2: color(display-p3 1 1 1 / 0.026);
+          --greyA3: color(display-p3 1 1 1 / 0.056);
+          --greyA4: color(display-p3 1 1 1 / 0.077);
+          --greyA5: color(display-p3 1 1 1 / 0.103);
+          --greyA6: color(display-p3 1 1 1 / 0.129);
+          --greyA7: color(display-p3 1 1 1 / 0.172);
+          --greyA8: color(display-p3 1 1 1 / 0.249);
+          --greyA9: color(display-p3 1 1 1 / 0.386);
+          --greyA10: color(display-p3 1 1 1 / 0.446);
+          --greyA11: color(display-p3 1 1 1 / 0.592);
+          --greyA12: color(display-p3 1 1 1 / 0.923);
+        }
+      }
     }
   }
 
