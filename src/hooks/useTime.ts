@@ -28,7 +28,7 @@ const MILLISECONDS_PER_SECOND = 1000;
 export function useTime({
   timeZone = "Europe/London",
 }: UseTimeOptions = {}): UseTimeResult {
-  const [currentDate, setCurrentDate] = useState<Date>(() => new Date());
+  const [currentDate, setCurrentDate] = useState<Date | null>(null);
 
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -48,12 +48,7 @@ export function useTime({
       }, delay);
     }
 
-    const elapsedInCurrentSecond = Date.now() % MILLISECONDS_PER_SECOND;
-    const remainingToNextSecond =
-      MILLISECONDS_PER_SECOND - elapsedInCurrentSecond;
-    const initialDelay = remainingToNextSecond || MILLISECONDS_PER_SECOND;
-
-    scheduleTick(initialDelay);
+    scheduleTick(0);
 
     return () => {
       if (timeoutRef.current) {
@@ -65,6 +60,10 @@ export function useTime({
   const date = currentDate;
 
   function formatToParts(options: Intl.DateTimeFormatOptions) {
+    if (!date) {
+      return [];
+    }
+
     const formatter = new Intl.DateTimeFormat("en-GB", {
       timeZone,
       ...options,
@@ -92,10 +91,10 @@ export function useTime({
   }
 
   const timeParts: TimeParts = {
-    hours: parseClockPart("hour") ?? date.getHours(),
-    minutes: parseClockPart("minute") ?? date.getMinutes(),
-    seconds: parseClockPart("second") ?? date.getSeconds(),
-    milliseconds: date.getMilliseconds(),
+    hours: parseClockPart("hour") ?? 0,
+    minutes: parseClockPart("minute") ?? 0,
+    seconds: parseClockPart("second") ?? 0,
+    milliseconds: date?.getMilliseconds() ?? 0,
   };
 
   function padTimeUnit(value: number) {
