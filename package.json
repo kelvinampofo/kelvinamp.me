@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
-    "@types/mdx": "^2.0.13",
     "@vercel/analytics": "^2.0.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
