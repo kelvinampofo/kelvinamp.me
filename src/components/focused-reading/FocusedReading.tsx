@@ -17,6 +17,7 @@ export default function FocusedReading({ children }: FocusedReadingProps) {
     { F: () => setIsFocused((prev) => !prev) },
     {
       delay: 300,
+      ignoreRepeat: true,
     }
   );
 

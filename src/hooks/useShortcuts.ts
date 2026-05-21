@@ -59,6 +59,7 @@ interface UseShortcutsOptions {
   delay?: number;
   matchBy?: MatchBy;
   enabled?: boolean;
+  ignoreRepeat?: boolean;
 }
 
 const SUPPORTED_MODIFIERS: ModifierKey[] = ["Alt", "Control", "Meta", "Shift"];
@@ -96,6 +97,7 @@ export default function useShortcuts(
     delay = 0,
     matchBy = "key",
     enabled = true,
+    ignoreRepeat = false,
   } = options;
 
   const shortcutBindings = Object.entries(shortcuts)
@@ -121,6 +123,7 @@ export default function useShortcuts(
 
   const handleShortcutKeyDown = useEffectEvent((event: KeyboardEvent) => {
     if (!enabled) return;
+    if (ignoreRepeat && event.repeat) return;
 
     const requiredModifiers = normalizeModifiers(modifiers);
     const pressedKey = matchBy === "key" ? event.key.toLowerCase() : event.code;
