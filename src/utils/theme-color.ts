@@ -1,24 +1,35 @@
 import { clamp, lerp } from "./math";
 
+type Rgb = [number, number, number];
+
 const THEME_META_NAME = "theme-color";
 
+const DEFAULT_FALLBACK_COLOR: Rgb = [255, 255, 255];
+
 function ensureThemeMeta() {
-  let element: HTMLMetaElement | null = document.querySelector(
+  const existingElement = document.querySelector<HTMLMetaElement>(
     `meta[name="${THEME_META_NAME}"]`
   );
 
-  if (!element) {
-    element = document.createElement("meta");
-    element.name = THEME_META_NAME;
-    element.content = getComputedStyle(document.body).backgroundColor;
-    document.head.appendChild(element);
+  if (existingElement) {
+    return existingElement;
   }
+
+  return createThemeMeta();
+}
+
+function createThemeMeta() {
+  const element = document.createElement("meta");
+
+  element.name = THEME_META_NAME;
+  element.content = getComputedStyle(document.body).backgroundColor;
+  document.head.appendChild(element);
 
   return element;
 }
 
 function getCurrentThemeColor() {
-  const element: HTMLMetaElement | null = document.querySelector(
+  const element = document.querySelector<HTMLMetaElement>(
     `meta[name="${THEME_META_NAME}"]`
   );
 
@@ -32,7 +43,21 @@ function parseRgb(input: string) {
 
   if (!match) return null;
 
-  return [Number(match[1]), Number(match[2]), Number(match[3])];
+  return [Number(match[1]), Number(match[2]), Number(match[3])] satisfies Rgb;
+}
+
+function parseDisplayP3(input: string) {
+  const match = input.match(
+    /color\s*\(\s*display-p3\s+([.\d]+)\s+([.\d]+)\s+([.\d]+)(?:\s*\/\s*([.\d]+))?\s*\)/i
+  );
+
+  if (!match) return null;
+
+  return [
+    Number(match[1]) * 255,
+    Number(match[2]) * 255,
+    Number(match[3]) * 255,
+  ] satisfies Rgb;
 }
 
 function hexToRgb(hex: string) {
@@ -43,7 +68,7 @@ function hexToRgb(hex: string) {
     const g = parseInt(clean[1] + clean[1], 16);
     const b = parseInt(clean[2] + clean[2], 16);
 
-    return [r, g, b];
+    return [r, g, b] satisfies Rgb;
   }
 
   if (clean.length === 6) {
@@ -51,13 +76,13 @@ function hexToRgb(hex: string) {
     const g = parseInt(clean.slice(2, 4), 16);
     const b = parseInt(clean.slice(4, 6), 16);
 
-    return [r, g, b];
+    return [r, g, b] satisfies Rgb;
   }
 
   return null;
 }
 
-function rgbToHex([r, g, b]: [number, number, number]) {
+function rgbToHex([r, g, b]: Rgb) {
   function toHex(channel: number) {
     return clamp(Math.round(channel), 0, 255).toString(16).padStart(2, "0");
   }
@@ -69,18 +94,32 @@ function parseColorToRgb(color: string) {
   return (
     hexToRgb(color) ||
     parseRgb(color) ||
+    parseDisplayP3(color) ||
     // fallback to resolving via browser then parse (handles named colors, hsl, etc.)
-    (typeof document !== "undefined"
-      ? parseRgb(
-          getComputedStyle(
-            Object.assign(document.createElement("div"), { style: { color } })
-          ).color
-        )
-      : null) || [0, 0, 0]
+    resolveColorToRgb(color) ||
+    DEFAULT_FALLBACK_COLOR
   );
 }
 
-/** animates the `<meta name="theme-color">` towards `toColor` over `duration` ms (default 250); returns a cancel function and no-ops on the server. */
+function resolveColorToRgb(color: string) {
+  if (typeof document === "undefined") return null;
+
+  const colorResolver = document.createElement("div");
+
+  colorResolver.style.color = color;
+  colorResolver.style.display = "none";
+  document.body.appendChild(colorResolver);
+
+  const resolvedColor = getComputedStyle(colorResolver).color;
+  colorResolver.remove();
+
+  return parseRgb(resolvedColor) || parseDisplayP3(resolvedColor);
+}
+
+/**
+ * Animates browser UI theme color towards `toColor`; returns a cancel function
+ * and no-ops on the server.
+ */
 export function animateThemeColor(toColor: string, duration = 250) {
   const isClientUnavailable =
     typeof document === "undefined" || typeof window === "undefined";
@@ -93,9 +132,9 @@ export function animateThemeColor(toColor: string, duration = 250) {
   const from = parseColorToRgb(getCurrentThemeColor());
   const to = parseColorToRgb(toColor);
 
-  let animationFrameId = 0;
-
+  const animation = { frameId: 0 };
   const start = performance.now();
+
   function tick() {
     const now = performance.now();
     const progress = clamp((now - start) / duration, 0, 1);
@@ -110,11 +149,11 @@ export function animateThemeColor(toColor: string, duration = 250) {
     meta.content = rgbToHex([r, g, b]);
 
     if (progress < 1) {
-      animationFrameId = requestAnimationFrame(tick);
+      animation.frameId = requestAnimationFrame(tick);
     }
   }
 
-  animationFrameId = requestAnimationFrame(tick);
+  animation.frameId = requestAnimationFrame(tick);
 
-  return () => cancelAnimationFrame(animationFrameId);
+  return () => cancelAnimationFrame(animation.frameId);
 }
