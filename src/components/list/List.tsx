@@ -1,10 +1,10 @@
-import { format, isAfter, subMonths, parseISO, isThisYear } from "date-fns";
 import Link from "next/link";
 
 import type {
   ContentCollection,
   ContentEntry,
 } from "../../utils/content-collection";
+import { formatDate, isAfter, isThisYear, subMonths } from "../../utils/date";
 import Badge from "../badge/Badge";
 
 import styles from "./List.module.css";
@@ -20,10 +20,7 @@ export default function List({ entries, collection }: ListProps) {
   return (
     <ol data-list="unstyled">
       {entries.map(({ id, slug, title, publishedDate, description }) => {
-        const isNew = isAfter(
-          parseISO(publishedDate),
-          subMonths(new Date(), 1)
-        );
+        const isNew = isAfter(publishedDate, subMonths(new Date(), 1));
 
         const pathname = `/${collection}/${slug}`;
 
@@ -49,11 +46,18 @@ export default function List({ entries, collection }: ListProps) {
 }
 
 function getDisplayDate(dateString: string, collection: ContentCollection) {
-  const date = parseISO(dateString);
+  const withYear = !isThisYear(dateString);
 
   if (collection === "writing") {
-    return format(date, isThisYear(date) ? "dd MMM" : "dd MMM yyyy");
+    return formatDate(dateString, {
+      day: "2-digit",
+      month: "short",
+      year: withYear ? "numeric" : undefined,
+    });
   }
 
-  return format(date, isThisYear(date) ? "MMMM" : "MMMM yyyy");
+  return formatDate(dateString, {
+    month: "long",
+    year: withYear ? "numeric" : undefined,
+  });
 }
