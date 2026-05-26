@@ -1,29 +1,33 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+const FINE_POINTER_QUERY = "(pointer: fine)";
 
 export default function usePointerDevice() {
-  const [isPointerDevice, setIsPointerDevice] = useState(
-    () =>
-      !!(
-        typeof window !== "undefined" &&
-        window.matchMedia("(pointer: fine)").matches
-      )
+  const isPointerDevice = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot
   );
 
-  useEffect(() => {
-    function handlePointerChange(event: MediaQueryListEvent) {
-      setIsPointerDevice(event.matches);
-    }
-
-    const pointerMediaQuery = window.matchMedia("(pointer: fine)");
-
-    pointerMediaQuery.addEventListener("change", handlePointerChange);
-
-    return () => {
-      pointerMediaQuery.removeEventListener("change", handlePointerChange);
-    };
-  }, []);
-
   return { isPointerDevice };
+}
+
+function getSnapshot() {
+  return window.matchMedia(FINE_POINTER_QUERY).matches;
+}
+
+function getServerSnapshot() {
+  return false;
+}
+
+function subscribe(callback: () => void) {
+  const pointerMediaQuery = window.matchMedia(FINE_POINTER_QUERY);
+
+  pointerMediaQuery.addEventListener("change", callback);
+
+  return () => {
+    pointerMediaQuery.removeEventListener("change", callback);
+  };
 }

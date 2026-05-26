@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useState, useRef, useCallback } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 const IS_SERVER = typeof window === "undefined";
 
@@ -29,15 +29,16 @@ export function useWindowDimension(options: UseWindowDimensionOptions = {}) {
   });
 
   const timerRef = useRef<number | null>(null);
-  const updateDimensions = useCallback(() => {
-    setDimensions({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
-  }, []);
 
   useLayoutEffect(() => {
     if (IS_SERVER) return;
+
+    function updateDimensions() {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
 
     function handleResize() {
       if (debounceDelay) {
@@ -60,7 +61,7 @@ export function useWindowDimension(options: UseWindowDimensionOptions = {}) {
         clearTimeout(timerRef.current);
       }
     };
-  }, [debounceDelay, updateDimensions]);
+  }, [debounceDelay]);
 
   return dimensions;
 }

@@ -2,63 +2,28 @@
 
 import { useSyncExternalStore } from "react";
 
-function subscribeFullscreenChanges(callback: () => void) {
-  if (typeof document === "undefined") {
-    return () => undefined;
-  }
-
-  function handleChange() {
-    callback();
-  }
-
-  document.addEventListener("fullscreenchange", handleChange);
-  document.addEventListener("fullscreenerror", handleChange);
-
-  return () => {
-    document.removeEventListener("fullscreenchange", handleChange);
-    document.removeEventListener("fullscreenerror", handleChange);
-  };
-}
-
-function isFullscreenSnapshot() {
-  return !!(typeof document !== "undefined" && document.fullscreenElement);
-}
-
-function canUseFullscreenSnapshot() {
-  return !!(
-    typeof document !== "undefined" &&
-    typeof document.documentElement.requestFullscreen === "function"
-  );
-}
-
-function getServerSnapshot() {
-  return false;
-}
-
-function noopSubscribe() {
-  return () => undefined;
-}
-
 export default function useFullscreen() {
   const isFullscreen = useSyncExternalStore(
-    subscribeFullscreenChanges,
-    isFullscreenSnapshot,
+    subscribeFullscreen,
+    getFullscreenSnapshot,
     getServerSnapshot
   );
 
   const canFullscreen = useSyncExternalStore(
-    noopSubscribe,
-    canUseFullscreenSnapshot,
+    subscribeFullscreenSupport,
+    getFullscreenSupportSnapshot,
     getServerSnapshot
   );
 
   async function enterFullscreen() {
-    if (!canFullscreen || typeof document === "undefined") return;
+    if (!canFullscreen) return;
+
     await document.documentElement.requestFullscreen();
   }
 
   async function exitFullscreen() {
-    if (!isFullscreen || typeof document === "undefined") return;
+    if (!isFullscreen) return;
+
     await document.exitFullscreen();
   }
 
@@ -79,4 +44,30 @@ export default function useFullscreen() {
     exitFullscreen,
     toggleFullscreen,
   };
+}
+
+function getFullscreenSnapshot() {
+  return !!document.fullscreenElement;
+}
+
+function getFullscreenSupportSnapshot() {
+  return typeof document.documentElement.requestFullscreen === "function";
+}
+
+function getServerSnapshot() {
+  return false;
+}
+
+function subscribeFullscreen(callback: () => void) {
+  document.addEventListener("fullscreenchange", callback);
+  document.addEventListener("fullscreenerror", callback);
+
+  return () => {
+    document.removeEventListener("fullscreenchange", callback);
+    document.removeEventListener("fullscreenerror", callback);
+  };
+}
+
+function subscribeFullscreenSupport() {
+  return () => undefined;
 }
