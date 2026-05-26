@@ -2,9 +2,9 @@
 
 import { type KeyboardEvent, type ReactNode, useState } from "react";
 
-import { useBrowserInfo } from "../../hooks/useBrowserInfo";
 import { useTime } from "../../hooks/useTime";
 import { useWindowDimension } from "../../hooks/useWindowDimension";
+import { getBrowserInfo } from "../../utils/browser-info";
 
 import BrowserInfo from "./components/BrowserInfo";
 import Clock from "./components/Clock";
@@ -21,7 +21,8 @@ export default function StatusDisplay() {
 
   const { currentTime, timezoneOffset, timeParts } = useTime();
   const { width, height } = useWindowDimension({ debounceDelay: 100 });
-  const { name, version } = useBrowserInfo();
+  const userAgent = typeof navigator === "undefined" ? "" : navigator.userAgent;
+  const { name, version } = getBrowserInfo(userAgent);
 
   const statusItems: StatusItem[] = [
     {

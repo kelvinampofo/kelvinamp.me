@@ -10,9 +10,7 @@ const BROWSERS: ReadonlyArray<{ name: string; regex: RegExp }> = [
   { name: "Edge", regex: /Edg\/(\d+\.\d+)/ },
 ];
 
-export function useBrowserInfo(): BrowserInfo {
-  const userAgent = navigator.userAgent;
-
+export function getBrowserInfo(userAgent: string): BrowserInfo {
   for (const { name, regex } of BROWSERS) {
     const match = regex.exec(userAgent);
     if (match) {
