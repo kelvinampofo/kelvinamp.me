@@ -5,7 +5,6 @@ import {
   type PopoverRootChangeEventDetails,
 } from "@base-ui/react/popover";
 import {
-  useCallback,
   useEffect,
   useEffectEvent,
   useRef,
@@ -126,7 +125,7 @@ export default function NumericScrubber() {
   // keep hover/focus from closing after explicit interaction
   const hasInteractedRef = useRef(false);
 
-  const updateValue = useCallback((nextValue: number) => {
+  function updateValue(nextValue: number) {
     const currentValue = valueRef.current;
 
     if (nextValue === currentValue) {
@@ -163,9 +162,9 @@ export default function NumericScrubber() {
         offsetSteps: 0,
       }));
     });
-  }, []);
+  }
 
-  const stopMomentum = useCallback(() => {
+  function stopMomentum() {
     const momentum = momentumRef.current;
 
     if (momentum.frameId !== null) {
@@ -176,38 +175,35 @@ export default function NumericScrubber() {
     momentum.velocity = 0;
     momentum.lastFrameTime = 0;
     momentum.accumulated = 0;
-  }, []);
+  }
 
   // apply small per-frame steps so tick highlights stay legible
-  const processStepQueue = useCallback(
-    ({ queue, maxStepsPerFrame }: StepQueueBatch) => {
-      if (queue.frameId !== null) {
+  function processStepQueue({ queue, maxStepsPerFrame }: StepQueueBatch) {
+    if (queue.frameId !== null) {
+      return;
+    }
+
+    function stepFrame() {
+      const pendingSteps = queue.pendingSteps;
+
+      if (pendingSteps === 0) {
+        queue.frameId = null;
         return;
       }
 
-      function stepFrame() {
-        const pendingSteps = queue.pendingSteps;
+      const step =
+        Math.sign(pendingSteps) *
+        clamp(Math.abs(pendingSteps), 0, maxStepsPerFrame);
 
-        if (pendingSteps === 0) {
-          queue.frameId = null;
-          return;
-        }
+      queue.pendingSteps -= step;
 
-        const step =
-          Math.sign(pendingSteps) *
-          clamp(Math.abs(pendingSteps), 0, maxStepsPerFrame);
-
-        queue.pendingSteps -= step;
-
-        updateValue(valueRef.current + step);
-
-        queue.frameId = requestAnimationFrame(stepFrame);
-      }
+      updateValue(valueRef.current + step);
 
       queue.frameId = requestAnimationFrame(stepFrame);
-    },
-    [updateValue]
-  );
+    }
+
+    queue.frameId = requestAnimationFrame(stepFrame);
+  }
 
   const handleNativeWheel = useEffectEvent((event: WheelEvent) => {
     // prevent back/forward swipe from hijacking the scrubber gesture
