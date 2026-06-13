@@ -10,6 +10,7 @@ import BrowserInfo from "./components/BrowserInfo";
 import Clock from "./components/Clock";
 import CurrentTime from "./components/CurrentTime";
 import Dimensions from "./components/Dimensions";
+import Principle from "./components/Principle";
 import styles from "./StatusDisplay.module.css";
 
 interface StatusItem {
@@ -37,6 +38,7 @@ export default function StatusDisplay() {
     { render: () => <CurrentTime time={currentTime} /> },
     { render: () => <Dimensions width={width} height={height} /> },
     { render: () => <BrowserInfo name={name} version={version} /> },
+    { render: () => <Principle /> },
   ];
 
   const totalStatusItems = statusItems.length;
