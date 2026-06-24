@@ -90,6 +90,23 @@ interface TrackTransition {
   duration: number;
 }
 
+interface ScrubberStepButtonProps {
+  direction: "left" | "right";
+  label: string;
+  onClick: () => void;
+}
+
+interface ScrubberTrackProps {
+  value: number;
+  trackTransition: TrackTransition;
+  setTrackViewport: (node: HTMLDivElement | null) => void;
+  onPointerDown: (event: PointerEvent<HTMLElement>) => void;
+  onPointerMove: (event: PointerEvent<HTMLElement>) => void;
+  onPointerUp: (event: PointerEvent<HTMLElement>) => void;
+  onPointerCancel: (event: PointerEvent<HTMLElement>) => void;
+  onTransitionEnd: (event: TransitionEvent<HTMLDivElement>) => void;
+}
+
 export default function NumericScrubber() {
   const [value, setValue] = useState(DEFAULT_VALUE);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -122,8 +139,75 @@ export default function NumericScrubber() {
     queue: { pendingSteps: 0, frameId: null },
   });
 
-  // keep hover/focus from closing after explicit interaction
   const hasInteractedRef = useRef(false);
+
+  const handleNativeWheel = useEffectEvent((event: WheelEvent) => {
+    // Prevent browser back/forward swipes from hijacking the scrubber gesture.
+    if (event.cancelable) {
+      event.preventDefault();
+    }
+
+    stopMomentum();
+
+    hasInteractedRef.current = true;
+
+    // Use the dominant axis so diagonal wheel gestures still feel deliberate.
+    const primaryDelta =
+      Math.abs(event.deltaX) > Math.abs(event.deltaY)
+        ? event.deltaX
+        : event.deltaY;
+
+    const adjustedDelta = primaryDelta * WHEEL_SENSITIVITY;
+    const wheelInput = wheelInputRef.current;
+
+    // Buffer fractional wheel movement until it crosses a full tick.
+    wheelInput.accumulated += adjustedDelta;
+
+    const steps = Math.trunc(wheelInput.accumulated / TICK_STEP);
+
+    if (steps === 0) {
+      return;
+    }
+
+    wheelInput.accumulated -= steps * TICK_STEP;
+    wheelInput.queue.pendingSteps += steps;
+
+    processStepQueue({
+      queue: wheelInput.queue,
+      maxStepsPerFrame: MAX_TICK_STEPS_PER_FRAME,
+    });
+  });
+
+  useEffect(() => {
+    if (!trackViewport) {
+      return;
+    }
+
+    trackViewport.addEventListener("wheel", handleNativeWheel, {
+      passive: false,
+    });
+
+    return () => {
+      trackViewport.removeEventListener("wheel", handleNativeWheel);
+    };
+  }, [trackViewport]);
+
+  useEffect(() => {
+    const dragInput = dragInputRef.current;
+    const wheelInput = wheelInputRef.current;
+
+    return () => {
+      if (trackFrameRef.current !== null) {
+        cancelAnimationFrame(trackFrameRef.current);
+      }
+
+      cancelStepQueue(wheelInput.queue);
+      cancelStepQueue(dragInput.queue);
+      cancelMomentum();
+
+      gesture.end();
+    };
+  }, []);
 
   function updateValue(nextValue: number) {
     const currentValue = valueRef.current;
@@ -132,7 +216,7 @@ export default function NumericScrubber() {
       return;
     }
 
-    // mark interaction so hover close doesn’t override explicit input
+    // Keep hover/focus close from overriding explicit scrubber input.
     hasInteractedRef.current = true;
 
     const delta = nextValue - currentValue;
@@ -164,7 +248,7 @@ export default function NumericScrubber() {
     });
   }
 
-  function stopMomentum() {
+  function cancelMomentum() {
     const momentum = momentumRef.current;
 
     if (momentum.frameId !== null) {
@@ -177,7 +261,19 @@ export default function NumericScrubber() {
     momentum.accumulated = 0;
   }
 
-  // apply small per-frame steps so tick highlights stay legible
+  function stopMomentum() {
+    cancelMomentum();
+  }
+
+  function cancelStepQueue(queue: StepQueue) {
+    if (queue.frameId !== null) {
+      cancelAnimationFrame(queue.frameId);
+    }
+
+    queue.frameId = null;
+    queue.pendingSteps = 0;
+  }
+
   function processStepQueue({ queue, maxStepsPerFrame }: StepQueueBatch) {
     if (queue.frameId !== null) {
       return;
@@ -191,6 +287,7 @@ export default function NumericScrubber() {
         return;
       }
 
+      // Apply small per-frame steps so tick highlights stay legible.
       const step =
         Math.sign(pendingSteps) *
         clamp(Math.abs(pendingSteps), 0, maxStepsPerFrame);
@@ -204,43 +301,6 @@ export default function NumericScrubber() {
 
     queue.frameId = requestAnimationFrame(stepFrame);
   }
-
-  const handleNativeWheel = useEffectEvent((event: WheelEvent) => {
-    // prevent back/forward swipe from hijacking the scrubber gesture
-    if (event.cancelable) {
-      event.preventDefault();
-    }
-
-    stopMomentum();
-
-    hasInteractedRef.current = true;
-
-    // use the dominant axis so diagonals feel consistent
-    const primaryDelta =
-      Math.abs(event.deltaX) > Math.abs(event.deltaY)
-        ? event.deltaX
-        : event.deltaY;
-
-    const adjustedDelta = primaryDelta * WHEEL_SENSITIVITY;
-
-    const wheelInput = wheelInputRef.current;
-    // buffer wheel input until it reaches a whole tick
-    wheelInput.accumulated += adjustedDelta;
-
-    const steps = Math.trunc(wheelInput.accumulated / TICK_STEP);
-
-    if (steps === 0) {
-      return;
-    }
-
-    wheelInput.accumulated -= steps * TICK_STEP;
-    wheelInput.queue.pendingSteps += steps;
-
-    processStepQueue({
-      queue: wheelInput.queue,
-      maxStepsPerFrame: MAX_TICK_STEPS_PER_FRAME,
-    });
-  });
 
   function handleTrackTransitionEnd(event: TransitionEvent<HTMLDivElement>) {
     if (
@@ -280,17 +340,18 @@ export default function NumericScrubber() {
       momentum.accumulated += deltaX;
 
       const steps = Math.trunc(momentum.accumulated / TICK_STEP);
+
       if (steps !== 0) {
         momentum.accumulated -= steps * TICK_STEP;
         updateValue(valueRef.current + steps);
       }
 
-      // ease out with time-based decay so it feels like native momentum scrolling
+      // Use time-based decay so momentum feels consistent across frame rates.
       const decay = Math.exp(-deltaTime / MOMENTUM_DECAY_MS);
       momentum.velocity *= decay;
 
       if (Math.abs(momentum.velocity) < MOMENTUM_MIN_VELOCITY) {
-        // stop once motion is barely noticeable to avoid micro-steps
+        // Stop once motion is barely noticeable to avoid micro-steps.
         stopMomentum();
         return;
       }
@@ -312,10 +373,8 @@ export default function NumericScrubber() {
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
 
-    // only pointerup continues into momentum; cancel ends immediately
-    const shouldStartMomentum = event.type === "pointerup";
-
-    if (shouldStartMomentum && dragSession.hasMoved) {
+    // Only pointerup continues into momentum; cancel ends immediately.
+    if (event.type === "pointerup" && dragSession.hasMoved) {
       startMomentum(dragSession.velocity);
       return;
     }
@@ -328,7 +387,7 @@ export default function NumericScrubber() {
       return;
     }
 
-    // ignore touch pointers while closed so scrolling doesn't grab focus
+    // Ignore touch pointers while closed so page scrolling does not grab focus.
     if (event.pointerType === "touch" && !isPopoverOpen) {
       return;
     }
@@ -362,10 +421,9 @@ export default function NumericScrubber() {
 
     const deltaX = event.clientX - dragSession.lastClientX;
     const deltaTime = Math.max(1, event.timeStamp - dragSession.lastTimestamp);
-
     const instantVelocity = deltaX / deltaTime;
 
-    // smooth velocity so momentum feels steady instead of jittery
+    // Smooth velocity so release momentum feels steady instead of jittery.
     dragSession.velocity = lerp(
       dragSession.velocity,
       instantVelocity,
@@ -374,7 +432,7 @@ export default function NumericScrubber() {
     dragSession.lastClientX = event.clientX;
     dragSession.lastTimestamp = event.timeStamp;
 
-    // buffer movement until we cross a full tick step
+    // Buffer fractional drag movement until it crosses a full tick.
     dragSession.accumulated += deltaX * DRAG_SENSITIVITY;
 
     const steps = Math.trunc(dragSession.accumulated / TICK_STEP);
@@ -423,11 +481,11 @@ export default function NumericScrubber() {
       return;
     }
 
-    // prevent popover from collapsing mid-gesture
     if (dragInputRef.current.session) {
       return;
     }
 
+    // After interaction, avoid collapsing while pointer/focus is still nearby.
     if (
       hasInteractedRef.current &&
       (eventDetails.reason === "trigger-hover" ||
@@ -438,20 +496,6 @@ export default function NumericScrubber() {
 
     setIsPopoverOpen(false);
   }
-
-  useEffect(() => {
-    if (!trackViewport) {
-      return;
-    }
-
-    trackViewport.addEventListener("wheel", handleNativeWheel, {
-      passive: false,
-    });
-
-    return () => {
-      trackViewport.removeEventListener("wheel", handleNativeWheel);
-    };
-  }, [trackViewport]);
 
   return (
     <p>
@@ -481,64 +525,96 @@ export default function NumericScrubber() {
               </Popover.Arrow>
 
               <div className={styles.scrubberControls}>
-                <button
-                  className={styles.scrubberStepButton}
+                <ScrubberStepButton
+                  direction="left"
+                  label="Decrease value"
                   onClick={() => updateValue(valueRef.current - 1)}
-                  aria-label="Decrease value"
-                  type="button"
-                >
-                  <Chevron direction="left" size={18} aria-hidden />
-                </button>
+                />
 
-                <div
-                  ref={setTrackViewport}
-                  className={styles.scrubberTrackViewport}
+                <ScrubberTrack
+                  value={value}
+                  trackTransition={trackTransition}
+                  setTrackViewport={setTrackViewport}
                   onPointerDown={handlePointerDown}
                   onPointerMove={handlePointerMove}
                   onPointerUp={handlePointerUp}
                   onPointerCancel={handlePointerCancel}
-                >
-                  <div
-                    className={styles.scrubberTrack}
-                    data-animating={trackTransition.isTrackAnimating}
-                    style={{
-                      "--tick-width": `${TICK_WIDTH}px`,
-                      "--tick-gap": `${TICK_GAP}px`,
-                      "--track-offset": `${
-                        trackTransition.offsetSteps * TICK_STEP
-                      }px`,
-                      "--track-duration": `${trackTransition.duration}ms`,
-                    }}
-                    onTransitionEnd={handleTrackTransitionEnd}
-                  >
-                    {Array.from({ length: TICK_COUNT }, (_tick, index) => {
-                      // derive ticks from the current value so the active tick stays centred
-                      const tick = value + index - TICK_OFFSET;
+                  onTransitionEnd={handleTrackTransitionEnd}
+                />
 
-                      return (
-                        <div
-                          key={tick}
-                          className={styles.scrubberTick}
-                          data-active={tick === value}
-                        />
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <button
-                  className={styles.scrubberStepButton}
+                <ScrubberStepButton
+                  direction="right"
+                  label="Increase value"
                   onClick={() => updateValue(valueRef.current + 1)}
-                  aria-label="Increase value"
-                  type="button"
-                >
-                  <Chevron direction="right" size={18} aria-hidden />
-                </button>
+                />
               </div>
             </Popover.Popup>
           </Popover.Positioner>
         </Popover.Portal>
       </Popover.Root>
     </p>
+  );
+}
+
+function ScrubberStepButton({
+  direction,
+  label,
+  onClick,
+}: ScrubberStepButtonProps) {
+  return (
+    <button
+      className={styles.scrubberStepButton}
+      onClick={onClick}
+      aria-label={label}
+      type="button"
+    >
+      <Chevron direction={direction} size={18} aria-hidden />
+    </button>
+  );
+}
+
+function ScrubberTrack({
+  value,
+  trackTransition,
+  setTrackViewport,
+  onPointerDown,
+  onPointerMove,
+  onPointerUp,
+  onPointerCancel,
+  onTransitionEnd,
+}: ScrubberTrackProps) {
+  return (
+    <div
+      ref={setTrackViewport}
+      className={styles.scrubberTrackViewport}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerCancel}
+    >
+      <div
+        className={styles.scrubberTrack}
+        data-animating={trackTransition.isTrackAnimating}
+        style={{
+          "--tick-width": `${TICK_WIDTH}px`,
+          "--tick-gap": `${TICK_GAP}px`,
+          "--track-offset": `${trackTransition.offsetSteps * TICK_STEP}px`,
+          "--track-duration": `${trackTransition.duration}ms`,
+        }}
+        onTransitionEnd={onTransitionEnd}
+      >
+        {Array.from({ length: TICK_COUNT }, (_tick, index) => {
+          const tick = value + index - TICK_OFFSET;
+
+          return (
+            <div
+              key={tick}
+              className={styles.scrubberTick}
+              data-active={tick === value}
+            />
+          );
+        })}
+      </div>
+    </div>
   );
 }
