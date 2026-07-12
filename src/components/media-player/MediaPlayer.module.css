@@ -4,7 +4,6 @@
 }
 
 .stage {
-  --media-crop-scale: 1.012;
   --playback-material-fill: rgb(210 210 210 / 0.46);
   --playback-material-highlight: rgb(255 255 255 / 0.38);
   --playback-material-shadow: rgb(0 0 0 / 0.22);
@@ -30,29 +29,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
-  transform: scale(var(--media-crop-scale));
-  transition: opacity 180ms var(--ease-out-cubic);
-}
-
-.stage[data-state="loaded"] .video {
-  opacity: 1;
-}
-
-.poster {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background-position: center;
-  background-size: cover;
-  opacity: 1;
-  transform: scale(var(--media-crop-scale));
-  transition: opacity 180ms var(--ease-out-cubic);
-  pointer-events: none;
-}
-
-.stage[data-state="loaded"] .poster {
-  opacity: 0;
 }
 
 .playbackIndicator {
@@ -72,8 +48,7 @@
   box-shadow:
     0 var(--space-14) var(--space-38) var(--playback-material-shadow),
     inset 0 0 0 var(--border-thin) var(--playback-material-highlight),
-    inset 0 calc(-1 * var(--space-12)) var(--space-24)
-      rgb(255 255 255 / 0.08);
+    inset 0 calc(-1 * var(--space-12)) var(--space-24) rgb(255 255 255 / 0.08);
   transform: translate(-50%, -50%) scale(1);
   backdrop-filter: blur(var(--space-20)) saturate(1.8);
   pointer-events: none;

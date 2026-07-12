@@ -4,6 +4,7 @@ import clsx from "clsx";
 import {
   use,
   type ComponentPropsWithoutRef,
+  type RefObject,
   type ReactNode,
   useRef,
   createContext,
@@ -16,7 +17,7 @@ import { clamp } from "../../utils/math";
 import styles from "./MediaPlayer.module.css";
 
 interface MediaPlayerContextValue {
-  setVideoElement: (node: HTMLVideoElement | null) => void;
+  videoRef: RefObject<HTMLVideoElement | null>;
   togglePlayback: () => Promise<void>;
   clearIndicator: () => void;
   indicator: IndicatorState;
@@ -24,6 +25,7 @@ interface MediaPlayerContextValue {
 
 interface MediaPlayerRootProps extends ComponentPropsWithoutRef<"div"> {
   children: ReactNode;
+  shortcutsEnabled?: boolean;
 }
 
 interface MediaPlayerIconProps {
@@ -32,7 +34,6 @@ interface MediaPlayerIconProps {
 
 type ShortcutHandlers = Parameters<typeof useShortcuts>[0];
 type MediaPlayerVideoProps = Omit<ComponentPropsWithoutRef<"video">, "ref">;
-type VideoSource = MediaPlayerVideoProps["src"];
 type Indicator = "play" | "pause";
 type IndicatorState = Indicator | null;
 
@@ -56,19 +57,28 @@ function useMediaPlayerContext(componentName: string) {
 
 function toggleTextTrack(track: TextTrack) {
   track.mode =
-    track.mode === "showing" || track.mode === "hidden" ? "disabled" : "hidden";
+    track.mode === "showing" || track.mode === "hidden"
+      ? "disabled"
+      : "showing";
 }
 
 async function playWithoutInterrupting(video: HTMLVideoElement) {
   try {
     await video.play();
-  } catch {}
+    return true;
+  } catch {
+    return false;
+  }
 }
 
-function Root({ children, className, ...props }: MediaPlayerRootProps) {
+function Root({
+  children,
+  className,
+  shortcutsEnabled = false,
+  ...props
+}: MediaPlayerRootProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-
   const [indicator, setIndicator] = useState<IndicatorState>(null);
 
   function showIndicator(nextIndicator: Indicator) {
@@ -77,10 +87,6 @@ function Root({ children, className, ...props }: MediaPlayerRootProps) {
 
   function clearIndicator() {
     setIndicator(null);
-  }
-
-  function setVideoElement(node: HTMLVideoElement | null) {
-    videoRef.current = node;
   }
 
   function withVideo(action: (video: HTMLVideoElement) => void) {
@@ -107,8 +113,12 @@ function Root({ children, className, ...props }: MediaPlayerRootProps) {
     }
 
     if (video.paused || video.ended) {
-      await playWithoutInterrupting(video);
-      showIndicator("pause");
+      const didPlay = await playWithoutInterrupting(video);
+
+      if (didPlay) {
+        showIndicator("pause");
+      }
+
       return;
     }
 
@@ -242,13 +252,14 @@ function Root({ children, className, ...props }: MediaPlayerRootProps) {
   };
 
   useShortcuts(shortcutHandlers, {
+    enabled: shortcutsEnabled,
     preventDefault: true,
   });
 
   return (
     <MediaPlayerContext.Provider
       value={{
-        setVideoElement,
+        videoRef,
         togglePlayback,
         clearIndicator,
         indicator,
@@ -268,80 +279,34 @@ function Video({
   loop = true,
   muted = true,
   onClick,
-  onCanPlay,
-  onLoadedData,
   playsInline = true,
   preload = "metadata",
   ...props
 }: MediaPlayerVideoProps) {
-  const [loadedSource, setLoadedSource] = useState<VideoSource>();
-
-  const { setVideoElement, togglePlayback, clearIndicator, indicator } =
+  const { videoRef, togglePlayback, clearIndicator, indicator } =
     useMediaPlayerContext("MediaPlayer.Video");
 
-  const { poster, src } = props;
-  const hasSourceLoaded = src != null && loadedSource === src;
-
-  function setSourceLoaded() {
-    setLoadedSource(src);
-  }
-
-  function handleVideoRef(node: HTMLVideoElement | null) {
-    setVideoElement(node);
-
-    if (!node) {
-      return;
-    }
-
-    // Cached videos can already be playable before canplay fires.
-    if (node.readyState >= node.HAVE_FUTURE_DATA) {
-      setSourceLoaded();
-    }
-  }
-
-  const foregroundVideo = (
-    <video
-      {...props}
-      ref={handleVideoRef}
-      autoPlay={autoPlay}
-      controls={controls}
-      loop={loop}
-      muted={muted}
-      playsInline={playsInline}
-      preload={preload}
-      onCanPlay={(event) => {
-        setSourceLoaded();
-        onCanPlay?.(event);
-      }}
-      onLoadedData={(event) => {
-        setSourceLoaded();
-        onLoadedData?.(event);
-      }}
-      onClick={(event) => {
-        onClick?.(event);
-
-        if (!event.defaultPrevented) {
-          void togglePlayback();
-        }
-      }}
-      className={clsx(styles.video, className)}
-    />
-  );
-
   return (
-    <div
-      className={styles.stage}
-      data-state={hasSourceLoaded ? "loaded" : "pending"}
-    >
+    <div className={styles.stage}>
       <div className={styles.frame}>
-        {poster && (
-          <div
-            aria-hidden
-            className={styles.poster}
-            style={{ backgroundImage: `url(${poster})` }}
-          />
-        )}
-        {foregroundVideo}
+        <video
+          {...props}
+          ref={videoRef}
+          autoPlay={autoPlay}
+          controls={controls}
+          loop={loop}
+          muted={muted}
+          playsInline={playsInline}
+          preload={preload}
+          onClick={(event) => {
+            onClick?.(event);
+
+            if (!event.defaultPrevented) {
+              void togglePlayback();
+            }
+          }}
+          className={clsx(styles.video, className)}
+        />
         {indicator && (
           <div
             aria-hidden

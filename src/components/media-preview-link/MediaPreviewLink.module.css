@@ -37,14 +37,24 @@
   transition-duration: var(--preview-exit-duration);
 }
 
-.player {
+.media {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+}
+
+.player {
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .video {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;

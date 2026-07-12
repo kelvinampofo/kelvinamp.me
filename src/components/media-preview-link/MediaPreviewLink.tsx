@@ -2,90 +2,60 @@
 
 import { PreviewCard } from "@base-ui/react/preview-card";
 import clsx from "clsx";
-import { useState } from "react";
+import Image from "next/image";
+import { useRef, useState, type CSSProperties, type ReactNode } from "react";
 
-import usePointerDevice from "../../hooks/usePointerDevice";
 import { MediaPlayer } from "../media-player/MediaPlayer";
 
 import styles from "./MediaPreviewLink.module.css";
 
 interface MediaPreviewVideo {
   type: "video";
-  poster?: string;
   src: string;
+  poster: string;
+}
+
+interface MediaPreviewImage {
+  type: "image";
+  src: string;
+  width: number;
+  height: number;
+  unoptimized?: boolean;
 }
 
 interface MediaPreviewLinkProps {
-  children: React.ReactNode;
+  children: ReactNode;
   href: string;
-  media: MediaPreviewVideo;
+  media: MediaPreviewVideo | MediaPreviewImage;
+  aspectRatio?: CSSProperties["aspectRatio"];
   className?: string;
   openDelayMs?: number;
   closeDelayMs?: number;
 }
 
+const MEDIA_ASPECT_RATIO = "16 / 9";
 const OPEN_DELAY_MS = 80;
 const CLOSE_DELAY_MS = 100;
-
-// Keep off-DOM videos alive so previews can reuse fetched media data.
-const preloadedVideos = new Map<string, HTMLVideoElement>();
-
-function preloadVideo(src: string) {
-  if (preloadedVideos.has(src)) {
-    return;
-  }
-
-  const video = document.createElement("video");
-
-  video.muted = true;
-  video.playsInline = true;
-  video.preload = "auto";
-  video.src = src;
-  video.load();
-
-  preloadedVideos.set(src, video);
-}
 
 export default function MediaPreviewLink({
   children,
   href,
   media,
+  aspectRatio = MEDIA_ASPECT_RATIO,
   className,
   openDelayMs = OPEN_DELAY_MS,
   closeDelayMs = CLOSE_DELAY_MS,
 }: MediaPreviewLinkProps) {
   const [open, setOpen] = useState(false);
-
-  const { isPointerDevice } = usePointerDevice();
-
-  function handleOpenChange(nextOpen: boolean) {
-    setOpen(nextOpen);
-  }
-
-  function handleClick(event: React.MouseEvent<HTMLAnchorElement>) {
-    preloadVideo(media.src);
-
-    if (isPointerDevice) {
-      return;
-    }
-
-    if (!open) {
-      event.preventDefault();
-      handleOpenChange(true);
-    }
-  }
+  const actionsRef = useRef<PreviewCard.Root.Actions>(null);
 
   return (
-    <PreviewCard.Root open={open} onOpenChange={handleOpenChange}>
+    <PreviewCard.Root actionsRef={actionsRef} onOpenChange={setOpen}>
       <PreviewCard.Trigger
         href={href}
         delay={openDelayMs}
         closeDelay={closeDelayMs}
-        data-state={open ? "open" : "closed"}
         className={clsx(styles.trigger, className)}
-        onFocus={() => preloadVideo(media.src)}
-        onPointerEnter={() => preloadVideo(media.src)}
-        onClick={handleClick}
       >
         {children}
       </PreviewCard.Trigger>
@@ -97,19 +67,33 @@ export default function MediaPreviewLink({
           className={styles.positioner}
         >
           <PreviewCard.Popup className={styles.popup}>
-            <MediaPlayer.Root className={styles.player}>
-              <MediaPlayer.Video
-                className={styles.video}
-                src={media.src}
-                poster={media.poster}
-                muted={false}
-                loop={false}
-                preload="auto"
-                onEnded={() => {
-                  handleOpenChange(false);
-                }}
-              />
-            </MediaPlayer.Root>
+            <div className={styles.media} style={{ aspectRatio }}>
+              {media.type === "video" ? (
+                <MediaPlayer.Root
+                  className={styles.player}
+                  shortcutsEnabled={open}
+                >
+                  <MediaPlayer.Video
+                    className={styles.video}
+                    src={media.src}
+                    poster={media.poster}
+                    loop={false}
+                    preload="metadata"
+                    onEnded={() => actionsRef.current?.close()}
+                  />
+                </MediaPlayer.Root>
+              ) : (
+                <Image
+                  className={styles.image}
+                  src={media.src}
+                  width={media.width}
+                  height={media.height}
+                  sizes="(max-width: 512px) 100vw, 512px"
+                  unoptimized={media.unoptimized}
+                  alt=""
+                />
+              )}
+            </div>
           </PreviewCard.Popup>
         </PreviewCard.Positioner>
       </PreviewCard.Portal>
