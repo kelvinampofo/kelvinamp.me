@@ -1,23 +1,23 @@
-.contactList {
+.list {
   display: flex;
   align-items: center;
   gap: var(--space-6);
   padding-left: 0;
 }
 
-.contactList li {
+.list li {
   margin-top: 0;
 }
 
-.contactList .dot {
+.list .separator {
   pointer-events: none;
   user-select: none;
 }
 
-.contactListHeading {
+.heading {
   margin: var(--space-28) 0;
 }
 
-.dot {
+.separator {
   color: var(--grey11);
 }

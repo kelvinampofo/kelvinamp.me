@@ -22,7 +22,7 @@ export default function Slide({
   isPriority,
 }: SlideProps) {
   return (
-    <li className={styles.slideItem}>
+    <li className={styles.slide}>
       <figure className={styles.figure}>
         <picture className={styles.picture}>
           <source srcSet={image.avif} type="image/avif" />
@@ -37,7 +37,7 @@ export default function Slide({
           />
         </picture>
         <figcaption
-          className={styles.figcaption}
+          className={styles.caption}
         >{`${title} by, ${author}`}</figcaption>
       </figure>
     </li>

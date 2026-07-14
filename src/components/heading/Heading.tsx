@@ -13,13 +13,8 @@ export default function Heading({
   as: HeadingTag = "h1",
   ...props
 }: HeadingProps) {
-  const variantClass = styles[HeadingTag];
-
   return (
-    <HeadingTag
-      className={clsx(styles.heading, variantClass, className)}
-      {...props}
-    >
+    <HeadingTag className={clsx(styles.heading, className)} {...props}>
       {children}
     </HeadingTag>
   );

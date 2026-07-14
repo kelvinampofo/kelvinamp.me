@@ -25,7 +25,7 @@ const BAR_ANIMATIONS = createBarAnimations();
 
 export function Waveform() {
   return (
-    <div className={styles.container}>
+    <div className={styles.waveform}>
       {BAR_ANIMATIONS.map(({ minScale, maxScale, duration }, index) => (
         <m.span
           key={`${minScale}-${maxScale}-${duration}`}

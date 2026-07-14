@@ -25,16 +25,16 @@ export default function List({ entries, collection }: ListProps) {
         const pathname = `/${collection}/${slug}`;
 
         return (
-          <li key={id} className={styles.listItem}>
+          <li key={id} className={styles.item}>
             <Link href={{ pathname }}>
-              <div className={styles.titleRow}>
+              <div className={styles.summary}>
                 <p>{title}</p>
                 {showDescription && description && (
                   <span className={styles.description}>{description}</span>
                 )}
                 {isNew && <Badge>new</Badge>}
               </div>
-              <span className={styles.postDate}>
+              <span className={styles.date}>
                 {getDisplayDate(publishedDate, collection)}
               </span>
             </Link>

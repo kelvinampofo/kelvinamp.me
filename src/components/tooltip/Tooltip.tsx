@@ -42,7 +42,7 @@ export default function Tooltip({
   return (
     <TooltipPrimitive.Root {...restRootProps}>
       <TooltipPrimitive.Trigger
-        className={clsx(styles.tooltipTrigger, triggerClassName)}
+        className={clsx(styles.trigger, triggerClassName)}
         {...restTriggerProps}
       >
         {children}
@@ -53,14 +53,14 @@ export default function Tooltip({
           {...restPositionerProps}
         >
           <TooltipPrimitive.Popup
-            className={clsx(styles.tooltipPopup, popupClassName)}
+            className={clsx(styles.popup, popupClassName)}
             {...restPopupProps}
           >
-            <TooltipPrimitive.Arrow className={styles.tooltipArrow}>
+            <TooltipPrimitive.Arrow className={styles.arrow}>
               <PopupArrow
-                fillClassName={styles.tooltipArrowFill}
-                outerStrokeClassName={styles.tooltipArrowOuterStroke}
-                innerStrokeClassName={styles.tooltipArrowInnerStroke}
+                fillClassName={styles.arrowFill}
+                outerStrokeClassName={styles.arrowOuterStroke}
+                innerStrokeClassName={styles.arrowInnerStroke}
               />
             </TooltipPrimitive.Arrow>
 

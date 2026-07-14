@@ -127,17 +127,17 @@ export default function Carousel() {
   const isAtEndOfSlide = currentSlide >= MAX_SLIDE_INDEX;
 
   const cursorClasses = clsx(
-    !isAtStartOfSlide && isCursorLeft && styles.cursorLeft,
-    !isAtEndOfSlide && isCursorRight && styles.cursorRight
+    !isAtStartOfSlide && isCursorLeft && styles.previousCursor,
+    !isAtEndOfSlide && isCursorRight && styles.nextCursor
   );
 
   return (
-    <div className={styles.carouselContainer}>
-      <div className={styles.buttonContainer}>
+    <div className={styles.carousel}>
+      <div className={styles.navigationSlot}>
         <button
           onClick={() => handleSlideChange(currentSlide - 1)}
           disabled={isAtStartOfSlide}
-          className={styles.arrowButton}
+          className={styles.navigationButton}
         >
           <Chevron direction="left" size={20} aria-hidden />
           <span className="sr-only">Previous slide</span>
@@ -152,7 +152,7 @@ export default function Carousel() {
         onScroll={(event) => {
           setSlidePosition(event.currentTarget.scrollLeft);
         }}
-        className={clsx(styles.slideList, cursorClasses)}
+        className={clsx(styles.list, cursorClasses)}
       >
         {slides.map(({ title, image, alt, author, isPriority }) => (
           <Slide
@@ -165,11 +165,11 @@ export default function Carousel() {
           />
         ))}
       </ul>
-      <div className={styles.buttonContainer}>
+      <div className={styles.navigationSlot}>
         <button
           onClick={() => handleSlideChange(currentSlide + 1)}
           disabled={isAtEndOfSlide}
-          className={styles.arrowButton}
+          className={styles.navigationButton}
         >
           <Chevron direction="right" size={20} aria-hidden />
           <span className="sr-only">Next slide</span>

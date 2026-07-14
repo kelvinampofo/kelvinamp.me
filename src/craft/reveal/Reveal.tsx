@@ -162,7 +162,7 @@ export default function Reveal() {
   return (
     <div
       ref={rootRef}
-      className={styles.container}
+      className={styles.reveal}
       data-debug={debug.enabled}
       style={{ "--reveal": `${REVEAL_DEFAULT}%` }}
     >
@@ -184,7 +184,7 @@ export default function Reveal() {
           sizes="(max-width: 900px) 100vw, 800px"
         />
         <Image
-          className={clsx(styles.layerImage, styles.revealImage)}
+          className={clsx(styles.layerImage, styles.revealedImage)}
           src={flutedGlassFlowers}
           alt="Fluted glass distortion of yellow wildflowers."
           aria-hidden="true"
@@ -194,7 +194,7 @@ export default function Reveal() {
           placeholder="blur"
         />
         <pre
-          className={styles.debug}
+          className={styles.debugPanel}
           style={{
             "--cursor-x": `${debug.cursor.x}px`,
             "--cursor-y": `${debug.cursor.y}px`,

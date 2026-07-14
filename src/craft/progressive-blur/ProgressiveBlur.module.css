@@ -1,4 +1,4 @@
-.maskGradient {
+.mask {
   --mask-gradient-start: 20%;
   --mask-gradient-end: 80%;
   --mask-gradient-padding: var(--space-16);

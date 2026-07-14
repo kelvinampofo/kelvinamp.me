@@ -1,4 +1,4 @@
-.backButton {
+.button {
   border-radius: var(--radius-4);
   display: flex;
   gap: var(--space-6);
@@ -10,20 +10,20 @@
   user-select: none;
 }
 
-.backButton svg {
+.button svg {
   transform: translateY(4px);
   fill: currentColor;
 }
 
 /* workaround for firefox to align the svg icon vertically */
 @supports (-moz-appearance: none) {
-  .backButton svg {
+  .button svg {
     transform: translateY(1.5px);
   }
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .backButton:hover {
+  .button:hover {
     color: var(--color-foreground-secondary);
   }
 }

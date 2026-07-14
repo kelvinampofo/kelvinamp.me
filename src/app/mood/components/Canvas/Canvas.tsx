@@ -136,14 +136,14 @@ export default function Canvas() {
   return (
     <div
       ref={canvasRef}
-      className={clsx(styles.moodCanvas, {
+      className={clsx(styles.canvas, {
         [styles.panMode]: isPanModeEnabled,
       })}
       onPointerDown={onPan}
       onWheel={onWheel}
     >
       <div
-        className={styles.moodSurface}
+        className={styles.surface}
         style={{
           transform: `scale(${camera.z}) translate(${camera.x}px, ${camera.y}px)`,
         }}
@@ -155,7 +155,7 @@ export default function Canvas() {
             <div
               key={id}
               ref={(element) => setElementRef(id, element)}
-              className={styles.moodElement}
+              className={styles.item}
               onPointerDown={(event) => onPointerDown(id, event)}
               onPointerMove={onPointerMove}
               onPointerUp={onPointerUp}
@@ -166,7 +166,7 @@ export default function Canvas() {
                 transform: `translate3d(${x}px, ${y}px, 0)`,
               }}
             >
-              <Image src={src} alt={alt} fill className={styles.moodImage} />
+              <Image src={src} alt={alt} fill className={styles.image} />
             </div>
           );
         })}

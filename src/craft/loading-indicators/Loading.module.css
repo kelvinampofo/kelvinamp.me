@@ -1,4 +1,4 @@
-.loadingText {
+.text {
   display: block;
   width: 5rem;
   cursor: not-allowed;
@@ -6,7 +6,7 @@
   line-height: 1.25rem;
 }
 
-.loadingText .loadingDots::after {
+.text .dots::after {
   content: "";
   display: inline-block;
   animation: loadingAnimation 1.5s infinite;
@@ -14,12 +14,12 @@
 }
 
 @media (max-width: 639px) {
-  .loadingText {
+  .text {
     display: none;
   }
 }
 
-.loadingDots {
+.dots {
   display: inline-block;
   cursor: not-allowed;
 }

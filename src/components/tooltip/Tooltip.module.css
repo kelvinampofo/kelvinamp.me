@@ -1,4 +1,4 @@
-.tooltipTrigger {
+.trigger {
   display: inline-flex;
   user-select: none;
   background-color: transparent;
@@ -6,7 +6,7 @@
   border-radius: var(--radius-2);
 }
 
-.tooltipPopup {
+.popup {
   --tooltip-transform-duration: var(--transition-enter);
   --tooltip-opacity-duration: var(--transition-enter);
 
@@ -42,7 +42,7 @@
   }
 }
 
-.tooltipArrow {
+.arrow {
   display: flex;
 
   &[data-side="top"] {
@@ -66,40 +66,40 @@
   }
 }
 
-.tooltipArrowFill {
+.arrowFill {
   fill: var(--tooltip-arrow-fill, var(--grey1));
 }
 
 @media (prefers-color-scheme: light) {
-  .tooltipPopup {
+  .popup {
     --tooltip-outline-color: rgb(9 9 11 / 0.1);
     color: #f0f0f0;
     background-color: #1f1f1f;
     outline: 1px solid var(--grey12);
   }
 
-  .tooltipArrowFill {
+  .arrowFill {
     fill: var(--tooltip-arrow-fill, #1f1f1f);
   }
 
-  .tooltipArrowOuterStroke {
+  .arrowOuterStroke {
     fill: var(--tooltip-arrow-outer-stroke, var(--grey12));
   }
 }
 
 @media (prefers-color-scheme: dark) {
-  .tooltipPopup {
+  .popup {
     background-color: var(--grey2);
     box-shadow:
       var(--shadow-tooltip),
       inset 0 0 0 1px rgb(255 255 255 / 0.1);
   }
 
-  .tooltipArrowFill {
+  .arrowFill {
     fill: var(--tooltip-arrow-fill, var(--grey2));
   }
 
-  .tooltipArrowInnerStroke {
+  .arrowInnerStroke {
     fill: var(--tooltip-arrow-inner-stroke, rgb(255 255 255 / 0.1));
   }
 }

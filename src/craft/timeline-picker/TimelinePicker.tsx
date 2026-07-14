@@ -91,10 +91,10 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
 
   return (
     <LazyMotion features={domAnimation}>
-      <div className={styles.timelineWrapper} data-debug-overlay={debugOverlay}>
-        <div className={styles.timelineContainer}>
+      <div className={styles.picker} data-debug-overlay={debugOverlay}>
+        <div className={styles.timeline}>
           <button
-            className={styles.timelineButton}
+            className={styles.navigationButton}
             onClick={handlePrev}
             disabled={currentIndex === 0}
             aria-label="Previous selection"
@@ -102,7 +102,7 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
             <Chevron direction="left" aria-hidden />
           </button>
 
-          <div className={styles.timelineTicks}>
+          <div className={styles.ticks}>
             {ticks.map(({ id, index }) => (
               <Tick
                 key={id}
@@ -114,7 +114,7 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
           </div>
 
           <button
-            className={styles.timelineButton}
+            className={styles.navigationButton}
             onClick={handleNext}
             disabled={currentIndex === ticks.length - 1}
             aria-label="Next selection"
@@ -139,7 +139,7 @@ function Tick({
   return (
     <m.div
       initial={false}
-      className={styles.timelineTick}
+      className={styles.tick}
       data-active={active}
       onClick={() => onSelect(index)}
       aria-hidden

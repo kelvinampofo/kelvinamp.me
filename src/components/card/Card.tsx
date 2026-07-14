@@ -14,9 +14,9 @@ export default function Card({
   ...props
 }: CardProps) {
   return (
-    <div className={clsx(styles.cardContainer, className)} {...props}>
-      <div className={styles.cardContent}>{children}</div>
-      {description && <p className={styles.cardDescription}>{description}</p>}
+    <div className={clsx(styles.card, className)} {...props}>
+      <div className={styles.content}>{children}</div>
+      {description && <p className={styles.description}>{description}</p>}
     </div>
   );
 }

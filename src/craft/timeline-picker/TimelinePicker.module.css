@@ -1,11 +1,11 @@
-.timelineWrapper {
+.picker {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-16);
 }
 
-.timelineContainer {
+.timeline {
   --tick-width: 1px;
   --tick-height: 20px;
   --tick-border-radius: var(--radius-8);
@@ -20,7 +20,7 @@
   user-select: none;
 }
 
-.timelineButton {
+.navigationButton {
   display: flex;
   color: var(--grey10);
   padding: var(--space-8);
@@ -29,16 +29,16 @@
   transition: var(--transition-hover);
 }
 
-.timelineButton:hover:not(:disabled) {
+.navigationButton:hover:not(:disabled) {
   background: var(--greyA4);
 }
 
-.timelineButton:disabled {
+.navigationButton:disabled {
   cursor: not-allowed;
   color: var(--greyA6);
 }
 
-.timelineTicks {
+.ticks {
   position: relative;
   min-width: min-content;
   width: 100%;
@@ -47,7 +47,7 @@
   justify-content: center;
 }
 
-.timelineTick {
+.tick {
   --hit-area: var(--space-8);
 
   position: relative;
@@ -61,11 +61,11 @@
   z-index: 1;
 }
 
-.timelineTick:nth-of-type(2n) {
+.tick:nth-of-type(2n) {
   background: var(--grey9);
 }
 
-.timelineTick::after {
+.tick::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -77,39 +77,39 @@
   pointer-events: auto;
 }
 
-.timelineTick[data-active="true"] {
+.tick[data-active="true"] {
   margin-bottom: var(--tick-margin-bottom-active);
   background: var(--active-tick-color);
   z-index: 5;
 }
 
-.timelineWrapper[data-debug-overlay="default"] .timelineTick {
+.picker[data-debug-overlay="default"] .tick {
   background: var(--active-tick-color);
 }
 
-.timelineWrapper[data-debug-overlay="default"] .timelineTick::after {
+.picker[data-debug-overlay="default"] .tick::after {
   --hit-area: 0px;
 }
 
-.timelineWrapper[data-debug-overlay="increased"] .timelineTick::after {
+.picker[data-debug-overlay="increased"] .tick::after {
   border: 1px solid color-mix(in oklab, var(--orange) 50%, transparent);
   background: color-mix(in oklab, var(--orange) 10%, transparent);
 }
 
 @media (max-width: 600px) {
-  .timelineContainer {
+  .timeline {
     padding: 0 var(--space-8);
   }
 
-  .timelineButton {
+  .navigationButton {
     margin: 0;
   }
 
-  .timelineTicks {
+  .ticks {
     min-width: 100px;
   }
 
-  .timelineTick[data-active="true"] {
+  .tick[data-active="true"] {
     margin-bottom: var(--tick-margin-bottom-mobile);
   }
 }

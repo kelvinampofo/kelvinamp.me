@@ -1,4 +1,4 @@
-.carouselContainer {
+.carousel {
   display: flex;
   height: auto;
   position: relative;
@@ -13,32 +13,32 @@
 }
 
 @media (max-width: 767px) {
-  .carouselContainer {
+  .carousel {
     padding-left: var(--space-16);
     padding-right: var(--space-16);
   }
 }
 
-.buttonContainer {
+.navigationSlot {
   display: none;
   align-items: center;
 }
 
 @media (min-width: 768px) {
-  .buttonContainer {
+  .navigationSlot {
     display: flex;
   }
 }
 
 @media (min-width: 1024px) {
-  .carouselContainer {
+  .carousel {
     width: calc(100% + 2 * (var(--space-38) + var(--space-24)));
     margin-left: calc(-1 * (var(--space-38) + var(--space-24)));
     margin-right: calc(-1 * (var(--space-38) + var(--space-24)));
   }
 }
 
-.slideList {
+.list {
   display: flex;
   height: 300px;
   overflow-x: auto;
@@ -48,38 +48,38 @@
 }
 
 @media (min-width: 768px) {
-  .slideList {
+  .list {
     height: 600px;
     scroll-snap-type: x mandatory;
     padding-bottom: var(--space-48);
   }
 }
 @media (min-width: 1024px) {
-  .slideList {
+  .list {
     height: 600px;
     padding-bottom: var(--space-48);
     padding-top: var(--space-32);
   }
 }
 
-.arrowButton {
+.navigationButton {
   border-radius: var(--radius-2);
   margin: 0 var(--space-8);
   color: var(--color-foreground-secondary);
   transition: color var(--transition-hover);
   cursor: pointer;
 }
-.arrowButton:hover:not(:disabled) {
+.navigationButton:hover:not(:disabled) {
   color: var(--color-foreground);
 }
-.arrowButton:disabled {
+.navigationButton:disabled {
   cursor: not-allowed;
   color: var(--grey8);
 }
 
-.cursorLeft {
+.previousCursor {
   cursor: w-resize;
 }
-.cursorRight {
+.nextCursor {
   cursor: e-resize;
 }

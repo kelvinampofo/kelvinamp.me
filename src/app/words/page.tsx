@@ -26,18 +26,18 @@ export default function Words() {
       <article className={clsx("prose", "layout-main")}>
         <Heading>Words</Heading>
         <p className="description">Running list of curated words.</p>
-        <Separator className={styles.wordsSeparator} />
-        <dl className={styles.wordsList}>
+        <Separator className={styles.separator} />
+        <dl className={styles.list}>
           {wordEntries.map(({ word, type, definition, variations }) => (
-            <div className={styles.wordEntry} key={word}>
-              <dt className={styles.word}>{word}</dt>
-              <dd className={styles.wordType}>
+            <div className={styles.entry} key={word}>
+              <dt className={styles.term}>{word}</dt>
+              <dd className={styles.partOfSpeech}>
                 <i>
                   {type}
                   {variations && ` (${variations.join(", ")})`}
                 </i>
               </dd>
-              <dd className={styles.wordDefinition}>{definition}</dd>
+              <dd className={styles.definition}>{definition}</dd>
             </div>
           ))}
         </dl>

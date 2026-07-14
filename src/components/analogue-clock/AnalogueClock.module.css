@@ -1,4 +1,4 @@
-.analogueClock {
+.clock {
   --size: 1.375rem;
 
   /*
@@ -30,7 +30,7 @@
   border-radius: 50%;
 }
 
-.clockHand {
+.hand {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -40,19 +40,19 @@
   transform: translate(-50%, -100%) rotate(var(--rotation));
 }
 
-.clockHandHours {
+.hourHand {
   z-index: 10;
   height: var(--hand-hour-length);
   background-color: var(--grey8);
 }
 
-.clockHandMinutes {
+.minuteHand {
   z-index: 20;
   height: var(--hand-minute-length);
   background-color: var(--grey8);
 }
 
-.clockHandSeconds {
+.secondHand {
   z-index: 30;
   height: var(--hand-second-length);
   width: 0.5px;

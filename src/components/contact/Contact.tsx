@@ -22,12 +22,12 @@ const contactLinks = [
 export default function Contact() {
   return (
     <div data-animate style={{ "--stagger": "5" }}>
-      <Heading as="h2" className={styles.contactListHeading}>
+      <Heading as="h2" className={styles.heading}>
         Connect
       </Heading>
       <ul
         data-list="unstyled"
-        className={styles.contactList}
+        className={styles.list}
         style={{ "--stagger": "2" }}
       >
         {contactLinks.map(({ label, href }, index) => (
@@ -43,7 +43,7 @@ export default function Contact() {
               </a>
             </li>
             {index < contactLinks.length - 1 && (
-              <span className={styles.dot} aria-hidden="true">
+              <span className={styles.separator} aria-hidden="true">
                 &middot;
               </span>
             )}

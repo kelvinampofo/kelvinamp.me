@@ -1,4 +1,4 @@
-.slideItem {
+.slide {
   position: relative;
   margin-right: var(--space-20);
   width: 250px;
@@ -8,7 +8,7 @@
   text-align: center;
   transition: all var(--transition-enter) var(--ease-out-cubic);
 }
-.slideItem:last-child {
+.slide:last-child {
   margin-right: 0;
 }
 
@@ -37,14 +37,14 @@
 }
 
 @media (min-width: 768px) {
-  .slideItem {
+  .slide {
     width: 450px;
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }
 }
 @media (min-width: 1024px) {
-  .slideItem {
+  .slide {
     width: 450px;
     scroll-snap-align: start;
     scroll-snap-stop: always;
@@ -66,7 +66,7 @@
   object-fit: fill;
 }
 
-.figcaption {
+.caption {
   position: absolute;
   bottom: calc(-1 * var(--space-24));
   left: 0;

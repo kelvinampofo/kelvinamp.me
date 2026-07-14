@@ -6,7 +6,7 @@ interface ShortcutKeyProps {
 
 export default function ShortcutKey({ keys }: ShortcutKeyProps) {
   return (
-    <div className={styles.container} aria-keyshortcuts={keys.join("+")}>
+    <div className={styles.keys} aria-keyshortcuts={keys.join("+")}>
       {keys.map((key) => (
         <kbd key={key} className={styles.key}>
           {key}

@@ -15,18 +15,14 @@ export default function Loading({ variant }: LoadingProps) {
   switch (variant) {
     case "loading-text":
       return (
-        <p className={styles.loadingText}>
+        <p className={styles.text}>
           Loading
-          <span className={styles.loadingDots} />
+          <span className={styles.dots} />
         </p>
       );
     case "loading-dots":
       return (
-        <div
-          className={styles.loadingDots}
-          aria-label="Loading..."
-          role="progressbar"
-        >
+        <div className={styles.dots} aria-label="Loading..." role="progressbar">
           {[...Array(3)].map((_, index) => (
             <span key={index} className={styles.dot} />
           ))}

@@ -1,4 +1,4 @@
-.container {
+.control {
   margin-top: var(--space-16);
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
   gap: var(--space-24);
 }
 
-.wrapper {
+.buttonMotion {
   will-change: transform;
 }
 
@@ -44,7 +44,7 @@
   }
 }
 
-.contentDefault {
+.prompt {
   display: flex;
   width: 100%;
   align-items: center;
@@ -52,28 +52,28 @@
   gap: var(--space-6);
 }
 
-.contentDefault > svg {
+.prompt > svg {
   opacity: 0.8;
 }
 
 @media (prefers-color-scheme: dark) {
-  .contentDefault > svg {
+  .prompt > svg {
     opacity: 0.9;
   }
 }
 
-.contentPressed {
+.waveform {
   display: flex;
   height: 100%;
   align-items: center;
   justify-content: center;
 }
 
-.tooltipWrapper {
+.hintSlot {
   min-height: 1rem;
 }
 
-.tooltip {
+.hint {
   display: block;
   font-size: 0.75rem;
   color: var(--color-foreground-secondary);

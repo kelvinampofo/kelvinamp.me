@@ -1,9 +1,9 @@
-.container {
+.phrases {
   position: relative;
   width: 100%;
 }
 
-.textContainer {
+.phrase {
   position: absolute;
   inset: 0;
   display: flex;
@@ -12,11 +12,11 @@
   transition: opacity 300ms;
 }
 
-.textContainer.visible {
+.phrase.visible {
   opacity: 0.8;
 }
 
-.textContainer.hidden {
+.phrase.hidden {
   filter: blur(0.5px);
   opacity: 0;
 }

@@ -29,7 +29,7 @@ export default function AnalogueClock({ timeParts }: AnalogueClockProps) {
 
   return (
     <div
-      className={styles.analogueClock}
+      className={styles.clock}
       aria-label="Analogue clock showing the current time"
       role="img"
     >
@@ -48,10 +48,10 @@ interface ClockHandProps {
 function ClockHand({ rotation, type }: ClockHandProps) {
   return (
     <div
-      className={clsx(styles.clockHand, {
-        [styles.clockHandHours]: type === "hours",
-        [styles.clockHandMinutes]: type === "minutes",
-        [styles.clockHandSeconds]: type === "seconds",
+      className={clsx(styles.hand, {
+        [styles.hourHand]: type === "hours",
+        [styles.minuteHand]: type === "minutes",
+        [styles.secondHand]: type === "seconds",
       })}
       style={{ "--rotation": `${rotation}deg` }}
     />

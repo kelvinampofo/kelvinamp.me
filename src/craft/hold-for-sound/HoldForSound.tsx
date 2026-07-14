@@ -102,12 +102,12 @@ export default function HoldForSound() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <div className={styles.container}>
+      <div className={styles.control}>
         <m.div
           variants={buttonVariants}
           animate={isPressed ? "pressed" : "default"}
           transition={buttonTransition}
-          className={styles.wrapper}
+          className={styles.buttonMotion}
         >
           <m.button
             className={styles.button}
@@ -131,7 +131,7 @@ export default function HoldForSound() {
                   animate="animate"
                   exit="exit"
                   transition={contentTransition}
-                  className={styles.contentDefault}
+                  className={styles.prompt}
                 >
                   <PlayIcon size={16} aria-hidden />
                   <span className="text-sm">Hold for sound</span>
@@ -144,7 +144,7 @@ export default function HoldForSound() {
                   animate="animate"
                   exit="exit"
                   transition={contentTransition}
-                  className={styles.contentPressed}
+                  className={styles.waveform}
                 >
                   <Waveform />
                 </m.div>
@@ -153,11 +153,11 @@ export default function HoldForSound() {
           </m.button>
         </m.div>
 
-        <div className={styles.tooltipWrapper}>
+        <div className={styles.hintSlot}>
           <AnimatePresence initial={false}>
             {!hasInteracted && (
               <m.span
-                className={styles.tooltip}
+                className={styles.hint}
                 key="visible"
                 variants={contentVariants}
                 initial="initial"

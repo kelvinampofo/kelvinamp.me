@@ -1,4 +1,4 @@
-.moodCanvas {
+.canvas {
   position: absolute;
   inset: 0;
   transform-origin: 0 0;
@@ -8,7 +8,7 @@
   -webkit-user-select: none;
 }
 
-.moodSurface {
+.surface {
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -18,7 +18,7 @@
   -webkit-user-select: none;
 }
 
-.moodElement {
+.item {
   position: absolute;
   left: 0;
   top: 0;
@@ -32,19 +32,19 @@
   cursor: grab;
 }
 
-.panMode .moodElement {
+.panMode .item {
   cursor: grab;
 }
 
-:global(body.gesture-grabbing) .moodCanvas {
+:global(body.gesture-grabbing) .canvas {
   cursor: grabbing;
 }
 
-:global(body.gesture-grabbing) .moodElement {
+:global(body.gesture-grabbing) .item {
   cursor: grabbing;
 }
 
-.moodImage {
+.image {
   object-fit: fill;
   user-select: none;
   -webkit-user-select: none;

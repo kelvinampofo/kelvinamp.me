@@ -1,4 +1,4 @@
-.cardContainer {
+.card {
   position: relative;
   width: 100%;
   border-radius: var(--radius-12);
@@ -8,7 +8,7 @@
   margin-bottom: var(--space-32);
 }
 
-.cardContent {
+.content {
   display: flex;
   justify-content: center;
   gap: var(--space-48);
@@ -18,7 +18,7 @@
   aspect-ratio: var(--card-content-aspect-ratio, auto);
 }
 
-.cardDescription {
+.description {
   padding: var(--space-10);
   font-size: 0.75rem;
   color: var(--color-foreground-secondary);

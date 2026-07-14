@@ -1,8 +1,8 @@
-.wordsSeparator {
+.separator {
   margin: var(--space-32) 0;
 }
 
-.wordsList {
+.list {
   margin-bottom: var(--space-48);
   display: grid;
   grid-template-columns: 1fr;
@@ -11,42 +11,35 @@
 }
 
 @media (min-width: 640px) {
-  .wordsList {
+  .list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-.wordEntry {
+.entry {
   display: flex;
   flex-direction: column;
   gap: var(--space-12);
 }
 
-.word {
+.term {
   font-weight: 500;
   color: var(--color-primary);
 }
 
-.wordDetails {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-12);
-}
-
-.wordType {
+.partOfSpeech {
   color: var(--color-text-secondary);
 }
 
-.wordDefinition {
+.definition {
   color: var(--color-text-secondary);
 }
 
-.wordsDescription,
-.wordType,
-.wordDefinition {
+.partOfSpeech,
+.definition {
   color: var(--color-foreground-secondary);
 }
 
-.word {
+.term {
   color: var(--foreground);
 }

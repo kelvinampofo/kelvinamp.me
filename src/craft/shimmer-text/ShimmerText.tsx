@@ -28,12 +28,12 @@ export default function ShimmerText({
   }, [phrases.length]);
 
   return (
-    <div className={styles.container} aria-label={ariaLabel}>
+    <div className={styles.phrases} aria-label={ariaLabel}>
       {phrases.map((phrase, index) => (
         <div
           key={phrase}
           aria-hidden={index !== viewIndex}
-          className={`${styles.textContainer} ${index === viewIndex ? styles.visible : styles.hidden}`}
+          className={`${styles.phrase} ${index === viewIndex ? styles.visible : styles.hidden}`}
         >
           <span className={styles.shimmer}>{phrase}</span>
         </div>

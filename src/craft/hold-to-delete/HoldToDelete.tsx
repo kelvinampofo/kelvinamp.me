@@ -38,8 +38,8 @@ export default function HoldToDelete() {
       onPointerCancel={handleUp}
       onPointerLeave={handleUp}
     >
-      <div aria-hidden="true" className={styles.progress} />
-      <div className={styles.content}>
+      <div aria-hidden="true" className={styles.progressFill} />
+      <div className={styles.label}>
         <Trash size={20} aria-hidden />
         <span>Hold to Delete</span>
       </div>

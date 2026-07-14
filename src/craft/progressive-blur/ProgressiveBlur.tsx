@@ -5,7 +5,7 @@ import styles from "./ProgressiveBlur.module.css";
 export default function ProgressiveBlur({ children }: PropsWithChildren) {
   return (
     <div
-      className={styles.maskGradient}
+      className={styles.mask}
       aria-label="scrolling text with a progressive linear blur effect"
       role="marquee"
     >

@@ -33,17 +33,17 @@
   box-shadow: none;
 }
 
-.content {
+.label {
   display: flex;
   align-items: center;
   gap: var(--space-6);
 }
 
-.content > svg {
+.label > svg {
   opacity: 0.9;
 }
 
-.progress {
+.progressFill {
   position: absolute;
   top: 0;
   left: 0;
@@ -54,11 +54,11 @@
   transition: clip-path 320ms var(--ease-in-out-cubic);
 }
 
-.button:active .progress {
+.button:active .progressFill {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   transition: clip-path 1600ms var(--ease-out-cubic);
 }
 
-.button:active .content > svg {
+.button:active .label > svg {
   opacity: 1;
 }
