@@ -19,6 +19,14 @@
   touch-action: manipulation;
 }
 
+.listItem > a:focus-visible {
+  width: calc(100% + var(--space-20));
+  padding: var(--space-14) var(--space-10);
+  margin: calc(var(--space-4) * -1) calc(var(--space-10) * -1) var(--space-4);
+  border-radius: var(--radius-10);
+  background: var(--color-background);
+}
+
 @media (hover: hover) and (pointer: fine) {
   .listItem > a:hover {
     color: var(--grey11);
