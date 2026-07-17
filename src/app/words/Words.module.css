@@ -28,11 +28,11 @@
 }
 
 .partOfSpeech {
-  color: var(--color-text-secondary);
+  color: var(--color-foreground-secondary);
 }
 
 .definition {
-  color: var(--color-text-secondary);
+  color: var(--color-foreground-secondary);
 }
 
 .partOfSpeech,
