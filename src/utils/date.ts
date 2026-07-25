@@ -5,8 +5,6 @@ type DateInput = Date | number | string;
 const DEFAULT_LOCALE = "en-GB";
 const DISPLAY_TIME_ZONE = "UTC";
 
-const formatterCache = new Map<string, Intl.DateTimeFormat>();
-
 /**
  * Returns true when the first date occurs after the comparison date.
  */
@@ -66,7 +64,12 @@ export function formatDate(
   options: Intl.DateTimeFormatOptions,
   locale = DEFAULT_LOCALE
 ) {
-  return getFormatter(locale, options).format(parseDate(date));
+  const formatter = new Intl.DateTimeFormat(locale, {
+    timeZone: DISPLAY_TIME_ZONE,
+    ...options,
+  });
+
+  return formatter.format(parseDate(date));
 }
 
 function parseDate(input: DateInput) {
@@ -78,22 +81,4 @@ function parseDate(input: DateInput) {
   }
 
   return date;
-}
-
-function getFormatter(locale: string, options: Intl.DateTimeFormatOptions) {
-  const key = JSON.stringify([locale, options]);
-  const cachedFormatter = formatterCache.get(key);
-
-  if (cachedFormatter) {
-    return cachedFormatter;
-  }
-
-  const formatter = new Intl.DateTimeFormat(locale, {
-    timeZone: DISPLAY_TIME_ZONE,
-    ...options,
-  });
-
-  formatterCache.set(key, formatter);
-
-  return formatter;
 }
