@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx"],
+  reactCompiler: true,
   images: {
     formats: ["image/avif", "image/webp"],
   },
