@@ -9,6 +9,11 @@ import Badge from "../badge/Badge";
 
 import styles from "./List.module.css";
 
+// Keep render output deterministic for the lifetime of this module. These
+// lists are statically generated, so this is effectively the build timestamp.
+const REFERENCE_DATE = new Date();
+const NEW_CONTENT_CUTOFF = subMonths(REFERENCE_DATE, 1);
+
 interface ListProps {
   entries: readonly ContentEntry[];
   collection: ContentCollection;
@@ -20,7 +25,7 @@ export default function List({ entries, collection }: ListProps) {
   return (
     <ol data-list="unstyled">
       {entries.map(({ id, slug, title, publishedDate, description }) => {
-        const isNew = isAfter(publishedDate, subMonths(new Date(), 1));
+        const isNew = isAfter(publishedDate, NEW_CONTENT_CUTOFF);
 
         const pathname = `/${collection}/${slug}`;
 
@@ -35,7 +40,7 @@ export default function List({ entries, collection }: ListProps) {
                 {isNew && <Badge>new</Badge>}
               </div>
               <span className={styles.date}>
-                {getDisplayDate(publishedDate, collection)}
+                {getDisplayDate(publishedDate, collection, REFERENCE_DATE)}
               </span>
             </Link>
           </li>
@@ -45,8 +50,12 @@ export default function List({ entries, collection }: ListProps) {
   );
 }
 
-function getDisplayDate(dateString: string, collection: ContentCollection) {
-  const withYear = !isThisYear(dateString);
+function getDisplayDate(
+  dateString: string,
+  collection: ContentCollection,
+  referenceDate: Date
+) {
+  const withYear = !isThisYear(dateString, referenceDate);
 
   if (collection === "writing") {
     return formatDate(dateString, {

@@ -19,7 +19,7 @@ export function isAfter(date: DateInput, comparisonDate: DateInput) {
  */
 export function isThisYear(
   date: DateInput,
-  referenceDate: DateInput = new Date()
+  referenceDate: DateInput
 ) {
   return (
     parseDate(date).getUTCFullYear() ===
