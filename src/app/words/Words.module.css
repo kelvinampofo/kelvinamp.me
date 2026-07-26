@@ -24,22 +24,10 @@
 
 .term {
   font-weight: 500;
-  color: var(--color-primary);
-}
-
-.partOfSpeech {
-  color: var(--color-foreground-secondary);
-}
-
-.definition {
-  color: var(--color-foreground-secondary);
+  color: var(--color-foreground);
 }
 
 .partOfSpeech,
 .definition {
   color: var(--color-foreground-secondary);
-}
-
-.term {
-  color: var(--foreground);
 }
