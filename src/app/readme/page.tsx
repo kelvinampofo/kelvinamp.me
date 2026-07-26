@@ -5,10 +5,12 @@ import Page from "../../components/page/Page";
 import Separator from "../../components/separator/Separator";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "/readme",
+  },
   title: "README",
   description:
     "A guide to how I work and how we can do our best work together.",
-  metadataBase: new URL("https://kelvinamp.me/readme"),
 };
 
 export default function Readme() {

@@ -57,6 +57,9 @@ export function createContentRoute(
     return {
       title,
       description,
+      alternates: {
+        canonical: `/${collection}/${slug}`,
+      },
     };
   }
 

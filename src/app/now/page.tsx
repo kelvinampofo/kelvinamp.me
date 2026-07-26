@@ -4,9 +4,11 @@ import Heading from "../../components/heading/Heading";
 import Page from "../../components/page/Page";
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: "/now",
+  },
   title: "Now",
   description: "Current focus and stage in life",
-  metadataBase: new URL("https://kelvinamp.me/now"),
 };
 
 export default function Now() {
