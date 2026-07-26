@@ -28,15 +28,16 @@ const CONTENT_ROOTS = {
 
 export const getContentEntries = cache(
   async (collection: ContentCollection): Promise<ContentEntry[]> => {
-    const files = await readdir(CONTENT_ROOTS[collection], {
+    // one directory per entry, with index.tsx holding the prose and metadata
+    const directories = await readdir(CONTENT_ROOTS[collection], {
       withFileTypes: true,
     });
 
     const entries = await Promise.all(
-      files
-        .filter((entry) => entry.isFile() && entry.name.endsWith(".tsx"))
-        .map(async (file): Promise<ContentEntry> => {
-          const slug = file.name.replace(/\.tsx$/, "");
+      directories
+        .filter((entry) => entry.isDirectory())
+        .map(async (directory): Promise<ContentEntry> => {
+          const slug = directory.name;
           const { metadata } = await importContentEntryModule(collection, slug);
 
           return {
@@ -56,8 +57,8 @@ export const getContentEntryModule = cache(
     collection: ContentCollection,
     slug: string
   ): Promise<ContentEntryModule | null> => {
-    // Check the index first so only unknown slugs return null. If a known
-    // entry fails to import, let the error through so the broken file is fixed.
+    // check the index first so only unknown slugs return null, letting a known
+    // entry that fails to import throw so the broken file gets fixed
     const entries = await getContentEntries(collection);
     const entryExists = entries.some((entry) => entry.slug === slug);
 
@@ -82,10 +83,12 @@ async function importContentEntryModule(
   collection: ContentCollection,
   slug: string
 ) {
-  const mod: unknown = await import(`../content/${collection}/${slug}.tsx`);
+  const mod: unknown = await import(
+    `../content/${collection}/${slug}/index.tsx`
+  );
 
   // TypeScript cannot see what a dynamic content import exports, so validate
-  // the module before returning it as a ContentEntryModule.
+  // the module before returning it as a ContentEntryModule
   assertContentEntryModule(mod, collection, slug);
 
   return mod;
