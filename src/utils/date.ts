@@ -15,10 +15,7 @@ export function isAfter(date: DateInput, comparisonDate: DateInput) {
 /**
  * Returns true when the date and reference date fall in the same UTC year.
  */
-export function isThisYear(
-  date: DateInput,
-  referenceDate: DateInput
-) {
+export function isThisYear(date: DateInput, referenceDate: DateInput) {
   return (
     parseDate(date).getUTCFullYear() ===
     parseDate(referenceDate).getUTCFullYear()

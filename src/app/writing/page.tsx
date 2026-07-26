@@ -25,7 +25,11 @@ export default async function WritingPage() {
         Infrequent thoughts on software <em>&</em> design, along with a running
         list of curated <Link href="/words">words</Link>.
       </p>
-      <List entries={entries} collection="writing" />
+      <List
+        entries={entries}
+        collection="writing"
+        dateFormat={{ day: "2-digit", month: "short" }}
+      />
     </Page>
   );
 }
