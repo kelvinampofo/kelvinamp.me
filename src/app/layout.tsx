@@ -27,7 +27,7 @@ interface RootLayoutProps {
 const inter = localFont({
   src: "../fonts/InterVariable.woff2",
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-family-inter",
 });
 
 export default function RootLayout({ children }: Readonly<RootLayoutProps>) {

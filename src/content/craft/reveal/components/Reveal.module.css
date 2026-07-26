@@ -10,7 +10,7 @@
   --reveal-overlap: 2px;
   --image-scale: 1.08;
   --image-ring-width: 1px;
-  --image-ring-color: color-mix(in oklab, var(--grey9) 16%, transparent);
+  --image-ring-color: color-mix(in oklab, var(--color-grey-9) 16%, transparent);
 
   position: relative;
 
@@ -19,7 +19,7 @@
 
   overflow: hidden;
 
-  background: var(--grey2);
+  background: var(--color-grey-2);
 
   touch-action: none;
 
@@ -67,14 +67,14 @@
   margin: 0;
   min-width: 180px;
 
-  background: color-mix(in oklab, var(--grey1) 70%, transparent);
+  background: color-mix(in oklab, var(--color-grey-1) 70%, transparent);
   border-radius: 0;
-  color: var(--grey12);
+  color: var(--color-grey-12);
 
   font-size: 0.75rem;
 
   opacity: 0;
-  transition: opacity var(--transition-enter) var(--ease-out-cubic);
+  transition: opacity var(--duration-enter) var(--ease-out-cubic);
 
   white-space: pre;
 }

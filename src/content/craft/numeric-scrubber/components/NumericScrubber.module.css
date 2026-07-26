@@ -19,8 +19,8 @@
 
 .scrubberPopover {
   --scrubber-scale: 1;
-  --scrubber-surface: var(--grey2);
-  --scrubber-outline: var(--grey6);
+  --scrubber-surface: var(--color-grey-2);
+  --scrubber-outline: var(--color-grey-6);
   --scrubber-arrow-fill: var(--scrubber-surface);
   --scrubber-arrow-outer-stroke: var(--scrubber-outline);
   --scrubber-arrow-inner-stroke: var(--scrubber-outline-contrast);
@@ -32,8 +32,8 @@
   transform: scale(var(--scrubber-scale));
   box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
   transition:
-    transform var(--transition-hover) var(--ease-in-out-cubic),
-    opacity var(--transition-hover) var(--ease-in-out-cubic);
+    transform var(--duration-hover) var(--ease-in-out-cubic),
+    opacity var(--duration-hover) var(--ease-in-out-cubic);
 
   &[data-starting-style],
   &[data-ending-style] {
@@ -67,11 +67,11 @@
 }
 
 .scrubberArrowFill {
-  fill: var(--scrubber-arrow-fill, var(--grey1));
+  fill: var(--scrubber-arrow-fill, var(--color-grey-1));
 }
 
 .scrubberArrowOuterStroke {
-  fill: var(--scrubber-arrow-outer-stroke, var(--grey12));
+  fill: var(--scrubber-arrow-outer-stroke, var(--color-grey-12));
 }
 
 .scrubberArrowInnerStroke {
@@ -97,7 +97,7 @@
   width: var(--size);
   height: var(--size);
   border-radius: var(--radius-10);
-  color: var(--grey10);
+  color: var(--color-grey-10);
   touch-action: manipulation;
 }
 
@@ -158,27 +158,27 @@
   width: var(--tick-width);
   height: var(--space-10);
   border-radius: var(--radius-full);
-  background: var(--grey9);
-  transition: var(--transition-hover);
+  background: var(--color-grey-9);
+  transition: var(--duration-hover);
 
   &[data-active="true"] {
     height: var(--space-14);
-    background: var(--grey12);
+    background: var(--color-grey-12);
   }
 }
 
 @media (prefers-color-scheme: light) {
   .scrubberPopover {
     --scrubber-surface: #f1f1f1;
-    --scrubber-outline: var(--grey8);
+    --scrubber-outline: var(--color-grey-8);
     --scrubber-outline-contrast: transparent;
     --scrubber-arrow-fill: #f1f1f1;
     --scrubber-arrow-outer-stroke: var(--scrubber-outline);
     --scrubber-arrow-inner-stroke: transparent;
 
-    color: var(--grey12);
+    color: var(--color-grey-12);
     background-color: #f1f1f1;
-    outline: 1px solid var(--grey8);
+    outline: 1px solid var(--color-grey-8);
     box-shadow:
       var(--shadow-border),
       0px 2px 4px rgba(0, 0, 0, 0.06),

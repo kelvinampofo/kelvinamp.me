@@ -7,12 +7,12 @@
   justify-content: center;
   overflow: hidden;
   border-radius: var(--radius-4);
-  background-color: var(--grey1);
+  background-color: var(--color-grey-1);
   padding: 1px var(--space-4);
-  outline: 1px solid var(--grey4);
+  outline: 1px solid var(--color-grey-4);
   transition-property: background-color, box-shadow, transform;
   transition-timing-function: var(--ease-out-cubic);
-  transition-duration: var(--transition-hover);
+  transition-duration: var(--duration-hover);
   will-change: transform;
   user-select: none;
   -webkit-user-select: none;
@@ -24,7 +24,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .button:hover {
-    background-color: var(--greyA1);
+    background-color: var(--color-grey-alpha-1);
   }
 }
 

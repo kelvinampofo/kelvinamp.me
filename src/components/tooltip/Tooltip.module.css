@@ -7,8 +7,8 @@
 }
 
 .popup {
-  --tooltip-transform-duration: var(--transition-enter);
-  --tooltip-opacity-duration: var(--transition-enter);
+  --tooltip-transform-duration: var(--duration-enter);
+  --tooltip-opacity-duration: var(--duration-enter);
 
   box-sizing: border-box;
   display: flex;
@@ -67,7 +67,7 @@
 }
 
 .arrowFill {
-  fill: var(--tooltip-arrow-fill, var(--grey1));
+  fill: var(--tooltip-arrow-fill, var(--color-grey-1));
 }
 
 @media (prefers-color-scheme: light) {
@@ -75,7 +75,7 @@
     --tooltip-outline-color: rgb(9 9 11 / 0.1);
     color: #f0f0f0;
     background-color: #1f1f1f;
-    outline: 1px solid var(--grey12);
+    outline: 1px solid var(--color-grey-12);
   }
 
   .arrowFill {
@@ -83,20 +83,20 @@
   }
 
   .arrowOuterStroke {
-    fill: var(--tooltip-arrow-outer-stroke, var(--grey12));
+    fill: var(--tooltip-arrow-outer-stroke, var(--color-grey-12));
   }
 }
 
 @media (prefers-color-scheme: dark) {
   .popup {
-    background-color: var(--grey2);
+    background-color: var(--color-grey-2);
     box-shadow:
       var(--shadow-tooltip),
       inset 0 0 0 1px rgb(255 255 255 / 0.1);
   }
 
   .arrowFill {
-    fill: var(--tooltip-arrow-fill, var(--grey2));
+    fill: var(--tooltip-arrow-fill, var(--color-grey-2));
   }
 
   .arrowInnerStroke {

@@ -1,5 +1,5 @@
 .fade {
-  --h: min(var(--space-96), var(--spacing-page-top, var(--space-96)));
+  --h: min(var(--space-96), var(--space-page-top, var(--space-96)));
   --direction: to bottom;
   --blur: 5px;
   --stop: 25%;
@@ -51,13 +51,13 @@
     right: 0;
 
     width: calc(
-      100% + var(--spacing-body-margin-left, 0px) +
-        var(--spacing-body-margin-right, 0px)
+      100% + var(--space-body-margin-left, 0px) +
+        var(--space-body-margin-right, 0px)
     );
     height: var(--h);
 
-    margin-left: calc(-1 * var(--spacing-body-margin-left, 0px));
-    margin-right: calc(-1 * var(--spacing-body-margin-right, 0px));
+    margin-left: calc(-1 * var(--space-body-margin-left, 0px));
+    margin-right: calc(-1 * var(--space-body-margin-right, 0px));
   }
 
   &[data-side="top"] {
@@ -68,7 +68,7 @@
 
   &[data-side="bottom"] {
     --direction: to top;
-    --h: min(var(--space-96), var(--spacing-page-bottom, var(--space-96)));
+    --h: min(var(--space-96), var(--space-page-bottom, var(--space-96)));
 
     top: auto;
     bottom: 0;
@@ -84,16 +84,16 @@
 
     width: var(--h);
     height: calc(
-      100% + var(--spacing-page-top, 0px) + var(--spacing-page-bottom, 0px)
+      100% + var(--space-page-top, 0px) + var(--space-page-bottom, 0px)
     );
 
-    margin-top: calc(-1 * var(--spacing-page-top, 0px));
-    margin-bottom: calc(-1 * var(--spacing-page-bottom, 0px));
+    margin-top: calc(-1 * var(--space-page-top, 0px));
+    margin-bottom: calc(-1 * var(--space-page-bottom, 0px));
   }
 
   &[data-side="left"] {
     --direction: to right;
-    --h: min(var(--space-96), var(--spacing-body-margin-left, var(--space-96)));
+    --h: min(var(--space-96), var(--space-body-margin-left, var(--space-96)));
 
     left: 0;
     right: auto;
@@ -104,10 +104,7 @@
 
   &[data-side="right"] {
     --direction: to left;
-    --h: min(
-      var(--space-96),
-      var(--spacing-body-margin-right, var(--space-96))
-    );
+    --h: min(var(--space-96), var(--space-body-margin-right, var(--space-96)));
 
     left: auto;
     right: 0;

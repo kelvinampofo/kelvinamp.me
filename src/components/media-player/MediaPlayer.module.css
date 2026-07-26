@@ -47,7 +47,7 @@
   border-radius: var(--radius-full);
   box-shadow:
     0 var(--space-14) var(--space-38) var(--playback-material-shadow),
-    inset 0 0 0 var(--border-thin) var(--playback-material-highlight),
+    inset 0 0 0 var(--border-width-thin) var(--playback-material-highlight),
     inset 0 calc(-1 * var(--space-12)) var(--space-24) rgb(255 255 255 / 0.08);
   transform: translate(-50%, -50%) scale(1);
   backdrop-filter: blur(var(--space-20)) saturate(1.8);

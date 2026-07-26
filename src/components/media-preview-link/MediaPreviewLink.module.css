@@ -1,6 +1,6 @@
 .trigger {
   position: relative;
-  transition: text-decoration-color var(--transition-hover);
+  transition: text-decoration-color var(--duration-hover);
 }
 
 .positioner {
@@ -10,8 +10,8 @@
 }
 
 .popup {
-  --preview-enter-duration: var(--transition-enter);
-  --preview-exit-duration: var(--transition-exit);
+  --preview-enter-duration: var(--duration-enter);
+  --preview-exit-duration: var(--duration-exit);
 
   width: min(32rem, var(--available-width));
   max-width: min(32rem, var(--available-width));

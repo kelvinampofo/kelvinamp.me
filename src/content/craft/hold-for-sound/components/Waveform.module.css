@@ -11,5 +11,5 @@
   width: 2px;
   transform-origin: center;
   border-radius: var(--radius-full);
-  background-color: var(--grey11);
+  background-color: var(--color-grey-11);
 }

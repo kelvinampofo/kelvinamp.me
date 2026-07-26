@@ -1,4 +1,4 @@
 .heading {
-  font: var(--type-heading);
-  color: var(--heading-color, var(--grey12));
+  font: var(--typography-heading);
+  color: var(--heading-color, var(--color-grey-12));
 }

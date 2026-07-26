@@ -1,5 +1,5 @@
 .separator {
-  background-color: var(--grey5);
+  background-color: var(--color-grey-5);
   border: none;
   margin: var(--space-28) 0;
   display: block;
@@ -7,7 +7,7 @@
 }
 
 .horizontal {
-  height: var(--border-thin);
+  height: var(--border-width-thin);
   width: 100%;
 }
 
@@ -20,6 +20,6 @@
 
 @media (prefers-contrast: more) {
   .separator {
-    background-color: var(--grey10);
+    background-color: var(--color-grey-10);
   }
 }

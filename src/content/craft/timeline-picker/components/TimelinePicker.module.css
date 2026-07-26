@@ -13,7 +13,7 @@
   --tick-margin-bottom-active: var(--space-12);
   --tick-margin-bottom-mobile: var(--space-10);
 
-  --active-tick-color: var(--orange);
+  --active-tick-color: var(--color-orange);
 
   display: flex;
   align-items: center;
@@ -22,20 +22,20 @@
 
 .navigationButton {
   display: flex;
-  color: var(--grey10);
+  color: var(--color-grey-10);
   padding: var(--space-8);
   border-radius: var(--radius-8);
   margin: 0 var(--space-6);
-  transition: var(--transition-hover);
+  transition: var(--duration-hover);
 }
 
 .navigationButton:hover:not(:disabled) {
-  background: var(--greyA4);
+  background: var(--color-grey-alpha-4);
 }
 
 .navigationButton:disabled {
   cursor: not-allowed;
-  color: var(--greyA6);
+  color: var(--color-grey-alpha-6);
 }
 
 .ticks {
@@ -55,14 +55,14 @@
   width: var(--tick-width);
   align-items: center;
   margin: 0 var(--tick-margin-horizontal);
-  background: var(--grey8);
+  background: var(--color-grey-8);
   border-radius: var(--tick-border-radius);
   touch-action: manipulation;
   z-index: 1;
 }
 
 .tick:nth-of-type(2n) {
-  background: var(--grey9);
+  background: var(--color-grey-9);
 }
 
 .tick::after {
@@ -92,8 +92,8 @@
 }
 
 .picker[data-debug-overlay="increased"] .tick::after {
-  border: 1px solid color-mix(in oklab, var(--orange) 50%, transparent);
-  background: color-mix(in oklab, var(--orange) 10%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-orange) 50%, transparent);
+  background: color-mix(in oklab, var(--color-orange) 10%, transparent);
 }
 
 @media (max-width: 600px) {

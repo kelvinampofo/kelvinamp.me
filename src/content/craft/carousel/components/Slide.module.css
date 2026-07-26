@@ -6,7 +6,7 @@
   overscroll-behavior-x: contain;
   background-color: var(--color-background);
   text-align: center;
-  transition: all var(--transition-enter) var(--ease-out-cubic);
+  transition: all var(--duration-enter) var(--ease-out-cubic);
 }
 .slide:last-child {
   margin-right: 0;
@@ -18,7 +18,7 @@
   height: 100%;
   margin: 0;
   overflow: hidden;
-  background: var(--grey3);
+  background: var(--color-grey-3);
 }
 
 .figure::before {
@@ -28,9 +28,9 @@
   z-index: 0;
   background: linear-gradient(
     90deg,
-    var(--grey3) 0%,
-    var(--grey4) 45%,
-    var(--grey3) 90%
+    var(--color-grey-3) 0%,
+    var(--color-grey-4) 45%,
+    var(--color-grey-3) 90%
   );
   background-size: 200% 100%;
   animation: image-placeholder 1.4s ease-in-out infinite;

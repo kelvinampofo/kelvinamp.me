@@ -3,7 +3,7 @@
 }
 
 .item:not(:last-child) {
-  border-bottom: var(--border-thin) solid var(--grey5);
+  border-bottom: var(--border-width-thin) solid var(--color-grey-5);
 }
 
 .item > a {
@@ -29,7 +29,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .item > a:hover {
-    color: var(--grey11);
+    color: var(--color-grey-11);
   }
 }
 

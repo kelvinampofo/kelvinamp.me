@@ -1,6 +1,6 @@
 .focusedReading[data-focus-mode="enabled"]
   :where(p, pre, li, img, div, blockquote) {
-  --transition-ease: var(--transition-enter) ease;
+  --transition-ease: var(--duration-enter) ease;
 
   opacity: 0.6;
   filter: blur(2px);

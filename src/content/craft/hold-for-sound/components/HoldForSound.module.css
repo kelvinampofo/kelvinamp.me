@@ -19,9 +19,9 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-4);
-  background-color: var(--grey1);
+  background-color: var(--color-grey-1);
   padding: var(--space-2) var(--space-4);
-  outline: 1px solid var(--grey4);
+  outline: 1px solid var(--color-grey-4);
   transition:
     background-color 0.2s,
     box-shadow 0.2s;
@@ -40,7 +40,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .button:hover {
-    background-color: var(--greyA1);
+    background-color: var(--color-grey-alpha-1);
   }
 }
 
