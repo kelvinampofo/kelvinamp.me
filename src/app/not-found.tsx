@@ -1,8 +1,7 @@
-import clsx from "clsx";
 import { Metadata } from "next";
 
-import BackButton from "../components/back-button/BackButton";
 import Heading from "../components/heading/Heading";
+import Page from "../components/page/Page";
 
 export const metadata: Metadata = {
   title: "404",
@@ -11,18 +10,13 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <>
-      <nav className="layout-rail">
-        <BackButton href="/" />
-      </nav>
-      <article className={clsx("prose", "layout-main")}>
-        <Heading>404 — Not Found</Heading>
-        <p>
-          You know what else isn’t found? Those old Intel stickers on Windows
-          machines—the ones with the hidden holographic chips on the back that
-          nobody ever saw.
-        </p>
-      </article>
-    </>
+    <Page backTo="/">
+      <Heading>404 — Not Found</Heading>
+      <p>
+        You know what else isn’t found? Those old Intel stickers on Windows
+        machines—the ones with the hidden holographic chips on the back that
+        nobody ever saw.
+      </p>
+    </Page>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import Heading from "../../components/heading/Heading";
 import List from "../../components/list/List";
+import Page from "../../components/page/Page";
 import { getContentEntries } from "../../utils/content-collection";
 
 export const metadata: Metadata = {
@@ -16,12 +17,12 @@ export default async function CraftPage() {
   const entries = await getContentEntries("craft");
 
   return (
-    <>
+    <Page backTo="/">
       <Heading>Craft</Heading>
       <p className="description">
         Collection of interfaces <em>&</em> interactions.
       </p>
       <List entries={entries} collection="craft" />
-    </>
+    </Page>
   );
 }
