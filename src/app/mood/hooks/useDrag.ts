@@ -95,7 +95,7 @@ export default function useDrag({
     const movement = Math.hypot(deltaX, deltaY);
 
     // A small drag hysteresis prevents incidental pointer jitter from
-    // immediately promoting a press into an active drag.
+    // immediately promoting a press into an active drag
     if (activeDrag.state === "press" && movement < threshold) {
       return;
     }

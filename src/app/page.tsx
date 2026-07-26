@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import AnimationController from "../components/animation-controller/AnimationController";
-import Contact from "../components/contact/Contact";
 import Heading from "../components/heading/Heading";
 import Separator from "../components/separator/Separator";
-import StatusDisplay from "../components/status-display/StatusDisplay";
+
+import AnimationController from "./_home/animation-controller/AnimationController";
+import Contact from "./_home/contact/Contact";
+import StatusDisplay from "./_home/status-display/StatusDisplay";
 
 export const metadata: Metadata = {
   alternates: {

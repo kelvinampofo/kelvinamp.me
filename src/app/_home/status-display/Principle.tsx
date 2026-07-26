@@ -1,4 +1,4 @@
-import Tooltip from "../../tooltip/Tooltip";
+import Tooltip from "../../../components/tooltip/Tooltip";
 
 export default function Principle() {
   return (

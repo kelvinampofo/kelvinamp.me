@@ -1,8 +1,8 @@
 "use client";
 
+import AnalogueClock from "../../../components/analogue-clock/AnalogueClock";
+import Tooltip from "../../../components/tooltip/Tooltip";
 import type { TimeParts } from "../../../hooks/useTime";
-import AnalogueClock from "../../analogue-clock/AnalogueClock";
-import Tooltip from "../../tooltip/Tooltip";
 
 interface ClockProps {
   currentTime: string;

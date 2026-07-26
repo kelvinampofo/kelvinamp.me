@@ -34,7 +34,7 @@ export function useTime({
 
   useEffect(() => {
     // scheduleNextTick aligns updates to exact wall-clock second boundaries
-    // (e.g. hh:mm:ss.000) to avoid setInterval drift over time.
+    // (e.g. hh:mm:ss.000) to avoid setInterval drift over time
     function scheduleTick(delay: number) {
       timeoutRef.current = setTimeout(() => {
         setCurrentDate(new Date());

@@ -2,15 +2,15 @@
 
 import { type KeyboardEvent, type ReactNode, useState } from "react";
 
-import { useTime } from "../../hooks/useTime";
-import { useWindowDimension } from "../../hooks/useWindowDimension";
-import { getBrowserInfo } from "../../utils/browser-info";
+import { useTime } from "../../../hooks/useTime";
+import { useWindowDimension } from "../../../hooks/useWindowDimension";
+import { getBrowserInfo } from "../../../utils/browser-info";
 
-import BrowserInfo from "./components/BrowserInfo";
-import Clock from "./components/Clock";
-import CurrentTime from "./components/CurrentTime";
-import Dimensions from "./components/Dimensions";
-import Principle from "./components/Principle";
+import BrowserInfo from "./BrowserInfo";
+import Clock from "./Clock";
+import CurrentTime from "./CurrentTime";
+import Dimensions from "./Dimensions";
+import Principle from "./Principle";
 import styles from "./StatusDisplay.module.css";
 
 interface StatusItem {
@@ -22,6 +22,7 @@ export default function StatusDisplay() {
 
   const { currentTime, timezoneOffset, timeParts } = useTime();
   const { width, height } = useWindowDimension({ debounceDelay: 100 });
+
   const userAgent = typeof navigator === "undefined" ? "" : navigator.userAgent;
   const { name, version } = getBrowserInfo(userAgent);
 
