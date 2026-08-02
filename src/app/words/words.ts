@@ -210,5 +210,11 @@ export const wordEntries = (
       type: "adjective",
       definition: "stated or appearing to be true, but not necessarily so",
     },
+    {
+      word: "esoteric",
+      type: "adjective",
+      definition:
+        "intended for or likely to be understood by only a small number of people with a specialised knowledge or interest",
+    },
   ] satisfies WordEntryProps[]
 ).sort((a, b) => a.word.localeCompare(b.word));
