@@ -1,5 +1,3 @@
-import Heading from "../../../components/heading/Heading";
-
 import type { ContentEntryMetadata } from "../../collection";
 
 export const metadata: ContentEntryMetadata = {
@@ -11,7 +9,6 @@ export const metadata: ContentEntryMetadata = {
 export default function ArtOfSayingNo() {
   return (
     <>
-      <Heading>The Art of Saying No</Heading>
       <p>
         Over the years, I have encountered a common piece of advice—learning to
         say <q>no</q>. Now I’m asking myself why a request should change my

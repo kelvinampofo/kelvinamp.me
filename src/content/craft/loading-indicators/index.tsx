@@ -1,6 +1,4 @@
 import Card from "../../../components/card/Card";
-import Heading from "../../../components/heading/Heading";
-
 import Loading from "./components/Loading";
 
 import type { ContentEntryMetadata } from "../../collection";
@@ -14,7 +12,6 @@ export const metadata: ContentEntryMetadata = {
 export default function LoadingIndicators() {
   return (
     <>
-      <Heading>Loading Indicators</Heading>
       <p>
         Simple loading state indicators. A little detail is the two stacked
         animations, one <code>linear</code>, the other eased with a custom{" "}

@@ -1,5 +1,3 @@
-import Heading from "../../../components/heading/Heading";
-
 import Reveal from "./components/Reveal";
 
 import type { ContentEntryMetadata } from "../../collection";
@@ -13,7 +11,6 @@ export const metadata: ContentEntryMetadata = {
 export default function RevealEntry() {
   return (
     <>
-      <Heading>Reveal</Heading>
       <p>
         Pointer-tracked image reveal. Image filter from{" "}
         <a

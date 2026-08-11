@@ -11,7 +11,6 @@ export const metadata: ContentEntryMetadata = {
 export default function MediaFormats() {
   return (
     <>
-      <Heading>On Media Formats</Heading>
       <p>
         Some notes on media formats. Recommended watch:{" "}
         <a href="https://youtu.be/qB9L-ZYM1_0?si=ZRq60cGJWnDxZFxX">

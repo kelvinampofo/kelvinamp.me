@@ -1,5 +1,3 @@
-import Heading from "../../../components/heading/Heading";
-
 import type { ContentEntryMetadata } from "../../collection";
 
 export const metadata: ContentEntryMetadata = {
@@ -11,7 +9,6 @@ export const metadata: ContentEntryMetadata = {
 export default function Learning() {
   return (
     <>
-      <Heading>Things I’ve Learned</Heading>
       <ol>
         <li>
           Find the intersection between what you love, what you’re good at, what

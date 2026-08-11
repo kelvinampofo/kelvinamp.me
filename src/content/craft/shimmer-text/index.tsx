@@ -1,6 +1,4 @@
 import Card from "../../../components/card/Card";
-import Heading from "../../../components/heading/Heading";
-
 import ShimmerText from "./components/ShimmerText";
 
 import type { ContentEntryMetadata } from "../../collection";
@@ -14,7 +12,6 @@ export const metadata: ContentEntryMetadata = {
 export default function ShimmerTextEntry() {
   return (
     <>
-      <Heading>Shimmer Text</Heading>
       <p>
         Loading shimmer text from{" "}
         <a href="https://openai.com/o1/#ui-video">OpenAI o1</a>.

@@ -1,6 +1,4 @@
 import Card from "../../../components/card/Card";
-import Heading from "../../../components/heading/Heading";
-
 import ProgressiveBlur from "./components/ProgressiveBlur";
 
 import type { ContentEntryMetadata } from "../../collection";
@@ -14,7 +12,6 @@ export const metadata: ContentEntryMetadata = {
 export default function ProgressiveBlurEntry() {
   return (
     <>
-      <Heading>Progressive Blur</Heading>
       <p>
         Progressive linear blur effect using <code>mask-image</code>.
       </p>

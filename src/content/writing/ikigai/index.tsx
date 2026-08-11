@@ -1,4 +1,3 @@
-import Heading from "../../../components/heading/Heading";
 import MediaPreviewLink from "../../../components/media-preview-link/MediaPreviewLink";
 
 import type { ContentEntryMetadata } from "../../collection";
@@ -12,7 +11,6 @@ export const metadata: ContentEntryMetadata = {
 export default function Ikigai() {
   return (
     <>
-      <Heading>Ikigai</Heading>
       <p>
         I recently came across the concept of{" "}
         <a href="https://en.wikipedia.org/wiki/Ikigai">ikigai</a> a Japanese

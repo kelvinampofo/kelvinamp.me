@@ -1,5 +1,3 @@
-import Heading from "../../../components/heading/Heading";
-
 import type { ContentEntryMetadata } from "../../collection";
 
 export const metadata: ContentEntryMetadata = {
@@ -11,7 +9,6 @@ export const metadata: ContentEntryMetadata = {
 export default function Scrolling() {
   return (
     <>
-      <Heading>Scrolling</Heading>
       <p>
         Field notes on scroll behaviour and scroll-driven code. Recommended
         read: Cheng Lou’s{" "}

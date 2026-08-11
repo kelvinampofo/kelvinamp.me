@@ -1,5 +1,3 @@
-import Heading from "../../../components/heading/Heading";
-
 import type { ContentEntryMetadata } from "../../collection";
 
 export const metadata: ContentEntryMetadata = {
@@ -11,7 +9,6 @@ export const metadata: ContentEntryMetadata = {
 export default function Inspiration() {
   return (
     <>
-      <Heading>Inspiration</Heading>
       <p>
         I’ve been thinking a lot about where ideas come from, especially in
         technical work.

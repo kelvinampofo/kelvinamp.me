@@ -12,7 +12,6 @@ export const metadata: ContentEntryMetadata = {
 export default function Motion() {
   return (
     <>
-      <Heading>Motion</Heading>
       <p>
         I’m really enjoying macOS Sonoma so far. The updated interface of the
         lock screen and the smooth login transition enhances the overall

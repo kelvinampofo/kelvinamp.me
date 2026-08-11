@@ -1,5 +1,3 @@
-import Heading from "../../../components/heading/Heading";
-
 import type { ContentEntryMetadata } from "../../collection";
 
 export const metadata: ContentEntryMetadata = {
@@ -11,7 +9,6 @@ export const metadata: ContentEntryMetadata = {
 export default function GitNotes() {
   return (
     <>
-      <Heading>Git Notes</Heading>
       <p>Quick notes for reference.</p>
       <ul>
         <li>

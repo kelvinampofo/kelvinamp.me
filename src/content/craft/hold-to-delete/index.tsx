@@ -1,5 +1,4 @@
 import Card from "../../../components/card/Card";
-import Heading from "../../../components/heading/Heading";
 import type { ContentEntryMetadata } from "../../collection";
 
 import HoldToDelete from "./components/HoldToDelete";
@@ -13,7 +12,6 @@ export const metadata: ContentEntryMetadata = {
 export default function HoldToDeleteEntry() {
   return (
     <>
-      <Heading>Hold to Delete</Heading>
       <p>
         Uses <code>clip-path</code> to animate the progress—leveraging{" "}
         <a href="https://en.wikipedia.org/wiki/Hardware_acceleration">

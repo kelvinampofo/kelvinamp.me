@@ -1,6 +1,4 @@
 import Card from "../../../components/card/Card";
-import Heading from "../../../components/heading/Heading";
-
 import TimelinePicker from "./components/TimelinePicker";
 
 import type { ContentEntryMetadata } from "../../collection";
@@ -14,7 +12,6 @@ export const metadata: ContentEntryMetadata = {
 export default function TimelinePickerEntry() {
   return (
     <>
-      <Heading>Timeline Picker</Heading>
       <p>
         A timeline picker for navigating time-based or sequential data. A
         notable detail, often overlooked, is the increased hit area—improving

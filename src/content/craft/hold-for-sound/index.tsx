@@ -1,6 +1,4 @@
 import Card from "../../../components/card/Card";
-import Heading from "../../../components/heading/Heading";
-
 import HoldForSound from "./components/HoldForSound";
 
 import type { ContentEntryMetadata } from "../../collection";
@@ -14,7 +12,6 @@ export const metadata: ContentEntryMetadata = {
 export default function HoldForSoundEntry() {
   return (
     <>
-      <Heading>Hold for Sound</Heading>
       <p>Audio interface.</p>
       <Card>
         <HoldForSound />

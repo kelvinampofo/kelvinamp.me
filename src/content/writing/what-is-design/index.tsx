@@ -1,4 +1,3 @@
-import Heading from "../../../components/heading/Heading";
 import Separator from "../../../components/separator/Separator";
 
 import type { ContentEntryMetadata } from "../../collection";
@@ -12,7 +11,6 @@ export const metadata: ContentEntryMetadata = {
 export default function WhatIsDesign() {
   return (
     <>
-      <Heading>What is Design</Heading>
       <p>Questions by Mme. L. Amic. Answers by Charles Eames.</p>
       <Separator />
       <p>What is your definition of “Design,” Monsieur Eames?</p>

@@ -1,6 +1,4 @@
 import Card from "../../../components/card/Card";
-import Heading from "../../../components/heading/Heading";
-
 import NumericScrubber from "./components/NumericScrubber";
 
 import type { ContentEntryMetadata } from "../../collection";
@@ -14,7 +12,6 @@ export const metadata: ContentEntryMetadata = {
 export default function NumericScrubberEntry() {
   return (
     <>
-      <Heading>Numeric scrubber</Heading>
       <p>
         A re-implementation of Apple’s Math Notes number scrubbing—
         <span data-pointer="only">
