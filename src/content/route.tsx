@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 
-import Page from "../components/page/Page";
-
 import {
   getContentEntries,
   getContentEntryModule,
@@ -10,21 +8,14 @@ import {
 
 type Params = Promise<{ slug: string }>;
 
-// Each route file exports concrete Next handlers, but the repeated loading,
-// page shell, metadata, and static-param behavior lives here
-export function createContentRoute(
-  collection: ContentCollection,
-  { focusMode = false }: { focusMode?: boolean } = {}
-) {
+// each route file exports concrete Next handlers, the repeated entry loading,
+// metadata, and static-param behavior lives here
+export function createContentRoute(collection: ContentCollection) {
   async function ContentPage({ params }: { params: Params }) {
     const { slug } = await params;
     const { default: Entry } = await getContentEntryModule(collection, slug);
 
-    return (
-      <Page backTo={`/${collection}`} focusMode={focusMode}>
-        <Entry />
-      </Page>
-    );
+    return <Entry />;
   }
 
   async function generateStaticParams() {

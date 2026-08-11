@@ -1,6 +1,6 @@
 import { createContentRoute } from "../../../content/route";
 
-const writingRoute = createContentRoute("writing", { focusMode: true });
+const writingRoute = createContentRoute("writing");
 
 export default writingRoute.ContentPage;
 export const generateMetadata = writingRoute.generateMetadata;
