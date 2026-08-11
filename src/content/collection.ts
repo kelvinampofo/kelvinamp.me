@@ -1,14 +1,15 @@
-import { readdir } from "fs/promises";
-
 import { cache } from "react";
 import type { ComponentType } from "react";
 
-export type ContentCollection = "craft" | "writing";
-
-export interface ContentEntryMetadata {
+interface ContentEntryMetadata {
   title: string;
   publishedDate: string;
   description?: string;
+}
+
+interface ContentEntryModule {
+  default: ComponentType;
+  metadata: ContentEntryMetadata;
 }
 
 export interface ContentEntry extends ContentEntryMetadata {
@@ -16,36 +17,28 @@ export interface ContentEntry extends ContentEntryMetadata {
   slug: string;
 }
 
-export interface ContentEntryModule {
-  default: ComponentType;
-  metadata: ContentEntryMetadata;
-}
+const CONTENT_MODULES = {
+  craft: import.meta.glob<ContentEntryModule>("./craft/*/index.tsx"),
+  writing: import.meta.glob<ContentEntryModule>("./writing/*/index.tsx"),
+};
 
-const CONTENT_ROOTS = {
-  craft: "./src/content/craft",
-  writing: "./src/content/writing",
-} satisfies Record<ContentCollection, string>;
+export type ContentCollection = keyof typeof CONTENT_MODULES;
 
 export const getContentEntries = cache(
   async (collection: ContentCollection): Promise<ContentEntry[]> => {
-    // one directory per entry, with index.tsx holding the prose and metadata
-    const directories = await readdir(CONTENT_ROOTS[collection], {
-      withFileTypes: true,
-    });
-
     const entries = await Promise.all(
-      directories
-        .filter((entry) => entry.isDirectory())
-        .map(async (directory): Promise<ContentEntry> => {
-          const slug = directory.name;
-          const { metadata } = await importContentEntryModule(collection, slug);
+      Object.entries(CONTENT_MODULES[collection]).map(
+        async ([path, loadModule]): Promise<ContentEntry> => {
+          const { metadata } = await loadModule();
+          const slug = getSlugFromPath(path);
 
           return {
             id: slug,
             slug,
             ...metadata,
           };
-        })
+        }
+      )
     );
 
     return sortEntries(entries);
@@ -57,16 +50,10 @@ export const getContentEntryModule = cache(
     collection: ContentCollection,
     slug: string
   ): Promise<ContentEntryModule | null> => {
-    // check the index first so only unknown slugs return null, letting a known
-    // entry that fails to import throw so the broken file gets fixed
-    const entries = await getContentEntries(collection);
-    const entryExists = entries.some((entry) => entry.slug === slug);
+    const loadModule =
+      CONTENT_MODULES[collection][`./${collection}/${slug}/index.tsx`];
 
-    if (!entryExists) {
-      return null;
-    }
-
-    return importContentEntryModule(collection, slug);
+    return loadModule ? loadModule() : null;
   }
 );
 
@@ -79,44 +66,12 @@ function sortEntries(entries: ContentEntry[]) {
   });
 }
 
-async function importContentEntryModule(
-  collection: ContentCollection,
-  slug: string
-) {
-  const mod: unknown = await import(`./${collection}/${slug}/index.tsx`);
+function getSlugFromPath(path: string) {
+  const match = path.match(/\/([^/]+)\/index\.tsx$/);
 
-  // TypeScript cannot see what a dynamic content import exports, so validate
-  // the module before returning it as a ContentEntryModule
-  assertContentEntryModule(mod, collection, slug);
-
-  return mod;
-}
-
-function assertContentEntryModule(
-  mod: unknown,
-  collection: ContentCollection,
-  slug: string
-): asserts mod is ContentEntryModule {
-  if (!mod || typeof mod !== "object") {
-    throw new Error(
-      `Content entry ${collection}/${slug} did not export a module.`
-    );
+  if (!match) {
+    throw new Error(`Could not derive a content slug from ${path}.`);
   }
 
-  const candidate = mod as Partial<ContentEntryModule>;
-  const metadata = candidate.metadata;
-  const hasComponent = typeof candidate.default === "function";
-
-  const hasMetadata =
-    !!metadata &&
-    typeof metadata.title === "string" &&
-    typeof metadata.publishedDate === "string" &&
-    (metadata.description === undefined ||
-      typeof metadata.description === "string");
-
-  if (!hasComponent || !hasMetadata) {
-    throw new Error(
-      `Content entry ${collection}/${slug} must export a default component and valid metadata.`
-    );
-  }
+  return match[1];
 }
