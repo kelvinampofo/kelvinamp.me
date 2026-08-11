@@ -1,4 +1,4 @@
-import { createContentRoute } from "../../../utils/content-route";
+import { createContentRoute } from "../../../content/route";
 
 const writingRoute = createContentRoute("writing", { focusMode: true });
 

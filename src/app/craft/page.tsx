@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Heading from "../../components/heading/Heading";
 import List from "../../components/list/List";
 import Page from "../../components/page/Page";
-import { getContentEntries } from "../../utils/content-collection";
+import { getContentEntries } from "../../content/collection";
 
 export const metadata: Metadata = {
   alternates: {

@@ -1,4 +1,4 @@
-import { createContentRoute } from "../../../utils/content-route";
+import { createContentRoute } from "../../../content/route";
 
 const craftRoute = createContentRoute("craft");
 

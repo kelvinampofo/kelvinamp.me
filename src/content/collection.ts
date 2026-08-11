@@ -83,9 +83,7 @@ async function importContentEntryModule(
   collection: ContentCollection,
   slug: string
 ) {
-  const mod: unknown = await import(
-    `../content/${collection}/${slug}/index.tsx`
-  );
+  const mod: unknown = await import(`./${collection}/${slug}/index.tsx`);
 
   // TypeScript cannot see what a dynamic content import exports, so validate
   // the module before returning it as a ContentEntryModule

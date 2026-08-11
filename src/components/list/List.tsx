@@ -3,7 +3,7 @@ import Link from "next/link";
 import type {
   ContentCollection,
   ContentEntry,
-} from "../../utils/content-collection";
+} from "../../content/collection";
 import { formatDate, isAfter, isThisYear, subMonths } from "../../utils/date";
 import Badge from "../badge/Badge";
 

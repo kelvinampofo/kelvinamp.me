@@ -7,7 +7,7 @@ import {
   getContentEntries,
   getContentEntryModule,
   type ContentCollection,
-} from "./content-collection";
+} from "./collection";
 
 type Params = Promise<{ slug: string }>;
 
