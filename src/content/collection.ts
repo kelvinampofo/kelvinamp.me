@@ -13,7 +13,6 @@ interface ContentEntryModule {
 }
 
 export interface ContentEntry extends ContentEntryMetadata {
-  id: string;
   slug: string;
 }
 
@@ -32,11 +31,7 @@ export const getContentEntries = cache(
           const { metadata } = await loadModule();
           const slug = getSlugFromPath(path);
 
-          return {
-            id: slug,
-            slug,
-            ...metadata,
-          };
+          return { slug, ...metadata };
         }
       )
     );

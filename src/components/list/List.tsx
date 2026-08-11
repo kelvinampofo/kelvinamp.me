@@ -1,9 +1,6 @@
 import Link from "next/link";
 
-import type {
-  ContentCollection,
-  ContentEntry,
-} from "../../content/collection";
+import type { ContentCollection, ContentEntry } from "../../content/collection";
 import { formatDate, isAfter, isThisYear, subMonths } from "../../utils/date";
 import Badge from "../badge/Badge";
 
@@ -29,13 +26,13 @@ export default function List({
 }: ListProps) {
   return (
     <ol data-list="unstyled">
-      {entries.map(({ id, slug, title, publishedDate, description }) => {
+      {entries.map(({ slug, title, publishedDate, description }) => {
         const isNew = isAfter(publishedDate, NEW_CONTENT_CUTOFF);
 
         const pathname = `/${collection}/${slug}`;
 
         return (
-          <li key={id} className={styles.item}>
+          <li key={slug} className={styles.item}>
             <Link href={{ pathname }}>
               <div className={styles.summary}>
                 <p>{title}</p>
