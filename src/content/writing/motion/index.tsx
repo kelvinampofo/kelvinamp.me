@@ -1,7 +1,9 @@
 import Heading from "../../../components/heading/Heading";
 import Separator from "../../../components/separator/Separator";
 
-export const metadata = {
+import type { ContentEntryMetadata } from "../../collection";
+
+export const metadata: ContentEntryMetadata = {
   title: "Motion",
   description: "Some thoughts on motion and macOS interaction design.",
   publishedDate: "2023-10-02",

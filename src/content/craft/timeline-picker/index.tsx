@@ -3,7 +3,9 @@ import Heading from "../../../components/heading/Heading";
 
 import TimelinePicker from "./components/TimelinePicker";
 
-export const metadata = {
+import type { ContentEntryMetadata } from "../../collection";
+
+export const metadata: ContentEntryMetadata = {
   title: "Timeline Picker",
   description: "Minimal timeline picker.",
   publishedDate: "2025-06-29",

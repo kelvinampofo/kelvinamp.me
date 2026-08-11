@@ -1,9 +1,10 @@
 import Card from "../../../components/card/Card";
 import Heading from "../../../components/heading/Heading";
+import type { ContentEntryMetadata } from "../../collection";
 
 import HoldToDelete from "./components/HoldToDelete";
 
-export const metadata = {
+export const metadata: ContentEntryMetadata = {
   title: "Hold to Delete",
   description: "“Hold to Delete” interaction.",
   publishedDate: "2024-06-09",

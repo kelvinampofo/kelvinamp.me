@@ -1,7 +1,7 @@
 import { cache } from "react";
 import type { ComponentType } from "react";
 
-interface ContentEntryMetadata {
+export interface ContentEntryMetadata {
   title: string;
   publishedDate: string;
   description?: string;

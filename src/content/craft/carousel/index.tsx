@@ -2,7 +2,9 @@ import Heading from "../../../components/heading/Heading";
 
 import Carousel from "./components/Carousel";
 
-export const metadata = {
+import type { ContentEntryMetadata } from "../../collection";
+
+export const metadata: ContentEntryMetadata = {
   title: "Carousel",
   description: "A minimal CSS based carousel.",
   publishedDate: "2023-08-19",
