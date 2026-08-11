@@ -24,7 +24,7 @@ const CONTENT_MODULES = {
 export type ContentCollection = keyof typeof CONTENT_MODULES;
 
 export const getContentEntries = cache(
-  async (collection: ContentCollection): Promise<ContentEntry[]> => {
+  async (collection: ContentCollection): Promise<readonly ContentEntry[]> => {
     const entries = await Promise.all(
       Object.entries(CONTENT_MODULES[collection]).map(
         async ([path, loadModule]): Promise<ContentEntry> => {
@@ -52,13 +52,10 @@ export const getContentEntryModule = cache(
   }
 );
 
-function sortEntries(entries: ContentEntry[]) {
-  return entries.sort((a, b) => {
-    if (a.publishedDate > b.publishedDate) return -1;
-    if (a.publishedDate < b.publishedDate) return 1;
-
-    return 0;
-  });
+function sortEntries(entries: readonly ContentEntry[]) {
+  return entries.toSorted((a, b) =>
+    b.publishedDate.localeCompare(a.publishedDate)
+  );
 }
 
 function getSlugFromPath(path: string) {
