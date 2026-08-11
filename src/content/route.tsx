@@ -10,8 +10,8 @@ type Params = Promise<{ slug: string }>;
 
 // each route file exports concrete Next handlers, the repeated entry loading,
 // metadata, and static-param behavior lives here
-export function createContentRoute(collection: ContentCollection) {
-  async function ContentPage({ params }: { params: Params }) {
+export function createRoute(collection: ContentCollection) {
+  async function EntryPage({ params }: { params: Params }) {
     const { slug } = await params;
     const { default: Entry } = await getContentEntryModule(collection, slug);
 
@@ -52,7 +52,7 @@ export function createContentRoute(collection: ContentCollection) {
   }
 
   return {
-    ContentPage,
+    EntryPage,
     generateMetadata,
     generateStaticParams,
   };

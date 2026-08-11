@@ -29,14 +29,14 @@ export const getContentEntries = cache(
       Object.entries(CONTENT_MODULES[collection]).map(
         async ([path, loadModule]): Promise<ContentEntry> => {
           const { metadata } = await loadModule();
-          const slug = getSlugFromPath(path);
+          const slug = slugFromPath(path);
 
           return { slug, ...metadata };
         }
       )
     );
 
-    return sortEntries(entries);
+    return sortByNewest(entries);
   }
 );
 
@@ -46,13 +46,13 @@ export const getContentEntryModule = cache(
     CONTENT_MODULES[collection][`./${collection}/${slug}/index.tsx`]()
 );
 
-function sortEntries(entries: readonly ContentEntry[]) {
+function sortByNewest(entries: readonly ContentEntry[]) {
   return entries.toSorted((a, b) =>
     b.publishedDate.localeCompare(a.publishedDate)
   );
 }
 
-function getSlugFromPath(path: string) {
+function slugFromPath(path: string) {
   const match = path.match(/\/([^/]+)\/index\.tsx$/);
 
   if (!match) {

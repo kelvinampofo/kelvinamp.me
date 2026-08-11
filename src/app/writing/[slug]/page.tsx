@@ -1,8 +1,8 @@
-import { createContentRoute } from "../../../content/route";
+import { createRoute } from "../../../content/route";
 
-const writingRoute = createContentRoute("writing");
+const writingRoute = createRoute("writing");
 
-export default writingRoute.ContentPage;
+export default writingRoute.EntryPage;
 export const generateMetadata = writingRoute.generateMetadata;
 export const generateStaticParams = writingRoute.generateStaticParams;
 

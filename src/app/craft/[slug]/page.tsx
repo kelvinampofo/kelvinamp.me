@@ -1,8 +1,8 @@
-import { createContentRoute } from "../../../content/route";
+import { createRoute } from "../../../content/route";
 
-const craftRoute = createContentRoute("craft");
+const craftRoute = createRoute("craft");
 
-export default craftRoute.ContentPage;
+export default craftRoute.EntryPage;
 export const generateMetadata = craftRoute.generateMetadata;
 export const generateStaticParams = craftRoute.generateStaticParams;
 
