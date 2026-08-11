@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 
 import Page from "../components/page/Page";
 
@@ -19,13 +18,7 @@ export function createContentRoute(
 ) {
   async function ContentPage({ params }: { params: Params }) {
     const { slug } = await params;
-    const entryModule = await getContentEntryModule(collection, slug);
-
-    if (!entryModule) {
-      notFound();
-    }
-
-    const { default: Entry } = entryModule;
+    const { default: Entry } = await getContentEntryModule(collection, slug);
 
     return (
       <Page backTo={`/${collection}`} focusMode={focusMode}>
@@ -46,13 +39,8 @@ export function createContentRoute(
     params: Params;
   }): Promise<Metadata> {
     const { slug } = await params;
-    const entryModule = await getContentEntryModule(collection, slug);
-
-    if (!entryModule) {
-      return {};
-    }
-
-    const { title, description } = entryModule.metadata;
+    const { metadata } = await getContentEntryModule(collection, slug);
+    const { title, description } = metadata;
 
     return {
       title,

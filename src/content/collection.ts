@@ -40,16 +40,10 @@ export const getContentEntries = cache(
   }
 );
 
+// routes set dynamicParams = false, so slug is always one of these modules
 export const getContentEntryModule = cache(
-  async (
-    collection: ContentCollection,
-    slug: string
-  ): Promise<ContentEntryModule | null> => {
-    const loadModule =
-      CONTENT_MODULES[collection][`./${collection}/${slug}/index.tsx`];
-
-    return loadModule ? loadModule() : null;
-  }
+  (collection: ContentCollection, slug: string) =>
+    CONTENT_MODULES[collection][`./${collection}/${slug}/index.tsx`]()
 );
 
 function sortEntries(entries: readonly ContentEntry[]) {
