@@ -1,12 +1,7 @@
 import "react";
 
-declare module "*.css";
-declare module "*.module.css" {
-  const classes: { readonly [key: string]: string };
-  export default classes;
-}
-
 declare module "react" {
+  // allow custom properties in JSX style objects
   interface CSSProperties {
     [key: `--${string}`]: string | number;
   }
