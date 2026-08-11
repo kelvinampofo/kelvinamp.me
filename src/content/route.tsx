@@ -31,13 +31,22 @@ export function createContentRoute(collection: ContentCollection) {
   }): Promise<Metadata> {
     const { slug } = await params;
     const { metadata } = await getContentEntryModule(collection, slug);
-    const { title, description } = metadata;
+    const { title, description, publishedDate } = metadata;
+
+    const canonical = `/${collection}/${slug}`;
 
     return {
       title,
       description,
       alternates: {
-        canonical: `/${collection}/${slug}`,
+        canonical,
+      },
+      openGraph: {
+        type: "article",
+        url: canonical,
+        title,
+        description,
+        publishedTime: publishedDate,
       },
     };
   }
