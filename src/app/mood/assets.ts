@@ -1,4 +1,4 @@
-export interface CanvasImage {
+export interface Asset {
   id: string;
   x: number;
   y: number;
@@ -8,13 +8,13 @@ export interface CanvasImage {
   alt: string;
 }
 
-export const CANVAS_IMAGES: CanvasImage[] = [
+export const ASSETS: Asset[] = [
   {
     id: "sketch",
     x: 440,
     y: 200,
     width: 340,
-    height: 400,
+    height: 387,
     src: "/assets/images/mood/sketch.avif",
     alt: "Sketch",
   },
@@ -23,7 +23,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     x: 400,
     y: 580,
     width: 280,
-    height: 220,
+    height: 280,
     src: "/assets/images/mood/bill-atkinson-lisa-polaroids.avif",
     alt: "Polaroids by Bill Atkinson",
   },
@@ -32,7 +32,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     x: 720,
     y: 218,
     width: 380,
-    height: 260,
+    height: 254,
     src: "/assets/images/mood/flow-diagram.avif",
     alt: "Flow diagram",
   },
@@ -41,7 +41,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     x: 800,
     y: 500,
     width: 400,
-    height: 400,
+    height: 382,
     src: "/assets/images/mood/caravaggio.avif",
     alt: "Caravaggio",
   },
@@ -68,7 +68,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     x: 1640,
     y: 180,
     width: 320,
-    height: 430,
+    height: 426,
     src: "/assets/images/mood/neue-haas-grotesk-specimen.avif",
     alt: "Neue Haas Grotesk alphabet specimen poster",
   },
@@ -77,7 +77,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     x: 1580,
     y: 650,
     width: 320,
-    height: 420,
+    height: 399,
     src: "/assets/images/mood/neue-haas-grotesk-refined-spacing.avif",
     alt: "Neue Haas Grotesk comparisons highlighting refined spacing",
   },
@@ -86,7 +86,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     x: 1900,
     y: 200,
     width: 360,
-    height: 360,
+    height: 356,
     src: "/assets/images/mood/neue-haas-grotesk-digital-era.avif",
     alt: "Essay on the digital era of Neue Helvetica with warm quote",
   },
@@ -95,7 +95,7 @@ export const CANVAS_IMAGES: CanvasImage[] = [
     x: 1890,
     y: 640,
     width: 340,
-    height: 420,
+    height: 414,
     src: "/assets/images/mood/neue-haas-grotesk-history.avif",
     alt: "History of Neue Haas Grotesk with Helvetica brochure",
   },

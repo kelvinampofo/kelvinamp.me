@@ -1,8 +1,7 @@
-.canvas {
+.viewport {
   position: absolute;
   inset: 0;
   transform-origin: 0 0;
-  will-change: transform;
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
@@ -13,7 +12,6 @@
   width: 100vw;
   height: 100vh;
   transform-origin: 0 0;
-  will-change: transform;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -26,6 +24,14 @@
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
+  /* hide only until the reveal begins */
+  animation: reveal 1ms linear var(--reveal-delay) backwards;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+  }
 }
 
 .panMode {
@@ -36,7 +42,7 @@
   cursor: grab;
 }
 
-:global(body.gesture-grabbing) .canvas {
+:global(body.gesture-grabbing) .viewport {
   cursor: grabbing;
 }
 
@@ -45,7 +51,13 @@
 }
 
 .image {
-  object-fit: fill;
+  object-fit: contain;
   user-select: none;
   -webkit-user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item {
+    animation: none;
+  }
 }
