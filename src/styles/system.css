@@ -469,8 +469,10 @@
     margin-top: var(--space-10);
   }
 
-  .prose :where(p, li, blockquote) {
-    text-wrap: pretty;
+  @media (min-width: 769px) {
+    .prose :where(p, li, blockquote) {
+      text-wrap: pretty;
+    }
   }
 
   .prose :where(ul, ol)[data-list="unstyled"] {
