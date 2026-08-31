@@ -1,3 +1,4 @@
+import type { Route } from "next";
 import Link from "next/link";
 
 import type { ContentCollection, ContentEntry } from "../../content/collection";
@@ -6,13 +7,17 @@ import Badge from "../badge/Badge";
 
 import styles from "./List.module.css";
 
+export interface ListEntry extends ContentEntry {
+  href?: Route;
+}
+
 // keep render output deterministic for the lifetime of this module - these
 // lists are statically generated, so this is effectively the build timestamp
 const REFERENCE_DATE = new Date();
 const NEW_CONTENT_CUTOFF = subMonths(REFERENCE_DATE, 1);
 
 interface ListProps {
-  entries: readonly ContentEntry[];
+  entries: readonly ListEntry[];
   collection: ContentCollection;
   showDescriptions?: boolean;
   dateFormat: Intl.DateTimeFormatOptions;
@@ -26,14 +31,13 @@ export default function List({
 }: ListProps) {
   return (
     <ol data-list="unstyled">
-      {entries.map(({ slug, title, publishedDate, description }) => {
+      {entries.map(({ slug, href, title, publishedDate, description }) => {
         const isNew = isAfter(publishedDate, NEW_CONTENT_CUTOFF);
-
-        const pathname = `/${collection}/${slug}`;
+        const linkHref = href ?? { pathname: `/${collection}/${slug}` };
 
         return (
           <li key={slug} className={styles.item}>
-            <Link href={{ pathname }}>
+            <Link href={linkHref}>
               <div className={styles.summary}>
                 <p>{title}</p>
                 {showDescriptions && description && (

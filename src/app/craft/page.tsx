@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 import Heading from "../../components/heading/Heading";
-import List from "../../components/list/List";
+import List, { type ListEntry } from "../../components/list/List";
 import Page from "../../components/page/Page";
-import { getContentEntries } from "../../content/collection";
+import { getContentEntries, sortByNewest } from "../../content/collection";
 
 export const metadata: Metadata = {
   alternates: {
@@ -13,8 +13,18 @@ export const metadata: Metadata = {
   description: "A collection of interface and interaction experiments.",
 };
 
+const MOOD_ITEM = {
+  slug: "mood",
+  href: "/mood",
+  title: "Mood",
+  description: "A mood board of random stuff.",
+  publishedDate: "2025-09-06",
+} satisfies ListEntry;
+
 export default async function CraftPage() {
   const entries = await getContentEntries("craft");
+
+  const items = sortByNewest([...entries, MOOD_ITEM]);
 
   return (
     <Page backTo="/">
@@ -23,7 +33,7 @@ export default async function CraftPage() {
         Collection of interfaces <em>&</em> interactions.
       </p>
       <List
-        entries={entries}
+        entries={items}
         collection="craft"
         showDescriptions
         dateFormat={{ month: "long" }}

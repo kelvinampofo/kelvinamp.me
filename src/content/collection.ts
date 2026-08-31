@@ -46,8 +46,10 @@ export const getContentEntryModule = cache(
     CONTENT_MODULES[collection][`./${collection}/${slug}/index.tsx`]()
 );
 
-function sortByNewest(entries: readonly ContentEntry[]) {
-  return entries.toSorted((a, b) =>
+export function sortByNewest<T extends { publishedDate: string }>(
+  items: readonly T[]
+) {
+  return items.toSorted((a, b) =>
     b.publishedDate.localeCompare(a.publishedDate)
   );
 }
