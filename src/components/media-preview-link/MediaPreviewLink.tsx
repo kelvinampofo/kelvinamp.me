@@ -47,7 +47,14 @@ export default function MediaPreviewLink({
   closeDelayMs = CLOSE_DELAY_MS,
 }: MediaPreviewLinkProps) {
   const [open, setOpen] = useState(false);
+  const [hasVideoIntent, setHasVideoIntent] = useState(false);
   const actionsRef = useRef<PreviewCard.Root.Actions>(null);
+
+  function warmVideo() {
+    if (media.type === "video") {
+      setHasVideoIntent(true);
+    }
+  }
 
   return (
     <PreviewCard.Root actionsRef={actionsRef} onOpenChange={setOpen}>
@@ -56,10 +63,12 @@ export default function MediaPreviewLink({
         delay={openDelayMs}
         closeDelay={closeDelayMs}
         className={clsx(styles.trigger, className)}
+        onFocus={warmVideo}
+        onPointerEnter={warmVideo}
       >
         {children}
       </PreviewCard.Trigger>
-      <PreviewCard.Portal>
+      <PreviewCard.Portal keepMounted={media.type === "video"}>
         <PreviewCard.Positioner
           side="top"
           align="center"
@@ -74,11 +83,12 @@ export default function MediaPreviewLink({
                   shortcutsEnabled={open}
                 >
                   <MediaPlayer.Video
+                    active={open}
                     className={styles.video}
                     src={media.src}
                     poster={media.poster}
                     loop={false}
-                    preload="metadata"
+                    preload={hasVideoIntent ? "auto" : "none"}
                     onEnded={() => actionsRef.current?.close()}
                   />
                 </MediaPlayer.Root>

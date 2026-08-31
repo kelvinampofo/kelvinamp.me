@@ -37,8 +37,8 @@
   left: 50%;
   z-index: 4;
   display: grid;
-  width: var(--space-56);
-  height: var(--space-56);
+  width: clamp(var(--space-40), 10%, var(--space-56));
+  aspect-ratio: 1;
   place-items: center;
   color: var(--playback-material-glyph);
   background:
@@ -60,8 +60,8 @@
 
 .playbackIcon {
   display: block;
-  width: var(--space-28);
-  height: var(--space-28);
+  width: 50%;
+  height: 50%;
 }
 
 .playbackIndicator[data-indicator="play"] .playbackIcon {

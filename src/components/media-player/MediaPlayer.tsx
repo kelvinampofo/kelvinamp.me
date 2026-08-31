@@ -2,13 +2,14 @@
 
 import clsx from "clsx";
 import {
+  createContext,
   use,
+  useEffect,
+  useRef,
+  useState,
   type ComponentPropsWithoutRef,
   type RefObject,
   type ReactNode,
-  useRef,
-  createContext,
-  useState,
 } from "react";
 
 import useShortcuts from "../../hooks/useShortcuts";
@@ -19,7 +20,7 @@ import styles from "./MediaPlayer.module.css";
 interface MediaPlayerContextValue {
   videoRef: RefObject<HTMLVideoElement | null>;
   togglePlayback: () => Promise<void>;
-  clearIndicator: () => void;
+  setIndicator: (indicator: IndicatorState) => void;
   indicator: IndicatorState;
 }
 
@@ -33,7 +34,12 @@ interface MediaPlayerIconProps {
 }
 
 type ShortcutHandlers = Parameters<typeof useShortcuts>[0];
-type MediaPlayerVideoProps = Omit<ComponentPropsWithoutRef<"video">, "ref">;
+interface MediaPlayerVideoProps extends Omit<
+  ComponentPropsWithoutRef<"video">,
+  "ref"
+> {
+  active?: boolean;
+}
 type Indicator = "play" | "pause";
 type IndicatorState = Indicator | null;
 
@@ -83,10 +89,6 @@ function Root({
 
   function showIndicator(nextIndicator: Indicator) {
     setIndicator(nextIndicator);
-  }
-
-  function clearIndicator() {
-    setIndicator(null);
   }
 
   function withVideo(action: (video: HTMLVideoElement) => void) {
@@ -261,7 +263,7 @@ function Root({
       value={{
         videoRef,
         togglePlayback,
-        clearIndicator,
+        setIndicator,
         indicator,
       }}
     >
@@ -273,6 +275,7 @@ function Root({
 }
 
 function Video({
+  active,
   autoPlay = true,
   className,
   controls = false,
@@ -283,8 +286,35 @@ function Video({
   preload = "metadata",
   ...props
 }: MediaPlayerVideoProps) {
-  const { videoRef, togglePlayback, clearIndicator, indicator } =
+  const { videoRef, togglePlayback, setIndicator, indicator } =
     useMediaPlayerContext("MediaPlayer.Video");
+  const playbackRef = useRef({ shouldResume: autoPlay, wasActive: false });
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video || active === undefined) return;
+
+    const playback = playbackRef.current;
+
+    if (active) {
+      playback.wasActive = true;
+
+      if (playback.shouldResume) {
+        void playWithoutInterrupting(video);
+      }
+
+      return;
+    }
+
+    if (playback.wasActive) {
+      playback.shouldResume = video.ended || !video.paused;
+    }
+
+    playback.wasActive = false;
+    video.pause();
+    setIndicator(null);
+  }, [active, setIndicator, videoRef]);
 
   return (
     <div className={styles.stage}>
@@ -292,7 +322,7 @@ function Video({
         <video
           {...props}
           ref={videoRef}
-          autoPlay={autoPlay}
+          autoPlay={active === undefined ? autoPlay : false}
           controls={controls}
           loop={loop}
           muted={muted}
@@ -307,14 +337,14 @@ function Video({
           }}
           className={clsx(styles.video, className)}
         />
-        {indicator && (
+        {indicator && active !== false && (
           <div
             aria-hidden
             className={styles.playbackIndicator}
             data-indicator={indicator}
             onAnimationEnd={() => {
               if (indicator === "pause") {
-                clearIndicator();
+                setIndicator(null);
               }
             }}
           >
