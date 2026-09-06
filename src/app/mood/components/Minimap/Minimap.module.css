@@ -1,0 +1,43 @@
+.minimap {
+  position: absolute;
+  right: max(var(--space-16), env(safe-area-inset-right));
+  bottom: max(var(--space-16), env(safe-area-inset-bottom));
+  outline: 1px solid var(--color-grey-6);
+  background: var(--color-grey-2);
+  box-shadow: 0 1px 2px var(--color-grey-alpha-4);
+  overflow: hidden;
+  touch-action: none;
+  cursor: crosshair;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.minimap[data-dragging="true"] {
+  cursor: grabbing;
+}
+
+/* stackOrder grows without bound, so keep it from painting over the camera */
+.scene {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+}
+
+.thumbnail {
+  position: absolute;
+  opacity: 0.85;
+}
+
+.image {
+  object-fit: contain;
+}
+
+.camera {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid var(--color-grey-11);
+  background: var(--color-grey-alpha-3);
+  pointer-events: none;
+  will-change: transform;
+}

@@ -18,6 +18,7 @@ import {
 } from "../../canvas";
 import useDrag from "../../hooks/useDrag";
 import usePanZoom from "../../hooks/usePanZoom";
+import Minimap, { type MinimapHandle } from "../Minimap/Minimap";
 
 import styles from "./MoodBoard.module.css";
 
@@ -43,6 +44,7 @@ export default function MoodBoard() {
 
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const surfaceRef = useRef<HTMLDivElement | null>(null);
+  const minimapRef = useRef<MinimapHandle | null>(null);
 
   const {
     onPointerDown: onDragItem,
@@ -58,6 +60,9 @@ export default function MoodBoard() {
     onPointerEnd: onPanEnd,
     zoomIn,
     zoomOut,
+    startGesture,
+    updateCamera,
+    commitCamera,
   } = usePanZoom({
     viewportRef,
     surfaceRef,
@@ -65,6 +70,7 @@ export default function MoodBoard() {
     tool,
     setCamera,
     cancelDrag,
+    onDraw: (next) => minimapRef.current?.draw(next),
   });
 
   const { toggleFullscreen } = useFullscreen();
@@ -98,61 +104,72 @@ export default function MoodBoard() {
   }, []);
 
   return (
-    <div
-      ref={viewportRef}
-      className={clsx(styles.viewport, { [styles.panMode]: tool === "pan" })}
-      onPointerDown={onPan}
-      onPointerDownCapture={onTouch}
-      onPointerMove={(event) => {
-        onDragMove(event);
-        onPanMove(event);
-      }}
-      onPointerUp={(event) => {
-        onDragEnd(event);
-        onPanEnd(event);
-      }}
-      onPointerCancel={(event) => {
-        onDragEnd(event);
-        onPanEnd(event);
-      }}
-    >
+    <>
       <div
-        ref={surfaceRef}
-        className={styles.surface}
-        style={{
-          transform: toCameraTransform(camera),
+        ref={viewportRef}
+        className={clsx(styles.viewport, { [styles.panMode]: tool === "pan" })}
+        onPointerDown={onPan}
+        onPointerDownCapture={onTouch}
+        onPointerMove={(event) => {
+          onDragMove(event);
+          onPanMove(event);
+        }}
+        onPointerUp={(event) => {
+          onDragEnd(event);
+          onPanEnd(event);
+        }}
+        onPointerCancel={(event) => {
+          onDragEnd(event);
+          onPanEnd(event);
         }}
       >
-        {ASSETS.map(({ id, width, height, src, alt }, index) => {
-          const placement = placements[id];
+        <div
+          ref={surfaceRef}
+          className={styles.surface}
+          style={{
+            transform: toCameraTransform(camera),
+          }}
+        >
+          {ASSETS.map(({ id, width, height, src, alt }, index) => {
+            const placement = placements[id];
 
-          return (
-            <div
-              key={id}
-              data-board-item
-              className={styles.item}
-              onPointerDown={(event) => onDragItem(id, event)}
-              style={{
-                width,
-                height,
-                transform: toItemTransform(placement),
-                zIndex: placement.stackOrder || undefined,
-                "--reveal-delay": `${Math.round(index * REVEAL_INTERVAL_MS)}ms`,
-              }}
-            >
-              <Image
-                src={src}
-                alt={alt}
-                fill
-                sizes={`${width}px`}
-                loading={id === LCP_ITEM_ID ? "eager" : undefined}
-                draggable={false}
-                className={styles.image}
-              />
-            </div>
-          );
-        })}
+            return (
+              <div
+                key={id}
+                data-board-item
+                className={styles.item}
+                onPointerDown={(event) => onDragItem(id, event)}
+                style={{
+                  width,
+                  height,
+                  transform: toItemTransform(placement),
+                  zIndex: placement.stackOrder || undefined,
+                  "--reveal-delay": `${Math.round(index * REVEAL_INTERVAL_MS)}ms`,
+                }}
+              >
+                <Image
+                  src={src}
+                  alt={alt}
+                  fill
+                  sizes={`${width}px`}
+                  loading={id === LCP_ITEM_ID ? "eager" : undefined}
+                  draggable={false}
+                  className={styles.image}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+      <Minimap
+        ref={minimapRef}
+        camera={camera}
+        placements={placements}
+        viewportRef={viewportRef}
+        onDragStart={startGesture}
+        onCameraChange={updateCamera}
+        onDragEnd={commitCamera}
+      />
+    </>
   );
 }

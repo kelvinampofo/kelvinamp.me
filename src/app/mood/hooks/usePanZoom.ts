@@ -39,6 +39,7 @@ interface UsePanZoomOptions {
   tool: Tool;
   setCamera: Dispatch<SetStateAction<Camera>>;
   cancelDrag: () => void;
+  onDraw?: (camera: Camera) => void;
 }
 
 function getPinch(points: Map<number, Point>) {
@@ -62,6 +63,7 @@ export default function usePanZoom({
   tool,
   setCamera,
   cancelDrag,
+  onDraw,
 }: UsePanZoomOptions) {
   const cameraRef = useRef(camera);
   const mousePanRef = useRef<MousePan | null>(null);
@@ -76,6 +78,10 @@ export default function usePanZoom({
     if (surfaceRef.current) {
       surfaceRef.current.style.transform = toCameraTransform(nextCamera);
     }
+
+    // gestures bypass state until they settle, so anything tracking the camera
+    // has to be written here too
+    onDraw?.(nextCamera);
   }
 
   function updateCamera(update: (current: Camera) => Camera) {
@@ -303,6 +309,9 @@ export default function usePanZoom({
   }, [viewportRef]);
 
   return {
+    startGesture,
+    updateCamera,
+    commitCamera,
     onPointerDown,
     onPointerDownCapture,
     onPointerMove,

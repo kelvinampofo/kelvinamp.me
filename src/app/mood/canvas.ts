@@ -81,10 +81,35 @@ export function zoomBy(camera: Camera, anchor: Point, factor: number) {
   return zoomAt(camera, anchor, camera.scale * factor);
 }
 
-export function centreCamera(
+export interface Size {
+  width: number;
+  height: number;
+}
+
+/** The slice of canvas the viewport currently shows. */
+export function getVisibleBounds(camera: Camera, { width, height }: Size) {
+  return {
+    x: -camera.x,
+    y: -camera.y,
+    width: width / camera.scale,
+    height: height / camera.scale,
+  };
+}
+
+/** Puts a canvas point at the centre of the viewport. */
+export function focusCamera(
   camera: Camera,
-  { width, height }: { width: number; height: number }
-) {
+  target: Point,
+  { width, height }: Size
+): Camera {
+  return {
+    ...camera,
+    x: width / (2 * camera.scale) - target.x,
+    y: height / (2 * camera.scale) - target.y,
+  };
+}
+
+export function centreCamera(camera: Camera, { width, height }: Size) {
   return {
     ...camera,
     x:
