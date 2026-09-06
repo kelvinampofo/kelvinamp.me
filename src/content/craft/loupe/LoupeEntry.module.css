@@ -1,0 +1,29 @@
+.demo {
+  width: 100%;
+  min-width: 0;
+}
+
+.desktopNotice {
+  display: none;
+  margin: 0;
+  padding: var(--space-16);
+  color: var(--color-foreground-secondary);
+  font-size: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .demo {
+    display: none;
+  }
+
+  .desktopNotice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-8);
+  }
+
+  .desktopNotice svg {
+    flex-shrink: 0;
+  }
+}
