@@ -24,7 +24,7 @@ import {
 const PIXELS_PER_WHEEL_LINE = 16;
 const WHEEL_COMMIT_DELAY_MS = 120;
 
-interface Pointer extends Point {
+interface TouchPointer extends Point {
   canPan: boolean;
 }
 
@@ -41,11 +41,7 @@ interface UsePanZoomOptions {
   cancelDrag: () => void;
 }
 
-function startsOnItem(target: EventTarget | null) {
-  return target instanceof Element && Boolean(target.closest("[data-board-item]"));
-}
-
-function getPinch(points: Map<number, Pointer>) {
+function getPinch(points: Map<number, Point>) {
   const [first, second] = points.values();
 
   if (!first || !second) return;
@@ -69,7 +65,7 @@ export default function usePanZoom({
 }: UsePanZoomOptions) {
   const cameraRef = useRef(camera);
   const mousePanRef = useRef<MousePan | null>(null);
-  const touchesRef = useRef(new Map<number, Pointer>());
+  const touchesRef = useRef(new Map<number, TouchPointer>());
   const wheelTimerRef = useRef(0);
   const dirtyRef = useRef(false);
 
@@ -161,11 +157,15 @@ export default function usePanZoom({
     if (touches.size === 0) startGesture();
 
     event.currentTarget.setPointerCapture(event.pointerId);
+    const startsOnItem =
+      event.target instanceof Element &&
+      Boolean(event.target.closest("[data-board-item]"));
     touches.set(event.pointerId, {
       ...pointInViewport(event),
-      canPan: !startsOnItem(event.target),
+      canPan: tool === "pan" || !startsOnItem,
     });
 
+    // A second finger switches from moving artwork to navigating the board.
     if (touches.size > 1) {
       cancelDrag();
       touches.forEach((touch) => {
@@ -174,10 +174,8 @@ export default function usePanZoom({
       event.stopPropagation();
     }
 
-    if ([...touches.values()].some(({ canPan }) => canPan)) {
-      document.body.classList.add("gesture-grabbing");
-      event.preventDefault();
-    }
+    // The global grabbing style disables hit testing, blocking a second touch.
+    event.preventDefault();
   }
 
   function moveTouch(event: ReactPointerEvent<HTMLDivElement>) {
@@ -187,8 +185,8 @@ export default function usePanZoom({
     if (!touch) return;
 
     const previousPinch = getPinch(touches);
-    const previousPoint = { x: touch.x, y: touch.y };
-    Object.assign(touch, pointInViewport(event));
+    const nextPoint = pointInViewport(event);
+    touches.set(event.pointerId, { ...nextPoint, canPan: touch.canPan });
 
     const nextPinch = getPinch(touches);
 
@@ -206,11 +204,7 @@ export default function usePanZoom({
       draw(zoomBy(panned, nextPinch.midpoint, factor));
     } else if (touch.canPan) {
       updateCamera((current) =>
-        panCamera(
-          current,
-          previousPoint.x - touch.x,
-          previousPoint.y - touch.y
-        )
+        panCamera(current, touch.x - nextPoint.x, touch.y - nextPoint.y)
       );
     }
   }
@@ -221,11 +215,7 @@ export default function usePanZoom({
     if (!previous || previous.pointerId !== event.pointerId) return;
 
     updateCamera((current) =>
-      panCamera(
-        current,
-        previous.x - event.clientX,
-        previous.y - event.clientY
-      )
+      panCamera(current, previous.x - event.clientX, previous.y - event.clientY)
     );
 
     previous.x = event.clientX;
@@ -244,9 +234,6 @@ export default function usePanZoom({
     if (event.pointerType === "touch") {
       const touches = touchesRef.current;
       touches.delete(event.pointerId);
-      touches.forEach((touch) => {
-        touch.canPan = true;
-      });
 
       if (touches.size > 0) return;
     } else if (mousePanRef.current?.pointerId === event.pointerId) {
