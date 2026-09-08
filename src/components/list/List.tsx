@@ -6,6 +6,7 @@ import { formatDate, isAfter, isThisYear, subMonths } from "../../utils/date";
 import Badge from "../badge/Badge";
 
 import styles from "./List.module.css";
+import ListNavigation from "./ListNavigation";
 
 export interface ListEntry extends ContentEntry {
   href?: Route;
@@ -30,7 +31,7 @@ export default function List({
   dateFormat,
 }: ListProps) {
   return (
-    <ol data-list="unstyled">
+    <ListNavigation>
       {entries.map(({ slug, href, title, publishedDate, description }) => {
         const isNew = isAfter(publishedDate, NEW_CONTENT_CUTOFF);
         const linkHref = href ?? { pathname: `/${collection}/${slug}` };
@@ -57,6 +58,6 @@ export default function List({
           </li>
         );
       })}
-    </ol>
+    </ListNavigation>
   );
 }
