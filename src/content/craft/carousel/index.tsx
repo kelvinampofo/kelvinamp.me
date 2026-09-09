@@ -1,6 +1,6 @@
-import Carousel from "./components/Carousel";
-
 import type { ContentEntryMetadata } from "../../collection";
+
+import Carousel from "./components/Carousel";
 
 export const metadata: ContentEntryMetadata = {
   title: "Carousel",

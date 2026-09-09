@@ -1,7 +1,7 @@
 import Card from "../../../components/card/Card";
-import HoldForSound from "./components/HoldForSound";
-
 import type { ContentEntryMetadata } from "../../collection";
+
+import HoldForSound from "./components/HoldForSound";
 
 export const metadata: ContentEntryMetadata = {
   title: "Hold for Sound",

@@ -1,5 +1,4 @@
 import MediaPreviewLink from "../../../components/media-preview-link/MediaPreviewLink";
-
 import type { ContentEntryMetadata } from "../../collection";
 
 export const metadata: ContentEntryMetadata = {

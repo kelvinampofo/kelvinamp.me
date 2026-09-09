@@ -1,7 +1,7 @@
 import Card from "../../../components/card/Card";
-import Loading from "./components/Loading";
-
 import type { ContentEntryMetadata } from "../../collection";
+
+import Loading from "./components/Loading";
 
 export const metadata: ContentEntryMetadata = {
   title: "Loading Indicators",

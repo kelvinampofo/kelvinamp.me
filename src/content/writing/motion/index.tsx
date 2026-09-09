@@ -1,6 +1,5 @@
 import Heading from "../../../components/heading/Heading";
 import Separator from "../../../components/separator/Separator";
-
 import type { ContentEntryMetadata } from "../../collection";
 
 export const metadata: ContentEntryMetadata = {

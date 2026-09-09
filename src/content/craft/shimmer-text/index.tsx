@@ -1,7 +1,8 @@
 import Card from "../../../components/card/Card";
+import type { ContentEntryMetadata } from "../../collection";
+
 import ShimmerText from "./components/ShimmerText";
 
-import type { ContentEntryMetadata } from "../../collection";
 
 export const metadata: ContentEntryMetadata = {
   title: "Shimmer Text",

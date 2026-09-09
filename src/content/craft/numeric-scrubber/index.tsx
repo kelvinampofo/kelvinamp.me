@@ -1,7 +1,7 @@
 import Card from "../../../components/card/Card";
-import NumericScrubber from "./components/NumericScrubber";
-
 import type { ContentEntryMetadata } from "../../collection";
+
+import NumericScrubber from "./components/NumericScrubber";
 
 export const metadata: ContentEntryMetadata = {
   title: "Numeric scrubber",

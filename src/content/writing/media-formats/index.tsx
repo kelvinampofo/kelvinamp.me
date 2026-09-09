@@ -1,5 +1,4 @@
 import Heading from "../../../components/heading/Heading";
-
 import type { ContentEntryMetadata } from "../../collection";
 
 export const metadata: ContentEntryMetadata = {

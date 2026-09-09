@@ -1,7 +1,7 @@
 import Card from "../../../components/card/Card";
-import ProgressiveBlur from "./components/ProgressiveBlur";
-
 import type { ContentEntryMetadata } from "../../collection";
+
+import ProgressiveBlur from "./components/ProgressiveBlur";
 
 export const metadata: ContentEntryMetadata = {
   title: "Progressive Blur",

@@ -1,6 +1,6 @@
-import Reveal from "./components/Reveal";
-
 import type { ContentEntryMetadata } from "../../collection";
+
+import Reveal from "./components/Reveal";
 
 export const metadata: ContentEntryMetadata = {
   title: "Reveal",

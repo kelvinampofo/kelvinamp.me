@@ -1,7 +1,7 @@
 import Card from "../../../components/card/Card";
-import TimelinePicker from "./components/TimelinePicker";
-
 import type { ContentEntryMetadata } from "../../collection";
+
+import TimelinePicker from "./components/TimelinePicker";
 
 export const metadata: ContentEntryMetadata = {
   title: "Timeline Picker",
