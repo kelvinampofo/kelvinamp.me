@@ -29,7 +29,7 @@ export type Placements = Record<string, Placement>;
 
 export const MIN_SCALE = 0.25;
 export const MAX_SCALE = 3;
-export const INITIAL_SCALE = 1.2;
+export const INITIAL_SCALE = 0.95;
 export const ZOOM_STEP = 1.06;
 export const WHEEL_ZOOM_DAMPING = 0.009;
 
