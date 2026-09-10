@@ -24,11 +24,14 @@
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
-  /* hide only until the reveal begins */
-  animation: reveal 1ms linear var(--reveal-delay) backwards;
 }
 
-@keyframes reveal {
+.surface[data-stagger-state="running"] .item {
+  /* stagger each appearance without fading */
+  animation: stagger-item 1ms step-end var(--stagger-delay) backwards;
+}
+
+@keyframes stagger-item {
   from {
     opacity: 0;
   }
@@ -57,7 +60,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .item {
-    animation: none;
+  .surface[data-stagger-state="running"] .item {
+    animation-delay: 0ms;
   }
 }

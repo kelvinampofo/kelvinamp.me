@@ -7,23 +7,38 @@
   box-shadow: 0 1px 2px var(--color-grey-alpha-4);
   overflow: hidden;
   touch-action: none;
-  cursor: crosshair;
+  cursor: grab;
   user-select: none;
   -webkit-user-select: none;
+  opacity: 0;
+  pointer-events: none;
+  /* pause after the stagger then fade in place */
+  transition: opacity 300ms ease 100ms;
+}
+
+.minimap[data-visible="true"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .minimap {
+    transition: none;
+  }
 }
 
 .minimap[data-dragging="true"] {
   cursor: grabbing;
 }
 
-/* stackOrder grows without bound, so keep it from painting over the camera */
-.scene {
+/* stackOrder grows without bound, so keep it from painting over the viewport indicator */
+.content {
   position: absolute;
   inset: 0;
   isolation: isolate;
 }
 
-.thumbnail {
+.item {
   position: absolute;
   opacity: 0.85;
 }
@@ -32,7 +47,7 @@
   object-fit: contain;
 }
 
-.camera {
+.viewportIndicator {
   position: absolute;
   top: 0;
   left: 0;

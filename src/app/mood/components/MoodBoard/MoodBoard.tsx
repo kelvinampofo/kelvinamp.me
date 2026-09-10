@@ -2,7 +2,13 @@
 
 import clsx from "clsx";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type AnimationEvent,
+} from "react";
 
 import useFullscreen from "../../../../hooks/useFullscreen";
 import useShortcuts from "../../../../hooks/useShortcuts";
@@ -22,14 +28,20 @@ import Minimap, { type MinimapHandle } from "../Minimap/Minimap";
 
 import styles from "./MoodBoard.module.css";
 
-const PREFERRED_REVEAL_INTERVAL_MS = 60;
-const MAX_REVEAL_DELAY_MS = 900;
-const LCP_ITEM_ID = "sketch";
+const PREFERRED_STAGGER_INTERVAL_MS = 40;
+const MAX_STAGGER_DURATION_MS = 800;
 
-// bound the stagger as the board grows
-const REVEAL_INTERVAL_MS = Math.min(
-  PREFERRED_REVEAL_INTERVAL_MS,
-  MAX_REVEAL_DELAY_MS / Math.max(ASSETS.length - 1, 1)
+// the stagger makes each larger arrival an lcp candidate until nasa appears
+const EAGER_ITEM_IDS = new Set([
+  "sketch",
+  "caravaggio",
+  "nasa-spacecraft-markings",
+]);
+
+// cap the stagger as the board grows
+const STAGGER_INTERVAL_MS = Math.min(
+  PREFERRED_STAGGER_INTERVAL_MS,
+  MAX_STAGGER_DURATION_MS / Math.max(ASSETS.length - 1, 1)
 );
 
 const INITIAL_CAMERA: Camera = { x: 0, y: 0, scale: INITIAL_SCALE };
@@ -38,6 +50,9 @@ const INITIAL_PLACEMENTS: Placements = Object.fromEntries(
 );
 
 export default function MoodBoard() {
+  const [staggerState, setStaggerState] = useState<"running" | "complete">(
+    "running"
+  );
   const [camera, setCamera] = useState(INITIAL_CAMERA);
   const [placements, setPlacements] = useState(INITIAL_PLACEMENTS);
   const [tool, setTool] = useState<Tool>("select");
@@ -92,6 +107,21 @@ export default function MoodBoard() {
     { preventDefault: true, modifiers: "Meta", matchBy: "code" }
   );
 
+  useLayoutEffect(() => {
+    const images = Array.from(
+      surfaceRef.current?.querySelectorAll("img") ?? []
+    );
+    const imagesAlreadyComplete = images.every((image) => image.complete);
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    // choose the stagger before paint and let css own its timing
+    if (imagesAlreadyComplete || prefersReducedMotion) {
+      setStaggerState("complete");
+    }
+  }, []);
+
   useEffect(() => {
     const bounds = viewportRef.current?.getBoundingClientRect();
 
@@ -102,6 +132,14 @@ export default function MoodBoard() {
       })
     );
   }, []);
+
+  const staggerComplete = staggerState === "complete";
+
+  function handleStaggerEnd(event: AnimationEvent<HTMLDivElement>) {
+    if (event.target === event.currentTarget) {
+      setStaggerState("complete");
+    }
+  }
 
   return (
     <>
@@ -126,6 +164,7 @@ export default function MoodBoard() {
         <div
           ref={surfaceRef}
           className={styles.surface}
+          data-stagger-state={staggerState}
           style={{
             transform: toCameraTransform(camera),
           }}
@@ -139,12 +178,15 @@ export default function MoodBoard() {
                 data-board-item
                 className={styles.item}
                 onPointerDown={(event) => onDragItem(id, event)}
+                onAnimationEnd={
+                  index === ASSETS.length - 1 ? handleStaggerEnd : undefined
+                }
                 style={{
                   width,
                   height,
                   transform: toItemTransform(placement),
                   zIndex: placement.stackOrder || undefined,
-                  "--reveal-delay": `${Math.round(index * REVEAL_INTERVAL_MS)}ms`,
+                  "--stagger-delay": `${Math.round(index * STAGGER_INTERVAL_MS)}ms`,
                 }}
               >
                 <Image
@@ -152,7 +194,7 @@ export default function MoodBoard() {
                   alt={alt}
                   fill
                   sizes={`${width}px`}
-                  loading={id === LCP_ITEM_ID ? "eager" : undefined}
+                  loading={EAGER_ITEM_IDS.has(id) ? "eager" : undefined}
                   draggable={false}
                   className={styles.image}
                 />
@@ -163,6 +205,7 @@ export default function MoodBoard() {
       </div>
       <Minimap
         ref={minimapRef}
+        revealReady={staggerComplete}
         camera={camera}
         placements={placements}
         viewportRef={viewportRef}

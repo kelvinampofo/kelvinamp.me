@@ -19,6 +19,7 @@ import {
   type Point,
   type Size,
 } from "../../canvas";
+import useMinimapImagesReady from "../../hooks/useMinimapImagesReady";
 
 import styles from "./Minimap.module.css";
 
@@ -35,6 +36,7 @@ export interface MinimapHandle {
 }
 
 interface MinimapProps {
+  revealReady: boolean;
   ref: RefObject<MinimapHandle | null>;
   camera: Camera;
   placements: Placements;
@@ -45,6 +47,7 @@ interface MinimapProps {
 }
 
 export default function Minimap({
+  revealReady,
   ref,
   camera,
   placements,
@@ -53,13 +56,20 @@ export default function Minimap({
   onCameraChange,
   onDragEnd,
 }: MinimapProps) {
-  const cameraRef = useRef<HTMLDivElement | null>(null);
+  const viewportIndicatorRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
   const activePointerIdRef = useRef<number | null>(null);
   const animationFrameIdRef = useRef(0);
   const pendingPointRef = useRef<Point | null>(null);
 
   const [viewport, setViewport] = useState<Size>({ width: 0, height: 0 });
   const [dragging, setDragging] = useState(false);
+  const { minimapImagesReady, checkMinimapImages } = useMinimapImagesReady(
+    contentRef,
+    ASSETS.length
+  );
+
+  const visible = revealReady && minimapImagesReady;
 
   // the board can pan anywhere, so size the minimap around the art rather than a fixed canvas
   const bounds = contentBounds(placements);
@@ -100,7 +110,7 @@ export default function Minimap({
     []
   );
 
-  function getCameraRect(next: Camera) {
+  function getViewportRect(next: Camera) {
     // zooming in shows less of the canvas, so the visible area and its minimap rectangle get smaller
     const visible = getVisibleBounds(next, viewport);
 
@@ -116,10 +126,10 @@ export default function Minimap({
   // update the rectangle directly so it follows gestures before React state catches up
   useImperativeHandle(ref, () => ({
     draw(next) {
-      const element = cameraRef.current;
+      const element = viewportIndicatorRef.current;
       if (!element) return;
 
-      const { x, y, width, height } = getCameraRect(next);
+      const { x, y, width, height } = getViewportRect(next);
 
       element.style.width = `${width}px`;
       element.style.height = `${height}px`;
@@ -200,11 +210,14 @@ export default function Minimap({
     }
   }
 
-  const rect = getCameraRect(camera);
+  const rect = getViewportRect(camera);
 
   return (
     <div
       className={styles.minimap}
+      data-visible={visible}
+      inert={!visible}
+      aria-hidden={!visible}
       data-dragging={dragging}
       style={minimapSize}
       role="presentation"
@@ -214,14 +227,14 @@ export default function Minimap({
       onPointerCancel={handlePointerEnd}
       onLostPointerCapture={handlePointerEnd}
     >
-      <div className={styles.scene}>
+      <div ref={contentRef} className={styles.content}>
         {ASSETS.map(({ id, width, height, src }) => {
           const placement = placements[id];
 
           return (
             <div
               key={id}
-              className={styles.thumbnail}
+              className={styles.item}
               style={{
                 left: (placement.x - bounds.x) * scale,
                 top: (placement.y - bounds.y) * scale,
@@ -234,6 +247,10 @@ export default function Minimap({
                 src={src}
                 alt=""
                 fill
+                loading="eager"
+                fetchPriority="low"
+                onLoad={checkMinimapImages}
+                onError={checkMinimapImages}
                 sizes={`${Math.ceil(width * scale)}px`}
                 draggable={false}
                 className={styles.image}
@@ -243,8 +260,8 @@ export default function Minimap({
         })}
       </div>
       <div
-        ref={cameraRef}
-        className={styles.camera}
+        ref={viewportIndicatorRef}
+        className={styles.viewportIndicator}
         style={{
           width: rect.width,
           height: rect.height,
