@@ -10,6 +10,7 @@ import {
   type RefObject,
 } from "react";
 
+import { afterNextPaint } from "../../../../utils/animation-frame";
 import { ASSETS } from "../../assets";
 import {
   focusCamera,
@@ -27,7 +28,7 @@ const MAX_WIDTH = 264;
 const MAX_HEIGHT = 200;
 const MAX_VIEWPORT_WIDTH_RATIO = 0.45;
 
-// the art sits in a wide band, so extra vertical padding leaves room to show the camera when panning above or below it
+// keep the camera visible above and below the artwork
 const PADDING_X = 80;
 const PADDING_Y = 320;
 
@@ -36,7 +37,7 @@ export interface MinimapHandle {
 }
 
 interface MinimapProps {
-  revealReady: boolean;
+  boardShown: boolean;
   ref: RefObject<MinimapHandle | null>;
   camera: Camera;
   placements: Placements;
@@ -47,7 +48,7 @@ interface MinimapProps {
 }
 
 export default function Minimap({
-  revealReady,
+  boardShown,
   ref,
   camera,
   placements,
@@ -64,25 +65,22 @@ export default function Minimap({
 
   const [viewport, setViewport] = useState<Size>({ width: 0, height: 0 });
   const [dragging, setDragging] = useState(false);
-  const { minimapImagesReady, checkMinimapImages } = useMinimapImagesReady(
-    contentRef,
-    ASSETS.length
-  );
+  const [visible, setVisible] = useState(false);
+  const minimapImagesReady = useMinimapImagesReady(contentRef, ASSETS.length);
 
-  const visible = revealReady && minimapImagesReady;
+  const canReveal = boardShown && minimapImagesReady;
 
-  // the board can pan anywhere, so size the minimap around the art rather than a fixed canvas
+  // size around the artwork because the board has no fixed bounds
   const bounds = contentBounds(placements);
   const availableWidth = viewport.width || MAX_WIDTH;
 
-  // use at most 45% of the viewport width so the minimap leaves room for the board on smaller screens
+  // leave room for the board on narrow viewports
   const maxWidth = Math.min(
     MAX_WIDTH,
     availableWidth * MAX_VIEWPORT_WIDTH_RATIO
   );
 
-  // choose the smaller scale so both dimensions fit their limits without stretching the art
-  // a scale of 1/10 means 100 canvas units become 10 minimap pixels
+  // preserve the artwork's aspect ratio within both size limits
   const scale = Math.min(maxWidth / bounds.width, MAX_HEIGHT / bounds.height);
 
   const minimapSize = {
@@ -105,25 +103,31 @@ export default function Minimap({
     return () => resizeObserver.disconnect();
   }, [viewportRef]);
 
+  // wait for the hidden state to paint even when thumbnails are cached
+  useEffect(() => {
+    if (!canReveal) return;
+
+    return afterNextPaint(() => setVisible(true));
+  }, [canReveal]);
+
   useEffect(
     () => () => window.cancelAnimationFrame(animationFrameIdRef.current),
     []
   );
 
   function getViewportRect(next: Camera) {
-    // zooming in shows less of the canvas, so the visible area and its minimap rectangle get smaller
-    const visible = getVisibleBounds(next, viewport);
+    const visibleBounds = getVisibleBounds(next, viewport);
 
-    // subtract the content bounds origin to measure from the minimap's top left, then scale canvas units into minimap pixels
+    // convert canvas bounds to minimap coordinates
     return {
-      width: visible.width * scale,
-      height: visible.height * scale,
-      x: (visible.x - bounds.x) * scale,
-      y: (visible.y - bounds.y) * scale,
+      width: visibleBounds.width * scale,
+      height: visibleBounds.height * scale,
+      x: (visibleBounds.x - bounds.x) * scale,
+      y: (visibleBounds.y - bounds.y) * scale,
     };
   }
 
-  // update the rectangle directly so it follows gestures before React state catches up
+  // bypass react so the indicator keeps pace with gestures
   useImperativeHandle(ref, () => ({
     draw(next) {
       const element = viewportIndicatorRef.current;
@@ -140,8 +144,7 @@ export default function Minimap({
   function toCanvasPosition(event: PointerEvent<HTMLDivElement>) {
     const rect = event.currentTarget.getBoundingClientRect();
 
-    // subtract the minimap's viewport position to find the pointer inside it, then divide by scale to undo the shrinking
-    // adding the bounds origin turns that distance into a canvas position, so 10 minimap pixels at a scale of 1/10 means 100 canvas units from the origin
+    // convert the pointer from minimap space to canvas space
     return {
       x: bounds.x + (event.clientX - rect.left) / scale,
       y: bounds.y + (event.clientY - rect.top) / scale,
@@ -153,13 +156,13 @@ export default function Minimap({
     pendingPointRef.current = null;
 
     if (point) {
-      // centre the main viewport on the selected canvas point while keeping the current zoom
+      // keep the current zoom while centring the selected point
       onCameraChange((current) => focusCamera(current, point, viewport));
     }
   }
 
   function scheduleFocus(event: PointerEvent<HTMLDivElement>) {
-    // keep the latest pointer position but schedule only one camera update per animation frame
+    // coalesce pointer moves into one camera update per frame
     pendingPointRef.current = toCanvasPosition(event);
     if (animationFrameIdRef.current) return;
 
@@ -172,7 +175,7 @@ export default function Minimap({
   function handlePointerDown(event: PointerEvent<HTMLDivElement>) {
     if (!event.isPrimary || event.button !== 0) return;
 
-    // keep receiving drag events even when the pointer leaves the minimap
+    // keep the drag active outside the minimap
     event.currentTarget.setPointerCapture(event.pointerId);
     activePointerIdRef.current = event.pointerId;
 
@@ -191,7 +194,7 @@ export default function Minimap({
   function handlePointerEnd(event: PointerEvent<HTMLDivElement>) {
     if (activePointerIdRef.current !== event.pointerId) return;
 
-    // apply the final position immediately if release happens before the queued frame runs
+    // flush the release position before the queued frame
     if (event.type === "pointerup") {
       pendingPointRef.current = toCanvasPosition(event);
     }
@@ -249,8 +252,6 @@ export default function Minimap({
                 fill
                 loading="eager"
                 fetchPriority="low"
-                onLoad={checkMinimapImages}
-                onError={checkMinimapImages}
                 sizes={`${Math.ceil(width * scale)}px`}
                 draggable={false}
                 className={styles.image}
@@ -279,14 +280,12 @@ function contentBounds(placements: Placements) {
     height,
   }));
 
-  // find the outer edges of all artwork and add padding on each side
-  // x and y mark each artwork's top left, so adding its width or height gives its opposite edge
+  // include negative artwork positions and pad the camera range
   const minX = Math.min(...boxes.map(({ x }) => x)) - PADDING_X;
   const minY = Math.min(...boxes.map(({ y }) => y)) - PADDING_Y;
   const maxX = Math.max(...boxes.map(({ x, width }) => x + width)) + PADDING_X;
   const maxY =
     Math.max(...boxes.map(({ y, height }) => y + height)) + PADDING_Y;
 
-  // subtract opposite edges to get the full span, including artwork at negative coordinates
   return { x: minX, y: minY, width: maxX - minX, height: maxY - minY };
 }

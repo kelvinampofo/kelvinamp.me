@@ -2,16 +2,11 @@
 
 import clsx from "clsx";
 import Image from "next/image";
-import {
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-  type AnimationEvent,
-} from "react";
+import { useEffect, useRef, useState, type AnimationEvent } from "react";
 
 import useFullscreen from "../../../../hooks/useFullscreen";
 import useShortcuts from "../../../../hooks/useShortcuts";
+import { afterNextPaint } from "../../../../utils/animation-frame";
 import { ASSETS } from "../../assets";
 import {
   centreCamera,
@@ -28,10 +23,13 @@ import Minimap, { type MinimapHandle } from "../Minimap/Minimap";
 
 import styles from "./MoodBoard.module.css";
 
+type StaggerState = "hidden" | "staggering" | "shown";
+
 const PREFERRED_STAGGER_INTERVAL_MS = 40;
 const MAX_STAGGER_DURATION_MS = 800;
+const STAGGER_FALLBACK_GRACE_MS = 250;
 
-// the stagger makes each larger arrival an lcp candidate until nasa appears
+// eager-load the images most likely to become lcp during the stagger
 const EAGER_ITEM_IDS = new Set([
   "sketch",
   "caravaggio",
@@ -50,9 +48,7 @@ const INITIAL_PLACEMENTS: Placements = Object.fromEntries(
 );
 
 export default function MoodBoard() {
-  const [staggerState, setStaggerState] = useState<"running" | "complete">(
-    "running"
-  );
+  const [staggerState, setStaggerState] = useState<StaggerState>("hidden");
   const [camera, setCamera] = useState(INITIAL_CAMERA);
   const [placements, setPlacements] = useState(INITIAL_PLACEMENTS);
   const [tool, setTool] = useState<Tool>("select");
@@ -107,20 +103,20 @@ export default function MoodBoard() {
     { preventDefault: true, modifiers: "Meta", matchBy: "code" }
   );
 
-  useLayoutEffect(() => {
-    const images = Array.from(
-      surfaceRef.current?.querySelectorAll("img") ?? []
-    );
-    const imagesAlreadyComplete = images.every((image) => image.complete);
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+  // wait for the hidden state to paint before starting the stagger
+  useEffect(() => afterNextPaint(() => setStaggerState("staggering")), []);
 
-    // choose the stagger before paint and let css own its timing
-    if (imagesAlreadyComplete || prefersReducedMotion) {
-      setStaggerState("complete");
-    }
-  }, []);
+  useEffect(() => {
+    if (staggerState !== "staggering") return;
+
+    // animationend may not fire in background tabs
+    const timeoutId = window.setTimeout(
+      () => setStaggerState("shown"),
+      MAX_STAGGER_DURATION_MS + STAGGER_FALLBACK_GRACE_MS
+    );
+
+    return () => window.clearTimeout(timeoutId);
+  }, [staggerState]);
 
   useEffect(() => {
     const bounds = viewportRef.current?.getBoundingClientRect();
@@ -133,11 +129,11 @@ export default function MoodBoard() {
     );
   }, []);
 
-  const staggerComplete = staggerState === "complete";
+  const boardShown = staggerState === "shown";
 
   function handleStaggerEnd(event: AnimationEvent<HTMLDivElement>) {
     if (event.target === event.currentTarget) {
-      setStaggerState("complete");
+      setStaggerState("shown");
     }
   }
 
@@ -205,7 +201,7 @@ export default function MoodBoard() {
       </div>
       <Minimap
         ref={minimapRef}
-        revealReady={staggerComplete}
+        boardShown={boardShown}
         camera={camera}
         placements={placements}
         viewportRef={viewportRef}

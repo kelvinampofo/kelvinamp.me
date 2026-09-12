@@ -26,8 +26,8 @@
   -webkit-user-select: none;
 }
 
-.surface[data-stagger-state="running"] .item {
-  /* stagger each appearance without fading */
+.surface[data-stagger-state="staggering"] .item {
+  /* reveal each item at its scheduled time without fading */
   animation: stagger-item 1ms step-end var(--stagger-delay) backwards;
 }
 
@@ -60,7 +60,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .surface[data-stagger-state="running"] .item {
+  .surface[data-stagger-state="staggering"] .item {
     animation-delay: 0ms;
   }
 }
