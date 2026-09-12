@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 
 import Heading from "../components/heading/Heading";
 import Separator from "../components/separator/Separator";
@@ -42,7 +43,9 @@ export default function Home() {
         </ul>
         <Separator data-animate style={{ "--stagger": "5" }} />
         <Contact />
-        <StatusDisplay />
+        <Suspense>
+          <StatusDisplay />
+        </Suspense>
       </article>
     </AnimationController>
   );

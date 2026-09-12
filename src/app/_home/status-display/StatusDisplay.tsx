@@ -1,6 +1,7 @@
 "use client";
 
-import { type KeyboardEvent, type ReactNode, useState } from "react";
+import { type KeyboardEvent, type ReactNode, use, useState } from "react";
+import { browser } from "react-dom";
 
 import { useTime } from "../../../hooks/useTime";
 import { useWindowDimension } from "../../../hooks/useWindowDimension";
@@ -18,12 +19,14 @@ interface StatusItem {
 }
 
 export default function StatusDisplay() {
+  use(browser());
+
   const [activeIndex, setActiveIndex] = useState(0);
 
   const { currentTime, timezoneOffset, timeParts } = useTime();
   const { width, height } = useWindowDimension({ debounceDelay: 100 });
 
-  const userAgent = typeof navigator === "undefined" ? "" : navigator.userAgent;
+  const userAgent = navigator.userAgent;
   const { name, version } = getBrowserInfo(userAgent);
 
   const statusItems: StatusItem[] = [

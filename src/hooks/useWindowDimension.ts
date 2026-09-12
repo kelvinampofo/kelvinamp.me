@@ -1,8 +1,7 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
-
-const IS_SERVER = typeof window === "undefined";
+import { use, useLayoutEffect, useRef, useState } from "react";
+import { browser } from "react-dom";
 
 interface WindowDimension<T extends number | undefined = number | undefined> {
   width: T;
@@ -11,28 +10,20 @@ interface WindowDimension<T extends number | undefined = number | undefined> {
 
 interface UseWindowDimensionOptions {
   debounceDelay?: number | false;
-  initialWidth?: number;
-  initialHeight?: number;
 }
 
 export function useWindowDimension(options: UseWindowDimensionOptions = {}) {
-  const {
-    debounceDelay = false,
-    initialWidth = 0,
-    initialHeight = 0,
-  } = options;
-  const [dimensions, setDimensions] = useState<WindowDimension>(() => {
-    if (IS_SERVER) {
-      return { width: initialWidth, height: initialHeight };
-    }
-    return { width: window.innerWidth, height: window.innerHeight };
-  });
+  use(browser("Window dimensions are only available in the browser."));
+
+  const { debounceDelay = false } = options;
+  const [dimensions, setDimensions] = useState<WindowDimension>(() => ({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  }));
 
   const timerRef = useRef<number | null>(null);
 
   useLayoutEffect(() => {
-    if (IS_SERVER) return;
-
     function updateDimensions() {
       setDimensions({
         width: window.innerWidth,
