@@ -12,7 +12,7 @@
   text-decoration: none;
   transition: color 150ms ease;
   width: 100%;
-  padding: var(--space-10) 0 var(--space-18);
+  padding: var(--space-16) 0;
   margin: 0;
   border-radius: var(--radius-8);
   -webkit-tap-highlight-color: transparent;
@@ -21,8 +21,8 @@
 
 .item > a:focus-visible {
   width: calc(100% + var(--space-20));
-  padding: var(--space-14) var(--space-10);
-  margin: calc(var(--space-4) * -1) calc(var(--space-10) * -1) var(--space-4);
+  padding: var(--space-20) var(--space-10);
+  margin: calc(var(--space-4) * -1) calc(var(--space-10) * -1);
   border-radius: var(--radius-10);
   background: var(--color-background);
 }

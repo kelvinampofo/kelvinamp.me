@@ -112,7 +112,7 @@
     /* https://rsms.me/inter/#features */
     --font-feature-settings: "liga" 1, "calt" 1, "frac", "ss08", "ss07";
 
-    --line-height-base: 1.75;
+    --line-height-base: 1.5;
 
     --typography-heading: var(--font-weight-heading) var(--font-size-base) /
       var(--line-height-base) var(--font-family-sans);
@@ -417,7 +417,7 @@
   }
 
   .prose > :not(:last-child) {
-    margin-bottom: var(--space-28);
+    margin-bottom: var(--space-32);
   }
 
   .prose a {
@@ -466,7 +466,7 @@
   }
 
   .prose :where(ul, ol) li + li {
-    margin-top: var(--space-10);
+    margin-top: var(--space-8);
   }
 
   @media (min-width: 769px) {
@@ -545,7 +545,7 @@
   }
 
   .prose ol[data-footnotes] > :not(:last-child) {
-    margin-bottom: var(--space-12);
+    margin-bottom: var(--space-8);
   }
 
   .prose .sidenote {
@@ -591,7 +591,7 @@
       margin-left: var(--space-24);
       margin-right: calc(-1 * (var(--sidenote-width) + var(--space-24)));
       margin-top: 0;
-      margin-bottom: var(--space-20);
+      margin-bottom: var(--space-16);
     }
   }
 
@@ -681,7 +681,7 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: stretch;
-      gap: var(--space-42);
+      gap: var(--space-32);
     }
 
     .layout-rail {

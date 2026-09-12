@@ -19,7 +19,7 @@
 }
 
 .description {
-  padding: var(--space-10);
+  padding: var(--space-8);
   font-size: 0.75rem;
   color: var(--color-foreground-secondary);
   text-align: center;
