@@ -10,7 +10,6 @@ import {
   type RefObject,
 } from "react";
 
-import { afterNextPaint } from "../../../../utils/animation-frame";
 import { ASSETS } from "../../assets";
 import {
   focusCamera,
@@ -57,21 +56,21 @@ export default function Minimap({
   onCameraChange,
   onDragEnd,
 }: MinimapProps) {
+  const [viewport, setViewport] = useState<Size>({ width: 0, height: 0 });
+  const [dragging, setDragging] = useState(false);
+
   const viewportIndicatorRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const activePointerIdRef = useRef<number | null>(null);
   const animationFrameIdRef = useRef(0);
   const pendingPointRef = useRef<Point | null>(null);
 
-  const [viewport, setViewport] = useState<Size>({ width: 0, height: 0 });
-  const [dragging, setDragging] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const minimapImagesReady = useMinimapImagesReady(contentRef, ASSETS.length);
+  const minimapImagesReady = useMinimapImagesReady(contentRef);
 
-  const canReveal = boardShown && minimapImagesReady;
+  const visible = boardShown && minimapImagesReady;
 
   // size around the artwork because the board has no fixed bounds
-  const bounds = contentBounds(placements);
+  const bounds = getContentBounds(placements);
   const availableWidth = viewport.width || MAX_WIDTH;
 
   // leave room for the board on narrow viewports
@@ -88,6 +87,20 @@ export default function Minimap({
     height: bounds.height * scale,
   };
 
+  // bypass react so the indicator keeps pace with gestures
+  useImperativeHandle(ref, () => ({
+    draw(next) {
+      const element = viewportIndicatorRef.current;
+      if (!element) return;
+
+      const { x, y, width, height } = getViewportRect(next);
+
+      element.style.width = `${width}px`;
+      element.style.height = `${height}px`;
+      element.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    },
+  }));
+
   useEffect(() => {
     const element = viewportRef.current;
     if (!element) return;
@@ -102,13 +115,6 @@ export default function Minimap({
     resizeObserver.observe(element);
     return () => resizeObserver.disconnect();
   }, [viewportRef]);
-
-  // wait for the hidden state to paint even when thumbnails are cached
-  useEffect(() => {
-    if (!canReveal) return;
-
-    return afterNextPaint(() => setVisible(true));
-  }, [canReveal]);
 
   useEffect(
     () => () => window.cancelAnimationFrame(animationFrameIdRef.current),
@@ -126,20 +132,6 @@ export default function Minimap({
       y: (visibleBounds.y - bounds.y) * scale,
     };
   }
-
-  // bypass react so the indicator keeps pace with gestures
-  useImperativeHandle(ref, () => ({
-    draw(next) {
-      const element = viewportIndicatorRef.current;
-      if (!element) return;
-
-      const { x, y, width, height } = getViewportRect(next);
-
-      element.style.width = `${width}px`;
-      element.style.height = `${height}px`;
-      element.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-    },
-  }));
 
   function toCanvasPosition(event: PointerEvent<HTMLDivElement>) {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -273,7 +265,7 @@ export default function Minimap({
   );
 }
 
-function contentBounds(placements: Placements) {
+function getContentBounds(placements: Placements) {
   const boxes = ASSETS.map(({ id, width, height }) => ({
     ...placements[id],
     width,

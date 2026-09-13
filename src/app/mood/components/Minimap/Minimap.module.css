@@ -12,18 +12,28 @@
   -webkit-user-select: none;
   opacity: 0;
   pointer-events: none;
-  /* pause after the stagger then fade in place */
-  transition: opacity 300ms ease 100ms;
 }
 
 .minimap[data-visible="true"] {
   opacity: 1;
   pointer-events: auto;
+  /* start at zero even if the hidden state never painted */
+  animation: minimap-enter 300ms ease 100ms both;
+}
+
+@keyframes minimap-enter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .minimap {
-    transition: none;
+  .minimap[data-visible="true"] {
+    animation: none;
   }
 }
 
@@ -31,7 +41,7 @@
   cursor: grabbing;
 }
 
-/* stackOrder grows without bound, so keep it from painting over the viewport indicator */
+/* keep dragged images below the viewport indicator */
 .content {
   position: absolute;
   inset: 0;

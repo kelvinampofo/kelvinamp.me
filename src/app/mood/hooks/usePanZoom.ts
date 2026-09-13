@@ -39,21 +39,7 @@ interface UsePanZoomOptions {
   tool: Tool;
   setCamera: Dispatch<SetStateAction<Camera>>;
   cancelDrag: () => void;
-  onDraw?: (camera: Camera) => void;
-}
-
-function getPinch(points: Map<number, Point>) {
-  const [first, second] = points.values();
-
-  if (!first || !second) return;
-
-  return {
-    midpoint: {
-      x: (first.x + second.x) / 2,
-      y: (first.y + second.y) / 2,
-    },
-    distance: Math.hypot(second.x - first.x, second.y - first.y),
-  };
+  onDraw: (camera: Camera) => void;
 }
 
 export default function usePanZoom({
@@ -71,6 +57,62 @@ export default function usePanZoom({
   const wheelTimerRef = useRef(0);
   const dirtyRef = useRef(false);
 
+  const onWheel = useEffectEvent((event: WheelEvent) => {
+    event.preventDefault();
+
+    const multiplier =
+      event.deltaMode === WheelEvent.DOM_DELTA_LINE
+        ? PIXELS_PER_WHEEL_LINE
+        : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
+          ? viewportRef.current?.clientHeight || window.innerHeight
+          : 1;
+    const deltaX = event.deltaX * multiplier;
+    const deltaY = event.deltaY * multiplier;
+
+    if (event.metaKey || event.ctrlKey) {
+      updateCamera((current) =>
+        zoomFromWheel(current, pointInViewport(event), deltaY)
+      );
+    } else {
+      updateCamera((current) => panCamera(current, deltaX, deltaY));
+    }
+
+    window.clearTimeout(wheelTimerRef.current);
+    wheelTimerRef.current = window.setTimeout(() => {
+      wheelTimerRef.current = 0;
+      commitCamera();
+    }, WHEEL_COMMIT_DELAY_MS);
+  });
+
+  useEffect(() => {
+    if (!mousePanRef.current && touchesRef.current.size === 0) {
+      cameraRef.current = camera;
+      dirtyRef.current = false;
+    }
+  }, [camera]);
+
+  useEffect(() => {
+    if (tool === "pan") return;
+
+    mousePanRef.current = null;
+    document.body.classList.remove("gesture-grabbing");
+  }, [tool]);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    const touches = touchesRef.current;
+
+    viewport?.addEventListener("wheel", onWheel, { passive: false });
+
+    return () => {
+      viewport?.removeEventListener("wheel", onWheel);
+      document.body.classList.remove("gesture-grabbing");
+      mousePanRef.current = null;
+      touches.clear();
+      window.clearTimeout(wheelTimerRef.current);
+    };
+  }, [viewportRef]);
+
   function draw(nextCamera: Camera) {
     cameraRef.current = nextCamera;
     dirtyRef.current = true;
@@ -79,9 +121,8 @@ export default function usePanZoom({
       surfaceRef.current.style.transform = toCameraTransform(nextCamera);
     }
 
-    // gestures bypass state until they settle, so anything tracking the camera
-    // has to be written here too
-    onDraw?.(nextCamera);
+    // keep the minimap in sync before React state is committed
+    onDraw(nextCamera);
   }
 
   function updateCamera(update: (current: Camera) => Camera) {
@@ -252,62 +293,6 @@ export default function usePanZoom({
     commitCamera();
   }
 
-  useEffect(() => {
-    if (!mousePanRef.current && touchesRef.current.size === 0) {
-      cameraRef.current = camera;
-      dirtyRef.current = false;
-    }
-  }, [camera]);
-
-  useEffect(() => {
-    if (tool === "pan") return;
-
-    mousePanRef.current = null;
-    document.body.classList.remove("gesture-grabbing");
-  }, [tool]);
-
-  const onWheel = useEffectEvent((event: WheelEvent) => {
-    event.preventDefault();
-
-    const multiplier =
-      event.deltaMode === WheelEvent.DOM_DELTA_LINE
-        ? PIXELS_PER_WHEEL_LINE
-        : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
-          ? viewportRef.current?.clientHeight || window.innerHeight
-          : 1;
-    const deltaX = event.deltaX * multiplier;
-    const deltaY = event.deltaY * multiplier;
-
-    if (event.metaKey || event.ctrlKey) {
-      updateCamera((current) =>
-        zoomFromWheel(current, pointInViewport(event), deltaY)
-      );
-    } else {
-      updateCamera((current) => panCamera(current, deltaX, deltaY));
-    }
-
-    window.clearTimeout(wheelTimerRef.current);
-    wheelTimerRef.current = window.setTimeout(() => {
-      wheelTimerRef.current = 0;
-      commitCamera();
-    }, WHEEL_COMMIT_DELAY_MS);
-  });
-
-  useEffect(() => {
-    const viewport = viewportRef.current;
-    const touches = touchesRef.current;
-
-    viewport?.addEventListener("wheel", onWheel, { passive: false });
-
-    return () => {
-      viewport?.removeEventListener("wheel", onWheel);
-      document.body.classList.remove("gesture-grabbing");
-      mousePanRef.current = null;
-      touches.clear();
-      window.clearTimeout(wheelTimerRef.current);
-    };
-  }, [viewportRef]);
-
   return {
     startGesture,
     updateCamera,
@@ -318,5 +303,19 @@ export default function usePanZoom({
     onPointerEnd,
     zoomIn: () => zoom(ZOOM_STEP),
     zoomOut: () => zoom(1 / ZOOM_STEP),
+  };
+}
+
+function getPinch(points: Map<number, Point>) {
+  const [first, second] = points.values();
+
+  if (!first || !second) return;
+
+  return {
+    midpoint: {
+      x: (first.x + second.x) / 2,
+      y: (first.y + second.y) / 2,
+    },
+    distance: Math.hypot(second.x - first.x, second.y - first.y),
   };
 }

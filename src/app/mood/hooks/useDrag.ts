@@ -16,7 +16,7 @@ import {
   type Tool,
 } from "../canvas";
 
-const DEFAULT_DRAG_THRESHOLD_PX = 10;
+const DRAG_THRESHOLD_PX = 10;
 
 interface DragState {
   isDragging: boolean;
@@ -34,11 +34,6 @@ interface UseDragOptions {
   placements: Placements;
   setPlacements: Dispatch<SetStateAction<Placements>>;
   tool: Tool;
-  dragThresholdPx?: number;
-}
-
-function isPrimaryPointer(event: { button: number; ctrlKey: boolean }) {
-  return event.button === 0 && !event.ctrlKey;
 }
 
 export default function useDrag({
@@ -46,10 +41,11 @@ export default function useDrag({
   placements,
   setPlacements,
   tool,
-  dragThresholdPx = DEFAULT_DRAG_THRESHOLD_PX,
 }: UseDragOptions) {
   const dragRef = useRef<DragState | null>(null);
   const frameRef = useRef(0);
+
+  useEffect(() => () => window.cancelAnimationFrame(frameRef.current), []);
 
   function cancel() {
     const drag = dragRef.current;
@@ -129,7 +125,7 @@ export default function useDrag({
     const deltaX = event.clientX - drag.pointerStart.x;
     const deltaY = event.clientY - drag.pointerStart.y;
 
-    if (!drag.isDragging && Math.hypot(deltaX, deltaY) < dragThresholdPx) {
+    if (!drag.isDragging && Math.hypot(deltaX, deltaY) < DRAG_THRESHOLD_PX) {
       return;
     }
 
@@ -166,7 +162,9 @@ export default function useDrag({
     }
   }
 
-  useEffect(() => () => window.cancelAnimationFrame(frameRef.current), []);
-
   return { onPointerDown, onPointerMove, onPointerEnd, cancel };
+}
+
+function isPrimaryPointer(event: { button: number; ctrlKey: boolean }) {
+  return event.button === 0 && !event.ctrlKey;
 }

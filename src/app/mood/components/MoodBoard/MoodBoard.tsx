@@ -23,8 +23,6 @@ import Minimap, { type MinimapHandle } from "../Minimap/Minimap";
 
 import styles from "./MoodBoard.module.css";
 
-type StaggerState = "hidden" | "staggering" | "shown";
-
 const PREFERRED_STAGGER_INTERVAL_MS = 40;
 const MAX_STAGGER_DURATION_MS = 800;
 const STAGGER_FALLBACK_GRACE_MS = 250;
@@ -47,11 +45,15 @@ const INITIAL_PLACEMENTS: Placements = Object.fromEntries(
   ASSETS.map(({ id, x, y }) => [id, { x, y, stackOrder: 0 }])
 );
 
+type StaggerState = "hidden" | "staggering" | "shown";
+
 export default function MoodBoard() {
   const [staggerState, setStaggerState] = useState<StaggerState>("hidden");
   const [camera, setCamera] = useState(INITIAL_CAMERA);
   const [placements, setPlacements] = useState(INITIAL_PLACEMENTS);
   const [tool, setTool] = useState<Tool>("select");
+
+  const boardShown = staggerState === "shown";
 
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const surfaceRef = useRef<HTMLDivElement | null>(null);
@@ -128,8 +130,6 @@ export default function MoodBoard() {
       })
     );
   }, []);
-
-  const boardShown = staggerState === "shown";
 
   function handleStaggerEnd(event: AnimationEvent<HTMLDivElement>) {
     if (event.target === event.currentTarget) {

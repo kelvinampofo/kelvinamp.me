@@ -2,36 +2,12 @@ import { clamp } from "../../utils/math";
 
 import { ASSETS } from "./assets";
 
-export interface Point {
-  x: number;
-  y: number;
-}
-
-export interface Camera extends Point {
-  scale: number;
-}
-
-export type Tool = "select" | "pan";
-
-export function toItemTransform({ x, y }: Point) {
-  return `translate3d(${x}px, ${y}px, 0)`;
-}
-
-export function toCameraTransform({ x, y, scale }: Camera) {
-  return `scale(${scale}) translate(${x}px, ${y}px)`;
-}
-
-export interface Placement extends Point {
-  stackOrder: number;
-}
-
-export type Placements = Record<string, Placement>;
-
-export const MIN_SCALE = 0.25;
-export const MAX_SCALE = 3;
 export const INITIAL_SCALE = 0.95;
 export const ZOOM_STEP = 1.06;
-export const WHEEL_ZOOM_DAMPING = 0.009;
+
+const MIN_SCALE = 0.25;
+const MAX_SCALE = 3;
+const WHEEL_ZOOM_DAMPING = 0.009;
 
 // leave room for the back link
 const RIGHT_BIAS_PX = 132;
@@ -43,24 +19,36 @@ const CONTENT_BOUNDS = {
   maxY: Math.max(...ASSETS.map(({ y, height }) => y + height)),
 };
 
-function toCanvasSpace(point: Point, camera: Camera) {
-  return {
-    x: point.x / camera.scale - camera.x,
-    y: point.y / camera.scale - camera.y,
-  };
+export interface Point {
+  x: number;
+  y: number;
 }
 
-/** Keeps the zoom anchor fixed. */
-function zoomAt(camera: Camera, anchor: Point, nextScale: number): Camera {
-  const scale = clamp(nextScale, MIN_SCALE, MAX_SCALE);
-  const pointBeforeZoom = toCanvasSpace(anchor, camera);
-  const pointAfterZoom = toCanvasSpace(anchor, { ...camera, scale });
+export interface Size {
+  width: number;
+  height: number;
+}
 
-  return {
-    x: camera.x + (pointAfterZoom.x - pointBeforeZoom.x),
-    y: camera.y + (pointAfterZoom.y - pointBeforeZoom.y),
-    scale,
-  };
+export interface Camera extends Point {
+  scale: number;
+}
+
+interface Placement extends Point {
+  stackOrder: number;
+}
+
+export interface Placements {
+  [id: string]: Placement;
+}
+
+export type Tool = "select" | "pan";
+
+export function toItemTransform({ x, y }: Point) {
+  return `translate3d(${x}px, ${y}px, 0)`;
+}
+
+export function toCameraTransform({ x, y, scale }: Camera) {
+  return `scale(${scale}) translate(${x}px, ${y}px)`;
 }
 
 export function panCamera(camera: Camera, deltaX: number, deltaY: number) {
@@ -79,11 +67,6 @@ export function zoomFromWheel(camera: Camera, anchor: Point, deltaY: number) {
 
 export function zoomBy(camera: Camera, anchor: Point, factor: number) {
   return zoomAt(camera, anchor, camera.scale * factor);
-}
-
-export interface Size {
-  width: number;
-  height: number;
 }
 
 /** The slice of canvas the viewport currently shows. */
@@ -118,5 +101,25 @@ export function centreCamera(camera: Camera, { width, height }: Size) {
     y:
       height / 2 / camera.scale -
       (CONTENT_BOUNDS.minY + CONTENT_BOUNDS.maxY) / 2,
+  };
+}
+
+function toCanvasSpace(point: Point, camera: Camera) {
+  return {
+    x: point.x / camera.scale - camera.x,
+    y: point.y / camera.scale - camera.y,
+  };
+}
+
+/** Keeps the zoom anchor fixed. */
+function zoomAt(camera: Camera, anchor: Point, nextScale: number): Camera {
+  const scale = clamp(nextScale, MIN_SCALE, MAX_SCALE);
+  const pointBeforeZoom = toCanvasSpace(anchor, camera);
+  const pointAfterZoom = toCanvasSpace(anchor, { ...camera, scale });
+
+  return {
+    x: camera.x + (pointAfterZoom.x - pointBeforeZoom.x),
+    y: camera.y + (pointAfterZoom.y - pointBeforeZoom.y),
+    scale,
   };
 }

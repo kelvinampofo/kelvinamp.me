@@ -1,7 +1,6 @@
 .viewport {
   position: absolute;
   inset: 0;
-  transform-origin: 0 0;
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
@@ -12,8 +11,6 @@
   width: 100vw;
   height: 100vh;
   transform-origin: 0 0;
-  user-select: none;
-  -webkit-user-select: none;
 }
 
 .item {
@@ -22,8 +19,10 @@
   top: 0;
   cursor: default;
   touch-action: none;
-  user-select: none;
-  -webkit-user-select: none;
+}
+
+.surface[data-stagger-state="hidden"] .item {
+  opacity: 0;
 }
 
 .surface[data-stagger-state="staggering"] .item {
@@ -37,26 +36,18 @@
   }
 }
 
-.panMode {
-  cursor: grab;
-}
-
+.panMode,
 .panMode .item {
   cursor: grab;
 }
 
-:global(body.gesture-grabbing) .viewport {
-  cursor: grabbing;
-}
-
+:global(body.gesture-grabbing) .viewport,
 :global(body.gesture-grabbing) .item {
   cursor: grabbing;
 }
 
 .image {
   object-fit: contain;
-  user-select: none;
-  -webkit-user-select: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
