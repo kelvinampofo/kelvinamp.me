@@ -3,13 +3,10 @@
   height: auto;
   position: relative;
   width: 100%;
-  margin-left: 0;
-  margin-right: 0;
+  margin: var(--space-32) 0;
   border-radius: var(--radius-8);
   background: var(--color-grey-1);
   outline: 1px solid var(--color-grey-4);
-  margin-top: var(--space-32);
-  margin-bottom: var(--space-32);
 }
 
 @media (max-width: 767px) {
@@ -22,6 +19,7 @@
 .navigationSlot {
   display: none;
   align-items: center;
+  padding-inline: var(--space-6);
 }
 
 @media (min-width: 768px) {
@@ -43,7 +41,7 @@
   height: 300px;
   overflow-x: auto;
   overscroll-behavior-x: contain;
-  padding: var(--space-16) 0 var(--space-32);
+  padding: var(--space-16) 0;
   scroll-behavior: smooth;
 }
 
@@ -51,27 +49,32 @@
   .list {
     height: 600px;
     scroll-snap-type: x mandatory;
-    padding-bottom: var(--space-48);
-  }
-}
-@media (min-width: 1024px) {
-  .list {
-    height: 600px;
-    padding-bottom: var(--space-48);
-    padding-top: var(--space-32);
+    padding-block: var(--space-24);
   }
 }
 
 .navigationButton {
-  border-radius: var(--radius-2);
-  margin: 0 var(--space-8);
+  display: grid;
+  width: var(--space-36);
+  height: var(--space-36);
+  place-items: center;
+  border-radius: 50%;
   color: var(--color-foreground-secondary);
-  transition: color var(--duration-hover);
+  transition:
+    color var(--duration-hover),
+    background-color var(--duration-hover);
   cursor: pointer;
 }
+
 .navigationButton:hover:not(:disabled) {
   color: var(--color-foreground);
+  background: var(--color-grey-alpha-4);
 }
+
+.navigationButton:focus-visible {
+  border-radius: 50%;
+}
+
 .navigationButton:disabled {
   cursor: not-allowed;
   color: var(--color-grey-8);
@@ -80,6 +83,7 @@
 .previousCursor {
   cursor: w-resize;
 }
+
 .nextCursor {
   cursor: e-resize;
 }

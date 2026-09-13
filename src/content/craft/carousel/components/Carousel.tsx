@@ -135,12 +135,13 @@ export default function Carousel() {
     <div className={styles.carousel}>
       <div className={styles.navigationSlot}>
         <button
+          type="button"
           onClick={() => handleSlideChange(currentSlide - 1)}
           disabled={isAtStartOfSlide}
           className={styles.navigationButton}
+          aria-label="Previous slide"
         >
           <Chevron direction="left" size={20} aria-hidden />
-          <span className="sr-only">Previous slide</span>
         </button>
       </div>
       <ul
@@ -152,6 +153,7 @@ export default function Carousel() {
         onScroll={(event) => {
           setSlidePosition(event.currentTarget.scrollLeft);
         }}
+        tabIndex={-1}
         className={clsx(styles.list, cursorClasses)}
       >
         {slides.map(({ title, image, alt, author, isPriority }) => (
@@ -167,12 +169,13 @@ export default function Carousel() {
       </ul>
       <div className={styles.navigationSlot}>
         <button
+          type="button"
           onClick={() => handleSlideChange(currentSlide + 1)}
           disabled={isAtEndOfSlide}
           className={styles.navigationButton}
+          aria-label="Next slide"
         >
           <Chevron direction="right" size={20} aria-hidden />
-          <span className="sr-only">Next slide</span>
         </button>
       </div>
     </div>
