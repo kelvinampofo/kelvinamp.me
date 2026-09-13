@@ -18,7 +18,7 @@
   opacity: 1;
   pointer-events: auto;
   /* start at zero even if the hidden state never painted */
-  animation: minimap-enter 300ms ease 100ms both;
+  animation: minimap-enter 300ms ease-in-out both;
 }
 
 @keyframes minimap-enter {
