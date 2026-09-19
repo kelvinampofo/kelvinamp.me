@@ -28,7 +28,7 @@ const TICK_COUNT = 11;
 const TICK_OFFSET = Math.floor(TICK_COUNT / 2);
 
 // controls for sensitivity (higher = more sensitive)
-const WHEEL_SENSITIVITY = 0.12;
+const WHEEL_SENSITIVITY = 0.2;
 const DRAG_SENSITIVITY = 0.25;
 
 // smoothing factor for drag velocity (1 = no smoothing)
