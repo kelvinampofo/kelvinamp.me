@@ -74,7 +74,7 @@ export default function StatusDisplay() {
       data-animate
       onKeyDown={handleKeyDown}
       onMouseDown={handleShowNextItem}
-      style={{ "--stagger": "7" }}
+      style={{ "--stagger": "6" }}
     >
       {activeStatusItem.render()}
     </div>

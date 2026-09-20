@@ -369,29 +369,25 @@
     }
 
     [data-animate] {
-      --delay: 100ms;
+      --delay: 120ms;
       --stagger: 0;
 
-      --transition-duration: 500ms;
-      --transition-easing: ease;
-      --transition-delay: calc(var(--stagger) * var(--delay));
-
-      opacity: 1;
-      transform: translateY(0);
-      transition:
-        opacity var(--transition-duration) var(--transition-easing)
-          var(--transition-delay),
-        transform var(--transition-duration) var(--transition-easing)
-          var(--transition-delay);
-
-      @starting-style {
-        opacity: 0;
-        transform: translateY(10px);
-      }
+      animation: enter 600ms both;
+      animation-delay: calc(var(--stagger) * var(--delay));
     }
 
     [data-animation-controller="false"] [data-animate] {
-      transition: none;
+      animation: none;
+    }
+  }
+
+  @keyframes enter {
+    from {
+      opacity: 0.01;
+      transform: translateY(10px);
+    }
+
+    to {
       opacity: 1;
       transform: none;
     }
