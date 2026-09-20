@@ -307,6 +307,9 @@
 @layer base {
   :root {
     color-scheme: light dark;
+    /* unprefixed form makes lightningcss re-derive and drop -webkit-, which Safari still needs */
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
   }
 
   * {
