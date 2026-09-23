@@ -379,7 +379,7 @@
       animation-delay: calc(var(--stagger) * var(--delay));
     }
 
-    [data-animation-controller="false"] [data-animate] {
+    [data-skip-animate] [data-animate] {
       animation: none;
     }
   }

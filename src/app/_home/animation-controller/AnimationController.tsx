@@ -10,18 +10,18 @@ export default function AnimationController({
   children,
 }: AnimationControllerProps) {
   useLayoutEffect(() => {
+    const root = document.documentElement;
+
     function handleVisibilityChange() {
       if (document.hidden) {
-        document.documentElement.dataset.animationController = "false";
+        root.toggleAttribute("data-skip-animate", true);
       }
     }
 
     const shouldAnimate =
       !document.hidden && !navigator.userActivation.hasBeenActive;
 
-    document.documentElement.dataset.animationController = shouldAnimate
-      ? "true"
-      : "false";
+    root.toggleAttribute("data-skip-animate", !shouldAnimate);
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
