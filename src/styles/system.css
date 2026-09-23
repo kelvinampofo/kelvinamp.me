@@ -419,6 +419,10 @@
     margin-bottom: var(--space-32);
   }
 
+  .prose > :where(h2, h3):not(:last-child) {
+    margin-bottom: var(--space-16);
+  }
+
   .prose a {
     position: relative;
     text-decoration: underline;

@@ -19,7 +19,7 @@ export default function MediaFormats() {
       </p>
       <Heading as="h2">GIF</Heading>
       <ul>
-        <li>8 bits per pixel (256 colours), huge file sizes.</li>
+        <li>8 bits per pixel (256 colours), huge file sizes</li>
         <li>
           good for memes, bad for actual image quality&mdash;avoid for anything
           longer than a few seconds
@@ -59,17 +59,17 @@ export default function MediaFormats() {
         </li>
         <li>
           better than GIF, PNG, and JPEG in most cases&mdash;ideal for the
-          modern web; ensure fallback for older Safari versions (&lt; 14)
+          modern web; ensure a fallback for older Safari versions (&lt; 14)
         </li>
       </ul>
       <Heading as="h2">AVIF</Heading>
       <ul>
         <li>
-          newer format built on AV1 codec to achieve a high compression rate
+          newer format built on the AV1 codec to achieve a high compression rate
           with no sacrifice to video quality
         </li>
         <li>
-          smaller than JPEG/WebP, supports up to 12 bits colour depth, HDR, and
+          smaller than JPEG/WebP, supports up to 12-bit colour depth, HDR, and
           animation
         </li>
         <li>
@@ -92,7 +92,7 @@ export default function MediaFormats() {
         <li>
           use the HTML <code>&lt;picture&gt;</code> element to specify
           fallbacks, allowing the browser to choose a supported format from top
-          to bottom.
+          to bottom
         </li>
       </ul>
       <aside aria-label="This is a code block of an HTML picture element with source fallbacks for HEIC, AVIF, WebP, and JPEG.">

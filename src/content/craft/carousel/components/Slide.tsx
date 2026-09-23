@@ -38,7 +38,7 @@ export default function Slide({
         </picture>
         <figcaption
           className={styles.caption}
-        >{`${title} by, ${author}`}</figcaption>
+        >{`${title} by ${author}`}</figcaption>
       </figure>
     </li>
   );

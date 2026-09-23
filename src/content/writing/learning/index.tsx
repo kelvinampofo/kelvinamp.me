@@ -31,7 +31,7 @@ export default function Learning() {
           everything is a remix of past work.
         </li>
         <li>
-          Time-blocking is not really my thing, calendar white space creates a
+          Time-blocking is not really my thing; calendar white space creates a
           buffer for work + play.
         </li>
         <li>
@@ -46,18 +46,18 @@ export default function Learning() {
           Make things with the time, space, and materials you have at present.
         </li>
         <li>
-          Don’t get stuck on perfection, prioritise speed of process and
+          Don’t get stuck on perfection; prioritise speed of process and
           refinement through iteration and feedback.
         </li>
         <li>
-          Recreate the ideas and ethos of inspiring humans, within the context
-          of my own life.
+          Recreate the ideas and ethos of inspiring humans within the context of
+          my own life.
         </li>
         <li>Growth ≠ linear.</li>
         <li>
           Programming is just like art or playing an instrument. It takes time.
         </li>
-        <li>Sleep is priority.</li>
+        <li>Sleep is a priority.</li>
       </ol>
     </>
   );

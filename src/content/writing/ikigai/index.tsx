@@ -12,7 +12,7 @@ export default function Ikigai() {
     <>
       <p>
         I recently came across the concept of{" "}
-        <a href="https://en.wikipedia.org/wiki/Ikigai">ikigai</a> a Japanese
+        <a href="https://en.wikipedia.org/wiki/Ikigai">ikigai</a>, a Japanese
         philosophy referring to something that gives a person a sense of
         purpose, a reason for being. It involves finding the intersection
         between what you love, what you’re good at, what the world needs, and
@@ -62,7 +62,7 @@ export default function Ikigai() {
       </p>
       <p>
         My goal was to build a place that feels like a home on the internet.
-        I’ll keep iterating over this. You can find the source code{" "}
+        I’ll keep iterating on this. You can find the source code{" "}
         <a href="https://github.com/kelvinampofo/kelvinamp.me">here</a> if
         interested.
       </p>

@@ -4,7 +4,7 @@ import type { ContentEntryMetadata } from "../../collection";
 import NumericScrubber from "./components/NumericScrubber";
 
 export const metadata: ContentEntryMetadata = {
-  title: "Numeric scrubber",
+  title: "Numeric Scrubber",
   description: "Inline numeric scrubber.",
   publishedDate: "2026-01-11",
 };

@@ -1,5 +1,4 @@
 import Heading from "../../../components/heading/Heading";
-import Separator from "../../../components/separator/Separator";
 import type { ContentEntryMetadata } from "../../collection";
 
 export const metadata: ContentEntryMetadata = {
@@ -13,16 +12,16 @@ export default function Motion() {
     <>
       <p>
         I’m really enjoying macOS Sonoma so far. The updated interface of the
-        lock screen and the smooth login transition enhances the overall
-        usability and adds a touch of elegance to the operating system. For me,
-        interaction design like this makes the human-computer interaction feel
+        lock screen and the smooth login transition enhance the overall
+        usability and add a touch of elegance to the operating system. For me,
+        interaction design like this makes human-computer interaction feel
         delightful.
       </p>
       <p>
-        Those seemingly small yet impactful micro-interactions, often go
+        Those seemingly small yet impactful micro-interactions often go
         unnoticed but contribute significantly to the user experience.{" "}
-        <a href="https://family.co/">Family</a> and Apple is an example of
-        companies that implements this well.
+        <a href="https://family.co/">Family</a> and Apple are examples of
+        companies that do this well.
       </p>
       <p>
         However, routine actions that are low in novelty should refrain from
@@ -33,7 +32,6 @@ export default function Motion() {
         experience.
       </p>
       <Heading as="h2">References</Heading>
-      <Separator />
       <ol>
         <li>
           <a href="https://www.apple.com/uk/macos/sonoma/">macOS Sonoma</a>

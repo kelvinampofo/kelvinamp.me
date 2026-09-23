@@ -47,7 +47,7 @@ export const wordEntries = (
     {
       word: "peculiar",
       type: "adjective",
-      definition: "different to what is normal or expected; strange:",
+      definition: "different to what is normal or expected; strange",
     },
     {
       word: "erroneous",
@@ -110,7 +110,7 @@ export const wordEntries = (
     {
       word: "myopic",
       type: "adjective",
-      definition: "short-sighted; lacking foresight, or intellectual insight",
+      definition: "short-sighted; lacking foresight or intellectual insight",
     },
     {
       word: "cognoscente",
@@ -132,7 +132,7 @@ export const wordEntries = (
       word: "mnemonics",
       type: "noun",
       definition:
-        "the study and development of systems for improving and assisting the memory.",
+        "the study and development of systems for improving and assisting the memory",
     },
     {
       word: "insipid",
@@ -197,7 +197,7 @@ export const wordEntries = (
     {
       word: "enamored",
       type: "adjective",
-      definition: "be filled with a feeling of love for",
+      definition: "filled with a feeling of love for",
     },
     {
       word: "corollary",

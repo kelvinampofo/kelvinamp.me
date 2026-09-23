@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   title: "Kelvin Ampofo",
   description:
-    "Software engineer making software with emphasis on human-computer interaction and aesthetic sensibility.",
+    "Software engineer making software with an emphasis on human-computer interaction and aesthetic sensibility.",
 };
 
 export default function Home() {
@@ -26,12 +26,16 @@ export default function Home() {
           Kelvin Ampofo
         </Heading>
         <p data-animate style={{ "--stagger": "1" }}>
-          Making software with emphasis on human-computer interaction and
-          aesthetic sensibility. Insatiable curiosity for{" "}
-          <em>novel interfaces</em>.
+          Making{" "}
+          <span className="text-secondary">
+            (design <em>&</em> engineering)
+          </span>{" "}
+          software with emphasis on human-computer interaction and aesthetic
+          sensibility. An insatiable curiosity for{" "}
+          <em>novel&nbsp;interfaces</em>.
         </p>
         <p data-animate style={{ "--stagger": "2" }}>
-          Read more on <Link href="/now">now</Link> page.
+          Read more on the <Link href="/now">now</Link> page.
         </p>
         <ul className="pages-list" data-animate style={{ "--stagger": "3" }}>
           <li>

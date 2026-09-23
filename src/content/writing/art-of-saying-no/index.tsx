@@ -26,7 +26,7 @@ export default function ArtOfSayingNo() {
       </p>
       <p>
         Saying “no” isn’t about restriction but <em>liberation</em>. It allows
-        me to set boundaries, protect my time and ideas, ensuring that I have
+        me to set boundaries and protect my time and ideas, ensuring that I have
         the mental capacity to invest in the important things.
       </p>
       <p>

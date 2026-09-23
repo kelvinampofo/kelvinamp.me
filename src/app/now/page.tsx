@@ -39,7 +39,7 @@ export default function Now() {
       <blockquote>
         <p>
           To do the useful thing, to say the courageous thing, to contemplate
-          the beautiful thing― that is enough for one man’s life.
+          the beautiful thing―that is enough for one man’s life.
         </p>
       </blockquote>
     </Page>

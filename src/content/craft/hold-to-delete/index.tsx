@@ -16,7 +16,7 @@ export default function HoldToDeleteEntry() {
         Uses <code>clip-path</code> to animate the progress—leveraging{" "}
         <a href="https://en.wikipedia.org/wiki/Hardware_acceleration">
           hardware acceleration
-        </a>
+        </a>{" "}
         for a more efficient interaction.
       </p>
       <p>

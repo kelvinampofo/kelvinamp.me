@@ -61,7 +61,7 @@ export default function Scrolling() {
         </li>
 
         <li>
-          scroll affordance often double as input feedback
+          scroll affordances often double as input feedback
           <ul>
             <li>
               elastic resistance, momentum decay, and boundary feedback are

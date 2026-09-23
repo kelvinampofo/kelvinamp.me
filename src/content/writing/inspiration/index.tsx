@@ -38,9 +38,9 @@ export default function Inspiration() {
       </blockquote>
       <p>
         To me, that quote captures the essence of the <em>creative process</em>.
-        Drawing into what sparks our curiosity, combining them with our personal
-        experiences and references, and slowly reinterpreting them into
-        something that feels like our <em>own</em>.
+        Drawing on what sparks our curiosity, combining it with our personal
+        experiences and references, and slowly reinterpreting it into something
+        that feels like our <em>own</em>.
       </p>
     </>
   );

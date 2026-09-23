@@ -126,15 +126,15 @@ export default function Readme() {
           Code reviews
           <ul>
             <li>
-              I review code for: <i>correctness</i>, <i>design</i>, and{" "}
-              <i>style</i>
+              I review code for <i>correctness</i>, <i>design</i>, and{" "}
+              <i>style</i>.
             </li>
             <li>
               I ask clarifying questions before requesting rework and offer
               diff-ready suggestions where possible.
             </li>
             <li>
-              I only block a PR if the code is not secure and correct—anything
+              I only block a PR if the code isn’t secure or correct—anything
               else is a nit-pick (but usually a valid one).
             </li>
           </ul>
