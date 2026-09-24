@@ -2,8 +2,6 @@
 
 import clsx from "clsx";
 
-import type { TimeParts } from "../../hooks/useTime";
-
 import styles from "./AnalogueClock.module.css";
 
 const SECONDS_PER_MINUTE = 60;
@@ -11,8 +9,14 @@ const HOURS_PER_HALF_DAY = 12;
 const DEGREES_PER_HOUR = 30;
 const DEGREES_PER_MINUTE_OR_SECOND = 6;
 
+interface ClockTimeParts {
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
 interface AnalogueClockProps {
-  timeParts: TimeParts;
+  timeParts: ClockTimeParts;
 }
 
 export default function AnalogueClock({ timeParts }: AnalogueClockProps) {
@@ -42,7 +46,7 @@ export default function AnalogueClock({ timeParts }: AnalogueClockProps) {
 
 interface ClockHandProps {
   rotation: number;
-  type: Exclude<keyof TimeParts, "milliseconds">;
+  type: keyof ClockTimeParts;
 }
 
 function ClockHand({ rotation, type }: ClockHandProps) {

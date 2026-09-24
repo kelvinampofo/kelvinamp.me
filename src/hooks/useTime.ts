@@ -1,128 +1,76 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-export interface TimeParts {
-  hours: number;
-  minutes: number;
-  seconds: number;
-  milliseconds: number;
-}
-
-export interface UseTimeOptions {
+interface UseTimeOptions {
   timeZone?: Intl.DateTimeFormatOptions["timeZone"];
-}
-
-export interface UseTimeResult {
-  currentTime: string;
-  timezoneOffset: string;
-  currentDate: Date | null;
-  timeParts: TimeParts;
+  enabled?: boolean;
 }
 
 type DateTimePartType = "hour" | "minute" | "second";
-type TimeZoneNameStyle = Intl.DateTimeFormatOptions["timeZoneName"];
-
-const TWO_DIGITS = 2;
-const DECIMAL_RADIX = 10;
-const MILLISECONDS_PER_SECOND = 1000;
 
 export function useTime({
   timeZone = "Europe/London",
-}: UseTimeOptions = {}): UseTimeResult {
+  enabled = true,
+}: UseTimeOptions = {}) {
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
 
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
   useEffect(() => {
-    // scheduleNextTick aligns updates to exact wall-clock second boundaries
-    // (e.g. hh:mm:ss.000) to avoid setInterval drift over time
-    function scheduleTick(delay: number) {
-      timeoutRef.current = setTimeout(() => {
-        setCurrentDate(new Date());
+    if (!enabled) return;
 
-        const elapsedInCurrentSecond = Date.now() % MILLISECONDS_PER_SECOND;
-        const remainingToNextSecond =
-          MILLISECONDS_PER_SECOND - elapsedInCurrentSecond;
-        const nextDelay = remainingToNextSecond || MILLISECONDS_PER_SECOND;
-
-        scheduleTick(nextDelay);
-      }, delay);
+    function updateTime() {
+      setCurrentDate(new Date());
     }
 
-    scheduleTick(0);
+    const initialTimeoutId = setTimeout(updateTime, 0);
+    const intervalId = setInterval(updateTime, 1000);
 
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      clearTimeout(initialTimeoutId);
+      clearInterval(intervalId);
     };
-  }, []);
+  }, [enabled]);
 
-  const date = currentDate;
-
-  function formatToParts(options: Intl.DateTimeFormatOptions) {
-    if (!date) {
-      return [];
-    }
-
-    const formatter = new Intl.DateTimeFormat("en-GB", {
-      timeZone,
-      ...options,
-    });
-
-    const formattedParts = formatter.formatToParts(date);
-
-    return formattedParts;
+  if (!currentDate) {
+    return {
+      currentTime: "00:00:00",
+      timezoneOffset: "",
+      timeParts: { hours: 0, minutes: 0, seconds: 0 },
+    };
   }
 
-  const hmsParts = formatToParts({
+  const clockFormatter = new Intl.DateTimeFormat("en-GB", {
+    timeZone,
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
     hour12: false,
   });
 
+  const timezoneFormatter = new Intl.DateTimeFormat("en-GB", {
+    timeZone,
+    timeZoneName: "shortOffset",
+  });
+
+  const hmsParts = clockFormatter.formatToParts(currentDate);
+
   function parseClockPart(type: DateTimePartType) {
-    const { value } = hmsParts.find((p) => p.type === type) ?? {};
-
-    const parsed = Number.parseInt(value ?? "", DECIMAL_RADIX);
-    const parsedClockPart = Number.isNaN(parsed) ? undefined : parsed;
-
-    return parsedClockPart;
+    const value = hmsParts.find((part) => part.type === type)?.value;
+    return Number(value ?? 0);
   }
 
-  const timeParts: TimeParts = {
-    hours: parseClockPart("hour") ?? 0,
-    minutes: parseClockPart("minute") ?? 0,
-    seconds: parseClockPart("second") ?? 0,
-    milliseconds: date?.getMilliseconds() ?? 0,
+  const timeParts = {
+    hours: parseClockPart("hour"),
+    minutes: parseClockPart("minute"),
+    seconds: parseClockPart("second"),
   };
 
-  function padTimeUnit(value: number) {
-    const unit = String(value).padStart(TWO_DIGITS, "0");
-
-    return unit;
-  }
-
-  const paddedHours = padTimeUnit(timeParts.hours);
-  const paddedMinutes = padTimeUnit(timeParts.minutes);
-  const paddedSeconds = padTimeUnit(timeParts.seconds);
-
-  const currentTime = `${paddedHours}:${paddedMinutes}:${paddedSeconds}`;
-
-  function getTimeZoneLabel(style: TimeZoneNameStyle) {
-    const parts = formatToParts({ timeZoneName: style });
-    const matchedPart = parts.find((p) => p.type === "timeZoneName");
-    const timezoneLabel = matchedPart?.value ?? "";
-
-    return timezoneLabel;
-  }
-
-  const timezoneOffset = getTimeZoneLabel("shortOffset");
+  const timezoneOffset =
+    timezoneFormatter
+      .formatToParts(currentDate)
+      .find((part) => part.type === "timeZoneName")?.value ?? "";
 
   return {
-    currentTime,
+    currentTime: clockFormatter.format(currentDate),
     timezoneOffset,
-    currentDate: date,
     timeParts,
   };
 }

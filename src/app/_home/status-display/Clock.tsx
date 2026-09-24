@@ -1,13 +1,13 @@
 "use client";
 
+import type { ComponentProps } from "react";
+
 import AnalogueClock from "../../../components/analogue-clock/AnalogueClock";
 import Tooltip from "../../../components/tooltip/Tooltip";
-import type { TimeParts } from "../../../hooks/useTime";
 
-interface ClockProps {
+interface ClockProps extends ComponentProps<typeof AnalogueClock> {
   currentTime: string;
   timezoneOffset: string;
-  timeParts: TimeParts;
 }
 
 export default function Clock({

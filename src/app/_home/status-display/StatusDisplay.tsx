@@ -23,7 +23,10 @@ export default function StatusDisplay() {
 
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const { currentTime, timezoneOffset, timeParts } = useTime();
+  const { currentTime, timezoneOffset, timeParts } = useTime({
+    enabled: activeIndex < 2,
+  });
+
   const { width, height } = useWindowDimension({ debounceDelay: 100 });
 
   const userAgent = navigator.userAgent;
