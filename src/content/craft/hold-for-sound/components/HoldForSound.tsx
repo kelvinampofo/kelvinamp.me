@@ -123,32 +123,24 @@ export default function HoldForSound() {
             title="porsche-911.wav"
           >
             <AnimatePresence mode="wait" initial={false}>
-              {!isPressed ? (
-                <m.div
-                  key="default"
-                  variants={contentVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  transition={contentTransition}
-                  className={styles.prompt}
-                >
-                  <PlayIcon size={16} aria-hidden />
-                  <span className="text-sm">Hold for sound</span>
-                </m.div>
-              ) : (
-                <m.div
-                  key="waveform"
-                  variants={contentVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  transition={contentTransition}
-                  className={styles.waveform}
-                >
+              <m.div
+                key={isPressed ? "waveform" : "default"}
+                variants={contentVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                transition={contentTransition}
+                className={isPressed ? styles.waveform : styles.prompt}
+              >
+                {isPressed ? (
                   <Waveform />
-                </m.div>
-              )}
+                ) : (
+                  <>
+                    <PlayIcon size={16} aria-hidden />
+                    <span className="text-sm">Hold for sound</span>
+                  </>
+                )}
+              </m.div>
             </AnimatePresence>
           </m.button>
         </m.div>
