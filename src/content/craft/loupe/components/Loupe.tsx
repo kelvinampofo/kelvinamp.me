@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
-import type { PointerEvent } from "react";
+import { useEffect, useEffectEvent, useId, useRef, useState } from "react";
+import type { PointerEvent, RefObject } from "react";
 
 import { clamp } from "../../../../utils/math";
 
@@ -9,14 +9,11 @@ import styles from "./Loupe.module.css";
 
 const CANVAS_HEIGHT = 220;
 const LENS_RADIUS = 45;
-const LENS_DIAMETER = LENS_RADIUS * 2;
 const MAGNIFICATION = 2;
-
-// at 2x zoom, a square half the original width and height fills the lens, so the content looks twice as big
-const SOURCE_VIEW_SIZE = LENS_DIAMETER / MAGNIFICATION;
 const LENS_EDGE_GAP = 8;
 const LENS_INSET = LENS_RADIUS + LENS_EDGE_GAP;
 const PROSE_VERTICAL_PADDING = 16;
+const PROSE_HEIGHT = CANVAS_HEIGHT - PROSE_VERTICAL_PADDING * 2;
 
 interface Point {
   x: number;
@@ -26,114 +23,30 @@ interface Point {
 interface Drag {
   pointerId: number;
   offset: Point;
+  origin: Point;
 }
 
 interface ProseProps {
   width: number | "100%";
 }
 
+// The magnified copy is laid out once at 2x; dragging only updates transforms.
 export default function Loupe() {
   const id = useId();
 
   const svgRef = useRef<SVGSVGElement>(null);
-  const measuredRef = useRef(false);
+  const lensRef = useRef<SVGGElement>(null);
+  const zoomRef = useRef<SVGGElement>(null);
 
-  const [width, setWidth] = useState(0);
-  const [lensCenter, setLensCenter] = useState<Point>({
-    x: 0,
-    y: CANVAS_HEIGHT / 2,
-  });
+  const { width, isDragging, handlers } = useLens(svgRef, ({ x, y }) => {
+    lensRef.current?.setAttribute("transform", `translate(${x} ${y})`);
 
-  const [drag, setDrag] = useState<Drag | null>(null);
-
-  useEffect(() => {
-    const svg = svgRef.current;
-    if (!svg) return;
-
-    measuredRef.current = false;
-
-    const resizeObserver = new ResizeObserver(([entry]) => {
-      const nextWidth = entry.contentRect.width;
-      if (!nextWidth) return;
-
-      setWidth(nextWidth);
-
-      const firstMeasurement = !measuredRef.current;
-      measuredRef.current = true;
-
-      // centre the lens once we know the canvas width, then preserve the user's position unless a resize pushes it past an edge
-      setLensCenter((current) =>
-        constrainPosition(
-          firstMeasurement
-            ? { x: nextWidth / 2, y: CANVAS_HEIGHT / 2 }
-            : current,
-          nextWidth
-        )
-      );
-    });
-
-    resizeObserver.observe(svg);
-    return () => resizeObserver.disconnect();
-  }, []);
-
-  function toSvgPoint(event: PointerEvent<SVGGElement>) {
-    // the pointer uses browser viewport coordinates, but the lens uses SVG coordinates
-    // this matrix maps SVG coordinates to the viewport, accounting for the SVG's position and scaling
-    const screenTransform = svgRef.current?.getScreenCTM();
-    if (!screenTransform) return null;
-
-    // inverse() reverses the mapping from viewport to SVG and matrixTransform() applies it to the pointer
-    // if the SVG starts 100px from the left with no scaling, a pointer at viewport x=150 becomes SVG x=50
-    const clientPoint = new DOMPoint(event.clientX, event.clientY);
-    const svgPoint = clientPoint.matrixTransform(screenTransform.inverse());
-
-    return svgPoint;
-  }
-
-  function handlePointerDown(event: PointerEvent<SVGGElement>) {
-    if (!event.isPrimary || event.button !== 0) return;
-
-    const point = toSvgPoint(event);
-    if (!point) return;
-
-    // keep receiving drag events even if the pointer moves outside the lens
-    event.currentTarget.setPointerCapture(event.pointerId);
-    setDrag({
-      pointerId: event.pointerId,
-      // remember where the lens was grabbed relative to its centre so grabbing near an edge doesn't make the centre jump to the pointer
-      offset: {
-        x: point.x - lensCenter.x,
-        y: point.y - lensCenter.y,
-      },
-    });
-  }
-
-  function handlePointerMove(event: PointerEvent<SVGGElement>) {
-    if (!drag || drag.pointerId !== event.pointerId) return;
-
-    const point = toSvgPoint(event);
-    if (!point) return;
-
-    // subtract the grab offset to keep the same spot on the lens under the pointer
-    setLensCenter(
-      constrainPosition(
-        { x: point.x - drag.offset.x, y: point.y - drag.offset.y },
-        width
-      )
+    // the lens origin is its centre, so a canvas point p lands at (p - centre) * magnification
+    zoomRef.current?.setAttribute(
+      "transform",
+      `translate(${-x * MAGNIFICATION} ${-y * MAGNIFICATION})`
     );
-  }
-
-  function handlePointerEnd(event: PointerEvent<SVGGElement>) {
-    if (drag?.pointerId !== event.pointerId) return;
-
-    setDrag(null);
-
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId);
-    }
-  }
-
-  const viewBox = `${lensCenter.x - SOURCE_VIEW_SIZE / 2} ${lensCenter.y - SOURCE_VIEW_SIZE / 2} ${SOURCE_VIEW_SIZE} ${SOURCE_VIEW_SIZE}`;
+  });
 
   return (
     <svg
@@ -156,32 +69,30 @@ export default function Loupe() {
       </defs>
       <Prose width="100%" />
       <g
+        ref={lensRef}
         visibility={width ? "visible" : "hidden"}
-        transform={`translate(${lensCenter.x} ${lensCenter.y})`}
         className={styles.lens}
-        data-dragging={drag !== null}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerEnd}
-        onPointerCancel={handlePointerEnd}
-        onLostPointerCapture={handlePointerEnd}
+        data-dragging={isDragging}
+        {...handlers}
       >
+        {/* an offset circle stands in for the drop-shadow filter, which would be re-run on every frame */}
         <circle
-          className={styles.lensSurface}
+          className={styles.lensShadow}
+          r={LENS_RADIUS}
+          cy={1}
+          pointerEvents="none"
+        />
+        <circle
           r={LENS_RADIUS}
           fill="var(--color-grey-2)"
           pointerEvents="none"
         />
         <g clipPath={`url(#${id}-clip)`} pointerEvents="none">
-          <svg
-            x={-LENS_RADIUS}
-            y={-LENS_RADIUS}
-            width={LENS_DIAMETER}
-            height={LENS_DIAMETER}
-            viewBox={viewBox}
-          >
-            <Prose width={width} />
-          </svg>
+          <g ref={zoomRef}>
+            <g transform={`scale(${MAGNIFICATION})`}>
+              <Prose width={width} />
+            </g>
+          </g>
         </g>
         <circle className={styles.lensOutline} r={LENS_RADIUS} />
       </g>
@@ -195,7 +106,7 @@ function Prose({ width }: ProseProps) {
       x="0"
       y={PROSE_VERTICAL_PADDING}
       width={width}
-      height={CANVAS_HEIGHT - PROSE_VERTICAL_PADDING * 2}
+      height={PROSE_HEIGHT}
       aria-hidden="true"
     >
       <div className={styles.prose}>
@@ -207,6 +118,119 @@ function Prose({ width }: ProseProps) {
       </div>
     </foreignObject>
   );
+}
+
+// Keep the lens position in a ref so pointer moves update the DOM without re-rendering.
+function useLens(
+  containerRef: RefObject<SVGSVGElement | null>,
+  positionLens: (center: Point) => void
+) {
+  const centerRef = useRef<Point>({ x: 0, y: CANVAS_HEIGHT / 2 });
+  const dragRef = useRef<Drag | null>(null);
+  const measuredRef = useRef(false);
+
+  const [width, setWidth] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleResize = useEffectEvent((nextWidth: number) => {
+    setWidth(nextWidth);
+
+    const firstMeasurement = !measuredRef.current;
+    measuredRef.current = true;
+
+    // centre the lens once we know the canvas width, then preserve the user's position unless a resize pushes it past an edge
+    centerRef.current = constrainPosition(
+      firstMeasurement
+        ? { x: nextWidth / 2, y: CANVAS_HEIGHT / 2 }
+        : centerRef.current,
+      nextWidth
+    );
+
+    positionLens(centerRef.current);
+  });
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    measuredRef.current = false;
+
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      const nextWidth = entry.contentRect.width;
+      if (!nextWidth) return;
+
+      handleResize(nextWidth);
+    });
+
+    resizeObserver.observe(container);
+    return () => resizeObserver.disconnect();
+  }, [containerRef]);
+
+  function onPointerDown(event: PointerEvent<SVGGElement>) {
+    if (!event.isPrimary || event.button !== 0) return;
+
+    const container = containerRef.current;
+    if (!container) return;
+
+    // the canvas is unscaled, so its bounding box maps viewport coordinates to canvas coordinates
+    // it's read once per drag so moves don't force a layout
+    const rect = container.getBoundingClientRect();
+    const origin = { x: rect.left, y: rect.top };
+
+    // keep receiving drag events even if the pointer moves outside the lens
+    event.currentTarget.setPointerCapture(event.pointerId);
+
+    dragRef.current = {
+      pointerId: event.pointerId,
+      origin,
+      // remember where the lens was grabbed relative to its centre so grabbing near an edge doesn't make the centre jump to the pointer
+      offset: {
+        x: event.clientX - origin.x - centerRef.current.x,
+        y: event.clientY - origin.y - centerRef.current.y,
+      },
+    };
+
+    setIsDragging(true);
+  }
+
+  function onPointerMove(event: PointerEvent<SVGGElement>) {
+    const drag = dragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+
+    // subtract the grab offset to keep the same spot on the lens under the pointer
+    centerRef.current = constrainPosition(
+      {
+        x: event.clientX - drag.origin.x - drag.offset.x,
+        y: event.clientY - drag.origin.y - drag.offset.y,
+      },
+      width
+    );
+
+    positionLens(centerRef.current);
+  }
+
+  function onPointerEnd(event: PointerEvent<SVGGElement>) {
+    if (dragRef.current?.pointerId !== event.pointerId) return;
+
+    dragRef.current = null;
+    setIsDragging(false);
+
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  }
+
+  return {
+    width,
+    isDragging,
+    handlers: {
+      onPointerDown,
+      onPointerMove,
+      onPointerUp: onPointerEnd,
+      onPointerCancel: onPointerEnd,
+      onLostPointerCapture: onPointerEnd,
+    },
+  };
 }
 
 function constrainPosition({ x, y }: Point, width: number): Point {
