@@ -159,10 +159,6 @@ export default function useShortcuts(
     }
   });
 
-  const handleShortcutKeyUp = useEffectEvent(() => {
-    clearDelayTimers();
-  });
-
   useEffect(() => {
     if (typeof window === "undefined" && !target) return;
 
@@ -175,7 +171,7 @@ export default function useShortcuts(
     }
 
     function handleKeyUp() {
-      handleShortcutKeyUp();
+      clearDelayTimers();
     }
 
     targetElement.addEventListener("keydown", handleKeyDown);
