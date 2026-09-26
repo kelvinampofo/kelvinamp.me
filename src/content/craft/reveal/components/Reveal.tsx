@@ -115,11 +115,6 @@ export default function Reveal() {
     requestRevealFrame();
   }
 
-  function handlePointerDown(event: PointerEvent<HTMLDivElement>) {
-    stageRef.current?.setPointerCapture(event.pointerId);
-    handlePointerMove(event);
-  }
-
   function handlePointerMove(event: PointerEvent<HTMLDivElement>) {
     if (pointerRafRef.current !== null) {
       cancelAnimationFrame(pointerRafRef.current);
@@ -133,6 +128,11 @@ export default function Reveal() {
       updateTargetFromPointer(clientX, clientY);
       pointerRafRef.current = null;
     });
+  }
+
+  function handlePointerDown(event: PointerEvent<HTMLDivElement>) {
+    stageRef.current?.setPointerCapture(event.pointerId);
+    handlePointerMove(event);
   }
 
   function handlePointerUp(event: PointerEvent<HTMLDivElement>) {
@@ -153,6 +153,10 @@ export default function Reveal() {
 
   useEffect(() => {
     return () => {
+      if (pointerRafRef.current !== null) {
+        cancelAnimationFrame(pointerRafRef.current);
+      }
+
       if (revealRafRef.current !== null) {
         cancelAnimationFrame(revealRafRef.current);
       }
