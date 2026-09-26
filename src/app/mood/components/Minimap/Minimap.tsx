@@ -87,6 +87,18 @@ export default function Minimap({
     height: bounds.height * scale,
   };
 
+  function getViewportRect(next: Camera) {
+    const visibleBounds = getVisibleBounds(next, viewport);
+
+    // convert canvas bounds to minimap coordinates
+    return {
+      width: visibleBounds.width * scale,
+      height: visibleBounds.height * scale,
+      x: (visibleBounds.x - bounds.x) * scale,
+      y: (visibleBounds.y - bounds.y) * scale,
+    };
+  }
+
   // bypass react so the indicator keeps pace with gestures
   useImperativeHandle(ref, () => ({
     draw(next) {
@@ -120,18 +132,6 @@ export default function Minimap({
     () => () => window.cancelAnimationFrame(animationFrameIdRef.current),
     []
   );
-
-  function getViewportRect(next: Camera) {
-    const visibleBounds = getVisibleBounds(next, viewport);
-
-    // convert canvas bounds to minimap coordinates
-    return {
-      width: visibleBounds.width * scale,
-      height: visibleBounds.height * scale,
-      x: (visibleBounds.x - bounds.x) * scale,
-      y: (visibleBounds.y - bounds.y) * scale,
-    };
-  }
 
   function toCanvasPosition(event: PointerEvent<HTMLDivElement>) {
     const rect = event.currentTarget.getBoundingClientRect();

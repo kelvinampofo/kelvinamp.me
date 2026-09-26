@@ -57,6 +57,53 @@ export default function usePanZoom({
   const wheelTimerRef = useRef(0);
   const dirtyRef = useRef(false);
 
+  function draw(nextCamera: Camera) {
+    cameraRef.current = nextCamera;
+    dirtyRef.current = true;
+
+    if (surfaceRef.current) {
+      surfaceRef.current.style.transform = toCameraTransform(nextCamera);
+    }
+
+    // keep the minimap in sync before React state is committed
+    onDraw(nextCamera);
+  }
+
+  function updateCamera(update: (current: Camera) => Camera) {
+    draw(update(cameraRef.current));
+  }
+
+  function commitCamera() {
+    if (!dirtyRef.current) return;
+
+    dirtyRef.current = false;
+    setCamera(cameraRef.current);
+  }
+
+  function startGesture() {
+    if (wheelTimerRef.current) {
+      window.clearTimeout(wheelTimerRef.current);
+      wheelTimerRef.current = 0;
+    } else {
+      cameraRef.current = camera;
+    }
+  }
+
+  function pointInViewport({
+    clientX,
+    clientY,
+  }: {
+    clientX: number;
+    clientY: number;
+  }) {
+    const bounds = viewportRef.current?.getBoundingClientRect();
+
+    return {
+      x: clientX - (bounds?.left ?? 0),
+      y: clientY - (bounds?.top ?? 0),
+    };
+  }
+
   const onWheel = useEffectEvent((event: WheelEvent) => {
     event.preventDefault();
 
@@ -112,53 +159,6 @@ export default function usePanZoom({
       window.clearTimeout(wheelTimerRef.current);
     };
   }, [viewportRef]);
-
-  function draw(nextCamera: Camera) {
-    cameraRef.current = nextCamera;
-    dirtyRef.current = true;
-
-    if (surfaceRef.current) {
-      surfaceRef.current.style.transform = toCameraTransform(nextCamera);
-    }
-
-    // keep the minimap in sync before React state is committed
-    onDraw(nextCamera);
-  }
-
-  function updateCamera(update: (current: Camera) => Camera) {
-    draw(update(cameraRef.current));
-  }
-
-  function commitCamera() {
-    if (!dirtyRef.current) return;
-
-    dirtyRef.current = false;
-    setCamera(cameraRef.current);
-  }
-
-  function startGesture() {
-    if (wheelTimerRef.current) {
-      window.clearTimeout(wheelTimerRef.current);
-      wheelTimerRef.current = 0;
-    } else {
-      cameraRef.current = camera;
-    }
-  }
-
-  function pointInViewport({
-    clientX,
-    clientY,
-  }: {
-    clientX: number;
-    clientY: number;
-  }) {
-    const bounds = viewportRef.current?.getBoundingClientRect();
-
-    return {
-      x: clientX - (bounds?.left ?? 0),
-      y: clientY - (bounds?.top ?? 0),
-    };
-  }
 
   function viewportCentre() {
     const viewport = viewportRef.current;

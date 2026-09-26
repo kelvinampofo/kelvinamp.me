@@ -141,74 +141,6 @@ export default function NumericScrubber() {
 
   const hasInteractedRef = useRef(false);
 
-  const handleNativeWheel = useEffectEvent((event: WheelEvent) => {
-    // Prevent browser back/forward swipes from hijacking the scrubber gesture
-    if (event.cancelable) {
-      event.preventDefault();
-    }
-
-    stopMomentum();
-
-    hasInteractedRef.current = true;
-
-    // Use the dominant axis so diagonal wheel gestures still feel deliberate
-    const primaryDelta =
-      Math.abs(event.deltaX) > Math.abs(event.deltaY)
-        ? event.deltaX
-        : event.deltaY;
-
-    const adjustedDelta = primaryDelta * WHEEL_SENSITIVITY;
-    const wheelInput = wheelInputRef.current;
-
-    // Buffer fractional wheel movement until it crosses a full tick
-    wheelInput.accumulated += adjustedDelta;
-
-    const steps = Math.trunc(wheelInput.accumulated / TICK_STEP);
-
-    if (steps === 0) {
-      return;
-    }
-
-    wheelInput.accumulated -= steps * TICK_STEP;
-    wheelInput.queue.pendingSteps += steps;
-
-    processStepQueue({
-      queue: wheelInput.queue,
-      maxStepsPerFrame: MAX_TICK_STEPS_PER_FRAME,
-    });
-  });
-
-  useEffect(() => {
-    if (!trackViewport) {
-      return;
-    }
-
-    trackViewport.addEventListener("wheel", handleNativeWheel, {
-      passive: false,
-    });
-
-    return () => {
-      trackViewport.removeEventListener("wheel", handleNativeWheel);
-    };
-  }, [trackViewport]);
-
-  useEffect(() => {
-    const dragInput = dragInputRef.current;
-    const wheelInput = wheelInputRef.current;
-
-    return () => {
-      if (trackFrameRef.current !== null) {
-        cancelAnimationFrame(trackFrameRef.current);
-      }
-
-      cancelStepQueue(wheelInput.queue);
-      cancelStepQueue(dragInput.queue);
-      cancelMomentum();
-
-      gesture.end();
-    };
-  }, []);
-
   function updateValue(nextValue: number) {
     const currentValue = valueRef.current;
 
@@ -301,6 +233,74 @@ export default function NumericScrubber() {
 
     queue.frameId = requestAnimationFrame(stepFrame);
   }
+
+  const handleNativeWheel = useEffectEvent((event: WheelEvent) => {
+    // Prevent browser back/forward swipes from hijacking the scrubber gesture
+    if (event.cancelable) {
+      event.preventDefault();
+    }
+
+    stopMomentum();
+
+    hasInteractedRef.current = true;
+
+    // Use the dominant axis so diagonal wheel gestures still feel deliberate
+    const primaryDelta =
+      Math.abs(event.deltaX) > Math.abs(event.deltaY)
+        ? event.deltaX
+        : event.deltaY;
+
+    const adjustedDelta = primaryDelta * WHEEL_SENSITIVITY;
+    const wheelInput = wheelInputRef.current;
+
+    // Buffer fractional wheel movement until it crosses a full tick
+    wheelInput.accumulated += adjustedDelta;
+
+    const steps = Math.trunc(wheelInput.accumulated / TICK_STEP);
+
+    if (steps === 0) {
+      return;
+    }
+
+    wheelInput.accumulated -= steps * TICK_STEP;
+    wheelInput.queue.pendingSteps += steps;
+
+    processStepQueue({
+      queue: wheelInput.queue,
+      maxStepsPerFrame: MAX_TICK_STEPS_PER_FRAME,
+    });
+  });
+
+  useEffect(() => {
+    if (!trackViewport) {
+      return;
+    }
+
+    trackViewport.addEventListener("wheel", handleNativeWheel, {
+      passive: false,
+    });
+
+    return () => {
+      trackViewport.removeEventListener("wheel", handleNativeWheel);
+    };
+  }, [trackViewport]);
+
+  useEffect(() => {
+    const dragInput = dragInputRef.current;
+    const wheelInput = wheelInputRef.current;
+
+    return () => {
+      if (trackFrameRef.current !== null) {
+        cancelAnimationFrame(trackFrameRef.current);
+      }
+
+      cancelStepQueue(wheelInput.queue);
+      cancelStepQueue(dragInput.queue);
+      cancelMomentum();
+
+      gesture.end();
+    };
+  }, []);
 
   function handleTrackTransitionEnd(event: TransitionEvent<HTMLDivElement>) {
     if (
