@@ -1,22 +1,15 @@
 "use client";
 
-import { type KeyboardEvent, type ReactNode, use, useState } from "react";
+import { type KeyboardEvent, use, useState } from "react";
 import { browser } from "react-dom";
 
 import { useTime } from "../../../hooks/useTime";
 import { useWindowDimension } from "../../../hooks/useWindowDimension";
 import { getBrowserInfo } from "../../../utils/browser-info";
 
-import BrowserInfo from "./BrowserInfo";
 import Clock from "./Clock";
-import CurrentTime from "./CurrentTime";
-import Dimensions from "./Dimensions";
 import Principle from "./Principle";
 import styles from "./StatusDisplay.module.css";
-
-interface StatusItem {
-  render: () => ReactNode;
-}
 
 export default function StatusDisplay() {
   use(browser());
@@ -32,32 +25,21 @@ export default function StatusDisplay() {
   const userAgent = navigator.userAgent;
   const { name, version } = getBrowserInfo(userAgent);
 
-  const statusItems: StatusItem[] = [
-    {
-      render: () => (
-        <Clock
-          currentTime={currentTime}
-          timezoneOffset={timezoneOffset}
-          timeParts={timeParts}
-        />
-      ),
-    },
-    { render: () => <CurrentTime time={currentTime} /> },
-    { render: () => <Dimensions width={width} height={height} /> },
-    { render: () => <BrowserInfo name={name} version={version} /> },
-    { render: () => <Principle /> },
+  const statusItems = [
+    <Clock
+      key="clock"
+      currentTime={currentTime}
+      timezoneOffset={timezoneOffset}
+      timeParts={timeParts}
+    />,
+    currentTime,
+    <span key="dimensions">{`${width}x${height}`}</span>,
+    `${name} ${version}`,
+    <Principle key="principle" />,
   ];
 
-  const totalStatusItems = statusItems.length;
-  if (totalStatusItems === 0) {
-    return;
-  }
-
-  const normalizedActiveIndex = activeIndex % totalStatusItems;
-  const activeStatusItem = statusItems[normalizedActiveIndex];
-
   function handleShowNextItem() {
-    setActiveIndex((currentIndex) => (currentIndex + 1) % totalStatusItems);
+    setActiveIndex((currentIndex) => (currentIndex + 1) % statusItems.length);
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
@@ -79,7 +61,7 @@ export default function StatusDisplay() {
       onMouseDown={handleShowNextItem}
       style={{ "--stagger": "6" }}
     >
-      {activeStatusItem.render()}
+      {statusItems[activeIndex]}
     </div>
   );
 }
