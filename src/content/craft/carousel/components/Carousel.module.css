@@ -4,7 +4,6 @@
   position: relative;
   width: 100%;
   margin: var(--space-32) 0;
-  border-radius: var(--radius-8);
   background: var(--color-grey-1);
   outline: 1px solid var(--color-grey-4);
 }
@@ -60,15 +59,14 @@
   place-items: center;
   border-radius: 50%;
   color: var(--color-foreground-secondary);
-  transition:
-    color var(--duration-hover),
-    background-color var(--duration-hover);
+  transition: color var(--duration-hover);
   cursor: pointer;
 }
 
-.navigationButton:hover:not(:disabled) {
-  color: var(--color-foreground);
-  background: var(--color-grey-alpha-4);
+@media (hover: hover) and (pointer: fine) {
+  .navigationButton:hover:not(:disabled) {
+    color: var(--color-foreground);
+  }
 }
 
 .navigationButton:focus-visible {
