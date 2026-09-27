@@ -18,12 +18,5 @@
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    animation: shimmer 2s linear infinite;
-  }
-}
-
-@keyframes shimmer {
-  to {
-    background-position: -200% 0;
   }
 }
