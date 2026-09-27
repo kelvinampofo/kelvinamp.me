@@ -25,7 +25,7 @@ import Minimap, { type MinimapHandle } from "../Minimap/Minimap";
 import styles from "./MoodBoard.module.css";
 
 const MAX_IMAGE_WAIT_MS = 1500;
-const LOADING_LABEL_DELAY_MS = 250;
+const LOADING_LABEL_DELAY_MS = 100;
 const PREFERRED_STAGGER_INTERVAL_MS = 40;
 const MAX_STAGGER_DURATION_MS = 800;
 const STAGGER_FALLBACK_GRACE_MS = 250;
