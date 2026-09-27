@@ -2,6 +2,8 @@
 
 import { useEffect, useState, type RefObject } from "react";
 
+import { waitForImage } from "../images";
+
 const MAX_WAIT_MS = 5000;
 
 export default function useMinimapImagesReady(
@@ -23,12 +25,14 @@ export default function useMinimapImagesReady(
     }, MAX_WAIT_MS);
 
     async function waitForImages() {
+      // wait for the thumbnails so they appear together
       await Promise.all(
         images.map((image) => waitForImage(image, controller.signal))
       );
 
       clearTimeout(timeoutId);
 
+      // only show the minimap if we are still waiting for it
       if (!controller.signal.aborted) setMinimapImagesReady(true);
       controller.abort();
     }
@@ -42,24 +46,4 @@ export default function useMinimapImagesReady(
   }, [contentRef]);
 
   return minimapImagesReady;
-}
-
-function waitForImage(image: HTMLImageElement, signal: AbortSignal) {
-  return new Promise<void>((resolve) => {
-    async function decode() {
-      try {
-        await image.decode();
-        resolve();
-      } catch {
-        // a source change interrupts decoding, retry when the new image loads
-        if (image.complete && image.naturalWidth === 0) resolve();
-      }
-    }
-
-    image.addEventListener("load", decode, { signal });
-    image.addEventListener("error", () => resolve(), { signal });
-    signal.addEventListener("abort", () => resolve(), { once: true });
-
-    void decode();
-  });
 }
