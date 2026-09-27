@@ -7,7 +7,7 @@
   box-shadow: 0 1px 2px var(--color-grey-alpha-4);
   overflow: hidden;
   touch-action: none;
-  cursor: grab;
+  cursor: crosshair;
   user-select: none;
   -webkit-user-select: none;
   opacity: 0;
@@ -37,8 +37,13 @@
   }
 }
 
-.minimap[data-dragging="true"] {
+.minimap[data-drag-target="indicator"] {
   cursor: grabbing;
+}
+
+.minimap[data-drag-target] .viewportIndicator {
+  /* keep the same cursor until the visitor releases the pointer */
+  cursor: inherit;
 }
 
 /* keep dragged images below the viewport indicator */
@@ -63,6 +68,6 @@
   left: 0;
   border: 1px solid var(--color-grey-11);
   background: var(--color-grey-alpha-3);
-  pointer-events: none;
+  cursor: grab;
   will-change: transform;
 }

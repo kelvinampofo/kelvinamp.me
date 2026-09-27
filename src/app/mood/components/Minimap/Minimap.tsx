@@ -57,7 +57,9 @@ export default function Minimap({
   onDragEnd,
 }: MinimapProps) {
   const [viewport, setViewport] = useState<Size>({ width: 0, height: 0 });
-  const [dragging, setDragging] = useState(false);
+  const [dragTarget, setDragTarget] = useState<"indicator" | "map" | null>(
+    null
+  );
 
   const viewportIndicatorRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -173,7 +175,11 @@ export default function Minimap({
 
     onDragStart();
 
-    setDragging(true);
+    // clicking the map should keep the crosshair even when the indicator moves underneath it
+    setDragTarget(
+      event.target === viewportIndicatorRef.current ? "indicator" : "map"
+    );
+
     scheduleFocus(event);
   }
 
@@ -198,7 +204,7 @@ export default function Minimap({
     onDragEnd();
 
     activePointerIdRef.current = null;
-    setDragging(false);
+    setDragTarget(null);
 
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
@@ -213,7 +219,7 @@ export default function Minimap({
       data-visible={visible}
       inert={!visible}
       aria-hidden={!visible}
-      data-dragging={dragging}
+      data-drag-target={dragTarget}
       style={minimapSize}
       role="presentation"
       onPointerDown={handlePointerDown}
