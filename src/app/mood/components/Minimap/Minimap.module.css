@@ -11,6 +11,8 @@
   user-select: none;
   -webkit-user-select: none;
   opacity: 0;
+  /* prepare the minimap before the fade so safari does not skip its first frames */
+  will-change: opacity;
   pointer-events: none;
 }
 
