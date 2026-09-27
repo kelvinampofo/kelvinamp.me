@@ -13,6 +13,16 @@
   transform-origin: 0 0;
 }
 
+.loadingStatus {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--color-grey-11);
+  font-size: 0.75rem;
+  pointer-events: none;
+}
+
 .item {
   position: absolute;
   left: 0;

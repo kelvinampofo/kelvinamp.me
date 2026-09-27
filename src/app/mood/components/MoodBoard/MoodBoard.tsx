@@ -25,6 +25,7 @@ import Minimap, { type MinimapHandle } from "../Minimap/Minimap";
 import styles from "./MoodBoard.module.css";
 
 const MAX_IMAGE_WAIT_MS = 1500;
+const LOADING_LABEL_DELAY_MS = 250;
 const PREFERRED_STAGGER_INTERVAL_MS = 40;
 const MAX_STAGGER_DURATION_MS = 800;
 const STAGGER_FALLBACK_GRACE_MS = 250;
@@ -51,6 +52,7 @@ type StaggerState = "hidden" | "staggering" | "shown";
 
 export default function MoodBoard() {
   const [staggerState, setStaggerState] = useState<StaggerState>("hidden");
+  const [showLoading, setShowLoading] = useState(false);
   const [camera, setCamera] = useState(INITIAL_CAMERA);
   const [placements, setPlacements] = useState(INITIAL_PLACEMENTS);
   const [tool, setTool] = useState<Tool>("select");
@@ -116,12 +118,18 @@ export default function MoodBoard() {
       if (controller.signal.aborted) return;
 
       clearTimeout(timeoutId);
+      clearTimeout(loadingLabelTimeoutId);
       controller.abort();
       setStaggerState("staggering");
     }
 
     // show the board after a short wait even if some images are still loading
     const timeoutId = setTimeout(startStagger, MAX_IMAGE_WAIT_MS);
+    // fast visits should not flash a loading message
+    const loadingLabelTimeoutId = setTimeout(
+      () => setShowLoading(true),
+      LOADING_LABEL_DELAY_MS
+    );
 
     const cancelImagePreparation = afterNextPaint(async () => {
       const viewport = viewportRef.current?.getBoundingClientRect();
@@ -146,6 +154,7 @@ export default function MoodBoard() {
       // stop waiting if the visitor leaves the board
       controller.abort();
       clearTimeout(timeoutId);
+      clearTimeout(loadingLabelTimeoutId);
       cancelImagePreparation();
     };
   }, []);
@@ -240,6 +249,9 @@ export default function MoodBoard() {
             );
           })}
         </div>
+      </div>
+      <div className={styles.loadingStatus} role="status">
+        {showLoading && staggerState === "hidden" ? "loading images..." : null}
       </div>
       <Minimap
         ref={minimapRef}
