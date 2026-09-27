@@ -48,16 +48,16 @@ const INITIAL_PLACEMENTS: Placements = Object.fromEntries(
   ASSETS.map(({ id, x, y }) => [id, { x, y, stackOrder: 0 }])
 );
 
-type StaggerState = "hidden" | "staggering" | "shown";
+type RevealState = "pending" | "loading" | "staggering" | "shown";
 
 export default function MoodBoard() {
-  const [staggerState, setStaggerState] = useState<StaggerState>("hidden");
-  const [showLoading, setShowLoading] = useState(false);
+  // the loading label and artwork belong to the same entrance sequence
+  const [revealState, setRevealState] = useState<RevealState>("pending");
   const [camera, setCamera] = useState(INITIAL_CAMERA);
   const [placements, setPlacements] = useState(INITIAL_PLACEMENTS);
   const [tool, setTool] = useState<Tool>("select");
 
-  const boardShown = staggerState === "shown";
+  const boardShown = revealState === "shown";
 
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const surfaceRef = useRef<HTMLDivElement | null>(null);
@@ -120,14 +120,17 @@ export default function MoodBoard() {
       clearTimeout(timeoutId);
       clearTimeout(loadingLabelTimeoutId);
       controller.abort();
-      setStaggerState("staggering");
+      setRevealState("staggering");
     }
 
     // show the board after a short wait even if some images are still loading
     const timeoutId = setTimeout(startStagger, MAX_IMAGE_WAIT_MS);
     // fast visits should not flash a loading message
     const loadingLabelTimeoutId = setTimeout(
-      () => setShowLoading(true),
+      () =>
+        setRevealState((current) =>
+          current === "pending" ? "loading" : current
+        ),
       LOADING_LABEL_DELAY_MS
     );
 
@@ -160,16 +163,16 @@ export default function MoodBoard() {
   }, []);
 
   useEffect(() => {
-    if (staggerState !== "staggering") return;
+    if (revealState !== "staggering") return;
 
     // animationend may not fire in background tabs
     const timeoutId = window.setTimeout(
-      () => setStaggerState("shown"),
+      () => setRevealState("shown"),
       MAX_STAGGER_DURATION_MS + STAGGER_FALLBACK_GRACE_MS
     );
 
     return () => window.clearTimeout(timeoutId);
-  }, [staggerState]);
+  }, [revealState]);
 
   useEffect(() => {
     const bounds = viewportRef.current?.getBoundingClientRect();
@@ -184,7 +187,7 @@ export default function MoodBoard() {
 
   function handleStaggerEnd(event: AnimationEvent<HTMLDivElement>) {
     if (event.target === event.currentTarget) {
-      setStaggerState("shown");
+      setRevealState("shown");
     }
   }
 
@@ -211,7 +214,7 @@ export default function MoodBoard() {
         <div
           ref={surfaceRef}
           className={styles.surface}
-          data-stagger-state={staggerState}
+          data-reveal-state={revealState}
           style={{
             transform: toCameraTransform(camera),
           }}
@@ -251,7 +254,7 @@ export default function MoodBoard() {
         </div>
       </div>
       <div className={styles.loadingStatus} role="status">
-        {showLoading && staggerState === "hidden" ? "loading images..." : null}
+        {revealState === "loading" ? "Loading images..." : null}
       </div>
       <Minimap
         ref={minimapRef}

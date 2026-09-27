@@ -31,11 +31,12 @@
   touch-action: none;
 }
 
-.surface[data-stagger-state="hidden"] .item {
+.surface[data-reveal-state="pending"] .item,
+.surface[data-reveal-state="loading"] .item {
   opacity: 0;
 }
 
-.surface[data-stagger-state="staggering"] .item {
+.surface[data-reveal-state="staggering"] .item {
   /* reveal each item at its scheduled time without fading */
   animation: stagger-item 1ms step-end var(--stagger-delay) backwards;
 }
@@ -61,7 +62,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .surface[data-stagger-state="staggering"] .item {
+  .surface[data-reveal-state="staggering"] .item {
     animation-delay: 0ms;
   }
 }
