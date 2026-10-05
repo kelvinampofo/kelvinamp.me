@@ -2,11 +2,10 @@
 
 import clsx from "clsx";
 import Image from "next/image";
-import { useEffect, useRef, useState, type AnimationEvent } from "react";
+import { useRef, useState } from "react";
 
 import useFullscreen from "../../../../hooks/useFullscreen";
 import useShortcuts from "../../../../hooks/useShortcuts";
-import { afterNextPaint } from "../../../../utils/animation-frame";
 import { ASSETS } from "../../assets";
 import {
   INITIAL_CAMERA,
@@ -15,25 +14,13 @@ import {
   type Placements,
   type Tool,
 } from "../../canvas";
+import useBoardReveal, { getStaggerDelay } from "../../hooks/useBoardReveal";
 import useCamera from "../../hooks/useCamera";
 import useDrag from "../../hooks/useDrag";
 import usePanZoom from "../../hooks/usePanZoom";
-import { waitForImage } from "../../images";
 import Minimap from "../Minimap/Minimap";
 
 import styles from "./MoodBoard.module.css";
-
-const MAX_IMAGE_WAIT_MS = 1500;
-const LOADING_LABEL_DELAY_MS = 100;
-const PREFERRED_STAGGER_INTERVAL_MS = 40;
-const MAX_STAGGER_DURATION_MS = 800;
-const STAGGER_FALLBACK_GRACE_MS = 250;
-
-// cap the stagger as the board grows
-const STAGGER_INTERVAL_MS = Math.min(
-  PREFERRED_STAGGER_INTERVAL_MS,
-  MAX_STAGGER_DURATION_MS / Math.max(ASSETS.length - 1, 1)
-);
 
 // eager-load the images most likely to become lcp during the stagger
 const EAGER_ITEM_IDS = new Set([
@@ -46,20 +33,24 @@ const INITIAL_PLACEMENTS: Placements = Object.fromEntries(
   ASSETS.map(({ id, x, y }) => [id, { x, y, stackOrder: 0 }])
 );
 
-type RevealState = "pending" | "loading" | "staggering" | "shown";
-
 export default function MoodBoard() {
-  const [revealState, setRevealState] = useState<RevealState>("pending");
   const [placements, setPlacements] = useState(INITIAL_PLACEMENTS);
   const [tool, setTool] = useState<Tool>("select");
 
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const surfaceRef = useRef<HTMLDivElement | null>(null);
+  const minimapContentRef = useRef<HTMLDivElement | null>(null);
 
   const { camera, viewport } = useCamera({
     viewportRef,
     surfaceRef,
     initialPlacements: INITIAL_PLACEMENTS,
+  });
+
+  const { revealState, minimapShown } = useBoardReveal({
+    viewportRef,
+    surfaceRef,
+    minimapContentRef,
   });
 
   const {
@@ -96,77 +87,6 @@ export default function MoodBoard() {
     },
     { preventDefault: true, modifiers: "Meta", matchBy: "code" }
   );
-
-  // wait until the board is centred before deciding which images are on screen
-  useEffect(() => {
-    const controller = new AbortController();
-
-    function startStagger() {
-      // start only once, whether the images finish loading or the timer runs out
-      if (controller.signal.aborted) return;
-
-      clearTimeout(timeoutId);
-      clearTimeout(loadingLabelTimeoutId);
-      controller.abort();
-      setRevealState("staggering");
-    }
-
-    // show the board after a short wait even if some images are still loading
-    const timeoutId = setTimeout(startStagger, MAX_IMAGE_WAIT_MS);
-    // fast visits should not flash a loading message
-    const loadingLabelTimeoutId = setTimeout(
-      () =>
-        setRevealState((current) =>
-          current === "pending" ? "loading" : current
-        ),
-      LOADING_LABEL_DELAY_MS
-    );
-
-    const cancelImagePreparation = afterNextPaint(async () => {
-      const viewport = viewportRef.current?.getBoundingClientRect();
-      const surface = surfaceRef.current;
-
-      if (!viewport || !surface || controller.signal.aborted) return;
-
-      // only wait for images the visitor can see
-      const images = getVisibleImages(surface, viewport);
-      await Promise.all(
-        images.map((image) => {
-          // make sure each image is ready to display before its turn in the stagger
-          image.loading = "eager";
-          return waitForImage(image, controller.signal);
-        })
-      );
-
-      startStagger();
-    });
-
-    return () => {
-      // stop waiting if the visitor leaves the board
-      controller.abort();
-      clearTimeout(timeoutId);
-      clearTimeout(loadingLabelTimeoutId);
-      cancelImagePreparation();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (revealState !== "staggering") return;
-
-    // animationend may not fire in background tabs
-    const timeoutId = window.setTimeout(
-      () => setRevealState("shown"),
-      MAX_STAGGER_DURATION_MS + STAGGER_FALLBACK_GRACE_MS
-    );
-
-    return () => window.clearTimeout(timeoutId);
-  }, [revealState]);
-
-  function handleStaggerEnd(event: AnimationEvent<HTMLDivElement>) {
-    if (event.target === event.currentTarget) {
-      setRevealState("shown");
-    }
-  }
 
   return (
     <>
@@ -206,15 +126,12 @@ export default function MoodBoard() {
                 data-board-item
                 className={styles.item}
                 onPointerDown={(event) => onDragItem(id, event)}
-                onAnimationEnd={
-                  index === ASSETS.length - 1 ? handleStaggerEnd : undefined
-                }
                 style={{
                   width,
                   height,
                   transform: toItemTransform(placement),
                   zIndex: placement.stackOrder || undefined,
-                  "--stagger-delay": `${Math.round(index * STAGGER_INTERVAL_MS)}ms`,
+                  "--stagger-delay": getStaggerDelay(index),
                 }}
               >
                 <Image
@@ -235,25 +152,12 @@ export default function MoodBoard() {
         {revealState === "loading" ? "Loading images..." : null}
       </div>
       <Minimap
-        boardShown={revealState === "shown"}
+        shown={minimapShown}
+        contentRef={minimapContentRef}
         camera={camera}
         viewport={viewport}
         placements={placements}
       />
     </>
   );
-}
-
-function getVisibleImages(surface: HTMLElement, viewport: DOMRect) {
-  return Array.from(surface.querySelectorAll("img")).filter((image) => {
-    const bounds = image.getBoundingClientRect();
-
-    // images at the edge of the screen count too
-    return (
-      bounds.right > viewport.left &&
-      bounds.left < viewport.right &&
-      bounds.bottom > viewport.top &&
-      bounds.top < viewport.bottom
-    );
-  });
 }

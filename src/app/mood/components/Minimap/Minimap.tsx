@@ -7,6 +7,7 @@ import {
   useRef,
   useState,
   type PointerEvent,
+  type RefObject,
 } from "react";
 
 import { ASSETS } from "../../assets";
@@ -22,19 +23,20 @@ import {
   type Size,
 } from "../../canvas";
 import type { CameraHandle } from "../../hooks/useCamera";
-import useMinimapImagesReady from "../../hooks/useMinimapImagesReady";
 
 import styles from "./Minimap.module.css";
 
 interface MinimapProps {
-  boardShown: boolean;
+  shown: boolean;
+  contentRef: RefObject<HTMLDivElement | null>;
   camera: CameraHandle;
   viewport: Size;
   placements: Placements;
 }
 
 export default function Minimap({
-  boardShown,
+  shown,
+  contentRef,
   camera,
   viewport,
   placements,
@@ -47,10 +49,6 @@ export default function Minimap({
   const activePointerIdRef = useRef<number | null>(null);
   const animationFrameIdRef = useRef(0);
   const pendingPointRef = useRef<Point | null>(null);
-
-  const contentRef = useRef<HTMLDivElement | null>(null);
-  const minimapImagesReady = useMinimapImagesReady(contentRef);
-  const shown = boardShown && minimapImagesReady;
 
   const projection = getMinimapProjection(placements, viewport);
 
