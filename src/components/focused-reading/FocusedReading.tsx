@@ -16,8 +16,7 @@ export default function FocusedReading({ children }: FocusedReadingProps) {
   useShortcuts(
     { F: () => setIsFocused((prev) => !prev) },
     {
-      delay: 300,
-      ignoreRepeat: true,
+      holdDurationMs: 300,
     }
   );
 
