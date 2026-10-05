@@ -2,7 +2,7 @@ import { clamp } from "../../utils/math";
 
 import { ASSETS } from "./assets";
 
-export const INITIAL_SCALE = 0.95;
+const INITIAL_SCALE = 0.95;
 export const ZOOM_STEP = 1.06;
 
 const MIN_SCALE = 0.25;
@@ -12,12 +12,13 @@ const WHEEL_ZOOM_DAMPING = 0.009;
 // leave room for the back link
 const RIGHT_BIAS_PX = 132;
 
-const CONTENT_BOUNDS = {
-  minX: Math.min(...ASSETS.map(({ x }) => x)),
-  minY: Math.min(...ASSETS.map(({ y }) => y)),
-  maxX: Math.max(...ASSETS.map(({ x, width }) => x + width)),
-  maxY: Math.max(...ASSETS.map(({ y, height }) => y + height)),
-};
+const MINIMAP_MAX_WIDTH = 264;
+const MINIMAP_MAX_HEIGHT = 200;
+const MINIMAP_MAX_VIEWPORT_WIDTH_RATIO = 0.45;
+
+// keep the camera visible above and below the artwork
+const MINIMAP_PADDING_X = 80;
+const MINIMAP_PADDING_Y = 320;
 
 export interface Point {
   x: number;
@@ -28,6 +29,8 @@ export interface Size {
   width: number;
   height: number;
 }
+
+export interface Rect extends Point, Size {}
 
 export interface Camera extends Point {
   scale: number;
@@ -42,6 +45,14 @@ export interface Placements {
 }
 
 export type Tool = "select" | "pan";
+
+export const INITIAL_CAMERA: Camera = { x: 0, y: 0, scale: INITIAL_SCALE };
+
+export interface MinimapProjection {
+  bounds: Rect;
+  scale: number;
+  size: Size;
+}
 
 export function toItemTransform({ x, y }: Point) {
   return `translate3d(${x}px, ${y}px, 0)`;
@@ -70,7 +81,10 @@ export function zoomBy(camera: Camera, anchor: Point, factor: number) {
 }
 
 /** The slice of canvas the viewport currently shows. */
-export function getVisibleBounds(camera: Camera, { width, height }: Size) {
+export function getVisibleBounds(
+  camera: Camera,
+  { width, height }: Size
+): Rect {
   return {
     x: -camera.x,
     y: -camera.y,
@@ -92,15 +106,94 @@ export function focusCamera(
   };
 }
 
-export function centreCamera(camera: Camera, { width, height }: Size) {
+export function centreCamera(
+  camera: Camera,
+  placements: Placements,
+  { width, height }: Size
+) {
+  const bounds = getBoardBounds(placements);
+
   return {
     ...camera,
     x:
       (width / 2 + RIGHT_BIAS_PX) / camera.scale -
-      (CONTENT_BOUNDS.minX + CONTENT_BOUNDS.maxX) / 2,
-    y:
-      height / 2 / camera.scale -
-      (CONTENT_BOUNDS.minY + CONTENT_BOUNDS.maxY) / 2,
+      (bounds.x + bounds.width / 2),
+    y: height / 2 / camera.scale - (bounds.y + bounds.height / 2),
+  };
+}
+
+/** The box around every item at its current placement. */
+export function getBoardBounds(
+  placements: Placements,
+  padding: Size = { width: 0, height: 0 }
+): Rect {
+  const boxes = ASSETS.map(({ id, width, height }) => ({
+    ...placements[id],
+    width,
+    height,
+  }));
+
+  const minX = Math.min(...boxes.map(({ x }) => x)) - padding.width;
+  const minY = Math.min(...boxes.map(({ y }) => y)) - padding.height;
+  const maxX =
+    Math.max(...boxes.map(({ x, width }) => x + width)) + padding.width;
+  const maxY =
+    Math.max(...boxes.map(({ y, height }) => y + height)) + padding.height;
+
+  return { x: minX, y: minY, width: maxX - minX, height: maxY - minY };
+}
+
+/** Fits the padded board into the minimap's size limits. */
+export function getMinimapProjection(
+  placements: Placements,
+  viewport: Size
+): MinimapProjection {
+  // size around the artwork because the board has no fixed bounds
+  const bounds = getBoardBounds(placements, {
+    width: MINIMAP_PADDING_X,
+    height: MINIMAP_PADDING_Y,
+  });
+
+  // leave room for the board on narrow viewports
+  const maxWidth = Math.min(
+    MINIMAP_MAX_WIDTH,
+    (viewport.width || MINIMAP_MAX_WIDTH) * MINIMAP_MAX_VIEWPORT_WIDTH_RATIO
+  );
+
+  // preserve the artwork's aspect ratio within both size limits
+  const scale = Math.min(
+    maxWidth / bounds.width,
+    MINIMAP_MAX_HEIGHT / bounds.height
+  );
+
+  return {
+    bounds,
+    scale,
+    size: { width: bounds.width * scale, height: bounds.height * scale },
+  };
+}
+
+/** Converts a canvas rect to minimap space. */
+export function toMinimapRect(
+  rect: Rect,
+  { bounds, scale }: MinimapProjection
+): Rect {
+  return {
+    x: (rect.x - bounds.x) * scale,
+    y: (rect.y - bounds.y) * scale,
+    width: rect.width * scale,
+    height: rect.height * scale,
+  };
+}
+
+/** Converts a minimap point to canvas space. */
+export function fromMinimapPoint(
+  point: Point,
+  { bounds, scale }: MinimapProjection
+): Point {
+  return {
+    x: bounds.x + point.x / scale,
+    y: bounds.y + point.y / scale,
   };
 }
 

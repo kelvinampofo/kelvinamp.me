@@ -4,25 +4,22 @@ import {
   useEffect,
   useEffectEvent,
   useRef,
-  type Dispatch,
   type PointerEvent as ReactPointerEvent,
   type RefObject,
-  type SetStateAction,
 } from "react";
 
 import {
   panCamera,
-  toCameraTransform,
   zoomBy,
   zoomFromWheel,
   ZOOM_STEP,
-  type Camera,
   type Point,
   type Tool,
 } from "../canvas";
 
+import type { CameraHandle } from "./useCamera";
+
 const PIXELS_PER_WHEEL_LINE = 16;
-const WHEEL_COMMIT_DELAY_MS = 120;
 
 interface TouchPointer extends Point {
   canPan: boolean;
@@ -34,60 +31,19 @@ interface MousePan extends Point {
 
 interface UsePanZoomOptions {
   viewportRef: RefObject<HTMLDivElement | null>;
-  surfaceRef: RefObject<HTMLDivElement | null>;
-  camera: Camera;
+  camera: CameraHandle;
   tool: Tool;
-  setCamera: Dispatch<SetStateAction<Camera>>;
   cancelDrag: () => void;
-  onDraw: (camera: Camera) => void;
 }
 
 export default function usePanZoom({
   viewportRef,
-  surfaceRef,
   camera,
   tool,
-  setCamera,
   cancelDrag,
-  onDraw,
 }: UsePanZoomOptions) {
-  const cameraRef = useRef(camera);
   const mousePanRef = useRef<MousePan | null>(null);
   const touchesRef = useRef(new Map<number, TouchPointer>());
-  const wheelTimerRef = useRef(0);
-  const dirtyRef = useRef(false);
-
-  function draw(nextCamera: Camera) {
-    cameraRef.current = nextCamera;
-    dirtyRef.current = true;
-
-    if (surfaceRef.current) {
-      surfaceRef.current.style.transform = toCameraTransform(nextCamera);
-    }
-
-    // keep the minimap in sync before React state is committed
-    onDraw(nextCamera);
-  }
-
-  function updateCamera(update: (current: Camera) => Camera) {
-    draw(update(cameraRef.current));
-  }
-
-  function commitCamera() {
-    if (!dirtyRef.current) return;
-
-    dirtyRef.current = false;
-    setCamera(cameraRef.current);
-  }
-
-  function startGesture() {
-    if (wheelTimerRef.current) {
-      window.clearTimeout(wheelTimerRef.current);
-      wheelTimerRef.current = 0;
-    } else {
-      cameraRef.current = camera;
-    }
-  }
 
   function pointInViewport({
     clientX,
@@ -113,30 +69,18 @@ export default function usePanZoom({
         : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
           ? viewportRef.current?.clientHeight || window.innerHeight
           : 1;
+
     const deltaX = event.deltaX * multiplier;
     const deltaY = event.deltaY * multiplier;
 
     if (event.metaKey || event.ctrlKey) {
-      updateCamera((current) =>
+      camera.move((current) =>
         zoomFromWheel(current, pointInViewport(event), deltaY)
       );
     } else {
-      updateCamera((current) => panCamera(current, deltaX, deltaY));
+      camera.move((current) => panCamera(current, deltaX, deltaY));
     }
-
-    window.clearTimeout(wheelTimerRef.current);
-    wheelTimerRef.current = window.setTimeout(() => {
-      wheelTimerRef.current = 0;
-      commitCamera();
-    }, WHEEL_COMMIT_DELAY_MS);
   });
-
-  useEffect(() => {
-    if (!mousePanRef.current && touchesRef.current.size === 0) {
-      cameraRef.current = camera;
-      dirtyRef.current = false;
-    }
-  }, [camera]);
 
   useEffect(() => {
     if (tool === "pan") return;
@@ -156,22 +100,13 @@ export default function usePanZoom({
       document.body.classList.remove("gesture-grabbing");
       mousePanRef.current = null;
       touches.clear();
-      window.clearTimeout(wheelTimerRef.current);
     };
   }, [viewportRef]);
 
-  function viewportCentre() {
-    const viewport = viewportRef.current;
-
-    return {
-      x: (viewport?.clientWidth ?? window.innerWidth) / 2,
-      y: (viewport?.clientHeight ?? window.innerHeight) / 2,
-    };
-  }
-
   function zoom(factor: number) {
-    updateCamera((current) => zoomBy(current, viewportCentre(), factor));
-    commitCamera();
+    camera.move((current, { width, height }) =>
+      zoomBy(current, { x: width / 2, y: height / 2 }, factor)
+    );
   }
 
   function onPointerDown(event: ReactPointerEvent<HTMLDivElement>) {
@@ -184,7 +119,6 @@ export default function usePanZoom({
       return;
     }
 
-    startGesture();
     mousePanRef.current = {
       pointerId: event.pointerId,
       x: event.clientX,
@@ -201,9 +135,8 @@ export default function usePanZoom({
 
     const touches = touchesRef.current;
 
-    if (touches.size === 0) startGesture();
-
     event.currentTarget.setPointerCapture(event.pointerId);
+
     const startsOnItem =
       event.target instanceof Element &&
       Boolean(event.target.closest("[data-board-item]"));
@@ -212,16 +145,16 @@ export default function usePanZoom({
       canPan: tool === "pan" || !startsOnItem,
     });
 
-    // A second finger switches from moving artwork to navigating the board.
+    // a second finger switches from moving artwork to navigating the board
     if (touches.size > 1) {
       cancelDrag();
-      touches.forEach((touch) => {
-        touch.canPan = true;
+      touches.forEach((touch, pointerId) => {
+        touches.set(pointerId, { ...touch, canPan: true });
       });
       event.stopPropagation();
     }
 
-    // The global grabbing style disables hit testing, blocking a second touch.
+    // the global grabbing style disables hit testing, blocking a second touch
     event.preventDefault();
   }
 
@@ -238,19 +171,22 @@ export default function usePanZoom({
     const nextPinch = getPinch(touches);
 
     if (previousPinch && nextPinch) {
-      const panned = panCamera(
-        cameraRef.current,
-        previousPinch.midpoint.x - nextPinch.midpoint.x,
-        previousPinch.midpoint.y - nextPinch.midpoint.y
-      );
       const factor =
         previousPinch.distance > 0
           ? nextPinch.distance / previousPinch.distance
           : 1;
 
-      draw(zoomBy(panned, nextPinch.midpoint, factor));
+      camera.move((current) => {
+        const panned = panCamera(
+          current,
+          previousPinch.midpoint.x - nextPinch.midpoint.x,
+          previousPinch.midpoint.y - nextPinch.midpoint.y
+        );
+
+        return zoomBy(panned, nextPinch.midpoint, factor);
+      });
     } else if (touch.canPan) {
-      updateCamera((current) =>
+      camera.move((current) =>
         panCamera(current, touch.x - nextPoint.x, touch.y - nextPoint.y)
       );
     }
@@ -261,12 +197,15 @@ export default function usePanZoom({
 
     if (!previous || previous.pointerId !== event.pointerId) return;
 
-    updateCamera((current) =>
+    camera.move((current) =>
       panCamera(current, previous.x - event.clientX, previous.y - event.clientY)
     );
 
-    previous.x = event.clientX;
-    previous.y = event.clientY;
+    mousePanRef.current = {
+      pointerId: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+    };
   }
 
   function onPointerMove(event: ReactPointerEvent<HTMLDivElement>) {
@@ -290,13 +229,9 @@ export default function usePanZoom({
     }
 
     document.body.classList.remove("gesture-grabbing");
-    commitCamera();
   }
 
   return {
-    startGesture,
-    updateCamera,
-    commitCamera,
     onPointerDown,
     onPointerDownCapture,
     onPointerMove,

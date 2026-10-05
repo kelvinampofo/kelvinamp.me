@@ -3,132 +3,77 @@
 import Image from "next/image";
 import {
   useEffect,
-  useImperativeHandle,
+  useLayoutEffect,
   useRef,
   useState,
   type PointerEvent,
-  type RefObject,
 } from "react";
 
 import { ASSETS } from "../../assets";
 import {
   focusCamera,
+  fromMinimapPoint,
+  getMinimapProjection,
   getVisibleBounds,
+  toMinimapRect,
   type Camera,
   type Placements,
   type Point,
   type Size,
 } from "../../canvas";
+import type { CameraHandle } from "../../hooks/useCamera";
 import useMinimapImagesReady from "../../hooks/useMinimapImagesReady";
 
 import styles from "./Minimap.module.css";
 
-const MAX_WIDTH = 264;
-const MAX_HEIGHT = 200;
-const MAX_VIEWPORT_WIDTH_RATIO = 0.45;
-
-// keep the camera visible above and below the artwork
-const PADDING_X = 80;
-const PADDING_Y = 320;
-
-export interface MinimapHandle {
-  draw: (camera: Camera) => void;
-}
-
 interface MinimapProps {
   boardShown: boolean;
-  ref: RefObject<MinimapHandle | null>;
-  camera: Camera;
+  camera: CameraHandle;
+  viewport: Size;
   placements: Placements;
-  viewportRef: RefObject<HTMLDivElement | null>;
-  onDragStart: () => void;
-  onCameraChange: (update: (current: Camera) => Camera) => void;
-  onDragEnd: () => void;
 }
 
 export default function Minimap({
   boardShown,
-  ref,
   camera,
+  viewport,
   placements,
-  viewportRef,
-  onDragStart,
-  onCameraChange,
-  onDragEnd,
 }: MinimapProps) {
-  const [viewport, setViewport] = useState<Size>({ width: 0, height: 0 });
   const [dragTarget, setDragTarget] = useState<"indicator" | "map" | null>(
     null
   );
 
   const viewportIndicatorRef = useRef<HTMLDivElement | null>(null);
-  const contentRef = useRef<HTMLDivElement | null>(null);
   const activePointerIdRef = useRef<number | null>(null);
   const animationFrameIdRef = useRef(0);
   const pendingPointRef = useRef<Point | null>(null);
 
+  const contentRef = useRef<HTMLDivElement | null>(null);
   const minimapImagesReady = useMinimapImagesReady(contentRef);
+  const shown = boardShown && minimapImagesReady;
 
-  const visible = boardShown && minimapImagesReady;
-
-  // size around the artwork because the board has no fixed bounds
-  const bounds = getContentBounds(placements);
-  const availableWidth = viewport.width || MAX_WIDTH;
-
-  // leave room for the board on narrow viewports
-  const maxWidth = Math.min(
-    MAX_WIDTH,
-    availableWidth * MAX_VIEWPORT_WIDTH_RATIO
-  );
-
-  // preserve the artwork's aspect ratio within both size limits
-  const scale = Math.min(maxWidth / bounds.width, MAX_HEIGHT / bounds.height);
-
-  const minimapSize = {
-    width: bounds.width * scale,
-    height: bounds.height * scale,
-  };
-
-  function getViewportRect(next: Camera) {
-    const visibleBounds = getVisibleBounds(next, viewport);
-
-    // convert canvas bounds to minimap coordinates
-    return {
-      width: visibleBounds.width * scale,
-      height: visibleBounds.height * scale,
-      x: (visibleBounds.x - bounds.x) * scale,
-      y: (visibleBounds.y - bounds.y) * scale,
-    };
-  }
+  const projection = getMinimapProjection(placements, viewport);
 
   // bypass react so the indicator keeps pace with gestures
-  useImperativeHandle(ref, () => ({
-    draw(next) {
-      const element = viewportIndicatorRef.current;
-      if (!element) return;
-
-      const { x, y, width, height } = getViewportRect(next);
-
-      element.style.width = `${width}px`;
-      element.style.height = `${height}px`;
-      element.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-    },
-  }));
-
-  useEffect(() => {
-    const element = viewportRef.current;
+  function drawIndicator(next: Camera) {
+    const element = viewportIndicatorRef.current;
     if (!element) return;
 
-    const resizeObserver = new ResizeObserver(([entry]) => {
-      setViewport({
-        width: entry.contentRect.width,
-        height: entry.contentRect.height,
-      });
-    });
+    const { x, y, width, height } = toMinimapRect(
+      getVisibleBounds(next, viewport),
+      projection
+    );
 
-    resizeObserver.observe(element);
-    return () => resizeObserver.disconnect();
-  }, [viewportRef]);
+    element.style.width = `${width}px`;
+    element.style.height = `${height}px`;
+    element.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+  }
+
+  // redraw after every render too, since the projection follows placements and resizes
+  useLayoutEffect(() => {
+    drawIndicator(camera.get());
+    return camera.subscribe(drawIndicator);
+  });
 
   useEffect(
     () => () => window.cancelAnimationFrame(animationFrameIdRef.current),
@@ -138,11 +83,10 @@ export default function Minimap({
   function toCanvasPosition(event: PointerEvent<HTMLDivElement>) {
     const rect = event.currentTarget.getBoundingClientRect();
 
-    // convert the pointer from minimap space to canvas space
-    return {
-      x: bounds.x + (event.clientX - rect.left) / scale,
-      y: bounds.y + (event.clientY - rect.top) / scale,
-    };
+    return fromMinimapPoint(
+      { x: event.clientX - rect.left, y: event.clientY - rect.top },
+      projection
+    );
   }
 
   function applyPendingFocus() {
@@ -151,7 +95,7 @@ export default function Minimap({
 
     if (point) {
       // keep the current zoom while centring the selected point
-      onCameraChange((current) => focusCamera(current, point, viewport));
+      camera.move((current, size) => focusCamera(current, point, size));
     }
   }
 
@@ -172,8 +116,6 @@ export default function Minimap({
     // keep the drag active outside the minimap
     event.currentTarget.setPointerCapture(event.pointerId);
     activePointerIdRef.current = event.pointerId;
-
-    onDragStart();
 
     // clicking the map should keep the crosshair even when the indicator moves underneath it
     setDragTarget(
@@ -201,7 +143,6 @@ export default function Minimap({
     animationFrameIdRef.current = 0;
 
     applyPendingFocus();
-    onDragEnd();
 
     activePointerIdRef.current = null;
     setDragTarget(null);
@@ -211,16 +152,14 @@ export default function Minimap({
     }
   }
 
-  const rect = getViewportRect(camera);
-
   return (
     <div
       className={styles.minimap}
-      data-visible={visible}
-      inert={!visible}
-      aria-hidden={!visible}
+      data-visible={shown}
+      inert={!shown}
+      aria-hidden={!shown}
       data-drag-target={dragTarget}
-      style={minimapSize}
+      style={{ ...projection.size }}
       role="presentation"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
@@ -231,16 +170,20 @@ export default function Minimap({
       <div ref={contentRef} className={styles.content}>
         {ASSETS.map(({ id, width, height, src }) => {
           const placement = placements[id];
+          const rect = toMinimapRect(
+            { ...placement, width, height },
+            projection
+          );
 
           return (
             <div
               key={id}
               className={styles.item}
               style={{
-                left: (placement.x - bounds.x) * scale,
-                top: (placement.y - bounds.y) * scale,
-                width: width * scale,
-                height: height * scale,
+                left: rect.x,
+                top: rect.y,
+                width: rect.width,
+                height: rect.height,
                 zIndex: placement.stackOrder || undefined,
               }}
             >
@@ -250,7 +193,7 @@ export default function Minimap({
                 fill
                 loading="eager"
                 fetchPriority="low"
-                sizes={`${Math.ceil(width * scale)}px`}
+                sizes={`${Math.ceil(rect.width)}px`}
                 draggable={false}
                 className={styles.image}
               />
@@ -258,32 +201,7 @@ export default function Minimap({
           );
         })}
       </div>
-      <div
-        ref={viewportIndicatorRef}
-        className={styles.viewportIndicator}
-        style={{
-          width: rect.width,
-          height: rect.height,
-          transform: `translate3d(${rect.x}px, ${rect.y}px, 0)`,
-        }}
-      />
+      <div ref={viewportIndicatorRef} className={styles.viewportIndicator} />
     </div>
   );
-}
-
-function getContentBounds(placements: Placements) {
-  const boxes = ASSETS.map(({ id, width, height }) => ({
-    ...placements[id],
-    width,
-    height,
-  }));
-
-  // include negative artwork positions and pad the camera range
-  const minX = Math.min(...boxes.map(({ x }) => x)) - PADDING_X;
-  const minY = Math.min(...boxes.map(({ y }) => y)) - PADDING_Y;
-  const maxX = Math.max(...boxes.map(({ x, width }) => x + width)) + PADDING_X;
-  const maxY =
-    Math.max(...boxes.map(({ y, height }) => y + height)) + PADDING_Y;
-
-  return { x: minX, y: minY, width: maxX - minX, height: maxY - minY };
 }

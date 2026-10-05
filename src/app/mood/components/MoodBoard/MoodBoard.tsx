@@ -9,18 +9,17 @@ import useShortcuts from "../../../../hooks/useShortcuts";
 import { afterNextPaint } from "../../../../utils/animation-frame";
 import { ASSETS } from "../../assets";
 import {
-  centreCamera,
-  INITIAL_SCALE,
+  INITIAL_CAMERA,
   toCameraTransform,
   toItemTransform,
-  type Camera,
   type Placements,
   type Tool,
 } from "../../canvas";
+import useCamera from "../../hooks/useCamera";
 import useDrag from "../../hooks/useDrag";
 import usePanZoom from "../../hooks/usePanZoom";
 import { waitForImage } from "../../images";
-import Minimap, { type MinimapHandle } from "../Minimap/Minimap";
+import Minimap from "../Minimap/Minimap";
 
 import styles from "./MoodBoard.module.css";
 
@@ -30,6 +29,12 @@ const PREFERRED_STAGGER_INTERVAL_MS = 40;
 const MAX_STAGGER_DURATION_MS = 800;
 const STAGGER_FALLBACK_GRACE_MS = 250;
 
+// cap the stagger as the board grows
+const STAGGER_INTERVAL_MS = Math.min(
+  PREFERRED_STAGGER_INTERVAL_MS,
+  MAX_STAGGER_DURATION_MS / Math.max(ASSETS.length - 1, 1)
+);
+
 // eager-load the images most likely to become lcp during the stagger
 const EAGER_ITEM_IDS = new Set([
   "sketch",
@@ -37,13 +42,6 @@ const EAGER_ITEM_IDS = new Set([
   "nasa-spacecraft-markings",
 ]);
 
-// cap the stagger as the board grows
-const STAGGER_INTERVAL_MS = Math.min(
-  PREFERRED_STAGGER_INTERVAL_MS,
-  MAX_STAGGER_DURATION_MS / Math.max(ASSETS.length - 1, 1)
-);
-
-const INITIAL_CAMERA: Camera = { x: 0, y: 0, scale: INITIAL_SCALE };
 const INITIAL_PLACEMENTS: Placements = Object.fromEntries(
   ASSETS.map(({ id, x, y }) => [id, { x, y, stackOrder: 0 }])
 );
@@ -51,17 +49,18 @@ const INITIAL_PLACEMENTS: Placements = Object.fromEntries(
 type RevealState = "pending" | "loading" | "staggering" | "shown";
 
 export default function MoodBoard() {
-  // the loading label and artwork belong to the same entrance sequence
   const [revealState, setRevealState] = useState<RevealState>("pending");
-  const [camera, setCamera] = useState(INITIAL_CAMERA);
   const [placements, setPlacements] = useState(INITIAL_PLACEMENTS);
   const [tool, setTool] = useState<Tool>("select");
 
-  const boardShown = revealState === "shown";
-
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const surfaceRef = useRef<HTMLDivElement | null>(null);
-  const minimapRef = useRef<MinimapHandle | null>(null);
+
+  const { camera, viewport } = useCamera({
+    viewportRef,
+    surfaceRef,
+    initialPlacements: INITIAL_PLACEMENTS,
+  });
 
   const {
     onPointerDown: onDragItem,
@@ -77,18 +76,7 @@ export default function MoodBoard() {
     onPointerEnd: onPanEnd,
     zoomIn,
     zoomOut,
-    startGesture,
-    updateCamera,
-    commitCamera,
-  } = usePanZoom({
-    viewportRef,
-    surfaceRef,
-    camera,
-    tool,
-    setCamera,
-    cancelDrag,
-    onDraw: (next) => minimapRef.current?.draw(next),
-  });
+  } = usePanZoom({ viewportRef, camera, tool, cancelDrag });
 
   const { toggleFullscreen } = useFullscreen();
 
@@ -174,17 +162,6 @@ export default function MoodBoard() {
     return () => window.clearTimeout(timeoutId);
   }, [revealState]);
 
-  useEffect(() => {
-    const bounds = viewportRef.current?.getBoundingClientRect();
-
-    setCamera((current) =>
-      centreCamera(current, {
-        width: bounds?.width || window.innerWidth,
-        height: bounds?.height || window.innerHeight,
-      })
-    );
-  }, []);
-
   function handleStaggerEnd(event: AnimationEvent<HTMLDivElement>) {
     if (event.target === event.currentTarget) {
       setRevealState("shown");
@@ -216,7 +193,8 @@ export default function MoodBoard() {
           className={styles.surface}
           data-reveal-state={revealState}
           style={{
-            transform: toCameraTransform(camera),
+            // the camera writes later transforms directly
+            transform: toCameraTransform(INITIAL_CAMERA),
           }}
         >
           {ASSETS.map(({ id, width, height, src, alt }, index) => {
@@ -257,14 +235,10 @@ export default function MoodBoard() {
         {revealState === "loading" ? "Loading images..." : null}
       </div>
       <Minimap
-        ref={minimapRef}
-        boardShown={boardShown}
+        boardShown={revealState === "shown"}
         camera={camera}
+        viewport={viewport}
         placements={placements}
-        viewportRef={viewportRef}
-        onDragStart={startGesture}
-        onCameraChange={updateCamera}
-        onDragEnd={commitCamera}
       />
     </>
   );

@@ -10,11 +10,12 @@ import {
 
 import {
   toItemTransform,
-  type Camera,
   type Placements,
   type Point,
   type Tool,
 } from "../canvas";
+
+import type { CameraHandle } from "./useCamera";
 
 const DRAG_THRESHOLD_PX = 10;
 
@@ -30,7 +31,7 @@ interface DragState {
 }
 
 interface UseDragOptions {
-  camera: Camera;
+  camera: CameraHandle;
   placements: Placements;
   setPlacements: Dispatch<SetStateAction<Placements>>;
   tool: Tool;
@@ -134,9 +135,11 @@ export default function useDrag({
       drag.element.style.zIndex = String(drag.stackOrder);
     }
 
+    const { scale } = camera.get();
+
     drag.nextPosition = {
-      x: drag.itemStart.x + deltaX / camera.scale,
-      y: drag.itemStart.y + deltaY / camera.scale,
+      x: drag.itemStart.x + deltaX / scale,
+      y: drag.itemStart.y + deltaY / scale,
     };
 
     scheduleDraw();
