@@ -1,6 +1,12 @@
-import { createRoute } from "../../../content/route";
+import { createRoute, type ContentEntryModule } from "../../../content/route";
 
-const craftRoute = createRoute("craft");
+const entries = import.meta.glob<ContentEntryModule>(
+  "../../../content/craft/*/index.tsx"
+);
+
+const craftRoute = createRoute("craft", (slug) =>
+  entries[`../../../content/craft/${slug}/index.tsx`]?.()
+);
 
 export default craftRoute.EntryPage;
 export const generateMetadata = craftRoute.generateMetadata;

@@ -1,13 +1,6 @@
 import Card from "../../../components/card/Card";
-import type { ContentEntryMetadata } from "../../collection";
 
 import HoldToDelete from "./components/HoldToDelete";
-
-export const metadata: ContentEntryMetadata = {
-  title: "Hold to Delete",
-  description: "“Hold to Delete” interaction.",
-  publishedDate: "2024-06-09",
-};
 
 export default function HoldToDeleteEntry() {
   return (

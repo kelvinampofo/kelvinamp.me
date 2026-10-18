@@ -1,17 +1,17 @@
 import Heading from "../../../components/heading/Heading";
 import Page from "../../../components/page/Page";
-import { getContentEntryModule } from "../../../content/collection";
+import { getContentEntry } from "../../../content/collection";
 
 export default async function WritingEntryLayout({
   params,
   children,
 }: LayoutProps<"/writing/[slug]">) {
   const { slug } = await params;
-  const { metadata } = await getContentEntryModule("writing", slug);
+  const { title } = await getContentEntry("writing", slug);
 
   return (
     <Page backTo="/writing" focusMode>
-      <Heading>{metadata.title}</Heading>
+      <Heading>{title}</Heading>
       {children}
     </Page>
   );

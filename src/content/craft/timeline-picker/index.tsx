@@ -1,13 +1,6 @@
 import Card from "../../../components/card/Card";
-import type { ContentEntryMetadata } from "../../collection";
 
 import TimelinePicker from "./components/TimelinePicker";
-
-export const metadata: ContentEntryMetadata = {
-  title: "Timeline Picker",
-  description: "Minimal timeline picker.",
-  publishedDate: "2025-06-29",
-};
 
 export default function TimelinePickerEntry() {
   return (

@@ -1,14 +1,7 @@
 import Card from "../../../components/card/Card";
-import type { ContentEntryMetadata } from "../../collection";
 
 import Loupe from "./components/Loupe";
 import styles from "./LoupeEntry.module.css";
-
-export const metadata: ContentEntryMetadata = {
-  title: "Loupe",
-  description: "A little loupe for the finer details.",
-  publishedDate: "2026-09-05",
-};
 
 export default function LoupeEntry() {
   return (

@@ -1,13 +1,6 @@
 import Card from "../../../components/card/Card";
-import type { ContentEntryMetadata } from "../../collection";
 
 import Loading from "./components/Loading";
-
-export const metadata: ContentEntryMetadata = {
-  title: "Loading Indicators",
-  description: "Simple loading state indicators.",
-  publishedDate: "2023-11-11",
-};
 
 export default function LoadingIndicators() {
   return (

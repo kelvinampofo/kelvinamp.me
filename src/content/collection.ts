@@ -1,5 +1,7 @@
+import "server-only";
+
+import { notFound } from "next/navigation";
 import { cache } from "react";
-import type { ComponentType } from "react";
 
 export interface ContentEntryMetadata {
   title: string;
@@ -7,8 +9,7 @@ export interface ContentEntryMetadata {
   description?: string;
 }
 
-interface ContentEntryModule {
-  default: ComponentType;
+interface ContentMetadataModule {
   metadata: ContentEntryMetadata;
 }
 
@@ -16,17 +17,17 @@ export interface ContentEntry extends ContentEntryMetadata {
   slug: string;
 }
 
-const CONTENT_MODULES = {
-  craft: import.meta.glob<ContentEntryModule>("./craft/*/index.tsx"),
-  writing: import.meta.glob<ContentEntryModule>("./writing/*/index.tsx"),
+const CONTENT_METADATA = {
+  craft: import.meta.glob<ContentMetadataModule>("./craft/*/metadata.ts"),
+  writing: import.meta.glob<ContentMetadataModule>("./writing/*/metadata.ts"),
 };
 
-export type ContentCollection = keyof typeof CONTENT_MODULES;
+export type ContentCollection = keyof typeof CONTENT_METADATA;
 
 export const getContentEntries = cache(
   async (collection: ContentCollection): Promise<readonly ContentEntry[]> => {
     const entries = await Promise.all(
-      Object.entries(CONTENT_MODULES[collection]).map(
+      Object.entries(CONTENT_METADATA[collection]).map(
         async ([path, loadModule]): Promise<ContentEntry> => {
           const { metadata } = await loadModule();
           const slug = slugFromPath(path);
@@ -40,11 +41,17 @@ export const getContentEntries = cache(
   }
 );
 
-// routes set dynamicParams = false, so slug is always one of these modules
-export const getContentEntryModule = cache(
-  (collection: ContentCollection, slug: string) =>
-    CONTENT_MODULES[collection][`./${collection}/${slug}/index.tsx`]()
-);
+export async function getContentEntry(
+  collection: ContentCollection,
+  slug: string
+) {
+  const entries = await getContentEntries(collection);
+  const entry = entries.find((entry) => entry.slug === slug);
+
+  if (!entry) notFound();
+
+  return entry;
+}
 
 export function sortByNewest<T extends { publishedDate: string }>(
   items: readonly T[]
@@ -55,11 +62,11 @@ export function sortByNewest<T extends { publishedDate: string }>(
 }
 
 function slugFromPath(path: string) {
-  const match = path.match(/\/([^/]+)\/index\.tsx$/);
+  const slug = path.match(/\/([^/]+)\/metadata\.ts$/)?.[1];
 
-  if (!match) {
+  if (!slug) {
     throw new Error(`Could not derive a content slug from ${path}.`);
   }
 
-  return match[1];
+  return slug;
 }

@@ -1,12 +1,4 @@
-import type { ContentEntryMetadata } from "../../collection";
-
 import Reveal from "./components/Reveal";
-
-export const metadata: ContentEntryMetadata = {
-  title: "Reveal",
-  description: "Pointer-tracked image reveal.",
-  publishedDate: "2026-02-01",
-};
 
 export default function RevealEntry() {
   return (

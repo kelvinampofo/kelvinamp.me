@@ -1,19 +1,31 @@
 import type { Metadata } from "next";
+import type { ComponentType } from "react";
 
 import {
   getContentEntries,
-  getContentEntryModule,
+  getContentEntry,
   type ContentCollection,
 } from "./collection";
 
 type Params = Promise<{ slug: string }>;
 
-// each route file exports concrete Next handlers, the repeated entry loading,
-// metadata, and static-param behavior lives here
-export function createRoute(collection: ContentCollection) {
+export interface ContentEntryModule {
+  default: ComponentType;
+}
+
+export function createRoute(
+  collection: ContentCollection,
+  loadEntry: (slug: string) => Promise<ContentEntryModule> | undefined
+) {
   async function EntryPage({ params }: { params: Params }) {
     const { slug } = await params;
-    const { default: Entry } = await getContentEntryModule(collection, slug);
+    const entry = await loadEntry(slug);
+
+    if (!entry) {
+      throw new Error(`Missing content module for ${collection}/${slug}.`);
+    }
+
+    const { default: Entry } = entry;
 
     return <Entry />;
   }
@@ -30,8 +42,10 @@ export function createRoute(collection: ContentCollection) {
     params: Params;
   }): Promise<Metadata> {
     const { slug } = await params;
-    const { metadata } = await getContentEntryModule(collection, slug);
-    const { title, description, publishedDate } = metadata;
+    const { title, description, publishedDate } = await getContentEntry(
+      collection,
+      slug
+    );
 
     const canonical = `/${collection}/${slug}`;
 

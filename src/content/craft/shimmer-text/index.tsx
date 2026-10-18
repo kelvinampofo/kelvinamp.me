@@ -1,14 +1,6 @@
 import Card from "../../../components/card/Card";
-import type { ContentEntryMetadata } from "../../collection";
 
 import ShimmerText from "./components/ShimmerText";
-
-
-export const metadata: ContentEntryMetadata = {
-  title: "Shimmer Text",
-  description: "Loading shimmer text from OpenAI o1.",
-  publishedDate: "2024-09-13",
-};
 
 export default function ShimmerTextEntry() {
   return (

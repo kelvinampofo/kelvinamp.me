@@ -1,13 +1,6 @@
 import Card from "../../../components/card/Card";
-import type { ContentEntryMetadata } from "../../collection";
 
 import NumericScrubber from "./components/NumericScrubber";
-
-export const metadata: ContentEntryMetadata = {
-  title: "Numeric Scrubber",
-  description: "Inline numeric scrubber.",
-  publishedDate: "2026-01-11",
-};
 
 export default function NumericScrubberEntry() {
   return (

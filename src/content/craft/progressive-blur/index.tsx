@@ -1,13 +1,6 @@
 import Card from "../../../components/card/Card";
-import type { ContentEntryMetadata } from "../../collection";
 
 import ProgressiveBlur from "./components/ProgressiveBlur";
-
-export const metadata: ContentEntryMetadata = {
-  title: "Progressive Blur",
-  description: "Progressive linear blur.",
-  publishedDate: "2024-05-27",
-};
 
 export default function ProgressiveBlurEntry() {
   return (
