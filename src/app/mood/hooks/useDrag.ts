@@ -8,7 +8,9 @@ import {
   type SetStateAction,
 } from "react";
 
+import type { Asset } from "../assets";
 import {
+  getPlacement,
   toItemTransform,
   type Placements,
   type Point,
@@ -26,6 +28,7 @@ interface DragState {
   element: HTMLElement;
   pointerStart: Point;
   itemStart: Point;
+  previousStackOrder: number;
   nextPosition: Point;
   stackOrder: number;
 }
@@ -57,12 +60,8 @@ export default function useDrag({
 
     if (!drag) return;
 
-    const placement = placements[drag.itemId];
-
-    if (placement) {
-      drag.element.style.transform = toItemTransform(placement);
-      drag.element.style.zIndex = String(placement.stackOrder);
-    }
+    drag.element.style.transform = toItemTransform(drag.itemStart);
+    drag.element.style.zIndex = String(drag.previousStackOrder);
   }
 
   // draw live, then commit on release
@@ -81,7 +80,7 @@ export default function useDrag({
   }
 
   function onPointerDown(
-    itemId: string,
+    asset: Asset,
     event: ReactPointerEvent<HTMLDivElement>
   ) {
     if (tool !== "select") return;
@@ -91,21 +90,22 @@ export default function useDrag({
       return;
     }
 
-    const placement = placements[itemId];
-
-    if (!placement) return;
+    const placement = getPlacement(asset, placements);
 
     const stackOrder =
-      Math.max(0, ...Object.values(placements).map((item) => item.stackOrder)) +
-      1;
+      Math.max(
+        0,
+        ...Object.values(placements).map((item) => item?.stackOrder ?? 0)
+      ) + 1;
 
     dragRef.current = {
       isDragging: false,
       pointerId: event.pointerId,
-      itemId,
+      itemId: asset.id,
       element: event.currentTarget,
       pointerStart: { x: event.clientX, y: event.clientY },
       itemStart: { x: placement.x, y: placement.y },
+      previousStackOrder: placement.stackOrder,
       nextPosition: { x: placement.x, y: placement.y },
       stackOrder,
     };

@@ -1,6 +1,6 @@
 import { clamp } from "../../utils/math";
 
-import { ASSETS } from "./assets";
+import { ASSETS, type Asset } from "./assets";
 
 const INITIAL_SCALE = 0.95;
 export const ZOOM_STEP = 1.06;
@@ -41,7 +41,11 @@ interface Placement extends Point {
 }
 
 export interface Placements {
-  [id: string]: Placement;
+  [id: string]: Placement | undefined;
+}
+
+export function getPlacement(asset: Asset, placements: Placements): Placement {
+  return placements[asset.id] ?? { x: asset.x, y: asset.y, stackOrder: 0 };
 }
 
 export type Tool = "select" | "pan";
@@ -127,10 +131,10 @@ export function getBoardBounds(
   placements: Placements,
   padding: Size = { width: 0, height: 0 }
 ): Rect {
-  const boxes = ASSETS.map(({ id, width, height }) => ({
-    ...placements[id],
-    width,
-    height,
+  const boxes = ASSETS.map((asset) => ({
+    ...getPlacement(asset, placements),
+    width: asset.width,
+    height: asset.height,
   }));
 
   const minX = Math.min(...boxes.map(({ x }) => x)) - padding.width;

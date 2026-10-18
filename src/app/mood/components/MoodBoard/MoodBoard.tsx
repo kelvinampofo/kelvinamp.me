@@ -9,6 +9,7 @@ import useShortcuts from "../../../../hooks/useShortcuts";
 import { ASSETS } from "../../assets";
 import {
   INITIAL_CAMERA,
+  getPlacement,
   toCameraTransform,
   toItemTransform,
   type Placements,
@@ -29,9 +30,7 @@ const EAGER_ITEM_IDS = new Set([
   "nasa-spacecraft-markings",
 ]);
 
-const INITIAL_PLACEMENTS: Placements = Object.fromEntries(
-  ASSETS.map(({ id, x, y }) => [id, { x, y, stackOrder: 0 }])
-);
+const INITIAL_PLACEMENTS: Placements = {};
 
 export default function MoodBoard() {
   const [placements, setPlacements] = useState(INITIAL_PLACEMENTS);
@@ -117,15 +116,16 @@ export default function MoodBoard() {
             transform: toCameraTransform(INITIAL_CAMERA),
           }}
         >
-          {ASSETS.map(({ id, width, height, src, alt }, index) => {
-            const placement = placements[id];
+          {ASSETS.map((asset, index) => {
+            const { id, width, height, src, alt } = asset;
+            const placement = getPlacement(asset, placements);
 
             return (
               <div
                 key={id}
                 data-board-item
                 className={styles.item}
-                onPointerDown={(event) => onDragItem(id, event)}
+                onPointerDown={(event) => onDragItem(asset, event)}
                 style={{
                   width,
                   height,

@@ -15,6 +15,7 @@ import {
   focusCamera,
   fromMinimapPoint,
   getMinimapProjection,
+  getPlacement,
   getVisibleBounds,
   toMinimapRect,
   type Camera,
@@ -166,8 +167,9 @@ export default function Minimap({
       onLostPointerCapture={handlePointerEnd}
     >
       <div ref={contentRef} className={styles.content}>
-        {ASSETS.map(({ id, width, height, src }) => {
-          const placement = placements[id];
+        {ASSETS.map((asset) => {
+          const { id, width, height, src } = asset;
+          const placement = getPlacement(asset, placements);
           const rect = toMinimapRect(
             { ...placement, width, height },
             projection
