@@ -3,9 +3,9 @@
 import { use, useLayoutEffect, useRef, useState } from "react";
 import { browser } from "react-dom";
 
-interface WindowDimension<T extends number | undefined = number | undefined> {
-  width: T;
-  height: T;
+interface WindowDimension {
+  width: number;
+  height: number;
 }
 
 interface UseWindowDimensionOptions {

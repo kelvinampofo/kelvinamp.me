@@ -1,5 +1,6 @@
 "use client";
 
+import { Tooltip } from "@base-ui/react/tooltip";
 import { type KeyboardEvent, use, useState } from "react";
 import { browser } from "react-dom";
 
@@ -52,16 +53,18 @@ export default function StatusDisplay() {
   }
 
   return (
-    <div
-      role="button"
-      tabIndex={0}
-      className={styles.statusDisplay}
-      data-animate
-      onKeyDown={handleKeyDown}
-      onMouseDown={handleShowNextItem}
-      style={{ "--stagger": "6" }}
-    >
-      {statusItems[activeIndex]}
-    </div>
+    <Tooltip.Provider>
+      <div
+        role="button"
+        tabIndex={0}
+        className={styles.statusDisplay}
+        data-animate
+        onKeyDown={handleKeyDown}
+        onMouseDown={handleShowNextItem}
+        style={{ "--stagger": "6" }}
+      >
+        {statusItems[activeIndex]}
+      </div>
+    </Tooltip.Provider>
   );
 }
