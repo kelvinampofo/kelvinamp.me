@@ -91,7 +91,7 @@ export default function MoodBoard() {
     <>
       <div
         ref={viewportRef}
-        className={clsx(styles.viewport, { [styles.panMode]: tool === "pan" })}
+        className={clsx(styles.viewport, tool === "pan" && styles.panMode)}
         onPointerDown={onPan}
         onPointerDownCapture={onTouch}
         onPointerMove={(event) => {

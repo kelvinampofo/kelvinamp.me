@@ -30,7 +30,7 @@ interface MediaPlayerRootProps extends ComponentPropsWithoutRef<"div"> {
 }
 
 interface MediaPlayerIconProps {
-  className: string;
+  className?: string;
 }
 
 type ShortcutHandlers = Parameters<typeof useShortcuts>[0];
@@ -181,7 +181,11 @@ function Root({
         PLAYBACK_RATES.length - 1
       );
 
-      video.playbackRate = PLAYBACK_RATES[nextIndex];
+      const nextRate = PLAYBACK_RATES[nextIndex];
+
+      if (nextRate !== undefined) {
+        video.playbackRate = nextRate;
+      }
     });
   }
 

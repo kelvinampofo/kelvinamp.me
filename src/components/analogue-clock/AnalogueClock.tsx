@@ -52,11 +52,12 @@ interface ClockHandProps {
 function ClockHand({ rotation, type }: ClockHandProps) {
   return (
     <div
-      className={clsx(styles.hand, {
-        [styles.hourHand]: type === "hours",
-        [styles.minuteHand]: type === "minutes",
-        [styles.secondHand]: type === "seconds",
-      })}
+      className={clsx(
+        styles.hand,
+        type === "hours" && styles.hourHand,
+        type === "minutes" && styles.minuteHand,
+        type === "seconds" && styles.secondHand
+      )}
       style={{ "--rotation": `${rotation}deg` }}
     />
   );

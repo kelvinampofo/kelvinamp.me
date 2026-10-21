@@ -156,6 +156,8 @@ function useLens(
     measuredRef.current = false;
 
     const resizeObserver = new ResizeObserver(([entry]) => {
+      if (!entry) return;
+
       const nextWidth = entry.contentRect.width;
       if (!nextWidth) return;
 

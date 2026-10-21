@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
+    "typecheck": "tsc --noEmit",
     "prettier": "prettier --write ."
   },
   "dependencies": {

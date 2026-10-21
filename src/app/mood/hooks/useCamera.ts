@@ -78,9 +78,9 @@ export default function useCamera({
       centreCamera(current, initialPlacementsRef.current, size)
     );
 
-    const resizeObserver = new ResizeObserver(([entry]) =>
-      resize(entry.contentRect)
-    );
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      if (entry) resize(entry.contentRect);
+    });
 
     resizeObserver.observe(element);
     return () => resizeObserver.disconnect();

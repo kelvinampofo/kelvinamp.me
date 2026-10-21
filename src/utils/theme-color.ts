@@ -64,9 +64,9 @@ function hexToRgb(hex: string) {
   const clean = hex.replace("#", "");
 
   if (clean.length === 3) {
-    const r = parseInt(clean[0] + clean[0], 16);
-    const g = parseInt(clean[1] + clean[1], 16);
-    const b = parseInt(clean[2] + clean[2], 16);
+    const r = parseInt(clean.charAt(0).repeat(2), 16);
+    const g = parseInt(clean.charAt(1).repeat(2), 16);
+    const b = parseInt(clean.charAt(2).repeat(2), 16);
 
     return [r, g, b] satisfies Rgb;
   }
