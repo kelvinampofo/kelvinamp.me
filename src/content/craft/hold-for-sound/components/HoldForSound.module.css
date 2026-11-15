@@ -13,6 +13,7 @@
 
 .button {
   position: relative;
+  border: 1px solid var(--color-grey-4);
   display: flex;
   height: 36px;
   width: 150px;
@@ -21,20 +22,20 @@
   border-radius: var(--radius-4);
   background-color: var(--color-grey-1);
   padding: var(--space-2) var(--space-4);
-  outline: 1px solid var(--color-grey-4);
-  transition:
-    background-color 0.2s,
-    box-shadow 0.2s;
+  transition: background-color 0.2s;
   user-select: none;
   -webkit-user-select: none;
   color: var(--color-foreground);
-  box-shadow: var(--elevation-1);
 
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
 
-.button:active {
+.button:not(:focus-visible) {
+  box-shadow: var(--elevation-1);
+}
+
+.button:active:not(:focus-visible) {
   box-shadow: none;
 }
 

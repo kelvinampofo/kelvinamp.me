@@ -26,7 +26,9 @@
   padding: var(--space-8);
   border-radius: var(--radius-8);
   margin: 0 var(--space-6);
-  transition: var(--duration-hover);
+  transition:
+    background-color var(--duration-hover),
+    color var(--duration-hover);
 }
 
 .navigationButton:hover:not(:disabled) {
