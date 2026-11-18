@@ -26,9 +26,8 @@ export default function Home() {
           Kelvin Ampofo
         </Heading>
         <p data-animate style={{ "--stagger": "1" }}>
-          Making software with a constant emphasis on human-computer interaction
-          and aesthetic sensibility. An insatiable curiosity for{" "}
-          <em>novel&nbsp;interfaces</em>.
+          Making software with a constant emphasis on human-computer interaction and aesthetic
+          sensibility. An insatiable curiosity for <em>novel&nbsp;interfaces</em>.
         </p>
         <p data-animate style={{ "--stagger": "2" }}>
           Read more on the <Link href="/now">now</Link> page.

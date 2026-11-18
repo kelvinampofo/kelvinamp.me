@@ -14,8 +14,8 @@ export default function MediaFormats() {
       <ul>
         <li>8 bits per pixel (256 colours), huge file sizes</li>
         <li>
-          good for memes, bad for actual image quality&mdash;avoid for anything
-          longer than a few seconds
+          good for memes, bad for actual image quality&mdash;avoid for anything longer than a few
+          seconds
         </li>
       </ul>
       <Heading as="h2">JPEG</Heading>
@@ -31,14 +31,10 @@ export default function MediaFormats() {
       <Heading as="h2">WebP</Heading>
       <ul>
         <li>
-          supports animation, transparency, and both lossy and lossless
-          compression
+          supports animation, transparency, and both lossy and lossless compression
           <ul>
             <li>
-              lossy:{" "}
-              <a href="https://developers.google.com/speed/webp/docs/webp_study">
-                ~25-34%
-              </a>{" "}
+              lossy: <a href="https://developers.google.com/speed/webp/docs/webp_study">~25-34%</a>{" "}
               smaller than JPEG
             </li>
             <li>
@@ -51,23 +47,19 @@ export default function MediaFormats() {
           </ul>
         </li>
         <li>
-          better than GIF, PNG, and JPEG in most cases&mdash;ideal for the
-          modern web; ensure a fallback for older Safari versions (&lt; 14)
+          better than GIF, PNG, and JPEG in most cases&mdash;ideal for the modern web; ensure a
+          fallback for older Safari versions (&lt; 14)
         </li>
       </ul>
       <Heading as="h2">AVIF</Heading>
       <ul>
         <li>
-          newer format built on the AV1 codec to achieve a high compression rate
-          with no sacrifice to video quality
+          newer format built on the AV1 codec to achieve a high compression rate with no sacrifice
+          to video quality
         </li>
+        <li>smaller than JPEG/WebP, supports up to 12-bit colour depth, HDR, and animation</li>
         <li>
-          smaller than JPEG/WebP, supports up to 12-bit colour depth, HDR, and
-          animation
-        </li>
-        <li>
-          should be the default if supported, though decoding can be
-          CPU-intensive on some platforms
+          should be the default if supported, though decoding can be CPU-intensive on some platforms
         </li>
       </ul>
       <Heading as="h2">JPEG XL</Heading>
@@ -79,13 +71,12 @@ export default function MediaFormats() {
       <ul>
         <li>Apple’s format for iOS photos</li>
         <li>
-          great compression, Live Photo support, depth data&mdash;not safe for
-          the web, convert to WebP or AVIF first
+          great compression, Live Photo support, depth data&mdash;not safe for the web, convert to
+          WebP or AVIF first
         </li>
         <li>
-          use the HTML <code>&lt;picture&gt;</code> element to specify
-          fallbacks, allowing the browser to choose a supported format from top
-          to bottom
+          use the HTML <code>&lt;picture&gt;</code> element to specify fallbacks, allowing the
+          browser to choose a supported format from top to bottom
         </li>
       </ul>
       <aside aria-label="This is a code block of an HTML picture element with source fallbacks for HEIC, AVIF, WebP, and JPEG.">
@@ -105,11 +96,8 @@ export default function MediaFormats() {
         <li>avoid GIF unless essential</li>
         <li>use WebP or video formats for animations</li>
         <li>
-          for{" "}
-          <a href="https://developer.apple.com/documentation/webkit/wkwebview">
-            WKWebView
-          </a>
-          : use HEIC for hardware acceleration
+          for <a href="https://developer.apple.com/documentation/webkit/wkwebview">WKWebView</a>:
+          use HEIC for hardware acceleration
         </li>
         <li>always serve the smallest viable file</li>
       </ul>

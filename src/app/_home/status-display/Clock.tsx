@@ -10,11 +10,7 @@ interface ClockProps extends ComponentProps<typeof AnalogueClock> {
   timezoneOffset: string;
 }
 
-export default function Clock({
-  currentTime,
-  timezoneOffset,
-  timeParts,
-}: ClockProps) {
+export default function Clock({ currentTime, timezoneOffset, timeParts }: ClockProps) {
   return (
     <Tooltip content={`${currentTime} ${timezoneOffset}`}>
       <AnalogueClock timeParts={timeParts} />

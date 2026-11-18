@@ -5,11 +5,7 @@ import { useSyncExternalStore } from "react";
 const FINE_POINTER_QUERY = "(pointer: fine)";
 
 export default function usePointerDevice() {
-  const isPointerDevice = useSyncExternalStore(
-    subscribe,
-    getSnapshot,
-    getServerSnapshot
-  );
+  const isPointerDevice = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   return { isPointerDevice };
 }

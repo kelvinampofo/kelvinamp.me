@@ -13,9 +13,8 @@ export default function NotFound() {
     <Page backTo="/">
       <Heading>404 — Not Found</Heading>
       <p>
-        You know what else isn’t found? Those old Intel stickers on Windows
-        machines—the ones with the hidden holographic chips on the back that
-        nobody ever saw.
+        You know what else isn’t found? Those old Intel stickers on Windows machines—the ones with
+        the hidden holographic chips on the back that nobody ever saw.
       </p>
     </Page>
   );

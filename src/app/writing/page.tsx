@@ -22,8 +22,8 @@ export default async function WritingPage() {
     <Page backTo="/">
       <Heading>Writing</Heading>
       <p className="description">
-        Infrequent thoughts on software <em>&</em> design, along with a running
-        list of curated <Link href="/words">words</Link>.
+        Infrequent thoughts on software <em>&</em> design, along with a running list of curated{" "}
+        <Link href="/words">words</Link>.
       </p>
       <List
         entries={entries}

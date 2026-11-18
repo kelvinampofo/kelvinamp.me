@@ -6,13 +6,13 @@ export default function useFullscreen() {
   const isFullscreen = useSyncExternalStore(
     subscribeFullscreen,
     getFullscreenSnapshot,
-    getServerSnapshot
+    getServerSnapshot,
   );
 
   const canFullscreen = useSyncExternalStore(
     subscribeFullscreenSupport,
     getFullscreenSupportSnapshot,
-    getServerSnapshot
+    getServerSnapshot,
   );
 
   async function enterFullscreen() {

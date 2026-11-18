@@ -35,8 +35,7 @@ export const wordEntries = (
     {
       word: "titbit",
       type: "noun",
-      definition:
-        "a small and particularly interesting item of gossip or information",
+      definition: "a small and particularly interesting item of gossip or information",
     },
     {
       word: "grok",
@@ -67,20 +66,17 @@ export const wordEntries = (
     {
       word: "resumption",
       type: "noun",
-      definition:
-        "the action of beginning something again after a pause or interruption",
+      definition: "the action of beginning something again after a pause or interruption",
     },
     {
       word: "grandiose",
       type: "adjective",
-      definition:
-        "impressive or magnificent in appearance or style, especially pretentiously so",
+      definition: "impressive or magnificent in appearance or style, especially pretentiously so",
     },
     {
       word: "tangentially",
       type: "adverb",
-      definition:
-        "in a way that relates only slightly to a matter; peripherally",
+      definition: "in a way that relates only slightly to a matter; peripherally",
     },
     {
       word: "cyclical",
@@ -125,14 +121,12 @@ export const wordEntries = (
     {
       word: "horology",
       type: "noun",
-      definition:
-        "the study and measurement of time and the art of making clocks and watches",
+      definition: "the study and measurement of time and the art of making clocks and watches",
     },
     {
       word: "mnemonics",
       type: "noun",
-      definition:
-        "the study and development of systems for improving and assisting the memory",
+      definition: "the study and development of systems for improving and assisting the memory",
     },
     {
       word: "insipid",
@@ -157,8 +151,7 @@ export const wordEntries = (
     {
       word: "corroboration",
       type: "noun",
-      definition:
-        "evidence that confirms or supports a statement, theory, or finding",
+      definition: "evidence that confirms or supports a statement, theory, or finding",
     },
     {
       word: "zeitgeist",
@@ -174,15 +167,13 @@ export const wordEntries = (
     {
       word: "emanate",
       type: "verb",
-      definition:
-        "(of a feeling, quality, or sensation) issue or spread out from (a source)",
+      definition: "(of a feeling, quality, or sensation) issue or spread out from (a source)",
       variations: ["emanates", "emanating", "emanated"],
     },
     {
       word: "proprioception",
       type: "noun",
-      definition:
-        "perception or awareness of the position and movement of the body",
+      definition: "perception or awareness of the position and movement of the body",
     },
     {
       word: "spelunking",
@@ -202,8 +193,7 @@ export const wordEntries = (
     {
       word: "corollary",
       type: "noun",
-      definition:
-        "a statement that follows directly from another statement or proposition",
+      definition: "a statement that follows directly from another statement or proposition",
     },
     {
       word: "ostensible",

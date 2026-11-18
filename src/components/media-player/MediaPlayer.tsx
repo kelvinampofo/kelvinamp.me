@@ -34,10 +34,7 @@ interface MediaPlayerIconProps {
 }
 
 type ShortcutHandlers = Parameters<typeof useShortcuts>[0];
-interface MediaPlayerVideoProps extends Omit<
-  ComponentPropsWithoutRef<"video">,
-  "ref"
-> {
+interface MediaPlayerVideoProps extends Omit<ComponentPropsWithoutRef<"video">, "ref"> {
   active?: boolean;
 }
 type Indicator = "play" | "pause";
@@ -62,10 +59,7 @@ function useMediaPlayerContext(componentName: string) {
 }
 
 function toggleTextTrack(track: TextTrack) {
-  track.mode =
-    track.mode === "showing" || track.mode === "hidden"
-      ? "disabled"
-      : "showing";
+  track.mode = track.mode === "showing" || track.mode === "hidden" ? "disabled" : "showing";
 }
 
 async function playWithoutInterrupting(video: HTMLVideoElement) {
@@ -77,12 +71,7 @@ async function playWithoutInterrupting(video: HTMLVideoElement) {
   }
 }
 
-function Root({
-  children,
-  className,
-  shortcutsEnabled = false,
-  ...props
-}: MediaPlayerRootProps) {
+function Root({ children, className, shortcutsEnabled = false, ...props }: MediaPlayerRootProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [indicator, setIndicator] = useState<IndicatorState>(null);
@@ -173,13 +162,8 @@ function Root({
   function cyclePlaybackRate(direction: 1 | -1) {
     withVideo((video) => {
       const currentIndex = PLAYBACK_RATES.indexOf(video.playbackRate);
-      const safeIndex =
-        currentIndex === -1 ? PLAYBACK_RATES.indexOf(1) : currentIndex;
-      const nextIndex = clamp(
-        safeIndex + direction,
-        0,
-        PLAYBACK_RATES.length - 1
-      );
+      const safeIndex = currentIndex === -1 ? PLAYBACK_RATES.indexOf(1) : currentIndex;
+      const nextIndex = clamp(safeIndex + direction, 0, PLAYBACK_RATES.length - 1);
 
       const nextRate = PLAYBACK_RATES[nextIndex];
 
@@ -223,7 +207,7 @@ function Root({
       video.currentTime = clamp(
         video.currentTime + direction * FRAME_DURATION,
         0,
-        video.duration || Number.MAX_SAFE_INTEGER
+        video.duration || Number.MAX_SAFE_INTEGER,
       );
     });
   }
@@ -381,14 +365,7 @@ function PlayIcon({ className }: MediaPlayerIconProps) {
 function PauseIcon({ className }: MediaPlayerIconProps) {
   return (
     <svg aria-hidden className={className} viewBox="0 0 18 18" fill="none">
-      <rect
-        x="4.5"
-        y="3.5"
-        width="3.5"
-        height="11"
-        rx="1"
-        fill="currentColor"
-      />
+      <rect x="4.5" y="3.5" width="3.5" height="11" rx="1" fill="currentColor" />
       <rect x="10" y="3.5" width="3.5" height="11" rx="1" fill="currentColor" />
     </svg>
   );

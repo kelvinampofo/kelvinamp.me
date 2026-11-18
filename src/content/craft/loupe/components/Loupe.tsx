@@ -44,7 +44,7 @@ export default function Loupe() {
     // the lens origin is its centre, so a canvas point p lands at (p - centre) * magnification
     zoomRef.current?.setAttribute(
       "transform",
-      `translate(${-x * MAGNIFICATION} ${-y * MAGNIFICATION})`
+      `translate(${-x * MAGNIFICATION} ${-y * MAGNIFICATION})`,
     );
   });
 
@@ -59,8 +59,7 @@ export default function Loupe() {
       aria-describedby={`${id}-instructions`}
     >
       <desc id={`${id}-instructions`}>
-        Drag the lens over the paragraph to magnify the text beneath it using a
-        mouse, touch or pen
+        Drag the lens over the paragraph to magnify the text beneath it using a mouse, touch or pen
       </desc>
       <defs>
         <clipPath id={`${id}-clip`}>
@@ -76,17 +75,8 @@ export default function Loupe() {
         {...handlers}
       >
         {/* an offset circle stands in for the drop-shadow filter, which would be re-run on every frame */}
-        <circle
-          className={styles.lensShadow}
-          r={LENS_RADIUS}
-          cy={1}
-          pointerEvents="none"
-        />
-        <circle
-          r={LENS_RADIUS}
-          fill="var(--color-grey-2)"
-          pointerEvents="none"
-        />
+        <circle className={styles.lensShadow} r={LENS_RADIUS} cy={1} pointerEvents="none" />
+        <circle r={LENS_RADIUS} fill="var(--color-grey-2)" pointerEvents="none" />
         <g clipPath={`url(#${id}-clip)`} pointerEvents="none">
           <g ref={zoomRef}>
             <g transform={`scale(${MAGNIFICATION})`}>
@@ -111,9 +101,9 @@ function Prose({ width }: ProseProps) {
     >
       <div className={styles.prose}>
         <p>
-          A curve that catches the light. A texture you can almost feel. The
-          smallest details give familiar things their character. Take a closer
-          look. There’s more here than you first noticed.
+          A curve that catches the light. A texture you can almost feel. The smallest details give
+          familiar things their character. Take a closer look. There’s more here than you first
+          noticed.
         </p>
       </div>
     </foreignObject>
@@ -123,7 +113,7 @@ function Prose({ width }: ProseProps) {
 // Keep the lens position in a ref so pointer moves update the DOM without re-rendering.
 function useLens(
   containerRef: RefObject<SVGSVGElement | null>,
-  positionLens: (center: Point) => void
+  positionLens: (center: Point) => void,
 ) {
   const centerRef = useRef<Point>({ x: 0, y: CANVAS_HEIGHT / 2 });
   const dragRef = useRef<Drag | null>(null);
@@ -140,10 +130,8 @@ function useLens(
 
     // centre the lens once we know the canvas width, then preserve the user's position unless a resize pushes it past an edge
     centerRef.current = constrainPosition(
-      firstMeasurement
-        ? { x: nextWidth / 2, y: CANVAS_HEIGHT / 2 }
-        : centerRef.current,
-      nextWidth
+      firstMeasurement ? { x: nextWidth / 2, y: CANVAS_HEIGHT / 2 } : centerRef.current,
+      nextWidth,
     );
 
     positionLens(centerRef.current);
@@ -205,7 +193,7 @@ function useLens(
         x: event.clientX - drag.origin.x - drag.offset.x,
         y: event.clientY - drag.origin.y - drag.offset.y,
       },
-      width
+      width,
     );
 
     positionLens(centerRef.current);

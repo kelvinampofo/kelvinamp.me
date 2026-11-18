@@ -1,11 +1,9 @@
 import { createRoute, type ContentEntryModule } from "../../../content/route";
 
-const entries = import.meta.glob<ContentEntryModule>(
-  "../../../content/writing/*/index.tsx"
-);
+const entries = import.meta.glob<ContentEntryModule>("../../../content/writing/*/index.tsx");
 
 const writingRoute = createRoute("writing", (slug) =>
-  entries[`../../../content/writing/${slug}/index.tsx`]?.()
+  entries[`../../../content/writing/${slug}/index.tsx`]?.(),
 );
 
 export default writingRoute.EntryPage;

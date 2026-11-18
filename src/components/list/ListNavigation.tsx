@@ -17,9 +17,7 @@ export default function ListNavigation({ children }: { children: ReactNode }) {
     }
 
     const boundary = event.currentTarget.querySelector(
-      event.shiftKey
-        ? ":scope > li:first-child > a"
-        : ":scope > li:last-child > a"
+      event.shiftKey ? ":scope > li:first-child > a" : ":scope > li:last-child > a",
     );
 
     // pause a held Tab at either the first or last item depending on the shift key

@@ -8,14 +8,7 @@ import {
   type RefObject,
 } from "react";
 
-import {
-  panCamera,
-  zoomBy,
-  zoomFromWheel,
-  ZOOM_STEP,
-  type Point,
-  type Tool,
-} from "../canvas";
+import { panCamera, zoomBy, zoomFromWheel, ZOOM_STEP, type Point, type Tool } from "../canvas";
 
 import type { CameraHandle } from "./useCamera";
 
@@ -36,22 +29,11 @@ interface UsePanZoomOptions {
   cancelDrag: () => void;
 }
 
-export default function usePanZoom({
-  viewportRef,
-  camera,
-  tool,
-  cancelDrag,
-}: UsePanZoomOptions) {
+export default function usePanZoom({ viewportRef, camera, tool, cancelDrag }: UsePanZoomOptions) {
   const mousePanRef = useRef<MousePan | null>(null);
   const touchesRef = useRef(new Map<number, TouchPointer>());
 
-  function pointInViewport({
-    clientX,
-    clientY,
-  }: {
-    clientX: number;
-    clientY: number;
-  }) {
+  function pointInViewport({ clientX, clientY }: { clientX: number; clientY: number }) {
     const bounds = viewportRef.current?.getBoundingClientRect();
 
     return {
@@ -74,9 +56,7 @@ export default function usePanZoom({
     const deltaY = event.deltaY * multiplier;
 
     if (event.metaKey || event.ctrlKey) {
-      camera.move((current) =>
-        zoomFromWheel(current, pointInViewport(event), deltaY)
-      );
+      camera.move((current) => zoomFromWheel(current, pointInViewport(event), deltaY));
     } else {
       camera.move((current) => panCamera(current, deltaX, deltaY));
     }
@@ -105,17 +85,12 @@ export default function usePanZoom({
 
   function zoom(factor: number) {
     camera.move((current, { width, height }) =>
-      zoomBy(current, { x: width / 2, y: height / 2 }, factor)
+      zoomBy(current, { x: width / 2, y: height / 2 }, factor),
     );
   }
 
   function onPointerDown(event: ReactPointerEvent<HTMLDivElement>) {
-    if (
-      event.pointerType === "touch" ||
-      tool !== "pan" ||
-      event.button !== 0 ||
-      event.ctrlKey
-    ) {
+    if (event.pointerType === "touch" || tool !== "pan" || event.button !== 0 || event.ctrlKey) {
       return;
     }
 
@@ -138,8 +113,7 @@ export default function usePanZoom({
     event.currentTarget.setPointerCapture(event.pointerId);
 
     const startsOnItem =
-      event.target instanceof Element &&
-      Boolean(event.target.closest("[data-board-item]"));
+      event.target instanceof Element && Boolean(event.target.closest("[data-board-item]"));
     touches.set(event.pointerId, {
       ...pointInViewport(event),
       canPan: tool === "pan" || !startsOnItem,
@@ -171,24 +145,19 @@ export default function usePanZoom({
     const nextPinch = getPinch(touches);
 
     if (previousPinch && nextPinch) {
-      const factor =
-        previousPinch.distance > 0
-          ? nextPinch.distance / previousPinch.distance
-          : 1;
+      const factor = previousPinch.distance > 0 ? nextPinch.distance / previousPinch.distance : 1;
 
       camera.move((current) => {
         const panned = panCamera(
           current,
           previousPinch.midpoint.x - nextPinch.midpoint.x,
-          previousPinch.midpoint.y - nextPinch.midpoint.y
+          previousPinch.midpoint.y - nextPinch.midpoint.y,
         );
 
         return zoomBy(panned, nextPinch.midpoint, factor);
       });
     } else if (touch.canPan) {
-      camera.move((current) =>
-        panCamera(current, touch.x - nextPoint.x, touch.y - nextPoint.y)
-      );
+      camera.move((current) => panCamera(current, touch.x - nextPoint.x, touch.y - nextPoint.y));
     }
   }
 
@@ -198,7 +167,7 @@ export default function usePanZoom({
     if (!previous || previous.pointerId !== event.pointerId) return;
 
     camera.move((current) =>
-      panCamera(current, previous.x - event.clientX, previous.y - event.clientY)
+      panCamera(current, previous.x - event.clientX, previous.y - event.clientY),
     );
 
     mousePanRef.current = {

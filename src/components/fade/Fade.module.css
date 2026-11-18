@@ -21,28 +21,18 @@
 
   -webkit-mask-image: var(
     --fade-mask,
-    var(
-      --mask,
-      linear-gradient(var(--direction), #000 var(--stop), transparent)
-    )
+    var(--mask, linear-gradient(var(--direction), #000 var(--stop), transparent))
   );
   mask-image: var(
     --fade-mask,
-    var(
-      --mask,
-      linear-gradient(var(--direction), #000 var(--stop), transparent)
-    )
+    var(--mask, linear-gradient(var(--direction), #000 var(--stop), transparent))
   );
 
   &::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      var(--direction),
-      var(--background),
-      transparent
-    );
+    background: linear-gradient(var(--direction), var(--background), transparent);
   }
 
   &[data-side="top"],
@@ -50,10 +40,7 @@
     left: 0;
     right: 0;
 
-    width: calc(
-      100% + var(--space-body-margin-left, 0px) +
-        var(--space-body-margin-right, 0px)
-    );
+    width: calc(100% + var(--space-body-margin-left, 0px) + var(--space-body-margin-right, 0px));
     height: var(--h);
 
     margin-left: calc(-1 * var(--space-body-margin-left, 0px));
@@ -83,9 +70,7 @@
     bottom: auto;
 
     width: var(--h);
-    height: calc(
-      100% + var(--space-page-top, 0px) + var(--space-page-bottom, 0px)
-    );
+    height: calc(100% + var(--space-page-top, 0px) + var(--space-page-bottom, 0px));
 
     margin-top: calc(-1 * var(--space-page-top, 0px));
     margin-bottom: calc(-1 * var(--space-page-bottom, 0px));

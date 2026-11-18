@@ -7,10 +7,7 @@ interface UseTimeOptions {
 
 type DateTimePartType = "hour" | "minute" | "second";
 
-export function useTime({
-  timeZone = "Europe/London",
-  enabled = true,
-}: UseTimeOptions = {}) {
+export function useTime({ timeZone = "Europe/London", enabled = true }: UseTimeOptions = {}) {
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
 
   useEffect(() => {
@@ -64,9 +61,8 @@ export function useTime({
   };
 
   const timezoneOffset =
-    timezoneFormatter
-      .formatToParts(currentDate)
-      .find((part) => part.type === "timeZoneName")?.value ?? "";
+    timezoneFormatter.formatToParts(currentDate).find((part) => part.type === "timeZoneName")
+      ?.value ?? "";
 
   return {
     currentTime: clockFormatter.format(currentDate),

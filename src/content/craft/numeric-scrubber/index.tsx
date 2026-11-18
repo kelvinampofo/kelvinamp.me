@@ -8,8 +8,7 @@ export default function NumericScrubberEntry() {
       <p>
         A re-implementation of Apple’s Math Notes number scrubbing—
         <span data-pointer="only">
-          hover over the number and drag the slider to change the value
-          interactively.
+          hover over the number and drag the slider to change the value interactively.
         </span>
         <span data-touch="only">
           tap the number and swipe left/right to adjust the value interactively.

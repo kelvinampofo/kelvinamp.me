@@ -33,18 +33,15 @@ export const getContentEntries = cache(
           const slug = slugFromPath(path);
 
           return { slug, ...metadata };
-        }
-      )
+        },
+      ),
     );
 
     return sortByNewest(entries);
-  }
+  },
 );
 
-export async function getContentEntry(
-  collection: ContentCollection,
-  slug: string
-) {
+export async function getContentEntry(collection: ContentCollection, slug: string) {
   const entries = await getContentEntries(collection);
   const entry = entries.find((entry) => entry.slug === slug);
 
@@ -53,12 +50,8 @@ export async function getContentEntry(
   return entry;
 }
 
-export function sortByNewest<T extends { publishedDate: string }>(
-  items: readonly T[]
-) {
-  return items.toSorted((a, b) =>
-    b.publishedDate.localeCompare(a.publishedDate)
-  );
+export function sortByNewest<T extends { publishedDate: string }>(items: readonly T[]) {
+  return items.toSorted((a, b) => b.publishedDate.localeCompare(a.publishedDate));
 }
 
 function slugFromPath(path: string) {

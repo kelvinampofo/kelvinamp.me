@@ -6,8 +6,7 @@ export default function ShimmerTextEntry() {
   return (
     <>
       <p>
-        Loading shimmer text from{" "}
-        <a href="https://openai.com/o1/#ui-video">OpenAI o1</a>.
+        Loading shimmer text from <a href="https://openai.com/o1/#ui-video">OpenAI o1</a>.
       </p>
       <Card>
         <ShimmerText>

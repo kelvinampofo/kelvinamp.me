@@ -21,22 +21,16 @@ interface AnalogueClockProps {
 
 export default function AnalogueClock({ timeParts }: AnalogueClockProps) {
   const secondsProgress = timeParts.seconds;
-  const minutesProgress =
-    timeParts.minutes + secondsProgress / SECONDS_PER_MINUTE;
+  const minutesProgress = timeParts.minutes + secondsProgress / SECONDS_PER_MINUTE;
   const hoursProgress =
-    (timeParts.hours % HOURS_PER_HALF_DAY) +
-    minutesProgress / SECONDS_PER_MINUTE;
+    (timeParts.hours % HOURS_PER_HALF_DAY) + minutesProgress / SECONDS_PER_MINUTE;
 
   const hoursDeg = hoursProgress * DEGREES_PER_HOUR;
   const minutesDeg = minutesProgress * DEGREES_PER_MINUTE_OR_SECOND;
   const secondsDeg = secondsProgress * DEGREES_PER_MINUTE_OR_SECOND;
 
   return (
-    <div
-      className={styles.clock}
-      aria-label="Analogue clock showing the current time"
-      role="img"
-    >
+    <div className={styles.clock} aria-label="Analogue clock showing the current time" role="img">
       <ClockHand rotation={hoursDeg} type="hours" />
       <ClockHand rotation={minutesDeg} type="minutes" />
       <ClockHand rotation={secondsDeg} type="seconds" />
@@ -56,7 +50,7 @@ function ClockHand({ rotation, type }: ClockHandProps) {
         styles.hand,
         type === "hours" && styles.hourHand,
         type === "minutes" && styles.minuteHand,
-        type === "seconds" && styles.secondHand
+        type === "seconds" && styles.secondHand,
       )}
       style={{ "--rotation": `${rotation}deg` }}
     />

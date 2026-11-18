@@ -85,10 +85,7 @@ export function zoomBy(camera: Camera, anchor: Point, factor: number) {
 }
 
 /** The slice of canvas the viewport currently shows. */
-export function getVisibleBounds(
-  camera: Camera,
-  { width, height }: Size
-): Rect {
+export function getVisibleBounds(camera: Camera, { width, height }: Size): Rect {
   return {
     x: -camera.x,
     y: -camera.y,
@@ -98,11 +95,7 @@ export function getVisibleBounds(
 }
 
 /** Puts a canvas point at the centre of the viewport. */
-export function focusCamera(
-  camera: Camera,
-  target: Point,
-  { width, height }: Size
-): Camera {
+export function focusCamera(camera: Camera, target: Point, { width, height }: Size): Camera {
   return {
     ...camera,
     x: width / (2 * camera.scale) - target.x,
@@ -110,18 +103,12 @@ export function focusCamera(
   };
 }
 
-export function centreCamera(
-  camera: Camera,
-  placements: Placements,
-  { width, height }: Size
-) {
+export function centreCamera(camera: Camera, placements: Placements, { width, height }: Size) {
   const bounds = getBoardBounds(placements);
 
   return {
     ...camera,
-    x:
-      (width / 2 + RIGHT_BIAS_PX) / camera.scale -
-      (bounds.x + bounds.width / 2),
+    x: (width / 2 + RIGHT_BIAS_PX) / camera.scale - (bounds.x + bounds.width / 2),
     y: height / 2 / camera.scale - (bounds.y + bounds.height / 2),
   };
 }
@@ -129,7 +116,7 @@ export function centreCamera(
 /** The box around every item at its current placement. */
 export function getBoardBounds(
   placements: Placements,
-  padding: Size = { width: 0, height: 0 }
+  padding: Size = { width: 0, height: 0 },
 ): Rect {
   const boxes = ASSETS.map((asset) => ({
     ...getPlacement(asset, placements),
@@ -139,19 +126,14 @@ export function getBoardBounds(
 
   const minX = Math.min(...boxes.map(({ x }) => x)) - padding.width;
   const minY = Math.min(...boxes.map(({ y }) => y)) - padding.height;
-  const maxX =
-    Math.max(...boxes.map(({ x, width }) => x + width)) + padding.width;
-  const maxY =
-    Math.max(...boxes.map(({ y, height }) => y + height)) + padding.height;
+  const maxX = Math.max(...boxes.map(({ x, width }) => x + width)) + padding.width;
+  const maxY = Math.max(...boxes.map(({ y, height }) => y + height)) + padding.height;
 
   return { x: minX, y: minY, width: maxX - minX, height: maxY - minY };
 }
 
 /** Fits the padded board into the minimap's size limits. */
-export function getMinimapProjection(
-  placements: Placements,
-  viewport: Size
-): MinimapProjection {
+export function getMinimapProjection(placements: Placements, viewport: Size): MinimapProjection {
   // size around the artwork because the board has no fixed bounds
   const bounds = getBoardBounds(placements, {
     width: MINIMAP_PADDING_X,
@@ -161,14 +143,11 @@ export function getMinimapProjection(
   // leave room for the board on narrow viewports
   const maxWidth = Math.min(
     MINIMAP_MAX_WIDTH,
-    (viewport.width || MINIMAP_MAX_WIDTH) * MINIMAP_MAX_VIEWPORT_WIDTH_RATIO
+    (viewport.width || MINIMAP_MAX_WIDTH) * MINIMAP_MAX_VIEWPORT_WIDTH_RATIO,
   );
 
   // preserve the artwork's aspect ratio within both size limits
-  const scale = Math.min(
-    maxWidth / bounds.width,
-    MINIMAP_MAX_HEIGHT / bounds.height
-  );
+  const scale = Math.min(maxWidth / bounds.width, MINIMAP_MAX_HEIGHT / bounds.height);
 
   return {
     bounds,
@@ -178,10 +157,7 @@ export function getMinimapProjection(
 }
 
 /** Converts a canvas rect to minimap space. */
-export function toMinimapRect(
-  rect: Rect,
-  { bounds, scale }: MinimapProjection
-): Rect {
+export function toMinimapRect(rect: Rect, { bounds, scale }: MinimapProjection): Rect {
   return {
     x: (rect.x - bounds.x) * scale,
     y: (rect.y - bounds.y) * scale,
@@ -191,10 +167,7 @@ export function toMinimapRect(
 }
 
 /** Converts a minimap point to canvas space. */
-export function fromMinimapPoint(
-  point: Point,
-  { bounds, scale }: MinimapProjection
-): Point {
+export function fromMinimapPoint(point: Point, { bounds, scale }: MinimapProjection): Point {
   return {
     x: bounds.x + point.x / scale,
     y: bounds.y + point.y / scale,

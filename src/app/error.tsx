@@ -4,11 +4,7 @@ import clsx from "clsx";
 
 import Heading from "../components/heading/Heading";
 
-export default function Error({
-  error,
-}: {
-  error: Error & { digest?: string };
-}) {
+export default function Error({ error }: { error: Error & { digest?: string } }) {
   return (
     <article className={clsx("prose", "layout-main")}>
       <Heading>{error.name}</Heading>

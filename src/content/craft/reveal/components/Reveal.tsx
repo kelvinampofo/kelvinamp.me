@@ -212,7 +212,7 @@ export default function Reveal() {
               factor: REVEAL_SMOOTHING,
             },
             null,
-            2
+            2,
           )}
         </pre>
       </div>

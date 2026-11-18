@@ -5,15 +5,7 @@ import { getContentEntries } from "../content/collection";
 export const baseUrl = "https://kelvinamp.me";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const pages = [
-    "",
-    "/now",
-    "/writing",
-    "/craft",
-    "/words",
-    "/mood",
-    "/readme",
-  ];
+  const pages = ["", "/now", "/writing", "/craft", "/words", "/mood", "/readme"];
 
   const [posts, demos] = await Promise.all([
     getContentEntries("writing"),

@@ -14,9 +14,7 @@ const DEFAULT_SIDE_OFFSET = 12;
 export default function Tooltip({ children, content }: TooltipProps) {
   return (
     <TooltipPrimitive.Root>
-      <TooltipPrimitive.Trigger className={styles.trigger}>
-        {children}
-      </TooltipPrimitive.Trigger>
+      <TooltipPrimitive.Trigger className={styles.trigger}>{children}</TooltipPrimitive.Trigger>
       <TooltipPrimitive.Portal>
         <TooltipPrimitive.Positioner sideOffset={DEFAULT_SIDE_OFFSET}>
           <TooltipPrimitive.Popup className={styles.popup}>

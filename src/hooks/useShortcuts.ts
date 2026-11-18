@@ -24,57 +24,50 @@ export default function useShortcuts(
     modifiers,
     matchBy = "key",
     holdDurationMs = 0,
-  }: UseShortcutsOptions = {}
+  }: UseShortcutsOptions = {},
 ) {
-  const requiredModifiers =
-    typeof modifiers === "string" ? [modifiers] : (modifiers ?? []);
+  const requiredModifiers = typeof modifiers === "string" ? [modifiers] : (modifiers ?? []);
 
-  const handleShortcut = useEffectEvent(
-    (event: KeyboardEvent, timers: HoldTimers) => {
-      if (event.defaultPrevented) return;
+  const handleShortcut = useEffectEvent((event: KeyboardEvent, timers: HoldTimers) => {
+    if (event.defaultPrevented) return;
 
-      const hasRequiredModifiers = MODIFIER_KEYS.every(
-        (modifier) =>
-          event.getModifierState(modifier) ===
-          requiredModifiers.includes(modifier)
-      );
+    const hasRequiredModifiers = MODIFIER_KEYS.every(
+      (modifier) => event.getModifierState(modifier) === requiredModifiers.includes(modifier),
+    );
 
-      if (!hasRequiredModifiers) {
-        cancelHoldTimers(timers);
-        return;
-      }
-
-      const callback = Object.entries(shortcuts).find(([key]) =>
-        matchBy === "key"
-          ? key.toLowerCase() === event.key.toLowerCase()
-          : key === event.code
-      )?.[1];
-
-      if (!callback) return;
-
-      // preventDefault must run before the keydown handler returns
-      if (preventDefault) {
-        event.preventDefault();
-      }
-
-      if (timers.has(event.code) || (holdDurationMs > 0 && event.repeat)) {
-        return;
-      }
-
-      if (holdDurationMs <= 0) {
-        callback(event);
-        return;
-      }
-
-      timers.set(
-        event.code,
-        setTimeout(() => {
-          timers.delete(event.code);
-          callback(event);
-        }, holdDurationMs)
-      );
+    if (!hasRequiredModifiers) {
+      cancelHoldTimers(timers);
+      return;
     }
-  );
+
+    const callback = Object.entries(shortcuts).find(([key]) =>
+      matchBy === "key" ? key.toLowerCase() === event.key.toLowerCase() : key === event.code,
+    )?.[1];
+
+    if (!callback) return;
+
+    // preventDefault must run before the keydown handler returns
+    if (preventDefault) {
+      event.preventDefault();
+    }
+
+    if (timers.has(event.code) || (holdDurationMs > 0 && event.repeat)) {
+      return;
+    }
+
+    if (holdDurationMs <= 0) {
+      callback(event);
+      return;
+    }
+
+    timers.set(
+      event.code,
+      setTimeout(() => {
+        timers.delete(event.code);
+        callback(event);
+      }, holdDurationMs),
+    );
+  });
 
   useEffect(() => {
     if (!enabled) return;

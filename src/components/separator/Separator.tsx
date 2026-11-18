@@ -17,7 +17,7 @@ export default function Separator({
       className={clsx(
         styles.separator,
         orientation === "vertical" ? styles.vertical : styles.horizontal,
-        className
+        className,
       )}
       {...props}
     />

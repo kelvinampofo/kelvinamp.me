@@ -6,9 +6,7 @@ interface AnimationControllerProps {
   children: ReactNode;
 }
 
-export default function AnimationController({
-  children,
-}: AnimationControllerProps) {
+export default function AnimationController({ children }: AnimationControllerProps) {
   useLayoutEffect(() => {
     const root = document.documentElement;
 
@@ -18,8 +16,7 @@ export default function AnimationController({
       }
     }
 
-    const shouldAnimate =
-      !document.hidden && !navigator.userActivation.hasBeenActive;
+    const shouldAnimate = !document.hidden && !navigator.userActivation.hasBeenActive;
 
     root.toggleAttribute("data-skip-animate", !shouldAnimate);
 

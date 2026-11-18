@@ -13,13 +13,7 @@ export default function PopupArrow({
   ...props
 }: PopupArrowProps) {
   return (
-    <svg
-      width={width}
-      height={height}
-      viewBox="0 0 20 10"
-      fill="none"
-      {...props}
-    >
+    <svg width={width} height={height} viewBox="0 0 20 10" fill="none" {...props}>
       <path
         d="M9.7 2.6L4.8 7C4.1 7.6 3.1 8 2.1 8H0V10H20V8H18.5C17.5 8 16.6 7.6 15.9 7L11 2.6C10.6 2.3 10 2.3 9.7 2.6Z"
         className={fillClassName}

@@ -19,9 +19,7 @@ export default function HoldToDelete() {
 
   function handleUp() {
     cancelAnimationRef.current?.();
-    cancelAnimationRef.current = animateThemeColor(
-      getComputedStyle(document.body).backgroundColor
-    );
+    cancelAnimationRef.current = animateThemeColor(getComputedStyle(document.body).backgroundColor);
   }
 
   useEffect(() => {

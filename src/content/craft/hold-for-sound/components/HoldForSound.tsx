@@ -16,22 +16,16 @@ import PlayIcon from "../../../../components/icons/Play";
 
 import styles from "./HoldForSound.module.css";
 
-const Waveform = dynamic(
-  () => import("./Waveform").then(({ Waveform }) => Waveform),
-  {
-    ssr: true,
-  }
-);
+const Waveform = dynamic(() => import("./Waveform").then(({ Waveform }) => Waveform), {
+  ssr: true,
+});
 
 const buttonVariants: Record<"default" | "pressed", TargetAndTransition> = {
   default: { scale: 1 },
   pressed: { scale: 1.05 },
 };
 
-const contentVariants: Record<
-  "initial" | "animate" | "exit",
-  TargetAndTransition
-> = {
+const contentVariants: Record<"initial" | "animate" | "exit", TargetAndTransition> = {
   initial: { opacity: 0, scale: 0.98, filter: "blur(1px)" },
   animate: { opacity: 1, scale: 1, filter: "blur(0px)" },
   exit: { opacity: 0, scale: 0.98, filter: "blur(1px)" },

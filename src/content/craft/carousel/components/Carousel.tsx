@@ -70,10 +70,7 @@ export default function Carousel() {
 
   const slideRef = useRef<HTMLUListElement | null>(null);
 
-  function scrollToSlide(
-    slider: HTMLUListElement | null,
-    currentSlideIndex: number
-  ) {
+  function scrollToSlide(slider: HTMLUListElement | null, currentSlideIndex: number) {
     if (!slider) return;
 
     slider.scrollTo({
@@ -94,9 +91,7 @@ export default function Carousel() {
   function handleMouseMove(event: React.MouseEvent<HTMLUListElement>) {
     const containerRect = event.currentTarget.getBoundingClientRect();
     const cursorDirection =
-      event.clientX < containerRect.left + containerRect.width / 2
-        ? "left"
-        : "right";
+      event.clientX < containerRect.left + containerRect.width / 2 ? "left" : "right";
 
     setIsCursorLeft(cursorDirection === "left");
     setIsCursorRight(cursorDirection === "right");
@@ -115,8 +110,7 @@ export default function Carousel() {
     const slideThreshold = containerRect.left + containerRect.width / 2;
 
     // determine the new slide index based on mouse position
-    const newSlideIndex =
-      mouseX < slideThreshold ? currentSlide - 1 : currentSlide + 1;
+    const newSlideIndex = mouseX < slideThreshold ? currentSlide - 1 : currentSlide + 1;
 
     if (newSlideIndex >= 0 && newSlideIndex < slides.length) {
       handleSlideChange(newSlideIndex);
@@ -128,7 +122,7 @@ export default function Carousel() {
 
   const cursorClasses = clsx(
     !isAtStartOfSlide && isCursorLeft && styles.previousCursor,
-    !isAtEndOfSlide && isCursorRight && styles.nextCursor
+    !isAtEndOfSlide && isCursorRight && styles.nextCursor,
   );
 
   return (

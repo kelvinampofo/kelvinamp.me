@@ -16,10 +16,7 @@ export function isAfter(date: DateInput, comparisonDate: DateInput) {
  * Returns true when the date and reference date fall in the same UTC year.
  */
 export function isThisYear(date: DateInput, referenceDate: DateInput) {
-  return (
-    parseDate(date).getUTCFullYear() ===
-    parseDate(referenceDate).getUTCFullYear()
-  );
+  return parseDate(date).getUTCFullYear() === parseDate(referenceDate).getUTCFullYear();
 }
 
 /**
@@ -35,9 +32,7 @@ export function subMonths(date: DateInput, amount: number) {
   const month = parsedDate.getUTCMonth() - amount;
   const day = parsedDate.getUTCDate();
 
-  const lastDayOfTargetMonth = new Date(
-    Date.UTC(year, month + 1, 0)
-  ).getUTCDate();
+  const lastDayOfTargetMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
 
   return new Date(
     Date.UTC(
@@ -47,8 +42,8 @@ export function subMonths(date: DateInput, amount: number) {
       parsedDate.getUTCHours(),
       parsedDate.getUTCMinutes(),
       parsedDate.getUTCSeconds(),
-      parsedDate.getUTCMilliseconds()
-    )
+      parsedDate.getUTCMilliseconds(),
+    ),
   );
 }
 
@@ -59,7 +54,7 @@ export function subMonths(date: DateInput, amount: number) {
 export function formatDate(
   date: DateInput,
   options: Intl.DateTimeFormatOptions,
-  locale = DEFAULT_LOCALE
+  locale = DEFAULT_LOCALE,
 ) {
   const formatter = new Intl.DateTimeFormat(locale, {
     timeZone: DISPLAY_TIME_ZONE,
@@ -70,8 +65,7 @@ export function formatDate(
 }
 
 function parseDate(input: DateInput) {
-  const date =
-    input instanceof Date ? new Date(input.getTime()) : new Date(input);
+  const date = input instanceof Date ? new Date(input.getTime()) : new Date(input);
 
   if (Number.isNaN(date.getTime())) {
     throw new Error(`Invalid date: ${input}`);

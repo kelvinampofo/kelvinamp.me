@@ -8,15 +8,15 @@ export default function WhatIsDesign() {
       <p>What is your definition of “Design,” Monsieur Eames?</p>
       <blockquote>
         <p>
-          One could describe design as a plan for arranging elements to
-          accomplish a particular purpose.
+          One could describe design as a plan for arranging elements to accomplish a particular
+          purpose.
         </p>
       </blockquote>
       <p>Is Design an expression of art?</p>
       <blockquote>
         <p>
-          I would rather say it’s an expression of purpose. It may, if it is
-          good enough, later be judged as art.
+          I would rather say it’s an expression of purpose. It may, if it is good enough, later be
+          judged as art.
         </p>
       </blockquote>
       <p>Is Design a craft for industrial purposes?</p>
@@ -27,10 +27,7 @@ export default function WhatIsDesign() {
       <blockquote>
         <p>What are the boundaries of problems?</p>
       </blockquote>
-      <p>
-        Is Design a discipline that concerns itself with only one part of the
-        environment?
-      </p>
+      <p>Is Design a discipline that concerns itself with only one part of the environment?</p>
       <blockquote>
         <p>No.</p>
       </blockquote>
@@ -41,8 +38,8 @@ export default function WhatIsDesign() {
       <p>Is Design a creation of an individual?</p>
       <blockquote>
         <p>
-          No, because to be realistic, one must always recognise the influence
-          of those that have gone before.
+          No, because to be realistic, one must always recognise the influence of those that have
+          gone before.
         </p>
       </blockquote>
       <p>Is Design a creation of a group?</p>
@@ -51,18 +48,13 @@ export default function WhatIsDesign() {
       </blockquote>
       <p>Is there a Design ethic?</p>
       <blockquote>
-        <p>
-          There are always design constraints and these often imply an ethic.
-        </p>
+        <p>There are always design constraints and these often imply an ethic.</p>
       </blockquote>
       <p>Does Design imply the idea of products that are necessarily useful?</p>
       <blockquote>
         <p>Yes, even though the use might be very subtle.</p>
       </blockquote>
-      <p>
-        Is it able to cooperate in the creation of works reserved solely for
-        pleasure?
-      </p>
+      <p>Is it able to cooperate in the creation of works reserved solely for pleasure?</p>
       <blockquote>
         <p>Who would say that ‘pleasure’ is not useful?</p>
       </blockquote>
@@ -72,10 +64,7 @@ export default function WhatIsDesign() {
       </blockquote>
       <p>Can the computer substitute for the Designer?</p>
       <blockquote>
-        <p>
-          Probably, in some special cases, but usually the computer is an aid to
-          the designer.
-        </p>
+        <p>Probably, in some special cases, but usually the computer is an aid to the designer.</p>
       </blockquote>
       <p>Does Design imply industrial manufacture?</p>
       <blockquote>
@@ -85,19 +74,15 @@ export default function WhatIsDesign() {
       <blockquote>
         <p>This is one kind of design problem.</p>
       </blockquote>
-      <p>
-        Is Design used to fit up an existing model so that it is more
-        attractive?
-      </p>
+      <p>Is Design used to fit up an existing model so that it is more attractive?</p>
       <blockquote>
         <p>One doesn’t usually think of design in this way.</p>
       </blockquote>
       <p>Is Design an element of industrial policy?</p>
       <blockquote>
         <p>
-          If design constraints imply an ethic and if industrial policy includes
-          ethical principles then yes, design is an element in industrial
-          policy.
+          If design constraints imply an ethic and if industrial policy includes ethical principles
+          then yes, design is an element in industrial policy.
         </p>
       </blockquote>
       <p>Does the creation of Design admit constraint?</p>
@@ -107,11 +92,11 @@ export default function WhatIsDesign() {
       <p>What constraints?</p>
       <blockquote>
         <p>
-          The sum of all constraints. Here is one of the few effective keys to
-          the design problem—the ability of the designer to recognise as many of
-          the constraints as possible—his willingness and enthusiasm for working
-          within these constraints—the constraints of price, size, strength,
-          balance, time, and so forth. Each problem has its own peculiar list.
+          The sum of all constraints. Here is one of the few effective keys to the design
+          problem—the ability of the designer to recognise as many of the constraints as
+          possible—his willingness and enthusiasm for working within these constraints—the
+          constraints of price, size, strength, balance, time, and so forth. Each problem has its
+          own peculiar list.
         </p>
       </blockquote>
       <p>Does Design obey laws?</p>
@@ -120,9 +105,7 @@ export default function WhatIsDesign() {
       </blockquote>
       <p>Are there tendencies and schools in Design?</p>
       <blockquote>
-        <p>
-          Yes, but these are more a measure of human limitation than of ideals.
-        </p>
+        <p>Yes, but these are more a measure of human limitation than of ideals.</p>
       </blockquote>
       <p>Is Design ephemeral?</p>
       <blockquote>
@@ -131,28 +114,26 @@ export default function WhatIsDesign() {
       <p>Ought Design to tend towards the ephemeral or towards permanence?</p>
       <blockquote>
         <p>
-          Those needs and designs that have a more universal quality tend toward
-          relative permanence.
+          Those needs and designs that have a more universal quality tend toward relative
+          permanence.
         </p>
       </blockquote>
       <p>
-        How would you define yourself with respect to a decorator? An interior
-        architect? A stylist?
+        How would you define yourself with respect to a decorator? An interior architect? A stylist?
       </p>
       <blockquote>
         <p>I wouldn&apos;t.</p>
       </blockquote>
       <p>
-        To whom does Design address itself: to the greatest numbers? To the
-        specialists or the enlightened amateur? To a privileged social class?
+        To whom does Design address itself: to the greatest numbers? To the specialists or the
+        enlightened amateur? To a privileged social class?
       </p>
       <blockquote>
         <p>Design addresses itself to the need.</p>
       </blockquote>
       <p>
-        After having answered all these questions, do you feel you have been
-        able to practice the profession of “Design” under satisfactory
-        conditions, or even optimum conditions?
+        After having answered all these questions, do you feel you have been able to practice the
+        profession of “Design” under satisfactory conditions, or even optimum conditions?
       </p>
       <blockquote>
         <p>Yes.</p>
@@ -160,13 +141,13 @@ export default function WhatIsDesign() {
       <p>Have you been forced to accept compromises?</p>
       <blockquote>
         <p>
-          I don’t remember ever being forced to accept compromises, but I have
-          willingly accepted constraints.
+          I don’t remember ever being forced to accept compromises, but I have willingly accepted
+          constraints.
         </p>
       </blockquote>
       <p>
-        What do you feel is the primary condition for the practice of Design and
-        for its propagation?
+        What do you feel is the primary condition for the practice of Design and for its
+        propagation?
       </p>
       <blockquote>
         <p>A recognition of need.</p>
@@ -177,15 +158,10 @@ export default function WhatIsDesign() {
         <em>(no answer)</em>
       </p>
       <Separator />
-      <p>
-        I think this is one of the most distilled articulations of design I’ve
-        come across.
-      </p>
+      <p>I think this is one of the most distilled articulations of design I’ve come across.</p>
       <p>
         Source:{" "}
-        <a href="https://www.youtube.com/watch?v=3xYi2rd1QCg">
-          Design Q&amp;A with Charles Eames
-        </a>
+        <a href="https://www.youtube.com/watch?v=3xYi2rd1QCg">Design Q&amp;A with Charles Eames</a>
       </p>
     </>
   );

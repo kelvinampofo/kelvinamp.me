@@ -10,8 +10,7 @@ export default function ProgressiveBlurEntry() {
       </p>
       <Card>
         <ProgressiveBlur>
-          The quick brown fox jumps over the lazy dog. The five boxing wizards
-          jump quickly.
+          The quick brown fox jumps over the lazy dog. The five boxing wizards jump quickly.
         </ProgressiveBlur>
       </Card>
     </>

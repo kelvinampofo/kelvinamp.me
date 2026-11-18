@@ -14,13 +14,7 @@ interface SlideProps {
   isPriority: boolean;
 }
 
-export default function Slide({
-  title,
-  image,
-  alt,
-  author,
-  isPriority,
-}: SlideProps) {
+export default function Slide({ title, image, alt, author, isPriority }: SlideProps) {
   return (
     <li className={styles.slide}>
       <figure className={styles.figure}>
@@ -36,9 +30,7 @@ export default function Slide({
             className={styles.image}
           />
         </picture>
-        <figcaption
-          className={styles.caption}
-        >{`${title} by ${author}`}</figcaption>
+        <figcaption className={styles.caption}>{`${title} by ${author}`}</figcaption>
       </figure>
     </li>
   );

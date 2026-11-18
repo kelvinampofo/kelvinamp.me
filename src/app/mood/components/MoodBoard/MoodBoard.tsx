@@ -24,11 +24,7 @@ import Minimap from "../Minimap/Minimap";
 import styles from "./MoodBoard.module.css";
 
 // eager-load the images most likely to become lcp during the stagger
-const EAGER_ITEM_IDS = new Set([
-  "sketch",
-  "caravaggio",
-  "nasa-spacecraft-markings",
-]);
+const EAGER_ITEM_IDS = new Set(["sketch", "caravaggio", "nasa-spacecraft-markings"]);
 
 const INITIAL_PLACEMENTS: Placements = {};
 
@@ -84,7 +80,7 @@ export default function MoodBoard() {
       Minus: zoomOut,
       NumpadSubtract: zoomOut,
     },
-    { preventDefault: true, modifiers: "Meta", matchBy: "code" }
+    { preventDefault: true, modifiers: "Meta", matchBy: "code" },
   );
 
   return (

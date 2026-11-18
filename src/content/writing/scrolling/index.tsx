@@ -2,8 +2,7 @@ export default function Scrolling() {
   return (
     <>
       <p>
-        Field notes on scroll behaviour and scroll-driven code. Recommended
-        read: Cheng Lou’s{" "}
+        Field notes on scroll behaviour and scroll-driven code. Recommended read: Cheng Lou’s{" "}
         <a
           href="https://github.com/chenglou/martian-ui/blob/main/docs/Scrolling.md"
           target="_blank"
@@ -16,12 +15,12 @@ export default function Scrolling() {
 
       <ul>
         <li>
-          on macOS and iOS, rubber-banding creates an elastic overscroll effect
-          that gently communicates the end of content without interrupting input
+          on macOS and iOS, rubber-banding creates an elastic overscroll effect that gently
+          communicates the end of content without interrupting input
           <ul>
             <li>
-              it’s primarily an Apple-platform UI affordance, supported by
-              Safari and Firefox for both page-level and container scrolling
+              it’s primarily an Apple-platform UI affordance, supported by Safari and Firefox for
+              both page-level and container scrolling
               <sup>
                 <a href="#sn-scroll-physics">1</a>
               </sup>
@@ -30,24 +29,20 @@ export default function Scrolling() {
                 className="sidenote"
                 aria-label="Note 1 about scrolling physics support"
               >
-                Support varies by platform: iOS browsers all use WebKit and
-                inherit elastic overscroll. On macOS, Chrome and Firefox can
-                adopt OS-level scroll physics, but overflow containers still
-                behave differently across engines.
+                Support varies by platform: iOS browsers all use WebKit and inherit elastic
+                overscroll. On macOS, Chrome and Firefox can adopt OS-level scroll physics, but
+                overflow containers still behave differently across engines.
               </aside>
             </li>
+            <li>Chrome applies elastic bounce to the page, not to scrollable containers</li>
             <li>
-              Chrome applies elastic bounce to the page, not to scrollable
-              containers
+              disabling it with <code>overscroll-behavior: none</code> removes boundary feedback
+              (generally not recommended)
             </li>
             <li>
-              disabling it with <code>overscroll-behavior: none</code> removes
-              boundary feedback (generally not recommended)
-            </li>
-            <li>
-              suppressing elastic overscroll removes an important boundary
-              signal, which can make interactions that rely on continuous input
-              (such as scrubbing or drag-based controls) feel abruptly clipped
+              suppressing elastic overscroll removes an important boundary signal, which can make
+              interactions that rely on continuous input (such as scrubbing or drag-based controls)
+              feel abruptly clipped
             </li>
           </ul>
         </li>
@@ -56,16 +51,16 @@ export default function Scrolling() {
           scroll affordances often double as input feedback
           <ul>
             <li>
-              elastic resistance, momentum decay, and boundary feedback are
-              frequently reused by users as cues for fine-grained control, even
-              when the interaction is not strictly scrolling
+              elastic resistance, momentum decay, and boundary feedback are frequently reused by
+              users as cues for fine-grained control, even when the interaction is not strictly
+              scrolling
             </li>
           </ul>
         </li>
 
         <li>
-          scrolling is often handled <em>off the main thread</em>, on the
-          compositor, so it remains smooth even under JavaScript work
+          scrolling is often handled <em>off the main thread</em>, on the compositor, so it remains
+          smooth even under JavaScript work
         </li>
 
         <li>
@@ -79,13 +74,11 @@ export default function Scrolling() {
           provide no provenance regarding their source
           <ul>
             <li>
-              a <code>scroll</code> event does not indicate <em>why</em>{" "}
-              scrolling occurred
+              a <code>scroll</code> event does not indicate <em>why</em> scrolling occurred
             </li>
             <li>
-              user gestures, keyboard input, drag-based auto-scrolling, and
-              programmatic scrolling are effectively indistinguishable at the
-              event level
+              user gestures, keyboard input, drag-based auto-scrolling, and programmatic scrolling
+              are effectively indistinguishable at the event level
             </li>
           </ul>
         </li>
@@ -93,15 +86,13 @@ export default function Scrolling() {
         <li>
           Apple scrolling physics feel like momentum with gentle decay
           <ul>
-            <li>
-              most attempts to reproduce this behaviour feel noticeably off
-            </li>
+            <li>most attempts to reproduce this behaviour feel noticeably off</li>
           </ul>
         </li>
 
         <li>
-          off-main-thread scrolling preserves perceived smoothness but limits
-          the reliability of scroll-driven JavaScript effects
+          off-main-thread scrolling preserves perceived smoothness but limits the reliability of
+          scroll-driven JavaScript effects
           <ul>
             <li>this trade-off is a constraint of current browser engines</li>
             <li>

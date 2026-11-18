@@ -5,11 +5,7 @@ export default function RevealEntry() {
     <>
       <p>
         Pointer-tracked image reveal. Image filter from{" "}
-        <a
-          href="https://paper.design/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://paper.design/" target="_blank" rel="noopener noreferrer">
           Paper
         </a>
         .
@@ -23,9 +19,8 @@ export default function RevealEntry() {
         >
           linear interpolation
         </a>
-        , so it lags slightly behind—like pulling a curtain with some conceptual
-        weight. Also, check the use of <code>mix-blend-mode: multiply</code>{" "}
-        along the frame’s edge.
+        , so it lags slightly behind—like pulling a curtain with some conceptual weight. Also, check
+        the use of <code>mix-blend-mode: multiply</code> along the frame’s edge.
       </p>
 
       <Reveal />

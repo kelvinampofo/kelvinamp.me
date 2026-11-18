@@ -13,17 +13,8 @@ interface PageProps {
   className?: string;
 }
 
-export default function Page({
-  backTo,
-  focusMode = false,
-  children,
-  className,
-}: PageProps) {
-  const content = (
-    <article className={clsx("prose", "layout-main", className)}>
-      {children}
-    </article>
-  );
+export default function Page({ backTo, focusMode = false, children, className }: PageProps) {
+  const content = <article className={clsx("prose", "layout-main", className)}>{children}</article>;
 
   return (
     <>

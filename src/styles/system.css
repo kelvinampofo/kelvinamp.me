@@ -86,9 +86,7 @@
     --color-focus-inner-light: hsl(0, 0%, 99%);
     --color-focus-inner-dark: hsl(0, 0%, 8.63%);
     --color-focus-outer: hsl(39, 100%, 57%);
-    --focus-ring:
-      0 0 0 2px var(--color-focus-inner-light),
-      0 0 0 4px var(--color-focus-outer);
+    --focus-ring: 0 0 0 2px var(--color-focus-inner-light), 0 0 0 4px var(--color-focus-outer);
 
     --color-selection-background: rgb(255, 249, 168);
     --color-selection-foreground: #000000;
@@ -105,8 +103,7 @@
     );
     --font-family-mono: "Jetbrains mono", "Menlo", monospace;
     --typography-italic:
-      400 italic calc(1em + 1px) / normal "Newsreader", "Signifier", "Times",
-      serif;
+      400 italic calc(1em + 1px) / normal "Newsreader", "Signifier", "Times", serif;
     --font-weight-heading: 400;
 
     /* https://rsms.me/inter/#features */
@@ -114,8 +111,8 @@
 
     --line-height-base: 1.5;
 
-    --typography-heading: var(--font-weight-heading) var(--font-size-base) /
-      var(--line-height-base) var(--font-family-sans);
+    --typography-heading: var(--font-weight-heading) var(--font-size-base) / var(--line-height-base)
+      var(--font-family-sans);
 
     /* dimension */
     --space-1: 1px;
@@ -165,18 +162,13 @@
     --shadow-border: 0 0 0 1px var(--color-shadow-border);
 
     --shadow-tooltip:
-      var(--shadow-border), 0px 1px 1px rgba(0, 0, 0, 0.02),
-      0px 4px 8px rgba(0, 0, 0, 0.04);
+      var(--shadow-border), 0px 1px 1px rgba(0, 0, 0, 0.02), 0px 4px 8px rgba(0, 0, 0, 0.04);
 
-    --elevation-1:
-      var(--color-shadow-ambient) 0 1px 1px,
-      var(--color-shadow-key) 0 2px 4px -2px;
+    --elevation-1: var(--color-shadow-ambient) 0 1px 1px, var(--color-shadow-key) 0 2px 4px -2px;
     --elevation-2:
-      var(--color-shadow-ambient) 0 2px 4px -2px,
-      var(--color-shadow-key) 0 6px 12px -4px;
+      var(--color-shadow-ambient) 0 2px 4px -2px, var(--color-shadow-key) 0 6px 12px -4px;
     --elevation-3:
-      var(--color-shadow-ambient) 0 8px 16px -4px,
-      var(--color-shadow-key) 0 12px 24px -6px;
+      var(--color-shadow-ambient) 0 8px 16px -4px, var(--color-shadow-key) 0 12px 24px -6px;
 
     /* cubicBezier, duration */
     --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
@@ -254,19 +246,13 @@
       --color-shadow-ambient: lch(0% 0 0 / 0.06);
       --color-shadow-key: lch(0% 0 0 / 0.08);
       --color-shadow-specular: lch(100% 0 0 / 0.07);
-      --focus-ring:
-        0 0 0 2px var(--color-focus-inner-dark),
-        0 0 0 4px var(--color-focus-outer);
+      --focus-ring: 0 0 0 2px var(--color-focus-inner-dark), 0 0 0 4px var(--color-focus-outer);
 
-      --elevation-1:
-        var(--color-shadow-key) 0 4px 4px -1px,
-        var(--color-shadow-key) 0 1px 1px 0;
+      --elevation-1: var(--color-shadow-key) 0 4px 4px -1px, var(--color-shadow-key) 0 1px 1px 0;
       --elevation-2:
-        var(--color-shadow-ambient) 0 4px 8px -4px,
-        var(--color-shadow-key) 0 6px 12px -4px;
+        var(--color-shadow-ambient) 0 4px 8px -4px, var(--color-shadow-key) 0 6px 12px -4px;
       --elevation-3:
-        var(--color-shadow-ambient) 0 8px 16px -4px,
-        var(--color-shadow-key) 0 12px 24px -6px;
+        var(--color-shadow-ambient) 0 8px 16px -4px, var(--color-shadow-key) 0 12px 24px -6px;
     }
   }
 
@@ -635,9 +621,7 @@
 
     display: grid;
     align-items: flex-start;
-    grid-template-columns: var(--column-length) var(--content-max-width) var(
-        --column-length
-      );
+    grid-template-columns: var(--column-length) var(--content-max-width) var(--column-length);
     column-gap: var(--space-24);
   }
 

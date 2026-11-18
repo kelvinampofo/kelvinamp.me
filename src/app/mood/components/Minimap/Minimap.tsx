@@ -35,16 +35,8 @@ interface MinimapProps {
   placements: Placements;
 }
 
-export default function Minimap({
-  shown,
-  contentRef,
-  camera,
-  viewport,
-  placements,
-}: MinimapProps) {
-  const [dragTarget, setDragTarget] = useState<"indicator" | "map" | null>(
-    null
-  );
+export default function Minimap({ shown, contentRef, camera, viewport, placements }: MinimapProps) {
+  const [dragTarget, setDragTarget] = useState<"indicator" | "map" | null>(null);
 
   const viewportIndicatorRef = useRef<HTMLDivElement | null>(null);
   const activePointerIdRef = useRef<number | null>(null);
@@ -58,10 +50,7 @@ export default function Minimap({
     const element = viewportIndicatorRef.current;
     if (!element) return;
 
-    const { x, y, width, height } = toMinimapRect(
-      getVisibleBounds(next, viewport),
-      projection
-    );
+    const { x, y, width, height } = toMinimapRect(getVisibleBounds(next, viewport), projection);
 
     element.style.width = `${width}px`;
     element.style.height = `${height}px`;
@@ -74,17 +63,14 @@ export default function Minimap({
     return camera.subscribe(drawIndicator);
   });
 
-  useEffect(
-    () => () => window.cancelAnimationFrame(animationFrameIdRef.current),
-    []
-  );
+  useEffect(() => () => window.cancelAnimationFrame(animationFrameIdRef.current), []);
 
   function toCanvasPosition(event: PointerEvent<HTMLDivElement>) {
     const rect = event.currentTarget.getBoundingClientRect();
 
     return fromMinimapPoint(
       { x: event.clientX - rect.left, y: event.clientY - rect.top },
-      projection
+      projection,
     );
   }
 
@@ -117,9 +103,7 @@ export default function Minimap({
     activePointerIdRef.current = event.pointerId;
 
     // clicking the map should keep the crosshair even when the indicator moves underneath it
-    setDragTarget(
-      event.target === viewportIndicatorRef.current ? "indicator" : "map"
-    );
+    setDragTarget(event.target === viewportIndicatorRef.current ? "indicator" : "map");
 
     scheduleFocus(event);
   }
@@ -170,10 +154,7 @@ export default function Minimap({
         {ASSETS.map((asset) => {
           const { id, width, height, src } = asset;
           const placement = getPlacement(asset, placements);
-          const rect = toMinimapRect(
-            { ...placement, width, height },
-            projection
-          );
+          const rect = toMinimapRect({ ...placement, width, height }, projection);
 
           return (
             <div

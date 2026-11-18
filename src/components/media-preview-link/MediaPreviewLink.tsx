@@ -78,10 +78,7 @@ export default function MediaPreviewLink({
           <PreviewCard.Popup className={styles.popup}>
             <div className={styles.media} style={{ aspectRatio }}>
               {media.type === "video" ? (
-                <MediaPlayer.Root
-                  className={styles.player}
-                  shortcutsEnabled={open}
-                >
+                <MediaPlayer.Root className={styles.player} shortcutsEnabled={open}>
                   <MediaPlayer.Video
                     active={open}
                     className={styles.video}

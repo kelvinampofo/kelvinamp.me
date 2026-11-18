@@ -1,5 +1,4 @@
-.focusedReading[data-focus-mode="enabled"]
-  :where(p, pre, li, img, div, blockquote) {
+.focusedReading[data-focus-mode="enabled"] :where(p, pre, li, img, div, blockquote) {
   --transition-ease: var(--duration-enter) ease;
 
   opacity: 0.6;

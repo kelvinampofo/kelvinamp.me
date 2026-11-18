@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  Popover,
-  type PopoverRootChangeEventDetails,
-} from "@base-ui/react/popover";
+import { Popover, type PopoverRootChangeEventDetails } from "@base-ui/react/popover";
 import {
   useEffect,
   useEffectEvent,
@@ -115,9 +112,7 @@ export default function NumericScrubber() {
     isTrackAnimating: false,
     duration: 0,
   });
-  const [trackViewport, setTrackViewport] = useState<HTMLDivElement | null>(
-    null
-  );
+  const [trackViewport, setTrackViewport] = useState<HTMLDivElement | null>(null);
 
   const valueRef = useRef(DEFAULT_VALUE);
   const trackFrameRef = useRef<number | null>(null);
@@ -163,10 +158,7 @@ export default function NumericScrubber() {
     setValue(nextValue);
 
     setTrackTransition({
-      duration: Math.min(
-        MAX_SHIFT_DURATION_MS,
-        STEP_DURATION_MS * Math.abs(delta)
-      ),
+      duration: Math.min(MAX_SHIFT_DURATION_MS, STEP_DURATION_MS * Math.abs(delta)),
       isTrackAnimating: false,
       offsetSteps: delta,
     });
@@ -220,9 +212,7 @@ export default function NumericScrubber() {
       }
 
       // Apply small per-frame steps so tick highlights stay legible
-      const step =
-        Math.sign(pendingSteps) *
-        clamp(Math.abs(pendingSteps), 0, maxStepsPerFrame);
+      const step = Math.sign(pendingSteps) * clamp(Math.abs(pendingSteps), 0, maxStepsPerFrame);
 
       queue.pendingSteps -= step;
 
@@ -246,9 +236,7 @@ export default function NumericScrubber() {
 
     // Use the dominant axis so diagonal wheel gestures still feel deliberate
     const primaryDelta =
-      Math.abs(event.deltaX) > Math.abs(event.deltaY)
-        ? event.deltaX
-        : event.deltaY;
+      Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
 
     const adjustedDelta = primaryDelta * WHEEL_SENSITIVITY;
     const wheelInput = wheelInputRef.current;
@@ -303,10 +291,7 @@ export default function NumericScrubber() {
   }, []);
 
   function handleTrackTransitionEnd(event: TransitionEvent<HTMLDivElement>) {
-    if (
-      event.propertyName !== "transform" ||
-      !trackTransition.isTrackAnimating
-    ) {
+    if (event.propertyName !== "transform" || !trackTransition.isTrackAnimating) {
       return;
     }
 
@@ -424,11 +409,7 @@ export default function NumericScrubber() {
     const instantVelocity = deltaX / deltaTime;
 
     // Smooth velocity so release momentum feels steady instead of jittery
-    dragSession.velocity = lerp(
-      dragSession.velocity,
-      instantVelocity,
-      DRAG_VELOCITY_SMOOTHING
-    );
+    dragSession.velocity = lerp(dragSession.velocity, instantVelocity, DRAG_VELOCITY_SMOOTHING);
     dragSession.lastClientX = event.clientX;
     dragSession.lastTimestamp = event.timeStamp;
 
@@ -471,10 +452,7 @@ export default function NumericScrubber() {
     endDrag(event, dragSession);
   }
 
-  function handlePopoverOpenChange(
-    open: boolean,
-    eventDetails: PopoverRootChangeEventDetails
-  ) {
+  function handlePopoverOpenChange(open: boolean, eventDetails: PopoverRootChangeEventDetails) {
     if (open) {
       hasInteractedRef.current = false;
       setIsPopoverOpen(true);
@@ -488,8 +466,7 @@ export default function NumericScrubber() {
     // After interaction, avoid collapsing while pointer/focus is still nearby
     if (
       hasInteractedRef.current &&
-      (eventDetails.reason === "trigger-hover" ||
-        eventDetails.reason === "focus-out")
+      (eventDetails.reason === "trigger-hover" || eventDetails.reason === "focus-out")
     ) {
       return;
     }
@@ -556,11 +533,7 @@ export default function NumericScrubber() {
   );
 }
 
-function ScrubberStepButton({
-  direction,
-  label,
-  onClick,
-}: ScrubberStepButtonProps) {
+function ScrubberStepButton({ direction, label, onClick }: ScrubberStepButtonProps) {
   return (
     <button
       className={styles.scrubberStepButton}
@@ -606,13 +579,7 @@ function ScrubberTrack({
         {Array.from({ length: TICK_COUNT }, (_tick, index) => {
           const tick = value + index - TICK_OFFSET;
 
-          return (
-            <div
-              key={tick}
-              className={styles.scrubberTick}
-              data-active={tick === value}
-            />
-          );
+          return <div key={tick} className={styles.scrubberTick} data-active={tick === value} />;
         })}
       </div>
     </div>

@@ -9,13 +9,7 @@ import {
 } from "react";
 
 import type { Asset } from "../assets";
-import {
-  getPlacement,
-  toItemTransform,
-  type Placements,
-  type Point,
-  type Tool,
-} from "../canvas";
+import { getPlacement, toItemTransform, type Placements, type Point, type Tool } from "../canvas";
 
 import type { CameraHandle } from "./useCamera";
 
@@ -40,12 +34,7 @@ interface UseDragOptions {
   tool: Tool;
 }
 
-export default function useDrag({
-  camera,
-  placements,
-  setPlacements,
-  tool,
-}: UseDragOptions) {
+export default function useDrag({ camera, placements, setPlacements, tool }: UseDragOptions) {
   const dragRef = useRef<DragState | null>(null);
   const frameRef = useRef(0);
 
@@ -79,10 +68,7 @@ export default function useDrag({
     });
   }
 
-  function onPointerDown(
-    asset: Asset,
-    event: ReactPointerEvent<HTMLDivElement>
-  ) {
+  function onPointerDown(asset: Asset, event: ReactPointerEvent<HTMLDivElement>) {
     if (tool !== "select") return;
 
     if (!isPrimaryPointer(event)) {
@@ -93,10 +79,7 @@ export default function useDrag({
     const placement = getPlacement(asset, placements);
 
     const stackOrder =
-      Math.max(
-        0,
-        ...Object.values(placements).map((item) => item?.stackOrder ?? 0)
-      ) + 1;
+      Math.max(0, ...Object.values(placements).map((item) => item?.stackOrder ?? 0)) + 1;
 
     dragRef.current = {
       isDragging: false,

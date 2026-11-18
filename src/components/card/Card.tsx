@@ -7,12 +7,7 @@ interface CardProps extends React.ComponentProps<"div"> {
   description?: string;
 }
 
-export default function Card({
-  children,
-  className,
-  description,
-  ...props
-}: CardProps) {
+export default function Card({ children, className, description, ...props }: CardProps) {
   return (
     <div className={clsx(styles.card, className)} {...props}>
       <div className={styles.content}>{children}</div>

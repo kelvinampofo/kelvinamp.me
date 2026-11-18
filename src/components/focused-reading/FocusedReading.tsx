@@ -17,14 +17,11 @@ export default function FocusedReading({ children }: FocusedReadingProps) {
     { F: () => setIsFocused((prev) => !prev) },
     {
       holdDurationMs: 300,
-    }
+    },
   );
 
   return (
-    <div
-      className={styles.focusedReading}
-      data-focus-mode={isFocused ? "enabled" : "disabled"}
-    >
+    <div className={styles.focusedReading} data-focus-mode={isFocused ? "enabled" : "disabled"}>
       {children}
     </div>
   );

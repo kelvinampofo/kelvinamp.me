@@ -8,7 +8,7 @@ const DEFAULT_FALLBACK_COLOR: Rgb = [255, 255, 255];
 
 function ensureThemeMeta() {
   const existingElement = document.querySelector<HTMLMetaElement>(
-    `meta[name="${THEME_META_NAME}"]`
+    `meta[name="${THEME_META_NAME}"]`,
   );
 
   if (existingElement) {
@@ -29,16 +29,14 @@ function createThemeMeta() {
 }
 
 function getCurrentThemeColor() {
-  const element = document.querySelector<HTMLMetaElement>(
-    `meta[name="${THEME_META_NAME}"]`
-  );
+  const element = document.querySelector<HTMLMetaElement>(`meta[name="${THEME_META_NAME}"]`);
 
   return element?.content || getComputedStyle(document.body).backgroundColor;
 }
 
 function parseRgb(input: string) {
   const match = input.match(
-    /rgba?\s*\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})(?:\s*,\s*(\d*\.?\d+|\.\d+))?\s*\)/i
+    /rgba?\s*\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})(?:\s*,\s*(\d*\.?\d+|\.\d+))?\s*\)/i,
   );
 
   if (!match) return null;
@@ -48,16 +46,12 @@ function parseRgb(input: string) {
 
 function parseDisplayP3(input: string) {
   const match = input.match(
-    /color\s*\(\s*display-p3\s+([.\d]+)\s+([.\d]+)\s+([.\d]+)(?:\s*\/\s*([.\d]+))?\s*\)/i
+    /color\s*\(\s*display-p3\s+([.\d]+)\s+([.\d]+)\s+([.\d]+)(?:\s*\/\s*([.\d]+))?\s*\)/i,
   );
 
   if (!match) return null;
 
-  return [
-    Number(match[1]) * 255,
-    Number(match[2]) * 255,
-    Number(match[3]) * 255,
-  ] satisfies Rgb;
+  return [Number(match[1]) * 255, Number(match[2]) * 255, Number(match[3]) * 255] satisfies Rgb;
 }
 
 function hexToRgb(hex: string) {
@@ -121,8 +115,7 @@ function resolveColorToRgb(color: string) {
  * and no-ops on the server.
  */
 export function animateThemeColor(toColor: string, duration = 250) {
-  const isClientUnavailable =
-    typeof document === "undefined" || typeof window === "undefined";
+  const isClientUnavailable = typeof document === "undefined" || typeof window === "undefined";
 
   if (isClientUnavailable) {
     return () => {};

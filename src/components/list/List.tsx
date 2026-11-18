@@ -49,9 +49,7 @@ export default function List({
               <span className={styles.date}>
                 {formatDate(publishedDate, {
                   ...dateFormat,
-                  year: isThisYear(publishedDate, REFERENCE_DATE)
-                    ? undefined
-                    : "numeric",
+                  year: isThisYear(publishedDate, REFERENCE_DATE) ? undefined : "numeric",
                 })}
               </span>
             </Link>

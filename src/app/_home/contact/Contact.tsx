@@ -25,20 +25,11 @@ export default function Contact() {
       <Heading as="h2" className={styles.heading}>
         Connect
       </Heading>
-      <ul
-        data-list="unstyled"
-        className={styles.list}
-        style={{ "--stagger": "2" }}
-      >
+      <ul data-list="unstyled" className={styles.list} style={{ "--stagger": "2" }}>
         {contactLinks.map(({ label, href }, index) => (
           <Fragment key={label}>
             <li>
-              <a
-                href={href}
-                className="basic-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={href} className="basic-link" target="_blank" rel="noopener noreferrer">
                 {label}
               </a>
             </li>

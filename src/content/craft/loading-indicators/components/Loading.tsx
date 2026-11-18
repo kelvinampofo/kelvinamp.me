@@ -29,13 +29,7 @@ export default function Loading({ variant }: LoadingProps) {
         </div>
       );
     case "primary-spinner":
-      return (
-        <div
-          className={styles.primarySpinner}
-          aria-label="Loading..."
-          role="progressbar"
-        />
-      );
+      return <div className={styles.primarySpinner} aria-label="Loading..." role="progressbar" />;
     case "secondary-spinner":
       return (
         <div
@@ -46,11 +40,7 @@ export default function Loading({ variant }: LoadingProps) {
       );
     case "ios-spinner":
       return (
-        <div
-          className={styles.iosSpinner}
-          aria-label="Loading..."
-          role="progressbar"
-        >
+        <div className={styles.iosSpinner} aria-label="Loading..." role="progressbar">
           {[...Array(12)].map((_, index) => (
             <div key={index} />
           ))}

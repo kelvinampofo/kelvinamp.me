@@ -74,9 +74,7 @@ export default function useCamera({
     resize(element.getBoundingClientRect());
 
     // centre before the first paint so the reveal sees which artwork is on screen
-    camera.move((current, size) =>
-      centreCamera(current, initialPlacementsRef.current, size)
-    );
+    camera.move((current, size) => centreCamera(current, initialPlacementsRef.current, size));
 
     const resizeObserver = new ResizeObserver(([entry]) => {
       if (entry) resize(entry.contentRect);

@@ -15,7 +15,7 @@ const STAGGER_FALLBACK_GRACE_MS = 250;
 // cap the stagger as the board grows
 const STAGGER_INTERVAL_MS = Math.min(
   PREFERRED_STAGGER_INTERVAL_MS,
-  MAX_STAGGER_DURATION_MS / Math.max(ASSETS.length - 1, 1)
+  MAX_STAGGER_DURATION_MS / Math.max(ASSETS.length - 1, 1),
 );
 
 export type RevealState = "pending" | "loading" | "staggering" | "shown";
@@ -49,18 +49,12 @@ export default function useBoardReveal({
     }
 
     // show the board after a short wait even if some images are still loading
-    const imageWaitTimeoutId = setTimeout(
-      startStagger,
-      MAX_BOARD_IMAGE_WAIT_MS
-    );
+    const imageWaitTimeoutId = setTimeout(startStagger, MAX_BOARD_IMAGE_WAIT_MS);
 
     // fast visits should not flash a loading message
     const loadingLabelTimeoutId = setTimeout(
-      () =>
-        setRevealState((current) =>
-          current === "pending" ? "loading" : current
-        ),
-      LOADING_LABEL_DELAY_MS
+      () => setRevealState((current) => (current === "pending" ? "loading" : current)),
+      LOADING_LABEL_DELAY_MS,
     );
 
     const cancelImagePreparation = afterNextPaint(async () => {
@@ -75,7 +69,7 @@ export default function useBoardReveal({
         images.map((image) => {
           image.loading = "eager";
           return waitForImage(image, controller.signal);
-        })
+        }),
       );
 
       startStagger();
@@ -101,8 +95,7 @@ export default function useBoardReveal({
     };
 
     surface.addEventListener("animationend", handleAnimationEnd);
-    return () =>
-      surface.removeEventListener("animationend", handleAnimationEnd);
+    return () => surface.removeEventListener("animationend", handleAnimationEnd);
   }, [surfaceRef]);
 
   useEffect(() => {
@@ -111,7 +104,7 @@ export default function useBoardReveal({
     // animationend may not fire in background tabs
     const timeoutId = window.setTimeout(
       () => setRevealState("shown"),
-      MAX_STAGGER_DURATION_MS + STAGGER_FALLBACK_GRACE_MS
+      MAX_STAGGER_DURATION_MS + STAGGER_FALLBACK_GRACE_MS,
     );
 
     return () => window.clearTimeout(timeoutId);
@@ -133,15 +126,10 @@ export default function useBoardReveal({
     }
 
     // show the minimap even if a thumbnail never loads
-    const thumbnailWaitTimeoutId = setTimeout(
-      finishThumbnailWait,
-      MAX_THUMBNAIL_WAIT_MS
-    );
+    const thumbnailWaitTimeoutId = setTimeout(finishThumbnailWait, MAX_THUMBNAIL_WAIT_MS);
 
     async function waitForThumbnails() {
-      await Promise.all(
-        images.map((image) => waitForImage(image, controller.signal))
-      );
+      await Promise.all(images.map((image) => waitForImage(image, controller.signal)));
 
       finishThumbnailWait();
     }

@@ -32,12 +32,7 @@ export default async function CraftPage() {
       <p className="description">
         Collection of interfaces <em>&</em> interactions.
       </p>
-      <List
-        entries={items}
-        collection="craft"
-        showDescriptions
-        dateFormat={{ month: "long" }}
-      />
+      <List entries={items} collection="craft" showDescriptions dateFormat={{ month: "long" }} />
     </Page>
   );
 }

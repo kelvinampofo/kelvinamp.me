@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  LazyMotion,
-  domAnimation,
-  m,
-  type Target,
-  type Transition,
-} from "motion/react";
+import { LazyMotion, domAnimation, m, type Target, type Transition } from "motion/react";
 import { useState } from "react";
 import useSound from "use-sound";
 
@@ -43,9 +37,7 @@ interface TimelinePickerProps {
 
 export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [debugOverlay, setDebugOverlay] = useState<
-    "none" | "default" | "increased"
-  >("none");
+  const [debugOverlay, setDebugOverlay] = useState<"none" | "default" | "increased">("none");
 
   const [play] = useSound(SOUND_URL, {
     volume: 0.25,
@@ -79,14 +71,8 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
   useShortcuts({
     ArrowLeft: handlePrev,
     ArrowRight: handleNext,
-    I: () =>
-      setDebugOverlay((prevMode) =>
-        prevMode === "increased" ? "none" : "increased"
-      ),
-    D: () =>
-      setDebugOverlay((prevMode) =>
-        prevMode === "default" ? "none" : "default"
-      ),
+    I: () => setDebugOverlay((prevMode) => (prevMode === "increased" ? "none" : "increased")),
+    D: () => setDebugOverlay((prevMode) => (prevMode === "default" ? "none" : "default")),
   });
 
   return (
@@ -104,12 +90,7 @@ export default function TimelinePicker({ onSelect }: TimelinePickerProps) {
 
           <div className={styles.ticks}>
             {ticks.map(({ id, index }) => (
-              <Tick
-                key={id}
-                index={index}
-                active={index === currentIndex}
-                onSelect={selectIndex}
-              />
+              <Tick key={id} index={index} active={index === currentIndex} onSelect={selectIndex} />
             ))}
           </div>
 
