@@ -27,7 +27,7 @@
 
 .prose {
   box-sizing: border-box;
-  padding: 0 16px;
+  padding-inline: var(--space-42);
   display: flex;
   align-items: center;
   height: 100%;
