@@ -16,9 +16,11 @@
 }
 
 .navigationSlot {
+  --navigation-inset: var(--space-6);
+
   display: none;
   align-items: center;
-  padding-inline: var(--space-6);
+  padding-inline: var(--navigation-inset);
 }
 
 @media (min-width: 768px) {
@@ -37,30 +39,35 @@
 
 .list {
   display: flex;
-  height: 300px;
   overflow-x: auto;
   overscroll-behavior-x: contain;
-  padding: var(--space-16) 0;
+  padding: var(--space-24) 0;
   scroll-behavior: smooth;
 }
 
 @media (min-width: 768px) {
   .list {
-    height: 600px;
     scroll-snap-type: x mandatory;
-    padding-block: var(--space-24);
+    padding-block: var(--space-32);
   }
 }
 
 .navigationButton {
+  position: relative;
   display: grid;
   width: var(--space-36);
   height: var(--space-36);
   place-items: center;
   border-radius: 50%;
-  color: var(--color-foreground-secondary);
+  color: color-mix(in srgb, var(--color-foreground) 80%, var(--color-foreground-secondary));
   transition: color var(--duration-hover);
   cursor: pointer;
+}
+
+.navigationButton::before {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--navigation-inset));
 }
 
 @media (hover: hover) and (pointer: fine) {

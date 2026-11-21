@@ -2,10 +2,9 @@
 
 import clsx from "clsx";
 import dynamic from "next/dynamic";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Chevron from "../../../../components/icons/Chevron";
-import { clamp } from "../../../../utils/math";
 
 import styles from "./Carousel.module.css";
 
@@ -58,34 +57,55 @@ const slides = [
   },
 ];
 
-const MAX_SLIDE_INDEX = slides.length - 1;
-
-const SLIDE_WIDTH = 450;
-const SLIDE_MARGIN = 20;
+const SCROLL_TOLERANCE = 1;
 
 export default function Carousel() {
-  const [slidePosition, setSlidePosition] = useState(0);
+  const [isAtStart, setIsAtStart] = useState(true);
+  const [isAtEnd, setIsAtEnd] = useState(false);
   const [isCursorLeft, setIsCursorLeft] = useState(false);
   const [isCursorRight, setIsCursorRight] = useState(false);
 
   const slideRef = useRef<HTMLUListElement | null>(null);
 
-  function scrollToSlide(slider: HTMLUListElement | null, currentSlideIndex: number) {
+  useEffect(() => {
+    const slider = slideRef.current;
     if (!slider) return;
 
-    slider.scrollTo({
-      left: currentSlideIndex * (SLIDE_WIDTH + SLIDE_MARGIN),
-      behavior: "smooth",
-    });
-  }
+    const syncScrollEdges = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = slider;
+      setIsAtStart(scrollLeft <= SCROLL_TOLERANCE);
+      setIsAtEnd(scrollLeft >= scrollWidth - clientWidth - SCROLL_TOLERANCE);
+    };
 
-  // calculate the current slide index based on slide position
-  const currentSlide = Math.floor(slidePosition / (SLIDE_WIDTH + SLIDE_MARGIN));
+    const observer = new ResizeObserver(syncScrollEdges);
+    observer.observe(slider);
+    slider.addEventListener("scroll", syncScrollEdges);
 
-  function handleSlideChange(newSlideIndex: number) {
-    const clampedSlideIndex = clamp(newSlideIndex, 0, MAX_SLIDE_INDEX);
+    return () => {
+      observer.disconnect();
+      slider.removeEventListener("scroll", syncScrollEdges);
+    };
+  }, []);
 
-    scrollToSlide(slideRef.current, clampedSlideIndex);
+  function handleSlideChange(direction: "previous" | "next") {
+    const slider = slideRef.current;
+    const firstSlide = slider?.firstElementChild;
+    if (!slider || !firstSlide) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = slider;
+    const end = scrollWidth - clientWidth;
+    const start = firstSlide.getBoundingClientRect().left;
+    const offsets = Array.from(slider.children, (slide) =>
+      Math.min(end, slide.getBoundingClientRect().left - start),
+    );
+    const offset =
+      direction === "next"
+        ? offsets.find((position) => position > scrollLeft + SCROLL_TOLERANCE)
+        : offsets.findLast((position) => position < scrollLeft - SCROLL_TOLERANCE);
+
+    if (offset !== undefined) {
+      slider.scrollTo({ left: offset, behavior: "smooth" });
+    }
   }
 
   function handleMouseMove(event: React.MouseEvent<HTMLUListElement>) {
@@ -103,26 +123,13 @@ export default function Carousel() {
   }
 
   function handleCarouselClick(event: React.MouseEvent<HTMLUListElement>) {
-    if (!slideRef.current) return;
-
-    const containerRect = slideRef.current.getBoundingClientRect();
-    const mouseX = event.clientX;
-    const slideThreshold = containerRect.left + containerRect.width / 2;
-
-    // determine the new slide index based on mouse position
-    const newSlideIndex = mouseX < slideThreshold ? currentSlide - 1 : currentSlide + 1;
-
-    if (newSlideIndex >= 0 && newSlideIndex < slides.length) {
-      handleSlideChange(newSlideIndex);
-    }
+    const { left, width } = event.currentTarget.getBoundingClientRect();
+    handleSlideChange(event.clientX < left + width / 2 ? "previous" : "next");
   }
 
-  const isAtStartOfSlide = currentSlide === 0;
-  const isAtEndOfSlide = currentSlide >= MAX_SLIDE_INDEX;
-
   const cursorClasses = clsx(
-    !isAtStartOfSlide && isCursorLeft && styles.previousCursor,
-    !isAtEndOfSlide && isCursorRight && styles.nextCursor,
+    !isAtStart && isCursorLeft && styles.previousCursor,
+    !isAtEnd && isCursorRight && styles.nextCursor,
   );
 
   return (
@@ -130,12 +137,12 @@ export default function Carousel() {
       <div className={styles.navigationSlot}>
         <button
           type="button"
-          onClick={() => handleSlideChange(currentSlide - 1)}
-          disabled={isAtStartOfSlide}
+          onClick={() => handleSlideChange("previous")}
+          disabled={isAtStart}
           className={styles.navigationButton}
           aria-label="Previous slide"
         >
-          <Chevron direction="left" size={20} aria-hidden />
+          <Chevron direction="left" size={24} aria-hidden />
         </button>
       </div>
       <ul
@@ -144,9 +151,6 @@ export default function Carousel() {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         onClick={handleCarouselClick}
-        onScroll={(event) => {
-          setSlidePosition(event.currentTarget.scrollLeft);
-        }}
         tabIndex={-1}
         className={clsx(styles.list, cursorClasses)}
       >
@@ -164,12 +168,12 @@ export default function Carousel() {
       <div className={styles.navigationSlot}>
         <button
           type="button"
-          onClick={() => handleSlideChange(currentSlide + 1)}
-          disabled={isAtEndOfSlide}
+          onClick={() => handleSlideChange("next")}
+          disabled={isAtEnd}
           className={styles.navigationButton}
           aria-label="Next slide"
         >
-          <Chevron direction="right" size={20} aria-hidden />
+          <Chevron direction="right" size={24} aria-hidden />
         </button>
       </div>
     </div>
