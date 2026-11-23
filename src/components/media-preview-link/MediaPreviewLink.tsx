@@ -5,7 +5,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import { useRef, useState, type CSSProperties, type ReactNode } from "react";
 
-import usePrefetchIntent, { skipPrefetchIntent } from "../../hooks/usePrefetchIntent";
+import usePointerDevice from "../../hooks/usePointerDevice";
 import { MediaPlayer } from "../media-player/MediaPlayer";
 
 import styles from "./MediaPreviewLink.module.css";
@@ -48,24 +48,21 @@ export default function MediaPreviewLink({
   closeDelayMs = CLOSE_DELAY_MS,
 }: MediaPreviewLinkProps) {
   const [open, setOpen] = useState(false);
+  const [hasVideoIntent, setHasVideoIntent] = useState(false);
 
   const actionsRef = useRef<PreviewCard.Root.Actions>(null);
-  const triggerRef = useRef<HTMLAnchorElement>(null);
 
-  const { intentSource, markIntent } = usePrefetchIntent(
-    media.type === "video" ? triggerRef : skipPrefetchIntent,
-  );
+  const { isPointerDevice } = usePointerDevice();
 
   return (
     <PreviewCard.Root actionsRef={actionsRef} onOpenChange={setOpen}>
       <PreviewCard.Trigger
-        ref={triggerRef}
         href={href}
         delay={openDelayMs}
         closeDelay={closeDelayMs}
         className={clsx(styles.trigger, className)}
-        onFocus={() => markIntent("focus")}
-        onPointerEnter={() => markIntent("hover")}
+        onFocus={() => setHasVideoIntent(true)}
+        onPointerEnter={() => setHasVideoIntent(true)}
       >
         {children}
       </PreviewCard.Trigger>
@@ -86,7 +83,8 @@ export default function MediaPreviewLink({
                     src={media.src}
                     poster={media.poster}
                     loop={false}
-                    preload={intentSource === null ? "none" : "auto"}
+                    // the card opens on mouse hover, so touch readers rarely see the video
+                    preload={isPointerDevice || hasVideoIntent ? "auto" : "none"}
                     onEnded={() => actionsRef.current?.close()}
                   />
                 </MediaPlayer.Root>
