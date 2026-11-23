@@ -83,6 +83,7 @@ export default function MediaPreviewLink({
                     src={media.src}
                     poster={media.poster}
                     loop={false}
+                    muted={false}
                     // the card opens on mouse hover, so touch readers rarely see the video
                     preload={isPointerDevice || hasVideoIntent ? "auto" : "none"}
                     onEnded={() => actionsRef.current?.close()}
