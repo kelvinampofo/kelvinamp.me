@@ -3,6 +3,20 @@
   transition: text-decoration-color var(--duration-hover);
 }
 
+.progress {
+  /* full until playback reports progress, so unplayed links look normal */
+  --progress: 100%;
+
+  background-image: linear-gradient(
+    to right,
+    currentColor var(--progress),
+    color-mix(in oklab, currentColor 40%, transparent) var(--progress)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .positioner {
   width: var(--positioner-width);
   height: var(--positioner-height);

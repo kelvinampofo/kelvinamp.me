@@ -51,16 +51,34 @@ export default function MediaPreviewLink({
   const [hasVideoIntent, setHasVideoIntent] = useState(false);
 
   const actionsRef = useRef<PreviewCard.Root.Actions>(null);
+  const triggerRef = useRef<HTMLAnchorElement>(null);
 
   const { isPointerDevice } = usePointerDevice();
+
+  function showProgress(video: HTMLVideoElement) {
+    if (Number.isFinite(video.duration)) {
+      const progress = (video.currentTime / video.duration) * 100;
+      triggerRef.current?.style.setProperty("--progress", `${progress}%`);
+    }
+  }
+
+  // timeupdate fires only about four times a second, too coarse for a smooth fill
+  function trackProgress(video: HTMLVideoElement) {
+    showProgress(video);
+
+    if (!video.paused) {
+      requestAnimationFrame(() => trackProgress(video));
+    }
+  }
 
   return (
     <PreviewCard.Root actionsRef={actionsRef} onOpenChange={setOpen}>
       <PreviewCard.Trigger
+        ref={triggerRef}
         href={href}
         delay={openDelayMs}
         closeDelay={closeDelayMs}
-        className={clsx(styles.trigger, className)}
+        className={clsx(styles.trigger, media.type === "video" && styles.progress, className)}
         onFocus={() => setHasVideoIntent(true)}
         onPointerEnter={() => setHasVideoIntent(true)}
       >
@@ -86,6 +104,8 @@ export default function MediaPreviewLink({
                     muted={false}
                     // the card opens on mouse hover, so touch readers rarely see the video
                     preload={isPointerDevice || hasVideoIntent ? "auto" : "none"}
+                    onPlay={(event) => trackProgress(event.currentTarget)}
+                    onTimeUpdate={(event) => showProgress(event.currentTarget)}
                     onEnded={() => actionsRef.current?.close()}
                   />
                 </MediaPlayer.Root>
