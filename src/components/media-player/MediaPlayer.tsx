@@ -289,6 +289,11 @@ function Video({
       playback.wasActive = true;
 
       if (playback.shouldResume) {
+        // browsers block autoplay with sound until the reader clicks, taps or presses a key
+        if (!muted) {
+          video.muted = !navigator.userActivation.hasBeenActive;
+        }
+
         void playWithoutInterrupting(video);
       }
 
@@ -302,7 +307,7 @@ function Video({
     playback.wasActive = false;
     video.pause();
     setIndicator(null);
-  }, [active, setIndicator, videoRef]);
+  }, [active, muted, setIndicator, videoRef]);
 
   return (
     <div className={styles.stage}>
