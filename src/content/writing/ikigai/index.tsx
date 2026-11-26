@@ -36,6 +36,7 @@ export default function Ikigai() {
                 src: "/assets/immutable/steve-jobs-make-something-wonderful.132af617.mp4",
                 poster: "/assets/immutable/steve-jobs-make-something-wonderful.6a1ff0dd.jpg",
               }}
+              aspectRatio="4 / 3"
             >
               make something wonderful and put it out there
             </MediaPreviewLink>

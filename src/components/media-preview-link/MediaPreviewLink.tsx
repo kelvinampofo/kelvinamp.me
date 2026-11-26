@@ -95,7 +95,7 @@ export default function MediaPreviewLink({
                   src={media.src}
                   width={media.width}
                   height={media.height}
-                  sizes="(max-width: 512px) 100vw, 512px"
+                  sizes="(max-width: 480px) 100vw, 480px"
                   unoptimized={media.unoptimized}
                   alt=""
                 />

@@ -6,24 +6,23 @@
 .positioner {
   width: var(--positioner-width);
   height: var(--positioner-height);
-  max-width: min(var(--available-width), 36rem);
+  max-width: min(var(--available-width), 34rem);
 }
 
 .popup {
   --preview-enter-duration: var(--duration-enter);
   --preview-exit-duration: var(--duration-exit);
 
-  width: min(32rem, var(--available-width));
-  max-width: min(32rem, var(--available-width));
+  width: min(30rem, var(--available-width));
+  max-width: min(30rem, var(--available-width));
   overflow: visible;
   transform-origin: var(--transform-origin);
   transition:
     transform var(--preview-enter-duration) var(--ease-out-cubic),
     opacity var(--preview-enter-duration) var(--ease-out-cubic);
   box-shadow:
-    0 30px 54px -24px rgb(0 0 0 / 0.44),
-    0 16px 24px -16px rgb(0 0 0 / 0.28),
-    0 0 34px -18px rgb(0 0 0 / 0.18);
+    0 12px 32px -16px rgb(0 0 0 / 0.18),
+    0 4px 10px -6px rgb(0 0 0 / 0.1);
   will-change: transform, opacity;
 }
 
