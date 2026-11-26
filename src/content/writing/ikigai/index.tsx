@@ -33,8 +33,8 @@ export default function Ikigai() {
               href="https://putsomethingback.stevejobsarchive.com/internal-meeting-at-apple"
               media={{
                 type: "video",
-                src: "/assets/immutable/steve-jobs-make-something-wonderful.255479a5.mp4",
-                poster: "/assets/immutable/steve-jobs-make-something-wonderful.10e9babf.jpg",
+                src: "/assets/immutable/steve-jobs-make-something-wonderful.132af617.mp4",
+                poster: "/assets/immutable/steve-jobs-make-something-wonderful.6a1ff0dd.jpg",
               }}
             >
               make something wonderful and put it out there
